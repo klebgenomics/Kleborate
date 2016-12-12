@@ -29,7 +29,15 @@ A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosom
 
 ## Typing genome assemblies
 
-Assembled draft or complete genomes can be analysed using the script mlstBLAST.py 
+Assembled draft or complete genomes can be analysed using the script mlstBLAST.py in this repository
+
+Dependencies: Python v2; BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
+
+Example command:
+
+````
+python mlstBLAST.py -s Kleborate/data/ybt_alleles.fasta -d Kleborate/data/YbST_profiles.txt *.fasta
+````
 
 ## Typing direct from Illumina reads
 
