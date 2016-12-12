@@ -3,10 +3,8 @@
 # -nLV : best matching ST is n-locus variant
 # if an annotation column is provided (such as clonal complex) in the final column of the profiles file,
 #	 this annotation will be reported in column 2 of the output table
-# NOTE there is a strong effect of the culling_limit parameter in blast...
-# for chromosome MLST, use -c 20
-# for colibactin, -c 100 seems to work
-# for yersiniabactin, use -c 10 
+# NOTE there is a bug with the culling_limit parameter in older versions of BLAST+...
+# This code has been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
 
 import string, re, collections
 import os, sys, subprocess
@@ -17,13 +15,13 @@ def main():
 	usage = "usage: %prog [options]"
 	parser = OptionParser(usage=usage)
 
-	# required qsub options
+	# options
 	parser.add_option("-s", "--seqs", action="store", dest="seqs", help="sequence file", default="")
 	parser.add_option("-d", "--database", action="store", dest="database", help="MLST profile database (col1=ST, other cols=loci, must have loci names in header)", default="")
 	parser.add_option("-i", "--info", action="store", dest="info", help="Info (clonal group, lineage, etc) provided in las column of profiles (yes (default), no)", default="yes")
-	parser.add_option("-m", "--minident", action="store", dest="minident", help="Minimum percent identity (default 90)", default="90")
+	parser.add_option("-m", "--minident", action="store", dest="minident", help="Minimum percent identity (default 95)", default="95")
 	parser.add_option("-n", "--maxmissing", action="store", dest="maxmissing", help="Maximum missing/uncalled loci to still calculate closest ST (default 3)", default="3")
-	parser.add_option("-c", "--cullinglimit", action="store", dest="cullinglimit", help="Culling limit (default 10, change to 100 for clb locus)", default="10")
+#	parser.add_option("-c", "--cullinglimit", action="store", dest="cullinglimit", help="Culling limit (default 10, change to 100 for clb locus)", default="10")
 	
 	return parser.parse_args()
 
@@ -43,17 +41,17 @@ if __name__ == "__main__":
 		(fileName,ext) = os.path.splitext(fileName)
 		
 	def getClosestLocusVariant(query, sts):
-		closest = None
+		closest = []
 		min_dist = len(query)
 		for index, item in enumerate(query):
 			if item == "-":	
 				query[index] = "0"
 		for st in sts:
 			d = sum(map(lambda x,y: bool(int(x)-int(y)),st.split(","),query))
-			if d < min_dist:
-				closest = sts[st]
+			if d <= min_dist:
+				closest.append(int(sts[st]))
 				min_dist = d
-		return (closest, min_dist)
+		return (str(min(closest)), min_dist)
 		
 	sts = {} # key = concatenated string of alleles, value = st
 	st_info = {} # key = st, value = info relating to this ST, eg clonal group
@@ -96,12 +94,12 @@ if __name__ == "__main__":
 		best_allele = {} # key = locus, value = best allele (* if imprecise match)
 
 		# blast against all
-		f = os.popen("blastn -db " + options.seqs + " -query " + contigs + " -outfmt '6 sacc pident qlen length score' -ungapped -dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000 -culling_limit " + options.cullinglimit + " -perc_identity " + options.minident) 
+		f = os.popen("blastn -task blastn -db " + options.seqs + " -query " + contigs + " -outfmt '6 sacc pident slen length score' -ungapped -dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000 -culling_limit 2 -perc_identity " + options.minident) 
 
 		for line in f:
 			fields = line.rstrip().split("\t")
 			(gene_id,pcid,length,allele_length,score) = (fields[0],float(fields[1]),int(fields[2]),int(fields[3]),float(fields[4]))
-			
+			#print line
 			if "__" in gene_id:
 				# srst2 formated file
 				gene_id_components = gene_id.split("__")
@@ -110,7 +108,7 @@ if __name__ == "__main__":
 			else:
 				allele = gene_id
 				locus = gene_id.split("_")[0]
-			if pcid < 100.00 or allele_length==length:
+			if pcid < 100.00 or allele_length < length:
 				allele = allele + "*" # imprecise match
 			# store best match for each one locus
 			if locus in best_score:
