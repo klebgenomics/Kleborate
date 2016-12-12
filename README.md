@@ -21,6 +21,10 @@ YbST sequences cluster into 17 distinct lineages of _ybt_, which are each associ
 
 CbST sequences cluster into 3 lineages, which are each associated with a single _ybt_ lineage (_clb_ 1 / _ybt_ 12; _clb_ 2, _ybt_ 1; ; _clb_ 3, _ybt_ 17) and the ICEKp10 structure.
 
+## Genotypes of publicly available strains
+
+A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosomal MLST assignments for 2500 public Klebs genomes is provided in the /data directory.
+
 ## Typing genome assemblies
 
 Assembled draft or complete genomes can be analysed using the script mlstBLAST.py 
