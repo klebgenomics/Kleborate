@@ -1,4 +1,13 @@
-# add reporting of clonal group
+# reports best match
+# * : best matching allele is not precise match
+# -nLV : best matching ST is n-locus variant
+# if an annotation column is provided (such as clonal complex) in the final column of the profiles file,
+#	 this annotation will be reported in column 2 of the output table
+# NOTE there is a strong effect of the culling_limit parameter in blast...
+# for chromosome MLST, use -c 20
+# for colibactin, -c 100 seems to work
+# for yersiniabactin, use -c 10 
+
 import string, re, collections
 import os, sys, subprocess
 from optparse import OptionParser
@@ -9,10 +18,13 @@ def main():
 	parser = OptionParser(usage=usage)
 
 	# required qsub options
-	parser.add_option("-s", "--summary", action="store", dest="summary", help="text file giving paths to allele sequences (one line/file per locus)", default="")
+	parser.add_option("-s", "--seqs", action="store", dest="seqs", help="sequence file", default="")
 	parser.add_option("-d", "--database", action="store", dest="database", help="MLST profile database (col1=ST, other cols=loci, must have loci names in header)", default="")
-	parser.add_option("-n", "--namesep", action="store", dest="namesep", help="separator for allele names (either '-' (default) or '_')", default="-")
-
+	parser.add_option("-i", "--info", action="store", dest="info", help="Info (clonal group, lineage, etc) provided in las column of profiles (yes (default), no)", default="yes")
+	parser.add_option("-m", "--minident", action="store", dest="minident", help="Minimum percent identity (default 90)", default="90")
+	parser.add_option("-n", "--maxmissing", action="store", dest="maxmissing", help="Maximum missing/uncalled loci to still calculate closest ST (default 3)", default="3")
+	parser.add_option("-c", "--cullinglimit", action="store", dest="cullinglimit", help="Culling limit (default 10, change to 100 for clb locus)", default="10")
+	
 	return parser.parse_args()
 
 if __name__ == "__main__":
@@ -22,109 +34,133 @@ if __name__ == "__main__":
 	if options.database=="":
 		DoError("No MLST databse provided (-d)")
 		
-	locus_seqs = {} # key = id (file name before extension), value = path to sequences
-	if options.summary=="":
+	if options.seqs=="":
 		DoError("No query sequences provided (-s)")
 	else:
-		f = file(options.summary,"r")
-		for line in f:
-			line.rstrip()
-			(path,fileName) = os.path.split(line)
-			if not os.path.exists(fileName + ".nin"):
-				os.system("makeblastdb -dbtype nucl -logfile blast.log -in " + fileName)
-			(fileName,ext) = os.path.splitext(fileName)
-			locus_seqs[fileName]=line
-		f.close()	
+		(path,fileName) = os.path.split(options.seqs)
+		if not os.path.exists(options.seqs + ".nin"):
+			os.system("makeblastdb -dbtype nucl -logfile blast.log -in " + options.seqs)
+		(fileName,ext) = os.path.splitext(fileName)
+		
+	def getClosestLocusVariant(query, sts):
+		closest = None
+		min_dist = len(query)
+		for index, item in enumerate(query):
+			if item == "-":	
+				query[index] = "0"
+		for st in sts:
+			d = sum(map(lambda x,y: bool(int(x)-int(y)),st.split(","),query))
+			if d < min_dist:
+				closest = sts[st]
+				min_dist = d
+		return (closest, min_dist)
 		
 	sts = {} # key = concatenated string of alleles, value = st
+	st_info = {} # key = st, value = info relating to this ST, eg clonal group
 	max_st = 0 # changeable variable holding the highest current ST, incremented when novel combinations are encountered
 	header = []
+	info_title = "info"
 	f = file(options.database,"r")
 	for line in f:
 		fields = line.rstrip().split("\t")
 		if len(header)==0:
 			header = fields
 			header.pop(0) # remove st label
+			if options.info=="yes":
+				info_title = header.pop() # remove info label
 		else:
-			sts[",".join(fields[1:])] = fields[0]
-			if int(fields[0]) > max_st:
-				max_st = int(fields[0])
+			st = fields.pop(0)
+			if options.info=="yes":
+				info = fields.pop()
+			sts[",".join(fields)] = st
+			if int(st) > max_st:
+				max_st = int(st)
+			if options.info=="yes":
+				st_info[st] = info
 	f.close()
-	
-	# check the loci match up
-	for locus in header:
-		if locus not in locus_seqs:
-			DoError("Locus "+locus+"in ST database file " + options.database + " but no matching sequence in " + options.summary)
 	
 	best_match = collections.defaultdict(dict) # key1 = strain, key2 = locus, value = best match (clean for ST, annotated)
 	perfect_match = collections.defaultdict(dict) # key1 = strain, key2 = locus, value = perfect match if available
 	
 	# print header
-	print "\t".join(["strain","perfectMatchST"]+header+["bestMatchST"]+header)
+	if options.info=="yes":
+		print "\t".join(["strain",info_title,"ST"]+header)
+	else:
+		print "\t".join(["strain","ST"]+header)
 	
 	for contigs in args:
-		tmp = contigs + ".tmp"
 		(dir,fileName) = os.path.split(contigs)
 		(name,ext) = os.path.splitext(fileName)
-		perfect_st = []
+
+		best_score = {} # key = locus, value = BLAST score for best matching allele encountered so far
+		best_allele = {} # key = locus, value = best allele (* if imprecise match)
+
+		# blast against all
+		f = os.popen("blastn -db " + options.seqs + " -query " + contigs + " -outfmt '6 sacc pident qlen length score' -ungapped -dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000 -culling_limit " + options.cullinglimit + " -perc_identity " + options.minident) 
+
+		for line in f:
+			fields = line.rstrip().split("\t")
+			(gene_id,pcid,length,allele_length,score) = (fields[0],float(fields[1]),int(fields[2]),int(fields[3]),float(fields[4]))
+			
+			if "__" in gene_id:
+				# srst2 formated file
+				gene_id_components = gene_id.split("__")
+				locus = gene_id_components[1]
+				allele = gene_id_components[2]
+			else:
+				allele = gene_id
+				locus = gene_id.split("_")[0]
+			if pcid < 100.00 or allele_length==length:
+				allele = allele + "*" # imprecise match
+			# store best match for each one locus
+			if locus in best_score:
+				if score > best_score[locus]:
+					# update
+					best_score[locus] = score
+					best_allele[locus] = allele.split("_")[1] # store number only
+			else:
+				# initialise
+				best_score[locus] = score
+				best_allele[locus] = allele.split("_")[1] # store number only
+		f.close()	
+
 		best_st = []
 		best_st_annotated = []
+		
 		for locus in header:
-			# correct order to build up concatenated ST
-			locus_seq = locus_seqs[locus]
-			cmd = " ".join(["blastn","-query",contigs,"-db",locus_seq.rstrip(),"-max_target_seqs","1","-outfmt '6 qseqid sacc pident length slen qlen'",">",tmp,"\n"])
-			os.system(cmd)
-			# read results
-			if os.stat(tmp)[6]!=0:
-				# file is not empty, ie match found
-				match = ""
-				f = file(tmp,"r")
-				fields = f.readline().rstrip().split("\t") # only has one line
-				(contig,allele,pcid,length,allele_length,contig_length) = (fields[0],fields[1].split(options.namesep)[1],float(fields[2]),int(fields[3]),int(fields[4]),int(fields[5]))
-				if pcid==100.00 and allele_length==length:
-					match = ""
-					perfect_st.append(allele)
-					best_st.append(allele)
-					best_st_annotated.append(allele)
-				elif pcid>90 and float(length)/float(allele_length) > 0.9:
-					match = "/" + str(pcid) + "," + str(float(length)/float(allele_length))
-					perfect_st.append("-")
-					best_st.append(allele)
-					best_st_annotated.append(allele + match)					
-				else:
-					perfect_st.append("-") # no allele at all
-					best_st.append("-")
-					best_st_annotated.append("-")
-				f.close()
+			if locus in best_allele:
+				allele = best_allele[locus]
+				allele_number = allele.replace("*","")
+				best_st.append(allele_number)
+				best_st_annotated.append(allele) # will still have * if imperfect match
 			else:
-				perfect_st.append("-") # no allele at all
 				best_st.append("-")
 				best_st_annotated.append("-")
-			os.system("rm -rf "+tmp)
 			
 		# assign ST
-		pst = ",".join(perfect_st)
 		bst = ",".join(best_st)
 		
-		if pst in sts:
-			pst = sts[pst]
-		elif "-" not in pst:
-			max_st += 1 # new combination
-			sts[pst] = str(max_st)
-			pst = str(max_st)
-		else:
-			pst = "0"
+		mismatch_loci = 0
 		
 		if bst in sts:
 			bst = sts[bst]
-		elif "-" not in bst:
-			max_st += 1 # new combination
-			sts[bst] = str(max_st)
-			bst = str(max_st)
+		elif bst.count("-") <= int(options.maxmissing):
+			(bst, mismatch_loci) = getClosestLocusVariant(best_st, sts)
 		else:
 			bst = "0"
 
+		# pull info column
+		if options.info=="yes":
+			info_final = ""
+			if bst in st_info:
+				info_final = st_info[bst]
+		
 		if best_st != best_st_annotated:
-			bst = "*"+bst
-			
-		print "\t".join([name,pst] + perfect_st + [bst] + best_st_annotated)
+			bst += "*"
+		if mismatch_loci > 0:
+			bst += "-" + str(mismatch_loci) + "LV"
+		
+		if options.info=="yes":
+			print "\t".join([name,info_final,bst] + best_st_annotated)
+		else:
+			print "\t".join([name,bst] + best_st_annotated)
