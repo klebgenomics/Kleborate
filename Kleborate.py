@@ -9,8 +9,8 @@ def main():
 	parser = OptionParser(usage=usage)
 
 	# options
-	parser.add_option("-p", "--path", action="store", dest="repo_path", help="Path to Kleborate directory", default="Kleborate")
-	parser.add_option("-o", "--outfile", action="store", dest="outfile", help="File for detailed output", default="Kleborate.txt")
+	parser.add_option("-p", "--path", action="store", dest="repo_path", help="Path to Kleborate directory (default Kleborate)", default="Kleborate")
+	parser.add_option("-o", "--outfile", action="store", dest="outfile", help="File for detailed output (default Kleborate_results.txt)", default="Kleborate_results.txt")
 	
 	return parser.parse_args()
 
@@ -28,7 +28,7 @@ if __name__ == "__main__":
 		(dir,fileName) = os.path.split(contigs)
 		(name,ext) = os.path.splitext(fileName)
 		
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/Klebsiella_pneumoniae.fasta -d "+ options.repo_path + "/data/kpneumoniae.txt -i no " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/Klebsiella_pneumoniae.fasta -d "+ options.repo_path + "/data/kpneumoniae.txt -i no --maxmissing 3 " + contigs) 
 
 		# run chromosome MLST
 		chr_ST = ""
@@ -44,7 +44,7 @@ if __name__ == "__main__":
 		
 		# run ybt MLST
 		
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/ybt_alleles.fasta -d "+ options.repo_path + "/data/YbST_profiles.txt -i yes " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/ybt_alleles.fasta -d "+ options.repo_path + "/data/YbST_profiles.txt -i yes --maxmissing 7 " + contigs) 
 
 		Yb_ST = ""
 		Yb_group = ""
@@ -52,15 +52,17 @@ if __name__ == "__main__":
 		
 		for line in f:
 			fields = line.rstrip().split("\t")
-			if fields[1] != "ST":
+			if fields[2] != "ST":
 				# skip header
-				(Yb_ST, Yb_group) = (fields[2], fields[1])
+				(strain,Yb_ST, Yb_group) = (fields[0],fields[2], fields[1])
 				Yb_ST_detail = fields[3:]
+				if Yb_group == "":
+					Yb_group = "-"
 		f.close()
 		
 		# run colibactin MLST
 		
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/colibactin_alleles.fasta -d "+ options.repo_path + "/data/CbST_profiles.txt -i yes " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/colibactin_alleles.fasta -d "+ options.repo_path + "/data/CbST_profiles.txt -i yes --maxmissing 10 " + contigs) 
 
 		Cb_ST = ""
 		Cb_group = ""
@@ -68,15 +70,17 @@ if __name__ == "__main__":
 		
 		for line in f:
 			fields = line.rstrip().split("\t")
-			if fields[1] != "ST":
+			if fields[2] != "ST":
 				# skip header
-				(Cb_ST, Cb_group) = (fields[2], fields[1])
+				(strain,Cb_ST, Cb_group) = (fields[0],fields[2], fields[1])
 				Cb_ST_detail = fields[3:]
+				if Cb_group == "":
+					Cb_group = "-"
 		f.close()
 		
-		print "\t".join([strain,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST])
+		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST])
 		
-		o.write("\t".join([strain,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
+		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
 		o.write("\n")
 
 		# run Kaptive
