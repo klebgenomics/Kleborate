@@ -66,7 +66,7 @@ if __name__ == "__main__":
 		
 		iuc_string = "-"
 		if len(iuc) > 0:
-			iuc_string = "iro" + "".join(iuc)
+			iuc_string = "iuc" + "".join(iuc)
 		
 		rmpA_string = "-"
 		if len(rmpA) > 0:
