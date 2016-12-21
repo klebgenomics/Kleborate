@@ -19,6 +19,16 @@ def main():
 if __name__ == "__main__":
 
 	(options, args) = main()
+	
+	def checkDup(x):
+		once = []
+		twice = []
+		for i in x:
+			if i not in once:
+				once.append(i)
+			else:
+				twice.append(i)
+		return (once, twice)
 		
 	if options.seqs=="":
 		DoError("No operon sequences provided (-s)")
@@ -62,7 +72,10 @@ if __name__ == "__main__":
 		
 		iro_string = "-"
 		if len(iro) > 0:
+			(iro,iro_dup) = checkDup(iro)
 			iro_string = "iro" + "".join(iro)
+			if len(iro_dup) > 0:
+				iro_string += ";iro" + "".join(iro_dup)
 		
 		iuc_string = "-"
 		if len(iuc) > 0:
