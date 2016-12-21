@@ -154,22 +154,22 @@ A tabulated summary is printed to standard out; details of the MLST analysis are
 * Imprecise allele matches are indicated with \*
 * If the length of match is less than the length of the reported allele (ie a partial match), this is indicated with ?
 * Results are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into Lahey classes, as follows: 
-..* AGly (aminoglycosides)
-..* Bla (beta-lactamases)
-....+ Bla_broad (broad spectrum)
-....+ Bla_broad_inhR (broad spectrum with resistance to beta-lactamase inhibitors)
-....+ Bla_Carb (carbapenemase)
-....+ Bla_ESBL (extended spectrum)
-....+ Bla_ESBL_inhR (extended spectrum with resistance to beta-lactamase inhibitors)
-..* Fcyn (fosfomycin)
-..* Flq (fluoroquinolones)
-..* Gly (glycopeptides)
-..* MLS (macrolides)
-..* Phe (phenicols)
-..* Rif (rifampin)
-..* Sul (sulfonamides)
-..* Tet (tetracyclines)
-..* Tmt (trimethoprim)
+  * AGly (aminoglycosides)
+  * Bla (beta-lactamases)
+  * Bla_broad (broad spectrum beta-lactamases)
+  * Bla_broad_inhR (broad spectrum beta-lactamases with resistance to beta-lactamase inhibitors)
+  * Bla_Carb (carbapenemase)
+  * Bla_ESBL (extended spectrum beta-lactamases)
+  * Bla_ESBL_inhR (extended spectrum beta-lactamases with resistance to beta-lactamase inhibitors)
+  * Fcyn (fosfomycin)
+  * Flq (fluoroquinolones)
+  * Gly (glycopeptides)
+  * MLS (macrolides)
+  * Phe (phenicols)
+  * Rif (rifampin)
+  * Sul (sulfonamides)
+  * Tet (tetracyclines)
+  * Tmt (trimethoprim)
 
 
 # Typing direct from Illumina reads
