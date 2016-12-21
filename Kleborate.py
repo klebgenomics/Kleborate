@@ -11,6 +11,7 @@ def main():
 	# options
 	parser.add_option("-p", "--path", action="store", dest="repo_path", help="Path to Kleborate directory (default Kleborate)", default="Kleborate")
 	parser.add_option("-o", "--outfile", action="store", dest="outfile", help="File for detailed output (default Kleborate_results.txt)", default="Kleborate_results.txt")
+	parser.add_option("-r", "--seqs", action="store", dest="resistance", help="Resistance genes screening (default off, set to on)", default="off")
 	
 	return parser.parse_args()
 
@@ -18,10 +19,25 @@ if __name__ == "__main__":
 
 	(options, args) = main()
 
-	print "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy"])
+	header_string = "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy"])
+	print header_string,
+	
+	res_header_string = ""
+	if options.resistance == "on":
+		f = os.popen("python "+ options.repo_path + "/resBLAST.py -s " + options.repo_path + "/data/ARGannot.r1.fasta -t " + options.repo_path + "/data/ARGannot_clustered80.csv") 
+		fields = f.readline().rstrip().split("\t")
+		res_header_string = "\t".join(fields[1:])
+		f.close()
+		print "\t" + res_header_string,
+	
+	print "" # end header
+		
+	mlst_header_string = "\t".join(["Chr_ST","gapA","infB","mdh","pgi","phoE","rpoB","tonB","YbST","ybtS","ybtX","ybtQ","ybtP","ybtA","irp2","irp1","ybtU","ybtT","ybtE","fyuA","CbST","clbA","clbB","clbC","clbD","clbE","clbF","clbG","clbH","clbI","clbL","clbM","clbN","clbO","clbP","clbQ"])
 	
 	o = file(options.outfile, "w")
-	o.write("\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy","Chr_ST","gapA","infB","mdh","pgi","phoE","rpoB","tonB","YbST","ybtS","ybtX","ybtQ","ybtP","ybtA","irp2","irp1","ybtU","ybtT","ybtE","fyuA","CbST","clbA","clbB","clbC","clbD","clbE","clbF","clbG","clbH","clbI","clbL","clbM","clbN","clbO","clbP","clbQ"]))
+	o.write("\t".join([header_string,mlst_header_string]))
+	if options.resistance == "on":
+		o.write("\t" + res_header_string)
 	o.write("\n")
 
 	for contigs in args:
@@ -81,17 +97,33 @@ if __name__ == "__main__":
 		# screen for other virulence genes (binary calls)
 
 		f = os.popen("python "+ options.repo_path + "/clusterBLAST.py -s "+ options.repo_path + "/data/other_vir_clusters.fasta " + contigs) 
-		
 		for line in f:
 			fields = line.rstrip().split("\t")
 			if fields[1] != "aerobactin":
 				# skip header
 				(strain,vir_hits) = (fields[0],"\t".join(fields[1:]))
 		f.close()	
-		
-		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits])
+
+		# screen for resistance genes
+		res_hits = ""
+		if options.resistance == "on":
+			f = os.popen("python "+ options.repo_path + "/resBLAST.py -s " + options.repo_path + "/data/ARGannot.r1.fasta -t " + options.repo_path + "/data/ARGannot_clustered80.csv " + contigs) 
+			for line in f:
+				fields = line.rstrip().split("\t")
+				if fields[0] != "strain":
+					# skip header
+					res_hits = "\t".join(fields[1:])	
+			f.close()
+
+		# record results
+		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits]),
+		if options.resistance == "on":
+			print "\t" + res_hits
+		print ""
 		
 		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
+		if options.resistance == "on":
+			o.write("\t" + res_hits)
 		o.write("\n")
 
 		# run Kaptive
