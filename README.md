@@ -6,10 +6,34 @@ We recently explored the diversity of the _Kp_ integrative conjugative element (
 
 We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICEKp (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICEKp variant are included in the /data directory of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Our analyses reveal hundreds of ICEKp transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. 
 
-Based on this analysis, we developed a MLST-style approach for identifying _ybt_ and _clb_ variants based on genome data. Our goal is to help identify emerging pathogenic _Kp_ lineages, and to make it easy for people who are using genomic surveillance to monitor for antibiotic resistance to also look out for the convergence of antibiotic resistance and virulence.
+Based on this analysis, we developed a MLST-style approach for identifying _ybt_ and _clb_ variants from genome data. 
+
+Our goal is to help identify emerging pathogenic _Kp_ lineages, and to make it easy for people who are using genomic surveillance to monitor for antibiotic resistance to also look out for the convergence of antibiotic resistance and virulence.
+
+To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes (/data), annotated ICEKp structures (/ICEKp_references) and code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the /data directory.
+
+If you are interested in inferring capsule types from genome data, see the [Kaptive](https://github.com/katholt/Kaptive) repo.
+
+## Let's get genotyping!
+Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assemblies? Use the Kleborate.py script. This will detect the MLST sequence type of the strain, genotype the _ybt_ and _clb_ loci, and also check for presence/absence of the acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon). For convenience, we provide code for screening for acquired resistance genes (resBLAST.py) which can optionally be called when you run Kleborate.py or as a standalone script.
+
+#### Basic usage:
+
+```
+# get the code
+git clone https://github.com/katholt/Kleborate 
+
+# screen some genomes for MLST + virulence loci
+python Kleborate.py -p Kleborate -o detailed_results.txt *.fasta
+
+# screen some genomes for MLST + virulence loci + acquired resistance genes
+python Kleborate.py -p Kleborate -o detailed_results.txt -r on *.fasta
+```
+
+See below for more details, examples and outputs.
 
 
-## MLST schemes
+# About the MLST schemes
 
 We have created two separate schemes: one for yersiniabactin sequence types (YbST) and one for colibactin sequence types (CbST).
 
@@ -27,24 +51,23 @@ CbST sequences cluster into 3 lineages, which are each associated with a single 
 
 A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosomal MLST assignments for 2500 public Klebs genomes is provided in the /data directory.
 
-## Typing genome assemblies
+# Typing genome assemblies using Kleborate
 
-The code in this repo can be used to determine chromosomal, yersiniabactin and colibactin genotypes from assembled draft or complete genomes.
+The Kleborate.py script in this repo can be used to determine chromosomal, yersiniabactin and colibactin genotypes from assembled draft or complete genomes. It also reports presence/absence of acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon, currently we just screen for the alleles in the virulence plasmid pLVPK). For convenience, Kleborate.py can optionally screen for acquired resistance genes as well (using the SRST2-formatted version of the ARG-Annot database).
 
-* A summary of sequence types and ICE/lineage information is printed to standard out
-* Full allele calls are saved to a file specified by `-o`
+A summary of sequence types and ICE/lineage information is printed to standard out; full allele calls are saved to a file specified by `-o`. See below for details of output formats.
 
 Dependencies: Python v2; BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
 
 To download:
 
-```` 
-git clone https://github.com/katholt/Kleborate 
 ````
+git clone https://github.com/katholt/Kleborate 
+```
 
 Usage:
 
-````
+```
 python Kleborate.py -h
 Usage: Kleborate.py [options]
 
@@ -54,17 +77,17 @@ Options:
                         Path to Kleborate directory (default Kleborate)
   -o OUTFILE, --outfile=OUTFILE
                         File for detailed output (default Kleborate_results.txt)
-````
+```
 
 Example command:
 
-````
+```
 python Kleborate.py -p Kleborate -o detailed_results.txt genome.fasta
-````
+```
 
 Test on well known genomes:
 
-````
+```
 ## GET CODE
 
 git clone https://github.com/katholt/Kleborate 
@@ -93,19 +116,63 @@ mv GCA_000016305.1_ASM1630v1_genomic.fna MGH78578.fna
 
 # RUN KLEBORATE
 # NOTE: -p must point to the Kleborate directory
+
 python Kleborate.py -p Kleborate -o details.txt *.fna
 
 ## EXPECTED OUTPUT
-strain	ST	Yersiniabactin	YbST	Colibactin	CbST
-Klebs_HS11286	11	ybt 9; ICEKp3	15	-	0
-Klebs_Kp1084	23	ybt 1; ICEKp10	47	clb 2	37
-MGH78578	38	-	0	-	0
-NTUH-K2044	23	ybt 2; ICEKp1	326	-	0
+strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy
+Klebs_HS11286	11	ybt 9; ICEKp3	15	-	0	-	-	-
+Klebs_Kp1084	23	ybt 1; ICEKp10	47	clb 2	37	-	-	- 
+MGH78578	38	-	0	-	0	-	-	- 
+NTUH-K2044	23	ybt 2; ICEKp1	326	-	0	iucABCD	iroBCDN;iroBCDN	rmpA;rmpA
 
-````
+# NOTE: NTUH-K2044 has two copies each of the iro and rmpA loci (one on the virulence plasmid with iuc, and one in ICEKp1).
+
+# RUN KLEBORATE with resistance gene screening turned on:
+
+python Kleborate.py -p Kleborate -o details.txt *.fna -r on
+
+```
+## Output
+
+A tabulated summary is printed to standard out; details of the MLST analysis are printed to the file specified by -o.
+
+#### Klebs, yersiniabactin and colibactin MLST
+* Kleborate makes an effort to report the closest matching ST / clonal group if a precise match is not found.
+* Imprecise allele matches are indicated with a \*
+* Imprecise ST calls are indicated with -nLV, where n indicates the number of loci that disagree with the ST reported. So 258-1LV indicates a single-locus variant of (SLV) of ST258, i.e. 6/7 loci match the ST258 alleles.
+* For _ybt_ and _clb_ schemes, the associated lineage and/or ICEKp structure are reported along with the ST. If these loci are not detected, the ST reported is 0.
+
+#### Virulence locus detection
+* Results in these columns should be interpreted as simply binary yes/no calls.
+* By default, a gene is called as present if it is detected in a single sequence with >90% identity and >80% coverage of the allele sequence from the virulence plasmid pLVPK. Note that rmpA and rmpA2 are ~85% homologous and are reported separately.
+* If multiple hits to the same query sequence are found in a given assembly, we attempt to report these separately. The NTUH-K2044 genome carries iroBCDN and rmpA in two locations (one on the virulence plasmid, one in the ICEKp1), and this should be reported as iroBDCN;iroBCDN and rmpA;rmpA as seen in the example above.
+
+#### Resistance gene detection
+* Here we are screening against the ARG-Annot database of acquired resistance genes ([SRST2](https://github.com/katholt/srst2) version), which includes allelic variants.
+* Kleborate attempts to report the best matching variant for each locus in the genome
+* Imprecise allele matches are indicated with \*
+* If the length of match is less than the length of the reported allele (ie a partial match), this is indicated with ?
+* Results are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into Lahey classes, as follows: 
+..* AGly (aminoglycosides)
+..* Bla (beta-lactamases)
+....+ Bla_broad (broad spectrum)
+....+ Bla_broad_inhR (broad spectrum with resistance to beta-lactamase inhibitors)
+....+ Bla_Carb (carbapenemase)
+....+ Bla_ESBL (extended spectrum)
+....+ Bla_ESBL_inhR (extended spectrum with resistance to beta-lactamase inhibitors)
+..* Fcyn (fosfomycin)
+..* Flq (fluoroquinolones)
+..* Gly (glycopeptides)
+..* MLS (macrolides)
+..* Phe (phenicols)
+..* Rif (rifampin)
+..* Sul (sulfonamides)
+..* Tet (tetracyclines)
+..* Tmt (trimethoprim)
 
 
-## Typing direct from Illumina reads
+# Typing direct from Illumina reads
 
 MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2). Steps are 
 
@@ -128,15 +195,6 @@ srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output CbST --log --mlst_db
 
 srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output Klebs --log --mlst_db Klebsiella_pneumoniae.fasta --mlst_definitions kpnuemoniae.txt
 ```
-
-
-## Other Klebs typing tools
-
-Capsule typing: [Kaptive](https://github.com/katholt/Kaptive) (input = assemblies, command line)
-
-MLST: [BIGSdb](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html) (input = assemblies, web-based)
-
-Resistance and plasmid loci: [SRST2](https://github.com/katholt/srst2) (input = reads, command line)
 
 
 ## Kleboration
