@@ -153,6 +153,8 @@ A tabulated summary is printed to standard out; details of the MLST analysis are
 * Kleborate attempts to report the best matching variant for each locus in the genome
 * Imprecise allele matches are indicated with \*
 * If the length of match is less than the length of the reported allele (ie a partial match), this is indicated with ?
+* Note that oqxAB, ampH and SHV (narrow spectrum) are core genes in _K. pneumoniae_ so should be detected in most genomes
+* If you see LEN or OKP beta-lactamases rather than SHV, you probably have _K. variicola_ (LEN) or _K. quasipneumoniae_ (OKP) rather than _K. pneumoniae_ (see [this paper](http://www.pnas.org/content/112/27/E3574.long) for clarification)
 * Results are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into Lahey classes, as follows: 
   * AGly (aminoglycosides)
   * Bla (beta-lactamases)
