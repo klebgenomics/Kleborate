@@ -18,10 +18,10 @@ if __name__ == "__main__":
 
 	(options, args) = main()
 
-	print "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST"])
+	print "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy"])
 	
 	o = file(options.outfile, "w")
-	o.write("\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","Chr_ST","gapA","infB","mdh","pgi","phoE","rpoB","tonB","YbST","ybtS","ybtX","ybtQ","ybtP","ybtA","irp2","irp1","ybtU","ybtT","ybtE","fyuA","CbST","clbA","clbB","clbC","clbD","clbE","clbF","clbG","clbH","clbI","clbL","clbM","clbN","clbO","clbP","clbQ"]))
+	o.write("\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy","Chr_ST","gapA","infB","mdh","pgi","phoE","rpoB","tonB","YbST","ybtS","ybtX","ybtQ","ybtP","ybtA","irp2","irp1","ybtU","ybtT","ybtE","fyuA","CbST","clbA","clbB","clbC","clbD","clbE","clbF","clbG","clbH","clbI","clbL","clbM","clbN","clbO","clbP","clbQ"]))
 	o.write("\n")
 
 	for contigs in args:
@@ -78,9 +78,20 @@ if __name__ == "__main__":
 					Cb_group = "-"
 		f.close()
 		
-		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST])
+		# screen for other virulence genes (binary calls)
+
+		f = os.popen("python "+ options.repo_path + "/clusterBLAST.py -s "+ options.repo_path + "/data/other_vir_clusters.fasta " + contigs) 
 		
-		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
+		for line in f:
+			fields = line.rstrip().split("\t")
+			if fields[1] != "aerobactin":
+				# skip header
+				(strain,vir_hits) = (fields[0],"\t".join(fields[1:]))
+		f.close()	
+		
+		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits])
+		
+		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
 		o.write("\n")
 
 		# run Kaptive

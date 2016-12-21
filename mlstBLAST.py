@@ -16,13 +16,11 @@ def main():
 	parser = OptionParser(usage=usage)
 
 	# options
-	parser.add_option("-s", "--seqs", action="store", dest="seqs", help="sequence file", default="")
+	parser.add_option("-s", "--seqs", action="store", dest="seqs", help="MLST allele sequences file", default="")
 	parser.add_option("-d", "--database", action="store", dest="database", help="MLST profile database (col1=ST, other cols=loci, must have loci names in header)", default="")
 	parser.add_option("-i", "--info", action="store", dest="info", help="Info (clonal group, lineage, etc) provided in las column of profiles (yes (default), no)", default="yes")
 	parser.add_option("-m", "--minident", action="store", dest="minident", help="Minimum percent identity (default 95)", default="95")
 	parser.add_option("-n", "--maxmissing", action="store", dest="maxmissing", help="Maximum missing/uncalled loci to still calculate closest ST (default 3)", default="3")
-#	parser.add_option("-c", "--cullinglimit", action="store", dest="cullinglimit", help="Culling limit (default 10, change to 100 for clb locus)", default="10")
-	
 	return parser.parse_args()
 
 if __name__ == "__main__":
@@ -30,10 +28,10 @@ if __name__ == "__main__":
 	(options, args) = main()
 
 	if options.database=="":
-		DoError("No MLST databse provided (-d)")
+		DoError("No MLST profiles databse provided (-d)")
 		
 	if options.seqs=="":
-		DoError("No query sequences provided (-s)")
+		DoError("No MLST allele sequences provided (-s)")
 	else:
 		(path,fileName) = os.path.split(options.seqs)
 		if not os.path.exists(options.seqs + ".nin"):

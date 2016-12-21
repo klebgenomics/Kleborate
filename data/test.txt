@@ -1,0 +1,2 @@
+strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy	Chr_ST	gapA	infB	mdh	pgi	phoE	rpoB	tonB	YbST	ybtS	ybtX	ybtQ	ybtP	ybtA	irp2	irp1	ybtU	ybtT	ybtE	fyuA	CbST	clbA	clbB	clbC	clbD	clbE	clbF	clbG	clbH	clbI	clbL	clbM	clbN	clbO	clbP	clbQ
+pLVPK	0	-	0	-	0	iroBCD	iroBCDN	rmpA,rmpA2	0	-	-	-	-	-	-	-	0	-	-	-	-	-	-	-	-	-	-	-	0	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
