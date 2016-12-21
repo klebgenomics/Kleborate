@@ -75,14 +75,21 @@ if __name__ == "__main__":
 			(iro,iro_dup) = checkDup(iro)
 			iro_string = "iro" + "".join(iro)
 			if len(iro_dup) > 0:
+				iro_dup = list(set(iro_dup)) # converting to set removes duplicates
+				iro_dup.sort()
 				iro_string += ";iro" + "".join(iro_dup)
 		
 		iuc_string = "-"
 		if len(iuc) > 0:
+			(iuc,iuc_dup) = checkDup(iuc)
 			iuc_string = "iuc" + "".join(iuc)
+			if len(iuc_dup) > 0:
+				iuc_dup = list(set(iuc_dup)) # converting to set removes duplicates
+				iuc_dup.sort()
+				iuc_string += ";iuc" + "".join(iuc_dup)
 		
 		rmpA_string = "-"
 		if len(rmpA) > 0:
-			rmpA_string = ",".join(rmpA)
+			rmpA_string = ";".join(rmpA)
 		
 		print "\t".join([name,iuc_string,iro_string,rmpA_string])
