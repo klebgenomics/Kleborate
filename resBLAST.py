@@ -11,11 +11,62 @@ def main():
 	# options
 	parser.add_option("-s", "--seqs", action="store", dest="seqs", help="res gene sequences to screen for", default="ARGannot.r1.fasta")
 	parser.add_option("-t", "--class", action="store", dest="res_class_file", help="res gene classes (CSV)", default="ARGannot_clustered80.csv")
-	parser.add_option("-q", "--qrdr", action="store", dest="qrdr", help="QRDR sequences", default="QRDR_120.aa")
+	parser.add_option("-q", "--qrdr", action="store", dest="qrdr", help="QRDR sequences", default="")
 	parser.add_option("-m", "--minident", action="store", dest="minident", help="Minimum percent identity (default 90)", default="90")
 	parser.add_option("-c", "--mincov", action="store", dest="mincov", help="Minimum percent coverage (default 80)", default="80")
 	
 	return parser.parse_args()
+	
+# functions for finding snps
+def getGappedPosition(seq,pos):
+	num_chars = 0
+	i = 0
+	seq_list = list(seq)
+	while num_chars <= pos and i < len(seq):
+		if seq[i] != "-":
+			num_chars += 1
+		i += 1
+	return (i-1)
+	
+def checkSNPs(wt_aa, hit_aa, mutations, sstart, gene_id):
+
+	# write temporary seqs
+	s = file("seqs.tmp","w")
+	s.write(">wt\n" + wt_aa + "\n")
+	s.write(">hit\n" + hit_aa + "\n")
+	s.close()
+
+	f = os.popen("edialign seqs.tmp -outfile x -outseq seqs.aln.tmp -auto")
+
+	# read aligned sequences
+	f = file("seqs.aln.tmp","r")
+	wt_string = ""
+	aln_string = ""
+	read_wt_seq = False
+	read_aln_seq = False
+	for line in f:
+		if line.startswith(">"):
+			if not read_wt_seq:
+				read_wt_seq = True # first header 
+			else:
+				read_aln_seq = True # second header
+		else:
+			if read_aln_seq:
+				aln_string += line.rstrip()
+			else:
+				wt_string += line.rstrip()	
+	f.close()
+
+	snps = []
+
+	for (pos,wt) in mutations:
+		if pos > sstart:
+			pos_in_aln = getGappedPosition(wt_string,pos - sstart + 1)
+			allele_in_aln = aln_string[pos_in_aln-1]
+			if allele_in_aln != wt:
+				snps.append(gene_id + "-" + str(pos) + allele_in_aln)
+			
+	return snps
 
 if __name__ == "__main__":
 
@@ -95,24 +146,37 @@ if __name__ == "__main__":
 				else:
 					hits_dict[hit_class] = [hit_allele]
 		f.close()
-
-		if options.qrdr!="":		
-			# check for QRDR mutations
-			f = os.popen("blastx -db " + options.qrdr + " -query " + contigs + " -outfmt '6 sacc sseq qseq gaps slen length' -ungapped -comp_based_stats F -culling_limit 1")
 		
-			qrdr_loci = {'gyrA': [(83,'S'),(87,'D')],'parC': [(80,'S'),(84,'E')]}
+		# check for QRDR mutations
+		if options.qrdr!="":
+		
+			# mutations to check for
+			qrdr_loci = {'GyrA': [(83,'S'),(87,'D')],'ParC': [(80,'S'),(84,'E')]}
+			qrdr_loci_checked = [] # take only the top hit for each seq
+			
+			f = os.popen("blastx -db " + options.qrdr + " -query " + contigs + " -outfmt '6 sacc sseq qseq gaps slen length sstart' -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1")
 		
 			for line in f:
 				fields = line.rstrip().split("\t")
-				(gene_id,wt_seq,this_seq,gaps,qrdr_length,aln_length) = (fields[0],fields[1],fields[2],int(fields[3]),int(fields[4]),int(fields[5]))
-				if (gaps == 0) and (qrdr_length == aln_length) and (gene_id in qrdr_loci):
-					for (pos,wt) in qrdr_loci[gene_id]:
-						if this_seq[pos-1] != wt:
-							res_allele = gene_id + "-" + str(pos) + this_seq[pos-1]
-							if "Flq_SNP" in hits_dict:
-								hits_dict["Flq"].append(res_allele)
+				(gene_id,wt_seq,this_seq,gaps,qrdr_length,aln_length,sstart) = (fields[0],fields[1],fields[2],int(fields[3]),int(fields[4]),int(fields[5]),int(fields[6]))
+				if gene_id not in qrdr_loci_checked:
+					qrdr_loci_checked.append(gene_id)
+					if (gaps == 0) and (qrdr_length == aln_length) and (gene_id in qrdr_loci):
+						for (pos,wt) in qrdr_loci[gene_id]:
+							if this_seq[pos-1] != wt:
+								res_allele = gene_id + "-" + str(pos) + this_seq[pos-1]
+								if "Flq_SNP" in hits_dict:
+									hits_dict["Flq"].append(res_allele)
+								else:
+									hits_dict["Flq"] = [res_allele]
+					else:
+						# not a simple alignment, need to align query and hit and extract loci manually
+						snps = checkSNPs(wt_seq, this_seq, qrdr_loci[gene_id], sstart, gene_id)
+						if len(snps) > 0:
+							if "Flq" in hits_dict:
+								hits_dict["Flq"] += snps
 							else:
-								hits_dict["Flq"] = [res_allele]
+								hits_dict["Flq"] = snps
 		
 		hit_string = [name]
 		for res_class in (res_classes + bla_classes):
