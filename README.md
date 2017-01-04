@@ -15,7 +15,7 @@ To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes (
 If you are interested in inferring capsule types from genome data, see the [Kaptive](https://github.com/katholt/Kaptive) repo.
 
 ## Let's get genotyping!
-Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assemblies? Use the Kleborate.py script. This will detect the MLST sequence type of the strain, genotype the _ybt_ and _clb_ loci, and also check for presence/absence of the acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon). For convenience, we provide code for screening for acquired resistance genes (resBLAST.py) which can optionally be called when you run Kleborate.py or as a standalone script.
+Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assemblies? Use the Kleborate.py script. This will detect the MLST sequence type of the strain, genotype the _ybt_ and _clb_ loci, determine the _wzi_ (capsule synthesis gene) allele and also check for presence/absence of the acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon). For convenience, we provide code for screening for acquired resistance genes (resBLAST.py) and quinolone-resistance determining mutations in _gyrA_ and _parC_, which can optionally be called when you run Kleborate.py or as a standalone script.
 
 #### Basic usage:
 
@@ -53,7 +53,7 @@ A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosom
 
 # Typing genome assemblies using Kleborate
 
-The Kleborate.py script in this repo can be used to determine chromosomal, yersiniabactin and colibactin genotypes from assembled draft or complete genomes. It also reports presence/absence of acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon, currently we just screen for the alleles in the virulence plasmid pLVPK). For convenience, Kleborate.py can optionally screen for acquired resistance genes as well (using the SRST2-formatted version of the ARG-Annot database).
+The Kleborate.py script in this repo can be used to determine chromosomal, yersiniabactin and colibactin genotypes from assembled draft or complete genomes. It also reports presence/absence of acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon, currently we just screen for the alleles in the virulence plasmid pLVPK). We also extract the _wzi_ gene allele to give an idea of the capsule type, but these are not totally predictive so we suggest you use our dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive) for this. For convenience, Kleborate.py can optionally screen for acquired resistance genes as well (using the SRST2-formatted version of the ARG-Annot database, with the core Klebs genes _oqxA_ and _oxqB_ removed).
 
 A summary of sequence types and ICE/lineage information is printed to standard out; full allele calls are saved to a file specified by `-o`. See below for details of output formats.
 
@@ -120,11 +120,11 @@ mv GCA_000016305.1_ASM1630v1_genomic.fna MGH78578.fna
 python Kleborate.py -p Kleborate -o details.txt *.fna
 
 ## EXPECTED OUTPUT
-strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy
-Klebs_HS11286	11	ybt 9; ICEKp3	15	-	0	-	-	-
-Klebs_Kp1084	23	ybt 1; ICEKp10	47	clb 2	37	-	-	- 
-MGH78578	38	-	0	-	0	-	-	- 
-NTUH-K2044	23	ybt 2; ICEKp1	326	-	0	iucABCD	iroBCDN;iroBCDN	rmpA;rmpA
+strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy	wzi 
+Klebs_HS11286	11	ybt 9; ICEKp3	15	-	0	-	-	-	wzi74 
+Klebs_Kp1084	23	ybt 1; ICEKp10	47	clb 2	37	-	-	-	wzi172 
+MGH78578	38	-	0	-	0	-	-	-	wzi50 
+NTUH-K2044	23	ybt 2; ICEKp1	326	-	0	iucABCD	iroBCDN;iroBCDN	rmpA;rmpA	wzi1
 
 # NOTE: NTUH-K2044 has two copies each of the iro and rmpA loci (one on the virulence plasmid with iuc, and one in ICEKp1).
 
@@ -148,13 +148,21 @@ A tabulated summary is printed to standard out; details of the MLST analysis are
 * By default, a gene is called as present if it is detected in a single sequence with >90% identity and >80% coverage of the allele sequence from the virulence plasmid pLVPK. Note that rmpA and rmpA2 are ~85% homologous and are reported separately.
 * If multiple hits to the same query sequence are found in a given assembly, we attempt to report these separately. The NTUH-K2044 genome carries iroBCDN and rmpA in two locations (one on the virulence plasmid, one in the ICEKp1), and this should be reported as iroBDCN;iroBCDN and rmpA;rmpA as seen in the example above.
 
+#### Wzi gene allele (marker of capsule type)
+* The closest match amongst the _wzi_ alleles in the BIGSdb will be reported.
+* This is a marker of capsule (K) type, although there is not a 1-1 relationship between wzi allele and K type
+* This can a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages)
+* Note for proper capsule type prediction you should use our dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive)
+
 #### Resistance gene detection
 * Here we are screening against the ARG-Annot database of acquired resistance genes ([SRST2](https://github.com/katholt/srst2) version), which includes allelic variants.
 * Kleborate attempts to report the best matching variant for each locus in the genome
 * Imprecise allele matches are indicated with \*
 * If the length of match is less than the length of the reported allele (ie a partial match), this is indicated with ?
-* Note that oqxAB, ampH and SHV (narrow spectrum) are core genes in _K. pneumoniae_ so should be detected in most genomes
+* Note that the beta-lactamases ampH and SHV (narrow spectrum) are core genes in _K. pneumoniae_ so should be detected in most genomes
 * If you see LEN or OKP beta-lactamases rather than SHV, you probably have _K. variicola_ (LEN) or _K. quasipneumoniae_ (OKP) rather than _K. pneumoniae_ (see [this paper](http://www.pnas.org/content/112/27/E3574.long) for clarification)
+* Note that _oqxAB_ are also core genes  in _K. pneumoniae_, but have been removed from this version of the ARG-Annot DB as they don't actually confer resistance to fluoroquinolones
+* In addition to acquired genes, we also check for the known quinolone resistance SNPs (GyrA 83 & 87; ParC 80 & 84)
 * Results are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into Lahey classes, as follows: 
   * AGly (aminoglycosides)
   * Bla (beta-lactamases)
