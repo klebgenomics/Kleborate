@@ -128,7 +128,7 @@ if __name__ == "__main__":
 		# record results
 		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST]),
 		if options.resistance == "on":
-			print "\t" + res_hits
+			print "\t" + res_hits,
 		print ""
 		
 		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
