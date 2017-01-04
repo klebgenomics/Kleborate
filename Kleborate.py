@@ -1,4 +1,5 @@
 # run chromosome, yersiniabactin and colibactin MLST on a Klebs genome
+# optionally, run resistance gene screening
 import string, re, collections
 import os, sys, subprocess
 from optparse import OptionParser
@@ -11,7 +12,7 @@ def main():
 	# options
 	parser.add_option("-p", "--path", action="store", dest="repo_path", help="Path to Kleborate directory (default Kleborate)", default="Kleborate")
 	parser.add_option("-o", "--outfile", action="store", dest="outfile", help="File for detailed output (default Kleborate_results.txt)", default="Kleborate_results.txt")
-	parser.add_option("-r", "--seqs", action="store", dest="resistance", help="Resistance genes screening (default off, set to on)", default="off")
+	parser.add_option("-r", "--resistance", action="store", dest="resistance", help="Resistance genes screening (default off, set to on)", default="off")
 	
 	return parser.parse_args()
 
@@ -19,7 +20,7 @@ if __name__ == "__main__":
 
 	(options, args) = main()
 
-	header_string = "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy"])
+	header_string = "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy","wzi"])
 	print header_string,
 	
 	res_header_string = ""
@@ -102,12 +103,21 @@ if __name__ == "__main__":
 			if fields[1] != "aerobactin":
 				# skip header
 				(strain,vir_hits) = (fields[0],"\t".join(fields[1:]))
-		f.close()	
+		f.close()
+		
+		wzi_ST = ""
+		# screen for wzi allele
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s " + options.repo_path + "/data/wzi.fasta -d " + options.repo_path + "/data/wzi.txt -i no " + contigs) 
+		for line in f:
+			fields = line.rstrip().split("\t")
+			if fields[0] != "ST":
+				# skip header
+				(strain, wzi_ST) = (fields[0], "wzi" + fields[1])
 
 		# screen for resistance genes
 		res_hits = ""
 		if options.resistance == "on":
-			f = os.popen("python "+ options.repo_path + "/resBLAST.py -s " + options.repo_path + "/data/ARGannot.r1.fasta -t " + options.repo_path + "/data/ARGannot_clustered80.csv " + contigs) 
+			f = os.popen("python "+ options.repo_path + "/resBLAST.py -s " + options.repo_path + "/data/ARGannot.r1.fasta -t " + options.repo_path + "/data/ARGannot_clustered80.csv -q" + options.repo_path + "/data/QRDR_120.aa " + contigs) 
 			for line in f:
 				fields = line.rstrip().split("\t")
 				if fields[0] != "strain":
@@ -116,12 +126,12 @@ if __name__ == "__main__":
 			f.close()
 
 		# record results
-		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits]),
+		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST]),
 		if options.resistance == "on":
 			print "\t" + res_hits
 		print ""
 		
-		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
+		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
 		if options.resistance == "on":
 			o.write("\t" + res_hits)
 		o.write("\n")

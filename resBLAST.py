@@ -11,6 +11,7 @@ def main():
 	# options
 	parser.add_option("-s", "--seqs", action="store", dest="seqs", help="res gene sequences to screen for", default="ARGannot.r1.fasta")
 	parser.add_option("-t", "--class", action="store", dest="res_class_file", help="res gene classes (CSV)", default="ARGannot_clustered80.csv")
+	parser.add_option("-q", "--qrdr", action="store", dest="qrdr", help="QRDR sequences", default="QRDR_120.aa")
 	parser.add_option("-m", "--minident", action="store", dest="minident", help="Minimum percent identity (default 90)", default="90")
 	parser.add_option("-c", "--mincov", action="store", dest="mincov", help="Minimum percent coverage (default 80)", default="80")
 	
@@ -26,7 +27,11 @@ if __name__ == "__main__":
 		(path,fileName) = os.path.split(options.seqs)
 		if not os.path.exists(options.seqs + ".nin"):
 			os.system("makeblastdb -dbtype nucl -logfile blast.log -in " + options.seqs)
-		(fileName,ext) = os.path.splitext(fileName)
+		
+	if options.qrdr!="":
+		(qrdr_path,qrdr_fileName) = os.path.split(options.qrdr)
+		if not os.path.exists(options.qrdr + ".nin"):
+			os.system("makeblastdb -dbtype nucl -logfile blast.log -in " + options.qrdr)
 		
 	# read table of genes and store classes
 	
@@ -90,6 +95,24 @@ if __name__ == "__main__":
 				else:
 					hits_dict[hit_class] = [hit_allele]
 		f.close()
+
+		if options.qrdr!="":		
+			# check for QRDR mutations
+			f = os.popen("blastx -db " + options.qrdr + " -query " + contigs + " -outfmt '6 sacc sseq qseq gaps slen length' -ungapped -comp_based_stats F -culling_limit 1")
+		
+			qrdr_loci = {'gyrA': [(83,'S'),(87,'D')],'parC': [(80,'S'),(84,'E')]}
+		
+			for line in f:
+				fields = line.rstrip().split("\t")
+				(gene_id,wt_seq,this_seq,gaps,qrdr_length,aln_length) = (fields[0],fields[1],fields[2],int(fields[3]),int(fields[4]),int(fields[5]))
+				if (gaps == 0) and (qrdr_length == aln_length) and (gene_id in qrdr_loci):
+					for (pos,wt) in qrdr_loci[gene_id]:
+						if this_seq[pos-1] != wt:
+							res_allele = gene_id + "-" + str(pos) + this_seq[pos-1]
+							if "Flq_SNP" in hits_dict:
+								hits_dict["Flq"].append(res_allele)
+							else:
+								hits_dict["Flq"] = [res_allele]
 		
 		hit_string = [name]
 		for res_class in (res_classes + bla_classes):
