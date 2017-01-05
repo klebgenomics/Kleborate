@@ -32,6 +32,14 @@ python Kleborate.py -p Kleborate -o detailed_results.txt -r on *.fasta
 
 See below for more details, examples and outputs.
 
+#### Dependencies
+
+* Python v2
+
+* BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
+
+* EMBOSS (optional, to help identify quinolone resistant SNPs)
+
 
 # About the MLST schemes
 
@@ -57,15 +65,21 @@ The Kleborate.py script in this repo can be used to determine chromosomal, yersi
 
 A summary of sequence types and ICE/lineage information is printed to standard out; full allele calls are saved to a file specified by `-o`. See below for details of output formats.
 
-Dependencies: Python v2; BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
+#### Dependencies
 
-To download:
+* Python v2
+
+* BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
+
+* EMBOSS (optional, to help identify quinolone resistant SNPs)
+
+#### To download:
 
 ````
 git clone https://github.com/katholt/Kleborate 
 ```
 
-Usage:
+#### Usage:
 
 ```
 python Kleborate.py -h
@@ -79,13 +93,13 @@ Options:
                         File for detailed output (default Kleborate_results.txt)
 ```
 
-Example command:
+#### Example command:
 
 ```
 python Kleborate.py -p Kleborate -o detailed_results.txt genome.fasta
 ```
 
-Test on well known genomes:
+#### Test on well known genomes:
 
 ```
 ## GET CODE
