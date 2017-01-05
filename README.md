@@ -38,6 +38,12 @@ See below for more details, examples and outputs.
 
 * BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
 
+#### Info and Contacts
+
+Kleborate is in active development so please post bugs and features request to the GitHub issues tracker.
+
+If you use it, please cite the preprint: Lam et al, 2017 [https://doi.org/10.1101/098178](http://biorxiv.org/content/early/2017/01/04/098178)
+
 # About the MLST schemes
 
 We have created two separate schemes: one for yersiniabactin sequence types (YbST) and one for colibactin sequence types (CbST). See [this preprint](http://biorxiv.org/content/early/2017/01/04/098178) for full details.
