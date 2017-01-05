@@ -2,6 +2,7 @@
 import string, re, collections
 import os, sys, subprocess
 from optparse import OptionParser
+import xml.etree.ElementTree as ET
 	
 def main():
 
@@ -28,46 +29,6 @@ def getGappedPosition(seq,pos):
 		i += 1
 	return (i-1)
 	
-def checkSNPs(wt_aa, hit_aa, mutations, sstart, gene_id):
-
-	# write temporary seqs
-	s = file("seqs.tmp","w")
-	s.write(">wt\n" + wt_aa + "\n")
-	s.write(">hit\n" + hit_aa + "\n")
-	s.close()
-
-	f = os.popen("edialign seqs.tmp -outfile x -outseq seqs.aln.tmp -auto")
-
-	# read aligned sequences
-	f = file("seqs.aln.tmp","r")
-	wt_string = ""
-	aln_string = ""
-	read_wt_seq = False
-	read_aln_seq = False
-	for line in f:
-		if line.startswith(">"):
-			if not read_wt_seq:
-				read_wt_seq = True # first header 
-			else:
-				read_aln_seq = True # second header
-		else:
-			if read_aln_seq:
-				aln_string += line.rstrip()
-			else:
-				wt_string += line.rstrip()	
-	f.close()
-
-	snps = []
-
-	for (pos,wt) in mutations:
-		if pos > sstart:
-			pos_in_aln = getGappedPosition(wt_string,pos - sstart + 1)
-			allele_in_aln = aln_string[pos_in_aln-1]
-			if allele_in_aln != wt:
-				snps.append(gene_id + "-" + str(pos) + allele_in_aln)
-			
-	return snps
-
 if __name__ == "__main__":
 
 	(options, args) = main()
@@ -152,34 +113,42 @@ if __name__ == "__main__":
 		
 			# mutations to check for
 			qrdr_loci = {'GyrA': [(83,'S'),(87,'D')],'ParC': [(80,'S'),(84,'E')]}
-			qrdr_loci_checked = [] # take only the top hit for each seq
+			snps = []
 			
-			f = os.popen("blastx -db " + options.qrdr + " -query " + contigs + " -outfmt '6 sacc sseq qseq gaps slen length sstart' -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1")
-		
-			for line in f:
-				fields = line.rstrip().split("\t")
-				(gene_id,wt_seq,this_seq,gaps,qrdr_length,aln_length,sstart) = (fields[0],fields[1],fields[2],int(fields[3]),int(fields[4]),int(fields[5]),int(fields[6]))
-				if gene_id not in qrdr_loci_checked:
-					qrdr_loci_checked.append(gene_id)
-					if (gaps == 0) and (qrdr_length == aln_length) and (gene_id in qrdr_loci):
-						for (pos,wt) in qrdr_loci[gene_id]:
-							if this_seq[pos-1] != wt:
-								res_allele = gene_id + "-" + str(pos) + this_seq[pos-1]
-								if "Flq_SNP" in hits_dict:
-									hits_dict["Flq"].append(res_allele)
-								else:
-									hits_dict["Flq"] = [res_allele]
-					else:
-						# not a simple alignment, need to align query and hit and extract loci manually
-						try:
-							snps = checkSNPs(wt_seq, this_seq, qrdr_loci[gene_id], sstart, gene_id)
-							if len(snps) > 0:
-								if "Flq" in hits_dict:
-									hits_dict["Flq"] += snps
-								else:
-									hits_dict["Flq"] = snps
-						except:
-							snps = []
+			blastx_cmd = "blastx -db " + options.qrdr + " -query " + contigs + " -outfmt 5 -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1"
+			process = subprocess.Popen(blastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
+			blast_output = process.communicate()[0]
+			
+			root = ET.fromstring(blast_output)			
+			for hit in root[8][0][4]:
+				gene_id = hit[2].text
+				aln_len = int(hit[4].text)
+				for hsp in hit[5]:
+					Hsp_hit_from = int(hsp[6].text)
+					Hsp_hit_to = int(hsp[7].text)
+					Hsp_gaps = int(hsp[12].text)
+					Hsp_align_len  = int(hsp[13].text)
+					Hsp_qseq = hsp[14].text
+					Hsp_hseq = hsp[15].text
+				
+					for (pos,wt) in qrdr_loci[gene_id]:
+						if  (Hsp_hit_to) >= pos and (Hsp_gaps == 0) and (Hsp_hit_from == 1):
+							# simple alignment 
+							if Hsp_qseq[pos-1] != wt:
+								snps.append(gene_id + "-" + str(pos) + Hsp_qseq[pos-1])
+						else:
+							# not a simple alignment, need to align query and hit and extract loci manually
+							if (pos >= Hsp_hit_from) and (pos <= Hsp_hit_to):
+								# locus is within aligned area
+								pos_in_aln = getGappedPosition(Hsp_hseq, pos - Hsp_hit_from + 1)
+								if Hsp_qseq[pos_in_aln-1] != wt:
+									snps.append(gene_id + "-" + str(pos) + Hsp_qseq[pos_in_aln-1])
+			
+			if "Flq_SNP" in hits_dict:
+				hits_dict["Flq"] + snps
+			else:
+				hits_dict["Flq"] = snps
+									
 		
 		hit_string = [name]
 		for res_class in (res_classes + bla_classes):

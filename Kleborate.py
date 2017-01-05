@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
 	(options, args) = main()
 
-	header_string = "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy","wzi"])
+	header_string = "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy","wzi","K"])
 	print header_string,
 	
 	res_header_string = ""
@@ -107,12 +107,12 @@ if __name__ == "__main__":
 		
 		wzi_ST = ""
 		# screen for wzi allele
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s " + options.repo_path + "/data/wzi.fasta -d " + options.repo_path + "/data/wzi.txt -i no " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s " + options.repo_path + "/data/wzi.fasta -d " + options.repo_path + "/data/wzi.txt -i yes " + contigs) 
 		for line in f:
 			fields = line.rstrip().split("\t")
 			if fields[0] != "ST":
 				# skip header
-				(strain, wzi_ST) = (fields[0], "wzi" + fields[1])
+				(strain, wzi_ST, Ktype) = (fields[0], "wzi" + fields[2], fields[1])
 
 		# screen for resistance genes
 		res_hits = ""
@@ -126,12 +126,12 @@ if __name__ == "__main__":
 			f.close()
 
 		# record results
-		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST]),
+		print "\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST,Ktype]),
 		if options.resistance == "on":
 			print "\t" + res_hits,
 		print ""
 		
-		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
+		o.write("\t".join([name,chr_ST,Yb_group,Yb_ST,Cb_group,Cb_ST,vir_hits,wzi_ST,Ktype,chr_ST]+chr_ST_detail+[Yb_ST]+Yb_ST_detail + [Cb_ST] + Cb_ST_detail))
 		if options.resistance == "on":
 			o.write("\t" + res_hits)
 		o.write("\n")
