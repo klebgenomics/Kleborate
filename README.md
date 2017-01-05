@@ -38,9 +38,6 @@ See below for more details, examples and outputs.
 
 * BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
 
-* EMBOSS (optional, to help identify quinolone resistant SNPs)
-
-
 # About the MLST schemes
 
 We have created two separate schemes: one for yersiniabactin sequence types (YbST) and one for colibactin sequence types (CbST).
@@ -59,7 +56,7 @@ CbST sequences cluster into 3 lineages, which are each associated with a single 
 
 A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosomal MLST assignments for 2500 public Klebs genomes is provided in the /data directory.
 
-# Typing genome assemblies using Kleborate
+# Detailed Usage - Typing genome assemblies using Kleborate
 
 The Kleborate.py script in this repo can be used to determine chromosomal, yersiniabactin and colibactin genotypes from assembled draft or complete genomes. It also reports presence/absence of acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon, currently we just screen for the alleles in the virulence plasmid pLVPK). We also extract the _wzi_ gene allele to give an idea of the capsule type, but these are not totally predictive so we suggest you use our dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive) for this. For convenience, Kleborate.py can optionally screen for acquired resistance genes as well (using the SRST2-formatted version of the ARG-Annot database, with the core Klebs genes _oqxA_ and _oxqB_ removed).
 
@@ -70,8 +67,6 @@ A summary of sequence types and ICE/lineage information is printed to standard o
 * Python v2
 
 * BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
-
-* EMBOSS (optional, to help identify quinolone resistant SNPs)
 
 #### To download:
 
@@ -164,7 +159,7 @@ A tabulated summary is printed to standard out; details of the MLST analysis are
 
 #### Wzi gene allele (marker of capsule type)
 * The closest match amongst the _wzi_ alleles in the BIGSdb will be reported.
-* This is a marker of capsule (K) type, although there is not a 1-1 relationship between wzi allele and K type
+* This is a marker of capsule (K) type. Although there is not a 1-1 relationship between wzi allele and K type, if a strong association with a specific K type is known, this will be reported in the K column.
 * This can a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages)
 * Note for proper capsule type prediction you should use our dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive)
 
