@@ -171,12 +171,15 @@ if __name__ == "__main__":
 									hits_dict["Flq"] = [res_allele]
 					else:
 						# not a simple alignment, need to align query and hit and extract loci manually
-						snps = checkSNPs(wt_seq, this_seq, qrdr_loci[gene_id], sstart, gene_id)
-						if len(snps) > 0:
-							if "Flq" in hits_dict:
-								hits_dict["Flq"] += snps
-							else:
-								hits_dict["Flq"] = snps
+						try:
+							snps = checkSNPs(wt_seq, this_seq, qrdr_loci[gene_id], sstart, gene_id)
+							if len(snps) > 0:
+								if "Flq" in hits_dict:
+									hits_dict["Flq"] += snps
+								else:
+									hits_dict["Flq"] = snps
+						except:
+							snps = []
 		
 		hit_string = [name]
 		for res_class in (res_classes + bla_classes):
