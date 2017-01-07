@@ -55,7 +55,7 @@ if __name__ == "__main__":
 			fields = line.rstrip().split("\t")
 			if fields[1] != "ST":
 				# skip header
-				(strain, chr_ST) = (fields[0], fields[1])
+				(strain, chr_ST) = (fields[0], "ST"+fields[1])
 				chr_ST_detail = fields[2:]
 		f.close()
 		
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 			fields = line.rstrip().split("\t")
 			if fields[2] != "ST":
 				# skip header
-				(strain,Yb_ST, Yb_group) = (fields[0],fields[2], fields[1])
+				(strain,Yb_ST, Yb_group) = (fields[0], fields[2], fields[1])
 				Yb_ST_detail = fields[3:]
 				if Yb_group == "":
 					Yb_group = "-"

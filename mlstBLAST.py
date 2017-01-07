@@ -160,9 +160,6 @@ if __name__ == "__main__":
 			
 		# assign ST
 		bst = ",".join(best_st)
-		
-		print bst
-		print sts
 
 		if bst in sts:
 			bst = sts[bst] # note may have mismatching alleles due to SNPs, this will be recorded in mismatch_loci_including_SNPs
