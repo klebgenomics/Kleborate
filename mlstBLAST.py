@@ -118,7 +118,6 @@ if __name__ == "__main__":
 		for line in f:
 			fields = line.rstrip().split("\t")
 			(gene_id,pcid,length,allele_length,score) = (fields[0],float(fields[1]),int(fields[2]),int(fields[3]),float(fields[4]))
-			#print line
 			if "__" in gene_id:
 				# srst2 formated file
 				gene_id_components = gene_id.split("__")
@@ -161,6 +160,9 @@ if __name__ == "__main__":
 			
 		# assign ST
 		bst = ",".join(best_st)
+		
+		print bst
+		print sts
 
 		if bst in sts:
 			bst = sts[bst] # note may have mismatching alleles due to SNPs, this will be recorded in mismatch_loci_including_SNPs

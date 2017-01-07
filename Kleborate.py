@@ -107,7 +107,7 @@ if __name__ == "__main__":
 		
 		wzi_ST = ""
 		# screen for wzi allele
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s " + options.repo_path + "/data/wzi.fasta -d " + options.repo_path + "/data/wzi.txt -i yes " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s " + options.repo_path + "/data/wzi.fasta -d " + options.repo_path + "/data/wzi.txt -i yes --maxmissing 3 " + contigs) 
 		for line in f:
 			fields = line.rstrip().split("\t")
 			if fields[0] != "ST":
