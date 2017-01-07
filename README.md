@@ -135,11 +135,11 @@ mv GCA_000016305.1_ASM1630v1_genomic.fna MGH78578.fna
 python Kleborate.py -p Kleborate -o details.txt *.fna
 
 ## EXPECTED OUTPUT
-strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy	wzi 
-Klebs_HS11286	11	ybt 9; ICEKp3	15	-	0	-	-	-	wzi74 
-Klebs_Kp1084	23	ybt 1; ICEKp10	47	clb 2	37	-	-	-	wzi172 
-MGH78578	38	-	0	-	0	-	-	-	wzi50 
-NTUH-K2044	23	ybt 2; ICEKp1	326	-	0	iucABCD	iroBCDN;iroBCDN	rmpA;rmpA	wzi1
+strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy	wzi	K 
+Klebs_HS11286	ST11	ybt 9; ICEKp3	15	-	0	-	-	-	wzi74	KL103 
+Klebs_Kp1084	ST23	ybt 1; ICEKp10	47	clb 2	37	-	-	-	wzi172	KL1 
+MGH78578	ST38	-	0	-	0	-	-	-	wzi50	KL15 (KL17,KL51,KL52) 
+NTUH-K2044	ST23	ybt 2; ICEKp1	326	-	0	iucABCD	iroBCDN;iroBCDN	rmpA;rmpA	wzi1	KL1
 
 # NOTE: NTUH-K2044 has two copies each of the iro and rmpA loci (one on the virulence plasmid with iuc, and one in ICEKp1).
 
