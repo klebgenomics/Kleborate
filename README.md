@@ -135,7 +135,7 @@ mv GCA_000016305.1_ASM1630v1_genomic.fna MGH78578.fna
 python Kleborate.py -p Kleborate -o details.txt *.fna
 
 ## EXPECTED OUTPUT
-strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy	wzi	K 
+strain	ST	Yersiniabactin	YbST	Colibactin	CbST	aerobactin	salmochelin	hypermucoidy	wzi	KL 
 Klebs_HS11286	ST11	ybt 9; ICEKp3	15	-	0	-	-	-	wzi74	KL103 
 Klebs_Kp1084	ST23	ybt 1; ICEKp10	47	clb 2	37	-	-	-	wzi172	KL1 
 MGH78578	ST38	-	0	-	0	-	-	-	wzi50	KL15 (KL17,KL51,KL52) 
