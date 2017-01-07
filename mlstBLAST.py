@@ -38,18 +38,39 @@ if __name__ == "__main__":
 			os.system("makeblastdb -dbtype nucl -logfile blast.log -in " + options.seqs)
 		(fileName,ext) = os.path.splitext(fileName)
 		
-	def getClosestLocusVariant(query, sts):
+	def getClosestLocusVariant(query, annotated_query, sts):
+		
 		closest = []
-		min_dist = len(query)
+		closest_alleles = {} # key = st, value = list
+		min_dist = len(query) # number mismatching loci, ignoring SNPs
+		min_dist_incl_snps = len(annotated_query) # number mismatching loci
+		
 		for index, item in enumerate(query):
 			if item == "-":	
 				query[index] = "0"
+				
+		# get distance from closest ST, ignoring SNPs (*)
 		for st in sts:
 			d = sum(map(lambda x,y: bool(int(x)-int(y)),st.split(","),query))
-			if d <= min_dist:
+			if d == min_dist:
 				closest.append(int(sts[st]))
-				min_dist = d
-		return (str(min(closest)), min_dist)
+				closest_alleles[sts[st]] = st
+			elif d < min_dist:
+				# reset
+				closest = [int(sts[st])]
+				closest_alleles[sts[st]] = st
+				min_dist = d # distance from closest ST, ignoring SNPs (*)
+				
+		closest_st = str(min(closest))
+
+		for index, item in enumerate(annotated_query):
+			if item == "-" or item.endswith("*"):	
+				annotated_query[index] = "0"
+
+		# get distance from closest ST, including SNPs (*)
+		min_dist_incl_snps = sum(map(lambda x,y: bool(int(x)-int(y)),closest_alleles[closest_st].split(","),annotated_query)) 
+		
+		return (closest_st, min_dist, min_dist_incl_snps)
 		
 	sts = {} # key = concatenated string of alleles, value = st
 	st_info = {} # key = st, value = info relating to this ST, eg clonal group
@@ -123,10 +144,15 @@ if __name__ == "__main__":
 		best_st = []
 		best_st_annotated = []
 		
+		mismatch_loci = 0
+		mismatch_loci_including_SNPs = 0
+		
 		for locus in header:
 			if locus in best_allele:
 				allele = best_allele[locus]
 				allele_number = allele.replace("*","")
+				if allele.endswith("*"):
+					mismatch_loci_including_SNPs += 1
 				best_st.append(allele_number)
 				best_st_annotated.append(allele) # will still have * if imperfect match
 			else:
@@ -135,26 +161,23 @@ if __name__ == "__main__":
 			
 		# assign ST
 		bst = ",".join(best_st)
-		
-		mismatch_loci = 0
-		
+
 		if bst in sts:
-			bst = sts[bst]
+			bst = sts[bst] # note may have mismatching alleles due to SNPs, this will be recorded in mismatch_loci_including_SNPs
 		elif bst.count("-") <= int(options.maxmissing):
-			(bst, mismatch_loci) = getClosestLocusVariant(best_st, sts)
+			# only report ST if enough loci are called
+			(bst, mismatch_loci, mismatch_loci_including_SNPs) = getClosestLocusVariant(best_st, best_st_annotated, sts)
 		else:
 			bst = "0"
-
+		
 		# pull info column
 		if options.info=="yes":
 			info_final = ""
 			if bst in st_info:
 				info_final = st_info[bst]
 		
-		if best_st != best_st_annotated:
-			bst += "*"
-		if mismatch_loci > 0:
-			bst += "-" + str(mismatch_loci) + "LV"
+		if mismatch_loci_including_SNPs > 0:
+			bst += "-" + str(mismatch_loci_including_SNPs) + "LV"
 		
 		if options.info=="yes":
 			print "\t".join([name,info_final,bst] + best_st_annotated)

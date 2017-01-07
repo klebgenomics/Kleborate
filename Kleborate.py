@@ -61,7 +61,7 @@ if __name__ == "__main__":
 		
 		# run ybt MLST
 		
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/ybt_alleles.fasta -d "+ options.repo_path + "/data/YbST_profiles.txt -i yes --maxmissing 7 " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/ybt_alleles.fasta -d "+ options.repo_path + "/data/YbST_profiles.txt -i yes --maxmissing 3 " + contigs) 
 
 		Yb_ST = ""
 		Yb_group = ""
@@ -79,7 +79,7 @@ if __name__ == "__main__":
 		
 		# run colibactin MLST
 		
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/colibactin_alleles.fasta -d "+ options.repo_path + "/data/CbST_profiles.txt -i yes --maxmissing 10 " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/colibactin_alleles.fasta -d "+ options.repo_path + "/data/CbST_profiles.txt -i yes --maxmissing 3 " + contigs) 
 
 		Cb_ST = ""
 		Cb_group = ""
