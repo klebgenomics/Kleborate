@@ -165,9 +165,9 @@ A tabulated summary is printed to standard out; details of the MLST analysis are
 
 #### Wzi gene allele (marker of capsule type)
 * The closest match amongst the _wzi_ alleles in the BIGSdb will be reported.
-* This is a marker of capsule (K) type. Although there is not a 1-1 relationship between wzi allele and K type, if a strong association with a specific K type is known, this will be reported in the K column.
+* This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, it is quite predictive (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)).
 * This can a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages)
-* Note for proper capsule type prediction you should use our dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive)
+* Note for optimal capsule type prediction you should use our dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive).
 
 #### Resistance gene detection
 * Here we are screening against the ARG-Annot database of acquired resistance genes ([SRST2](https://github.com/katholt/srst2) version), which includes allelic variants.
