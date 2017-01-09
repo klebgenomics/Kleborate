@@ -2,6 +2,7 @@
 # optionally, run resistance gene screening
 import string, re, collections
 import os, sys, subprocess
+import gzip
 from optparse import OptionParser
 	
 def main():
@@ -15,6 +16,37 @@ def main():
 	parser.add_option("-r", "--resistance", action="store", dest="resistance", help="Resistance genes screening (default off, set to on)", default="off")
 	
 	return parser.parse_args()
+
+
+def get_compression_type(filename):
+	"""
+	Attempts to guess the compression (if any) on a file using the first few bytes.
+	http://stackoverflow.com/questions/13044562
+	"""
+	magic_dict = {'gz': (b'\x1f', b'\x8b', b'\x08'),
+				  'bz2': (b'\x42', b'\x5a', b'\x68'),
+				  'zip': (b'\x50', b'\x4b', b'\x03', b'\x04')}
+	max_len = max(len(x) for x in magic_dict)
+
+	unknown_file = open(filename, 'rb')
+	file_start = unknown_file.read(max_len)
+	unknown_file.close()
+	compression_type = 'plain'
+	for filetype, magic_bytes in magic_dict.items():
+		if file_start.startswith(magic_bytes):
+			compression_type = filetype
+	if compression_type == 'bz2':
+		sys.exit('cannot use bzip2 format - use gzip instead')
+	if compression_type == 'zip':
+		sys.exit('cannot use zip format - use gzip instead')
+	return compression_type
+
+
+def decompress_file(in_file, out_file):
+	with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
+		s = i.read()
+		o.write(s)
+
 
 if __name__ == "__main__":
 
@@ -45,6 +77,15 @@ if __name__ == "__main__":
 		(dir,fileName) = os.path.split(contigs)
 		(name,ext) = os.path.splitext(fileName)
 		
+		# If the contigs are in a gz file, make a temporary decompressed FASTA file.
+		if get_compression_type(contigs) == 'gz':
+			new_contigs = contigs + '_temp_decompress.fasta'
+			decompress_file(contigs, new_contigs)
+			contigs = new_contigs
+			temp_decompress = True
+		else:
+			temp_decompress = False
+
 		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s "+ options.repo_path + "/data/Klebsiella_pneumoniae.fasta -d "+ options.repo_path + "/data/kpneumoniae.txt -i no --maxmissing 3 " + contigs) 
 
 		# run chromosome MLST
@@ -137,5 +178,12 @@ if __name__ == "__main__":
 		o.write("\n")
 
 		# run Kaptive
+
+
+
+
+		# If we've been working on a temporary decompressed file, delete it now.
+		if temp_decompress:
+			os.remove(contigs)
 		
 	o.close()
