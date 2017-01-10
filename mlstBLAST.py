@@ -18,7 +18,7 @@ def main():
 	# options
 	parser.add_option("-s", "--seqs", action="store", dest="seqs", help="MLST allele sequences file", default="")
 	parser.add_option("-d", "--database", action="store", dest="database", help="MLST profile database (col1=ST, other cols=loci, must have loci names in header)", default="")
-	parser.add_option("-i", "--info", action="store", dest="info", help="Info (clonal group, lineage, etc) provided in las column of profiles (yes (default), no)", default="yes")
+	parser.add_option("-i", "--info", action="store", dest="info", help="Info (clonal group, lineage, etc) provided in last column of profiles (yes (default), no)", default="yes")
 	parser.add_option("-m", "--minident", action="store", dest="minident", help="Minimum percent identity (default 95)", default="95")
 	parser.add_option("-n", "--maxmissing", action="store", dest="maxmissing", help="Maximum missing/uncalled loci to still calculate closest ST (default 3)", default="3")
 	return parser.parse_args()
@@ -175,7 +175,7 @@ if __name__ == "__main__":
 			if bst in st_info:
 				info_final = st_info[bst]
 		
-		if mismatch_loci_including_SNPs > 0:
+		if mismatch_loci_including_SNPs > 0 and bst != "0":
 			bst += "-" + str(mismatch_loci_including_SNPs) + "LV"
 		
 		if options.info=="yes":

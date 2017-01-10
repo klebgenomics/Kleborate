@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
 	(options, args) = main()
 
-	header_string = "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy","wzi","K"])
+	header_string = "\t".join(["strain","ST","Yersiniabactin","YbST","Colibactin","CbST","aerobactin","salmochelin","hypermucoidy","wzi","KL"])
 	print header_string,
 	
 	res_header_string = ""
@@ -96,8 +96,10 @@ if __name__ == "__main__":
 			fields = line.rstrip().split("\t")
 			if fields[1] != "ST":
 				# skip header
-				(strain, chr_ST) = (fields[0], "ST"+fields[1])
+				(strain, chr_ST) = (fields[0], fields[1])
 				chr_ST_detail = fields[2:]
+				if chr_ST != "0":
+					chr_ST = "ST"+chr_ST
 		f.close()
 		
 		# run ybt MLST
@@ -146,14 +148,17 @@ if __name__ == "__main__":
 				(strain,vir_hits) = (fields[0],"\t".join(fields[1:]))
 		f.close()
 		
-		wzi_ST = ""
 		# screen for wzi allele
-		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s " + options.repo_path + "/data/wzi.fasta -d " + options.repo_path + "/data/wzi.txt -i yes --maxmissing 3 " + contigs) 
+		f = os.popen("python "+ options.repo_path + "/mlstBLAST.py -s " + options.repo_path + "/data/wzi.fasta -d " + options.repo_path + "/data/wzi.txt -i yes --maxmissing 0 " + contigs) 
 		for line in f:
 			fields = line.rstrip().split("\t")
 			if fields[0] != "ST":
 				# skip header
 				(strain, wzi_ST, Ktype) = (fields[0], "wzi" + fields[2], fields[1])
+				if fields[2] == "0":
+					wzi_ST = "0"
+				if Ktype == "":
+					Ktype = "-"
 
 		# screen for resistance genes
 		res_hits = ""
