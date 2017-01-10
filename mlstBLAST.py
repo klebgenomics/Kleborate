@@ -157,15 +157,19 @@ if __name__ == "__main__":
 			else:
 				best_st.append("-")
 				best_st_annotated.append("-")
+				mismatch_loci += 1
+				mismatch_loci_including_SNPs += 1
 			
 		# assign ST
 		bst = ",".join(best_st)
-
-		if bst in sts:
-			bst = sts[bst] # note may have mismatching alleles due to SNPs, this will be recorded in mismatch_loci_including_SNPs
-		elif bst.count("-") <= int(options.maxmissing):
-			# only report ST if enough loci are called
-			(bst, mismatch_loci, mismatch_loci_including_SNPs) = getClosestLocusVariant(best_st, best_st_annotated, sts)
+		
+		if mismatch_loci_including_SNPs <= int(options.maxmissing):
+			# only report ST if enough loci are precise matches
+			if bst in sts:
+				bst = sts[bst] # note may have mismatching alleles due to SNPs, this will be recorded in mismatch_loci_including_SNPs
+			else:
+				# determine closest ST
+				(bst, mismatch_loci, mismatch_loci_including_SNPs) = getClosestLocusVariant(best_st, best_st_annotated, sts)
 		else:
 			bst = "0"
 		
