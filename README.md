@@ -14,10 +14,18 @@ To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes (
 
 If you are interested in inferring capsule types from genome data, see the [Kaptive](https://github.com/katholt/Kaptive) repo.
 
+#### Info and Contacts
+
+Kleborate is in active development so please post bugs and features request to the GitHub issues tracker. 
+
+If you use it, please cite the preprint: Lam et al, 2017 [https://doi.org/10.1101/098178](http://biorxiv.org/content/early/2017/01/04/098178)
+
 For more on our lab, including other software, see [http://holtlab.net](http://holtlab.net)
 
 ## Let's get genotyping!
 Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assemblies? Use the Kleborate.py script. This will detect the MLST sequence type of the strain, genotype the _ybt_ and _clb_ loci, determine the _wzi_ (capsule synthesis gene) allele and also check for presence/absence of the acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon). For convenience, we provide code for screening for acquired resistance genes (resBLAST.py) and quinolone-resistance determining mutations in _gyrA_ and _parC_, which can optionally be called when you run Kleborate.py or as a standalone script.
+
+(If you haven't got good assemblies yet, try our [Unicycler](https://github.com/rrwick/Unicycler) assembler which works great on Illumina or hybrid Illumina + Nanopore/PacBio reads)
 
 #### Basic usage:
 
@@ -39,12 +47,6 @@ See below for more details, examples and outputs.
 * Python v2
 
 * BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
-
-#### Info and Contacts
-
-Kleborate is in active development so please post bugs and features request to the GitHub issues tracker.
-
-If you use it, please cite the preprint: Lam et al, 2017 [https://doi.org/10.1101/098178](http://biorxiv.org/content/early/2017/01/04/098178)
 
 # About the MLST schemes
 
