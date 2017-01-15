@@ -14,6 +14,8 @@ To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes (
 
 If you are interested in inferring capsule types from genome data, see the [Kaptive](https://github.com/katholt/Kaptive) repo.
 
+For more on our lab, including other software, see [http://holtlab.net](http://holtlab.net)
+
 ## Let's get genotyping!
 Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assemblies? Use the Kleborate.py script. This will detect the MLST sequence type of the strain, genotype the _ybt_ and _clb_ loci, determine the _wzi_ (capsule synthesis gene) allele and also check for presence/absence of the acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon). For convenience, we provide code for screening for acquired resistance genes (resBLAST.py) and quinolone-resistance determining mutations in _gyrA_ and _parC_, which can optionally be called when you run Kleborate.py or as a standalone script.
 
