@@ -20,4 +20,4 @@ mv GCA_000016305.1_ASM1630v1_genomic.fna MGH78578.fna
 
 # run typing
 # NOTE: -p must point to the Kleborate directory
-python Kleborate.py -p . -o details.txt *.fna
+kleborate -p . -o details.txt *.fna
