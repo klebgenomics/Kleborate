@@ -1,6 +1,7 @@
 # run chromosome, yersiniabactin and colibactin MLST on a Klebs genome
 # optionally, run resistance gene screening
-import os, sys
+import os
+import sys
 import gzip
 import argparse
 import distutils.spawn
@@ -21,7 +22,6 @@ def main():
     header_string = '\t'.join(['strain', 'ST', 'Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin',
                                'salmochelin', 'hypermucoidy', 'wzi', 'KL'])
     print header_string,
-
     res_header_string = ''
     if args.resistance:
         f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' + data_folder +
@@ -30,7 +30,6 @@ def main():
         res_header_string = '\t'.join(fields[1:])
         f.close()
         print '\t' + res_header_string,
-
     print ''  # end header
 
     mlst_header_string = '\t'.join(['Chr_ST', 'gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB', 'YbST', 'ybtS',
@@ -38,14 +37,14 @@ def main():
                                     'CbST', 'clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI',
                                     'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ'])
     o = file(args.outfile, 'w')
-    o.write('\t'.join([header_string,mlst_header_string]))
-    if args.resistance == 'on':
+    o.write('\t'.join([header_string, mlst_header_string]))
+    if args.resistance:
         o.write('\t' + res_header_string)
     o.write('\n')
 
     for contigs in args.assemblies:
-        (dir, fileName) = os.path.split(contigs)
-        (name, ext) = os.path.splitext(fileName)
+        (_, filename) = os.path.split(contigs)
+        (name, ext) = os.path.splitext(filename)
 
         # If the contigs are in a gz file, make a temporary decompressed FASTA file.
         if get_compression_type(contigs) == 'gz':
@@ -103,7 +102,7 @@ def main():
             fields = line.rstrip().split('\t')
             if fields[2] != 'ST':
                 # skip header
-                (strain, cb_st, cb_group) = (fields[0],fields[2], fields[1])
+                (strain, cb_st, cb_group) = (fields[0], fields[2], fields[1])
                 cb_st_detail = fields[3:]
                 if cb_group == '':
                     cb_group = '-'
@@ -116,7 +115,7 @@ def main():
             fields = line.rstrip().split('\t')
             if fields[1] != 'aerobactin':
                 # skip header
-                (strain,vir_hits) = (fields[0],'\t'.join(fields[1:]))
+                (strain, vir_hits) = (fields[0], '\t'.join(fields[1:]))
         f.close()
 
         # screen for wzi allele
@@ -150,7 +149,7 @@ def main():
             print '\t' + res_hits,
         print ''
 
-        o.write('\t'.join([name, chr_st, yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type, chr_st] + \
+        o.write('\t'.join([name, chr_st, yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type, chr_st] +
                           chr_st_detail + [yb_st] + yb_st_detail + [cb_st] + cb_st_detail))
         if args.resistance:
             o.write('\t' + res_hits)
