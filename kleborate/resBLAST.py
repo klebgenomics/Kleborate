@@ -36,7 +36,7 @@ if __name__ == "__main__":
     (options, args) = main()
 
     if options.seqs == "":
-        DoError("No res gene sequences provided (-s)")
+        sys.exit("No res gene sequences provided (-s)")
     else:
         (path,fileName) = os.path.split(options.seqs)
         if not os.path.exists(options.seqs + ".nin"):
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     bla_classes = []
 
     if options.res_class_file == "":
-        DoError("No res gene class file provided (-t)")
+        sys.exit("No res gene class file provided (-t)")
     else:
         f = file(options.res_class_file,"r")
         header=0

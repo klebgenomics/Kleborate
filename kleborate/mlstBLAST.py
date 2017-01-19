@@ -28,10 +28,10 @@ if __name__ == "__main__":
     (options, args) = main()
 
     if options.database=="":
-        DoError("No MLST profiles databse provided (-d)")
+        sys.exit("No MLST profiles databse provided (-d)")
 
     if options.seqs=="":
-        DoError("No MLST allele sequences provided (-s)")
+        sys.exit("No MLST allele sequences provided (-s)")
     else:
         (path,fileName) = os.path.split(options.seqs)
         if not os.path.exists(options.seqs + ".nin"):

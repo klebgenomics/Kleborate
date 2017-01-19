@@ -32,7 +32,7 @@ if __name__ == "__main__":
         return (once, twice)
 
     if options.seqs == "":
-        DoError("No operon sequences provided (-s)")
+        sys.exit("No operon sequences provided (-s)")
     else:
         (path,fileName) = os.path.split(options.seqs)
         if not os.path.exists(options.seqs + ".nin"):
