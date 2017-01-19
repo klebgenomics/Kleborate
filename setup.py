@@ -29,7 +29,7 @@ setup(name='Kleborate',
       test_suite='nose.collector',
       tests_require=[],
       entry_points={
-          'console_scripts': ['kleborate=kleborate.Kleborate:kleborate'],
+          'console_scripts': ['kleborate=kleborate.kleborate:kleborate'],
       },
       include_package_data=True,
       zip_safe=False)
