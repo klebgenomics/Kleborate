@@ -143,11 +143,12 @@ if __name__ == "__main__":
 								pos_in_aln = getGappedPosition(Hsp_hseq, pos - Hsp_hit_from + 1)
 								if Hsp_qseq[pos_in_aln-1] != wt:
 									snps.append(gene_id + "-" + str(pos) + Hsp_qseq[pos_in_aln-1])
-			
-			if "Flq_SNP" in hits_dict:
-				hits_dict["Flq"] + snps
-			else:
-				hits_dict["Flq"] = snps
+
+			if snps:
+				if "Flq" in hits_dict:
+					hits_dict["Flq"] += snps
+				else:
+					hits_dict["Flq"] = snps
 									
 		
 		hit_string = [name]
