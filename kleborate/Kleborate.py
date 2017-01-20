@@ -14,34 +14,17 @@ def main():
     args = parse_arguments()
     check_inputs_and_programs(args)
 
-    # find necessary resources
+    # Find necessary resources
     data_folder = resource_filename(__name__, 'data')
     mlstblast = resource_filename(__name__, 'mlstBLAST.py')
     resblast = resource_filename(__name__, 'resBLAST.py')
     clusterblast = resource_filename(__name__, 'clusterBLAST.py')
 
-    header_string = '\t'.join(['strain', 'contig_count', 'N50', 'largest_contig', 'ST',
-                               'Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin',
-                               'salmochelin', 'hypermucoidy', 'wzi', 'KL'])
-    print header_string,
-    res_header_string = ''
-    if args.resistance:
-        f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' + data_folder +
-                     '/ARGannot_clustered80.csv')
-        fields = f.readline().rstrip().split('\t')
-        res_header_string = '\t'.join(fields[1:])
-        f.close()
-        print '\t' + res_header_string,
-    print ''  # end header
-
-    mlst_header_string = '\t'.join(['Chr_ST', 'gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB', 'YbST', 'ybtS',
-                                    'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA',
-                                    'CbST', 'clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI',
-                                    'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ'])
+    # Output in two places: stdout (less verbose) and file (more verbose)
+    stdout_header, full_header = build_output_headers(args, resblast, data_folder)
+    print '\t'.join(stdout_header)
     o = file(args.outfile, 'w')
-    o.write('\t'.join([header_string, mlst_header_string]))
-    if args.resistance:
-        o.write('\t' + res_header_string)
+    o.write('\t'.join(full_header))
     o.write('\n')
 
     for contigs in args.assemblies:
@@ -59,17 +42,15 @@ def main():
 
         contig_count, n50, longest_contig = get_contig_stats(contigs)
 
-        f = os.popen('python ' + mlstblast + ' -s ' + data_folder + '/Klebsiella_pneumoniae.fasta -d ' + data_folder +
-                     '/kpneumoniae.txt -i no --maxmissing 3 ' + contigs)
-
         # run chromosome MLST
+        f = os.popen('python ' + mlstblast + ' -s ' + data_folder +
+                     '/Klebsiella_pneumoniae.fasta -d ' + data_folder +
+                     '/kpneumoniae.txt -i no --maxmissing 3 ' + contigs)
         chr_st = ''
         chr_st_detail = []
-
         for line in f:
             fields = line.rstrip().split('\t')
-            if fields[1] != 'ST':
-                # skip header
+            if fields[1] != 'ST':  # skip header
                 (strain, chr_st) = (fields[0], fields[1])
                 chr_st_detail = fields[2:]
                 if chr_st != '0':
@@ -77,17 +58,14 @@ def main():
         f.close()
 
         # run ybt MLST
-
-        f = os.popen('python ' + mlstblast + ' -s ' + data_folder + '/ybt_alleles.fasta -d ' + data_folder +
-                     '/YbST_profiles.txt -i yes --maxmissing 3 ' + contigs)
+        f = os.popen('python ' + mlstblast + ' -s ' + data_folder + '/ybt_alleles.fasta -d ' +
+                     data_folder + '/YbST_profiles.txt -i yes --maxmissing 3 ' + contigs)
         yb_st = ''
         yb_group = ''
         yb_st_detail = []
-
         for line in f:
             fields = line.rstrip().split('\t')
-            if fields[2] != 'ST':
-                # skip header
+            if fields[2] != 'ST':  # skip header
                 (strain, yb_st, yb_group) = (fields[0], fields[2], fields[1])
                 yb_st_detail = fields[3:]
                 if yb_group == '':
@@ -95,17 +73,15 @@ def main():
         f.close()
 
         # run colibactin MLST
-
-        f = os.popen('python ' + mlstblast + ' -s ' + data_folder + '/colibactin_alleles.fasta -d ' + data_folder +
+        f = os.popen('python ' + mlstblast + ' -s ' + data_folder +
+                     '/colibactin_alleles.fasta -d ' + data_folder +
                      '/CbST_profiles.txt -i yes --maxmissing 3 ' + contigs)
         cb_st = ''
         cb_group = ''
         cb_st_detail = []
-
         for line in f:
             fields = line.rstrip().split('\t')
-            if fields[2] != 'ST':
-                # skip header
+            if fields[2] != 'ST':  # skip header
                 (strain, cb_st, cb_group) = (fields[0], fields[2], fields[1])
                 cb_st_detail = fields[3:]
                 if cb_group == '':
@@ -113,12 +89,11 @@ def main():
         f.close()
 
         # screen for other virulence genes (binary calls)
-
-        f = os.popen('python ' + clusterblast + ' -s ' + data_folder + '/other_vir_clusters.fasta ' + contigs)
+        f = os.popen('python ' + clusterblast + ' -s ' + data_folder +
+                     '/other_vir_clusters.fasta ' + contigs)
         for line in f:
             fields = line.rstrip().split('\t')
-            if fields[1] != 'aerobactin':
-                # skip header
+            if fields[1] != 'aerobactin':  # skip header
                 (strain, vir_hits) = (fields[0], '\t'.join(fields[1:]))
         f.close()
 
@@ -127,8 +102,7 @@ def main():
                      '/wzi.txt -i yes --maxmissing 0 -m 99 ' + contigs)
         for line in f:
             fields = line.rstrip().split('\t')
-            if fields[0] != 'ST':
-                # skip header
+            if fields[0] != 'ST':  # skip header
                 (strain, wzi_st, k_type) = (fields[0], 'wzi' + fields[2], fields[1])
                 if fields[2] == '0':
                     wzi_st = '0'
@@ -136,15 +110,15 @@ def main():
                     k_type = '-'
 
         # screen for resistance genes
-        res_hits = ''
+        res_hits = []
         if args.resistance:
-            f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' + data_folder +
-                         '/ARGannot_clustered80.csv -q' + data_folder + '/QRDR_120.aa ' + contigs)
+            f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' +
+                         data_folder + '/ARGannot_clustered80.csv -q' + data_folder +
+                         '/QRDR_120.aa ' + contigs)
             for line in f:
                 fields = line.rstrip().split('\t')
-                if fields[0] != 'strain':
-                    # skip header
-                    res_hits = '\t'.join(fields[1:])
+                if fields[0] != 'strain':  # skip header
+                    res_hits = fields[1:]
             f.close()
 
         # run Kaptive
@@ -154,18 +128,42 @@ def main():
         # TO DO
         # TO DO
 
-        # record results
-        print '\t'.join([name, str(contig_count), str(n50), str(longest_contig), chr_st, yb_group,
-                         yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type]),
+        # Summarise virulence and resistance in simple scores.
+        # TO DO
+        # TO DO
+        # TO DO
+        # TO DO
+        # TO DO
+        virulence_score = '-'  # TEMP
         if args.resistance:
-            print '\t' + res_hits,
-        print ''
+            # TO DO
+            # TO DO
+            # TO DO
+            # TO DO
+            # TO DO
+            resistance_score = '-'  # TEMP
+        else:
+            resistance_score = ''
 
-        o.write('\t'.join([name, str(contig_count), str(n50), str(longest_contig), chr_st, yb_group,
-                           yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type, chr_st] +
-                          chr_st_detail + [yb_st] + yb_st_detail + [cb_st] + cb_st_detail))
+        # Print results to screen.
+        stdout_results = [name, chr_st, virulence_score]
         if args.resistance:
-            o.write('\t' + res_hits)
+            stdout_results.append(resistance_score)
+        stdout_results += [yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type]
+        if args.resistance:
+            stdout_results += res_hits
+        print '\t'.join(stdout_results)
+
+        # Save results to file.
+        full_results = [name, str(contig_count), str(n50), str(longest_contig), chr_st,
+                        virulence_score]
+        if args.resistance:
+            full_results.append(resistance_score)
+        full_results += [yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type, chr_st] + \
+            chr_st_detail + [yb_st] + yb_st_detail + [cb_st] + cb_st_detail
+        if args.resistance:
+            full_results += res_hits
+        o.write('\t'.join(full_results))
         o.write('\n')
 
         # If we've been working on a temporary decompressed file, delete it now.
@@ -180,7 +178,8 @@ def parse_arguments():
     parser.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
                         help='File for detailed output (default: Kleborate_results.txt)')
     parser.add_argument('-r', '--resistance', action='store_true',
-                        help='Turn on resistance genes screening (default: no resistance gene screening)')
+                        help='Turn on resistance genes screening (default: no resistance gene '
+                             'screening)')
     parser.add_argument('-k', '--kaptive', action='store_true',
                         help='Turn on capsule typing with Kaptive (default: no capsule typing')
     parser.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
@@ -211,6 +210,41 @@ def check_inputs_and_programs(args):
             imp.find_module('Bio')
         except ImportError:
             sys.exit('Error: could not find BioPython (required for Kaptive)')
+
+
+def build_output_headers(args, resblast, data_folder):
+    """
+    There are two levels of output:
+      * stdout is simpler and displayed to the console
+      * full contains more and is saved to file
+    This function returns header for both.
+    """
+    stdout_header = ['strain', 'ST', 'virulence_score']
+    full_header = ['strain', 'contig_count', 'N50', 'largest_contig', 'ST', 'virulence_score']
+    if args.resistance:
+        stdout_header.append('resistance_score')
+        full_header.append('resistance_score')
+
+    other_columns = ['Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin', 'salmochelin',
+                     'hypermucoidy', 'wzi', 'KL']
+    stdout_header += other_columns
+    full_header += other_columns
+
+    mlst_header = ['Chr_ST', 'gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB', 'YbST', 'ybtS',
+                   'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA',
+                   'CbST', 'clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI',
+                   'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ']
+    full_header += mlst_header
+
+    if args.resistance:
+        f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' +
+                     data_folder + '/ARGannot_clustered80.csv')
+        fields = f.readline().rstrip().split('\t')
+        stdout_header += fields[1:]
+        full_header += fields[1:]
+        f.close()
+
+    return stdout_header, full_header
 
 
 def decompress_file(in_file, out_file):
