@@ -7,6 +7,7 @@ import argparse
 import distutils.spawn
 from pkg_resources import resource_filename
 import imp
+from .contig_stats import load_fasta, get_compression_type, get_contig_stats
 
 
 def main():
@@ -19,7 +20,8 @@ def main():
     resblast = resource_filename(__name__, 'resBLAST.py')
     clusterblast = resource_filename(__name__, 'clusterBLAST.py')
 
-    header_string = '\t'.join(['strain', 'ST', 'Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin',
+    header_string = '\t'.join(['strain', 'contig_count', 'N50', 'largest_contig', 'ST',
+                               'Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin',
                                'salmochelin', 'hypermucoidy', 'wzi', 'KL'])
     print header_string,
     res_header_string = ''
@@ -54,6 +56,8 @@ def main():
             temp_decompress = True
         else:
             temp_decompress = False
+
+        contig_count, n50, longest_contig = get_contig_stats(contigs)
 
         f = os.popen('python ' + mlstblast + ' -s ' + data_folder + '/Klebsiella_pneumoniae.fasta -d ' + data_folder +
                      '/kpneumoniae.txt -i no --maxmissing 3 ' + contigs)
@@ -143,22 +147,26 @@ def main():
                     res_hits = '\t'.join(fields[1:])
             f.close()
 
+        # run Kaptive
+        # TO DO
+        # TO DO
+        # TO DO
+        # TO DO
+        # TO DO
+
         # record results
-        print '\t'.join([name, chr_st, yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type]),
+        print '\t'.join([name, str(contig_count), str(n50), str(longest_contig), chr_st, yb_group,
+                         yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type]),
         if args.resistance:
             print '\t' + res_hits,
         print ''
 
-        o.write('\t'.join([name, chr_st, yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type, chr_st] +
+        o.write('\t'.join([name, str(contig_count), str(n50), str(longest_contig), chr_st, yb_group,
+                           yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type, chr_st] +
                           chr_st_detail + [yb_st] + yb_st_detail + [cb_st] + cb_st_detail))
         if args.resistance:
             o.write('\t' + res_hits)
         o.write('\n')
-
-        # run Kaptive
-
-
-
 
         # If we've been working on a temporary decompressed file, delete it now.
         if temp_decompress:
@@ -203,56 +211,6 @@ def check_inputs_and_programs(args):
             imp.find_module('Bio')
         except ImportError:
             sys.exit('Error: could not find BioPython (required for Kaptive)')
-
-
-def load_fasta(filename):
-    """Returns the names and sequences for the given fasta file."""
-    fasta_seqs = []
-    if get_compression_type(filename) == 'gz':
-        open_func = gzip.open
-    else:  # plain text
-        open_func = open
-    with open_func(filename, 'rt') as fasta_file:
-        name = ''
-        sequence = ''
-        for line in fasta_file:
-            line = line.strip()
-            if not line:
-                continue
-            if line[0] == '>':  # Header line = start of new contig
-                if name:
-                    fasta_seqs.append((name.split()[0], sequence))
-                    sequence = ''
-                name = line[1:]
-            else:
-                sequence += line
-        if name:
-            fasta_seqs.append((name.split()[0], sequence))
-    return fasta_seqs
-
-
-def get_compression_type(filename):
-    """
-    Attempts to guess the compression (if any) on a file using the first few bytes.
-    http://stackoverflow.com/questions/13044562
-    """
-    magic_dict = {'gz': (b'\x1f', b'\x8b', b'\x08'),
-                  'bz2': (b'\x42', b'\x5a', b'\x68'),
-                  'zip': (b'\x50', b'\x4b', b'\x03', b'\x04')}
-    max_len = max(len(x) for x in magic_dict)
-
-    unknown_file = open(filename, 'rb')
-    file_start = unknown_file.read(max_len)
-    unknown_file.close()
-    compression_type = 'plain'
-    for file_type, magic_bytes in magic_dict.items():
-        if file_start.startswith(magic_bytes):
-            compression_type = file_type
-    if compression_type == 'bz2':
-        sys.exit('cannot use bzip2 format - use gzip instead')
-    if compression_type == 'zip':
-        sys.exit('cannot use zip format - use gzip instead')
-    return compression_type
 
 
 def decompress_file(in_file, out_file):
