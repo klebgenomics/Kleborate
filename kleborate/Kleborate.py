@@ -21,7 +21,7 @@ def main():
     clusterblast = resource_filename(__name__, 'clusterBLAST.py')
 
     # Output in two places: stdout (less verbose) and file (more verbose)
-    stdout_header, full_header = build_output_headers(args, resblast, data_folder)
+    stdout_header, full_header, res_headers = build_output_headers(args, resblast, data_folder)
     print '\t'.join(stdout_header)
     o = file(args.outfile, 'w')
     o.write('\t'.join(full_header))
@@ -66,7 +66,7 @@ def main():
         for line in f:
             fields = line.rstrip().split('\t')
             if fields[2] != 'ST':  # skip header
-                (strain, yb_st, yb_group) = (fields[0], fields[2], fields[1])
+                strain, yb_st, yb_group = fields[0], fields[2], fields[1]
                 yb_st_detail = fields[3:]
                 if yb_group == '':
                     yb_group = '-'
@@ -89,12 +89,15 @@ def main():
         f.close()
 
         # screen for other virulence genes (binary calls)
+        aerobactin, salmochelin, hypermucoidy = '-', '-', '-'
         f = os.popen('python ' + clusterblast + ' -s ' + data_folder +
                      '/other_vir_clusters.fasta ' + contigs)
         for line in f:
             fields = line.rstrip().split('\t')
             if fields[1] != 'aerobactin':  # skip header
-                (strain, vir_hits) = (fields[0], '\t'.join(fields[1:]))
+                aerobactin = fields[1]
+                salmochelin = fields[2]
+                hypermucoidy = fields[3]
         f.close()
 
         # screen for wzi allele
@@ -128,20 +131,11 @@ def main():
         # TO DO
         # TO DO
 
-        # Summarise virulence and resistance in simple scores.
-        # TO DO
-        # TO DO
-        # TO DO
-        # TO DO
-        # TO DO
-        virulence_score = '-'  # TEMP
+        # Summarise virulence and resistance.
+        virulence_score = get_virulence_score(yb_group, cb_group, aerobactin, salmochelin,
+                                              hypermucoidy)
         if args.resistance:
-            # TO DO
-            # TO DO
-            # TO DO
-            # TO DO
-            # TO DO
-            resistance_score = '-'  # TEMP
+            resistance_score = get_resistance_score(res_headers, res_hits)
         else:
             resistance_score = ''
 
@@ -149,7 +143,8 @@ def main():
         stdout_results = [name, chr_st, virulence_score]
         if args.resistance:
             stdout_results.append(resistance_score)
-        stdout_results += [yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type]
+        stdout_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
+                           wzi_st, k_type]
         if args.resistance:
             stdout_results += res_hits
         print '\t'.join(stdout_results)
@@ -159,8 +154,9 @@ def main():
                         virulence_score]
         if args.resistance:
             full_results.append(resistance_score)
-        full_results += [yb_group, yb_st, cb_group, cb_st, vir_hits, wzi_st, k_type, chr_st] + \
-            chr_st_detail + [yb_st] + yb_st_detail + [cb_st] + cb_st_detail
+        full_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
+                         wzi_st, k_type, chr_st] + chr_st_detail + [yb_st] + yb_st_detail + \
+                        [cb_st] + cb_st_detail
         if args.resistance:
             full_results += res_hits
         o.write('\t'.join(full_results))
@@ -217,7 +213,8 @@ def build_output_headers(args, resblast, data_folder):
     There are two levels of output:
       * stdout is simpler and displayed to the console
       * full contains more and is saved to file
-    This function returns header for both.
+    This function returns headers for both. It also returns the resistance headers in a separate
+    list, as they are used to
     """
     stdout_header = ['strain', 'ST', 'virulence_score']
     full_header = ['strain', 'contig_count', 'N50', 'largest_contig', 'ST', 'virulence_score']
@@ -240,11 +237,54 @@ def build_output_headers(args, resblast, data_folder):
         f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' +
                      data_folder + '/ARGannot_clustered80.csv')
         fields = f.readline().rstrip().split('\t')
-        stdout_header += fields[1:]
-        full_header += fields[1:]
+        res_headers = fields[1:]
+        stdout_header += res_headers
+        full_header += res_headers
         f.close()
+    else:
+        res_headers = []
 
-    return stdout_header, full_header
+    return stdout_header, full_header, res_headers
+
+
+def get_virulence_score(yb_group, cb_group, aerobactin, salmochelin, hypermucoidy):
+    """
+    The yersiniabactin locus counts as 1 and having any of the others counts as 2.
+    This gives 4 possible scores:
+      * 0 = no virulence
+      * 1 = just yersiniabactin
+      * 2 = one or more non-yersiniabactin
+      * 3 = yersiniabactin and one or more non-yersiniabactin
+    """
+    score = 0
+    if yb_group != '-':
+        score += 1
+    if cb_group != '-' or aerobactin != '-' or salmochelin != '-' or hypermucoidy != '-':
+        score += 2
+    return str(score)
+
+
+def get_resistance_score(res_headers, res_hits):
+    """
+    Three possible resistance scores:
+      * 0 = no ESBL, no Carbepenemase
+      * 1 = ESBL, no Carbepenemase
+      * 2 = Carbepenemase (whether or not ESBL is present)
+    """
+    # Look for a hit in any 'ESBL' column (e.g. 'Bla_ESBL' or 'Bla_ESBL_inhR')
+    esbl_header_indices = [i for i, h in enumerate(res_headers) if 'esbl' in h.lower()]
+    has_esbl = any(res_hits[i] != '-' for i in esbl_header_indices)
+
+    # Look for a hit in any 'Carb' column (e.g. 'Bla_Carb')
+    carb_header_indices = [i for i, h in enumerate(res_headers) if 'carb' in h.lower()]
+    has_carb = any(res_hits[i] != '-' for i in carb_header_indices)
+
+    if has_carb:
+        return '2'
+    elif has_esbl:
+        return '1'
+    else:
+        return '0'
 
 
 def decompress_file(in_file, out_file):
