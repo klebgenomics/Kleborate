@@ -134,15 +134,14 @@ def main():
         # Summarise virulence and resistance.
         virulence_score = get_virulence_score(yb_group, cb_group, aerobactin, salmochelin,
                                               hypermucoidy)
-        if args.resistance:
-            resistance_score = get_resistance_score(res_headers, res_hits)
-        else:
-            resistance_score = ''
+        resistance_score = get_resistance_score(res_headers, res_hits)
+        resistance_class_count = get_resistance_class_count(res_headers, res_hits)
+        resistance_gene_count = get_resistance_gene_count(res_headers, res_hits)
 
         # Print results to screen.
-        stdout_results = [name, chr_st, virulence_score]
+        stdout_results = [name, chr_st, str(virulence_score)]
         if args.resistance:
-            stdout_results.append(resistance_score)
+            stdout_results.append(str(resistance_score))
         stdout_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
                            wzi_st, k_type]
         if args.resistance:
@@ -151,9 +150,11 @@ def main():
 
         # Save results to file.
         full_results = [name, str(contig_count), str(n50), str(longest_contig), chr_st,
-                        virulence_score]
+                        str(virulence_score)]
         if args.resistance:
-            full_results.append(resistance_score)
+            full_results.append(str(resistance_score))
+            full_results.append(str(resistance_class_count))
+            full_results.append(str(resistance_gene_count))
         full_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
                          wzi_st, k_type, chr_st] + chr_st_detail + [yb_st] + yb_st_detail + \
                         [cb_st] + cb_st_detail
@@ -214,13 +215,15 @@ def build_output_headers(args, resblast, data_folder):
       * stdout is simpler and displayed to the console
       * full contains more and is saved to file
     This function returns headers for both. It also returns the resistance headers in a separate
-    list, as they are used to
+    list, as they are used to total up some resistance summaries.
     """
     stdout_header = ['strain', 'ST', 'virulence_score']
     full_header = ['strain', 'contig_count', 'N50', 'largest_contig', 'ST', 'virulence_score']
     if args.resistance:
         stdout_header.append('resistance_score')
         full_header.append('resistance_score')
+        full_header.append('num_resistance_classes')
+        full_header.append('num_resistance_genes')
 
     other_columns = ['Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin', 'salmochelin',
                      'hypermucoidy', 'wzi', 'KL']
@@ -261,7 +264,7 @@ def get_virulence_score(yb_group, cb_group, aerobactin, salmochelin, hypermucoid
         score += 1
     if cb_group != '-' or aerobactin != '-' or salmochelin != '-' or hypermucoidy != '-':
         score += 2
-    return str(score)
+    return score
 
 
 def get_resistance_score(res_headers, res_hits):
@@ -271,6 +274,9 @@ def get_resistance_score(res_headers, res_hits):
       * 1 = ESBL, no Carbepenemase
       * 2 = Carbepenemase (whether or not ESBL is present)
     """
+    if not res_headers:
+        return '-'
+
     # Look for a hit in any 'ESBL' column (e.g. 'Bla_ESBL' or 'Bla_ESBL_inhR')
     esbl_header_indices = [i for i, h in enumerate(res_headers) if 'esbl' in h.lower()]
     has_esbl = any(res_hits[i] != '-' for i in esbl_header_indices)
@@ -280,11 +286,31 @@ def get_resistance_score(res_headers, res_hits):
     has_carb = any(res_hits[i] != '-' for i in carb_header_indices)
 
     if has_carb:
-        return '2'
+        return 2
     elif has_esbl:
-        return '1'
+        return 1
     else:
-        return '0'
+        return 0
+
+
+def get_resistance_class_count(res_headers, res_hits):
+    """
+    Counts up all resistance gene classes, excluding the 'Bla' class which is intrinsic.
+    """
+    if not res_headers:
+        return '-'
+    res_indices = [i for i, h in enumerate(res_headers) if h.lower() != 'bla']
+    return sum(0 if res_hits[i] == '-' else 1 for i in res_indices)
+
+
+def get_resistance_gene_count(res_headers, res_hits):
+    """
+    Counts up all resistance genes, excluding the 'Bla' class which is intrinsic.
+    """
+    if not res_headers:
+        return '-'
+    res_indices = [i for i, h in enumerate(res_headers) if h.lower() != 'bla']
+    return sum(0 if res_hits[i] == '-' else len(res_hits[i].split(';')) for i in res_indices)
 
 
 def decompress_file(in_file, out_file):
