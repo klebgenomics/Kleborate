@@ -125,11 +125,13 @@ def main():
             f.close()
 
         # run Kaptive
-        # TO DO
-        # TO DO
-        # TO DO
-        # TO DO
-        # TO DO
+        if args.kaptive:
+            pass
+            # TO DO
+            # TO DO
+            # TO DO
+            # TO DO
+            # TO DO
 
         # Summarise virulence and resistance.
         virulence_score = get_virulence_score(yb_group, cb_group, aerobactin, salmochelin,
@@ -246,6 +248,14 @@ def build_output_headers(args, resblast, data_folder):
         f.close()
     else:
         res_headers = []
+
+    if args.kaptive:
+        pass
+        # TO DO
+        # TO DO
+        # TO DO
+        # TO DO
+        # TO DO
 
     return stdout_header, full_header, res_headers
 
