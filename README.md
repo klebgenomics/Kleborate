@@ -48,6 +48,11 @@ See below for more details, examples and outputs.
 
 * BLAST+ v2.2.30 (note earlier versions have a bug with the culling_limit parameter)
 
+
+
+
+
+
 # About the MLST schemes
 
 We have created two separate schemes: one for yersiniabactin sequence types (YbST) and one for colibactin sequence types (CbST). See [this preprint](http://biorxiv.org/content/early/2017/01/04/098178) for full details.
@@ -65,6 +70,11 @@ CbST sequences cluster into 3 lineages, which are each associated with a single 
 ## Genotypes of publicly available strains
 
 A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosomal MLST assignments for 2500 public Klebs genomes is provided in the /data directory.
+
+
+
+
+
 
 # Detailed Usage - Typing genome assemblies using Kleborate
 
@@ -201,6 +211,9 @@ A tabulated summary is printed to standard out; details of the MLST analysis are
   * Tmt (trimethoprim)
 
 
+
+
+
 # Typing direct from Illumina reads
 
 MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2). Steps are 
@@ -226,7 +239,10 @@ srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output Klebs --log --mlst_d
 ```
 
 
-## Kleboration
+
+
+
+# Kleboration
 
 Kleborate is under active development with many other Klebs genomic analysis tools and projects in progress. 
 
