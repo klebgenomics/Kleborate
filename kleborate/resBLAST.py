@@ -127,7 +127,8 @@ if __name__ == "__main__":
             snps = []
 
             blastx_cmd = "blastx -db " + options.qrdr + " -query " + contigs + \
-                         " -outfmt 5 -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1"
+                         " -outfmt 5 -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1" \
+                         " -seg no"
             process = subprocess.Popen(blastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
             blast_output = process.communicate()[0]
 
