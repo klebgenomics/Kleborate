@@ -92,3 +92,7 @@ ENV/
 .DS_Store
 ._.DS_Store
 
+# PyCharm stuff
+.idea/
+
+
