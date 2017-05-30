@@ -158,8 +158,7 @@ def main():
             full_results.append(str(resistance_class_count))
             full_results.append(str(resistance_gene_count))
         full_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
-                         wzi_st, k_type, chr_st] + chr_st_detail + [yb_st] + yb_st_detail + \
-                        [cb_st] + cb_st_detail
+                         wzi_st, k_type, chr_st] + chr_st_detail + yb_st_detail + cb_st_detail
         if args.resistance:
             full_results += res_hits
         o.write('\t'.join(full_results))
@@ -232,10 +231,10 @@ def build_output_headers(args, resblast, data_folder):
     stdout_header += other_columns
     full_header += other_columns
 
-    mlst_header = ['Chr_ST', 'gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB', 'YbST', 'ybtS',
-                   'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA',
-                   'CbST', 'clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI',
-                   'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ']
+    mlst_header = ['Chr_ST', 'gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB', 'ybtS', 'ybtX',
+                   'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA', 'clbA',
+                   'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI', 'clbL', 'clbM',
+                   'clbN', 'clbO', 'clbP', 'clbQ']
     full_header += mlst_header
 
     if args.resistance:
