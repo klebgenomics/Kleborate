@@ -44,6 +44,7 @@ if __name__ == "__main__":
         (fileName, ext) = os.path.splitext(fileName)
 
     def get_closest_locus_variant(query, annotated_query, sts):
+        annotated_query = list(annotated_query)  # copy the list so we don't change the original
         closest = []
         closest_alleles = {} # key = st, value = list
         min_dist = len(query) # number mismatching loci, ignoring SNPs
