@@ -68,8 +68,14 @@ def main():
             if fields[2] != 'ST':  # skip header
                 strain, yb_st, yb_group = fields[0], fields[2], fields[1]
                 yb_st_detail = fields[3:]
+
+                # If no ybt group was found but at least 8 out of the 11 ybt genes are present,
+                # then this strain is labelled as 'ybt unknown'.
                 if yb_group == '':
-                    yb_group = '-'
+                    if sum(0 if x == '-' else 1 for x in yb_st_detail) >= 8:
+                        yb_group = 'ybt unknown'
+                    else:
+                        yb_group = '-'
         f.close()
 
         # run colibactin MLST
@@ -82,10 +88,16 @@ def main():
         for line in f:
             fields = line.rstrip().split('\t')
             if fields[2] != 'ST':  # skip header
-                (strain, cb_st, cb_group) = (fields[0], fields[2], fields[1])
+                strain, cb_st, cb_group = fields[0], fields[2], fields[1]
                 cb_st_detail = fields[3:]
+
+                # If no clb group was found but at least 12 out of the 15 clb genes are present,
+                # then this strain is labelled as 'clb unknown'.
                 if cb_group == '':
-                    cb_group = '-'
+                    if sum(0 if x == '-' else 1 for x in cb_st_detail) >= 12:
+                        cb_group = 'clb unknown'
+                    else:
+                        cb_group = '-'
         f.close()
 
         # screen for other virulence genes (binary calls)

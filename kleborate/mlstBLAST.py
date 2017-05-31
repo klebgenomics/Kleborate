@@ -48,7 +48,6 @@ if __name__ == "__main__":
         closest = []
         closest_alleles = {} # key = st, value = list
         min_dist = len(query) # number mismatching loci, ignoring SNPs
-        min_dist_incl_snps = len(annotated_query) # number mismatching loci
 
         for index, item in enumerate(query):
             if item == "-":
