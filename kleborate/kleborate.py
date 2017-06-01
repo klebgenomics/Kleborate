@@ -74,6 +74,7 @@ def main():
                 if yb_group == '':
                     if sum(0 if x == '-' else 1 for x in yb_st_detail) >= 8:
                         yb_group = 'ybt unknown'
+                        yb_st = 'unknown'
                     else:
                         yb_group = '-'
         f.close()
@@ -96,6 +97,7 @@ def main():
                 if cb_group == '':
                     if sum(0 if x == '-' else 1 for x in cb_st_detail) >= 12:
                         cb_group = 'clb unknown'
+                        cb_st = 'unknown'
                     else:
                         cb_group = '-'
         f.close()
