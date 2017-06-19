@@ -138,14 +138,9 @@ def main():
                     res_hits = fields[1:]
             f.close()
 
-        # run Kaptive
-        if args.kaptive:
-            pass
-            # TO DO
-            # TO DO
-            # TO DO
-            # TO DO
-            # TO DO
+        # # TO DO: run Kaptive
+        # if args.kaptive:
+        #     pass
 
         # Summarise virulence and resistance.
         virulence_score = get_virulence_score(yb_group, cb_group, aerobactin, salmochelin,
@@ -192,8 +187,8 @@ def parse_arguments():
     parser.add_argument('-r', '--resistance', action='store_true',
                         help='Turn on resistance genes screening (default: no resistance gene '
                              'screening)')
-    parser.add_argument('-k', '--kaptive', action='store_true',
-                        help='Turn on capsule typing with Kaptive (default: no capsule typing')
+    # parser.add_argument('-k', '--kaptive', action='store_true',
+    #                     help='Turn on capsule typing with Kaptive (default: no capsule typing')
     parser.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
                         help='FASTA file(s) for assemblies')
     return parser.parse_args()
@@ -217,11 +212,13 @@ def check_inputs_and_programs(args):
     if args.resistance:
         if not distutils.spawn.find_executable('blastx'):
             sys.exit('Error: could not find blastx')
-    if args.kaptive:
-        try:
-            imp.find_module('Bio')
-        except ImportError:
-            sys.exit('Error: could not find BioPython (required for Kaptive)')
+
+    # # TO DO
+    # if args.kaptive:
+    #     try:
+    #         imp.find_module('Bio')
+    #     except ImportError:
+    #         sys.exit('Error: could not find BioPython (required for Kaptive)')
 
 
 def build_output_headers(args, resblast, data_folder):
@@ -262,13 +259,9 @@ def build_output_headers(args, resblast, data_folder):
     else:
         res_headers = []
 
-    if args.kaptive:
-        pass
-        # TO DO
-        # TO DO
-        # TO DO
-        # TO DO
-        # TO DO
+    # # TO DO
+    # if args.kaptive:
+    #     pass
 
     return stdout_header, full_header, res_headers
 
