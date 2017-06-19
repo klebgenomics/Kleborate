@@ -202,6 +202,13 @@ def parse_arguments():
     #                     help='Turn on capsule typing with Kaptive (default: no capsule typing')
     parser.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
                         help='FASTA file(s) for assemblies')
+
+    # If no arguments were used, print the entire help (argparse default is to just give an error
+    # like '-a is required').
+    if len(sys.argv) == 1:
+        parser.print_help(file=sys.stderr)
+        sys.exit(1)
+
     return parser.parse_args()
 
 
