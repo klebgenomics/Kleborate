@@ -5,5 +5,3 @@ Kleborate output for all _Klebsiella_ genomes in NCBI (genomes downloaded using 
 
 * [Genotyped_Isolates_Lam2017.txt](Genotyped_Isolates_Lam2017.txt)
 Manually curated genotype information used in the Lam et al 2017 preprint
-
-* Other files are query databases used by Kleborate for genotyping.
