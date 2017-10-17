@@ -1,4 +1,4 @@
-# Kleborate
+<p align="center"><img src="logo.png" alt="Kleborate" width="400"></p>
 
 _Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunistic infections, with a handful of hypervirulent lineages recognised as true human pathogens. Evidence is now mounting that other _Kp_ strains carrying acquired siderophores (yersiniabactin, salmochelin and aerobactin) and/or the genotoxin colibactin are also highly pathogenic and can cause invasive disease. 
 
