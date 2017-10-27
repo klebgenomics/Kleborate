@@ -19,6 +19,7 @@ import argparse
 import distutils.spawn
 from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stats
+from .version import __version__
 
 
 def main():
@@ -202,19 +203,31 @@ def main():
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Kleborate')
-    parser.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
+    parser = argparse.ArgumentParser(description='Kleborate: a tool for characterising '
+                                                 'virulence and resistance in Klebsiella',
+                                     add_help=False)
+
+    required_args = parser.add_argument_group('Required arguments')
+    required_args.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
+                               help='FASTA file(s) for assemblies')
+
+    optional_args = parser.add_argument_group('Optional arguments')
+    optional_args.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
                         help='File for detailed output (default: Kleborate_results.txt)')
-    parser.add_argument('-r', '--resistance', action='store_true',
+    optional_args.add_argument('-r', '--resistance', action='store_true',
                         help='Turn on resistance genes screening (default: no resistance gene '
                              'screening)')
-    parser.add_argument('-s', '--species', action='store_true',
-                        help='Turn on Klebsiella species check(requires Mash, default no species '
-                             'check)')
-    # parser.add_argument('-k', '--kaptive', action='store_true',
-    #                     help='Turn on capsule typing with Kaptive (default: no capsule typing')
-    parser.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
-                        help='FASTA file(s) for assemblies')
+    optional_args.add_argument('-s', '--species', action='store_true',
+                        help='Turn on Klebsiella species identification (requires Mash, default: '
+                             'no species identification)')
+    # TO DO
+    # optional_args.add_argument('-k', '--kaptive', action='store_true',
+    #                            help='Turn on capsule typing with Kaptive (default: no capsule typing')
+
+    help_args = parser.add_argument_group('Help')
+    help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
+                           help='Show this help message and exit')
+    help_args.add_argument('--version', action='version', version=__version__)
 
     # If no arguments were used, print the entire help (argparse default is to just give an error
     # like '-a is required').

@@ -6,8 +6,12 @@ def readme():
         return f.read()
 
 
+# Get the program version from another file.
+exec(open('porechop/version.py').read())
+
+
 setup(name='Kleborate',
-      version='0.0.1',
+      version=__version__,
       description='Kleborate',
       long_description=readme(),
       classifiers=[
