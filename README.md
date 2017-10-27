@@ -4,13 +4,13 @@ _Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunisti
 
 We recently explored the diversity of the _Kp_ integrative conjugative element (ICEKp), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2499 _Kp_ (see [this preprint](http://biorxiv.org/content/early/2017/01/04/098178)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 5%.
 
-We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICEKp (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICEKp variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Our analyses reveal hundreds of ICEKp transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. 
+We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICEKp (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICEKp variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Our analyses reveal hundreds of ICEKp transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations.
 
 Based on this analysis, we developed a MLST-style approach for identifying _ybt_ and _clb_ variants from genome data. 
 
 Our goal is to help identify emerging pathogenic _Kp_ lineages, and to make it easy for people who are using genomic surveillance to monitor for antibiotic resistance to also look out for the convergence of antibiotic resistance and virulence.
 
-To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes ([data](https://github.com/katholt/Kleborate/tree/master/data)), annotated ICEKp structures (/ICEKp_references) and code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the [data directory](https://github.com/katholt/Kleborate/tree/master/data).
+To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes ([data](https://github.com/katholt/Kleborate/tree/master/kleborate/data)), annotated ICEKp structures ([ICEKp_references](https://github.com/katholt/Kleborate/tree/master/kleborate/ICEKp_references)) and code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the [data directory](https://github.com/katholt/Kleborate/tree/master/data).
 
 If you are interested in inferring capsule types from genome data, see the [Kaptive](https://github.com/katholt/Kaptive) repo.
 
@@ -77,7 +77,7 @@ See below for more details, examples and outputs.
 
 We have created two separate schemes: one for yersiniabactin sequence types (YbST) and one for colibactin sequence types (CbST). See [this preprint](http://biorxiv.org/content/early/2017/01/04/098178) for full details.
 
-MLST-style schemes are included in the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html), and are also included in the [data directory](https://github.com/katholt/Kleborate/tree/master/data) of this repository. The schemes include all known alleles for the genes that make up the yersiniabactin and colibactin synthesis loci that are mobilised by the _Klebsiella_ ICEKp.
+MLST-style schemes are included in the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html), and are also included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository. The schemes include all known alleles for the genes that make up the yersiniabactin and colibactin synthesis loci that are mobilised by the _Klebsiella_ ICEKp.
 
 #### YbST - Yersiniabactin Sequence Types
 
@@ -247,7 +247,7 @@ Kleborate is designed for the well studied group of species at the top right of 
 
 MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2). Steps are 
 
-* download the YbST and CbST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/data) in _this_ repository
+* download the YbST and CbST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) in _this_ repository
 * Install [SRST2](https://github.com/katholt/srst2) if you don't already have it (`git clone https://github.com/katholt/srst2`); 
 * Run SRST2, setting the `--mlst_scheme` and `--mlst_definitions` to point to the YbST or CbST allele sequences and profile tables like this:
 
