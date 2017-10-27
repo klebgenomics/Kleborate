@@ -27,7 +27,7 @@ def main():
     parser = OptionParser(usage=usage)
 
     # options
-    parser.add_option("-s", "--seqs", action="store", dest="seqs", default="ARGannot.r1.fasta",
+    parser.add_option("-s", "--seqs", action="store", dest="seqs", default="ARGannot_r2.fasta",
                       help="res gene sequences to screen for")
     parser.add_option("-t", "--class", action="store", dest="res_class_file", default="ARGannot_clustered80.csv",
                       help="res gene classes (CSV)")

@@ -70,6 +70,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1083,410,Aac3-I_AGly,Aac3-I,no,yes,AGly___Aac3-I___AJ877225___5293-5757___465,Aac3-I,AGly,AJ877225,5293-5757,465,NA,NA
 1084,410,Aac3-I_AGly,Aac3-I,no,yes,AGly___Aac3-I___X15852___1250-1783___534,Aac3-I,AGly,X15852,1250-1783,534,NA,NA
 1085,411,AadB_AGly,AadB,yes,no,AGly___AadB___JQ690540___4275-4808___534,AadB,AGly,JQ690540,4275-4808,534,NA,NA
+1086,411,AadB_AGly,Ant''Ia,yes,no,AGly___Ant''Ia___GQ388247___7505-8038___543,Ant''Ia,AGly,GQ388247,7505-8038,543,NA,NA
 1088,413,Sat-2A_AGly,Sat-2A,no,no,AGly___Sat-2A___X51546___518-1042___525,Sat-2A,AGly,X51546,518-1042,525,NA,NA
 1095,319,RmtD_AGly,RmtD,yes,no,AGly___RmtD___DQ914960___9632-8889___744,RmtD,AGly,DQ914960,9632-8889,744,NA,NA
 1096,319,RmtD_AGly,RmtD2,yes,no,AGly___RmtD2___HQ401565___14882-14139___744,RmtD2,AGly,HQ401565,14882-14139,744,NA,NA
@@ -109,7 +110,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1579,308,RmtA_AGly,RmtA,no,no,AGly___RmtA___AB120321___6677-7432___756,RmtA,AGly,AB120321,6677-7432,756,NA,NA
 1580,309,RmtB_AGly,RmtB,no,no,AGly___RmtB___AB103506___1410-2165___756,RmtB,AGly,AB103506,1410-2165,756,NA,NA
 1581,300,Ant4-Ib_AGly,Ant4-Ib,no,yes,AGly___Ant4-Ib___AJ506108___209-979___771,Ant4-Ib,AGly,AJ506108,209-979,771,NA,NA
-1582,301,Aad9_AGly,Aad9,no,no,AGly___Aad9___M69221___271-1038___768,Aad9,AGly,M69221,271-1038,768,NA,NA
+1582,301,Aad9_Agly,Aad9,no,no,Agly___Aad9___M69221___271-1038___768,Aad9,AGly,M69221,271-1038,768,NA,NA
 1592,303,Aph3''Ic_AGly,Aph3''Ic,no,no,AGly___Aph3''Ic___DQ336355___603-1367___816,Aph3''Ic,AGly,DQ336355,603-1367,816,NA,NA
 1594,305,Ant4-IIa_AGly,Ant4-IIa,no,yes,AGly___Ant4-IIa___M98270___145-903___759,Ant4-IIa,AGly,M98270,145-903,759,NA,NA
 1595,306,RmtH_AGly,RmtH,no,no,AGly___RmtH___KC544262___666-1424___759,RmtH,AGly,KC544262,666-1424,759,NA,NA
@@ -121,6 +122,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1601,229,AadA_AGly,AadA13,yes,no,AGly___AadA13___AY713504___1-798___798,AadA13,AGly,AY713504,1-798,798,NA,NA
 1602,229,AadA_AGly,AadA15,yes,no,AGly___AadA15___DQ393783___1800-2591___792,AadA15,AGly,DQ393783,1800-2591,792,NA,NA
 1603,229,AadA_AGly,AadA17,yes,no,AGly___AadA17___FJ460181___774-1565___792,AadA17,AGly,FJ460181,774-1565,792,NA,NA
+1604,229,AadA_AGly,AadA1b,yes,no,AGly___AadA1b___JN596991___1364-2155___792,AadA1b,AGly,JN596991,1364-2155,792,NA,NA
 1605,229,AadA_AGly,AadA2,yes,no,AGly___AadA2___X68227___66-945___780,AadA2,AGly,X68227,66-945,780,NA,NA
 1606,229,AadA_AGly,AadA21,yes,no,AGly___AadA21___AY171244___47-838___792,AadA21,AGly,AY171244,47-838,792,NA,NA
 1607,229,AadA_AGly,AadA22,yes,no,AGly___AadA22___AM261837___74-865___792,AadA22,AGly,AM261837,74-865,792,NA,NA
@@ -153,7 +155,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1683,43,AacAad_AGly,AadA7,yes,no,AGly___AadA7___AF224733___32-829___798,AadA7,AGly,AF224733,32-829,798,NA,NA
 1684,43,AacAad_AGly,Ant3''Ih-Aac6-IId,yes,no,AGly___Ant3''Ih-Aac6-IId___AF453998___3555-4946___1392,Ant3''Ih-Aac6-IId,AGly,AF453998,3555-4946,1392,NA,NA
 1686,41,Aac6-Aph2_AGly,Aac6-Aph2,no,yes,AGly___Aac6-Aph2___M13771___304-1743___1440,Aac6-Aph2,AGly,M13771,304-1743,1440,NA,NA
-1678,43,AacAad_AGly,Aac6Ib-cr,yes,no,AGly___Flqn___Aac6Ib-cr___EF636461___1124-1642___519,Aac6Ib-cr,AGly,EF636461,1124-1642,519,NA,NA
+1678,43,AacAad_AGly,Aac6Ib-cr,yes,no,AGly___Flqn___Aac6Ib-cr___EF636461___1124-1642___519,Aac6Ib-cr,Agly,EF636461,1124-1642,519,NA,NA
 836,16,Penicillin_Binding_Protein_Ecoli_Bla,Penicillin_Binding_Protein_Ecoli,no,no,Bla___Penicillin_Binding_Protein_Ecoli___CP002291___664439-666340___1902,Penicillin_Binding_Protein_Ecoli,Bla,CP002291,664439-666340,1902,NA,NA
 69,292,LCR_Bla,Nps1,yes,no,Bla___Nps1___AY027589___46-828___783,Nps1,Bla,AY027589,46-828,783,NA,NA
 70,292,LCR_Bla,LCR-1,yes,no,Bla___LCR-1,LCR-1,Bla,X56809,112-894,783,NA,NA
@@ -178,12 +180,15 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 94,196,HERA-1_Bla,HERA-4,no,no,Bla___HERA-4___AJ536088___1-873___873,HERA-4,Bla,AJ536088,1-873,873,NA,NA
 95,196,HERA-1_Bla,HERA-5,no,no,Bla___HERA-5___AJ536089___1-873___873,HERA-5,Bla,AJ536089,1-873,873,NA,NA
 96,196,HERA-1_Bla,HERA-6,no,no,Bla___HERA-6___AJ536090___1-873___873,HERA-6,Bla,AJ536090,1-873,873,NA,NA
+97,196,HERA-1_Bla,HERA-7,no,no,Bla___HERA-7___AJ536091___1-873___873,HERA-7,Bla,AJ536091,1-873,873,NA,NA
 98,196,HERA-1_Bla,HERA-8,no,no,Bla___HERA-8___AJ536092___1-873___873,HERA-8,Bla,AJ536092,1-873,873,NA,NA
 99,191,SFO-1_Bla,SFO-1,no,no,Bla___SFO-1___FJ848785___4719-5594___876,SFO-1,Bla,FJ848785,4719-5594,876,NA,NA
 100,190,CTX-M-9_Bla,CTX-M-9,no,yes,Bla___CTX-M-9___AF174129___1-876___876,CTX-M-9,Bla,AF174129,1-876,876,class A extended-spectrum beta-lactamase CTX-M-9,Bla_ESBL
+101,190,CTX-M-9_Bla,CTX-M-13,no,yes,Bla___CTX-M-13___AF252621___1-876___876,CTX-M-13,Bla,AF252621,1-876,876,class A extended-spectrum beta-lactamase CTX-M-13,Bla_ESBL
 102,190,CTX-M-9_Bla,CTX-M-14,no,yes,Bla___CTX-M-14___AF252622___1741-2616___876,CTX-M-14,Bla,AF252622,1741-2616,876,class A extended-spectrum beta-lactamase CTX-M-14,Bla_ESBL
 103,190,CTX-M-9_Bla,CTX-M-16,no,yes,Bla___CTX-M-16___AY029068___1-876___876,CTX-M-16,Bla,AY029068,1-876,876,class A extended-spectrum beta-lactamase CTX-M-16,Bla_ESBL
 104,190,CTX-M-9_Bla,CTX-M-17,no,yes,Bla___CTX-M-17___AY033516___2826-3711___876,CTX-M-17,Bla,AY033516,2826-3711,876,class A extended-spectrum beta-lactamase CTX-M-17,Bla_ESBL
+105,190,CTX-M-9_Bla,CTX-M-18,no,yes,Bla___CTX-M-18___AF325133___1-876___876,CTX-M-18,Bla,AF325133,1-876,876,NA,NA
 106,190,CTX-M-9_Bla,CTX-M-19,no,yes,Bla___CTX-M-19___AF325134___1-876___876,CTX-M-19,Bla,AF325134,1-876,876,class A extended-spectrum beta-lactamase CTX-M-19,Bla_ESBL
 107,190,CTX-M-9_Bla,CTX-M-21,no,yes,Bla___CTX-M-21___AJ416346___557-1432___876,CTX-M-21,Bla,AJ416346,557-1432,876,class A extended-spectrum beta-lactamase CTX-M-21,Bla_ESBL
 108,190,CTX-M-9_Bla,CTX-M-24,no,yes,Bla___CTX-M-24___AY143430___1-876___876,CTX-M-24,Bla,AY143430,1-876,876,class A extended-spectrum beta-lactamase CTX-M-24,Bla_ESBL
@@ -203,6 +208,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 122,190,CTX-M-9_Bla,CTX-M-84,no,yes,Bla___CTX-M-84___FJ214367___1-876___876,CTX-M-84,Bla,FJ214367,1-876,876,class A extended-spectrum beta-lactamase CTX-M-84,Bla_ESBL
 123,190,CTX-M-9_Bla,CTX-M-85,no,yes,Bla___CTX-M-85___FJ214368___1-876___876,CTX-M-85,Bla,FJ214368,1-876,876,class A extended-spectrum beta-lactamase CTX-M-85,Bla_ESBL
 124,190,CTX-M-9_Bla,CTX-M-86,no,yes,Bla___CTX-M-86___FJ214369___1-876___876,CTX-M-86,Bla,FJ214369,1-876,876,class A extended-spectrum beta-lactamase CTX-M-86,Bla_ESBL
+125,190,CTX-M-9_Bla,CTX-M-87,no,yes,Bla___CTX-M-87___EU545409___81-956___876,CTX-M-87,Bla,EU545409,81-956,876,class A extended-spectrum beta-lactamase CTX-M-87,Bla_ESBL
 126,190,CTX-M-9_Bla,CTX-M-90,no,yes,Bla___CTX-M-90___FJ907381___1-876___876,CTX-M-90,Bla,FJ907381,1-876,876,class A extended-spectrum beta-lactamase CTX-M-90,Bla_ESBL
 127,190,CTX-M-9_Bla,CTX-M-93,no,yes,Bla___CTX-M-93___HQ166709___1-876___876,CTX-M-93,Bla,HQ166709,1-876,876,class A extended-spectrum beta-lactamase CTX-M-93,Bla_ESBL
 128,190,CTX-M-9_Bla,CTX-M-98,no,yes,Bla___CTX-M-98___HQ637575___1-876___876,CTX-M-98,Bla,HQ637575,1-876,876,class A extended-spectrum beta-lactamase CTX-M-98,Bla_ESBL
@@ -244,6 +250,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 164,193,CTX-M-1_Bla,CTX-M-53,no,yes,Bla___CTX-M-53___NC_011604___5892-6767___876,CTX-M-53,Bla,NC_011604,5892-6767,876,class A extended-spectrum beta-lactamase CTX-M-53,Bla_ESBL
 165,193,CTX-M-1_Bla,CTX-M-54,no,yes,Bla___CTX-M-54___DQ303459___2175-3050___876,CTX-M-54,Bla,DQ303459,2175-3050,876,class A extended-spectrum beta-lactamase CTX-M-54,Bla_ESBL
 166,193,CTX-M-1_Bla,CTX-M-55,no,yes,Bla___CTX-M-55___HM748991___321-1196___876,CTX-M-55,Bla,HM748991,321-1196,876,class A extended-spectrum beta-lactamase CTX-M-55,Bla_ESBL
+167,193,CTX-M-1_Bla,CTX-M-57,no,yes,Bla___CTX-M-57___DQ810789___228-1103___876,CTX-M-57,Bla,DQ810789,228-1103,876,NA,NA
 168,193,CTX-M-1_Bla,CTX-M-58,no,yes,Bla___CTX-M-58___HQ734707___1-876___876,CTX-M-58,Bla,HQ734707,1-876,876,class A extended-spectrum beta-lactamase CTX-M-58,Bla_ESBL
 169,193,CTX-M-1_Bla,CTX-M-60,no,yes,Bla___CTX-M-60___AM411407___1-876___876,CTX-M-60,Bla,AM411407,1-876,876,class A extended-spectrum beta-lactamase CTX-M-60,Bla_ESBL
 170,193,CTX-M-1_Bla,CTX-M-61,no,yes,Bla___CTX-M-61___GU125683___1-876___876,CTX-M-61,Bla,GU125683,1-876,876,class A extended-spectrum beta-lactamase CTX-M-61,Bla_ESBL
@@ -431,6 +438,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 420,92,CMY_Bla,CMY-56,yes,yes,Bla___CMY-56___HQ322613___1-1146___1146,CMY-56,Bla,HQ322613,1-1146,1146,class C beta-lactamase CMY-56,Bla
 421,92,CMY_Bla,CMY-57,yes,yes,Bla___CMY-57___HQ285243___1-1146___1146,CMY-57,Bla,HQ285243,1-1146,1146,class C beta-lactamase CMY-57,Bla
 422,92,CMY_Bla,CMY-58,yes,yes,Bla___CMY-58___HQ185697___1268-2413___1146,CMY-58,Bla,HQ185697,1268-2413,1146,class C beta-lactamase CMY-58,Bla
+423,92,CMY_Bla,CMY-59,yes,yes,Bla___CMY-59___HQ267530___1-1146___1146,CMY-59,Bla,HQ267530,1-1146,1146,class C beta-lactamase CMY-59,Bla
 424,92,CMY_Bla,CMY-60,yes,yes,Bla___CMY-60___JF460794___1-1146___1146,CMY-60,Bla,JF460794,1-1146,1146,class C beta-lactamase CMY-60,Bla
 425,92,CMY_Bla,CMY-61,yes,yes,Bla___CMY-61___JF460795___1-1143___1143,CMY-61,Bla,JF460795,1-1143,1143,class C beta-lactamase CMY-61,Bla
 426,92,CMY_Bla,CMY-62,yes,yes,Bla___CMY-62___JF460796___1-1146___1146,CMY-62,Bla,JF460796,1-1146,1146,class C beta-lactamase CMY-62,Bla
@@ -512,6 +520,8 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 504,236,OXA-24_Bla,OXA-24,no,yes,Bla___OXA-24___AJ239129___1-828___828,OXA-24,Bla,AJ239129,1-828,828,carbapenem-hydrolyzing class D beta-lactamase OXA-24,Bla_Carb
 505,236,OXA-24_Bla,OXA-25,no,yes,Bla___OXA-25___AF201826___22-849___828,OXA-25,Bla,AF201826,22-849,828,carbapenem-hydrolyzing class D beta-lactamase OXA-25,Bla_Carb
 506,236,OXA-24_Bla,OXA-26,no,yes,Bla___OXA-26___AF201827___22-849___828,OXA-26,Bla,AF201827,22-849,828,carbapenem-hydrolyzing class D beta-lactamase OXA-26,Bla_Carb
+507,236,OXA-24_Bla,OXA-33,no,yes,Bla___OXA-33___AY082394___1-828___828,OXA-33,Bla,AY082394,1-828,828,carbapenem-hydrolyzing class D beta-lactamase OXA-33,Bla_Carb
+508,236,OXA-24_Bla,OXA-40,no,yes,Bla___OXA-40___AY228470___1266-2093___828,OXA-40,Bla,AY228470,1266-2093,828,NA,NA
 509,236,OXA-24_Bla,OXA-72,no,yes,Bla___OXA-72___AY739646___1-828___828,OXA-72,Bla,AY739646,1-828,828,carbapenem-hydrolyzing class D beta-lactamase OXA-72,Bla_Carb
 510,236,OXA-24_Bla,OXA-139,no,yes,Bla___OXA-139___AM991978___1-828___828,OXA-139,Bla,AM991978,1-828,828,carbapenem-hydrolyzing class D beta-lactamase OXA-139,Bla_Carb
 511,236,OXA-24_Bla,OXA-143,no,yes,Bla___OXA-143___GQ861437___2914-3741___828,OXA-143,Bla,GQ861437,2914-3741,828,carbapenem-hydrolyzing class D beta-lactamase OXA-143,Bla_Carb
@@ -525,6 +535,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 519,230,SPM-1_Bla,SPM-1,no,no,Bla___SPM-1___GU831565___1-831___831,SPM-1,Bla,GU831565,1-831,831,NA,NA
 520,231,OXA-1_Bla,OXA-1,no,yes,Bla___OXA-1___JQ682867___1-831___831,OXA-1,Bla,JQ682867,1-831,831,oxacillin-hydrolyzing class D beta-lactamase OXA-1,Bla
 521,231,OXA-1_Bla,OXA-4,no,yes,Bla___OXA-4___JN129451___1037-1867___831,OXA-4,Bla,JN129451,1037-1867,831,oxacillin-hydrolyzing class D beta-lactamase OXA-4,Bla
+522,231,OXA-1_Bla,OXA-30,no,yes,Bla___OXA-30___HM998988___991-1821___831,OXA-30,Bla,HM998988,991-1821,831,NA,NA
 523,231,OXA-1_Bla,OXA-31,no,yes,Bla___OXA-31___AF294653___754-1581___828,OXA-31,Bla,AF294653,754-1581,828,class D extended-spectrum beta-lactamase OXA-31,Bla_ESBL
 524,231,OXA-1_Bla,OXA-47,no,yes,Bla___OXA-47___AY237830___1-831___831,OXA-47,Bla,AY237830,1-831,831,oxacillin-hydrolyzing class D beta-lactamase OXA-47,Bla
 525,231,OXA-1_Bla,OXA-224,no,yes,Bla___OXA-224___JN596991___2281-3111___831,OXA-224,Bla,JN596991,2281-3111,831,class D beta-lactamase OXA-224,Bla
@@ -555,8 +566,10 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 561,137,CARB_Bla,CARB-4,yes,yes,Bla___CARB-4___AY913772___1600-2466___867,CARB-4,Bla,AY913772,1600-2466,867,carbenicillin-hydrolyzing class A beta-lactamase CARB-4,Bla_Carb
 562,137,CARB_Bla,CARB-6,yes,yes,Bla___CARB-6___AF030945___1-867___867,CARB-6,Bla,AF030945,1-867,867,carbenicillin-hydrolyzing class A beta-lactamase CARB-6,Bla_Carb
 563,137,CARB_Bla,CARB-7,yes,yes,Bla___CARB-7___AF409092___888-1754___867,CARB-7,Bla,AF409092,888-1754,867,carbenicillin-hydrolyzing class A beta-lactamase CARB-7,Bla_Carb
+564,137,CARB_Bla,CARB-8,yes,yes,Bla___CARB-8___GQ866976___1345-2211___867,CARB-8,Bla,GQ866976,1345-2211,867,carbenicillin-hydrolyzing class A beta-lactamase CARB-8,Bla_Carb
 565,137,CARB_Bla,CARB-9,yes,yes,Bla___CARB-9___AY248038___2073-2939___867,CARB-9,Bla,AY248038,2073-2939,867,carbenicillin-hydrolyzing class A beta-lactamase CARB-9,Bla_Carb
 566,137,CARB_Bla,CARB-11,yes,yes,Bla___CARB-11___AY008290___1-867___867,CARB-11,Bla,AY008290,1-867,867,class A beta-lactamase CARB-11,Bla
+567,137,CARB_Bla,CARB-12,yes,yes,Bla___CARB-12___D13210___232-1098___867,CARB-12,Bla,D13210,232-1098,867,carbenicillin-hydrolyzing class A beta-lactamase CARB-12,Bla_Carb
 574,138,Zn-dependent_hydrolase_Bla,Zn-dependent_hydrolase,no,no,Bla___Zn-dependent_hydrolase___NC_010410___882015-882977___963,Zn-dependent_hydrolase,Bla,NC_010410,882015-882977,963,NA,NA
 615,89,AMPH_Ecoli_Bla,AMPH,no,no,Bla___AMPH_Ecoli___AP012030___395554-396711___1158,AMPH,Bla,AP012030,395554-396711,1158,NA,NA
 621,82,ACC-1_Bla,ACC-1,no,no,Bla___ACC-1___AJ133121___650-1810___1161,ACC-1,Bla,AJ133121,650-1810,1161,cephalosporin-hydrolyzing class C beta-lactamase ACC-1,Bla
@@ -676,6 +689,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 745,242,OXA-23_Bla,OXA-225,no,yes,Bla___OXA-225___JN638887___1-822___822,OXA-225,Bla,JN638887,1-822,822,carbapenem-hydrolyzing class D beta-lactamase OXA-225,Bla_Carb
 746,242,OXA-23_Bla,OXA-239,no,yes,Bla___OXA-239___JQ837239___1-822___822,OXA-239,Bla,JQ837239,1-822,822,carbapenem-hydrolyzing class D beta-lactamase OXA-239,Bla_Carb
 748,248,OXA-213_Bla,OXA-213,no,yes,Bla___OXA-213___JN861781______1-825___825,OXA-213,Bla,JN861781,1-825,825,carbapenem-hydrolyzing class D beta-lactamase OXA-213,Bla_Carb
+749,248,OXA-213_Bla,OXA-214,no,yes,Bla___OXA-214___JN861781___1-825___825,OXA-214,Bla,JN861781,1-825,825,carbapenem-hydrolyzing class D beta-lactamase OXA-214,Bla_Carb
 767,178,CME-1_Bla,CME-1,no,no,Bla___CME-1___AJ006275___72-959___888,CME-1,Bla,AJ006275,72-959,888,NA,NA
 768,177,FONA-1_Bla,FONA-1,no,no,Bla___FONA-1___AJ251239___1054-1941___888,FONA-1,Bla,AJ251239,1054-1941,888,NA,NA
 769,177,FONA-1_Bla,FONA-2,no,no,Bla___FONA-2___AJ251240___1054-1941___888,FONA-2,Bla,AJ251240,1054-1941,888,NA,NA
@@ -742,6 +756,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 848,327,IND_Bla,IND-2c,yes,yes,Bla___IND-2c___GU186042______57-788___732,IND-2c,Bla,GU186042,57-788,732,NA,NA
 849,327,IND_Bla,IND-11,yes,yes,Bla___IND-11___HM245379___57-788___732,IND-11,Bla,HM245379,57-788,732,carbapenem-hydrolyzing metallo-beta-lactamase IND-11,Bla_Carb
 850,327,IND_Bla,IND-12,yes,yes,Bla___IND-12___HM245380___28-759___732,IND-12,Bla,HM245380,28-759,732,carbapenem-hydrolyzing metallo-beta-lactamase IND-12,Bla_Carb
+851,327,IND_Bla,IND-13,yes,yes,Bla___IND-13___HM245381______57-788___732,IND-13,Bla,HM245381,57-788,732,NA,NA
 852,327,IND_Bla,IND-15,yes,yes,Bla___IND-15___AB563173___33-764___732,IND-15,Bla,AB563173,33-764,732,carbapenem-hydrolyzing metallo-beta-lactamase IND-15,Bla_Carb
 858,329,IND-4_Bla,IND-4,no,yes,Bla___IND-4___AF219135______1-729___729,IND-4,Bla,AF219135,1-729,729,carbapenem-hydrolyzing metallo-beta-lactamase IND-4,Bla_Carb
 859,201,GES_Bla,GES-1,yes,no,Bla___GES-1___HM370522___1-864___864,GES-1,Bla,HM370522,1-864,864,carbapenem-hydrolyzing class A beta-lactamase GES-1,Bla_Carb
@@ -750,6 +765,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 862,201,GES_Bla,GES-4,yes,no,Bla___GES-4___AB116260___1330-2193___864,GES-4,Bla,AB116260,1330-2193,864,carbapenem-hydrolyzing class A beta-lactamase GES-4,Bla_Carb
 863,201,GES_Bla,GES-5,yes,no,Bla___GES-5___DQ236171___112-975___864,GES-5,Bla,DQ236171,112-975,864,carbapenem-hydrolyzing class A beta-lactamase GES-5,Bla_Carb
 864,201,GES_Bla,GES-6,yes,no,Bla___GES-6___AY494718___1-864___864,GES-6,Bla,AY494718,1-864,864,carbapenem-hydrolyzing class A beta-lactamase GES-6,Bla_Carb
+865,201,GES_Bla,GES-7,yes,no,Bla___GES-7___HQ170511___644-1507___864,GES-7,Bla,HQ170511,644-1507,864,carbapenem-hydrolyzing class A beta-lactamase GES-7,Bla_Carb
 866,201,GES_Bla,IBC-2,yes,no,Bla___IBC-2___AF329699___373-1236___864,IBC-2,Bla,AF329699,373-1236,864,NA,NA
 867,201,GES_Bla,GES-9,yes,no,Bla___GES-9___AY920928___2690-3553___864,GES-9,Bla,AY920928,2690-3553,864,carbapenem-hydrolyzing class A beta-lactamase GES-9,Bla_Carb
 868,201,GES_Bla,GES-10,yes,no,Bla___GES-10___FJ820124___1124-1987___864,GES-10,Bla,FJ820124,1124-1987,864,carbapenem-hydrolyzing class A beta-lactamase GES-10,Bla_Carb
@@ -831,6 +847,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 949,205,TEM-1D_Bla,TEM-96,no,no,Bla___TEM-96___AY092401___1-861___861,TEM-96,Bla,AY092401,1-861,861,class A beta-lactamase TEM-96,Bla
 950,205,TEM-1D_Bla,TEM-97,no,no,Bla___TEM-97___AF397066___1-861___861,TEM-97,Bla,AF397066,1-861,861,class A beta-lactamase TEM-97,Bla
 951,205,TEM-1D_Bla,TEM-98,no,no,Bla___TEM-98___AF397067___1-861___861,TEM-98,Bla,AF397067,1-861,861,class A beta-lactamase TEM-98,Bla
+952,205,TEM-1D_Bla,TEM-99,no,no,Bla___TEM-99___AF397066___1-861___861,TEM-99,Bla,AF397066,1-861,861,class A beta-lactamase TEM-99,Bla
 953,205,TEM-1D_Bla,TEM-101,no,no,Bla___TEM-101___AF495873___1-861___861,TEM-101,Bla,AF495873,1-861,861,class A extended-spectrum beta-lactamase TEM-101,Bla_ESBL
 954,205,TEM-1D_Bla,TEM-102,no,no,Bla___TEM-102___AY029354___3-833___831,TEM-102,Bla,AY029354,3-833,831,NA,NA
 955,205,TEM-1D_Bla,TEM-104,no,no,Bla___TEM-104___AF516719___215-1075___861,TEM-104,Bla,AF516719,215-1075,861,class A beta-lactamase TEM-104,Bla
@@ -921,6 +938,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1063,123,BlaA1_Bla,BlaA1,no,no,Bla___BlaA1___NC_010410___1803480-1804499___1020,BlaA1,Bla,NC_010410,1803480-1804499,1020,NA,NA
 1070,128,cfxA_Bla,cfxA,yes,no,Bla___cfxA___U38243___150-1115___966,cfxA,Bla,U38243,150-1115,966,NA,NA
 1071,128,cfxA_Bla,cfxA2,yes,no,Bla___cfxA2___AF504910___1-966___966,cfxA2,Bla,AF504910,1-966,966,NA,NA
+1072,128,cfxA_Bla,cfxA3,yes,no,Bla___cfxA3___U75371___8234-9199___966,cfxA3,Bla,U75371,8234-9199,966,NA,NA
 1073,128,cfxA_Bla,cfxA4,yes,no,Bla___cfxA4___AY769933___1-966___966,cfxA4,Bla,AY769933,1-966,966,NA,NA
 1074,128,cfxA_Bla,cfxA5,yes,no,Bla___cfxA5___AY769934___28-993___966,cfxA5,Bla,AY769934,28-993,966,NA,NA
 1075,128,cfxA_Bla,cfxA6,yes,no,Bla___cfxA6___GQ342996___798-1793___966,cfxA6,Bla,GQ342996,798-1793,966,NA,NA
@@ -956,6 +974,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1126,318,IMP-1_Bla,IMP-34,no,no,Bla___IMP-34___AB715422___1696-2436___741,IMP-34,Bla,AB715422,1696-2436,741,NA,NA
 1127,318,IMP-1_Bla,IMP-35,no,no,Bla___IMP-35___JF816544___1-741___741,IMP-35,Bla,JF816544,1-741,741,carbapenem-hydrolyzing metallo-beta-lactamase IMP-35,Bla_Carb
 1128,318,IMP-1_Bla,IMP-37,no,no,Bla___IMP-37___JX131372___97-843___747,IMP-37,Bla,JX131372,97-843,747,carbapenem-hydrolyzing metallo-beta-lactamase IMP-37,Bla_Carb
+1129,318,IMP-1_Bla,IMP-38,no,no,Bla___IMP-38___HQ875573___1-741___741,IMP-38,Bla,HQ875573,1-741,741,carbapenem-hydrolyzing metallo-beta-lactamase IMP-38,Bla_Carb
 1130,318,IMP-1_Bla,IMP-39,no,no,Bla___IMP-39___D50438___1195-1935___741,IMP-39,Bla,D50438,1195-1935,741,NA,NA
 1131,318,IMP-1_Bla,IMP-40,no,no,Bla___IMP-40___AB753457___1-741___741,IMP-40,Bla,AB753457,1-741,741,carbapenem-hydrolyzing metallo-beta-lactamase IMP-40,Bla_Carb
 1132,318,IMP-1_Bla,IMP-41,no,no,Bla___IMP-41___AB753458___1-738___738,IMP-41,Bla,AB753458,1-738,738,carbapenem-hydrolyzing metallo-beta-lactamase IMP-41,Bla_Carb
@@ -970,14 +989,18 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1143,315,CfiA_Bla,cfiA2,yes,no,Bla___cfiA2___AB087226___1-750___750,cfiA2,Bla,AB087226,1-750,750,NA,NA
 1144,315,CfiA_Bla,cfiA3,yes,no,Bla___cfiA3___AB087228___1-750___750,cfiA3,Bla,AB087228,1-750,750,NA,NA
 1145,315,CfiA_Bla,cfiA4,yes,no,Bla___cfiA4___AB087229___1-750___750,cfiA4,Bla,AB087229,1-750,750,NA,NA
+1146,315,CfiA_Bla,CfiA5,yes,no,Bla___CfiA5___AB087230___1-750___750,CfiA5,Bla,AB087230,1-750,750,NA,NA
 1147,315,CfiA_Bla,cfiA6,yes,no,Bla___cfiA6___AB087231___1-750___750,cfiA6,Bla,AB087231,1-750,750,NA,NA
+1148,315,CfiA_Bla,cfiA7,yes,no,Bla___cfiA7___AB087232___1-750___750,cfiA7,Bla,AB087232,1-750,750,NA,NA
 1149,315,CfiA_Bla,cfiA8,yes,no,Bla___cfiA8___AB087233___1-750___750,cfiA8,Bla,AB087233,1-750,750,NA,NA
 1150,315,CfiA_Bla,cfiA9,yes,no,Bla___cfiA9___AB087234___1-750___750,cfiA9,Bla,AB087234,1-750,750,NA,NA
 1151,315,CfiA_Bla,cfiA10,yes,no,Bla___cfiA10___AB087227___1-750___750,cfiA10,Bla,AB087227,1-750,750,NA,NA
+1152,315,CfiA_Bla,cfiA11,yes,no,Bla___cfiA11___FM200784___162-911___750,cfiA11,Bla,FM200784,162-911,750,NA,NA
 1153,315,CfiA_Bla,cfiA12,yes,no,Bla___cfiA12___FM200786___1-737___737,cfiA12,Bla,FM200786,1-737,737,NA,NA
 1154,315,CfiA_Bla,cfiA13,yes,no,Bla___cfiA13___FM200787___3-752___750,cfiA13,Bla,FM200787,3-752,750,NA,NA
 1155,315,CfiA_Bla,cfiA14,yes,no,Bla___cfiA14___FM200789___162-911___750,cfiA14,Bla,FM200789,162-911,750,NA,NA
 1156,315,CfiA_Bla,cfiA15,yes,no,Bla___cfiA15___AF429432___1501-2250___750,cfiA15,Bla,AF429432,1501-2250,750,NA,NA
+1157,315,CfiA_Bla,CfiA16,yes,no,Bla___CfiA16___FM200792___1845-2594___750,CfiA16,Bla,FM200792,1845-2594,750,NA,NA
 1159,314,B-1_Bla,B-1,no,no,Bla___B-1___AF189298___1-750___750,B-1,Bla,AF189298,1-750,750,NA,NA
 1160,314,B-1_Bla,B-2,no,no,Bla___B-2___AF189300___1-750___750,B-2,Bla,AF189300,1-750,750,NA,NA
 1161,314,B-1_Bla,B-3,no,no,Bla___B-3___AF162284___1-750___750,B-3,Bla,AF162284,1-750,750,NA,NA
@@ -1141,10 +1164,12 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1374,164,SHV-OKP-LEN_Bla,SHV-121,yes,no,Bla___SHV-121___AB538449___1-861___861,SHV-121,Bla,AB538449,1-861,861,class A beta-lactamase SHV-121,Bla
 1375,164,SHV-OKP-LEN_Bla,SHV-122,yes,no,Bla___SHV-122___GQ290211___1-515___515,SHV-122,Bla,GQ290211,1-515,515,class A beta-lactamase SHV-122,Bla
 1376,164,SHV-OKP-LEN_Bla,SHV-128,yes,no,Bla___SHV-128___GU932590___1-861___861,SHV-128,Bla,GU932590,1-861,861,class A extended-spectrum beta-lactamase SHV-128,Bla_ESBL
+1377,164,SHV-OKP-LEN_Bla,SHV-129,yes,no,Bla___SHV-129___HM125687___1-861___861,SHV-129,Bla,HM125687,1-861,861,class A extended-spectrum beta-lactamase SHV-129,Bla_ESBL
 1378,164,SHV-OKP-LEN_Bla,SHV-132,yes,no,Bla___SHV-132___GU981741___794-1654___861,SHV-132,Bla,GU981741,794-1654,861,NA,NA
 1379,164,SHV-OKP-LEN_Bla,SHV-133,yes,no,Bla___SHV-133___AB551737___15-875___861,SHV-133,Bla,AB551737,15-875,861,class A beta-lactamase SHV-133,Bla
 1380,164,SHV-OKP-LEN_Bla,SHV-134,yes,no,Bla___SHV-134___HM559945___1-861___861,SHV-134,Bla,HM559945,1-861,861,class A extended-spectrum beta-lactamase SHV-134,Bla_ESBL
 1381,164,SHV-OKP-LEN_Bla,SHV-135,yes,no,Bla___SHV-135___HQ637576___1-861___861,SHV-135,Bla,HQ637576,1-861,861,class A beta-lactamase SHV-135,Bla
+1382,164,SHV-OKP-LEN_Bla,SHV-136,yes,no,Bla___SHV-136___HQ661362___72-932___861,SHV-136,Bla,HQ661362,72-932,861,NA,NA
 1383,164,SHV-OKP-LEN_Bla,SHV-137,yes,no,Bla___SHV-137___HQ661363___72-932___861,SHV-137,Bla,HQ661363,72-932,861,class A beta-lactamase SHV-137,Bla
 1384,164,SHV-OKP-LEN_Bla,SHV-140,yes,no,Bla___SHV-140___JN051143___1-861___861,SHV-140,Bla,JN051143,1-861,861,class A broad-spectrum beta-lactamase SHV-140,Bla_broad
 1385,164,SHV-OKP-LEN_Bla,SHV-141,yes,no,Bla___SHV-141___JQ388884___1-861___861,SHV-141,Bla,JQ388884,1-861,861,class A broad-spectrum beta-lactamase SHV-141,Bla_broad
@@ -1207,6 +1232,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1442,165,VEB-1_Bla,VEB-8,no,no,Bla___VEB-8___JX679208___1-900___900,VEB-8,Bla,JX679208,1-900,900,class A extended-spectrum beta-lactamase VEB-8,Bla_ESBL
 1445,160,MAL-CKO_Bla,MAL-1,yes,no,Bla___MAL-1___AJ277209___12-914___903,MAL-1,Bla,AJ277209,12-914,903,NA,NA
 1446,160,MAL-CKO_Bla,CKO-1,yes,no,Bla___CKO-1___AF477396___1-903___903,CKO-1,Bla,AF477396,1-903,903,NA,NA
+1447,161,CEPA-85_Bla,CEPA-85,no,no,Bla___CEPA-85___U05887___556-1458___903,CEPA-85,Bla,U05887,556-1458,903,NA,NA
 1448,161,CEPA-85_Bla,CEPA-49,no,no,Bla___CEPA-49___U05886___404-1306___903,CEPA-49,Bla,U05886,404-1306,903,NA,NA
 1449,161,CEPA-85_Bla,CEPA-44,no,no,Bla___CEPA-44___U05885___556-1458___903,CEPA-44,Bla,U05885,556-1458,903,NA,NA
 1450,161,CEPA-85_Bla,CEPA-29,no,no,Bla___CEPA-29___U05884___556-1458___903,CEPA-29,Bla,U05884,556-1458,903,NA,NA
@@ -1338,10 +1364,13 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 45,344,QnrB_Flq,QnrB6,yes,no,Flq___QnrB6___EF520349___37-681___645,QnrB6,Flq,EF520349,37-681,645,NA,NA
 46,344,QnrB_Flq,QnrB7,yes,no,Flq___QnrB7___EU043311___1-645___645,QnrB7,Flq,EU043311,1-645,645,NA,NA
 47,344,QnrB_Flq,QnrB8,yes,no,Flq___QnrB8___EU043312___1-645___645,QnrB8,Flq,EU043312,1-645,645,NA,NA
+48,344,QnrB_Flq,QnrB9,yes,no,Flq___QnrB9___EF653270___1-648___648,QnrB9,Flq,EF653270,1-648,648,NA,NA
+49,0,OqxB_Flq,OqxB,no,no,Flq___OqxBgb___EU370913___47851-51003___3153,OqxBgb,Flq,EU370913,47851-51003,3153,NA,NA
 50,346,QnrC_Flq,QnrC,no,no,Flq___QnrC___EU917444___1717-2382___666,QnrC,Flq,EU917444,1717-2382,666,NA,NA
 299,32,QepA_Flq,QepA,yes,no,Flq___QepA___AB263754___7052-8587___1536,QepA,Flq,AB263754,7052-8587,1536,NA,NA
 300,32,QepA_Flq,QepA2,yes,no,Flq___QepA2___EU847537___1672-3107___1536,QepA2,Flq,EU847537,1672-3107,1536,NA,NA
 638,84,norA_Flq,norA,no,no,Flq___norA___D90119___478-1644___1167,norA,Flq,D90119,478-1644,1167,NA,NA
+1044,77,OqxA_Flq,OqxA,no,no,Flq___OqxA___EU370913___46652-47827___1176,OqxA,Flq,EU370913,46652-47827,1176,NA,NA
 1187,361,QnrD_Flq,QnrD,no,no,Flq___QnrD___FJ228229___554-1198___645,QnrD,Flq,FJ228229,554-1198,645,NA,NA
 1455,357,Qnr-S_Flq,Qnr-S1,yes,yes,Flq___Qnr-S1___AB187515___9737-10393___657,Qnr-S1,Flq,AB187515,9737-10393,657,NA,NA
 1456,357,Qnr-S_Flq,QnrS2,yes,no,Flq___QnrS2___DQ485530___1-657___657,QnrS2,Flq,DQ485530,1-657,657,NA,NA
@@ -1426,9 +1455,11 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1553,116,VanC1_Gly,VanC,yes,no,Gly___VanC___AF162694___1411-2442___1032,VanC,Gly,AF162694,1411-2442,1032,NA,NA
 1554,116,VanC1_Gly,VanC1,yes,no,Gly___VanC1___EU151769___31-1062___1032,VanC1,Gly,EU151769,31-1062,1032,NA,NA
 1556,110,VanH_Gly,VanH,yes,no,Gly___VanH___DQ246438___124-1179___1056,VanH,Gly,DQ246438,124-1179,1056,NA,NA
+1557,110,VanH_Gly,VanH-Ac1,yes,yes,Gly___VanH-Ac1___DQ246438___124-1179___1056,VanH-Ac1,Gly,DQ246438,124-1179,1056,NA,NA
 1558,110,VanH_Gly,VanH-Ac2,yes,yes,Gly___VanH-Ac2___AY618461___1-714___714,VanH-Ac2,Gly,AY618461,1-714,714,NA,NA
 1559,110,VanH_Gly,VanH-Ao1,yes,yes,Gly___VanH-Ao1___AF060799___534-1580___1047,VanH-Ao1,Gly,AF060799,534-1580,1047,NA,NA
 1560,110,VanH_Gly,VanH-Ao2,yes,yes,Gly___VanH-Ao2___HQ679900___1-1032___1032,VanH-Ao2,Gly,HQ679900,1-1032,1032,NA,NA
+1561,113,VanL_Gly,VanL,yes,no,Gly___VanL___EU250284___955-2004___1010,VanL,Gly,EU250284,955-2004,1010,NA,NA
 1562,113,VanL_Gly,VanA-L,yes,yes,Gly___VanA-L___EU250284___955-2004___1050,VanA-L,Gly,EU250284,955-2004,1050,NA,NA
 1563,112,VanC2-4_Gly,VanC4,yes,no,Gly___VanC4___EU151752___29-1081___1053,VanC4,Gly,EU151752,29-1081,1053,NA,NA
 1564,112,VanC2-4_Gly,VanC2-3,yes,no,Gly___VanC2___3___EU151755___29-1081___1083,VanC2-3,Gly,EU151755,29-1081,1083,NA,NA
@@ -1517,6 +1548,7 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1640,157,Erm42_MLS,Erm42,no,no,MLS___Erm42___FR734406___1-906___906,Erm42,MLS,FR734406,1-906,906,NA,NA
 1663,158,MphA_MLS,MphA,no,no,MLS___MphA___DQ445270___1626-2531___1230,MphA,MLS,DQ445270,1626-2531,1230,NA,NA
 1685,40,LmrA_MLS,LmrA,no,no,MLS___LmrA___X59926___318-1763___1446,LmrA,MLS,X59926,318-1763,1446,NA,NA
+58,343,CatA10_Phe,Cat,yes,no,Phe___Cat___AY238971___1055-1741___687,Cat,Phe,AY238971,1055-1741,687,NA,NA
 59,343,CatA10_Phe,CatA10,yes,no,Phe___CatA10___AY238971___1055-1741___687,CatA10,Phe,AY238971,1055-1741,687,NA,NA
 60,348,Cat-86_Phe,Cat-86,no,yes,Phe___Cat-86___K00544___145-807___663,Cat-86,Phe,K00544,145-807,663,NA,NA
 596,379,CatB6_Phe,CatB6,no,no,Phe___CatB6___AJ223604___3727-4341___615,CatB6,Phe,AJ223604,3727-4341,615,NA,NA
@@ -1546,10 +1578,12 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1468,354,CatQ_Phe,CatQ,no,no,Phe___CatQ___M55620459-1118___660,CatQ,Phe,M55620,459-1118,660,NA,NA
 1469,353,CatB_Phe,CatB,no,no,Phe___CatB___M93113___145-804___630,CatB,Phe,M93113,145-804,630,NA,NA
 1470,352,CatA1_Phe,CatA1,no,no,Phe___CatA1___V00622___244-903___660,CatA1,Phe,V00622,244-903,660,NA,NA
+1474,358,CatA9_Phe,Cat-pC194,yes,yes,Phe___Cat-pC194___NC_002013___1260-1910___651,Cat-pC194,Phe,NC_002013,1260-1910,651,NA,NA
 1475,358,CatA9_Phe,CatA9,yes,no,Phe___CatA9___K01998___288-938___651,CatA9,Phe,K01998,288-938,651,NA,NA
 1536,58,PexA_Phe,PexA,no,no,Phe___PexA___HM537013___24055-25302___1248,PexA,Phe,HM537013,24055-25302,1248,NA,NA
 1537,55,CmlA_Phe,CmlA1,yes,no,Phe___CmlA1___M64556___601-1860___1260,CmlA1,Phe,M64556,601-1860,1260,NA,NA
 1538,55,CmlA_Phe,CmlA5,yes,no,PheCmlA5___HQ141279___907-2166___1260,CmlA5,Phe,HQ141279,907-2166,1260,NA,NA
+1549,114,CfrA_Phe,Cfr,yes,no,Phe___Cfr___AJ579365___6290-7339___1050,Cfr,Phe,AJ579365,6290-7339,1050,NA,NA
 1669,48,CmlV_Phe,CmlV,no,no,Phe___CmlV___U09991___28-1338___1311,CmlV,Phe,U09991,28-1338,1311,NA,NA
 1675,42,FexA_Phe,FexA,no,no,Phe___FexA___JQ041372___14024-15451___1428,FexA,Phe,JQ041372,14024-15451,1428,NA,NA
 274,443,Arr_Rif,Arr2,yes,no,Rif___Arr2___JQ639792___1050-1502___453,Arr2,Rif,JQ639792,1050-1502,453,NA,NA
@@ -1648,5 +1682,3 @@ seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multip
 1571,421,DfrA3_Tmt,DfrA3,no,no,Tmt___DfrA3___J03306___103-591___489,DfrA3,Tmt,J03306,103-591,489,NA,NA
 1576,424,DfrC_Tmt,DfrC,no,no,Tmt___DfrC___Z48233___337-822___486,DfrC,Tmt,Z48233,337-822,486,NA,NA
 1578,426,DfrA3b_Tmt,DfrA3b,no,no,Tmt___DfrA3b___AY162283___5616-6095___480,DfrA3b,Tmt,AY162283,5616-6095,480,NA,NA
-1688,467,Mcr1_Colistin,Mcr1,yes,no,Col___Mcr1___KP347127___22413-24038___1626,Mcr1,Col,KP347127,22413-24038,1626,NA,NA
-1689,468,Mcr2_Colistin,Mcr2,yes,no,Col___Mcr2___LT598652___26779-28395___1617,Mcr2,Col,LT598652,26779-28395,1617,NA,NA

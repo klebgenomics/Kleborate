@@ -145,7 +145,7 @@ def main():
         # screen for resistance genes
         res_hits = []
         if args.resistance:
-            f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' +
+            f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot_r2.fasta -t ' +
                          data_folder + '/ARGannot_clustered80.csv -q' + data_folder +
                          '/QRDR_120.aa ' + contigs)
             for line in f:
@@ -301,7 +301,7 @@ def build_output_headers(args, resblast, data_folder):
     full_header += mlst_header
 
     if args.resistance:
-        f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot.r1.fasta -t ' +
+        f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot_r2.fasta -t ' +
                      data_folder + '/ARGannot_clustered80.csv')
         fields = f.readline().rstrip().split('\t')
         res_headers = fields[1:]
