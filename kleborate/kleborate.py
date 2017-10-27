@@ -145,9 +145,10 @@ def main():
         # screen for resistance genes
         res_hits = []
         if args.resistance:
-            f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot_r2.fasta -t ' +
-                         data_folder + '/ARGannot_clustered80.csv -q' + data_folder +
-                         '/QRDR_120.aa ' + contigs)
+            f = os.popen('python ' + resblast +
+                         ' -s ' + data_folder + '/ARGannot_r2.fasta' +
+                         ' -t ' + data_folder + '/ARGannot_clustered80.csv' +
+                         ' -q ' + data_folder + '/QRDR_120.aa ' + contigs)
             for line in f:
                 fields = line.rstrip().split('\t')
                 if fields[0] != 'strain':  # skip header

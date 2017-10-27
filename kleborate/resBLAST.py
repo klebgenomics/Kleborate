@@ -63,8 +63,8 @@ if __name__ == "__main__":
 
     if options.qrdr != "":
         (qrdr_path, qrdr_fileName) = os.path.split(options.qrdr)
-        if not os.path.exists(options.qrdr + ".nin"):
-            os.system("makeblastdb -dbtype nucl -logfile blast.log -in " + options.qrdr)
+        if not os.path.exists(options.qrdr + ".pin"):
+            os.system("makeblastdb -dbtype prot -logfile blast.log -in " + options.qrdr)
 
     # read table of genes and store classes
 
@@ -150,47 +150,47 @@ if __name__ == "__main__":
             root = ElementTree.fromstring(blast_output)
             
             for query in root[8]:
-				for hit in query[4]:
-					gene_id = hit[2].text
-					aln_len = int(hit[4].text)
-					for hsp in hit[5]:
-						Hsp_hit_eval = float(hsp[5].text)
-						Hsp_hit_from = int(hsp[6].text)
-						Hsp_hit_to = int(hsp[7].text)
-						Hsp_gaps = int(hsp[12].text)
-						Hsp_align_len = int(hsp[13].text)
-						Hsp_qseq = hsp[14].text
-						Hsp_hseq = hsp[15].text
+                for hit in query[4]:
+                    gene_id = hit[2].text
+                    aln_len = int(hit[4].text)
+                    for hsp in hit[5]:
+                        Hsp_hit_eval = float(hsp[5].text)
+                        Hsp_hit_from = int(hsp[6].text)
+                        Hsp_hit_to = int(hsp[7].text)
+                        Hsp_gaps = int(hsp[12].text)
+                        Hsp_align_len = int(hsp[13].text)
+                        Hsp_qseq = hsp[14].text
+                        Hsp_hseq = hsp[15].text
 
-						for (pos, wt) in qrdr_loci[gene_id]:
-							if Hsp_hit_to >= pos and (Hsp_gaps == 0) and (Hsp_hit_from == 1):
-								# simple alignment
-								if (gene_id,pos) in complete_hits:
-									complete_hits[(gene_id,pos)].append( Hsp_qseq[pos-1] )
-								else:
-									complete_hits[(gene_id,pos)] = [ Hsp_qseq[pos-1] ]
-							else:
-								# not a simple alignment, need to align query and hit and extract loci manually
-								if (pos >= Hsp_hit_from) and (pos <= Hsp_hit_to) and (Hsp_hit_eval <= 0.00001):
-									# locus is within aligned area, set evalue to filter out the junk alignments
-									pos_in_aln = get_gapped_position(Hsp_hseq, pos - Hsp_hit_from + 1)
-									if (gene_id,pos) in incomplete_hits:
-										incomplete_hits[(gene_id,pos)].append( Hsp_qseq[pos_in_aln-1] )
-									else:
-										incomplete_hits[(gene_id,pos)] = [ Hsp_qseq[pos_in_aln-1] ]
-			
+                        for (pos, wt) in qrdr_loci[gene_id]:
+                            if Hsp_hit_to >= pos and (Hsp_gaps == 0) and (Hsp_hit_from == 1):
+                                # simple alignment
+                                if (gene_id,pos) in complete_hits:
+                                    complete_hits[(gene_id,pos)].append( Hsp_qseq[pos-1] )
+                                else:
+                                    complete_hits[(gene_id,pos)] = [ Hsp_qseq[pos-1] ]
+                            else:
+                                # not a simple alignment, need to align query and hit and extract loci manually
+                                if (pos >= Hsp_hit_from) and (pos <= Hsp_hit_to) and (Hsp_hit_eval <= 0.00001):
+                                    # locus is within aligned area, set evalue to filter out the junk alignments
+                                    pos_in_aln = get_gapped_position(Hsp_hseq, pos - Hsp_hit_from + 1)
+                                    if (gene_id,pos) in incomplete_hits:
+                                        incomplete_hits[(gene_id,pos)].append( Hsp_qseq[pos_in_aln-1] )
+                                    else:
+                                        incomplete_hits[(gene_id,pos)] = [ Hsp_qseq[pos_in_aln-1] ]
+            
             snps = []      
             
             for locus in qrdr_loci:
-            	for (pos, wt) in qrdr_loci[locus]:
-					if (locus, pos) in complete_hits:
-						if complete_hits[(locus, pos)][0] != wt:
-							snps.append( locus + "-" + str(pos) + complete_hits[(locus, pos)][0] ) # record SNP at this site
-					else:
-						if (locus, pos) in incomplete_hits:
-							if incomplete_hits[(locus, pos)][0] != wt:
-								snps.append( locus + "-" + str(pos) + incomplete_hits[(locus, pos)][0] ) # record SNP at this site
-								
+                for (pos, wt) in qrdr_loci[locus]:
+                    if (locus, pos) in complete_hits:
+                        if complete_hits[(locus, pos)][0] != wt:
+                            snps.append( locus + "-" + str(pos) + complete_hits[(locus, pos)][0] ) # record SNP at this site
+                    else:
+                        if (locus, pos) in incomplete_hits:
+                            if incomplete_hits[(locus, pos)][0] != wt:
+                                snps.append( locus + "-" + str(pos) + incomplete_hits[(locus, pos)][0] ) # record SNP at this site
+                                
             if snps:
                 if "Flq" in hits_dict:
                     hits_dict["Flq"] += snps
