@@ -4,13 +4,13 @@ _Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunisti
 
 We recently explored the diversity of the _Kp_ integrative conjugative element (ICEKp), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2499 _Kp_ (see [this preprint](http://biorxiv.org/content/early/2017/01/04/098178)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 5%.
 
-We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICEKp (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICEKp variant are included in the /data directory of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Our analyses reveal hundreds of ICEKp transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. 
+We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICEKp (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICEKp variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Our analyses reveal hundreds of ICEKp transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. 
 
 Based on this analysis, we developed a MLST-style approach for identifying _ybt_ and _clb_ variants from genome data. 
 
 Our goal is to help identify emerging pathogenic _Kp_ lineages, and to make it easy for people who are using genomic surveillance to monitor for antibiotic resistance to also look out for the convergence of antibiotic resistance and virulence.
 
-To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes (/data), annotated ICEKp structures (/ICEKp_references) and code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the /data directory.
+To help facilitate that, in this repo we share the new _ybt_ and _clb_ schemes ([data](https://github.com/katholt/Kleborate/tree/master/data)), annotated ICEKp structures (/ICEKp_references) and code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the [data directory](https://github.com/katholt/Kleborate/tree/master/data).
 
 If you are interested in inferring capsule types from genome data, see the [Kaptive](https://github.com/katholt/Kaptive) repo.
 
@@ -35,7 +35,8 @@ Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assem
 * [setuptools](https://pypi.python.org/pypi/setuptools) (required to install Kleborate)
   * To install: `pip install setuptools`
 * BLAST+ command line tools (`makeblastdb`, `blastn`, etc)
-  * version 2.2.30 or later is needed, as earlier versions have a bug with the culling_limit parameter
+  * Version 2.2.30 or later is needed, as earlier versions have a bug with the culling_limit parameter.
+* [Mash](https://github.com/marbl/Mash) is required to use the `--species` option
 
 
 #### Installation
@@ -61,41 +62,40 @@ Kleborate/kleborate-runner.py -h
 #### Basic usage
 
 ```
-# screen some genomes for MLST + virulence loci
+# screen some genomes for MLST and virulence loci
 kleborate -o detailed_results.txt -a *.fasta
 
-# screen some genomes for MLST + virulence loci + acquired resistance genes
-kleborate --resistance -o detailed_results.txt -a *.fasta
+# screen some genomes for Klebsiella species, MLST, virulence loci and acquired resistance genes
+kleborate --species --resistance -o detailed_results.txt -a *.fasta
 ```
 
 See below for more details, examples and outputs.
 
 
 
-# About the MLST schemes
+## About the MLST schemes
 
 We have created two separate schemes: one for yersiniabactin sequence types (YbST) and one for colibactin sequence types (CbST). See [this preprint](http://biorxiv.org/content/early/2017/01/04/098178) for full details.
 
-MLST-style schemes are included in the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html), and are also included in the /data directory of this repository. The schemes include all known alleles for the genes that make up the yersiniabactin and colibactin synthesis loci that are mobilised by the _Klebsiella_ ICEKp.
+MLST-style schemes are included in the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html), and are also included in the [data directory](https://github.com/katholt/Kleborate/tree/master/data) of this repository. The schemes include all known alleles for the genes that make up the yersiniabactin and colibactin synthesis loci that are mobilised by the _Klebsiella_ ICEKp.
 
-### YbST - Yersiniabactin Sequence Types
+#### YbST - Yersiniabactin Sequence Types
 
 YbST sequences cluster into 17 distinct lineages of _ybt_, which are each associated with a particular ICEKp structure (see the paper for details). Three lineages (_ybt_ 1, _ybt_ 12, _ybt_ 17) are associated with the ICEKp10 structure in which the _clb_ colibactin locus is found; _ybt_ 4 is plasmid-encoded; and all other lineages correspond to a single ICEKp.
 
-### CbST - Colibactin Sequence Types
+#### CbST - Colibactin Sequence Types
 
-CbST sequences cluster into 3 lineages, which are each associated with a single _ybt_ lineage (_clb_ 1 / _ybt_ 12; _clb_ 2, _ybt_ 1; ; _clb_ 3, _ybt_ 17) and the ICEKp10 structure.
+CbST sequences cluster into 3 lineages, which are each associated with a single _ybt_ lineage (_clb_ 1, _ybt_ 12; _clb_ 2, _ybt_ 1; _clb_ 3, _ybt_ 17) and the ICEKp10 structure.
+
+
 
 ## Genotypes of publicly available strains
 
-A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosomal MLST assignments for 2500 public Klebs genomes is provided in the /data directory.
+A table of pre-computed yersiniabactin, colibactin,  capsule locus and chromosomal MLST assignments for 2500 public Klebs genomes is provided in the [data directory](https://github.com/katholt/Kleborate/tree/master/data).
 
 
 
-
-
-
-# Detailed Usage - Typing genome assemblies using Kleborate
+## Detailed Usage - Typing genome assemblies using Kleborate
 
 Kleborate can be used to determine chromosomal, yersiniabactin and colibactin genotypes from assembled draft or complete genomes. It also reports presence/absence of acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon, currently we just screen for the alleles in the virulence plasmid pLVPK). We also extract the _wzi_ gene allele to give an idea of the capsule type, but these are not totally predictive so we suggest you use our dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive) for this. For convenience, Kleborate can optionally screen for acquired resistance genes as well (using the SRST2-formatted version of the ARG-Annot database, with the core Klebs genes _oqxA_ and _oxqB_ removed).
 
@@ -166,6 +166,9 @@ NTUH-K2044  ST23  3 ybt 2; ICEKp1 326 - 0 iucABCD iroBCDN;iroBCDN rmpA;rmpA wzi1
 ./Kleborate/kleborate-runner.py --resistance -o results_with_resistance.txt -a *.fna
 
 ```
+
+
+
 ## Output
 
 A tabulated summary is printed to standard out; details of the MLST analysis are printed to the file specified by -o.
@@ -229,11 +232,22 @@ This is a simple score from 0-2 to roughly quantify how resistant the strain is:
 * 2 = Carbepenemase (whether or not ESBL is present)
 
 
-# Typing direct from Illumina reads
+## _Klebsiella_ species
+
+By using the `--species` option, Kleborate will attempt to identify the species of _Klebsiella_. It does this by comparing the assembly using Mash to a curated set of _Klebsiella_ assemblies [from NCBI](https://www.ncbi.nlm.nih.gov/assembly) and reporting the species of the closest match. Kleborate considers a Mash distance of ≤ 0.01 to be a strong species match. A distance of > 0.01 and ≤ 0.03 is a weak match and might indicate that your sample is a novel lineage or a hybrid between multiple _Klebsiella_ species. 
+
+Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
+<p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
+
+Kleborate is designed for the well studied group of species at the top right of the tree which includes the "big three": _pneumoniae_, _quasipneumoniae_ (two subspecies) and _variicola_. _K. quasivariicola_ is more recently characterised and described here: [Long 2017](http://genomea.asm.org/content/5/42/e01057-17). The Kp5 group does not yet have a species name and was described in this paper: [Blin 2017](http://onlinelibrary.wiley.com/doi/10.1111/1462-2920.13689/abstract). More distant _Klebsiella_ species (_oxytoca_, _michiganensis_ and _aerogenes_) are less well characterised and isolates are often labelled inconsistently. We have defined these species using the names most commonly assigned to the clades, but these species delineations deserve closer attention.
+
+
+
+## Typing direct from Illumina reads
 
 MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2). Steps are 
 
-* download the YbST and CbST allele sequences and profile tables from the /data directory in _this_ repository
+* download the YbST and CbST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/data) in _this_ repository
 * Install [SRST2](https://github.com/katholt/srst2) if you don't already have it (`git clone https://github.com/katholt/srst2`); 
 * Run SRST2, setting the `--mlst_scheme` and `--mlst_definitions` to point to the YbST or CbST allele sequences and profile tables like this:
 
@@ -256,7 +270,7 @@ srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output Klebs --log --mlst_d
 
 
 
-# Kleboration
+## Kleboration
 
 Kleborate is under active development with many other Klebs genomic analysis tools and projects in progress. 
 
@@ -266,7 +280,7 @@ Please get in touch via the issues tracker if you have any issues, questions or 
 
 Stop! Kleborate and listen
 
-ICEKp is back with with my brand new invention
+ICEKp is back with with my brand-new invention
 
 If there was a problem, Klebs'll solve it
 

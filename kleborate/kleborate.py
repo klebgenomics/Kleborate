@@ -53,6 +53,10 @@ def main():
 
         contig_count, n50, longest_contig = get_contig_stats(contigs)
 
+        # Check the species with Mash
+        if args.species:
+            species, species_hit_strength = get_klebsiella_species(contigs, data_folder)
+
         # run chromosome MLST
         f = os.popen('python ' + mlstblast + ' -s ' + data_folder +
                      '/Klebsiella_pneumoniae.fasta -d ' + data_folder +
@@ -161,7 +165,10 @@ def main():
         resistance_gene_count = get_resistance_gene_count(res_headers, res_hits)
 
         # Print results to screen.
-        stdout_results = [name, chr_st, str(virulence_score)]
+        stdout_results = [name]
+        if args.species:
+            stdout_results += [species]
+        stdout_results += [chr_st, str(virulence_score)]
         if args.resistance:
             stdout_results.append(str(resistance_score))
         stdout_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
@@ -171,8 +178,11 @@ def main():
         print '\t'.join(stdout_results)
 
         # Save results to file.
-        full_results = [name, str(contig_count), str(n50), str(longest_contig), chr_st,
-                        str(virulence_score)]
+        full_results = [name]
+        if args.species:
+            full_results += [species, species_hit_strength]
+        full_results += [str(contig_count), str(n50), str(longest_contig), chr_st,
+                         str(virulence_score)]
         if args.resistance:
             full_results.append(str(resistance_score))
             full_results.append(str(resistance_class_count))
@@ -198,6 +208,9 @@ def parse_arguments():
     parser.add_argument('-r', '--resistance', action='store_true',
                         help='Turn on resistance genes screening (default: no resistance gene '
                              'screening)')
+    parser.add_argument('-s', '--species', action='store_true',
+                        help='Turn on Klebsiella species check(requires Mash, default no species '
+                             'check)')
     # parser.add_argument('-k', '--kaptive', action='store_true',
     #                     help='Turn on capsule typing with Kaptive (default: no capsule typing')
     parser.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
@@ -230,6 +243,9 @@ def check_inputs_and_programs(args):
     if args.resistance:
         if not distutils.spawn.find_executable('blastx'):
             sys.exit('Error: could not find blastx')
+    if args.species:
+        if not distutils.spawn.find_executable('mash'):
+            sys.exit('Error: could not find mash')
 
     # # TO DO
     # if args.kaptive:
@@ -247,8 +263,13 @@ def build_output_headers(args, resblast, data_folder):
     This function returns headers for both. It also returns the resistance headers in a separate
     list, as they are used to total up some resistance summaries.
     """
-    stdout_header = ['strain', 'ST', 'virulence_score']
-    full_header = ['strain', 'contig_count', 'N50', 'largest_contig', 'ST', 'virulence_score']
+    stdout_header = ['strain']
+    full_header = ['strain']
+    if args.species:
+        stdout_header += ['species']
+        full_header += ['species', 'species_match']
+    stdout_header += ['ST', 'virulence_score']
+    full_header += ['contig_count', 'N50', 'largest_contig', 'ST', 'virulence_score']
     if args.resistance:
         stdout_header.append('resistance_score')
         full_header.append('resistance_score')
@@ -351,6 +372,36 @@ def decompress_file(in_file, out_file):
     with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
         s = i.read()
         o.write(s)
+
+
+def get_klebsiella_species(contigs, data_folder):
+    f = os.popen('mash dist ' + data_folder + '/species_mash_sketches.msh ' + contigs)
+
+    best_species = None
+    best_distance = 1.0
+
+    for line in f:
+        line_parts = line.split('\t')
+        reference = line_parts[0]
+        if len(line_parts) < 4 or not reference.startswith('Klebsiella_'):
+            continue
+        species = reference.split('/')[0]
+        distance = float(line_parts[2])
+
+        # Fix up the species name formatting a bit.
+        species = species.replace('_', ' ')
+        species = species.replace(' subsp ', ' subsp. ')
+
+        if distance < best_distance:
+            best_distance = distance
+            best_species = species
+
+    if best_distance <= 0.01:
+        return best_species, 'strong'
+    elif best_distance <= 0.03:
+        return best_species, 'weak'
+    else:
+        return 'unknown', ''
 
 
 if __name__ == '__main__':
