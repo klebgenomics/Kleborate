@@ -1,5 +1,4 @@
 clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_contains_multiple_genes,gene_found_in_multiple_clusters,bla_description,bla_class
-0,OqxB__49,Flq,OqxB,OqxB,49,EU370913,47851-51003,3153,no,no,NA,NA
 1,VanTc3__534,Gly,VanTc,VanTc3,534,AY033764,1644-3746,2103,no,no,NA,NA
 1,VanTc4__535,Gly,VanTc,VanTc4,535,EU151753,1647-3749,2103,no,no,NA,NA
 2,VanT__1054,Gly,VanT,VanT,1054,AF162694,3008-5104,2097,no,no,NA,NA
@@ -88,7 +87,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 74,TetD__1047,Tet,TetD,TetD,1047,AB089602,1-1185,1185,no,no,NA,NA
 75,Tet-41__1046,Tet,Tet-41,Tet-41,1046,AY264780,3006-1825,1182,no,no,NA,NA
 76,Cml__1045,Phe,Cml,Cml,1045,X59968,508-1686,1179,no,no,NA,NA
-77,OqxA__1044,Flq,OqxA,OqxA,1044,EU370913,46652-47827,1176,no,no,NA,NA
 78,CmrA__1053,Phe,CmrA,CmrA,1053,Z12001,993-2168,1176,no,no,NA,NA
 79,Cmr__1052,Phe,Cmr,Cmr,1052,U85507,3518-4693,1176,no,no,NA,NA
 80,TetG__632,Tet,TetG,TetG,632,NC_010410,3672607-3671432,1176,no,no,NA,NA
@@ -1814,7 +1812,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 509,QnrVC7__1831,Flq,QnrVC5,QnrVC7,1831,KM555152,1-657,657,no,no,NA,NA
 513,FosA2__1735,Fcyn,FosA2,FosA2,1735,EU487198,217-642,426,no,no,NA,NA
 512,FosX__1834,Fcyn,FosX,FosX,1834,AP010904,1708924-1709388,465,no,no,NA,NA
-510,Far1__1832,Fcd,Far1,Far1,1832,NC_005127,19072-19713,642,no,no,NA,NA
 62,EreA2__48,MLS,EreA,EreA2,48,KJ668707,2797-4023,1227,no,no,NA,NA
 210,ErmCX__1725,MLS,ErmX,ErmCX,1725,AF024666,2208-2969,762,no,no,NA,NA
 267,LnuB__1736,MLS,LinB,LnuB,1736,KC688833,1-804,804,no,no,NA,NA
