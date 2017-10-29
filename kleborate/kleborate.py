@@ -59,9 +59,12 @@ def main():
             species, species_hit_strength = get_klebsiella_species(contigs, data_folder)
 
         # run chromosome MLST
-        f = os.popen('python ' + mlstblast + ' -s ' + data_folder +
-                     '/Klebsiella_pneumoniae.fasta -d ' + data_folder +
-                     '/kpneumoniae.txt -i no --maxmissing 3 ' + contigs)
+        f = os.popen('python ' + mlstblast +
+                     ' -s ' + data_folder + '/Klebsiella_pneumoniae.fasta' +
+                     ' -d ' + data_folder + '/kpneumoniae.txt' +
+                     ' -i no' +
+                     ' --maxmissing 3' +
+                     ' ' + contigs)
         chr_st = ''
         chr_st_detail = []
         for line in f:
@@ -74,8 +77,12 @@ def main():
         f.close()
 
         # run ybt MLST
-        f = os.popen('python ' + mlstblast + ' -s ' + data_folder + '/ybt_alleles.fasta -d ' +
-                     data_folder + '/YbST_profiles.txt -i yes --maxmissing 3 ' + contigs)
+        f = os.popen('python ' + mlstblast +
+                     ' -s ' + data_folder + '/ybt_alleles.fasta' +
+                     ' -d ' + data_folder + '/YbST_profiles.txt' +
+                     ' -i yes' +
+                     ' --maxmissing 3' +
+                     ' ' + contigs)
         yb_st = ''
         yb_group = ''
         yb_st_detail = []
@@ -96,9 +103,12 @@ def main():
         f.close()
 
         # run colibactin MLST
-        f = os.popen('python ' + mlstblast + ' -s ' + data_folder +
-                     '/colibactin_alleles.fasta -d ' + data_folder +
-                     '/CbST_profiles.txt -i yes --maxmissing 3 ' + contigs)
+        f = os.popen('python ' + mlstblast +
+                     ' -s ' + data_folder + '/colibactin_alleles.fasta' +
+                     ' -d ' + data_folder + '/CbST_profiles.txt' +
+                     ' -i yes' +
+                     ' --maxmissing 3' +
+                     ' ' + contigs)
         cb_st = ''
         cb_group = ''
         cb_st_detail = []
@@ -120,8 +130,9 @@ def main():
 
         # screen for other virulence genes (binary calls)
         aerobactin, salmochelin, hypermucoidy = '-', '-', '-'
-        f = os.popen('python ' + clusterblast + ' -s ' + data_folder +
-                     '/other_vir_clusters.fasta ' + contigs)
+        f = os.popen('python ' + clusterblast +
+                     ' -s ' + data_folder + '/other_vir_clusters.fasta' +
+                     ' ' + contigs)
         for line in f:
             fields = line.rstrip().split('\t')
             if fields[1] != 'aerobactin':  # skip header
@@ -131,8 +142,13 @@ def main():
         f.close()
 
         # screen for wzi allele
-        f = os.popen('python ' + mlstblast + ' -s ' + data_folder + '/wzi.fasta -d ' + data_folder +
-                     '/wzi.txt -i yes --maxmissing 0 -m 99 ' + contigs)
+        f = os.popen('python ' + mlstblast +
+                     ' -s ' + data_folder + '/wzi.fasta' +
+                     ' -d ' + data_folder + '/wzi.txt' +
+                     ' -i yes' +
+                     ' --maxmissing 0' +
+                     ' -m 99' +
+                     ' ' + contigs)
         for line in f:
             fields = line.rstrip().split('\t')
             if fields[0] != 'ST':  # skip header
@@ -147,8 +163,9 @@ def main():
         if args.resistance:
             f = os.popen('python ' + resblast +
                          ' -s ' + data_folder + '/ARGannot_r2.fasta' +
-                         ' -t ' + data_folder + '/ARGannot_clustered80.csv' +
-                         ' -q ' + data_folder + '/QRDR_120.aa ' + contigs)
+                         ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv' +
+                         ' -q ' + data_folder + '/QRDR_120.aa' +
+                         ' ' + contigs)
             for line in f:
                 fields = line.rstrip().split('\t')
                 if fields[0] != 'strain':  # skip header
@@ -302,8 +319,9 @@ def build_output_headers(args, resblast, data_folder):
     full_header += mlst_header
 
     if args.resistance:
-        f = os.popen('python ' + resblast + ' -s ' + data_folder + '/ARGannot_r2.fasta -t ' +
-                     data_folder + '/ARGannot_clustered80.csv')
+        f = os.popen('python ' + resblast +
+                     ' -s ' + data_folder + '/ARGannot_r2.fasta' +
+                     ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv')
         fields = f.readline().rstrip().split('\t')
         res_headers = fields[1:]
         stdout_header += res_headers

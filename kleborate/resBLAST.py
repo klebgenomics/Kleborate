@@ -29,7 +29,7 @@ def main():
     # options
     parser.add_option("-s", "--seqs", action="store", dest="seqs", default="ARGannot_r2.fasta",
                       help="res gene sequences to screen for")
-    parser.add_option("-t", "--class", action="store", dest="res_class_file", default="ARGannot_clustered80.csv",
+    parser.add_option("-t", "--class", action="store", dest="res_class_file", default="ARGannot_clustered80_r2.csv",
                       help="res gene classes (CSV)")
     parser.add_option("-q", "--qrdr", action="store", dest="qrdr", help="QRDR sequences", default="")
     parser.add_option("-m", "--minident", action="store", dest="minident", default="90",
@@ -80,13 +80,13 @@ if __name__ == "__main__":
         for line in f:
             if header == 0:
                 header = 1
-                # seqID,clusterid,gene,allele,cluster_contains_multiple_genes,gene_found_in_multiple_clusters,
-                # idInFile,symbol,class,accession,positions,size,Lahey,Bla_Class
+                # clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_contains_multiple_genes,gene_found_in_multiple_clusters,bla_description,bla_class
             else:
                 fields = line.rstrip().split(",")
-                (seqID, clusterID, gene, allele, allele_symbol,
-                 res_class, bla_class) = (fields[0], fields[1], fields[2], fields[3], fields[3], fields[8], fields[13])
-                seq_header = "__".join([clusterID, gene, allele, seqID])
+
+                clusterID, res_class, gene, allele_symbol, seqID, bla_class = fields[0], fields[2], fields[3], fields[4], fields[5], fields[12]
+                seq_header = "__".join([clusterID, gene + '_' + res_class, allele_symbol, seqID])
+
                 if res_class == "Bla" and bla_class == "NA":
                     bla_class = "Bla"
                 gene_info[seq_header] = (allele_symbol, res_class, bla_class)
