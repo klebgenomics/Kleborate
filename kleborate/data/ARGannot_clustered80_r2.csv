@@ -1816,7 +1816,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 210,ErmCX__1725,MLS,ErmX,ErmCX,1725,AF024666,2208-2969,762,no,no,NA,NA
 267,LnuB__1736,MLS,LinB,LnuB,1736,KC688833,1-804,804,no,no,NA,NA
 511,NimB_Nitroimidazole_Gene__1833,Ntmdz,NimB_Nitroimidazole_Gene,NimB_Nitroimidazole_Gene,1833,X71443,794-1288,495,no,no,NA,NA
-472,OptrA__1759,Oxzln,OptrA,OptrA,1759,KP399637,31477-33444,1968,no,no,NA,NA
 476,CmlB1__1763,Phe,CmlB1,CmlB1,1763,NG_047658,101-1366,1266,no,no,NA,NA
 79,Cmx__58,Phe,Cmr,Cmx,58,AF024666,15877-17052,1176,no,no,NA,NA
 475,IRI__1762,Rif,IRI,IRI,1762,U56415,280-1719,1440,no,no,NA,NA
