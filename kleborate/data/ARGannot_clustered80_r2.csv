@@ -307,14 +307,14 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,VanH-Pt__569,Gly,VanH-Pt,VanH-Pt,569,DQ018710,5109-6077,969,no,no,NA,NA
 135,VanH-Pt2__570,Gly,VanH-Pt,VanH-Pt2,570,AY926880,2771-3739,969,no,no,NA,NA
 136,Erm31__568,MLS,Erm31,Erm31,568,AF079138,154-1122,969,no,no,NA,NA
-137,CARB-1__558,Bla,CARB,CARB-1,558,D86225,232-1098,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
+137,CARB-1__558,Bla,CARB,CARB-1,558,D86225,232-1098,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
 137,CARB-11__566,Bla,CARB,CARB-11,566,AY008290,1-867,867,no,no,class A beta-lactamase,Bla
-137,CARB-2__559,Bla,CARB,CARB-2,559,HQ157204,747-1613,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
-137,CARB-3__560,Bla,CARB,CARB-3,560,S46063,122-1036,915,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
-137,CARB-4__561,Bla,CARB,CARB-4,561,AY913772,1600-2466,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
-137,CARB-6__562,Bla,CARB,CARB-6,562,AF030945,96-962,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
-137,CARB-7__563,Bla,CARB,CARB-7,563,AF409092,888-1754,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
-137,CARB-9__565,Bla,CARB,CARB-9,565,AY248038,2073-2939,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
+137,CARB-2__559,Bla,CARB,CARB-2,559,HQ157204,747-1613,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-3__560,Bla,CARB,CARB-3,560,S46063,122-1036,915,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-4__561,Bla,CARB,CARB-4,561,AY913772,1600-2466,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-6__562,Bla,CARB,CARB-6,562,AF030945,96-962,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-7__563,Bla,CARB,CARB-7,563,AF409092,888-1754,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-9__565,Bla,CARB,CARB-9,565,AY248038,2073-2939,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
 137,PSE-4__557,Bla,CARB,PSE-4,557,AF313471,1422-2288,867,no,no,NA,NA
 138,Zn-dependent_hydrolase__574,Bla,Zn-dependent_hydrolase,Zn-dependent_hydrolase,574,NC_010410,882015-882977,963,no,no,NA,NA
 139,ErmS__573,MLS,ErmS,ErmS,573,M19269,460-1419,960,no,no,NA,NA
@@ -334,7 +334,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 147,CphA2__538,Bla,CphA2,CphA2,538,NC_000918,673738-674661,924,no,no,NA,NA
 148,Aph2''Ic__550,AGly,Aph2''Ic,Aph2''Ic,550,U51479,196-1116,921,no,no,NA,NA
 149,ROB-1__551,Bla,ROB-1,ROB-1,551,AF022114,303-1220,918,no,no,cephalosporin-hydrolyzing class A beta-lactamase,Bla
-150,AER-1__1631,Bla,AER-1,AER-1,1631,U14748,325-1239,915,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
+150,AER-1__1631,Bla,AER-1,AER-1,1631,U14748,325-1239,915,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
 151,AIM-1__1630,Bla,AIM-1,AIM-1,1630,AM998375,1173-2084,912,no,no,subclass B3 metallo-beta-lactamase,Bla
 152,VanY-A__1634,Gly,VanY-A,VanY-A,1634,M97297,9052-9963,912,no,no,NA,NA
 152,VanY-Pt__1636,Gly,VanY-A,VanY-Pt,1636,AY926880,5831-6721,891,no,no,NA,NA
@@ -575,8 +575,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 167,MphC__1444,MLS,MphC,MphC,1444,AF167161,5665-6564,900,no,no,NA,NA
 168,VgbA__1241,MLS,VgbA,VgbA,1241,AF117258,3768-2869,900,no,no,NA,NA
 169,HugA__1242,Bla,HugA2,HugA,1242,AF324468,1221-2117,897,no,no,NA,NA
-170,CARB-10__783,Bla,CARB-5,CARB-10,783,EU850412,2270-3166,897,no,no,carbenicillin-hydrolyzing class A extended-spectrum beta-lactamase,Bla_Carb
-170,CARB-5__782,Bla,CARB-5,CARB-5,782,AF135373,12-908,897,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
+170,CARB-10__783,Bla,CARB-5,CARB-10,783,EU850412,2270-3166,897,no,no,carbenicillin-hydrolyzing class A extended-spectrum beta-lactamase,Bla_ESBL
+170,CARB-5__782,Bla,CARB-5,CARB-5,782,AF135373,12-908,897,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
 171,FAR-1__781,Bla,FAR-1,FAR-1,781,AF024601,303-1196,894,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 172,Lut-1__780,Bla,Lut-1,Lut-1,780,AY695112,1-891,891,no,no,NA,NA
 173,AadE-Pp__778,AGly,AadE-K,AadE-Pp,778,HE577054,1299623-1300477,855,no,no,NA,NA
@@ -1286,7 +1286,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 298,ErmQ__62,MLS,ErmQ,ErmQ,62,L22689,262-1035,774,no,no,NA,NA
 299,AadD__63,AGly,AadD,AadD,63,AF181950,3176-3946,771,no,no,NA,NA
 300,Ant4-Ib__1581,AGly,Ant4-Ib,Ant4-Ib,1581,AJ506108,209-979,771,no,no,NA,NA
-301,Aad9__1582,AGly,Aad9,Aad9,1582,M69221,271-1038,768,no,no,NA,NA
+301,Aad9__1582,Agly,Aad9,Aad9,1582,M69221,271-1038,768,no,no,NA,NA
 302,CEPH-A3__1583,Bla,CEPH,CEPH-A3,1583,AY112998,197-961,765,no,no,NA,NA
 302,CphA__1586,Bla,CEPH,CphA,1586,AY261378,1-765,765,no,no,NA,NA
 302,CphA4__1587,Bla,CEPH,CphA4,1587,AY227050,131-895,765,no,no,NA,NA
@@ -1703,8 +1703,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 492,PLA1a__1807,Bla,ORN-PLA,PLA1a,1807,AY302757,187-1062,876,no,no,NA,NA
 492,PLA2a__1808,Bla,ORN-PLA,PLA2a,1808,AY307385,162-1037,876,no,no,NA,NA
 489,SPU-1__1799,Bla,SPU,SPU-1,1799,GQ919044,1-882,882,no,no,CSP family class A extended-spectrum beta-lactamase,Bla_ESBL
-493,VHW-1__1809,Bla,VHW,VHW-1,1809,AF217648,133-1005,873,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
-493,VHH-1__1810,Bla,VHW,VHH-1,1810,AF217649,134-985,852,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
+493,VHW-1__1809,Bla,VHW,VHW-1,1809,AF217648,133-1005,873,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+493,VHH-1__1810,Bla,VHW,VHH-1,1810,AF217649,134-985,852,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
 479,SST-1__1786,Bla,SRT-SST,SST-1,1786,AB008455,152-1288,1137,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
 96,AZECL-25__1152,Bla,ACT-MIR,AZECL-25,1152,KJ949106,1-1146,1146,no,no,NA,NA
 494,CAU-1__1811,Bla,CAU,CAU-1,1811,AJ308331,1-870,870,no,no,subclass B3 metallo-beta-lactamase,Bla
@@ -1781,7 +1781,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 477,ADC-76__1777,Bla,ADC,ADC-76,1777,KP881236,1-1152,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
 477,ADC-77__1778,Bla,ADC,ADC-77,1778,KP881237,54-1205,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
 477,ADC-78__1779,Bla,ADC,ADC-78,1779,KP881238,1-1152,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
-137,CARB-8__1157,Bla,CARB,CARB-8,1157,NG_035647,3623-4489,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla_Carb
+137,CARB-8__1157,Bla,CARB,CARB-8,1157,NG_035647,3623-4489,867,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
 170,CARB-8_OU__1698,Bla,CARB-5,CARB-8_OU,1698,AY178993,575-1471,897,no,no,NA,NA
 165,VEB-1a__1694,Bla,VEB-1,VEB-1a,1694,AF324833,1-900,900,no,no,NA,NA
 165,VEB-1b__1695,Bla,VEB-1,VEB-1b,1695,AF324834,1-900,900,no,no,NA,NA
