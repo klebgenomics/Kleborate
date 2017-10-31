@@ -29,6 +29,7 @@ def main():
 
     for name, seq in fasta_seqs:
         name = name.replace('NimB_Nitroimidazole_Gene', 'NimB')  # fix verbose gene name
+        name = name.replace('_Colistin__', '_Col__')  # colistin class name to just three letters
         allele_name = name.split('__')[2]
         if allele_name in allele_names:
             print('>' + name)
