@@ -54,7 +54,7 @@ if __name__ == "__main__":
     else:
         (path, fileName) = os.path.split(options.seqs)
         if not os.path.exists(options.seqs + ".nin"):
-            os.system("makeblastdb -dbtype nucl -logfile blast.log -in " + options.seqs)
+            os.system("makeblastdb -dbtype nucl -in " + options.seqs)
         (fileName, ext) = os.path.splitext(fileName)
 
     def get_closest_locus_variant(query, annotated_query, sts):
