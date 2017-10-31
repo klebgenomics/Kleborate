@@ -16,6 +16,7 @@ import os
 import sys
 import gzip
 import argparse
+import subprocess
 import distutils.spawn
 from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stats
@@ -318,15 +319,18 @@ def build_output_headers(args, resblast, data_folder):
                    'clbN', 'clbO', 'clbP', 'clbQ']
     full_header += mlst_header
 
+    # If resistance genes are on, run the resBLAST.py script to get its headers.
     if args.resistance:
-        f = os.popen('python ' + resblast +
-                     ' -s ' + data_folder + '/ARGannot_r2.fasta' +
-                     ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv')
-        fields = f.readline().rstrip().split('\t')
+        res_out = subprocess.check_output('python ' + resblast +
+                                          ' -s ' + data_folder + '/ARGannot_r2.fasta' +
+                                          ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv',
+                                          shell=True)
+        if res_out is bytes:
+            res_out = res_out.decode()
+        fields = res_out.split('\n')[0].rstrip().split('\t')
         res_headers = fields[1:]
         stdout_header += res_headers
         full_header += res_headers
-        f.close()
     else:
         res_headers = []
 

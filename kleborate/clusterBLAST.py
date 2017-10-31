@@ -17,6 +17,7 @@ not, see <http://www.gnu.org/licenses/>.
 
 import os
 import sys
+import subprocess
 from optparse import OptionParser
 
 
@@ -53,7 +54,9 @@ if __name__ == "__main__":
     else:
         (path, fileName) = os.path.split(options.seqs)
         if not os.path.exists(options.seqs + ".nin"):
-            os.system("makeblastdb -dbtype nucl -in " + options.seqs)
+            with open(os.devnull, 'w') as devnull:
+                subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
+                                      stdout = devnull, shell=True)
         (fileName, ext) = os.path.splitext(fileName)
 
     # print header

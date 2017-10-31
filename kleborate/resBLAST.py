@@ -59,12 +59,16 @@ if __name__ == "__main__":
     else:
         (path, fileName) = os.path.split(options.seqs)
         if not os.path.exists(options.seqs + ".nin"):
-            os.system("makeblastdb -dbtype nucl -in " + options.seqs)
+            with open(os.devnull, 'w') as devnull:
+                subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
+                                      stdout = devnull, shell=True)
 
     if options.qrdr != "":
         (qrdr_path, qrdr_fileName) = os.path.split(options.qrdr)
         if not os.path.exists(options.qrdr + ".pin"):
-            os.system("makeblastdb -dbtype prot -in " + options.qrdr)
+            with open(os.devnull, 'w') as devnull:
+                subprocess.check_call("makeblastdb -dbtype prot -in " + options.qrdr,
+                                      stdout = devnull, shell=True)
 
     # read table of genes and store classes
 
