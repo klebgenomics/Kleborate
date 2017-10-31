@@ -41,6 +41,9 @@ with open(argannot_csv_filename, 'rt') as argannot_csv_file:
         # Fix verbose gene name
         stripped_line = stripped_line.replace('NimB_Nitroimidazole_Gene', 'NimB')
 
+        # Fix resistance class capitalisation
+        stripped_line = stripped_line.replace(',Agly,', ',AGly,')
+
         line_parts = stripped_line.split(',')
         res_class = line_parts[2]
         gene = line_parts[3]
