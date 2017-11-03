@@ -419,12 +419,13 @@ def get_klebsiella_species(contigs, data_folder):
     for line in f:
         line_parts = line.split('\t')
         reference = line_parts[0]
-        if len(line_parts) < 4 or not reference.startswith('Klebsiella_'):
+        if len(line_parts) < 4:
             continue
         species = reference.split('/')[0]
         distance = float(line_parts[2])
 
         # Fix up the species name formatting a bit.
+        species = species.replace('Escherichia_coli', 'Escherichia coli / Shigella')
         species = species.replace('_', ' ')
         species = species.replace(' subsp ', ' subsp. ')
 

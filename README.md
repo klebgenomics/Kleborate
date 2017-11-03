@@ -241,6 +241,8 @@ Here is an annotated tree of the reference assemblies, made by [mashtree](https:
 
 Kleborate is designed for the well studied group of species at the top right of the tree which includes the "big three": _pneumoniae_, _quasipneumoniae_ (two subspecies) and _variicola_. _K. quasivariicola_ is more recently characterised and described here: [Long 2017](http://genomea.asm.org/content/5/42/e01057-17). The Kp5 group does not yet have a species name and was described in this paper: [Blin 2017](http://onlinelibrary.wiley.com/doi/10.1111/1462-2920.13689/abstract). More distant _Klebsiella_ species (_oxytoca_, _michiganensis_ and _aerogenes_) are less well characterised and isolates are often labelled inconsistently. We have defined these species using the names most commonly assigned to the clades, but these species delineations deserve closer attention.
 
+Kleborate will also call other species in Enterobacteriaceae, as different species sometimes end up in _Klebsiella_ collections. These names are again assigned based on the clades in a mashtree, but were not as carefully curated as the _Klebsiella_ species (so take them with a grain of salt).
+
 
 
 ## Typing direct from Illumina reads
