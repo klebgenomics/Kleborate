@@ -33,10 +33,12 @@ def main():
     resblast = resource_filename(__name__, 'resBLAST.py')
     clusterblast = resource_filename(__name__, 'clusterBLAST.py')
 
-    # Output in two places: stdout (less verbose) and file (more verbose)
+    kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
+
+    # Output in two places: stdout (less verbose) and file (more verbose).
     stdout_header, full_header, res_headers = build_output_headers(args, resblast, data_folder)
     print '\t'.join(stdout_header)
-    o = file(args.outfile, 'w')
+    o = open(args.outfile, 'w')
     o.write('\t'.join(full_header))
     o.write('\n')
 
@@ -58,6 +60,8 @@ def main():
         # Check the species with Mash
         if args.species:
             species, species_hit_strength = get_klebsiella_species(contigs, data_folder)
+        else:
+            species, species_hit_strength = '', ''
 
         # run chromosome MLST
         f = os.popen('python ' + mlstblast +
@@ -173,9 +177,17 @@ def main():
                     res_hits = fields[1:]
             f.close()
 
-        # # TO DO: run Kaptive
-        # if args.kaptive:
-        #     pass
+        if args.kaptive_k:
+            k_type, k_confidence, k_problems, k_identity, k_missing = \
+                run_kaptive(kaptive_py, kaptive_k_db, contigs, args.kaptive_k_outfile)
+        else:
+            k_confidence, k_problems, k_identity, k_missing = '', '', '', ''
+
+        if args.kaptive_o:
+            o_type, o_confidence, o_problems, o_identity, o_missing = \
+                run_kaptive(kaptive_py, kaptive_o_db, contigs, args.kaptive_o_outfile)
+        else:
+            o_type, o_confidence, o_problems, o_identity, o_missing = '', '', '', '', ''
 
         # Summarise virulence and resistance.
         virulence_score = get_virulence_score(yb_group, cb_group, aerobactin, salmochelin,
@@ -193,6 +205,11 @@ def main():
             stdout_results.append(str(resistance_score))
         stdout_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
                            wzi_st, k_type]
+        if args.kaptive_o:
+            stdout_results.append(k_confidence)
+        if args.kaptive_o:
+            stdout_results.append(o_type)
+            stdout_results.append(o_confidence)
         if args.resistance:
             stdout_results += res_hits
         print '\t'.join(stdout_results)
@@ -208,11 +225,17 @@ def main():
             full_results.append(str(resistance_class_count))
             full_results.append(str(resistance_gene_count))
         full_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
-                         wzi_st, k_type, chr_st] + chr_st_detail + yb_st_detail + cb_st_detail
+                         wzi_st, k_type]
+        if args.kaptive_k:
+            full_results += [k_confidence, k_problems, k_identity, k_missing]
+        if args.kaptive_o:
+            full_results += [o_type, o_confidence, o_problems, o_identity, o_missing]
+        full_results += [chr_st] + chr_st_detail + yb_st_detail + cb_st_detail
         if args.resistance:
             full_results += res_hits
         o.write('\t'.join(full_results))
         o.write('\n')
+        o.flush()
 
         # If we've been working on a temporary decompressed file, delete it now.
         if temp_decompress:
@@ -230,18 +253,33 @@ def parse_arguments():
     required_args.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
                                help='FASTA file(s) for assemblies')
 
-    optional_args = parser.add_argument_group('Optional arguments')
-    optional_args.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
-                        help='File for detailed output (default: Kleborate_results.txt)')
-    optional_args.add_argument('-r', '--resistance', action='store_true',
-                        help='Turn on resistance genes screening (default: no resistance gene '
-                             'screening)')
-    optional_args.add_argument('-s', '--species', action='store_true',
-                        help='Turn on Klebsiella species identification (requires Mash, default: '
-                             'no species identification)')
-    # TO DO
-    # optional_args.add_argument('-k', '--kaptive', action='store_true',
-    #                            help='Turn on capsule typing with Kaptive (default: no capsule typing')
+    screening_args = parser.add_argument_group('Screening options')
+    screening_args.add_argument('-r', '--resistance', action='store_true',
+                                help='Turn on resistance genes screening (default: no resistance '
+                                     'gene screening)')
+    screening_args.add_argument('-s', '--species', action='store_true',
+                                help='Turn on Klebsiella species identification (requires Mash, '
+                                     'default: no species identification)')
+    screening_args.add_argument('--kaptive_k', action='store_true',
+                                help='Turn on Kaptive screening of K loci (default: do not run '
+                                     'Kaptive for K loci)')
+    screening_args.add_argument('--kaptive_o', action='store_true',
+                                help='Turn on Kaptive screening of O loci (default: do not run '
+                                     'Kaptive for O loci)')
+    screening_args.add_argument('-k', '--kaptive', action='store_true',
+                                help='Equivalent to --kaptive_k --kaptive_o')
+    screening_args.add_argument('--all', action='store_true',
+                                help='Equivalent to --resistance --species --kaptive')
+
+    output_args = parser.add_argument_group('Output')
+    output_args.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
+                             help='File for detailed output (default: Kleborate_results.txt)')
+    output_args.add_argument('--kaptive_k_outfile', type=str,
+                             help='File for full Kaptive K locus output (default: do not '
+                                  'save Kaptive K locus results to separate file)')
+    output_args.add_argument('--kaptive_o_outfile', type=str,
+                             help='File for full Kaptive O locus output (default: do not '
+                                  'save Kaptive O locus results to separate file)')
 
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
@@ -254,11 +292,29 @@ def parse_arguments():
         parser.print_help(file=sys.stderr)
         sys.exit(1)
 
-    return parser.parse_args()
+    args = parser.parse_args()
+
+    if args.kaptive:
+        args.kaptive_k = True
+        args.kaptive_o = True
+    if args.all:
+        args.resistance = True
+        args.species = True
+        args.kaptive_k = True
+        args.kaptive_o = True
+
+    if args.kaptive_k_outfile and not args.kaptive_k:
+        sys.exit('Error: you must use --kaptive_k (or --kaptive) to use --kaptive_k_outfile')
+    if args.kaptive_o_outfile and not args.kaptive_o:
+        sys.exit('Error: you must use --kaptive_o (or --kaptive) to use --kaptive_o_outfile')
+
+    return args
 
 
 def check_inputs_and_programs(args):
     for assembly in args.assemblies:
+        if os.path.isdir(assembly):
+            sys.exit('Error: ' + assembly + ' is a directory (please specify assembly files)')
         if not os.path.isfile(assembly):
             sys.exit('Error: could not find ' + assembly)
         fasta = load_fasta(assembly)
@@ -279,13 +335,6 @@ def check_inputs_and_programs(args):
         if not distutils.spawn.find_executable('mash'):
             sys.exit('Error: could not find mash')
 
-    # # TO DO
-    # if args.kaptive:
-    #     try:
-    #         imp.find_module('Bio')
-    #     except ImportError:
-    #         sys.exit('Error: could not find BioPython (required for Kaptive)')
-
 
 def build_output_headers(args, resblast, data_folder):
     """
@@ -302,6 +351,7 @@ def build_output_headers(args, resblast, data_folder):
         full_header += ['species', 'species_match']
     stdout_header += ['ST', 'virulence_score']
     full_header += ['contig_count', 'N50', 'largest_contig', 'ST', 'virulence_score']
+
     if args.resistance:
         stdout_header.append('resistance_score')
         full_header.append('resistance_score')
@@ -309,9 +359,26 @@ def build_output_headers(args, resblast, data_folder):
         full_header.append('num_resistance_genes')
 
     other_columns = ['Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin', 'salmochelin',
-                     'hypermucoidy', 'wzi', 'KL']
+                     'hypermucoidy', 'wzi', 'K_locus']
     stdout_header += other_columns
     full_header += other_columns
+
+    if args.kaptive_k:
+        # K_locus is already in the header.
+        stdout_header.append('K_locus_confidence')
+        full_header.append('K_locus_problems')
+        full_header.append('K_locus_confidence')
+        full_header.append('K_locus_identity')
+        full_header.append('K_locus_missing_genes')
+
+    if args.kaptive_o:
+        stdout_header.append('O_locus')
+        stdout_header.append('O_locus_confidence')
+        full_header.append('O_locus')
+        full_header.append('O_locus_problems')
+        full_header.append('O_locus_confidence')
+        full_header.append('O_locus_identity')
+        full_header.append('O_locus_missing_genes')
 
     mlst_header = ['Chr_ST', 'gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB', 'ybtS', 'ybtX',
                    'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA', 'clbA',
@@ -333,10 +400,6 @@ def build_output_headers(args, resblast, data_folder):
         full_header += res_headers
     else:
         res_headers = []
-
-    # # TO DO
-    # if args.kaptive:
-    #     pass
 
     return stdout_header, full_header, res_headers
 
@@ -361,8 +424,8 @@ def get_virulence_score(yb_group, cb_group, aerobactin, salmochelin, hypermucoid
 def get_resistance_score(res_headers, res_hits):
     """
     Three possible resistance scores:
-      * 0 = no ESBL, no Carbepenemase
-      * 1 = ESBL, no Carbepenemase
+      * 0 = no ESBL, no carbepenemase
+      * 1 = ESBL, no carbepenemase
       * 2 = Carbepenemase (whether or not ESBL is present)
     """
     if not res_headers:
@@ -439,6 +502,96 @@ def get_klebsiella_species(contigs, data_folder):
         return best_species, 'weak'
     else:
         return 'unknown', ''
+
+
+def get_kaptive_paths():
+    this_file = os.path.realpath(__file__)
+    kaptive_dir = os.path.join(os.path.dirname(os.path.dirname(this_file)), 'kaptive')
+    if not os.path.isdir(kaptive_dir):
+        sys.exit('Error: could not find Kaptive directory. Did you git clone with --recursive?')
+    kaptive_py = os.path.join(kaptive_dir, 'kaptive.py')
+    if not os.path.isfile(kaptive_py):
+        sys.exit('Error: could not find kaptive.py')
+    db_dir = os.path.join(kaptive_dir, 'reference_database')
+    kaptive_k_db = os.path.join(db_dir, 'Klebsiella_k_locus_primary_reference.gbk')
+    if not os.path.isfile(kaptive_k_db):
+        sys.exit('Error: could not find Klebsiella_k_locus_primary_reference.gbk')
+    kaptive_o_db = os.path.join(db_dir, 'Klebsiella_o_locus_primary_reference.gbk')
+    if not os.path.isfile(kaptive_o_db):
+        sys.exit('Error: could not find Klebsiella_o_locus_primary_reference.gbk')
+    return kaptive_py, kaptive_k_db, kaptive_o_db
+
+
+def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
+    kaptive_prefix = 'temp_kaptive_results_' + str(os.getpid())
+    kaptive_table = kaptive_prefix + '_table.txt'
+
+    p = subprocess.Popen('python ' + kaptive_py +
+                         ' -a ' + contigs +
+                         ' -k ' + kaptive_db +
+                         ' -o ' + kaptive_prefix +
+                         ' --verbose' +
+                         ' --no_seq_out --no_json',
+                         shell=True,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = p.communicate()
+
+    # Make sure the output is a string, whether we are in Python 2 or 3.
+    if not isinstance(stdout, str):
+        stdout = stdout.decode()
+    if not isinstance(stderr, str):
+        stderr = stderr.decode()
+
+    if p.returncode != 0:
+        if stderr:
+            sys.exit('Error: Kaptive failed to run with the following error:\n' + stderr.strip())
+        else:
+            sys.exit('Error: Kaptive failed to run')
+
+    locus, confidence, problems, identity = None, None, None, None
+    missing = []
+
+    # Parse the required information from the Kaptive verbose output.
+    output_lines = stdout.splitlines()
+    missing_gene_lines = False
+    for line in output_lines:
+        if 'Best match locus:' in line:
+            locus = line.split('Best match locus:')[1].strip()
+        if 'Match confidence:' in line:
+            confidence = line.split('Match confidence:')[1].strip()
+        if 'Problems:' in line:
+            problems = line.split('Problems:')[1].strip()
+        if 'Identity:' in line:
+            identity = line.split('Identity:')[1].strip()
+        if 'Other genes in locus:' in line:
+            missing_gene_lines = False
+        if missing_gene_lines:
+            missing_gene = line.strip()
+            if missing_gene:
+                missing.append(missing_gene)
+        if 'Missing expected genes:' in line:
+            missing_gene_lines = True
+
+    if not output_file:
+        try:
+            os.remove(kaptive_table)
+        except OSError:
+            pass
+
+    else:  # if we are saving Kaptive results to file...
+        with open(kaptive_table, 'rt') as f:
+            kaptive_table_lines = f.readlines()
+        assert len(kaptive_table_lines) == 2
+        if not os.path.isfile(output_file):
+            with open(output_file, 'wt') as f:
+                f.write(kaptive_table_lines[0])  # write header line
+        with open(output_file, 'at') as f:
+            f.write(kaptive_table_lines[1])      # write data line
+
+    if locus is None or confidence is None or problems is None or identity is None:
+        sys.exit('Error: Kaptive failed to produce the expected output')
+
+    return locus, confidence, problems, identity, ','.join(missing)
 
 
 if __name__ == '__main__':
