@@ -15,197 +15,234 @@ not, see <http://www.gnu.org/licenses/>.
 # blast for resistance genes, summarise by class (one class per column)
 
 import os
-import sys
 import subprocess
-from optparse import OptionParser
+import argparse
 import xml.etree.ElementTree as ElementTree
 
 
 def main():
+    args = parse_arguments()
+    build_blast_databases(args)
+    gene_info, res_classes, bla_classes = read_class_file(args.resclass)
+    print_header(res_classes, bla_classes)
 
-    usage = "usage: %prog [options]"
-    parser = OptionParser(usage=usage)
+    for contigs in args.assemblies:
+        hits_dict = blast_against_all(args, contigs, gene_info)
+        if args.qrdr:
+            check_for_qrdr_mutations(hits_dict, contigs, args)
+        if args.trunc:
+            check_for_gene_truncations(hits_dict, contigs, args)
+        print_results(contigs, res_classes, bla_classes, hits_dict)
 
-    # options
-    parser.add_option("-s", "--seqs", action="store", dest="seqs", default="ARGannot_r2.fasta",
-                      help="res gene sequences to screen for")
-    parser.add_option("-t", "--class", action="store", dest="res_class_file", default="ARGannot_clustered80_r2.csv",
-                      help="res gene classes (CSV)")
-    parser.add_option("-q", "--qrdr", action="store", dest="qrdr", help="QRDR sequences", default="")
-    parser.add_option("-m", "--minident", action="store", dest="minident", default="90",
-                      help="Minimum percent identity (default 90)")
-    parser.add_option("-c", "--mincov", action="store", dest="mincov", default="80",
-                      help="Minimum percent coverage (default 80)")
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description='Klebsiella resistance screen (part of Kleborate)',
+                                     add_help=False)
+
+    parser.add_argument('assemblies', nargs='+', type=str,
+                        help='FASTA file(s) for assemblies')
+
+    required_args = parser.add_argument_group('Required arguments')
+    required_args.add_argument('-s', '--seqs', type=str, required=True,
+                               help='resistance gene sequences to screen for')
+    required_args.add_argument('-t', '--resclass', type=str, required=True,
+                               help='resistance gene classes (CSV)')
+
+    additional_screening_args = parser.add_argument_group('Additional screening')
+    additional_screening_args.add_argument('-q', '--qrdr', type=str,
+                                           help='QRDR sequences for which mutations can cause '
+                                                'fluoroquinolone resistance')
+    additional_screening_args.add_argument('-r', '--trunc', type=str,
+                                           help='genes for which truncation can cause colistin '
+                                                'resistance')
+
+    settings_args = parser.add_argument_group('Settings')
+    settings_args.add_argument('-m', '--minident', type=float, default=90.0,
+                               help='minimum percent identity (default 90)')
+    settings_args.add_argument('-c', '--mincov', type=float, default=80.0,
+                               help='minimum percent coverage (default 80)')
+
+    help_args = parser.add_argument_group('Help')
+    help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
+                           help='show this help message and exit')
+
     return parser.parse_args()
+
+
+def build_blast_databases(args):
+    if not os.path.exists(args.seqs + '.nin'):
+        with open(os.devnull, 'w') as devnull:
+            subprocess.check_call('makeblastdb -dbtype nucl -in ' + args.seqs,
+                                  stdout=devnull, shell=True)
+    if args.qrdr:
+        if not os.path.exists(args.qrdr + '.pin'):
+            with open(os.devnull, 'w') as devnull:
+                subprocess.check_call('makeblastdb -dbtype prot -in ' + args.qrdr,
+                                      stdout=devnull, shell=True)
+
+
+def read_class_file(res_class_file):
+    gene_info = {}  # key = sequence id (fasta header in seq file), value = (allele,class,Bla_Class)
+    res_classes = []
+    bla_classes = []
+
+    f = file(res_class_file, 'r')
+    header = 0
+    for line in f:
+        if header == 0:
+            header = 1
+            # clusterid,queryID,class,gene,allele,seqID,accession,positions,size,
+            # cluster_contains_multiple_genes,gene_found_in_multiple_clusters,bla_description,
+            # bla_class
+        else:
+            fields = line.rstrip().split(',')
+
+            cluster_id, res_class, gene, allele_symbol, seq_id, bla_class = \
+                fields[0], fields[2], fields[3], fields[4], fields[5], fields[12]
+            seq_header = '__'.join([cluster_id, gene + '_' + res_class, allele_symbol, seq_id])
+
+            if res_class == 'Bla' and bla_class == 'NA':
+                bla_class = 'Bla'
+            gene_info[seq_header] = (allele_symbol, res_class, bla_class)
+            if res_class not in res_classes:
+                res_classes.append(res_class)
+            if bla_class not in bla_classes:
+                bla_classes.append(bla_class)
+    f.close()
+
+    res_classes.sort()
+    res_classes.remove('Bla')
+    bla_classes.sort()
+    bla_classes.remove('NA')
+
+    return gene_info, res_classes, bla_classes
 
 
 # functions for finding snps
 def get_gapped_position(seq, position):
     num_chars = 0
     i = 0
-    seq_list = list(seq)
     while num_chars <= position and i < len(seq):
-        if seq[i] != "-":
+        if seq[i] != '-':
             num_chars += 1
         i += 1
-    return i-1
+    return i - 1
 
-if __name__ == "__main__":
 
-    (options, args) = main()
+def print_header(res_classes, bla_classes):
+    print '\t'.join(['strain'] + res_classes + bla_classes)
 
-    if options.seqs == "":
-        sys.exit("No res gene sequences provided (-s)")
-    else:
-        (path, fileName) = os.path.split(options.seqs)
-        if not os.path.exists(options.seqs + ".nin"):
-            with open(os.devnull, 'w') as devnull:
-                subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
-                                      stdout = devnull, shell=True)
 
-    if options.qrdr != "":
-        (qrdr_path, qrdr_fileName) = os.path.split(options.qrdr)
-        if not os.path.exists(options.qrdr + ".pin"):
-            with open(os.devnull, 'w') as devnull:
-                subprocess.check_call("makeblastdb -dbtype prot -in " + options.qrdr,
-                                      stdout = devnull, shell=True)
+def blast_against_all(args, contigs, gene_info):
+    hits_dict = {}  # key = class, value = list
 
-    # read table of genes and store classes
-
-    gene_info = {}  # key = sequence id (fasta header in seq file), value = (allele,class,Bla_Class)
-    res_classes = []
-    bla_classes = []
-
-    if options.res_class_file == "":
-        sys.exit("No res gene class file provided (-t)")
-    else:
-        f = file(options.res_class_file, "r")
-        header = 0
-        for line in f:
-            if header == 0:
-                header = 1
-                # clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_contains_multiple_genes,gene_found_in_multiple_clusters,bla_description,bla_class
+    f = os.popen('blastn -task blastn -db ' + args.seqs + ' -query ' + contigs +
+                 " -outfmt '6 sacc pident slen length score' -ungapped -dust no -evalue 1E-20 " +
+                 '-word_size 32 -max_target_seqs 10000 -culling_limit 1 -perc_identity ' +
+                 str(args.minident))
+    for line in f:
+        fields = line.rstrip().split('\t')
+        gene_id, pcid, length, allele_length, score = \
+            fields[0], float(fields[1]), float(fields[2]), float(fields[3]), float(fields[4])
+        if (allele_length / length * 100) > args.mincov:
+            (hit_allele, hit_class, hit_bla_class) = gene_info[gene_id]
+            if hit_class == 'Bla':
+                hit_class = hit_bla_class
+            if pcid < 100.00:
+                hit_allele += '*'  # imprecise match
+            if allele_length < length:
+                hit_allele += '?'  # partial match
+            if hit_class in hits_dict:
+                hits_dict[hit_class].append(hit_allele)
             else:
-                fields = line.rstrip().split(",")
+                hits_dict[hit_class] = [hit_allele]
+    f.close()
+    return hits_dict
 
-                clusterID, res_class, gene, allele_symbol, seqID, bla_class = fields[0], fields[2], fields[3], fields[4], fields[5], fields[12]
-                seq_header = "__".join([clusterID, gene + '_' + res_class, allele_symbol, seqID])
 
-                if res_class == "Bla" and bla_class == "NA":
-                    bla_class = "Bla"
-                gene_info[seq_header] = (allele_symbol, res_class, bla_class)
-                if res_class not in res_classes:
-                    res_classes.append(res_class)
-                if bla_class not in bla_classes:
-                    bla_classes.append(bla_class)
-        f.close()
+def check_for_qrdr_mutations(hits_dict, contigs, args):
+    qrdr_loci = {'GyrA': [(83, 'S'), (87, 'D')], 'ParC': [(80, 'S'), (84, 'E')]}
 
-    res_classes.sort()
-    res_classes.remove("Bla")
-    bla_classes.sort()
-    bla_classes.remove("NA")
+    # key = (locus, pos), value = allele,
+    # if found in a simple hit starting at position 1 of the protein seq
+    complete_hits = {}
+    incomplete_hits = {}
 
-    # print header
-    print "\t".join(["strain"] + res_classes + bla_classes)
+    blastx_cmd = 'blastx -db ' + args.qrdr + ' -query ' + contigs + \
+                 ' -outfmt 5 -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1 -seg no'
+    process = subprocess.Popen(blastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
+    blast_output = process.communicate()[0]
+    root = ElementTree.fromstring(blast_output)
 
-    for contigs in args:
-        (_, fileName) = os.path.split(contigs)
-        (name, ext) = os.path.splitext(fileName)
+    for query in root[8]:
+        for hit in query[4]:
+            gene_id = hit[2].text
+            for hsp in hit[5]:
+                hsp_hit_eval = float(hsp[5].text)
+                hsp_hit_from = int(hsp[6].text)
+                hsp_hit_to = int(hsp[7].text)
+                hsp_gaps = int(hsp[12].text)
+                hsp_qseq = hsp[14].text
+                hsp_hseq = hsp[15].text
 
-        # blast against all
-        f = os.popen("blastn -task blastn -db " + options.seqs + " -query " + contigs +
-                     " -outfmt '6 sacc pident slen length score' -ungapped -dust no -evalue 1E-20 -word_size 32"
-                     " -max_target_seqs 10000 -culling_limit 1 -perc_identity " + options.minident)
-
-        # list of genes in each class with hits
-        hits_dict = {}  # key = class, value = list
-
-        for line in f:
-            fields = line.rstrip().split("\t")
-            (gene_id, pcid, length, allele_length, score) = (fields[0], float(fields[1]), float(fields[2]),
-                                                             float(fields[3]), float(fields[4]))
-            if (allele_length / length * 100) > float(options.mincov):
-                (hit_allele, hit_class, hit_bla_class) = gene_info[gene_id]
-                if hit_class == "Bla":
-                    hit_class = hit_bla_class
-                if pcid < 100.00:
-                    hit_allele += "*"  # imprecise match
-                if allele_length < length:
-                    hit_allele += "?"  # partial match
-                if hit_class in hits_dict:
-                    hits_dict[hit_class].append(hit_allele)
-                else:
-                    hits_dict[hit_class] = [hit_allele]
-        f.close()
-
-        # check for QRDR mutations
-        if options.qrdr != "":
-
-            # mutations to check for
-            qrdr_loci = {'GyrA': [(83, 'S'), (87, 'D')], 'ParC': [(80, 'S'), (84, 'E')]}
-            complete_hits = {} # key = (locus, pos), value = allele, if found in a simple hit starting at position 1 of the protein seq
-            incomplete_hits = {} 
-
-            blastx_cmd = "blastx -db " + options.qrdr + " -query " + contigs + \
-                         " -outfmt 5 -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1" \
-                         " -seg no"
-            process = subprocess.Popen(blastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
-            blast_output = process.communicate()[0]
-            root = ElementTree.fromstring(blast_output)
-            
-            for query in root[8]:
-                for hit in query[4]:
-                    gene_id = hit[2].text
-                    aln_len = int(hit[4].text)
-                    for hsp in hit[5]:
-                        Hsp_hit_eval = float(hsp[5].text)
-                        Hsp_hit_from = int(hsp[6].text)
-                        Hsp_hit_to = int(hsp[7].text)
-                        Hsp_gaps = int(hsp[12].text)
-                        Hsp_align_len = int(hsp[13].text)
-                        Hsp_qseq = hsp[14].text
-                        Hsp_hseq = hsp[15].text
-
-                        for (pos, wt) in qrdr_loci[gene_id]:
-                            if Hsp_hit_to >= pos and (Hsp_gaps == 0) and (Hsp_hit_from == 1):
-                                # simple alignment
-                                if (gene_id,pos) in complete_hits:
-                                    complete_hits[(gene_id,pos)].append( Hsp_qseq[pos-1] )
-                                else:
-                                    complete_hits[(gene_id,pos)] = [ Hsp_qseq[pos-1] ]
-                            else:
-                                # not a simple alignment, need to align query and hit and extract loci manually
-                                if (pos >= Hsp_hit_from) and (pos <= Hsp_hit_to) and (Hsp_hit_eval <= 0.00001):
-                                    # locus is within aligned area, set evalue to filter out the junk alignments
-                                    pos_in_aln = get_gapped_position(Hsp_hseq, pos - Hsp_hit_from + 1)
-                                    if (gene_id,pos) in incomplete_hits:
-                                        incomplete_hits[(gene_id,pos)].append( Hsp_qseq[pos_in_aln-1] )
-                                    else:
-                                        incomplete_hits[(gene_id,pos)] = [ Hsp_qseq[pos_in_aln-1] ]
-            
-            snps = []      
-            
-            for locus in qrdr_loci:
-                for (pos, wt) in qrdr_loci[locus]:
-                    if (locus, pos) in complete_hits:
-                        if complete_hits[(locus, pos)][0] != wt:
-                            snps.append( locus + "-" + str(pos) + complete_hits[(locus, pos)][0] ) # record SNP at this site
+                for (pos, wt) in qrdr_loci[gene_id]:
+                    if hsp_hit_to >= pos and (hsp_gaps == 0) and (hsp_hit_from == 1):
+                        # simple alignment
+                        if (gene_id, pos) in complete_hits:
+                            complete_hits[(gene_id, pos)].append(hsp_qseq[pos - 1])
+                        else:
+                            complete_hits[(gene_id, pos)] = [hsp_qseq[pos - 1]]
                     else:
-                        if (locus, pos) in incomplete_hits:
-                            if incomplete_hits[(locus, pos)][0] != wt:
-                                snps.append( locus + "-" + str(pos) + incomplete_hits[(locus, pos)][0] ) # record SNP at this site
-                                
-            if snps:
-                if "Flq" in hits_dict:
-                    hits_dict["Flq"] += snps
-                else:
-                    hits_dict["Flq"] = snps
+                        # not a simple alignment, need to align query and hit and extract loci
+                        # manually
+                        if (pos >= hsp_hit_from) and (pos <= hsp_hit_to) and \
+                                (hsp_hit_eval <= 0.00001):
+                            # locus is within aligned area, set evalue to filter out the junk
+                            # alignments
+                            pos_in_aln = get_gapped_position(hsp_hseq, pos - hsp_hit_from + 1)
+                            if (gene_id, pos) in incomplete_hits:
+                                incomplete_hits[(gene_id, pos)].append(hsp_qseq[pos_in_aln - 1])
+                            else:
+                                incomplete_hits[(gene_id, pos)] = [hsp_qseq[pos_in_aln - 1]]
 
-        hit_string = [name]
-        for res_class in (res_classes + bla_classes):
-            if res_class in hits_dict:
-                hit_string.append(";".join(hits_dict[res_class]))
+    snps = []
+
+    for locus in qrdr_loci:
+        for (pos, wt) in qrdr_loci[locus]:
+            if (locus, pos) in complete_hits:
+                if complete_hits[(locus, pos)][0] != wt:
+                    snps.append(locus + '-' + str(pos) +
+                                complete_hits[(locus, pos)][0])  # record SNP at this site
             else:
-                hit_string.append("-")
+                if (locus, pos) in incomplete_hits:
+                    if incomplete_hits[(locus, pos)][0] != wt:
+                        snps.append(locus + '-' + str(pos) +
+                                    incomplete_hits[(locus, pos)][0])  # record SNP at this site
+    if snps:
+        if 'Flq' in hits_dict:
+            hits_dict['Flq'] += snps
+        else:
+            hits_dict['Flq'] = snps
 
-        print "\t".join(hit_string)
+
+def check_for_gene_truncations(hits_dict, contigs, args):
+    # TO DO
+    # TO DO
+    # TO DO
+    # TO DO
+    # TO DO
+    pass
+
+
+def print_results(contigs, res_classes, bla_classes, hits_dict):
+    result_string = [os.path.splitext(os.path.split(contigs)[1])[0]]
+    for res_class in (res_classes + bla_classes):
+        if res_class in hits_dict:
+            result_string.append(';'.join(hits_dict[res_class]))
+        else:
+            result_string.append('-')
+    print '\t'.join(result_string)
+
+
+if __name__ == '__main__':
+    main()
