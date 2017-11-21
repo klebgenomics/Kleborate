@@ -26,222 +26,35 @@ from .version import __version__
 def main():
     args = parse_arguments()
     check_inputs_and_programs(args)
-
-    # Find necessary resources
-    data_folder = resource_filename(__name__, 'data')
-    mlstblast = resource_filename(__name__, 'mlstBLAST.py')
-    resblast = resource_filename(__name__, 'resBLAST.py')
-    clusterblast = resource_filename(__name__, 'clusterBLAST.py')
-
+    data_folder, mlstblast, resblast, clusterblast = get_resource_paths()
     kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
 
-    # Output in two places: stdout (less verbose) and file (more verbose).
-    stdout_header, full_header, res_headers = build_output_headers(args, resblast, data_folder)
-    print '\t'.join(stdout_header)
-    o = open(args.outfile, 'w')
-    o.write('\t'.join(full_header))
-    o.write('\n')
+    stdout_header, full_header, res_headers = get_output_headers(args, resblast, data_folder)
+    output_headers(stdout_header, full_header, args.outfile)
 
     for contigs in args.assemblies:
-        (_, filename) = os.path.split(contigs)
-        (name, ext) = os.path.splitext(filename)
+        temp_decompressed_file, contigs = gunzip_contigs_if_necessary(contigs)
 
-        # If the contigs are in a gz file, make a temporary decompressed FASTA file.
-        if get_compression_type(contigs) == 'gz':
-            new_contigs = contigs + '_temp_decompress.fasta'
-            decompress_file(contigs, new_contigs)
-            contigs = new_contigs
-            temp_decompress = True
-        else:
-            temp_decompress = False
+        # All results are stored in a dictionary where the key is the column name and the value
+        # is the result. The results are outputted in order of the header rows. This means that the
+        # column orders can be easily changed by modifying the get_output_headers function.
 
-        contig_count, n50, longest_contig = get_contig_stats(contigs)
+        results = {'strain': os.path.splitext(os.path.split(contigs)[1])[0]}
+        results.update(get_contig_stat_results(contigs))
+        results.update(get_species_results(contigs, data_folder, args))
+        results.update(get_chromosome_mlst_results(mlstblast, data_folder, contigs))
+        results.update(get_ybt_mlst_results(mlstblast, data_folder, contigs))
+        results.update(get_clb_mlst_results(mlstblast, data_folder, contigs))
+        results.update(get_other_vir_results(clusterblast, data_folder, contigs))
+        results.update(get_wzi_and_k_locus_results(mlstblast, data_folder, contigs))
+        results.update(get_resistance_results(resblast, data_folder, contigs, args, res_headers))
+        results.update(get_summary_results(results, res_headers))
+        results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
+        results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
 
-        # Check the species with Mash
-        if args.species:
-            species, species_hit_strength = get_klebsiella_species(contigs, data_folder)
-        else:
-            species, species_hit_strength = '', ''
-
-        # run chromosome MLST
-        f = os.popen('python ' + mlstblast +
-                     ' -s ' + data_folder + '/Klebsiella_pneumoniae.fasta' +
-                     ' -d ' + data_folder + '/kpneumoniae.txt' +
-                     ' -i no' +
-                     ' --maxmissing 3' +
-                     ' ' + contigs)
-        chr_st = ''
-        chr_st_detail = []
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if fields[1] != 'ST':  # skip header
-                (strain, chr_st) = (fields[0], fields[1])
-                chr_st_detail = fields[2:]
-                if chr_st != '0':
-                    chr_st = 'ST' + chr_st
-        f.close()
-
-        # run ybt MLST
-        f = os.popen('python ' + mlstblast +
-                     ' -s ' + data_folder + '/ybt_alleles.fasta' +
-                     ' -d ' + data_folder + '/YbST_profiles.txt' +
-                     ' -i yes' +
-                     ' --maxmissing 3' +
-                     ' ' + contigs)
-        yb_st = ''
-        yb_group = ''
-        yb_st_detail = []
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if fields[2] != 'ST':  # skip header
-                strain, yb_st, yb_group = fields[0], fields[2], fields[1]
-                yb_st_detail = fields[3:]
-
-                # If no ybt group was found but at least 8 out of the 11 ybt genes are present,
-                # then this strain is labelled as 'ybt unknown'.
-                if yb_group == '':
-                    if sum(0 if x == '-' else 1 for x in yb_st_detail) >= 8:
-                        yb_group = 'ybt unknown'
-                        yb_st = 'unknown'
-                    else:
-                        yb_group = '-'
-        f.close()
-
-        # run colibactin MLST
-        f = os.popen('python ' + mlstblast +
-                     ' -s ' + data_folder + '/colibactin_alleles.fasta' +
-                     ' -d ' + data_folder + '/CbST_profiles.txt' +
-                     ' -i yes' +
-                     ' --maxmissing 3' +
-                     ' ' + contigs)
-        cb_st = ''
-        cb_group = ''
-        cb_st_detail = []
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if fields[2] != 'ST':  # skip header
-                strain, cb_st, cb_group = fields[0], fields[2], fields[1]
-                cb_st_detail = fields[3:]
-
-                # If no clb group was found but at least 12 out of the 15 clb genes are present,
-                # then this strain is labelled as 'clb unknown'.
-                if cb_group == '':
-                    if sum(0 if x == '-' else 1 for x in cb_st_detail) >= 12:
-                        cb_group = 'clb unknown'
-                        cb_st = 'unknown'
-                    else:
-                        cb_group = '-'
-        f.close()
-
-        # screen for other virulence genes (binary calls)
-        aerobactin, salmochelin, hypermucoidy = '-', '-', '-'
-        f = os.popen('python ' + clusterblast +
-                     ' -s ' + data_folder + '/other_vir_clusters.fasta' +
-                     ' ' + contigs)
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if fields[1] != 'aerobactin':  # skip header
-                aerobactin = fields[1]
-                salmochelin = fields[2]
-                hypermucoidy = fields[3]
-        f.close()
-
-        # screen for wzi allele
-        f = os.popen('python ' + mlstblast +
-                     ' -s ' + data_folder + '/wzi.fasta' +
-                     ' -d ' + data_folder + '/wzi.txt' +
-                     ' -i yes' +
-                     ' --maxmissing 0' +
-                     ' -m 99' +
-                     ' ' + contigs)
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if fields[0] != 'ST':  # skip header
-                (strain, wzi_st, k_type) = (fields[0], 'wzi' + fields[2], fields[1])
-                if fields[2] == '0':
-                    wzi_st = '0'
-                if k_type == '':
-                    k_type = '-'
-
-        # screen for resistance genes
-        res_hits = []
-        if args.resistance:
-            f = os.popen('python ' + resblast +
-                         ' -s ' + data_folder + '/ARGannot_r2.fasta' +
-                         ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv' +
-                         ' -q ' + data_folder + '/QRDR_120.aa' +
-                         ' ' + contigs)
-            for line in f:
-                fields = line.rstrip().split('\t')
-                if fields[0] != 'strain':  # skip header
-                    res_hits = fields[1:]
-            f.close()
-
-        if args.kaptive_k:
-            k_type, k_confidence, k_problems, k_identity, k_missing = \
-                run_kaptive(kaptive_py, kaptive_k_db, contigs, args.kaptive_k_outfile)
-        else:
-            k_confidence, k_problems, k_identity, k_missing = '', '', '', ''
-
-        if args.kaptive_o:
-            o_type, o_confidence, o_problems, o_identity, o_missing = \
-                run_kaptive(kaptive_py, kaptive_o_db, contigs, args.kaptive_o_outfile)
-        else:
-            o_type, o_confidence, o_problems, o_identity, o_missing = '', '', '', '', ''
-
-        # Summarise virulence and resistance.
-        virulence_score = get_virulence_score(yb_group, cb_group, aerobactin, salmochelin,
-                                              hypermucoidy)
-        resistance_score = get_resistance_score(res_headers, res_hits)
-        resistance_class_count = get_resistance_class_count(res_headers, res_hits)
-        resistance_gene_count = get_resistance_gene_count(res_headers, res_hits)
-
-        # Print results to screen.
-        stdout_results = [name]
-        if args.species:
-            stdout_results += [species]
-        stdout_results += [chr_st, str(virulence_score)]
-        if args.resistance:
-            stdout_results.append(str(resistance_score))
-        stdout_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
-                           wzi_st, k_type]
-        if args.kaptive_o:
-            stdout_results.append(k_confidence)
-        if args.kaptive_o:
-            stdout_results.append(o_type)
-            stdout_results.append(o_confidence)
-        if args.resistance:
-            stdout_results += res_hits
-        print '\t'.join(stdout_results)
-
-        # Save results to file.
-        full_results = [name]
-        if args.species:
-            full_results += [species, species_hit_strength]
-        full_results += [str(contig_count), str(n50), str(longest_contig), chr_st,
-                         str(virulence_score)]
-        if args.resistance:
-            full_results.append(str(resistance_score))
-            full_results.append(str(resistance_class_count))
-            full_results.append(str(resistance_gene_count))
-        full_results += [yb_group, yb_st, cb_group, cb_st, aerobactin, salmochelin, hypermucoidy,
-                         wzi_st, k_type]
-        if args.kaptive_k:
-            full_results += [k_confidence, k_problems, k_identity, k_missing]
-        if args.kaptive_o:
-            full_results += [o_type, o_confidence, o_problems, o_identity, o_missing]
-        full_results += [chr_st] + chr_st_detail + yb_st_detail + cb_st_detail
-        if args.resistance:
-            full_results += res_hits
-        o.write('\t'.join(full_results))
-        o.write('\n')
-        o.flush()
-
-        # If we've been working on a temporary decompressed file, delete it now.
-        if temp_decompress:
+        output_results(stdout_header, full_header, args.outfile, results)
+        if temp_decompressed_file:
             os.remove(contigs)
-
-    o.close()
 
 
 def parse_arguments():
@@ -271,7 +84,7 @@ def parse_arguments():
     screening_args.add_argument('--all', action='store_true',
                                 help='Equivalent to --resistance --species --kaptive')
 
-    output_args = parser.add_argument_group('Output')
+    output_args = parser.add_argument_group('Output options')
     output_args.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
                              help='File for detailed output (default: Kleborate_results.txt)')
     output_args.add_argument('--kaptive_k_outfile', type=str,
@@ -336,7 +149,7 @@ def check_inputs_and_programs(args):
             sys.exit('Error: could not find mash')
 
 
-def build_output_headers(args, resblast, data_folder):
+def get_output_headers(args, resblast, data_folder):
     """
     There are two levels of output:
       * stdout is simpler and displayed to the console
@@ -380,11 +193,10 @@ def build_output_headers(args, resblast, data_folder):
         full_header.append('O_locus_identity')
         full_header.append('O_locus_missing_genes')
 
-    mlst_header = ['Chr_ST', 'gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB', 'ybtS', 'ybtX',
-                   'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA', 'clbA',
-                   'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI', 'clbL', 'clbM',
-                   'clbN', 'clbO', 'clbP', 'clbQ']
-    full_header += mlst_header
+    full_header.append('Chr_ST')
+    full_header += get_chromosome_mlst_header()
+    full_header += get_ybt_mlst_header()
+    full_header += get_clb_mlst_header()
 
     # If resistance genes are on, run the resBLAST.py script to get its headers.
     if args.resistance:
@@ -504,6 +316,14 @@ def get_klebsiella_species(contigs, data_folder):
         return 'unknown', ''
 
 
+def get_resource_paths():
+    data_folder = resource_filename(__name__, 'data')
+    mlstblast = resource_filename(__name__, 'mlstBLAST.py')
+    resblast = resource_filename(__name__, 'resBLAST.py')
+    clusterblast = resource_filename(__name__, 'clusterBLAST.py')
+    return data_folder, mlstblast, resblast, clusterblast
+
+
 def get_kaptive_paths():
     this_file = os.path.realpath(__file__)
     kaptive_dir = os.path.join(os.path.dirname(os.path.dirname(this_file)), 'kaptive')
@@ -591,7 +411,247 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
     if locus is None or confidence is None or problems is None or identity is None:
         sys.exit('Error: Kaptive failed to produce the expected output')
 
-    return locus, confidence, problems, identity, ','.join(missing)
+    return [locus, confidence, problems, identity, ','.join(missing)]
+
+
+def get_chromosome_mlst_header():
+    return ['gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB']
+
+
+def get_ybt_mlst_header():
+    return ['ybtS', 'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA']
+
+
+def get_clb_mlst_header():
+    return ['clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI', 'clbL', 'clbM',
+            'clbN', 'clbO', 'clbP', 'clbQ']
+
+
+def gunzip_contigs_if_necessary(contigs):
+    if get_compression_type(contigs) == 'gz':
+        new_contigs = contigs + '_temp_decompress.fasta'
+        decompress_file(contigs, new_contigs)
+        contigs = new_contigs
+        temp_decompress = True
+    else:
+        temp_decompress = False
+    return temp_decompress, contigs
+
+
+def get_contig_stat_results(contigs):
+    contig_count, n50, longest_contig = get_contig_stats(contigs)
+    return {'contig_count': str(contig_count),
+            'N50': str(n50),
+            'largest_contig': str(longest_contig)}
+
+
+def get_species_results(contigs, data_folder, args):
+    if args.species:
+        species, species_hit_strength = get_klebsiella_species(contigs, data_folder)
+    else:
+        species, species_hit_strength = '', ''
+    return {'species': species,
+            'species_match': species_hit_strength}
+
+
+def get_chromosome_mlst_results(mlstblast, data_folder, contigs):
+    f = os.popen('python ' + mlstblast +
+                 ' -s ' + data_folder + '/Klebsiella_pneumoniae.fasta' +
+                 ' -d ' + data_folder + '/kpneumoniae.txt' +
+                 ' -i no' +
+                 ' --maxmissing 3' +
+                 ' ' + contigs)
+    chr_st = ''
+    chr_st_detail = []
+    for line in f:
+        fields = line.rstrip().split('\t')
+        if fields[1] != 'ST':  # skip header
+            (strain, chr_st) = (fields[0], fields[1])
+            chr_st_detail = fields[2:]
+            if chr_st != '0':
+                chr_st = 'ST' + chr_st
+    f.close()
+
+    chromosome_mlst_header = get_chromosome_mlst_header()
+    assert len(chromosome_mlst_header) == len(chr_st_detail)
+
+    results = {'ST': chr_st,
+               'Chr_ST': chr_st}
+    results.update(dict(zip(get_chromosome_mlst_header(), chr_st_detail)))
+    return results
+
+
+def get_ybt_mlst_results(mlstblast, data_folder, contigs):
+    f = os.popen('python ' + mlstblast +
+                 ' -s ' + data_folder + '/ybt_alleles.fasta' +
+                 ' -d ' + data_folder + '/YbST_profiles.txt' +
+                 ' -i yes' +
+                 ' --maxmissing 3' +
+                 ' ' + contigs)
+    yb_st = ''
+    yb_group = ''
+    yb_st_detail = []
+    for line in f:
+        fields = line.rstrip().split('\t')
+        if fields[2] != 'ST':  # skip header
+            strain, yb_st, yb_group = fields[0], fields[2], fields[1]
+            yb_st_detail = fields[3:]
+
+            # If no ybt group was found but at least 8 out of the 11 ybt genes are present,
+            # then this strain is labelled as 'ybt unknown'.
+            if yb_group == '':
+                if sum(0 if x == '-' else 1 for x in yb_st_detail) >= 8:
+                    yb_group = 'ybt unknown'
+                    yb_st = 'unknown'
+                else:
+                    yb_group = '-'
+    f.close()
+
+    ybt_mlst_header = get_ybt_mlst_header()
+    assert len(ybt_mlst_header) == len(yb_st_detail)
+
+    results = {'Yersiniabactin': yb_group,
+               'YbST': yb_st}
+    results.update(dict(zip(get_ybt_mlst_header(), yb_st_detail)))
+    return results
+
+
+def get_clb_mlst_results(mlstblast, data_folder, contigs):
+    f = os.popen('python ' + mlstblast +
+                 ' -s ' + data_folder + '/colibactin_alleles.fasta' +
+                 ' -d ' + data_folder + '/CbST_profiles.txt' +
+                 ' -i yes' +
+                 ' --maxmissing 3' +
+                 ' ' + contigs)
+    cb_st = ''
+    cb_group = ''
+    cb_st_detail = []
+    for line in f:
+        fields = line.rstrip().split('\t')
+        if fields[2] != 'ST':  # skip header
+            strain, cb_st, cb_group = fields[0], fields[2], fields[1]
+            cb_st_detail = fields[3:]
+
+            # If no clb group was found but at least 12 out of the 15 clb genes are present,
+            # then this strain is labelled as 'clb unknown'.
+            if cb_group == '':
+                if sum(0 if x == '-' else 1 for x in cb_st_detail) >= 12:
+                    cb_group = 'clb unknown'
+                    cb_st = 'unknown'
+                else:
+                    cb_group = '-'
+    f.close()
+
+    clb_mlst_header = get_clb_mlst_header()
+    assert len(clb_mlst_header) == len(cb_st_detail)
+
+    results = {'Colibactin': cb_group,
+               'CbST': cb_st}
+    results.update(dict(zip(get_clb_mlst_header(), cb_st_detail)))
+    return results
+
+
+def get_other_vir_results(clusterblast, data_folder, contigs):
+    aerobactin, salmochelin, hypermucoidy = '-', '-', '-'
+    f = os.popen('python ' + clusterblast +
+                 ' -s ' + data_folder + '/other_vir_clusters.fasta' +
+                 ' ' + contigs)
+    for line in f:
+        fields = line.rstrip().split('\t')
+        if fields[1] != 'aerobactin':  # skip header
+            aerobactin = fields[1]
+            salmochelin = fields[2]
+            hypermucoidy = fields[3]
+    f.close()
+
+    return {'aerobactin': aerobactin,
+            'salmochelin': salmochelin,
+            'hypermucoidy': hypermucoidy}
+
+
+def get_wzi_and_k_locus_results(mlstblast, data_folder, contigs):
+    wzi_st, k_type = '-', '-'
+    f = os.popen('python ' + mlstblast +
+                 ' -s ' + data_folder + '/wzi.fasta' +
+                 ' -d ' + data_folder + '/wzi.txt' +
+                 ' -i yes' +
+                 ' --maxmissing 0' +
+                 ' -m 99' +
+                 ' ' + contigs)
+    for line in f:
+        fields = line.rstrip().split('\t')
+        if fields[0] != 'ST':  # skip header
+            (strain, wzi_st, k_type) = (fields[0], 'wzi' + fields[2], fields[1])
+            if fields[2] == '0':
+                wzi_st = '0'
+            if k_type == '':
+                k_type = '-'
+    f.close()
+
+    return {'wzi': wzi_st,
+            'K_locus': k_type}
+
+
+def get_resistance_results(resblast, data_folder, contigs, args, res_headers):
+    res_hits = []
+    if args.resistance:
+        f = os.popen('python ' + resblast +
+                     ' -s ' + data_folder + '/ARGannot_r2.fasta' +
+                     ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv' +
+                     ' -q ' + data_folder + '/QRDR_120.aa' +
+                     ' ' + contigs)
+        for line in f:
+            fields = line.rstrip().split('\t')
+            if fields[0] != 'strain':  # skip header
+                res_hits = fields[1:]
+        f.close()
+    else:
+        res_hits = [''] * len(res_headers)
+
+    assert len(res_headers) == len(res_hits)
+    return dict(zip(res_headers, res_hits))
+
+
+def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
+    assert locus_type == 'K' or locus_type == 'O'
+
+    headers = ['K_locus', 'K_locus_confidence', 'K_locus_problems', 'K_locus_identity',
+               'K_locus_missing_genes']
+    if locus_type == 'O':
+        headers = [x.replace('K_locus', 'O_locus') for x in headers]
+
+    kaptive_results = ['', '', '', '', '']
+    if (args.kaptive_k and locus_type == 'K') or (args.kaptive_o and locus_type == 'O'):
+        kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, args.kaptive_k_outfile)
+
+    assert len(headers) == len(kaptive_results)
+    return dict(zip(headers, kaptive_results))
+
+
+def get_summary_results(results, res_headers):
+    res_hits = [results[x] for x in res_headers]
+    return {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
+                                                       results['Colibactin'],
+                                                       results['aerobactin'],
+                                                       results['salmochelin'],
+                                                       results['hypermucoidy'])),
+            'resistance_score': str(get_resistance_score(res_headers, res_hits)),
+            'num_resistance_classes': str(get_resistance_class_count(res_headers, res_hits)),
+            'num_resistance_genes': str(get_resistance_gene_count(res_headers, res_hits))}
+
+
+def output_headers(stdout_header, full_header, outfile):
+    print '\t'.join(stdout_header)
+    with open(outfile, 'wt') as o:
+        o.write('\t'.join(full_header))
+        o.write('\n')
+
+
+def output_results(stdout_header, full_header, outfile, results):
+    print '\t'.join([results[x] for x in stdout_header])
+    with open(outfile, 'at') as o:
+        o.write('\t'.join([results[x] for x in full_header]))
+        o.write('\n')
 
 
 if __name__ == '__main__':
