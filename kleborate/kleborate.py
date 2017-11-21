@@ -381,6 +381,8 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
             confidence = line.split('Match confidence:')[1].strip()
         if 'Problems:' in line:
             problems = line.split('Problems:')[1].strip()
+            if problems == 'None':
+                problems = problems.lower()
         if 'Identity:' in line:
             identity = line.split('Identity:')[1].strip()
         if 'Other genes in locus:' in line:
