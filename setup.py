@@ -7,7 +7,7 @@ def readme():
 
 
 # Get the program version from another file.
-exec(open('porechop/version.py').read())
+exec(open('kleborate/version.py').read())
 
 
 setup(name='Kleborate',
