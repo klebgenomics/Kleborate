@@ -1,5 +1,16 @@
 <p align="center"><img src="logo.png" alt="Kleborate" width="400"></p>
 
+Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
+ * MLST sequence type
+ * species (e.g _K. pneumoniae_, _K. quasipneumoniae_, _K. variicola_, etc.)
+ * virulence genes: _ybt_, _clb_, _iro_ and _iuc_ loci, and the _rmpA_ and _rmpA2_ hypermucoidy genes
+ * antimicrobial resistance genes, including quinolone resistance SNPs and colisitin resistance gene truncations
+ * K and O capsule types, via the tool [Kaptive](https://github.com/katholt/Kaptive)
+
+
+
+## Background
+
 _Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunistic infections, with a handful of hypervirulent lineages recognised as true human pathogens. Evidence is now mounting that other _Kp_ strains carrying acquired siderophores (yersiniabactin, salmochelin and aerobactin) and/or the genotoxin colibactin are also highly pathogenic and can cause invasive disease. 
 
 We recently explored the diversity of the _Kp_ integrative conjugative element (ICEKp), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2499 _Kp_ (see [this preprint](http://biorxiv.org/content/early/2017/01/04/098178)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 5%.
@@ -16,7 +27,7 @@ If you are interested in inferring capsule types from genome data, see the [Kapt
 
 #### Info and Contacts
 
-Kleborate is in active development so please post bugs and features request to the GitHub issues tracker. 
+Kleborate is in active development so please post bugs and feature requests to the GitHub [issues tracker](https://github.com/katholt/Kleborate/issues).
 
 If you use it, please cite the preprint: Lam et al, 2017 [https://doi.org/10.1101/098178](http://biorxiv.org/content/early/2017/01/04/098178)
 
@@ -24,7 +35,10 @@ For more on our lab, including other software, see [http://holtlab.net](http://h
 
 
 ## Let's get genotyping!
-Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assemblies? Use the `kleborate` command. This will detect the MLST sequence type of the strain, genotype the _ybt_ and _clb_ loci, determine the _wzi_ (capsule synthesis gene) allele and also check for presence/absence of the acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon). For convenience, we provide code for screening for acquired resistance genes (resBLAST.py) and quinolone-resistance determining mutations in _gyrA_ and _parC_, which can optionally be called when you run `kleborate` or as a standalone script.
+
+Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assemblies? Use the `kleborate` command. This will detect the MLST sequence type of the strain, genotype the _ybt_ and _clb_ loci, determine the _wzi_ (capsule synthesis gene) allele and also check for presence/absence of the acquired siderophores salmochelin (_iro_) and aerobactin (_iuc_) loci and the hypermucoidy genes _rmpA_ and _rmpA2_ (allelic typing of these should be available soon)
+
+For convenience, we provide code for screening for acquired resistance genes, quinolone-resistance determining mutations in _gyrA_ and _parC_, and colistin-resistance caused by truncation of the _mgrB_ and _pmrB_ genes. These screens are included in `kleborate` when you use the `--resistance` option, or you can use the standalone script [`resBLAST.py`](kleborate/resBLAST.py).
 
 (If you haven't got good assemblies yet, try our [Unicycler](https://github.com/rrwick/Unicycler) assembler which works great on Illumina or hybrid Illumina + Nanopore/PacBio reads)
 
@@ -42,7 +56,7 @@ Just want to get cracking with screening a bunch of _K. pneumoniae_ genome assem
 #### Installation
 
 ```bash
-git clone https://github.com/katholt/Kleborate.git
+git clone --recursive https://github.com/katholt/Kleborate.git
 cd Kleborate
 python setup.py install
 kleborate -h
@@ -54,7 +68,7 @@ kleborate -h
 You don't have to install Kleborate to use it. You can instead use the `kleborate-runner.py` script:
 
 ```bash
-git clone https://github.com/katholt/Kleborate.git
+git clone --recursive https://github.com/katholt/Kleborate.git
 Kleborate/kleborate-runner.py -h
 ```
 
@@ -62,11 +76,15 @@ Kleborate/kleborate-runner.py -h
 #### Basic usage
 
 ```
-# screen some genomes for MLST and virulence loci
+# Screen some genomes for MLST and virulence loci:
 kleborate -o detailed_results.txt -a *.fasta
 
-# screen some genomes for Klebsiella species, MLST, virulence loci and acquired resistance genes
-kleborate --species --resistance -o detailed_results.txt -a *.fasta
+# Also screen for resistance genes:
+kleborate --resistance -o detailed_results.txt -a *.fasta
+
+# Turn on all of Kleborate's optional screens (resistance gene, species check and Kaptive
+# for both K and O loci):
+kleborate --all -o detailed_results.txt -a *.fasta
 ```
 
 See below for more details, examples and outputs.
@@ -105,22 +123,45 @@ A summary of sequence types and ICE/lineage information is printed to standard o
 #### Usage:
 
 ```
-Usage: kleborate [options]
+usage: kleborate -a ASSEMBLIES [ASSEMBLIES ...] [-r] [-s] [--kaptive_k]
+                 [--kaptive_o] [-k] [--all] [-o OUTFILE]
+                 [--kaptive_k_outfile KAPTIVE_K_OUTFILE]
+                 [--kaptive_o_outfile KAPTIVE_O_OUTFILE] [-h] [--version]
 
-Options:
-  -h, --help            show this help message and exit
-  -o OUTFILE, --outfile=OUTFILE
-                        File for detailed output (default
+Kleborate: a tool for characterising virulence and resistance in Klebsiella
+
+Required arguments:
+  -a ASSEMBLIES [ASSEMBLIES ...], --assemblies ASSEMBLIES [ASSEMBLIES ...]
+                        FASTA file(s) for assemblies
+
+Screening options:
+  -r, --resistance      Turn on resistance genes screening (default: no
+                        resistance gene screening)
+  -s, --species         Turn on Klebsiella species identification (requires
+                        Mash, default: no species identification)
+  --kaptive_k           Turn on Kaptive screening of K loci (default: do not
+                        run Kaptive for K loci)
+  --kaptive_o           Turn on Kaptive screening of O loci (default: do not
+                        run Kaptive for O loci)
+  -k, --kaptive         Equivalent to --kaptive_k --kaptive_o
+  --all                 Equivalent to --resistance --species --kaptive
+
+Output options:
+  -o OUTFILE, --outfile OUTFILE
+                        File for detailed output (default:
                         Kleborate_results.txt)
-  -r RESISTANCE, --resistance=RESISTANCE
-                        Resistance genes screening (default off, set to on)
+  --kaptive_k_outfile KAPTIVE_K_OUTFILE
+                        File for full Kaptive K locus output (default: do not
+                        save Kaptive K locus results to separate file)
+  --kaptive_o_outfile KAPTIVE_O_OUTFILE
+                        File for full Kaptive O locus output (default: do not
+                        save Kaptive O locus results to separate file)
+
+Help:
+  -h, --help            Show this help message and exit
+  --version             show program's version number and exit
 ```
 
-#### Example command:
-
-```
-kleborate --resistance -o detailed_results.txt -a genome.fasta
-```
 
 #### Test on well known genomes:
 
