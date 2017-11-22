@@ -39,7 +39,7 @@ def parse_arguments():
     parser = argparse.ArgumentParser(description='Klebsiella resistance screen (part of Kleborate)',
                                      add_help=False)
 
-    parser.add_argument('assemblies', nargs='+', type=str,
+    parser.add_argument('assemblies', nargs='*', type=str,
                         help='FASTA file(s) for assemblies')
 
     required_args = parser.add_argument_group('Required arguments')
