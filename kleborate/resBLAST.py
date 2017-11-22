@@ -53,8 +53,8 @@ def parse_arguments():
                                            help='QRDR sequences for which mutations can cause '
                                                 'fluoroquinolone resistance')
     additional_screening_args.add_argument('-r', '--trunc', type=str,
-                                           help='genes for which truncation can cause colistin '
-                                                'resistance')
+                                           help='MgrB and PmrB genes for which truncation can '
+                                                'cause colistin resistance')
 
     settings_args = parser.add_argument_group('Settings')
     settings_args.add_argument('-m', '--minident', type=float, default=90.0,
@@ -78,6 +78,11 @@ def build_blast_databases(args):
         if not os.path.exists(args.qrdr + '.pin'):
             with open(os.devnull, 'w') as devnull:
                 subprocess.check_call('makeblastdb -dbtype prot -in ' + args.qrdr,
+                                      stdout=devnull, shell=True)
+    if args.trunc:
+        if not os.path.exists(args.trunc + '.pin'):
+            with open(os.devnull, 'w') as devnull:
+                subprocess.check_call('makeblastdb -dbtype prot -in ' + args.trunc,
                                       stdout=devnull, shell=True)
 
 
@@ -160,20 +165,24 @@ def blast_against_all(args, contigs, gene_info):
     return hits_dict
 
 
+def blastx_results_as_xml_tree(database, query):
+    blastx_cmd = 'blastx -db ' + database + ' -query ' + query + ' -query_gencode 11' + \
+                 ' -outfmt 5 -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1 -seg no'
+    process = subprocess.Popen(blastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
+    blast_output = process.communicate()[0]
+    if not isinstance(blast_output, str):
+        blast_output = blast_output.decode()
+    return ElementTree.fromstring(blast_output)
+
+
 def check_for_qrdr_mutations(hits_dict, contigs, args):
     qrdr_loci = {'GyrA': [(83, 'S'), (87, 'D')], 'ParC': [(80, 'S'), (84, 'E')]}
 
     # key = (locus, pos), value = allele,
     # if found in a simple hit starting at position 1 of the protein seq
-    complete_hits = {}
-    incomplete_hits = {}
+    complete_hits, incomplete_hits = {}, {}
 
-    blastx_cmd = 'blastx -db ' + args.qrdr + ' -query ' + contigs + \
-                 ' -outfmt 5 -ungapped -comp_based_stats F -culling_limit 1 -max_hsps 1 -seg no'
-    process = subprocess.Popen(blastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
-    blast_output = process.communicate()[0]
-    root = ElementTree.fromstring(blast_output)
-
+    root = blastx_results_as_xml_tree(args.qrdr, contigs)
     for query in root[8]:
         for hit in query[4]:
             gene_id = hit[2].text
@@ -204,7 +213,6 @@ def check_for_qrdr_mutations(hits_dict, contigs, args):
                                 incomplete_hits[(gene_id, pos)].append(hsp_qseq[pos_in_aln - 1])
                             else:
                                 incomplete_hits[(gene_id, pos)] = [hsp_qseq[pos_in_aln - 1]]
-
     snps = []
 
     for locus in qrdr_loci:
@@ -219,19 +227,41 @@ def check_for_qrdr_mutations(hits_dict, contigs, args):
                         snps.append(locus + '-' + str(pos) +
                                     incomplete_hits[(locus, pos)][0])  # record SNP at this site
     if snps:
-        if 'Flq' in hits_dict:
-            hits_dict['Flq'] += snps
-        else:
-            hits_dict['Flq'] = snps
+        if 'Flq' not in hits_dict:
+            hits_dict['Flq'] = []
+        hits_dict['Flq'] += snps
 
 
 def check_for_gene_truncations(hits_dict, contigs, args):
-    # TO DO
-    # TO DO
-    # TO DO
-    # TO DO
-    # TO DO
-    pass
+    best_mgrb_cov, best_pmrb_cov = 0.0, 0.0
+
+    root = blastx_results_as_xml_tree(args.trunc, contigs)
+    for query in root[8]:
+        for hit in query[4]:
+            gene_id = hit[2].text
+            assert gene_id == 'MgrB' or gene_id == 'PmrB'
+            gene_len = int(hit[4].text)
+
+            for hsp in hit[5]:
+                hsp_qseq = hsp[14].text
+                hit_length = max(len(x) for x in hsp_qseq.split('*'))
+                coverage = 100.0 * float(hit_length) / gene_len
+
+                if gene_id == 'MgrB' and coverage > best_mgrb_cov:
+                    best_mgrb_cov = coverage
+                elif gene_id == 'PmrB' and coverage > best_pmrb_cov:
+                    best_pmrb_cov = coverage
+
+    truncations = []
+    if best_mgrb_cov < 90.0:
+        truncations.append('MgrB-' + ('%.0f' % best_mgrb_cov) + '%')
+    if best_pmrb_cov < 90.0:
+        truncations.append('PmrB-' + ('%.0f' % best_pmrb_cov) + '%')
+
+    if truncations:
+        if 'Col' not in hits_dict:
+            hits_dict['Col'] = []
+        hits_dict['Col'] += truncations
 
 
 def print_results(contigs, res_classes, bla_classes, hits_dict):

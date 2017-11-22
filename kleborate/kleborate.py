@@ -204,7 +204,7 @@ def get_output_headers(args, resblast, data_folder):
                                           ' -s ' + data_folder + '/ARGannot_r2.fasta' +
                                           ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv',
                                           shell=True)
-        if res_out is bytes:
+        if not isinstance(res_out, str):
             res_out = res_out.decode()
         fields = res_out.split('\n')[0].rstrip().split('\t')
         res_headers = fields[1:]
