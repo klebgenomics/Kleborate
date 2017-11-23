@@ -264,8 +264,17 @@ def check_for_gene_truncations(hits_dict, contigs, args):
         hits_dict['Col'] += truncations
 
 
+def get_strain_name(full_path):
+    filename = os.path.split(full_path)[1]
+    if filename.endswith('_temp_decompress.fasta'):
+        filename = filename[:-22]
+    if filename.endswith('.gz'):
+        filename = filename[:-3]
+    return os.path.splitext(filename)[0]
+
+
 def print_results(contigs, res_classes, bla_classes, hits_dict):
-    result_string = [os.path.splitext(os.path.split(contigs)[1])[0]]
+    result_string = [get_strain_name(contigs)]
     for res_class in (res_classes + bla_classes):
         if res_class in hits_dict:
             result_string.append(';'.join(hits_dict[res_class]))

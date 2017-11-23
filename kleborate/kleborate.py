@@ -39,7 +39,7 @@ def main():
         # is the result. The results are outputted in order of the header rows. This means that the
         # column orders can be easily changed by modifying the get_output_headers function.
 
-        results = {'strain': os.path.splitext(os.path.split(contigs)[1])[0]}
+        results = {'strain': get_strain_name(contigs)}
         results.update(get_contig_stat_results(contigs))
         results.update(get_species_results(contigs, data_folder, args))
         results.update(get_chromosome_mlst_results(mlstblast, data_folder, contigs))
@@ -654,6 +654,15 @@ def output_results(stdout_header, full_header, outfile, results):
     with open(outfile, 'at') as o:
         o.write('\t'.join([results[x] for x in full_header]))
         o.write('\n')
+
+
+def get_strain_name(full_path):
+    filename = os.path.split(full_path)[1]
+    if filename.endswith('_temp_decompress.fasta'):
+        filename = filename[:-22]
+    if filename.endswith('.gz'):
+        filename = filename[:-3]
+    return os.path.splitext(filename)[0]
 
 
 if __name__ == '__main__':
