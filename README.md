@@ -297,7 +297,7 @@ MLST assignment can also be achieved direct from reads using [SRST2](https://git
 ```
 srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output YbST --log --mlst_db ybt_alleles.fasta --mlst_definitions YbST_profiles.txt
 
-srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output CbST --log --mlst_db colibactin_alleles.fasta --mlst_definitions CbST_profiles.txt
+srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output CbST --log --mlst_db clb_alleles.fasta --mlst_definitions CbST_profiles.txt
 ```
 
 Note that currently you can only run SRST2 with one MLST scheme at a time, so in order to type MLST, YbST and CbST you will need to run three separate commands:
@@ -305,7 +305,7 @@ Note that currently you can only run SRST2 with one MLST scheme at a time, so in
 ```
 srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output YbST --log --mlst_db ybt_alleles.fasta --mlst_definitions YbST_profiles.txt
 
-srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output CbST --log --mlst_db colibactin_alleles.fasta --mlst_definitions CbST_profiles.txt
+srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output CbST --log --mlst_db clb_alleles.fasta --mlst_definitions CbST_profiles.txt
 
 srst2 --input_pe reads_1.fastq.gz reads_2.fastq.gz --output Klebs --log --mlst_db Klebsiella_pneumoniae.fasta --mlst_definitions kpnuemoniae.txt
 ```

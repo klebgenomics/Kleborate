@@ -45,7 +45,9 @@ def main():
         results.update(get_chromosome_mlst_results(mlstblast, data_folder, contigs))
         results.update(get_ybt_mlst_results(mlstblast, data_folder, contigs))
         results.update(get_clb_mlst_results(mlstblast, data_folder, contigs))
-        results.update(get_other_vir_results(clusterblast, data_folder, contigs))
+        results.update(get_iuc_mlst_results(mlstblast, data_folder, contigs))
+        results.update(get_iro_mlst_results(mlstblast, data_folder, contigs))
+        results.update(get_hypermucoidy_results(clusterblast, data_folder, contigs))
         results.update(get_wzi_and_k_locus_results(mlstblast, data_folder, contigs))
         results.update(get_resistance_results(resblast, data_folder, contigs, args, res_headers))
         results.update(get_summary_results(results, res_headers))
@@ -171,7 +173,10 @@ def get_output_headers(args, resblast, data_folder):
         full_header.append('num_resistance_classes')
         full_header.append('num_resistance_genes')
 
-    other_columns = ['Yersiniabactin', 'YbST', 'Colibactin', 'CbST', 'aerobactin', 'salmochelin',
+    other_columns = ['Yersiniabactin', 'YbST',
+                     'Colibactin', 'CbST',
+                     'Aerobactin', 'AbST',
+                     'Salmochelin', 'SmST',
                      'hypermucoidy', 'wzi', 'K_locus']
     stdout_header += other_columns
     full_header += other_columns
@@ -429,6 +434,14 @@ def get_clb_mlst_header():
             'clbN', 'clbO', 'clbP', 'clbQ']
 
 
+def get_iuc_mlst_header():
+    return ['iucA', 'iucB', 'iucC', 'iucD', 'iutA']
+
+
+def get_iro_mlst_header():
+    return ['iroB', 'iroC', 'iroD', 'iroN']
+
+
 def gunzip_contigs_if_necessary(contigs):
     if get_compression_type(contigs) == 'gz':
         new_contigs = contigs + '_temp_decompress.fasta'
@@ -483,92 +496,144 @@ def get_chromosome_mlst_results(mlstblast, data_folder, contigs):
     return results
 
 
-def get_ybt_mlst_results(mlstblast, data_folder, contigs):
+def get_virulence_cluster_results(mlstblast, data_folder, contigs, alleles_fasta, profiles_txt,
+                                  vir_name, vir_st_name, unknown_group_name, min_gene_count,
+                                  header_function):
     f = os.popen('python ' + mlstblast +
-                 ' -s ' + data_folder + '/ybt_alleles.fasta' +
-                 ' -d ' + data_folder + '/YbST_profiles.txt' +
+                 ' -s ' + data_folder + '/' + alleles_fasta +
+                 ' -d ' + data_folder + '/' + profiles_txt +
                  ' -i yes' +
                  ' --maxmissing 3' +
                  ' ' + contigs)
-    yb_st = ''
-    yb_group = ''
-    yb_st_detail = []
+    st, group = '', ''
+    st_detail = []
     for line in f:
         fields = line.rstrip().split('\t')
         if fields[2] != 'ST':  # skip header
-            strain, yb_st, yb_group = fields[0], fields[2], fields[1]
-            yb_st_detail = fields[3:]
+            strain, st, group = fields[0], fields[2], fields[1]
+            st_detail = fields[3:]
 
-            # If no ybt group was found but at least 8 out of the 11 ybt genes are present,
-            # then this strain is labelled as 'ybt unknown'.
-            if yb_group == '':
-                if sum(0 if x == '-' else 1 for x in yb_st_detail) >= 8:
-                    yb_group = 'ybt unknown'
-                    yb_st = 'unknown'
+            # If no group was found but enough of the genes are present, then this strain is
+            # labelled as an unknown lineage.
+            if group == '':
+                if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
+                    group = unknown_group_name
+                    st = 'unknown'
                 else:
-                    yb_group = '-'
+                    group = '-'
     f.close()
 
-    ybt_mlst_header = get_ybt_mlst_header()
-    assert len(ybt_mlst_header) == len(yb_st_detail)
+    mlst_header = header_function()
+    assert len(mlst_header) == len(st_detail)
 
-    results = {'Yersiniabactin': yb_group,
-               'YbST': yb_st}
-    results.update(dict(zip(get_ybt_mlst_header(), yb_st_detail)))
+    results = {vir_name: group,
+               vir_st_name: st}
+    results.update(dict(zip(mlst_header, st_detail)))
     return results
+
+
+def get_ybt_mlst_results(mlstblast, data_folder, contigs):
+    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'ybt_alleles.fasta',
+                                         'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
+                                         'ybt unknown', 8, get_ybt_mlst_header)
+
+    # f = os.popen('python ' + mlstblast +
+    #              ' -s ' + data_folder + '/ybt_alleles.fasta' +
+    #              ' -d ' + data_folder + '/YbST_profiles.txt' +
+    #              ' -i yes' +
+    #              ' --maxmissing 3' +
+    #              ' ' + contigs)
+    # yb_st = ''
+    # yb_group = ''
+    # yb_st_detail = []
+    # for line in f:
+    #     fields = line.rstrip().split('\t')
+    #     if fields[2] != 'ST':  # skip header
+    #         strain, yb_st, yb_group = fields[0], fields[2], fields[1]
+    #         yb_st_detail = fields[3:]
+    #
+    #         # If no ybt group was found but at least 8 out of the 11 ybt genes are present,
+    #         # then this strain is labelled as 'ybt unknown'.
+    #         if yb_group == '':
+    #             if sum(0 if x == '-' else 1 for x in yb_st_detail) >= 8:
+    #                 yb_group = 'ybt unknown'
+    #                 yb_st = 'unknown'
+    #             else:
+    #                 yb_group = '-'
+    # f.close()
+    #
+    # ybt_mlst_header = get_ybt_mlst_header()
+    # assert len(ybt_mlst_header) == len(yb_st_detail)
+    #
+    # results = {'Yersiniabactin': yb_group,
+    #            'YbST': yb_st}
+    # results.update(dict(zip(get_ybt_mlst_header(), yb_st_detail)))
+    # return results
 
 
 def get_clb_mlst_results(mlstblast, data_folder, contigs):
-    f = os.popen('python ' + mlstblast +
-                 ' -s ' + data_folder + '/colibactin_alleles.fasta' +
-                 ' -d ' + data_folder + '/CbST_profiles.txt' +
-                 ' -i yes' +
-                 ' --maxmissing 3' +
-                 ' ' + contigs)
-    cb_st = ''
-    cb_group = ''
-    cb_st_detail = []
-    for line in f:
-        fields = line.rstrip().split('\t')
-        if fields[2] != 'ST':  # skip header
-            strain, cb_st, cb_group = fields[0], fields[2], fields[1]
-            cb_st_detail = fields[3:]
+    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'clb_alleles.fasta',
+                                         'CbST_profiles.txt', 'Colibactin', 'CbST',
+                                         'clb unknown', 12, get_clb_mlst_header)
 
-            # If no clb group was found but at least 12 out of the 15 clb genes are present,
-            # then this strain is labelled as 'clb unknown'.
-            if cb_group == '':
-                if sum(0 if x == '-' else 1 for x in cb_st_detail) >= 12:
-                    cb_group = 'clb unknown'
-                    cb_st = 'unknown'
-                else:
-                    cb_group = '-'
-    f.close()
+    # f = os.popen('python ' + mlstblast +
+    #              ' -s ' + data_folder + '/clb_alleles.fasta' +
+    #              ' -d ' + data_folder + '/CbST_profiles.txt' +
+    #              ' -i yes' +
+    #              ' --maxmissing 3' +
+    #              ' ' + contigs)
+    # cb_st = ''
+    # cb_group = ''
+    # cb_st_detail = []
+    # for line in f:
+    #     fields = line.rstrip().split('\t')
+    #     if fields[2] != 'ST':  # skip header
+    #         strain, cb_st, cb_group = fields[0], fields[2], fields[1]
+    #         cb_st_detail = fields[3:]
+    #
+    #         # If no clb group was found but at least 12 out of the 15 clb genes are present,
+    #         # then this strain is labelled as 'clb unknown'.
+    #         if cb_group == '':
+    #             if sum(0 if x == '-' else 1 for x in cb_st_detail) >= 12:
+    #                 cb_group = 'clb unknown'
+    #                 cb_st = 'unknown'
+    #             else:
+    #                 cb_group = '-'
+    # f.close()
+    #
+    # clb_mlst_header = get_clb_mlst_header()
+    # assert len(clb_mlst_header) == len(cb_st_detail)
+    #
+    # results = {'Colibactin': cb_group,
+    #            'CbST': cb_st}
+    # results.update(dict(zip(get_clb_mlst_header(), cb_st_detail)))
+    # return results
 
-    clb_mlst_header = get_clb_mlst_header()
-    assert len(clb_mlst_header) == len(cb_st_detail)
 
-    results = {'Colibactin': cb_group,
-               'CbST': cb_st}
-    results.update(dict(zip(get_clb_mlst_header(), cb_st_detail)))
-    return results
+def get_iuc_mlst_results(mlstblast, data_folder, contigs):
+    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'iuc_alleles.fasta',
+                                         'AbST_profiles.txt', 'Aerobactin', 'AbST',
+                                         'iuc unknown', 4, get_iuc_mlst_header)
 
 
-def get_other_vir_results(clusterblast, data_folder, contigs):
-    aerobactin, salmochelin, hypermucoidy = '-', '-', '-'
+def get_iro_mlst_results(mlstblast, data_folder, contigs):
+    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'iro_alleles.fasta',
+                                         'SmST_profiles.txt', 'Salmochelin', 'SmST',
+                                         'iro unknown', 3, get_iro_mlst_header)
+
+
+def get_hypermucoidy_results(clusterblast, data_folder, contigs):
+    hypermucoidy = '-'
     f = os.popen('python ' + clusterblast +
-                 ' -s ' + data_folder + '/other_vir_clusters.fasta' +
+                 ' -s ' + data_folder + '/hypermucoidy.fasta' +
                  ' ' + contigs)
     for line in f:
         fields = line.rstrip().split('\t')
-        if fields[1] != 'aerobactin':  # skip header
-            aerobactin = fields[1]
-            salmochelin = fields[2]
+        if fields[1] != 'hypermucoidy':  # skip header
             hypermucoidy = fields[3]
     f.close()
 
-    return {'aerobactin': aerobactin,
-            'salmochelin': salmochelin,
-            'hypermucoidy': hypermucoidy}
+    return {'hypermucoidy': hypermucoidy}
 
 
 def get_wzi_and_k_locus_results(mlstblast, data_folder, contigs):
@@ -634,8 +699,8 @@ def get_summary_results(results, res_headers):
     res_hits = [results[x] for x in res_headers]
     return {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
                                                        results['Colibactin'],
-                                                       results['aerobactin'],
-                                                       results['salmochelin'],
+                                                       results['Aerobactin'],
+                                                       results['Salmochelin'],
                                                        results['hypermucoidy'])),
             'resistance_score': str(get_resistance_score(res_headers, res_hits)),
             'num_resistance_classes': str(get_resistance_class_count(res_headers, res_hits)),

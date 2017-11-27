@@ -22,7 +22,6 @@ from optparse import OptionParser
 
 
 def main():
-
     usage = "usage: %prog [options]"
     parser = OptionParser(usage=usage)
 
@@ -34,6 +33,7 @@ def main():
     parser.add_option("-c", "--mincov", action="store", dest="mincov", default="80",
                       help="Minimum percent coverage (default 80)")
     return parser.parse_args()
+
 
 if __name__ == "__main__":
 
@@ -56,11 +56,11 @@ if __name__ == "__main__":
         if not os.path.exists(options.seqs + ".nin"):
             with open(os.devnull, 'w') as devnull:
                 subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
-                                      stdout = devnull, shell=True)
+                                      stdout=devnull, shell=True)
         (fileName, ext) = os.path.splitext(fileName)
 
     # print header
-    print "\t".join(["strain", "aerobactin", "salmochelin", "hypermucoidy"])
+    print "\t".join(["strain", "hypermucoidy"])
 
     for contigs in args:
         (_, fileName) = os.path.split(contigs)
@@ -79,41 +79,15 @@ if __name__ == "__main__":
             fields = line.rstrip().split("\t")
             (gene_id, pcid, length, allele_length, score) = (fields[0], float(fields[1]), float(fields[2]),
                                                              float(fields[3]), float(fields[4]))
-            if gene_id.startswith("iro"):
-                if (allele_length / length * 100) > float(options.mincov):
-                    iro.append(gene_id[3])  # 4th character is the gene letter
-            if gene_id.startswith("iuc"):
-                if (allele_length / length * 100) > float(options.mincov):
-                    iuc.append(gene_id[3])  # 4th character is the gene letter
             if gene_id.startswith("rmpA"):
                 if (allele_length / length * 100) > float(options.mincov):
                     rmpA.append(gene_id)
         f.close()
 
-        iro.sort()
-        iuc.sort()
         rmpA.sort()
-
-        iro_string = "-"
-        if len(iro) > 0:
-            (iro, iro_dup) = check_dup(iro)
-            iro_string = "iro" + "".join(iro)
-            if len(iro_dup) > 0:
-                iro_dup = list(set(iro_dup))  # converting to set removes duplicates
-                iro_dup.sort()
-                iro_string += ";iro" + "".join(iro_dup)
-
-        iuc_string = "-"
-        if len(iuc) > 0:
-            (iuc, iuc_dup) = check_dup(iuc)
-            iuc_string = "iuc" + "".join(iuc)
-            if len(iuc_dup) > 0:
-                iuc_dup = list(set(iuc_dup))  # converting to set removes duplicates
-                iuc_dup.sort()
-                iuc_string += ";iuc" + "".join(iuc_dup)
 
         rmpA_string = "-"
         if len(rmpA) > 0:
             rmpA_string = ";".join(rmpA)
 
-        print "\t".join([name, iuc_string, iro_string, rmpA_string])
+        print "\t".join([name, rmpA_string])
