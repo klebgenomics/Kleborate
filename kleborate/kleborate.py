@@ -630,7 +630,7 @@ def get_hypermucoidy_results(clusterblast, data_folder, contigs):
     for line in f:
         fields = line.rstrip().split('\t')
         if fields[1] != 'hypermucoidy':  # skip header
-            hypermucoidy = fields[3]
+            hypermucoidy = fields[1]
     f.close()
 
     return {'hypermucoidy': hypermucoidy}
