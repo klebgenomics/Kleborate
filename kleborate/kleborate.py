@@ -547,7 +547,7 @@ def get_clb_mlst_results(mlstblast, data_folder, contigs):
 def get_iuc_mlst_results(mlstblast, data_folder, contigs):
     return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'iuc_alleles.fasta',
                                          'AbST_profiles.txt', 'Aerobactin', 'AbST',
-                                         'iuc unknown', 4, get_iuc_mlst_header)
+                                         'iuc unknown', 3, get_iuc_mlst_header)
 
 
 def get_iro_mlst_results(mlstblast, data_folder, contigs):
