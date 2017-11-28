@@ -537,77 +537,11 @@ def get_ybt_mlst_results(mlstblast, data_folder, contigs):
                                          'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
                                          'ybt unknown', 8, get_ybt_mlst_header)
 
-    # f = os.popen('python ' + mlstblast +
-    #              ' -s ' + data_folder + '/ybt_alleles.fasta' +
-    #              ' -d ' + data_folder + '/YbST_profiles.txt' +
-    #              ' -i yes' +
-    #              ' --maxmissing 3' +
-    #              ' ' + contigs)
-    # yb_st = ''
-    # yb_group = ''
-    # yb_st_detail = []
-    # for line in f:
-    #     fields = line.rstrip().split('\t')
-    #     if fields[2] != 'ST':  # skip header
-    #         strain, yb_st, yb_group = fields[0], fields[2], fields[1]
-    #         yb_st_detail = fields[3:]
-    #
-    #         # If no ybt group was found but at least 8 out of the 11 ybt genes are present,
-    #         # then this strain is labelled as 'ybt unknown'.
-    #         if yb_group == '':
-    #             if sum(0 if x == '-' else 1 for x in yb_st_detail) >= 8:
-    #                 yb_group = 'ybt unknown'
-    #                 yb_st = 'unknown'
-    #             else:
-    #                 yb_group = '-'
-    # f.close()
-    #
-    # ybt_mlst_header = get_ybt_mlst_header()
-    # assert len(ybt_mlst_header) == len(yb_st_detail)
-    #
-    # results = {'Yersiniabactin': yb_group,
-    #            'YbST': yb_st}
-    # results.update(dict(zip(get_ybt_mlst_header(), yb_st_detail)))
-    # return results
-
 
 def get_clb_mlst_results(mlstblast, data_folder, contigs):
     return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'clb_alleles.fasta',
                                          'CbST_profiles.txt', 'Colibactin', 'CbST',
                                          'clb unknown', 12, get_clb_mlst_header)
-
-    # f = os.popen('python ' + mlstblast +
-    #              ' -s ' + data_folder + '/clb_alleles.fasta' +
-    #              ' -d ' + data_folder + '/CbST_profiles.txt' +
-    #              ' -i yes' +
-    #              ' --maxmissing 3' +
-    #              ' ' + contigs)
-    # cb_st = ''
-    # cb_group = ''
-    # cb_st_detail = []
-    # for line in f:
-    #     fields = line.rstrip().split('\t')
-    #     if fields[2] != 'ST':  # skip header
-    #         strain, cb_st, cb_group = fields[0], fields[2], fields[1]
-    #         cb_st_detail = fields[3:]
-    #
-    #         # If no clb group was found but at least 12 out of the 15 clb genes are present,
-    #         # then this strain is labelled as 'clb unknown'.
-    #         if cb_group == '':
-    #             if sum(0 if x == '-' else 1 for x in cb_st_detail) >= 12:
-    #                 cb_group = 'clb unknown'
-    #                 cb_st = 'unknown'
-    #             else:
-    #                 cb_group = '-'
-    # f.close()
-    #
-    # clb_mlst_header = get_clb_mlst_header()
-    # assert len(clb_mlst_header) == len(cb_st_detail)
-    #
-    # results = {'Colibactin': cb_group,
-    #            'CbST': cb_st}
-    # results.update(dict(zip(get_clb_mlst_header(), cb_st_detail)))
-    # return results
 
 
 def get_iuc_mlst_results(mlstblast, data_folder, contigs):
@@ -690,9 +624,10 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
     kaptive_results = ['', '', '', '', '']
     if (args.kaptive_k and locus_type == 'K') or (args.kaptive_o and locus_type == 'O'):
         kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, args.kaptive_k_outfile)
-
-    assert len(headers) == len(kaptive_results)
-    return dict(zip(headers, kaptive_results))
+        assert len(headers) == len(kaptive_results)
+        return dict(zip(headers, kaptive_results))
+    else:
+        return {}
 
 
 def get_summary_results(results, res_headers):
