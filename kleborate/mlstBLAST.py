@@ -99,33 +99,34 @@ if __name__ == "__main__":
     max_st = 0  # changeable variable holding the highest current ST, incremented when novel combinations are encountered
     header = []
     info_title = "info"
-    f = file(options.database, "r")
-    for line in f:
-        fields = line.rstrip().split("\t")
-        if len(header)==0:
-            header = fields
-            header.pop(0)  # remove st label
-            if options.info == "yes":
-                info_title = header.pop() # remove info label
-        else:
-            st = fields.pop(0)
-            if options.info == "yes":
-                info = fields.pop()
-            sts[",".join(fields)] = st
-            if int(st) > max_st:
-                max_st = int(st)
-            if options.info == "yes":
-                st_info[st] = info
-    f.close()
+    with open(options.database, "r") as f:
+        for line in f:
+            fields = line.rstrip().split("\t")
+            if len(header)==0:
+                header = fields
+                header.pop(0)  # remove st label
+                if options.info == "yes":
+                    info_title = header.pop() # remove info label
+            else:
+                st = fields.pop(0)
+                if options.info == "yes":
+                    info = fields.pop()
+                else:
+                    info = ''
+                sts[",".join(fields)] = st
+                if int(st) > max_st:
+                    max_st = int(st)
+                if options.info == "yes":
+                    st_info[st] = info
 
     best_match = collections.defaultdict(dict)  # key1 = strain, key2 = locus, value = best match (clean for ST, annotated)
     perfect_match = collections.defaultdict(dict)  # key1 = strain, key2 = locus, value = perfect match if available
 
     # print header
     if options.info == "yes":
-        print "\t".join(["strain", info_title, "ST"] + header)
+        print("\t".join(["strain", info_title, "ST"] + header))
     else:
-        print "\t".join(["strain", "ST"] + header)
+        print("\t".join(["strain", "ST"] + header))
 
     for contigs in args:
         (_, fileName) = os.path.split(contigs)
@@ -208,6 +209,6 @@ if __name__ == "__main__":
             bst += "-" + str(mismatch_loci_including_SNPs) + "LV"
 
         if options.info == "yes":
-            print "\t".join([name, info_final, bst] + best_st_annotated)
+            print("\t".join([name, info_final, bst] + best_st_annotated))
         else:
-            print "\t".join([name, bst] + best_st_annotated)
+            print("\t".join([name, bst] + best_st_annotated))

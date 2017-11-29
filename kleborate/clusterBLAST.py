@@ -60,7 +60,7 @@ if __name__ == "__main__":
         (fileName, ext) = os.path.splitext(fileName)
 
     # print header
-    print "\t".join(["strain", "hypermucoidy"])
+    print("\t".join(["strain", "hypermucoidy"]))
 
     for contigs in args:
         (_, fileName) = os.path.split(contigs)
@@ -90,4 +90,4 @@ if __name__ == "__main__":
         if len(rmpA) > 0:
             rmpA_string = ";".join(rmpA)
 
-        print "\t".join([name, rmpA_string])
+        print("\t".join([name, rmpA_string]))

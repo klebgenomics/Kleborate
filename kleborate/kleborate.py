@@ -643,14 +643,14 @@ def get_summary_results(results, res_headers):
 
 
 def output_headers(stdout_header, full_header, outfile):
-    print '\t'.join(stdout_header)
+    print('\t'.join(stdout_header))
     with open(outfile, 'wt') as o:
         o.write('\t'.join(full_header))
         o.write('\n')
 
 
 def output_results(stdout_header, full_header, outfile, results):
-    print '\t'.join([results[x] for x in stdout_header])
+    print('\t'.join([results[x] for x in stdout_header]))
     with open(outfile, 'at') as o:
         o.write('\t'.join([results[x] for x in full_header]))
         o.write('\n')
