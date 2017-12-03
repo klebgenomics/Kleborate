@@ -600,6 +600,7 @@ def get_resistance_results(resblast, data_folder, contigs, args, res_headers):
                      ' -s ' + data_folder + '/ARGannot_r2.fasta' +
                      ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv' +
                      ' -q ' + data_folder + '/QRDR_120.aa' +
+                     ' -r ' + data_folder + '/MgrB_and_PmrB.aa' +
                      ' ' + contigs)
         for line in f:
             fields = line.rstrip().split('\t')
