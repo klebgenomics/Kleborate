@@ -87,5 +87,5 @@ class TestIro(unittest.TestCase):
         self.assertEqual(results['iroC'], '1')
         self.assertEqual(results['iroD'], '-')
         self.assertEqual(results['iroN'], '-')
-        self.assertEqual(results['Salmochelin'], 'iro unknown')
+        self.assertEqual(results['Salmochelin'], '-')
         self.assertEqual(results['SmST'], '0')
