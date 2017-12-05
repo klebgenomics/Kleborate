@@ -68,3 +68,18 @@ class TestMlst(unittest.TestCase):
         self.assertEqual(results['rpoB'], '4')
         self.assertEqual(results['tonB'], '12')
         self.assertEqual(results['ST'], 'ST23-1LV')
+
+    def test_unknown_ST(self):
+        """
+        This test has exact matches for alleles but in an unknown ST combination
+        """
+        results = get_chromosome_mlst_results(self.mlstblast, self.data_folder,
+                                              'test/test_mlst_3.fasta')
+        self.assertEqual(results['gapA'], '44')
+        self.assertEqual(results['infB'], '56')
+        self.assertEqual(results['mdh'], '34')
+        self.assertEqual(results['pgi'], '19')
+        self.assertEqual(results['phoE'], '30')
+        self.assertEqual(results['rpoB'], '53')
+        self.assertEqual(results['tonB'], '55')
+        self.assertEqual(results['ST'], '0')
