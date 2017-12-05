@@ -57,14 +57,14 @@ if __name__ == "__main__":
         if not os.path.exists(options.seqs + ".nin"):
             with open(os.devnull, 'w') as devnull:
                 subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
-                                      stdout = devnull, shell=True)
+                                      stdout=devnull, shell=True)
         (fileName, ext) = os.path.splitext(fileName)
 
     def get_closest_locus_variant(query, annotated_query, sts):
         annotated_query = list(annotated_query)  # copy the list so we don't change the original
         closest = []
-        closest_alleles = {} # key = st, value = list
-        min_dist = len(query) # number mismatching loci, ignoring SNPs
+        closest_alleles = {}   # key = st, value = list
+        min_dist = len(query)  # number mismatching loci, ignoring SNPs
 
         for index, item in enumerate(query):
             if item == "-":
@@ -80,7 +80,7 @@ if __name__ == "__main__":
                 # reset
                 closest = [int(sts[st])]
                 closest_alleles[sts[st]] = st
-                min_dist = d # distance from closest ST, ignoring SNPs (*)
+                min_dist = d  # distance from closest ST, ignoring SNPs (*)
 
         closest_st = str(min(closest))
 
@@ -118,6 +118,10 @@ if __name__ == "__main__":
                     max_st = int(st)
                 if options.info == "yes":
                     st_info[st] = info
+
+    # In order to call an ST, there needs to be an exact match for half (rounded down) of the
+    # relevant alleles.
+    required_exact_matches = int(len(header) / 2)
 
     best_match = collections.defaultdict(dict)  # key1 = strain, key2 = locus, value = best match (clean for ST, annotated)
     perfect_match = collections.defaultdict(dict)  # key1 = strain, key2 = locus, value = perfect match if available
@@ -168,8 +172,7 @@ if __name__ == "__main__":
         best_st = []
         best_st_annotated = []
 
-        mismatch_loci = 0
-        mismatch_loci_including_SNPs = 0
+        mismatch_loci, mismatch_loci_including_SNPs = 0, 0
 
         for locus in header:
             if locus in best_allele:
@@ -194,14 +197,18 @@ if __name__ == "__main__":
                 bst = sts[bst]  # note may have mismatching alleles due to SNPs, this will be recorded in mismatch_loci_including_SNPs
             else:
                 # determine closest ST
-                (bst, mismatch_loci, mismatch_loci_including_SNPs) = get_closest_locus_variant(best_st,
-                                                                                               best_st_annotated, sts)
+                bst, mismatch_loci, mismatch_loci_including_SNPs = \
+                    get_closest_locus_variant(best_st, best_st_annotated, sts)
         else:
             bst = "0"
 
+        exact_matches = len(best_st) - mismatch_loci_including_SNPs
+        if exact_matches < required_exact_matches:
+            bst = "0"
+
         # pull info column
+        info_final = ""
         if options.info == "yes":
-            info_final = ""
             if bst in st_info:
                 info_final = st_info[bst]
 

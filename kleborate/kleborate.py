@@ -518,7 +518,7 @@ def get_virulence_cluster_results(mlstblast, data_folder, contigs, alleles_fasta
             if group == '':
                 if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
                     group = unknown_group_name
-                    st = 'unknown'
+                    st = '0'
                 else:
                     group = '-'
     f.close()
