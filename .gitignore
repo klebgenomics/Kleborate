@@ -95,11 +95,3 @@ ENV/
 # PyCharm stuff
 .idea/
 
-# BLAST databases
-*.nin
-*.nhr
-*.nsq
-*.pin
-*.phr
-*.psq
-
