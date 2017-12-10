@@ -27,7 +27,7 @@ setup(name='Kleborate',
       author='Kathryn Holt',
       author_email='',
       license='GPLv2',
-      packages=['kleborate'],
+      packages=['kleborate','kaptive'],
       install_requires=[
       ],
       test_suite='nose.collector',
