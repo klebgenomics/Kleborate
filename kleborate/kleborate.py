@@ -139,9 +139,9 @@ def check_inputs_and_programs(args):
             header, seq = record
             if len(seq) == 0:
                 sys.exit('Error: invalid FASTA file (contains a zero-length sequence): ' + assembly)
-    if not distutils.spawn.find_executable('blastn'):
-        sys.exit('Error: could not find makeblastdb')
     if not distutils.spawn.find_executable('makeblastdb'):
+        sys.exit('Error: could not find makeblastdb')
+    if not distutils.spawn.find_executable('blastn'):
         sys.exit('Error: could not find blastn')
     if args.resistance:
         if not distutils.spawn.find_executable('blastx'):
