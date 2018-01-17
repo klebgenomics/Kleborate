@@ -2,8 +2,8 @@
 """
 Convenience wrapper for running Kleborate directly from source tree.
 
-Copyright 2017 Kat Holt
-Copyright 2017 Ryan Wick (rrwick@gmail.com)
+Copyright 2018 Kat Holt
+Copyright 2018 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
