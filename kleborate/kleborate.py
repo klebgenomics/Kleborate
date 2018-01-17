@@ -99,7 +99,8 @@ def parse_arguments():
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                            help='Show this help message and exit')
-    help_args.add_argument('--version', action='version', version=__version__)
+    help_args.add_argument('--version', action='version', version=__version__,
+                           help="Show program's version number and exit")
 
     # If no arguments were used, print the entire help (argparse default is to just give an error
     # like '-a is required').
@@ -241,9 +242,9 @@ def get_virulence_score(yb_group, cb_group, aerobactin, salmochelin, hypermucoid
 def get_resistance_score(res_headers, res_hits):
     """
     Three possible resistance scores:
-      * 0 = no ESBL, no carbepenemase
-      * 1 = ESBL, no carbepenemase
-      * 2 = Carbepenemase (whether or not ESBL is present)
+      * 0 = no ESBL, no carbapenemase
+      * 1 = ESBL, no carbapenemase
+      * 2 = Carbapenemase (whether or not ESBL is present)
     """
     if not res_headers:
         return '-'
