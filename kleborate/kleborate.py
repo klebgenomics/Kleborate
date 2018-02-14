@@ -222,42 +222,60 @@ def get_output_headers(args, resblast, data_folder):
     return stdout_header, full_header, res_headers
 
 
-def get_virulence_score(yb_group, cb_group, aerobactin, salmochelin, hypermucoidy):
+def get_virulence_score(yersiniabactin, colibactin, aerobactin):
     """
-    The yersiniabactin locus counts as 1 and having any of the others counts as 2.
-    This gives 4 possible scores:
-      * 0 = no virulence
-      * 1 = just yersiniabactin
-      * 2 = one or more non-yersiniabactin
-      * 3 = yersiniabactin and one or more non-yersiniabactin
+    Six possible virulence scores:
+      * 0 = no virulence (no yersiniabactin, colibactin or aerobactin)
+      * 1 = just yersiniabactin (no colibactin or aerobactin)
+      * 2 = colibactin but no aerobactin (regardless of yersiniabactin, which is probably present)
+      * 3 = just aerobactin (no yersiniabactin or colibactin)
+      * 4 = aerobactin and yersiniabactin (but not colibactin)
+      * 5 = colibactin and aerobactin (regardless of yersiniabactin, which is probably present)
     """
-    score = 0
-    if yb_group != '-':
-        score += 1
-    if cb_group != '-' or aerobactin != '-' or salmochelin != '-' or hypermucoidy != '-':
-        score += 2
-    return score
+    has_ybt = (yersiniabactin != '-')
+    has_aero = (aerobactin != '-')
+    has_coli = (colibactin != '-')
+
+    if has_coli and has_aero:
+        return 5
+    elif has_aero and has_ybt:
+        return 4
+    elif has_aero:
+        return 3
+    elif has_coli:
+        return 2
+    elif has_ybt:
+        return 1
+    else:
+        return 0
 
 
 def get_resistance_score(res_headers, res_hits):
     """
-    Three possible resistance scores:
-      * 0 = no ESBL, no carbapenemase
-      * 1 = ESBL, no carbapenemase
-      * 2 = Carbapenemase (whether or not ESBL is present)
+    Four possible resistance scores:
+      * 0 = no ESBL, no carbapenemase (regardless of colistin resistance)
+      * 1 = ESBL, no carbapenemase (regardless of colistin resistance)
+      * 2 = Carbapenemase without colistin resistance
+      * 3 = Carbapenemase and colistin resistance
     """
     if not res_headers:
         return '-'
 
-    # Look for a hit in any 'ESBL' column (e.g. 'Bla_ESBL' or 'Bla_ESBL_inhR')
+    # Look for a hit in any 'ESBL' column (e.g. 'Bla_ESBL' or 'Bla_ESBL_inhR').
     esbl_header_indices = [i for i, h in enumerate(res_headers) if 'esbl' in h.lower()]
     has_esbl = any(res_hits[i] != '-' for i in esbl_header_indices)
 
-    # Look for a hit in any 'Carb' column (e.g. 'Bla_Carb')
+    # Look for a hit in any 'Carb' column (e.g. 'Bla_Carb').
     carb_header_indices = [i for i, h in enumerate(res_headers) if 'carb' in h.lower()]
     has_carb = any(res_hits[i] != '-' for i in carb_header_indices)
 
-    if has_carb:
+    # Look for a hit in the 'Col' column.
+    col_header_indices = [i for i, h in enumerate(res_headers) if h.lower() == 'col']
+    has_col = any(res_hits[i] != '-' for i in col_header_indices)
+
+    if has_carb and has_col:
+        return 3
+    elif has_carb:
         return 2
     elif has_esbl:
         return 1
@@ -636,9 +654,7 @@ def get_summary_results(results, res_headers):
     res_hits = [results[x] for x in res_headers]
     return {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
                                                        results['Colibactin'],
-                                                       results['Aerobactin'],
-                                                       results['Salmochelin'],
-                                                       results['hypermucoidy'])),
+                                                       results['Aerobactin'])),
             'resistance_score': str(get_resistance_score(res_headers, res_hits)),
             'num_resistance_classes': str(get_resistance_class_count(res_headers, res_hits)),
             'num_resistance_genes': str(get_resistance_gene_count(res_headers, res_hits))}
