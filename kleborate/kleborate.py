@@ -17,6 +17,7 @@ import sys
 import gzip
 import argparse
 import subprocess
+import random
 import distutils.spawn
 from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stats
@@ -366,8 +367,9 @@ def get_kaptive_paths():
     return kaptive_py, kaptive_k_db, kaptive_o_db
 
 
-def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
-    kaptive_prefix = 'temp_kaptive_results_' + str(os.getpid())
+def run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, output_file):
+    kaptive_prefix = 'temp_kaptive_{}_results_{}_{}'.format(locus_type, os.getpid(),
+                                                            random.randint(0, 999999))
     kaptive_table = kaptive_prefix + '_table.txt'
 
     p = subprocess.Popen('python ' + kaptive_py +
@@ -641,9 +643,12 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
     if locus_type == 'O':
         headers = [x.replace('K_locus', 'O_locus') for x in headers]
 
-    kaptive_results = ['', '', '', '', '']
     if (args.kaptive_k and locus_type == 'K') or (args.kaptive_o and locus_type == 'O'):
-        kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, args.kaptive_k_outfile)
+        if locus_type == 'K':
+            outfile = args.kaptive_k_outfile
+        else:  # locus_type == 'O':
+            outfile = args.kaptive_o_outfile
+        kaptive_results = run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, outfile)
         assert len(headers) == len(kaptive_results)
         return dict(zip(headers, kaptive_results))
     else:
