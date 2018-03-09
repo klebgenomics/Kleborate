@@ -97,3 +97,10 @@ ENV/
 
 gh-md-toc
 
+# Blast indices
+*.nhr
+*.nin
+*.nsq
+*.phr
+*.pin
+*.psq
