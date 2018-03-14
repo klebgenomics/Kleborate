@@ -420,13 +420,7 @@ def run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, output_file):
         if 'Missing expected genes:' in line:
             missing_gene_lines = True
 
-    if not output_file:
-        try:
-            os.remove(kaptive_table)
-        except OSError:
-            pass
-
-    else:  # if we are saving Kaptive results to file...
+    if output_file:  # if we are saving Kaptive results to file...
         with open(kaptive_table, 'rt') as f:
             kaptive_table_lines = f.readlines()
         assert len(kaptive_table_lines) == 2
@@ -435,6 +429,11 @@ def run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, output_file):
                 f.write(kaptive_table_lines[0])  # write header line
         with open(output_file, 'at') as f:
             f.write(kaptive_table_lines[1])      # write data line
+
+    try:
+        os.remove(kaptive_table)
+    except OSError:
+        pass
 
     if locus is None or confidence is None or problems is None or identity is None:
         sys.exit('Error: Kaptive failed to produce the expected output')
