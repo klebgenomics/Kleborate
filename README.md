@@ -152,7 +152,9 @@ Some notes on Kleborate's MLST calls:
 
 ### Virulence loci
 
-We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2499 _Kp_ (see [this preprint](http://biorxiv.org/content/early/2017/01/04/098178)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICE<i>Kp</i> (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Our analyses reveal hundreds of ICE<i>Kp</i> transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for identifying virulence loci from genome data. 
+We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Kp_ (see [this preprint](http://biorxiv.org/content/early/2017/01/04/098178)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICE<i>Kp</i> (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Three of these 17 lineages were associated with three distinct lineages of colibactin. Our analyses reveal hundreds of ICE<i>Kp</i> transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for identifying virulence loci from genome data. 
+
+We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci, both of which are often mobilised together by plasmids, and occasionally found on the chromosome (_iro_ with _ybt_ mobilised by ICE<i>Kp1</i> and a chromosomal _iuc_ locus associated with ST67 _Kp_ subsp _rhinoscleromatis_. We developed a MLST-style typing scheme for these loci, and identified five _iro_ and six _iuc_ lineages. Some of these lineages (_iuc3B_ and _iuc4_) associated with novel plasmids that have not yet been previously described in _Kp_, and plasmids which were homologous to _E. coli_ antimicrobial resistance plasmids with _iuc1_ and _iro1_. The most common represented plasmid lineages were those related to the virulence plasmid pK2044 from NTUH-K2044 (_iuc2_ and _iro3_) and Kp52.145 plasmid II from Kp52.145 (_iuc3B_ and _iro4_). ICE<i>Kp1</i> was associated with _iro5_ and _Kp_ subsp _rhinoscleromatis_ with _iuc5_. 
 
 Kleborate examines four different virulence loci in _Klebsiella_: yersiniabactin (_ybt_), colibactin (_clb_), aerobactin (_iuc_) and salmochelin (_iro_).
 * For each virulence locus, Kleborate will call the sequence type using the same logic as the MLST described above.
@@ -208,17 +210,20 @@ All resistance results (both for the gene screen and mutation screen) are groupe
 
 Kleborate outputs a simple categorical virulence score, and if resistance screening is enabled, an antimicrobial resistance score as well. These scores provide a rough categorisation of the strains to facilitate monitoring resistance-virulence convergence:
 
-* The virulence score ranges from 0 to 3:
+* The virulence score ranges from 0 to 5:
   * 0 = no virulence loci
-  * 1 = only yersiniabactin
-  * 2 = one or more virulence loci other than yersiniabactin (colibactin, aerobactin, salmochelin, hypermucoidy or any combination of these)
-  * 3 = yersiniabactin and one or more other virulence loci
-* The resistance score ranges from 0 to 2:
-  * 0 = no ESBL, no carbapenemase
-  * 1 = ESBL, no carbapenemase
-  * 2 = Carbapenemase (whether or not ESBL is present)
+  * 1 = yersiniabactin only
+  * 2 = yersiniabactin and colibactin, or colibactin only 
+  * 3 = aerobactin and/or salmochelin only (without yersiniabactin or colibactin)
+  * 4 = aerobactin and/or salmochelin with yersiniabactin (without colibactin)
+  * 5 = yersiniabactin, colibactin and aerobactin and/or salmochelin
+* The resistance score ranges from 0 to 3:
+  * 0 = no ESBL, no carbapenemase (regardless of colistin resistance)
+  * 1 = ESBL, no carbapenemase (regardless of colistin resistance)
+  * 2 = Carbapenemase without colistin resistance (regardless of ESBL)
+  * 3 = Carbapenemase with colistin resistance (regardless of ESBL)
 
-When resistance screening is enabled, Kleborate also quantifies how many resistance genes are present and how many resistance classes have at least one gene. Since on resistance class can have multiple genes (as is often the case for the intrinsic genes in the Bla class), the gene count is typically higher than the class count.
+When resistance screening is enabled, Kleborate also quantifies how many resistance genes are present and how many resistance classes have at least one gene. Since a resistance class can have multiple genes (as is often the case for the intrinsic genes in the Bla class), the gene count is typically higher than the class count.
 
 
 
