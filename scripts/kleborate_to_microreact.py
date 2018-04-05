@@ -16,6 +16,7 @@ not, see <http://www.gnu.org/licenses/>.
 import sys
 import argparse
 import collections
+import pandas as pd
 from Bio import Phylo
 
 
@@ -41,13 +42,15 @@ def main():
     check_for_unique_names(name_subs)
     save_tree_with_new_names(args.tree_in, args.tree_out, name_subs)
     colours = get_colours(args.kleborate_in)
+    autocolour_columns = get_autocolour_columns(args.kleborate_in)
+
     csv_lines = []
     with open(args.kleborate_in, 'rt') as kleborate_results:
         header, columns = None, {}
         for line in kleborate_results:
             line = line.rstrip('\n')
             if header is None:
-                header = get_header(line, columns)
+                header = get_header(line, columns, autocolour_columns)
                 line_parts = header
             else:
                 line_parts = get_data(line, columns, colours, name_subs)
@@ -58,16 +61,44 @@ def main():
             output_csv.write(line)
             output_csv.write('\n')
 
+    print()
+
 
 def get_colours(kleborate_in):
+    table = pd.read_table(kleborate_in)
+    try:
+        max_classes = max(table['num_resistance_classes'])
+    except (KeyError, ValueError):
+        max_classes = 10
+    try:
+        max_genes = max(table['num_resistance_genes'])
+    except (KeyError, ValueError):
+        max_genes = 20
     colours = {'vir_score': colour_range("#CCCCCC", "#1414FF", 4),
                'res_score': colour_range("#CCCCCC", "#FF1414", 3),
-               'res_classes': colour_range("#CCCCCC", "#FF1414", 11),   # TO DO: better determination of top count
-               'res_genes': colour_range("#CCCCCC", "#FF1414", 18)}     # TO DO: better determination of top count
+               'res_classes': colour_range("#CCCCCC", "#FF1414", max_classes),
+               'res_genes': colour_range("#CCCCCC", "#FF1414", max_genes)}
     return colours
 
 
-def get_header(line, columns):
+def get_autocolour_columns(kleborate_in):
+    autocolour_columns = []
+    table = pd.read_table(kleborate_in)
+    for col_name in ['species', 'ST', 'Yersiniabactin', 'YbST', 'Colibactin', 'CbST',
+                     'Aerobactin', 'AbST', 'Salmochelin', 'SmST', 'hypermucoidy', 'wzi',
+                     'K_locus', 'O_locus']:
+        try:
+            if len(set(table[col_name])) > 1:
+                autocolour_columns.append(col_name)
+        except KeyError:
+            pass
+    print()
+    print('Using "__autocolour" on the following columns:')
+    print('   ', ', '.join(autocolour_columns))
+    return set(autocolour_columns)
+
+
+def get_header(line, columns, autocolour_columns):
     header = line.split('\t')
     header[0] = 'id'  # Change 'strain' to 'id' for Microreact.
 
@@ -80,10 +111,14 @@ def get_header(line, columns):
     assert (columns['vir_score'] < columns['res_score']
             < columns['res_classes'] < columns['res_genes'])
 
-    header.insert(columns['vir_score'] + 1, 'virulence_score__colour')
-    header.insert(columns['res_score'] + 1, 'resistance_score__colour')
-    header.insert(columns['res_classes'] + 1, 'num_resistance_classes__colour')
     header.insert(columns['res_genes'] + 1, 'num_resistance_genes__colour')
+    header.insert(columns['res_classes'] + 1, 'num_resistance_classes__colour')
+    header.insert(columns['res_score'] + 1, 'resistance_score__colour')
+    header.insert(columns['vir_score'] + 1, 'virulence_score__colour')
+
+    for autocolour_column in autocolour_columns:
+        i = find_column_index(header, autocolour_column)
+        header[i] = autocolour_column + '__autocolour'
 
     return header
 
