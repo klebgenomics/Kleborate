@@ -74,10 +74,10 @@ def get_colours(kleborate_in):
         max_genes = max(table['num_resistance_genes'])
     except (KeyError, ValueError):
         max_genes = 20
-    colours = {'vir_score': colour_range("#CCCCCC", "#1414FF", 4),
-               'res_score': colour_range("#CCCCCC", "#FF1414", 3),
-               'res_classes': colour_range("#CCCCCC", "#FF1414", max_classes),
-               'res_genes': colour_range("#CCCCCC", "#FF1414", max_genes)}
+    colours = {'vir_score': colour_range("#CCCCCC", "#1414FF", 6),
+               'res_score': colour_range("#CCCCCC", "#FF1414", 4),
+               'res_classes': colour_range("#CCCCCC", "#FF1414", max_classes+1),
+               'res_genes': colour_range("#CCCCCC", "#FF1414", max_genes+1)}
     return colours
 
 
@@ -139,13 +139,10 @@ def get_data(line, columns, colours, name_subs):
     resistance_class_colour = colours['res_classes'][num_resistance_classes]
     resistance_gene_colour = colours['res_genes'][num_resistance_genes]
 
-    line_parts.insert(columns['vir_score'] + 1, virulence_score_colour)
-    line_parts.insert(columns['res_score'] + 1, resistance_score_colour)
-    line_parts.insert(columns['res_classes'] + 1, resistance_class_colour)
     line_parts.insert(columns['res_genes'] + 1, resistance_gene_colour)
-
-    # if '.' in line_parts[0]:
-    #     line_parts[0] = line_parts[0].replace('.', '_')
+    line_parts.insert(columns['res_classes'] + 1, resistance_class_colour)
+    line_parts.insert(columns['res_score'] + 1, resistance_score_colour)
+    line_parts.insert(columns['vir_score'] + 1, virulence_score_colour)
 
     return line_parts
 
