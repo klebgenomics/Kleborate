@@ -41,19 +41,19 @@ def main():
     name_subs = name_substitution(args.kleborate_in)
     check_for_unique_names(name_subs)
     save_tree_with_new_names(args.tree_in, args.tree_out, name_subs)
-    colours = get_colours(args.kleborate_in)
     autocolour_columns = get_autocolour_columns(args.kleborate_in)
 
     csv_lines = []
     with open(args.kleborate_in, 'rt') as kleborate_results:
-        header, columns = None, {}
+        original_header, new_header = None, None
         for line in kleborate_results:
             line = line.rstrip('\n')
-            if header is None:
-                header = get_header(line, columns, autocolour_columns)
-                line_parts = header
+            if original_header is None:
+                original_header = line.split('\t')
+                new_header = get_new_header(original_header, autocolour_columns)
+                line_parts = new_header
             else:
-                line_parts = get_data(line, columns, colours, name_subs)
+                line_parts = get_data(line, name_subs, original_header, new_header)
             csv_lines.append((','.join(line_parts)))
 
     with open(args.csv_out, 'wt') as output_csv:
@@ -64,29 +64,13 @@ def main():
     print()
 
 
-def get_colours(kleborate_in):
-    table = pd.read_table(kleborate_in)
-    try:
-        max_classes = max(table['num_resistance_classes'])
-    except (KeyError, ValueError):
-        max_classes = 10
-    try:
-        max_genes = max(table['num_resistance_genes'])
-    except (KeyError, ValueError):
-        max_genes = 20
-    colours = {'vir_score': colour_range("#CCCCCC", "#1414FF", 6),
-               'res_score': colour_range("#CCCCCC", "#FF1414", 4),
-               'res_classes': colour_range("#CCCCCC", "#FF1414", max_classes+1),
-               'res_genes': colour_range("#CCCCCC", "#FF1414", max_genes+1)}
-    return colours
 
 
 def get_autocolour_columns(kleborate_in):
     autocolour_columns = []
     table = pd.read_table(kleborate_in)
-    for col_name in ['species', 'ST', 'Yersiniabactin', 'YbST', 'Colibactin', 'CbST',
-                     'Aerobactin', 'AbST', 'Salmochelin', 'SmST', 'hypermucoidy', 'wzi',
-                     'K_locus', 'O_locus']:
+    for col_name in ['ST', 'YbST', 'CbST', 'AbST', 'SmST', 'hypermucoidy', 'wzi', 'K_locus',
+                     'O_locus']:
         try:
             if len(set(table[col_name])) > 1:
                 autocolour_columns.append(col_name)
@@ -98,53 +82,57 @@ def get_autocolour_columns(kleborate_in):
     return set(autocolour_columns)
 
 
-def get_header(line, columns, autocolour_columns):
-    header = line.split('\t')
-    header[0] = 'id'  # Change 'strain' to 'id' for Microreact.
-
-    # Add new colour columns.
-    columns['vir_score'] = find_column_index(header, 'virulence_score')
-    columns['res_score'] = find_column_index(header, 'resistance_score')
-    columns['res_classes'] = find_column_index(header, 'num_resistance_classes')
-    columns['res_genes'] = find_column_index(header, 'num_resistance_genes')
-
-    assert (columns['vir_score'] < columns['res_score']
-            < columns['res_classes'] < columns['res_genes'])
-
-    header.insert(columns['res_genes'] + 1, 'num_resistance_genes__colour')
-    header.insert(columns['res_classes'] + 1, 'num_resistance_classes__colour')
-    header.insert(columns['res_score'] + 1, 'resistance_score__colour')
-    header.insert(columns['vir_score'] + 1, 'virulence_score__colour')
-
+def get_new_header(original_header, autocolour_columns):
+    original_header[0] = 'id'  # Change 'strain' to 'id' for Microreact.
     for autocolour_column in autocolour_columns:
-        i = find_column_index(header, autocolour_column)
-        header[i] = autocolour_column + '__autocolour'
+        i = find_column_index(original_header, autocolour_column)
+        original_header[i] = autocolour_column + '__autocolour'
+
+    def insert_colour_column(header, col_name):
+        header.insert(find_column_index(header, col_name) + 1, col_name + '__colour')
+
+    header = list(original_header)
+    insert_colour_column(header, 'virulence_score')
+    insert_colour_column(header, 'resistance_score')
+    insert_colour_column(header, 'num_resistance_classes')
+    insert_colour_column(header, 'num_resistance_genes')
+    insert_colour_column(header, 'species')
+    insert_colour_column(header, 'Yersiniabactin')
+    insert_colour_column(header, 'Colibactin')
+    insert_colour_column(header, 'Aerobactin')
+    insert_colour_column(header, 'Salmochelin')
 
     return header
 
 
-def get_data(line, columns, colours, name_subs):
+def get_data(line, name_subs, original_header, new_header):
     line = line.replace(',', ';')
     line_parts = line.split('\t')
 
     line_parts[0] = name_subs[line_parts[0]]
 
-    virulence_score = int(line_parts[columns['vir_score']])
-    resistance_score = int(line_parts[columns['res_score']])
-    num_resistance_classes = int(line_parts[columns['res_classes']])
-    num_resistance_genes = int(line_parts[columns['res_genes']])
+    original_data = dict(zip(original_header, line_parts))
+    new_data = {h: '' for h in new_header}
 
-    virulence_score_colour = colours['vir_score'][virulence_score]
-    resistance_score_colour = colours['res_score'][resistance_score]
-    resistance_class_colour = colours['res_classes'][num_resistance_classes]
-    resistance_gene_colour = colours['res_genes'][num_resistance_genes]
+    for label, value in original_data.items():
+        new_data[label] = value
 
-    line_parts.insert(columns['res_genes'] + 1, resistance_gene_colour)
-    line_parts.insert(columns['res_classes'] + 1, resistance_class_colour)
-    line_parts.insert(columns['res_score'] + 1, resistance_score_colour)
-    line_parts.insert(columns['vir_score'] + 1, virulence_score_colour)
+    vir_score = int(original_data['virulence_score'])
+    res_score = int(original_data['resistance_score'])
+    res_classes = int(original_data['num_resistance_classes'])
+    res_genes = int(original_data['num_resistance_genes'])
 
-    return line_parts
+    new_data['virulence_score__colour'] = get_vir_score_colour(vir_score)
+    new_data['resistance_score__colour'] = get_res_score_colour(res_score)
+    new_data['num_resistance_classes__colour'] = get_res_classes_colour(res_classes)
+    new_data['num_resistance_genes__colour'] = get_res_genes_colour(res_genes)
+    new_data['species__colour'] = get_species_colour(original_data['species'])
+    new_data['Yersiniabactin__colour'] = get_vir_lineage_colour(original_data['Yersiniabactin'])
+    new_data['Colibactin__colour'] = get_vir_lineage_colour(original_data['Colibactin'])
+    new_data['Aerobactin__colour'] = get_vir_lineage_colour(original_data['Aerobactin'])
+    new_data['Salmochelin__colour'] = get_vir_lineage_colour(original_data['Salmochelin'])
+
+    return [new_data[h] for h in new_header]
 
 
 def name_substitution(kleborate_in):
@@ -227,6 +215,66 @@ def find_column_index(header, col_name):
         return header.index(col_name)
     except ValueError:
         sys.exit('Error: could not find ' + col_name + ' column in Kleborate')
+
+
+def get_vir_score_colour(vir_score):
+    try:
+        return ['#DEEBF7', '#9ECAE1', '#6BAED6', '#4292C6', '#2171B5', '#08306B'][vir_score]
+    except IndexError:
+        return '#BFBFBF'
+
+
+def get_res_score_colour(res_score):
+    try:
+        return ['#FCBBA1', '#FC9272', '#FB6A4A', '#BE413D'][res_score]
+    except IndexError:
+        return '#BFBFBF'
+
+
+def get_res_classes_colour(res_classes):
+    try:
+        return colour_range('#FCBBA1', '#BE413D', 11)[res_classes]
+    except IndexError:
+        return '#BE413D'
+
+
+def get_res_genes_colour(res_genes):
+    try:
+        return colour_range('#FCBBA1', '#BE413D', 21)[res_genes]
+    except IndexError:
+        return '#BE413D'
+
+
+def get_species_colour(species):
+    try:
+        return {'Klebsiella pneumoniae': '#875F9A',
+                'Klebsiella variicola': '#8CBDB2',
+                'Klebsiella quasivariicola': '#F0B663',
+                'Klebsiella quasipneumoniae subsp. quasipneumoniae': '#ED6060',
+                'Klebsiella quasipneumoniae subsp. similipneumoniae': '#EDA483'}[species]
+    except IndexError:
+        return '#BFBFBF'
+
+
+def get_vir_lineage_colour(vir_lineage):
+    vir_lineage_colours = {'ybt 1': '#B27F91', 'ybt 2': '#CDA12C', 'ybt 3': '#56A354',
+                           'ybt 4': '#F28FA2', 'ybt 5': '#DB7723', 'ybt 6': '#93539D',
+                           'ybt 7': '#3A85A8', 'ybt 8': '#7B75CC', 'ybt 9': '#D9C5EF',
+                           'ybt 10': '#449D72', 'ybt 11': '#EBD930', 'ybt 12': '#6AA3C6',
+                           'ybt 13': '#A39F93', 'ybt 14': '#93539D', 'ybt 15': '#EDC59A',
+                           'ybt 16': '#840639', 'ybt 17': '#E25065', 'clb 1': '#99BBE0',
+                           'clb 2A': '#5972AF', 'clb 2B': '#242F69', 'clb 3': '#242F69',
+                           'iro 1': '#B6D5EF', 'iro 2': '#DEC4E8', 'iro 3': '#E29771',
+                           'iro 4': '#A4A4EA', 'iro 5': '#E0AAAA', 'iuc 1': '#B6D5EF',
+                           'iuc 2': '#DEC4E8', 'iuc 2A': '#D8ABDD', 'iuc 3': '#C3EADB',
+                           'iuc 4': '#9ACCBC', 'iuc 5': '#E0AAAA'}
+    vir_lineage = vir_lineage.split(';')[0]
+    if vir_lineage in vir_lineage_colours:
+        return vir_lineage_colours[vir_lineage]
+    elif vir_lineage == '-':
+        return '#FFFFFF'
+    else:
+        return '#BFBFBF'
 
 
 if __name__ == '__main__':
