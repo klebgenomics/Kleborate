@@ -1,6 +1,32 @@
-# Supporting scripts for Kleborate
+## Table of contents
 
-This directory contains a few scripts which are used to prepare Kleborate's resistance gene database files: `ARGannot_r2.fasta` and `ARGannot_clustered80_r2.csv`. To generate these files yourself, follow the steps below.
+* [Using Kleborate with Microreact](#using-kleborate-with-microreact)
+* [Preparing Kleborate's resistance gene database files](#preparing-kleborates-resistance-gene-database-files)
+
+## Using Kleborate with Microreact
+
+If you have a phylogenetic tree of your samples, you can view Kleborate's results on the tree using [Microreact](https://microreact.org/).
+
+#### Requirements
+
+* Kleborate output table
+* Phylogenetic tree (Newick or Nexus format)
+
+Importantly, the sample names in the table and tree must match.
+
+#### Usage
+
+```
+kleborate_to_microreact.py --kleborate_in Kleborate_results.txt --tree_in tree.nwk --csv_out microreact.csv --tree_out microreact.nwk
+```
+
+If that command completes successfully, you can go to [Microreact's upload page](https://microreact.org/upload) and drag the `microreact.csv` and `microreact.nwk` files onto the page. Then explore the data with the available colours, labels and blocks!
+
+
+
+## Preparing Kleborate's resistance gene database files
+
+These instructions describe how to generate Kleborate's resistance gene database files: `ARGannot_r2.fasta` and `ARGannot_clustered80_r2.csv`.
 
 This is necessary for a couple reasons: 
 
@@ -9,14 +35,13 @@ This is necessary for a couple reasons:
 
 
 
-### Requirements
+#### Requirements
 
 * Python 3 (with BioPython)
 * [SRST2](https://github.com/katholt/srst2) (for the files in its data directory)
 
 
-
-### 1. Download beta-lactamase information
+#### 1. Download beta-lactamase information
 
 The first file you need is from the [Lahey Clinic beta-lactamase classifications](https://www.lahey.org/Studies/). While that site is no longer active, it still contains useful information that is not available elsewhere. Download the data table [here](ftp://ftp.ncbi.nlm.nih.gov/pathogen/betalactamases/Lahey.tab).
 
@@ -24,7 +49,7 @@ The second file you need is the GenBank from [BioProject PRJNA313047](https://ww
 
 
 
-### 2. Make the beta-lactamase information table
+#### 2. Make the beta-lactamase information table
 
 Run the `bla_info.py` script to create a table containing a description and class for each beta-lactamase allele. It takes as input the two files you just downloaded:
 ```
@@ -32,8 +57,7 @@ Run the `bla_info.py` script to create a table containing a description and clas
 ```
 
 
-
-### 3. Make the ARG-ANNOT csv file
+#### 3. Make the ARG-ANNOT csv file
 
 Kleborate uses the `ARGannot_r2.fasta` and `ARGannot_clustered80_r2.csv` files. These are included in [SRST2](https://github.com/katholt/srst2), but Kleborate needs slightly modified versions.
 
@@ -43,8 +67,7 @@ Run the `make_argannot_csv.py` to add the beta-lactamase information to SRST2's 
 ```
 
 
-
-### 4. Make the ARG-ANNOT fasta file
+#### 4. Make the ARG-ANNOT fasta file
 
 Now you need to make a fasta file corresponding to the csv file you just made. This removes alleles that aren't in the csv:
 ```
