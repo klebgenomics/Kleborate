@@ -56,6 +56,8 @@ def main():
                 line_parts = get_data(line, name_subs, original_header, new_header)
             csv_lines.append((','.join(line_parts)))
 
+    print()
+    print('Writing Microreact table to: {}'.format(args.csv_out))
     with open(args.csv_out, 'wt') as output_csv:
         for line in csv_lines:
             output_csv.write(line)
@@ -69,7 +71,7 @@ def main():
 def get_autocolour_columns(kleborate_in):
     autocolour_columns = []
     table = pd.read_table(kleborate_in)
-    for col_name in ['ST', 'YbST', 'CbST', 'AbST', 'SmST', 'hypermucoidy', 'wzi', 'K_locus',
+    for col_name in ['ST', 'YbST', 'CbST', 'AbST', 'SmST', 'wzi', 'K_locus',
                      'O_locus']:
         try:
             if len(set(table[col_name])) > 1:
@@ -88,19 +90,17 @@ def get_new_header(original_header, autocolour_columns):
         i = find_column_index(original_header, autocolour_column)
         original_header[i] = autocolour_column + '__autocolour'
 
-    def insert_colour_column(header, col_name):
-        header.insert(find_column_index(header, col_name) + 1, col_name + '__colour')
-
     header = list(original_header)
-    insert_colour_column(header, 'virulence_score')
-    insert_colour_column(header, 'resistance_score')
-    insert_colour_column(header, 'num_resistance_classes')
-    insert_colour_column(header, 'num_resistance_genes')
-    insert_colour_column(header, 'species')
-    insert_colour_column(header, 'Yersiniabactin')
-    insert_colour_column(header, 'Colibactin')
-    insert_colour_column(header, 'Aerobactin')
-    insert_colour_column(header, 'Salmochelin')
+    for col in ['virulence_score', 'resistance_score', 'num_resistance_classes',
+                'num_resistance_genes', 'species', 'Yersiniabactin', 'Colibactin', 'Aerobactin',
+                'Salmochelin', 'hypermucoidy']:
+        header.insert(find_column_index(header, col) + 1, col + '__colour')
+
+    for res in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul', 'Tet',
+                'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_broad',
+                'Bla_broad_inhR']:
+        header.insert(find_column_index(header, res) + 1, res + '__colour')
+        header.remove(res)
 
     return header
 
@@ -131,6 +131,11 @@ def get_data(line, name_subs, original_header, new_header):
     new_data['Colibactin__colour'] = get_vir_lineage_colour(original_data['Colibactin'])
     new_data['Aerobactin__colour'] = get_vir_lineage_colour(original_data['Aerobactin'])
     new_data['Salmochelin__colour'] = get_vir_lineage_colour(original_data['Salmochelin'])
+    new_data['hypermucoidy__colour'] = get_hypermucoidy_colour(original_data['hypermucoidy'])
+    for res_class in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul',
+                      'Tet', 'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_broad',
+                      'Bla_broad_inhR']:
+        new_data[res_class + '__colour'] = get_res_class_colour(original_data[res_class])
 
     return [new_data[h] for h in new_header]
 
@@ -167,6 +172,8 @@ def check_for_unique_names(name_subs):
 
 
 def save_tree_with_new_names(tree_in, tree_out, name_subs):
+    print()
+    print('Writing Microreact tree to: {}'.format(tree_out))
     tree_format = None
     for try_tree_format in ['newick', 'nexus', 'nexml', 'phyloxml', 'cdao']:
         try:
@@ -275,6 +282,14 @@ def get_vir_lineage_colour(vir_lineage):
         return '#FFFFFF'
     else:
         return '#BFBFBF'
+
+
+def get_hypermucoidy_colour(hypermucoidy):
+    return '#FFFFFF' if hypermucoidy == '-' else '#08306B'
+
+
+def get_res_class_colour(res_class):
+    return '#FFFFFF' if res_class == '-' else '#BE413D'
 
 
 if __name__ == '__main__':
