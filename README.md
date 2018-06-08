@@ -9,6 +9,7 @@ Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
 
 If you use Kleborate, please cite this preprint:<br>
 > [__Lam MMC, Wick RR, Wyres KL, Gorrie C, Judd LM, Brisse S, et al.__ Frequent emergence of pathogenic lineages of _Klebsiella pneumoniae_ via mobilisation of yersiniabactin and colibactin. _bioRxiv_  2017.](http://biorxiv.org/content/early/2017/01/04/098178)
+Note. this preprint serves as a citation for only the yersiniabactin and colibactin typing schemes. A manuscript describing the Kleborate software in full is currently in preparation. 
 
 
 
