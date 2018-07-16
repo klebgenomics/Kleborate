@@ -3,7 +3,8 @@
 Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
  * MLST sequence type
  * species (e.g. _K. pneumoniae_, _K. quasipneumoniae_, _K. variicola_, etc.)
- * virulence genes: _ybt_, _clb_, _iro_ and _iuc_ loci, and the _rmpA_ and _rmpA2_ hypermucoidy genes
+ * ICEKp associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_)
+ * virulence plasmid associated loci: salmochelin (_iro_), aerobactin (_iuc_), hypermucoidy (_rmpA_, _rmpA2_)
  * antimicrobial resistance genes, including quinolone resistance SNPs and colistin resistance truncations
  * K and O capsule types, via [Kaptive](https://github.com/katholt/Kaptive)
 
