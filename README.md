@@ -7,10 +7,16 @@ Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
  * antimicrobial resistance genes, including quinolone resistance SNPs and colistin resistance truncations
  * K and O capsule types, via [Kaptive](https://github.com/katholt/Kaptive)
 
-If you use Kleborate, please cite this preprint:<br>
-> [__Lam MMC, Wick RR, Wyres KL, Gorrie C, Judd LM, Brisse S, et al.__ Frequent emergence of pathogenic lineages of _Klebsiella pneumoniae_ via mobilisation of yersiniabactin and colibactin. _bioRxiv_  2017.](http://biorxiv.org/content/early/2017/01/04/098178)
-Note. this preprint serves as a citation for only the yersiniabactin and colibactin typing schemes. A manuscript describing the Kleborate software in full is currently in preparation. 
+A manuscript describing the Kleborate software in full is currently in preparation. 
 
+In the meantime, if you use Kleborate, please cite the component schemes that you report:<br>
+> Yersiniabactin and colibactin (ICEKp) [__Lam MMC, et al.__ Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element ICEKp in _Klebsiella_ pneumoniae populations _MGen_  2018.](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)
+
+> Kaptive for capsule (K) serotyping:
+[Wyres, K. et al. Identification of _Klebsiella_ capsule synthesis loci from whole genome data. Microbial Genomics (2016).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
+
+> Kaptive for O antigen serotyping:
+[Kaptive Web: user-friendly capsule and lipopolysaccharide serotype prediction for _Klebsiella_ genomes. Journal of Clinical Microbiology (2018).](http://jcm.asm.org/content/56/6/e00197-18)
 
 
 ## Table of Contents
