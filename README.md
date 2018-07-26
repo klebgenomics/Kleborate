@@ -49,7 +49,7 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 
 _Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunistic infections, with a handful of hypervirulent lineages recognised as true human pathogens. Evidence is now mounting that other _Kp_ strains carrying acquired siderophores (yersiniabactin, salmochelin and aerobactin) and/or the genotoxin colibactin are also highly pathogenic and can cause invasive disease.
 
-Our goal is to help identify emerging pathogenic _Kp_ lineages, and to make it easy for people who are using genomic surveillance to monitor for antibiotic resistance to also look out for the convergence of antibiotic resistance and virulence. To help facilitate that, in this repo we share code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the [data directory](https://github.com/katholt/Kleborate/tree/master/data).
+Our goal is to help identify emerging pathogenic _Kp_ lineages, and to make it easy for people who are using genomic surveillance to monitor for antibiotic resistance to also look out for the convergence of antibiotic resistance and virulence. To help facilitate that, in this repo we share code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the [data directory](https://github.com/katholt/Kleborate/data).
 
 
 
@@ -193,7 +193,7 @@ By using the `--resistance` option, Kleborate will screen for resistance genes a
 
 Using the `--resistance` option also turns on screening for resistance-conferring mutations:
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
-* Colistin resistance due to truncation or loss of MgrB or (less than 90% gene coverage counts as a truncation/loss).
+* Colistin resistance due to truncation or loss of MgrB or PmrB (less than 90% gene coverage counts as a truncation/loss).
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
 * AGly (aminoglycosides)
@@ -303,7 +303,7 @@ Here are the full Kleborate results, written to `results.txt`:
 
 MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2):
 
-* Download the YbST and CbST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) in this repository.
+* Download the YbST, CbST, AbST and SmST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/kleborate/data) in this repository.
 * Install [SRST2](https://github.com/katholt/srst2) if you don't already have it (`git clone https://github.com/katholt/srst2`).
 * Run SRST2, setting the `--mlst_scheme` and `--mlst_definitions` to point to the YbST or CbST allele sequences and profile tables.
 
