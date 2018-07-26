@@ -88,6 +88,7 @@ git clone --recursive https://github.com/katholt/Kleborate.git
 Kleborate/kleborate-runner.py -h
 ```
 
+See [examples below](#example-output) to test out your installation on some public genome data.
 
 
 ## Basic usage
