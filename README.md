@@ -179,17 +179,17 @@ Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have b
 
 | v0.2.0        | v0.3.0        | location (see [preprint](https://www.biorxiv.org/content/early/2018/07/25/376236) for details)
 | ------------- | ------------- |------------------
-| iuc 2         | iuc 1         | KpVP-1 (e.g. pLVPK)
-| iuc 3B        | iuc 2         | KpVP-2
-| iuc 3A        | iuc 2A        | other plasmids
-| iuc 4         | iuc 3         | other plasmids
-| iuc 5         | iuc 4         | rhinoscleromatis chromosome
-| iuc 1         | iuc 5         | _E. coli_ variant
-| iro 3         | iro 1         | KpVP-1 (e.g. pLVPK)
-| iro 4         | iro 2         | KpVP-2
-| iro 5         | iro 3         | ICEKp1
-| iro 2         | iro 4         | _Enterobacter_ variant
-| iro 1         | iro 5         | _E. coli_ variant
+| iuc 2         | iuc 1         | KpVP-1 (e.g. pLVPK) |
+| iuc 3B        | iuc 2         | KpVP-2 |
+| iuc 3A        | iuc 2A        | other plasmids |
+| iuc 4         | iuc 3         | other plasmids |
+| iuc 5         | iuc 4         | rhinoscleromatis chromosome |
+| iuc 1         | iuc 5         | _E. coli_ variant |
+| iro 3         | iro 1         | KpVP-1 (e.g. pLVPK) |
+| iro 4         | iro 2         | KpVP-2 |
+| iro 5         | iro 3         | ICEKp1 |
+| iro 2         | iro 4         | _Enterobacter_ variant |
+| iro 1         | iro 5         | _E. coli_ variant |
 
 
 
@@ -302,7 +302,12 @@ kleborate  --all -o results.txt -a *.fasta.gz
 
 These are the concise Kleborate results that it prints to the terminal:
 
-
+| strain        | species               | ST   | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | rmpA                             | rmpA2    | wzi   | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          |
+|---------------|-----------------------|------|-----------------|------------------|----------------|------|------------|------|------------|------|-------------|--------|----------------------------------|----------|-------|---------|--------------------|---------|--------------------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------|
+| Klebs_HS11286 | Klebsiella pneumoniae | ST11 | 1               | 2                | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi74 | KL103   | Very high          | O2v1    | Very high          | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | GyrA-83I;ParC-80I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* |
+| MGH78578      | Klebsiella pneumoniae | ST38 | 0               | 1                | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi50 | KL52    | Perfect            | OL101   | High               | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         |
+| NTUH-K2044    | Klebsiella pneumoniae | ST23 | 4               | 0                | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 1      | 1    | iro 3       | 18-1LV | rmpA_11 (ICEKp1),rmpA_2 (KpVP-1) | rmpA2_3  | wzi1  | KL1     | Perfect            | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
+| SGH10         | Klebsiella pneumoniae | ST23 | 5               | 0                | ybt 1; ICEKp10 | 53   | clb 2      | 29   | iuc 1      | 1    | iro 1       | 2      | rmpA_2 (KpVP-1)                  | rmpA2_6* | wzi1  | KL1     | Very high          | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
 
 
 
