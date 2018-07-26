@@ -102,6 +102,9 @@ __Also screen for resistance genes:__<br>
 __Turn on all of Kleborate's optional screens (resistance genes, species check and both K and O loci):__<br>
 `kleborate --all -o results.txt -a *.fasta`
 
+__Screen everything in a set of gzipped assemblies:__<br>
+`kleborate --all -o results.txt -a *.fasta.gz`
+
 
 
 ## Full usage
@@ -116,7 +119,7 @@ Kleborate: a tool for characterising virulence and resistance in Klebsiella
 
 Required arguments:
   -a ASSEMBLIES [ASSEMBLIES ...], --assemblies ASSEMBLIES [ASSEMBLIES ...]
-                        FASTA file(s) for assemblies
+                        FASTA file(s) for assemblies, can be gzipped (.gz)
 
 Screening options:
   -r, --resistance      Turn on resistance genes screening (default: no
@@ -170,23 +173,23 @@ Kleborate examines four key virulence loci in _Klebsiella_: yersiniabactin (_ybt
 
 We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Kp_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICE<i>Kp</i> (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Three of these 17 lineages were associated with three distinct lineages of colibactin. Our analyses reveal hundreds of ICE<i>Kp</i> transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST) which is implemented in Kleborate. 
 
-We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci among a dataset of 2733 _Kp_ genomes (see [this preprint](https://www.biorxiv.org/content/early/2018/07/25/376236)), both of which are often mobilised together by plasmids, and occasionally found on the chromosome (_iro_ with _ybt_ mobilised by ICE<i>Kp1</i> and a chromosomal _iuc_ locus associated with ST67 _Kp_ subsp _rhinoscleromatis_). We developed a MLST-style typing scheme for these loci, and identified five _iro_ and six _iuc_ lineages. The most common represented plasmid lineages were those related to the virulence plasmid pK2044 from NTUH-K2044 (_iuc1_ and _iro1_) and Kp52.145 plasmid II from Kp52.145 (_iuc2_ and _iro2_). Some lineages (_iuc2A_, _iuc3_ and _iro4_) were associated with novel plasmids that have not yet been previously described in _Kp_, and while others appears to be closely related to to _E. coli_ antimicrobial resistance plasmids with _iuc5_ and _iro5_.  ICE<i>Kp1</i> was associated with _iro3_ and _Kp_ subsp _rhinoscleromatis_ with _iuc4_. Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.
+We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci among a dataset of 2733 _Kp_ genomes (see [this preprint](https://www.biorxiv.org/content/early/2018/07/25/376236)), both of which are often mobilised together by plasmids, and occasionally found on the chromosome (_iro_ with _ybt_ mobilised by ICE<i>Kp1</i> and a chromosomal _iuc_ locus associated with ST67 _Kp_ subsp _rhinoscleromatis_). We developed a MLST-style typing scheme for these loci, and identified five _iro_ and six _iuc_ lineages. The most common represented plasmid lineages were those related to the virulence plasmid KpVP-1, such as pK2044 or pLVPK (_iuc1_ and _iro1_), or the virulence plasmid KpVP-2 such as Kp52.145 plasmid II (_iuc2_ and _iro2_). Some lineages (_iuc2A_, _iuc3_ and _iro4_) were associated with novel plasmids that have not yet been previously described in _Kp_, and while others appears to be closely related to to _E. coli_ antimicrobial resistance plasmids with _iuc5_ and _iro5_. ICE<i>Kp1</i> was associated with _iro3_ and _Kp_ subsp _rhinoscleromatis_ with _iuc4_. Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.
 
 Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have been updated between Kleborate version 0.2.0 and 0.3.0 to match the nomenclature used in [the preprint](https://www.biorxiv.org/content/early/2018/07/25/376236). The AbST and SmST allele numbers are unchanged. Lineage name re-assignments are:
 
-| v0.2.0        | v0.3.0        |
-| ------------- | ------------- |
-| iuc 1         | iuc 5         |
-| iuc 2         | iuc 1         |
-| iuc 3A        | iuc 2A        |
-| iuc 3B        | iuc 2         |
-| iuc 4         | iuc 3         |
-| iuc 5         | iuc 4         |
-| iro 1         | iro 5         |
-| iro 2         | iro 4         |
-| iro 3         | iro 1         |
-| iro 4         | iro 2         |
-| iro 5         | iro 3         |
+| v0.2.0        | v0.3.0        | location (see paper for details)
+| ------------- | ------------- |------------------
+| iuc 1         | iuc 5         | _E. coli_ variant
+| iuc 2         | iuc 1         | KpVP-1 (e.g. pLVPK)
+| iuc 3A        | iuc 2A        | other plasmids
+| iuc 3B        | iuc 2         | KpVP-2
+| iuc 4         | iuc 3         | other plasmids
+| iuc 5         | iuc 4         | rhinoscleromatis chromosome
+| iro 1         | iro 5         | _E. coli_ variant
+| iro 2         | iro 4         | _Enterobacter_ variant
+| iro 3         | iro 1         | KpVP-1 (e.g. pLVPK)
+| iro 4         | iro 2         | KpVP-2
+| iro 5         | iro 3         | ICEKp1
 
 
 
@@ -287,6 +290,7 @@ Run these commands to download some well-known _Klebsiella_ genomes and run Kleb
 
 ```bash
 wget -O NTUH-K2044.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/009/885/GCA_000009885.1_ASM988v1/GCA_000009885.1_ASM988v1_genomic.fna.gz
+wget -O SGH10.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/813/595/GCA_002813595.1_ASM281359v1/GCA_002813595.1_ASM281359v1_genomic.fna.gz
 wget -O Klebs_HS11286.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/240/185/GCA_000240185.2_ASM24018v2/GCA_000240185.2_ASM24018v2_genomic.fna.gz
 wget -O MGH78578.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/016/305/GCA_000016305.1_ASM1630v1/GCA_000016305.1_ASM1630v1_genomic.fna.gz
 
@@ -298,11 +302,7 @@ kleborate  --all -o results.txt -a *.fasta.gz
 
 These are the concise Kleborate results that it prints to the terminal:
 
-| strain        | species               | ST   | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | hypermucoidy | wzi   | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          | 
-|---------------|-----------------------|------|-----------------|------------------|----------------|------|------------|------|------------|------|-------------|--------|--------------|-------|---------|--------------------|---------|--------------------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------| 
-| Klebs_HS11286 | Klebsiella pneumoniae | ST11 | 1               | 2                | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -            | wzi74 | KL103   | Very high          | O2v1    | Very high          | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | ParC-80I;GyrA-83I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* | 
-| MGH78578      | Klebsiella pneumoniae | ST38 | 0               | 1                | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -            | wzi50 | KL52    | Perfect            | OL101   | High               | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         | 
-| NTUH-K2044    | Klebsiella pneumoniae | ST23 | 3               | 0                | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 2      | 1    | iro 5       | 18-1LV | rmpA;rmpA    | wzi1  | KL1     | Perfect            | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       | 
+
 
 
 
