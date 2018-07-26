@@ -89,7 +89,7 @@ if __name__ == "__main__":
 			if length > (allele_length/2):
 				gene = gene_id.split("_")[0]
 				if gene=="rmpA":
-					info = " ("+st_info[gene_id.split("_")[1]]+")" # predict from best hit
+					info = "("+st_info[gene_id.split("_")[1]]+")" # predict from best hit
 					if pcid < 100.00 or allele_length < length:
 						gene_id += "*" #indicate imprecise hit
 					rmpA_calls.append(gene_id+info)
