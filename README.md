@@ -3,7 +3,7 @@
 Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
  * MLST sequence type
  * species (e.g. _K. pneumoniae_, _K. quasipneumoniae_, _K. variicola_, etc.)
- * ICEKp associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_)
+ * ICE<i>Kp</i> associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_)
  * virulence plasmid associated loci: salmochelin (_iro_), aerobactin (_iuc_), hypermucoidy (_rmpA_, _rmpA2_)
  * antimicrobial resistance genes, including quinolone resistance SNPs and colistin resistance truncations
  * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/katholt/Kaptive)
@@ -11,10 +11,10 @@ Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
 A manuscript describing the Kleborate software in full is currently in preparation. 
 
 In the meantime, if you use Kleborate, please cite the component schemes that you report:<br>
-> Yersiniabactin and colibactin (ICEKp) [_Lam, MMC. et al._ Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element ICEKp in _Klebsiella_ pneumoniae populations _Microbial Genomics_  2018.](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)
+> Yersiniabactin and colibactin (ICE<i>Kp</i>) [Lam, MMC. et al. Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element ICE<i>Kp</i> in _Klebsiella pneumoniae_ populations _Microbial Genomics_ (2018).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)
 
 > Aerobactin and salmochelin:
-[Lam, MMC. et al. Tracking key virulence loci encoding aerobactin and salmochelin siderophore synthesis in Klebsiella pneumoniae _bioRxiv_ 2018.](https://www.biorxiv.org/content/early/2018/07/25/376236)
+[Lam, MMC. et al. Tracking key virulence loci encoding aerobactin and salmochelin siderophore synthesis in _Klebsiella pneumoniae_ _bioRxiv_ (2018).](https://www.biorxiv.org/content/early/2018/07/25/376236)
 
 > Kaptive for capsule (K) serotyping:
 [Wyres, K. et al. Identification of _Klebsiella_ capsule synthesis loci from whole genome data. _Microbial Genomics_ (2016).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
