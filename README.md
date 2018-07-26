@@ -212,7 +212,7 @@ By using the `--resistance` option, Kleborate will screen for resistance genes a
 
 Using the `--resistance` option also turns on screening for resistance-conferring mutations:
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
-* Colistin resistance due to truncation or loss of MgrB or (less than 90% gene coverage counts as a truncation/loss).
+* Colistin resistance due to truncation or loss of MgrB or PmrB (less than 90% gene coverage counts as a truncation/loss).
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
 * AGly (aminoglycosides)
@@ -322,7 +322,7 @@ Here are the full Kleborate results, written to `results.txt`:
 
 MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2):
 
-* Download the YbST and CbST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) in this repository.
+* Download the YbST, CbST, AbST, SmST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) in this repository.
 * Install [SRST2](https://github.com/katholt/srst2) if you don't already have it (`git clone https://github.com/katholt/srst2`).
 * Run SRST2, setting the `--mlst_scheme` and `--mlst_definitions` to point to the YbST or CbST allele sequences and profile tables.
 
