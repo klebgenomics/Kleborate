@@ -3,21 +3,24 @@
 Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
  * MLST sequence type
  * species (e.g. _K. pneumoniae_, _K. quasipneumoniae_, _K. variicola_, etc.)
- * ICEKp associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_)
+ * ICE<i>Kp</i> associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_)
  * virulence plasmid associated loci: salmochelin (_iro_), aerobactin (_iuc_), hypermucoidy (_rmpA_, _rmpA2_)
  * antimicrobial resistance genes, including quinolone resistance SNPs and colistin resistance truncations
- * K and O capsule types, via [Kaptive](https://github.com/katholt/Kaptive)
+ * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/katholt/Kaptive)
 
 A manuscript describing the Kleborate software in full is currently in preparation. 
 
 In the meantime, if you use Kleborate, please cite the component schemes that you report:<br>
-> Yersiniabactin and colibactin (ICEKp) [__Lam MMC, et al.__ Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element ICEKp in _Klebsiella_ pneumoniae populations _MGen_  2018.](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)
+> Yersiniabactin and colibactin (ICE<i>Kp</i>) [Lam, MMC. et al. Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element ICE<i>Kp</i> in _Klebsiella pneumoniae_ populations _Microbial Genomics_ (2018).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)
+
+> Aerobactin and salmochelin:
+[Lam, MMC. et al. Tracking key virulence loci encoding aerobactin and salmochelin siderophore synthesis in _Klebsiella pneumoniae_ _bioRxiv_ (2018).](https://www.biorxiv.org/content/early/2018/07/25/376236)
 
 > Kaptive for capsule (K) serotyping:
-[Wyres, K. et al. Identification of _Klebsiella_ capsule synthesis loci from whole genome data. Microbial Genomics (2016).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
+[Wyres, KL. et al. Identification of _Klebsiella_ capsule synthesis loci from whole genome data. _Microbial Genomics_ (2016).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
 
-> Kaptive for O antigen serotyping:
-[Kaptive Web: user-friendly capsule and lipopolysaccharide serotype prediction for _Klebsiella_ genomes. Journal of Clinical Microbiology (2018).](http://jcm.asm.org/content/56/6/e00197-18)
+> Kaptive for O antigen (LPS) serotyping:
+[Wick, RR et. al. Kaptive Web: user-friendly capsule and lipopolysaccharide serotype prediction for _Klebsiella_ genomes. _Journal of Clinical Microbiology_ (2018).](http://jcm.asm.org/content/56/6/e00197-18)
 
 
 ## Table of Contents
@@ -30,11 +33,10 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 * [Screening details](#screening-details)
    * [MLST](#mlst)
    * [Virulence loci](#virulence-loci)
-   * [Other virulence genes](#other-virulence-genes)
    * [Resistance gene detection](#resistance-gene-detection)
    * [Scores and counts](#scores-and-counts)
    * [<em>Klebsiella</em> species](#klebsiella-species)
-   * [Capsule typing](#capsule-typing)
+   * [Serotype prediction](#serotype-prediction)
 * [Example output](#example-output)
    * [Test data](#test-data)
    * [Concise results (stdout)](#concise-results-stdout)
@@ -99,6 +101,9 @@ __Also screen for resistance genes:__<br>
 __Turn on all of Kleborate's optional screens (resistance genes, species check and both K and O loci):__<br>
 `kleborate --all -o results.txt -a *.fasta`
 
+__Screen everything in a set of gzipped assemblies:__<br>
+`kleborate --all -o results.txt -a *.fasta.gz`
+
 
 
 ## Full usage
@@ -113,7 +118,7 @@ Kleborate: a tool for characterising virulence and resistance in Klebsiella
 
 Required arguments:
   -a ASSEMBLIES [ASSEMBLIES ...], --assemblies ASSEMBLIES [ASSEMBLIES ...]
-                        FASTA file(s) for assemblies
+                        FASTA file(s) for assemblies, can be gzipped (.gz)
 
 Screening options:
   -r, --resistance      Turn on resistance genes screening (default: no
@@ -160,24 +165,46 @@ Some notes on Kleborate's MLST calls:
 
 ### Virulence loci
 
-We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Kp_ (see [this preprint](http://biorxiv.org/content/early/2017/01/04/098178)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICE<i>Kp</i> (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Three of these 17 lineages were associated with three distinct lineages of colibactin. Our analyses reveal hundreds of ICE<i>Kp</i> transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for identifying virulence loci from genome data. 
-
-We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci, both of which are often mobilised together by plasmids, and occasionally found on the chromosome (_iro_ with _ybt_ mobilised by ICE<i>Kp1</i> and a chromosomal _iuc_ locus associated with ST67 _Kp_ subsp _rhinoscleromatis_). We developed a MLST-style typing scheme for these loci, and identified five _iro_ and six _iuc_ lineages. The most common represented plasmid lineages were those related to the virulence plasmid pK2044 from NTUH-K2044 (_iuc2_ and _iro3_) and Kp52.145 plasmid II from Kp52.145 (_iuc3B_ and _iro4_). Some lineages (_iuc3A_, _iuc4_ and _iro2_) were associated with novel plasmids that have not yet been previously described in _Kp_, and while others appears to be closely related to to _E. coli_ antimicrobial resistance plasmids with _iuc1_ and _iro1_.  ICE<i>Kp1</i> was associated with _iro5_ and _Kp_ subsp _rhinoscleromatis_ with _iuc5_. 
-
-Kleborate examines four different virulence loci in _Klebsiella_: yersiniabactin (_ybt_), colibactin (_clb_), aerobactin (_iuc_) and salmochelin (_iro_).
-* For each virulence locus, Kleborate will call the sequence type using the same logic as the MLST described above.
+Kleborate examines four key virulence loci in _Klebsiella_: the siderophores yersiniabactin (_ybt_), aerobactin (_iuc_) and salmochelin (_iro_), and the genotoxin colibactin (_clb_).
+* For each of these loci, Kleborate will call a sequence type using the same logic as the MLST described above.
 * If the locus is not detected, Kleborate reports the ST as `0` and the lineage as `-`.
-* Kleborate will also report the lineage associated with the virulence sequence types (and for yersiniabactin, ICE<i>Kp</i> structure as well).
+* Kleborate will also report the lineage associated with the virulence sequence types, as outlined below and detailed in the corresponding papers (for yersiniabactin, we also report the predicted ICE<i>Kp</i> structure based on the _ybt_ lineage assignment).
+
+#### Yersiniabactin and colibactin (primarily mobilised by ICE<i>Kp</i>)
+We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Klebsiella_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ (see figure) embedded within 14 structural variants of ICE<i>Kp</i> that can integrate at any of four tRNA-Asn sites in the chromosome. Three of the _ybt_ 17 lineages were associated with three lineages of colibactin, with which they are co-located in the same ICE structure designated ICE<i>Kp10</i>. One ICE structure (ICE<i>Kp1</i>) carries the salmochelin synthesis locus _iro_ and _rmpA_ hypermucoidy gene in addition to _ybt_ (lineage 2). Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST), which is implemented in Kleborate. Annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository).
+
+<p align="left"><img src="images/ybt_trees.png" alt="ybt tree" width="70%"></p>
+
+#### Aerobactin and salmochelin (primarily mobilised by virulence plasmids)
+We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci among a dataset of 2733 _Klebsiella_ genomes (see [this preprint](https://www.biorxiv.org/content/early/2018/07/25/376236)). We identified five _iro_ and six _iuc_ lineages (see figure), each of which was associated with a specific location within _Kp_ genomes. The most common lineages were _iuc1_ and _iro1_, which are found together on the virulence plasmid KpVP-1 (typified by pK2044 or pLVPK common to the hypervirulent clones ST23, ST86, etc). _iuc2_ and _iro2_ lineages were associated with the alternative virulence plasmid KpVP-2 (typified by Kp52.145 plasmid II from the K2 ST66 lab strain known as Kp52.145 or B5055). _iuc5_ and _iro5_ originate from _E. coli_ and are carried (often together) on _E. coli_ plasmids that can transfer to _Kp_. The lineages _iuc2A_, _iuc3_ and _iro4_ were associated with other novel plasmids that have not yet been previously described in _Kp_. In addition, we found the salmochelin locus present in ICE<i>Kp1</i> constitutes its own lineage _iro3_, and the aerobactin locus present in the chromosome of ST67 _Kp_ subsp _rhinoscleromatis_ strains constitutes its own lineage _iuc4_. Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.
+
+<p align="center"><img src="images/iuc_iro_trees.png" alt="iuc and iro trees" width="70%"></p>
+
+Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have been updated between Kleborate version 0.2.0 and 0.3.0 to match the nomenclature used in [the preprint](https://www.biorxiv.org/content/early/2018/07/25/376236). The AbST and SmST allele numbers are unchanged. Lineage name re-assignments are:
+
+| v0.2.0        | v0.3.0        | location (see [preprint](https://www.biorxiv.org/content/early/2018/07/25/376236) for details)
+| ------------- | ------------- |------------------
+| iuc 2         | iuc 1         | KpVP-1 (e.g. pLVPK) |
+| iuc 3B        | iuc 2         | KpVP-2 |
+| iuc 3A        | iuc 2A        | other plasmids |
+| iuc 4         | iuc 3         | other plasmids |
+| iuc 5         | iuc 4         | rhinoscleromatis chromosome |
+| iuc 1         | iuc 5         | _E. coli_ variant |
+| iro 3         | iro 1         | KpVP-1 (e.g. pLVPK) |
+| iro 4         | iro 2         | KpVP-2 |
+| iro 5         | iro 3         | ICEKp1 |
+| iro 2         | iro 4         | _Enterobacter_ variant |
+| iro 1         | iro 5         | _E. coli_ variant |
 
 
 
-### Other virulence genes
+#### Hypermucoidy genes
 
-In addition to the virulence loci, Kleborate screens for the _rmpA_ and _rmpA2_ genes which result in a hypermucoid phenotype by upregulating capsule production.
+Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which result in a hypermucoid phenotype by upregulating capsule production. 
 
-* Results in these columns should be interpreted as simply binary yes/no calls.
-* By default, a gene is called as present if it is detected in a single sequence with >90% identity and >80% coverage of the allele sequence from the virulence plasmid pLVPK. Note that _rmpA_ and _rmpA2_ are ~85% homologous and are reported separately.
-* If multiple hits to the same query sequence are found in a given assembly, we attempt to report these separately. The NTUH-K2044 genome carries _rmpA_ in two locations (one on the virulence plasmid, one in the ICE<i>Kp1</i>), and this should be reported as `rmpA;rmpA` as seen in the example above.
+* The two genes share ~83% nucleotide identity so are easily distinguished, and are reported in separate columns.
+* Alleles for each gene are sourced from the BIGSdb. For _rmpA_, we have also mapped thes alleles to the various known locations for _rmpA_ in _Klebsiella_ (i.e. major virulence plasmids KpVP-1 and KpVP-2; other virulences plasmids simply designated as VP; ICE<i>Kp1</i> and the chromosome in rhinoscleromatis).
+* Unique (non-overlapping) nucleotide BLAST hits with >95% identity and >50% coverage are reported. Note multiple hits to the same gene are reported if found (e.g. the NTUH-K2044 genome carries _rmpA_ in the virulence plasmid and also in ICE<i>Kp1</i>, which is reported in the _rmpA_ column as rmpA_11(ICEKp1),rmpA_2(KpVP-1)).
 
 
 
@@ -248,10 +275,12 @@ Kleborate will also call other species in Enterobacteriaceae, as different speci
 
 
 
-### Capsule typing
+### Serotype prediction
 
+#### Basic capsule prediction with _wzi_ allele typing
 By default, Kleborate will report the closest match amongst the _wzi_ alleles in the BIGSdb. This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, there is a strong correlation (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)). The _wzi_ allele can provide a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages).
 
+#### Capsule (K) and O antigen (LPS) serotype prediction using Kaptive
 You can optionally turn on capsule typing using the dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive):
 * `--kaptive_k` turns on Kaptive screening of the K locus
 * `--kaptive_o` turns on Kaptive screening of the O locus
@@ -268,6 +297,7 @@ Run these commands to download some well-known _Klebsiella_ genomes and run Kleb
 
 ```bash
 wget -O NTUH-K2044.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/009/885/GCA_000009885.1_ASM988v1/GCA_000009885.1_ASM988v1_genomic.fna.gz
+wget -O SGH10.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/813/595/GCA_002813595.1_ASM281359v1/GCA_002813595.1_ASM281359v1_genomic.fna.gz
 wget -O Klebs_HS11286.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/240/185/GCA_000240185.2_ASM24018v2/GCA_000240185.2_ASM24018v2_genomic.fna.gz
 wget -O MGH78578.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/016/305/GCA_000016305.1_ASM1630v1/GCA_000016305.1_ASM1630v1_genomic.fna.gz
 
@@ -279,11 +309,12 @@ kleborate  --all -o results.txt -a *.fasta.gz
 
 These are the concise Kleborate results that it prints to the terminal:
 
-| strain        | species               | ST   | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | hypermucoidy | wzi   | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          | 
-|---------------|-----------------------|------|-----------------|------------------|----------------|------|------------|------|------------|------|-------------|--------|--------------|-------|---------|--------------------|---------|--------------------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------| 
-| Klebs_HS11286 | Klebsiella pneumoniae | ST11 | 1               | 2                | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -            | wzi74 | KL103   | Very high          | O2v1    | Very high          | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | ParC-80I;GyrA-83I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* | 
-| MGH78578      | Klebsiella pneumoniae | ST38 | 0               | 1                | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -            | wzi50 | KL52    | Perfect            | OL101   | High               | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         | 
-| NTUH-K2044    | Klebsiella pneumoniae | ST23 | 3               | 0                | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 2      | 1    | iro 5       | 18-1LV | rmpA;rmpA    | wzi1  | KL1     | Perfect            | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       | 
+| strain        | species               | ST   | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | rmpA                             | rmpA2    | wzi   | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          |
+|---------------|-----------------------|------|-----------------|------------------|----------------|------|------------|------|------------|------|-------------|--------|----------------------------------|----------|-------|---------|--------------------|---------|--------------------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------|
+| Klebs_HS11286 | Klebsiella pneumoniae | ST11 | 1               | 2                | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi74 | KL103   | Very high          | O2v1    | Very high          | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | GyrA-83I;ParC-80I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* |
+| MGH78578      | Klebsiella pneumoniae | ST38 | 0               | 1                | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi50 | KL52    | Perfect            | OL101   | High               | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         |
+| NTUH-K2044    | Klebsiella pneumoniae | ST23 | 4               | 0                | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 1      | 1    | iro 3       | 18-1LV | rmpA_11 (ICEKp1),rmpA_2 (KpVP-1) | rmpA2_3  | wzi1  | KL1     | Perfect            | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
+| SGH10         | Klebsiella pneumoniae | ST23 | 5               | 0                | ybt 1; ICEKp10 | 53   | clb 2      | 29   | iuc 1      | 1    | iro 1       | 2      | rmpA_2 (KpVP-1)                  | rmpA2_6* | wzi1  | KL1     | Very high          | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
 
 
 
@@ -291,11 +322,12 @@ These are the concise Kleborate results that it prints to the terminal:
 
 Here are the full Kleborate results, written to `results.txt`:
 
-| strain        | species               | species_match | contig_count | N50     | largest_contig | ST   | virulence_score | resistance_score | num_resistance_classes | num_resistance_genes | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | hypermucoidy | wzi   | K_locus | K_locus_problems | K_locus_confidence | K_locus_identity | K_locus_missing_genes | O_locus | O_locus_problems | O_locus_confidence | O_locus_identity | O_locus_missing_genes | Chr_ST | gapA | infB | mdh | pgi | phoE | rpoB | tonB | ybtS | ybtX | ybtQ | ybtP | ybtA | irp2 | irp1 | ybtU | ybtT | ybtE | fyuA | clbA | clbB | clbC | clbD | clbE | clbF | clbG | clbH | clbI | clbL | clbM | clbN | clbO | clbP | clbQ | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          | 
-|---------------|-----------------------|---------------|--------------|---------|----------------|------|-----------------|------------------|------------------------|----------------------|----------------|------|------------|------|------------|------|-------------|--------|--------------|-------|---------|------------------|--------------------|------------------|-----------------------|---------|------------------|--------------------|------------------|-----------------------|--------|------|------|-----|-----|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------| 
-| Klebs_HS11286 | Klebsiella pneumoniae | strong        | 7            | 5333942 | 5333942        | ST11 | 1               | 2                | 9                      | 17                   | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -            | wzi74 | KL103   | *                | Very high          | 96.69%           |                       | O2v1    | none             | Very high          | 97.72%           |                       | ST11   | 3    | 3    | 1   | 1   | 1    | 1    | 4    | 14   | 11   | 14   | 5    | 9    | 22   | 19   | 10   | 5    | 11   | 11   | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | ParC-80I;GyrA-83I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* | 
-| MGH78578      | Klebsiella pneumoniae | strong        | 6            | 5315120 | 5315120        | ST38 | 0               | 1                | 7                      | 15                   | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -            | wzi50 | KL52    | none             | Perfect            | 100.00%          |                       | OL101   | *                | High               | 94.91%           |                       | ST38   | 2    | 1    | 2   | 1   | 2    | 2    | 2    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         | 
-| NTUH-K2044    | Klebsiella pneumoniae | strong        | 2            | 5248520 | 5248520        | ST23 | 3               | 0                | 0                      | 0                    | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 2      | 1    | iro 5       | 18-1LV | rmpA;rmpA    | wzi1  | KL1     | none             | Perfect            | 100.00%          |                       | O1v2    | none             | Very high          | 99.13%           |                       | ST23   | 2    | 1    | 1   | 1   | 9    | 4    | 12   | 9    | 7    | 9    | 6    | 5    | 1    | 1    | 6    | 7    | 7    | 6    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       | 
+| strain        | species               | species_match | contig_count | N50     | largest_contig | ST   | virulence_score | resistance_score | num_resistance_classes | num_resistance_genes | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | rmpA                             | rmpA2    | wzi   | K_locus | K_locus_problems | K_locus_confidence | K_locus_identity | K_locus_missing_genes | O_locus | O_locus_problems | O_locus_confidence | O_locus_identity | O_locus_missing_genes | Chr_ST | gapA | infB | mdh | pgi | phoE | rpoB | tonB | ybtS | ybtX | ybtQ | ybtP | ybtA | irp2 | irp1 | ybtU | ybtT | ybtE | fyuA | clbA | clbB | clbC | clbD | clbE | clbF | clbG | clbH | clbI | clbL | clbM | clbN | clbO | clbP | clbQ | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          |
+|---------------|-----------------------|---------------|--------------|---------|----------------|------|-----------------|------------------|------------------------|----------------------|----------------|------|------------|------|------------|------|-------------|--------|----------------------------------|----------|-------|---------|------------------|--------------------|------------------|-----------------------|---------|------------------|--------------------|------------------|-----------------------|--------|------|------|-----|-----|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------|
+| Klebs_HS11286 | Klebsiella pneumoniae | strong        | 7            | 5333942 | 5333942        | ST11 | 1               | 2                | 9                      | 17                   | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi74 | KL103   | *                | Very high          | 96.69%           |                       | O2v1    | none             | Very high          | 97.72%           |                       | ST11   | 3    | 3    | 1   | 1   | 1    | 1    | 4    | 14   | 11   | 14   | 5    | 9    | 22   | 19   | 10   | 5    | 11   | 11   | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | GyrA-83I;ParC-80I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* |
+| MGH78578      | Klebsiella pneumoniae | strong        | 6            | 5315120 | 5315120        | ST38 | 0               | 1                | 7                      | 15                   | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi50 | KL52    | none             | Perfect            | 100.00%          |                       | OL101   | *                | High               | 94.91%           |                       | ST38   | 2    | 1    | 2   | 1   | 2    | 2    | 2    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         |
+| NTUH-K2044    | Klebsiella pneumoniae | strong        | 2            | 5248520 | 5248520        | ST23 | 4               | 0                | 0                      | 0                    | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 1      | 1    | iro 3       | 18-1LV | rmpA_11 (ICEKp1),rmpA_2 (KpVP-1) | rmpA2_3  | wzi1  | KL1     | none             | Perfect            | 100.00%          |                       | O1v2    | none             | Very high          | 99.13%           |                       | ST23   | 2    | 1    | 1   | 1   | 9    | 4    | 12   | 9    | 7    | 9    | 6    | 5    | 1    | 1    | 6    | 7    | 7    | 6    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
+| SGH10         | Klebsiella pneumoniae | strong        | 2            | 5485114 | 5485114        | ST23 | 5               | 0                | 0                      | 0                    | ybt 1; ICEKp10 | 53   | clb 2      | 29   | iuc 1      | 1    | iro 1       | 2      | rmpA_2 (KpVP-1)                  | rmpA2_6* | wzi1  | KL1     | none             | Very high          | 100.00%          |                       | O1v2    | none             | Very high          | 99.11%           |                       | ST23   | 2    | 1    | 1   | 1   | 9    | 4    | 12   | 2    | 2    | 2    | 2    | 2    | 6    | 124  | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 3    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
 
 
 
@@ -303,7 +335,7 @@ Here are the full Kleborate results, written to `results.txt`:
 
 MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2):
 
-* Download the YbST, CbST, AbST and SmST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/kleborate/data) in this repository.
+* Download the YbST, CbST, AbST, SmST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) in this repository.
 * Install [SRST2](https://github.com/katholt/srst2) if you don't already have it (`git clone https://github.com/katholt/srst2`).
 * Run SRST2, setting the `--mlst_scheme` and `--mlst_definitions` to point to the YbST or CbST allele sequences and profile tables.
 
