@@ -6,7 +6,7 @@ Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
  * ICEKp associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_)
  * virulence plasmid associated loci: salmochelin (_iro_), aerobactin (_iuc_), hypermucoidy (_rmpA_, _rmpA2_)
  * antimicrobial resistance genes, including quinolone resistance SNPs and colistin resistance truncations
- * K and O capsule types, via [Kaptive](https://github.com/katholt/Kaptive)
+ * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/katholt/Kaptive)
 
 A manuscript describing the Kleborate software in full is currently in preparation. 
 
@@ -19,7 +19,7 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 > Kaptive for capsule (K) serotyping:
 [Wyres, K. et al. Identification of _Klebsiella_ capsule synthesis loci from whole genome data. _Microbial Genomics_ (2016).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
 
-> Kaptive for O antigen serotyping:
+> Kaptive for O antigen (LPS) serotyping:
 [Kaptive Web: user-friendly capsule and lipopolysaccharide serotype prediction for _Klebsiella_ genomes. _Journal of Clinical Microbiology_ (2018).](http://jcm.asm.org/content/56/6/e00197-18)
 
 
@@ -37,7 +37,7 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
    * [Resistance gene detection](#resistance-gene-detection)
    * [Scores and counts](#scores-and-counts)
    * [<em>Klebsiella</em> species](#klebsiella-species)
-   * [Capsule typing](#capsule-typing)
+   * [Serotype prediction](#serotype-prediction)
 * [Example output](#example-output)
    * [Test data](#test-data)
    * [Concise results (stdout)](#concise-results-stdout)
@@ -270,10 +270,12 @@ Kleborate will also call other species in Enterobacteriaceae, as different speci
 
 
 
-### Capsule typing
+### Serotype prediction
 
+#### Basic capsule prediction with _wzi_ allele typing
 By default, Kleborate will report the closest match amongst the _wzi_ alleles in the BIGSdb. This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, there is a strong correlation (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)). The _wzi_ allele can provide a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages).
 
+#### Capsule (K) and O antigen (LPS) serotype prediction using Kaptive
 You can optionally turn on capsule typing using the dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive):
 * `--kaptive_k` turns on Kaptive screening of the K locus
 * `--kaptive_o` turns on Kaptive screening of the O locus
