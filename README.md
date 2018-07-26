@@ -32,8 +32,8 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 * [Full usage](#full-usage)
 * [Screening details](#screening-details)
    * [MLST](#mlst)
-   * [Virulence loci](#virulence-loci)
-   * [Other virulence genes](#other-virulence-genes)
+   * [Virulence loci (yersiniabactin, colibactin, aerobactin, salmochelin)](#virulence-loci)
+   * [Hypermucoidy](#hypermucoidy-genes)
    * [Resistance gene detection](#resistance-gene-detection)
    * [Scores and counts](#scores-and-counts)
    * [<em>Klebsiella</em> species](#klebsiella-species)
@@ -190,13 +190,13 @@ Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have b
 
 
 
-### Other virulence genes
+### Hypermucoidy genes
 
-In addition to the virulence loci, Kleborate screens for the _rmpA_ and _rmpA2_ genes which result in a hypermucoid phenotype by upregulating capsule production.
+Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which result in a hypermucoid phenotype by upregulating capsule production. 
 
-* Results in these columns should be interpreted as simply binary yes/no calls for each of the two genes.
-* By default, a gene is called as present if it is detected in a single sequence with >90% identity and >80% coverage of the allele sequence from the virulence plasmid pLVPK. Note that _rmpA_ and _rmpA2_ are ~85% homologous and are reported separately.
-* If multiple hits to the same query sequence are found in a given assembly, we attempt to report these separately. E.g. the NTUH-K2044 genome carries _rmpA_ in two locations (one on the virulence plasmid, one in the ICE<i>Kp1</i>), and this should be reported as `rmpA;rmpA` as seen in the example below.
+* The two genes share ~83% nucleotide identity so are easily distinguished, and are reported in separate columns.
+* Alleles for each gene are sourced from the BIGSdb. For _rmpA_, we have also mapped thes alleles to the various known locations for _rmpA_ in _Klebsiella_ (i.e. major virulence plasmids KpVP-1 and KpVP-2; other virulences plasmids simply designated as VP; ICE<i>Kp1</i> and the chromosome in rhinoscleromatis).
+* Unique (non-overlapping) nucleotide BLAST hits with >95% identity and >50% coverage are reported. Note multiple hits to the same gene are reported if found (e.g. the NTUH-K2044 genome carries _rmpA_ in the virulence plasmid and also in ICE<i>Kp1</i>, which is reported in the _rmpA_ column as rmpA_11(ICEKp1),rmpA_2(KpVP-1)).
 
 
 
