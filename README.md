@@ -32,8 +32,7 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 * [Full usage](#full-usage)
 * [Screening details](#screening-details)
    * [MLST](#mlst)
-   * [Virulence loci (yersiniabactin, colibactin, aerobactin, salmochelin)](#virulence-loci)
-   * [Hypermucoidy](#hypermucoidy-genes)
+   * [Virulence loci](#virulence-loci)
    * [Resistance gene detection](#resistance-gene-detection)
    * [Scores and counts](#scores-and-counts)
    * [<em>Klebsiella</em> species](#klebsiella-species)
@@ -166,14 +165,20 @@ Some notes on Kleborate's MLST calls:
 
 ### Virulence loci
 
-Kleborate examines four key virulence loci in _Klebsiella_: yersiniabactin (_ybt_), colibactin (_clb_), aerobactin (_iuc_) and salmochelin (_iro_).
-* For each virulence locus, Kleborate will call a sequence type using the same logic as the MLST described above.
+Kleborate examines four key virulence loci in _Klebsiella_: the siderophores yersiniabactin (_ybt_), aerobactin (_iuc_) and salmochelin (_iro_), and the genotoxin colibactin (_clb_).
+* For each of these loci, Kleborate will call a sequence type using the same logic as the MLST described above.
 * If the locus is not detected, Kleborate reports the ST as `0` and the lineage as `-`.
 * Kleborate will also report the lineage associated with the virulence sequence types, as outlined below and detailed in the corresponding papers (for yersiniabactin, we also report the predicted ICE<i>Kp</i> structure based on the _ybt_ lineage assignment).
 
-We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Kp_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ embedded within 14 structural variants of ICE<i>Kp</i> (some of which include the colibactin _clb_ or salmochelin _iro_ synthesis loci, annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository) that can integrate at any of four tRNA-Asn sites in the chromosome. Three of these 17 lineages were associated with three distinct lineages of colibactin. Our analyses reveal hundreds of ICE<i>Kp</i> transmission events affecting hundreds of chromosomal _Kp_ lineages, including nearly two dozen transfers into the globally disseminated carbapenem-resistant clonal group 258. Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST) which is implemented in Kleborate. 
+#### Yersiniabactin and colibactin (primarily mobilised by ICE<i>Kp</i>)
+We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Klebsiella_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ (see figure) embedded within 14 structural variants of ICE<i>Kp</i> that can integrate at any of four tRNA-Asn sites in the chromosome. Three of the _ybt_ 17 lineages were associated with three lineages of colibactin, with which they are co-located in the same ICE structure designated ICE<i>Kp10</i>. One ICE structure (ICE<i>Kp1</i>) carries the salmochelin synthesis locus _iro_ and _rmpA_ hypermucoidy gene in addition to _ybt_ (lineage 2). Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST), which is implemented in Kleborate. Annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository).
 
-We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci among a dataset of 2733 _Kp_ genomes (see [this preprint](https://www.biorxiv.org/content/early/2018/07/25/376236)), both of which are often mobilised together by plasmids, and occasionally found on the chromosome (_iro_ with _ybt_ mobilised by ICE<i>Kp1</i> and a chromosomal _iuc_ locus associated with ST67 _Kp_ subsp _rhinoscleromatis_). We developed a MLST-style typing scheme for these loci, and identified five _iro_ and six _iuc_ lineages. The most common represented plasmid lineages were those related to the virulence plasmid KpVP-1, such as pK2044 or pLVPK (_iuc1_ and _iro1_), or the virulence plasmid KpVP-2 such as Kp52.145 plasmid II (_iuc2_ and _iro2_). Some lineages (_iuc2A_, _iuc3_ and _iro4_) were associated with novel plasmids that have not yet been previously described in _Kp_, and while others appears to be closely related to to _E. coli_ antimicrobial resistance plasmids with _iuc5_ and _iro5_. ICE<i>Kp1</i> was associated with _iro3_ and _Kp_ subsp _rhinoscleromatis_ with _iuc4_. Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.
+<p align="left"><img src="images/ybt_trees.png" alt="ybt tree" width="70%"></p>
+
+#### Aerobactin and salmochelin (primarily mobilised by virulence plasmids)
+We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci among a dataset of 2733 _Klebsiella_ genomes (see [this preprint](https://www.biorxiv.org/content/early/2018/07/25/376236)). We identified five _iro_ and six _iuc_ lineages (see figure), each of which was associated with a specific location within _Kp_ genomes. The most common lineages were _iuc1_ and _iro1_, which are found together on the virulence plasmid KpVP-1 (typified by pK2044 or pLVPK common to the hypervirulent clones ST23, ST86, etc). _iuc2_ and _iro2_ lineages were associated with the alternative virulence plasmid KpVP-2 (typified by Kp52.145 plasmid II from the K2 ST66 lab strain known as Kp52.145 or B5055). _iuc5_ and _iro5_ originate from _E. coli_ and are carried (often together) on _E. coli_ plasmids that can transfer to _Kp_. The lineages _iuc2A_, _iuc3_ and _iro4_ were associated with other novel plasmids that have not yet been previously described in _Kp_. In addition, we found the salmochelin locus present in ICE<i>Kp1</i> constitutes its own lineage _iro3_, and the aerobactin locus present in the chromosome of ST67 _Kp_ subsp _rhinoscleromatis_ strains constitutes its own lineage _iuc4_. Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.
+
+<p align="center"><img src="images/iuc_iro_trees.png" alt="iuc and iro trees" width="70%"></p>
 
 Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have been updated between Kleborate version 0.2.0 and 0.3.0 to match the nomenclature used in [the preprint](https://www.biorxiv.org/content/early/2018/07/25/376236). The AbST and SmST allele numbers are unchanged. Lineage name re-assignments are:
 
@@ -193,7 +198,7 @@ Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have b
 
 
 
-### Hypermucoidy genes
+#### Hypermucoidy genes
 
 Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which result in a hypermucoid phenotype by upregulating capsule production. 
 
