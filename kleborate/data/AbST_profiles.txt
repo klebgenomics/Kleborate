@@ -61,3 +61,4 @@ ST	iucA	iucB	iucC	iucD	iutA	iuc_lineage
 60	45	12	33	35	60	iuc 5
 61	45	24	33	35	61	iuc 5
 62	45	12	33	35	61	iuc 5
+63  1   15  1   1   1   iuc 1
