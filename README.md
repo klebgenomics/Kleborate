@@ -177,19 +177,19 @@ We further explored the genetic diversity of the aerobactin (_iuc_) and salmoche
 
 Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have been updated between Kleborate version 0.2.0 and 0.3.0 to match the nomenclature used in [the preprint](https://www.biorxiv.org/content/early/2018/07/25/376236). The AbST and SmST allele numbers are unchanged. Lineage name re-assignments are:
 
-| v0.2.0        | v0.3.0        | location (see paper for details)
+| v0.2.0        | v0.3.0        | location (see [preprint](https://www.biorxiv.org/content/early/2018/07/25/376236) for details)
 | ------------- | ------------- |------------------
-| iuc 1         | iuc 5         | _E. coli_ variant
 | iuc 2         | iuc 1         | KpVP-1 (e.g. pLVPK)
-| iuc 3A        | iuc 2A        | other plasmids
 | iuc 3B        | iuc 2         | KpVP-2
+| iuc 3A        | iuc 2A        | other plasmids
 | iuc 4         | iuc 3         | other plasmids
 | iuc 5         | iuc 4         | rhinoscleromatis chromosome
-| iro 1         | iro 5         | _E. coli_ variant
-| iro 2         | iro 4         | _Enterobacter_ variant
+| iuc 1         | iuc 5         | _E. coli_ variant
 | iro 3         | iro 1         | KpVP-1 (e.g. pLVPK)
 | iro 4         | iro 2         | KpVP-2
 | iro 5         | iro 3         | ICEKp1
+| iro 2         | iro 4         | _Enterobacter_ variant
+| iro 1         | iro 5         | _E. coli_ variant
 
 
 
