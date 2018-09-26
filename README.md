@@ -8,7 +8,7 @@ Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
  * antimicrobial resistance genes, including quinolone resistance SNPs and colistin resistance truncations
  * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/katholt/Kaptive)
 
-A manuscript describing the Kleborate software in full is currently in preparation. 
+A manuscript describing the Kleborate software in full is currently in preparation. (Note that the BLAST logic has been checked in the light of [this article](https://doi.org/10.1093/bioinformatics/bty833) describing a common misconception regarding the BLAST parameter -max_target_seqs.)
 
 In the meantime, if you use Kleborate, please cite the component schemes that you report:<br>
 > Yersiniabactin and colibactin (ICE<i>Kp</i>) [Lam, MMC. et al. Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element ICE<i>Kp</i> in _Klebsiella pneumoniae_ populations. _Microbial Genomics_ (2018).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)
