@@ -235,6 +235,7 @@ All resistance results (both for the gene screen and mutation screen) are groupe
 * Flq (fluoroquinolones)
 * Gly (glycopeptides)
 * MLS (macrolides)
+* Ntmdz (nitroimidazole, e.g. metronidazole)
 * Phe (phenicols)
 * Rif (rifampin)
 * Sul (sulfonamides)
