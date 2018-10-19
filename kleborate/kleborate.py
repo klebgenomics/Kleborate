@@ -374,7 +374,7 @@ def run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, output_file):
 															random.randint(0, 999999))
 	kaptive_table = kaptive_prefix + '_table.txt'
 
-	p = subprocess.Popen('python ' + kaptive_py +
+	p = subprocess.Popen('python3 ' + kaptive_py +
 						 ' -a ' + contigs +
 						 ' -k ' + kaptive_db +
 						 ' -o ' + kaptive_prefix +
