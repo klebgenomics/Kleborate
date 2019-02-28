@@ -22,7 +22,7 @@ class TestIro(unittest.TestCase):
     """
 
     def setUp(self):
-        self.data_folder, self.mlstblast, self.resblast, self.clusterblast = get_resource_paths()
+        self.data_folder, self.mlstblast, _, _, _ = get_resource_paths()
 
     def test_iro_random(self):
         """
@@ -47,7 +47,7 @@ class TestIro(unittest.TestCase):
         self.assertEqual(results['iroC'], '33')
         self.assertEqual(results['iroD'], '12')
         self.assertEqual(results['iroN'], '15')
-        self.assertEqual(results['Salmochelin'], 'iro 2')
+        self.assertEqual(results['Salmochelin'], 'iro 4')
         self.assertEqual(results['SmST'], '33')
 
     def test_iro_inexact(self):
@@ -61,7 +61,7 @@ class TestIro(unittest.TestCase):
         self.assertEqual(results['iroC'], '33*')
         self.assertEqual(results['iroD'], '12')
         self.assertEqual(results['iroN'], '15*')
-        self.assertEqual(results['Salmochelin'], 'iro 2')
+        self.assertEqual(results['Salmochelin'], 'iro 4')
         self.assertEqual(results['SmST'], '33-2LV')
 
     def test_iro_novel(self):

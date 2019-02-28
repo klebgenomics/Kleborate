@@ -31,7 +31,7 @@ class TestResAlleles(unittest.TestCase):
 
     def setUp(self):
         self.args = Args()
-        self.data_folder, self.mlstblast, self.resblast, self.clusterblast = get_resource_paths()
+        self.data_folder, _, self.resblast, _, _ = get_resource_paths()
         _, _, self.res_headers = get_output_headers(self.args, self.resblast, self.data_folder)
 
     def test_both_genes_intact(self):
