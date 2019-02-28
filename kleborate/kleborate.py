@@ -17,10 +17,10 @@ import sys
 import gzip
 import argparse
 import subprocess
-import random
 import distutils.spawn
 from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stats
+from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results
 from .version import __version__
 
@@ -321,98 +321,6 @@ def get_resource_paths():
     return data_folder, mlstblast, resblast, clusterblast, rmpablast
 
 
-def get_kaptive_paths():
-    this_file = os.path.realpath(__file__)
-    kaptive_dir = os.path.join(os.path.dirname(os.path.dirname(this_file)), 'kaptive')
-    if not os.path.isdir(kaptive_dir):
-        sys.exit('Error: could not find Kaptive directory. Did you git clone with --recursive?')
-    kaptive_py = os.path.join(kaptive_dir, 'kaptive.py')
-    if not os.path.isfile(kaptive_py):
-        sys.exit('Error: could not find kaptive.py')
-    db_dir = os.path.join(kaptive_dir, 'reference_database')
-    kaptive_k_db = os.path.join(db_dir, 'Klebsiella_k_locus_primary_reference.gbk')
-    if not os.path.isfile(kaptive_k_db):
-        sys.exit('Error: could not find Klebsiella_k_locus_primary_reference.gbk')
-    kaptive_o_db = os.path.join(db_dir, 'Klebsiella_o_locus_primary_reference.gbk')
-    if not os.path.isfile(kaptive_o_db):
-        sys.exit('Error: could not find Klebsiella_o_locus_primary_reference.gbk')
-    return kaptive_py, kaptive_k_db, kaptive_o_db
-
-
-def run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, output_file):
-    kaptive_prefix = 'temp_kaptive_{}_results_{}_{}'.format(locus_type, os.getpid(),
-                                                            random.randint(0, 999999))
-    kaptive_table = kaptive_prefix + '_table.txt'
-
-    p = subprocess.Popen('python3 ' + kaptive_py +
-                         ' -a ' + contigs +
-                         ' -k ' + kaptive_db +
-                         ' -o ' + kaptive_prefix +
-                         ' --verbose' +
-                         ' --no_seq_out --no_json',
-                         shell=True,
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = p.communicate()
-
-    # Make sure the output is a string, whether we are in Python 2 or 3.
-    if not isinstance(stdout, str):
-        stdout = stdout.decode()
-    if not isinstance(stderr, str):
-        stderr = stderr.decode()
-
-    if p.returncode != 0:
-        if stderr:
-            sys.exit('Error: Kaptive failed to run with the following error:\n' + stderr.strip())
-        else:
-            sys.exit('Error: Kaptive failed to run')
-
-    locus, confidence, problems, identity = None, None, None, None
-    missing = []
-
-    # Parse the required information from the Kaptive verbose output.
-    output_lines = stdout.splitlines()
-    missing_gene_lines = False
-    for line in output_lines:
-        if 'Best match locus:' in line:
-            locus = line.split('Best match locus:')[1].strip()
-        if 'Match confidence:' in line:
-            confidence = line.split('Match confidence:')[1].strip()
-        if 'Problems:' in line:
-            problems = line.split('Problems:')[1].strip()
-            if problems == 'None':
-                problems = problems.lower()
-        if 'Identity:' in line:
-            identity = line.split('Identity:')[1].strip()
-        if 'Other genes in locus:' in line:
-            missing_gene_lines = False
-        if missing_gene_lines:
-            missing_gene = line.strip()
-            if missing_gene:
-                missing.append(missing_gene)
-        if 'Missing expected genes:' in line:
-            missing_gene_lines = True
-
-    if output_file:	 # if we are saving Kaptive results to file...
-        with open(kaptive_table, 'rt') as f:
-            kaptive_table_lines = f.readlines()
-        assert len(kaptive_table_lines) == 2
-        if not os.path.isfile(output_file):
-            with open(output_file, 'wt') as f:
-                f.write(kaptive_table_lines[0])	 # write header line
-        with open(output_file, 'at') as f:
-            f.write(kaptive_table_lines[1])		 # write data line
-
-    try:
-        os.remove(kaptive_table)
-    except OSError:
-        pass
-
-    if locus is None or confidence is None or problems is None or identity is None:
-        sys.exit('Error: Kaptive failed to produce the expected output')
-
-    return [locus, confidence, problems, identity, ','.join(missing)]
-
-
 def get_chromosome_mlst_header():
     return ['gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB']
 
@@ -597,26 +505,6 @@ def get_resistance_results(resblast, data_folder, contigs, args, res_headers):
 
     assert len(res_headers) == len(res_hits)
     return dict(zip(res_headers, res_hits))
-
-
-def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
-    assert locus_type == 'K' or locus_type == 'O'
-
-    headers = ['K_locus', 'K_locus_confidence', 'K_locus_problems', 'K_locus_identity',
-               'K_locus_missing_genes']
-    if locus_type == 'O':
-        headers = [x.replace('K_locus', 'O_locus') for x in headers]
-
-    if (args.kaptive_k and locus_type == 'K') or (args.kaptive_o and locus_type == 'O'):
-        if locus_type == 'K':
-            outfile = args.kaptive_k_outfile
-        else:  # locus_type == 'O':
-            outfile = args.kaptive_o_outfile
-        kaptive_results = run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, outfile)
-        assert len(headers) == len(kaptive_results)
-        return dict(zip(headers, kaptive_results))
-    else:
-        return {}
 
 
 def get_summary_results(results, res_headers):
