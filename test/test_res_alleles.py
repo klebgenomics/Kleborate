@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_resource_paths, get_resistance_results
+from kleborate.kleborate import get_resource_paths
 
 
 class TestResAlleles(unittest.TestCase):

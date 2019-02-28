@@ -19,7 +19,7 @@ import argparse
 import subprocess
 import distutils.spawn
 from pkg_resources import resource_filename
-from .contig_stats import load_fasta, get_compression_type, get_contig_stats
+from .contig_stats import load_fasta, get_compression_type, get_contig_stat_results
 from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results
 from .version import __version__
@@ -353,13 +353,6 @@ def gunzip_contigs_if_necessary(contigs):
     return temp_decompress, contigs
 
 
-def get_contig_stat_results(contigs):
-    contig_count, n50, longest_contig = get_contig_stats(contigs)
-    return {'contig_count': str(contig_count),
-            'N50': str(n50),
-            'largest_contig': str(longest_contig)}
-
-
 def get_chromosome_mlst_results(mlstblast, data_folder, contigs):
     f = os.popen('python ' + mlstblast +
                  ' -s ' + data_folder + '/Klebsiella_pneumoniae.fasta' +
@@ -448,7 +441,6 @@ def get_iro_mlst_results(mlstblast, data_folder, contigs):
 
 
 def get_hypermucoidy_results(rmpablast, data_folder, contigs):
-    hypermucoidy = '-'
     f = os.popen('python ' + rmpablast +
                  ' -s ' + data_folder + '/hypermucoidy.fasta' +
                  ' -d ' + data_folder + '/hypermucoidy_rmpA.txt' +

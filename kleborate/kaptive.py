@@ -13,9 +13,9 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
-import random
 import subprocess
 import sys
+import tempfile
 
 
 def get_kaptive_paths():
@@ -49,80 +49,75 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
             outfile = args.kaptive_k_outfile
         else:  # locus_type == 'O':
             outfile = args.kaptive_o_outfile
-        kaptive_results = run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, outfile)
+        kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile)
         assert len(headers) == len(kaptive_results)
         return dict(zip(headers, kaptive_results))
     else:
         return {}
 
 
-def run_kaptive(kaptive_py, kaptive_db, locus_type, contigs, output_file):
-    kaptive_prefix = 'temp_kaptive_{}_results_{}_{}'.format(locus_type, os.getpid(),
-                                                            random.randint(0, 999999))
-    kaptive_table = kaptive_prefix + '_table.txt'
+def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        kaptive_prefix = tmp_dir + '/kaptive'
+        kaptive_table = kaptive_prefix + '_table.txt'
 
-    p = subprocess.Popen('python3 ' + kaptive_py +
-                         ' -a ' + contigs +
-                         ' -k ' + kaptive_db +
-                         ' -o ' + kaptive_prefix +
-                         ' --verbose' +
-                         ' --no_seq_out --no_json',
-                         shell=True,
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = p.communicate()
+        p = subprocess.Popen('python3 ' + kaptive_py +
+                             ' -a ' + contigs +
+                             ' -k ' + kaptive_db +
+                             ' -o ' + kaptive_prefix +
+                             ' --verbose' +
+                             ' --no_seq_out --no_json',
+                             shell=True,
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout, stderr = p.communicate()
 
-    # Make sure the output is a string, whether we are in Python 2 or 3.
-    if not isinstance(stdout, str):
-        stdout = stdout.decode()
-    if not isinstance(stderr, str):
-        stderr = stderr.decode()
+        # Make sure the output is a string, whether we are in Python 2 or 3.
+        if not isinstance(stdout, str):
+            stdout = stdout.decode()
+        if not isinstance(stderr, str):
+            stderr = stderr.decode()
 
-    if p.returncode != 0:
-        if stderr:
-            sys.exit('Error: Kaptive failed to run with the following error:\n' + stderr.strip())
-        else:
-            sys.exit('Error: Kaptive failed to run')
+        if p.returncode != 0:
+            if stderr:
+                sys.exit('Error: Kaptive failed to run with the following error:\n' + stderr.strip())
+            else:
+                sys.exit('Error: Kaptive failed to run')
 
-    locus, confidence, problems, identity = None, None, None, None
-    missing = []
+        locus, confidence, problems, identity = None, None, None, None
+        missing = []
 
-    # Parse the required information from the Kaptive verbose output.
-    output_lines = stdout.splitlines()
-    missing_gene_lines = False
-    for line in output_lines:
-        if 'Best match locus:' in line:
-            locus = line.split('Best match locus:')[1].strip()
-        if 'Match confidence:' in line:
-            confidence = line.split('Match confidence:')[1].strip()
-        if 'Problems:' in line:
-            problems = line.split('Problems:')[1].strip()
-            if problems == 'None':
-                problems = problems.lower()
-        if 'Identity:' in line:
-            identity = line.split('Identity:')[1].strip()
-        if 'Other genes in locus:' in line:
-            missing_gene_lines = False
-        if missing_gene_lines:
-            missing_gene = line.strip()
-            if missing_gene:
-                missing.append(missing_gene)
-        if 'Missing expected genes:' in line:
-            missing_gene_lines = True
+        # Parse the required information from the Kaptive verbose output.
+        output_lines = stdout.splitlines()
+        missing_gene_lines = False
+        for line in output_lines:
+            if 'Best match locus:' in line:
+                locus = line.split('Best match locus:')[1].strip()
+            if 'Match confidence:' in line:
+                confidence = line.split('Match confidence:')[1].strip()
+            if 'Problems:' in line:
+                problems = line.split('Problems:')[1].strip()
+                if problems == 'None':
+                    problems = problems.lower()
+            if 'Identity:' in line:
+                identity = line.split('Identity:')[1].strip()
+            if 'Other genes in locus:' in line:
+                missing_gene_lines = False
+            if missing_gene_lines:
+                missing_gene = line.strip()
+                if missing_gene:
+                    missing.append(missing_gene)
+            if 'Missing expected genes:' in line:
+                missing_gene_lines = True
 
-    if output_file:	 # if we are saving Kaptive results to file...
-        with open(kaptive_table, 'rt') as f:
-            kaptive_table_lines = f.readlines()
-        assert len(kaptive_table_lines) == 2
-        if not os.path.isfile(output_file):
-            with open(output_file, 'wt') as f:
-                f.write(kaptive_table_lines[0])	 # write header line
-        with open(output_file, 'at') as f:
-            f.write(kaptive_table_lines[1])		 # write data line
-
-    try:
-        os.remove(kaptive_table)
-    except OSError:
-        pass
+        if output_file:	 # if we are saving Kaptive results to file...
+            with open(kaptive_table, 'rt') as f:
+                kaptive_table_lines = f.readlines()
+            assert len(kaptive_table_lines) == 2
+            if not os.path.isfile(output_file):
+                with open(output_file, 'wt') as f:
+                    f.write(kaptive_table_lines[0])	 # write header line
+            with open(output_file, 'at') as f:
+                f.write(kaptive_table_lines[1])		 # write data line
 
     if locus is None or confidence is None or problems is None or identity is None:
         sys.exit('Error: Kaptive failed to produce the expected output')

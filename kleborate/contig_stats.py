@@ -16,6 +16,13 @@ import sys
 import gzip
 
 
+def get_contig_stat_results(contigs):
+    contig_count, n50, longest_contig = get_contig_stats(contigs)
+    return {'contig_count': str(contig_count),
+            'N50': str(n50),
+            'largest_contig': str(longest_contig)}
+
+
 def get_contig_stats(assembly):
     """
     Returns various contig length metrics.
