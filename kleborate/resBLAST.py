@@ -1,4 +1,6 @@
 """
+Blast for resistance genes, summarise by class (one class per column)
+
 Copyright 2018 Kat Holt
 Copyright 2018 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
@@ -11,8 +13,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
 details. You should have received a copy of the GNU General Public License along with Kleborate. If
 not, see <http://www.gnu.org/licenses/>.
 """
-
-# blast for resistance genes, summarise by class (one class per column)
 
 import os
 import subprocess

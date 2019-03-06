@@ -1,4 +1,6 @@
 """
+Blast for sets of genes that make up operons for screening, summarise hits for each operon
+
 Copyright 2018 Kat Holt
 Copyright 2018 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
@@ -12,82 +14,69 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-# blast for sets of genes that make up operons for screening
-# summarise hits for each operon
-
 import os
 import sys
 import subprocess
 from optparse import OptionParser
 
 
-def main():
-    usage = "usage: %prog [options]"
+def parse_arguments():
+    usage = 'usage: %prog [options]'
     parser = OptionParser(usage=usage)
 
     # options
-    parser.add_option("-s", "--seqs", action="store", dest="seqs", default="",
-                      help="operon sequences to screen for")
-    parser.add_option("-m", "--minident", action="store", dest="minident", default="90",
-                      help="Minimum percent identity (default 90)")
-    parser.add_option("-c", "--mincov", action="store", dest="mincov", default="80",
-                      help="Minimum percent coverage (default 80)")
+    parser.add_option('-s', '--seqs', action='store', dest='seqs', default='',
+                      help='operon sequences to screen for')
+    parser.add_option('-m', '--minident', action='store', dest='minident', default='90',
+                      help='Minimum percent identity (default 90)')
+    parser.add_option('-c', '--mincov', action='store', dest='mincov', default='80',
+                      help='Minimum percent coverage (default 80)')
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main():
+    options, args = parse_arguments()
 
-    (options, args) = main()
-
-    def check_dup(x):
-        once = []
-        twice = []
-        for i in x:
-            if i not in once:
-                once.append(i)
-            else:
-                twice.append(i)
-        return once, twice
-
-    if options.seqs == "":
-        sys.exit("No operon sequences provided (-s)")
+    if options.seqs == '':
+        sys.exit('No operon sequences provided (-s)')
     else:
-        (path, fileName) = os.path.split(options.seqs)
-        if not os.path.exists(options.seqs + ".nin"):
+        if not os.path.exists(options.seqs + '.nin'):
             with open(os.devnull, 'w') as devnull:
-                subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
+                subprocess.check_call('makeblastdb -dbtype nucl -in ' + options.seqs,
                                       stdout=devnull, shell=True)
-        (fileName, ext) = os.path.splitext(fileName)
 
     # print header
-    print("\t".join(["strain", "hypermucoidy"]))
+    print('\t'.join(['strain', 'hypermucoidy']))
 
     for contigs in args:
         (_, fileName) = os.path.split(contigs)
         (name, ext) = os.path.splitext(fileName)
 
         # blast against all
-        f = os.popen("blastn -task blastn -db " + options.seqs + " -query " + contigs +
-                     " -outfmt '6 sacc pident slen length score' -ungapped -dust no -evalue 1E-20 -word_size 32"
-                     " -max_target_seqs 10000 -culling_limit 1 -perc_identity " + options.minident)
+        f = os.popen('blastn -task blastn -db ' + options.seqs + ' -query ' + contigs +
+                     " -outfmt '6 sacc pident slen length score' -ungapped -dust no " +
+                     '-evalue 1E-20 -word_size 32 -max_target_seqs 10000 -culling_limit 1 ' +
+                     '-perc_identity ' + options.minident)
 
         # list of genes in each locus with hits
-        iro = []
-        rmpA = []
-        iuc = []
+        rmpa = []
         for line in f:
-            fields = line.rstrip().split("\t")
-            (gene_id, pcid, length, allele_length, score) = (fields[0], float(fields[1]), float(fields[2]),
-                                                             float(fields[3]), float(fields[4]))
-            if gene_id.startswith("rmpA"):
+            fields = line.rstrip().split('\t')
+            gene_id, pcid, length, allele_length, score = \
+                fields[0], float(fields[1]), float(fields[2]), float(fields[3]), float(fields[4])
+            if gene_id.startswith('rmpA'):
                 if (allele_length / length * 100) > float(options.mincov):
-                    rmpA.append(gene_id)
+                    rmpa.append(gene_id)
         f.close()
 
-        rmpA.sort()
+        rmpa.sort()
 
-        rmpA_string = "-"
-        if len(rmpA) > 0:
-            rmpA_string = ";".join(rmpA)
+        rmpa_string = '-'
+        if len(rmpa) > 0:
+            rmpa_string = ';'.join(rmpa)
 
-        print("\t".join([name, rmpA_string]))
+        print('\t'.join([name, rmpa_string]))
+
+
+if __name__ == '__main__':
+    main()
