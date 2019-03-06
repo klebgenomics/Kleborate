@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_resource_paths, get_iro_mlst_results
+from kleborate.kleborate import get_data_path, get_iro_mlst_results
 
 
 class TestIro(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestIro(unittest.TestCase):
     """
 
     def setUp(self):
-        self.data_folder, _, _ = get_resource_paths()
+        self.data_folder = get_data_path()
 
     def test_iro_random(self):
         """

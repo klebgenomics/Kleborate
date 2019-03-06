@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_resource_paths, get_output_headers, get_resistance_results
+from kleborate.kleborate import get_data_path, get_output_headers, get_resistance_results
 
 
 class Args(object):
@@ -31,7 +31,7 @@ class TestResAlleles(unittest.TestCase):
 
     def setUp(self):
         self.args = Args()
-        self.data_folder, _, _ = get_resource_paths()
+        self.data_folder = get_data_path()
         _, _, self.res_headers = get_output_headers(self.args, self.data_folder)
 
     def test_both_genes_intact(self):

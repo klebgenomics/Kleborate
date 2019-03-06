@@ -13,14 +13,14 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_resource_paths
+from kleborate.kleborate import get_data_path
 from kleborate.species import get_klebsiella_species
 
 
 class TestSpecies(unittest.TestCase):
 
     def setUp(self):
-        self.data_folder, _, _ = get_resource_paths()
+        self.data_folder = get_data_path()
 
     def test_klebsiella_aerogenes(self):
         species, strength = get_klebsiella_species('test/GCF_000215745.1.fna.gz', self.data_folder)
