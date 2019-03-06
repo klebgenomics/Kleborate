@@ -1,4 +1,15 @@
+#!/usr/bin/env python3
 """
+Reports best match
+  * :   best matching allele is not precise match
+ -nLV : best matching ST is n-locus variant
+
+If an annotation column is provided (such as clonal complex) in the final column of the profiles
+file, this annotation will be reported in column 2 of the output table.
+
+NOTE there is a bug with the culling_limit parameter in older versions of BLAST+. This code has
+been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
+
 Copyright 2018 Kat Holt
 Copyright 2018 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
@@ -12,127 +23,81 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-# reports best match
-# * : best matching allele is not precise match
-# -nLV : best matching ST is n-locus variant
-# if an annotation column is provided (such as clonal complex) in the final column of the profiles file,
-#     this annotation will be reported in column 2 of the output table
-# NOTE there is a bug with the culling_limit parameter in older versions of BLAST+...
-# This code has been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
-
-import collections
 import os
-import sys
 import subprocess
-from optparse import OptionParser
+import argparse
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-s', '--seqs', type=str, required=True,
+                        help='MLST allele sequences file')
+    parser.add_argument('-d', '--database', type=str, required=True,
+                        help='MLST profile database (col1=ST, other cols=loci, must have loci '
+                             'names in header)')
+    parser.add_argument('-i', '--info', type=str, default='yes',
+                        help='Info (clonal group, lineage, etc) provided in last column of '
+                             'profiles (yes (default), no)')
+    parser.add_argument('-m', '--minident', type=int, default=95,
+                        help='Minimum percent identity (default 95)')
+    parser.add_argument('-n', '--maxmissing', type=int, default=3,
+                        help='Maximum missing/uncalled loci to still calculate closest ST '
+                             '(default 3)')
+    parser.add_argument('assemblies', type=str, nargs='+',
+                        help='FASTA files to query')
+    return parser.parse_args()
 
 
 def main():
-    usage = "usage: %prog [options]"
-    parser = OptionParser(usage=usage)
+    args = parse_arguments()
+    results = mlst_blast(args.seqs, args.database, args.info, args.assemblies, args.minident,
+                         args.maxmissing, print_header=True)
+    print("\t".join(results))
 
-    # options
-    parser.add_option("-s", "--seqs", action="store", dest="seqs", default="",
-                      help="MLST allele sequences file")
-    parser.add_option("-d", "--database", action="store", dest="database", default="",
-                      help="MLST profile database (col1=ST, other cols=loci, must have loci names in header)")
-    parser.add_option("-i", "--info", action="store", dest="info", default="yes",
-                      help="Info (clonal group, lineage, etc) provided in last column of profiles (yes (default), no)")
-    parser.add_option("-m", "--minident", action="store", dest="minident", default="95",
-                      help="Minimum percent identity (default 95)")
-    parser.add_option("-n", "--maxmissing", action="store", dest="maxmissing", default="3",
-                      help="Maximum missing/uncalled loci to still calculate closest ST (default 3)")
-    return parser.parse_args()
 
-if __name__ == "__main__":
-    (options, args) = main()
-
-    if options.database == "":
-        sys.exit("No MLST profiles databse provided (-d)")
-
-    if options.seqs == "":
-        sys.exit("No MLST allele sequences provided (-s)")
-    else:
-        (path, fileName) = os.path.split(options.seqs)
-        if not os.path.exists(options.seqs + ".nin"):
-            with open(os.devnull, 'w') as devnull:
-                subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
-                                      stdout=devnull, shell=True)
-        (fileName, ext) = os.path.splitext(fileName)
-
-    def get_closest_locus_variant(query, annotated_query, sts):
-        annotated_query = list(annotated_query)  # copy the list so we don't change the original
-        closest = []
-        closest_alleles = {}   # key = st, value = list
-        min_dist = len(query)  # number mismatching loci, ignoring SNPs
-
-        for index, item in enumerate(query):
-            if item == "-":
-                query[index] = "0"
-
-        # get distance from closest ST, ignoring SNPs (*)
-        for st in sts:
-            d = sum(map(lambda x, y: bool(int(x)-int(y)), st.split(","), query))
-            if d == min_dist:
-                closest.append(int(sts[st]))
-                closest_alleles[sts[st]] = st
-            elif d < min_dist:
-                # reset
-                closest = [int(sts[st])]
-                closest_alleles[sts[st]] = st
-                min_dist = d  # distance from closest ST, ignoring SNPs (*)
-
-        closest_st = str(min(closest))
-
-        for index, item in enumerate(annotated_query):
-            if item == "-" or item.endswith("*"):
-                annotated_query[index] = "0"
-
-        # get distance from closest ST, including SNPs (*)
-        min_dist_incl_snps = sum(map(lambda x, y: bool(int(x)-int(y)),
-                                     closest_alleles[closest_st].split(","), annotated_query))
-
-        return closest_st, min_dist, min_dist_incl_snps
+def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print_header):
+    if not os.path.exists(seqs + ".nin"):
+        with open(os.devnull, 'w') as devnull:
+            subprocess.check_call("makeblastdb -dbtype nucl -in " + seqs,
+                                  stdout=devnull, shell=True)
 
     sts = {}  # key = concatenated string of alleles, value = st
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group
     max_st = 0  # changeable variable holding the highest current ST, incremented when novel combinations are encountered
     header = []
     info_title = "info"
-    with open(options.database, "r") as f:
+    with open(database, "r") as f:
         for line in f:
             fields = line.rstrip().split("\t")
-            if len(header)==0:
+            if len(header) == 0:
                 header = fields
                 header.pop(0)  # remove st label
-                if options.info == "yes":
-                    info_title = header.pop() # remove info label
+                if info_arg == "yes":
+                    info_title = header.pop()  # remove info label
             else:
                 st = fields.pop(0)
-                if options.info == "yes":
+                if info_arg == "yes":
                     info = fields.pop()
                 else:
                     info = ''
                 sts[",".join(fields)] = st
                 if int(st) > max_st:
                     max_st = int(st)
-                if options.info == "yes":
+                if info_arg == "yes":
                     st_info[st] = info
 
     # In order to call an ST, there needs to be an exact match for half (rounded down) of the
     # relevant alleles.
     required_exact_matches = int(len(header) / 2)
 
-    best_match = collections.defaultdict(dict)  # key1 = strain, key2 = locus, value = best match (clean for ST, annotated)
-    perfect_match = collections.defaultdict(dict)  # key1 = strain, key2 = locus, value = perfect match if available
+    if print_header:
+        if info_arg == "yes":
+            print("\t".join(["strain", info_title, "ST"] + header))
+        else:
+            print("\t".join(["strain", "ST"] + header))
 
-    # print header
-    if options.info == "yes":
-        print("\t".join(["strain", info_title, "ST"] + header))
-    else:
-        print("\t".join(["strain", "ST"] + header))
-
-    for contigs in args:
+    for contigs in assemblies:
         (_, fileName) = os.path.split(contigs)
         (name, ext) = os.path.splitext(fileName)
 
@@ -140,9 +105,9 @@ if __name__ == "__main__":
         best_allele = {}  # key = locus, value = best allele (* if imprecise match)
 
         # blast against all
-        f = os.popen("blastn -task blastn -db " + options.seqs + " -query " + contigs +
+        f = os.popen("blastn -task blastn -db " + seqs + " -query " + contigs +
                      " -outfmt '6 sacc pident slen length score' -ungapped -dust no -evalue 1E-20 -word_size 32"
-                     " -max_target_seqs 10000 -culling_limit 2 -perc_identity " + options.minident)
+                     " -max_target_seqs 10000 -culling_limit 2 -perc_identity " + str(minident))
         for line in f:
             fields = line.rstrip().split("\t")
             (gene_id, pcid, length, allele_length, score) = (fields[0], float(fields[1]), int(fields[2]),
@@ -191,7 +156,7 @@ if __name__ == "__main__":
         # assign ST
         bst = ",".join(best_st)
 
-        if mismatch_loci_including_SNPs <= int(options.maxmissing):
+        if mismatch_loci_including_SNPs <= maxmissing:
             # only report ST if enough loci are precise matches
             if bst in sts:
                 bst = sts[bst]  # note may have mismatching alleles due to SNPs, this will be recorded in mismatch_loci_including_SNPs
@@ -208,14 +173,53 @@ if __name__ == "__main__":
 
         # pull info column
         info_final = ""
-        if options.info == "yes":
+        if info_arg == "yes":
             if bst in st_info:
                 info_final = st_info[bst]
 
         if mismatch_loci_including_SNPs > 0 and bst != "0":
             bst += "-" + str(mismatch_loci_including_SNPs) + "LV"
 
-        if options.info == "yes":
-            print("\t".join([name, info_final, bst] + best_st_annotated))
+        if info_arg == "yes":
+            return [name, info_final, bst] + best_st_annotated
         else:
-            print("\t".join([name, bst] + best_st_annotated))
+            return [name, bst] + best_st_annotated
+
+
+def get_closest_locus_variant(query, annotated_query, sts):
+    annotated_query = list(annotated_query)  # copy the list so we don't change the original
+    closest = []
+    closest_alleles = {}   # key = st, value = list
+    min_dist = len(query)  # number mismatching loci, ignoring SNPs
+
+    for index, item in enumerate(query):
+        if item == "-":
+            query[index] = "0"
+
+    # get distance from closest ST, ignoring SNPs (*)
+    for st in sts:
+        d = sum(map(lambda x, y: bool(int(x)-int(y)), st.split(","), query))
+        if d == min_dist:
+            closest.append(int(sts[st]))
+            closest_alleles[sts[st]] = st
+        elif d < min_dist:
+            # reset
+            closest = [int(sts[st])]
+            closest_alleles[sts[st]] = st
+            min_dist = d  # distance from closest ST, ignoring SNPs (*)
+
+    closest_st = str(min(closest))
+
+    for index, item in enumerate(annotated_query):
+        if item == "-" or item.endswith("*"):
+            annotated_query[index] = "0"
+
+    # get distance from closest ST, including SNPs (*)
+    min_dist_incl_snps = sum(map(lambda x, y: bool(int(x)-int(y)),
+                                 closest_alleles[closest_st].split(","), annotated_query))
+
+    return closest_st, min_dist, min_dist_incl_snps
+
+
+if __name__ == '__main__':
+    main()
