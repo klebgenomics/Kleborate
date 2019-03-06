@@ -27,12 +27,18 @@ def main():
     print_header(res_classes, bla_classes)
 
     for contigs in args.assemblies:
-        hits_dict = blast_against_all(args, contigs, gene_info)
-        if args.qrdr:
-            check_for_qrdr_mutations(hits_dict, contigs, args)
-        if args.trunc:
-            check_for_gene_truncations(hits_dict, contigs, args)
+        hits_dict = resblast_one_assembly(contigs, gene_info, args.qrdr, args.trunc, args.seqs,
+                                          args.mincov, args.minident)
         print_results(contigs, res_classes, bla_classes, hits_dict)
+
+
+def resblast_one_assembly(contigs, gene_info, qrdr, trunc, seqs, mincov, minident):
+    hits_dict = blast_against_all(seqs, mincov, minident, contigs, gene_info)
+    if qrdr:
+        check_for_qrdr_mutations(hits_dict, contigs, qrdr)
+    if trunc:
+        check_for_gene_truncations(hits_dict, contigs, trunc)
+    return hits_dict
 
 
 def parse_arguments():
@@ -134,21 +140,25 @@ def get_gapped_position(seq, position):
 
 
 def print_header(res_classes, bla_classes):
-    print('\t'.join(['strain'] + res_classes + bla_classes))
+    print('\t'.join(['strain'] + get_res_headers(res_classes, bla_classes)))
 
 
-def blast_against_all(args, contigs, gene_info):
+def get_res_headers(res_classes, bla_classes):
+    return res_classes + bla_classes
+
+
+def blast_against_all(seqs, mincov, minident, contigs, gene_info):
     hits_dict = {}  # key = class, value = list
 
-    f = os.popen('blastn -task blastn -db ' + args.seqs + ' -query ' + contigs +
+    f = os.popen('blastn -task blastn -db ' + seqs + ' -query ' + contigs +
                  " -outfmt '6 sacc pident slen length score' -ungapped -dust no -evalue 1E-20 " +
                  '-word_size 32 -max_target_seqs 10000 -culling_limit 1 -perc_identity ' +
-                 str(args.minident))
+                 str(minident))
     for line in f:
         fields = line.rstrip().split('\t')
         gene_id, pcid, length, allele_length, score = \
             fields[0], float(fields[1]), float(fields[2]), float(fields[3]), float(fields[4])
-        if (allele_length / length * 100) > args.mincov:
+        if (allele_length / length * 100) > mincov:
             (hit_allele, hit_class, hit_bla_class) = gene_info[gene_id]
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
@@ -174,14 +184,14 @@ def blastx_results_as_xml_tree(database, query):
     return ElementTree.fromstring(blast_output)
 
 
-def check_for_qrdr_mutations(hits_dict, contigs, args):
+def check_for_qrdr_mutations(hits_dict, contigs, qrdr):
     qrdr_loci = {'GyrA': [(83, 'S'), (87, 'D')], 'ParC': [(80, 'S'), (84, 'E')]}
 
     # key = (locus, pos), value = allele,
     # if found in a simple hit starting at position 1 of the protein seq
     complete_hits, incomplete_hits = {}, {}
 
-    root = blastx_results_as_xml_tree(args.qrdr, contigs)
+    root = blastx_results_as_xml_tree(qrdr, contigs)
     for query in root[8]:
         for hit in query[4]:
             gene_id = hit[2].text
@@ -231,10 +241,10 @@ def check_for_qrdr_mutations(hits_dict, contigs, args):
         hits_dict['Flq'] += snps
 
 
-def check_for_gene_truncations(hits_dict, contigs, args):
+def check_for_gene_truncations(hits_dict, contigs, trunc):
     best_mgrb_cov, best_pmrb_cov = 0.0, 0.0
 
-    root = blastx_results_as_xml_tree(args.trunc, contigs)
+    root = blastx_results_as_xml_tree(trunc, contigs)
     for query in root[8]:
         for hit in query[4]:
             gene_id = hit[2].text

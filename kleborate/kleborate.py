@@ -16,23 +16,23 @@ import os
 import sys
 import gzip
 import argparse
-import subprocess
 import distutils.spawn
 from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stat_results
 from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results
 from .mlstBLAST import mlst_blast
+from .resBLAST import read_class_file, get_res_headers, resblast_one_assembly
 from .version import __version__
 
 
 def main():
     args = parse_arguments()
     check_inputs_and_programs(args)
-    data_folder, _, resblast, clusterblast, rmpablast = get_resource_paths()
+    data_folder, clusterblast, rmpablast = get_resource_paths()
     kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
 
-    stdout_header, full_header, res_headers = get_output_headers(args, resblast, data_folder)
+    stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
     output_headers(stdout_header, full_header, args.outfile)
 
     for contigs in args.assemblies:
@@ -52,7 +52,7 @@ def main():
         results.update(get_iro_mlst_results(data_folder, contigs))
         results.update(get_hypermucoidy_results(rmpablast, data_folder, contigs))
         results.update(get_wzi_and_k_locus_results(data_folder, contigs))
-        results.update(get_resistance_results(resblast, data_folder, contigs, args, res_headers))
+        results.update(get_resistance_results(data_folder, contigs, args, res_headers))
         results.update(get_summary_results(results, res_headers))
         results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
         results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
@@ -155,7 +155,7 @@ def check_inputs_and_programs(args):
             sys.exit('Error: could not find mash')
 
 
-def get_output_headers(args, resblast, data_folder):
+def get_output_headers(args, data_folder):
     """
     There are two levels of output:
       * stdout is simpler and displayed to the console
@@ -210,14 +210,9 @@ def get_output_headers(args, resblast, data_folder):
 
     # If resistance genes are on, run the resBLAST.py script to get its headers.
     if args.resistance:
-        res_out = subprocess.check_output('python ' + resblast +
-                                          ' -s ' + data_folder + '/ARGannot_r2.fasta' +
-                                          ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv',
-                                          shell=True)
-        if not isinstance(res_out, str):
-            res_out = res_out.decode()
-        fields = res_out.split('\n')[0].rstrip().split('\t')
-        res_headers = fields[1:]
+        gene_info, res_classes, bla_classes = \
+            read_class_file(data_folder + '/ARGannot_clustered80_r2.csv')
+        res_headers = get_res_headers(res_classes, bla_classes)
         stdout_header += res_headers
         full_header += res_headers
     else:
@@ -315,11 +310,9 @@ def decompress_file(in_file, out_file):
 
 def get_resource_paths():
     data_folder = resource_filename(__name__, 'data')
-    mlstblast = resource_filename(__name__, 'mlstBLAST.py')
-    resblast = resource_filename(__name__, 'resBLAST.py')
     clusterblast = resource_filename(__name__, 'clusterBLAST.py')
     rmpablast = resource_filename(__name__, 'rmpA.py')
-    return data_folder, mlstblast, resblast, clusterblast, rmpablast
+    return data_folder, clusterblast, rmpablast
 
 
 def get_chromosome_mlst_header():
@@ -448,25 +441,17 @@ def get_wzi_and_k_locus_results(data_folder, contigs):
             'K_locus': k_type}
 
 
-def get_resistance_results(resblast, data_folder, contigs, args, res_headers):
-    res_hits = []
+def get_resistance_results(data_folder, contigs, args, res_headers):
     if args.resistance:
-        f = os.popen('python ' + resblast +
-                     ' -s ' + data_folder + '/ARGannot_r2.fasta' +
-                     ' -t ' + data_folder + '/ARGannot_clustered80_r2.csv' +
-                     ' -q ' + data_folder + '/QRDR_120.aa' +
-                     ' -r ' + data_folder + '/MgrB_and_PmrB.aa' +
-                     ' ' + contigs)
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if fields[0] != 'strain':  # skip header
-                res_hits = fields[1:]
-        f.close()
+        gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r2.csv')
+        qrdr = data_folder + '/QRDR_120.aa'
+        trunc = data_folder + '/MgrB_and_PmrB.aa'
+        seqs = data_folder + '/ARGannot_r2.fasta'
+        res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, seqs, 80.0, 90.0)
+        return {r: ';'.join(res_hits[r]) if r in res_hits else '-'
+                for r in res_headers}
     else:
-        res_hits = [''] * len(res_headers)
-
-    assert len(res_headers) == len(res_hits)
-    return dict(zip(res_headers, res_hits))
+        return {}
 
 
 def get_summary_results(results, res_headers):
