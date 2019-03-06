@@ -22,13 +22,14 @@ from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stat_results
 from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results
+from .mlstBLAST import mlst_blast
 from .version import __version__
 
 
 def main():
     args = parse_arguments()
     check_inputs_and_programs(args)
-    data_folder, mlstblast, resblast, clusterblast, rmpablast = get_resource_paths()
+    data_folder, _, resblast, clusterblast, rmpablast = get_resource_paths()
     kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
 
     stdout_header, full_header, res_headers = get_output_headers(args, resblast, data_folder)
@@ -44,13 +45,13 @@ def main():
         results = {'strain': get_strain_name(contigs)}
         results.update(get_contig_stat_results(contigs))
         results.update(get_species_results(contigs, data_folder, args))
-        results.update(get_chromosome_mlst_results(mlstblast, data_folder, contigs))
-        results.update(get_ybt_mlst_results(mlstblast, data_folder, contigs))
-        results.update(get_clb_mlst_results(mlstblast, data_folder, contigs))
-        results.update(get_iuc_mlst_results(mlstblast, data_folder, contigs))
-        results.update(get_iro_mlst_results(mlstblast, data_folder, contigs))
+        results.update(get_chromosome_mlst_results(data_folder, contigs))
+        results.update(get_ybt_mlst_results(data_folder, contigs))
+        results.update(get_clb_mlst_results(data_folder, contigs))
+        results.update(get_iuc_mlst_results(data_folder, contigs))
+        results.update(get_iro_mlst_results(data_folder, contigs))
         results.update(get_hypermucoidy_results(rmpablast, data_folder, contigs))
-        results.update(get_wzi_and_k_locus_results(mlstblast, data_folder, contigs))
+        results.update(get_wzi_and_k_locus_results(data_folder, contigs))
         results.update(get_resistance_results(resblast, data_folder, contigs, args, res_headers))
         results.update(get_summary_results(results, res_headers))
         results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
@@ -353,23 +354,14 @@ def gunzip_contigs_if_necessary(contigs):
     return temp_decompress, contigs
 
 
-def get_chromosome_mlst_results(mlstblast, data_folder, contigs):
-    f = os.popen('python ' + mlstblast +
-                 ' -s ' + data_folder + '/Klebsiella_pneumoniae.fasta' +
-                 ' -d ' + data_folder + '/kpneumoniae.txt' +
-                 ' -i no' +
-                 ' --maxmissing 3' +
-                 ' ' + contigs)
-    chr_st = ''
-    chr_st_detail = []
-    for line in f:
-        fields = line.rstrip().split('\t')
-        if fields[1] != 'ST':  # skip header
-            (strain, chr_st) = (fields[0], fields[1])
-            chr_st_detail = fields[2:]
-            if chr_st != '0':
-                chr_st = 'ST' + chr_st
-    f.close()
+def get_chromosome_mlst_results(data_folder, contigs):
+    seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
+    database = data_folder + '/kpneumoniae.txt'
+    results = mlst_blast(seqs, database, 'no', [contigs], minident=95, maxmissing=3,
+                         print_header=False)
+    strain, chr_st, chr_st_detail = results[0], results[1], results[2:]
+    if chr_st != '0':
+        chr_st = 'ST' + chr_st
 
     chromosome_mlst_header = get_chromosome_mlst_header()
     assert len(chromosome_mlst_header) == len(chr_st_detail)
@@ -380,32 +372,20 @@ def get_chromosome_mlst_results(mlstblast, data_folder, contigs):
     return results
 
 
-def get_virulence_cluster_results(mlstblast, data_folder, contigs, alleles_fasta, profiles_txt,
+def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_txt,
                                   vir_name, vir_st_name, unknown_group_name, min_gene_count,
                                   header_function):
-    f = os.popen('python ' + mlstblast +
-                 ' -s ' + data_folder + '/' + alleles_fasta +
-                 ' -d ' + data_folder + '/' + profiles_txt +
-                 ' -i yes' +
-                 ' --maxmissing 3' +
-                 ' ' + contigs)
-    st, group = '', ''
-    st_detail = []
-    for line in f:
-        fields = line.rstrip().split('\t')
-        if fields[2] != 'ST':  # skip header
-            strain, st, group = fields[0], fields[2], fields[1]
-            st_detail = fields[3:]
-
-            # If no group was found but enough of the genes are present, then this strain is
-            # labelled as an unknown lineage.
-            if group == '':
-                if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
-                    group = unknown_group_name
-                    st = '0'
-                else:
-                    group = '-'
-    f.close()
+    seqs = data_folder + '/' + alleles_fasta
+    database = data_folder + '/' + profiles_txt
+    results = mlst_blast(seqs, database, 'yes', [contigs], minident=95, maxmissing=3,
+                         print_header=False)
+    strain, group, st, st_detail = results[0], results[1], results[2], results[3:]
+    if group == '':
+        if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
+            group = unknown_group_name
+            st = '0'
+        else:
+            group = '-'
 
     mlst_header = header_function()
     assert len(mlst_header) == len(st_detail)
@@ -416,26 +396,26 @@ def get_virulence_cluster_results(mlstblast, data_folder, contigs, alleles_fasta
     return results
 
 
-def get_ybt_mlst_results(mlstblast, data_folder, contigs):
-    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'ybt_alleles.fasta',
+def get_ybt_mlst_results(data_folder, contigs):
+    return get_virulence_cluster_results(data_folder, contigs, 'ybt_alleles.fasta',
                                          'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
                                          'ybt unknown', 8, get_ybt_mlst_header)
 
 
-def get_clb_mlst_results(mlstblast, data_folder, contigs):
-    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'clb_alleles.fasta',
+def get_clb_mlst_results(data_folder, contigs):
+    return get_virulence_cluster_results(data_folder, contigs, 'clb_alleles.fasta',
                                          'CbST_profiles.txt', 'Colibactin', 'CbST',
                                          'clb unknown', 12, get_clb_mlst_header)
 
 
-def get_iuc_mlst_results(mlstblast, data_folder, contigs):
-    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'iuc_alleles.fasta',
+def get_iuc_mlst_results(data_folder, contigs):
+    return get_virulence_cluster_results(data_folder, contigs, 'iuc_alleles.fasta',
                                          'AbST_profiles.txt', 'Aerobactin', 'AbST',
                                          'iuc unknown', 3, get_iuc_mlst_header)
 
 
-def get_iro_mlst_results(mlstblast, data_folder, contigs):
-    return get_virulence_cluster_results(mlstblast, data_folder, contigs, 'iro_alleles.fasta',
+def get_iro_mlst_results(data_folder, contigs):
+    return get_virulence_cluster_results(data_folder, contigs, 'iro_alleles.fasta',
                                          'SmST_profiles.txt', 'Salmochelin', 'SmST',
                                          'iro unknown', 3, get_iro_mlst_header)
 
@@ -455,24 +435,14 @@ def get_hypermucoidy_results(rmpablast, data_folder, contigs):
             'rmpA2': rmpA2_allele}
 
 
-def get_wzi_and_k_locus_results(mlstblast, data_folder, contigs):
-    wzi_st, k_type = '-', '-'
-    f = os.popen('python ' + mlstblast +
-                 ' -s ' + data_folder + '/wzi.fasta' +
-                 ' -d ' + data_folder + '/wzi.txt' +
-                 ' -i yes' +
-                 ' --maxmissing 0' +
-                 ' -m 99' +
-                 ' ' + contigs)
-    for line in f:
-        fields = line.rstrip().split('\t')
-        if fields[0] != 'ST':  # skip header
-            (strain, wzi_st, k_type) = (fields[0], 'wzi' + fields[2], fields[1])
-            if fields[2] == '0':
-                wzi_st = '0'
-            if k_type == '':
-                k_type = '-'
-    f.close()
+def get_wzi_and_k_locus_results(data_folder, contigs):
+    seqs = data_folder + '/wzi.fasta'
+    database = data_folder + '/wzi.txt'
+    results = mlst_blast(seqs, database, 'yes', [contigs], minident=95, maxmissing=3,
+                         print_header=False)
+    strain, k_type, wzi_st = results[0], results[1], 'wzi' + results[2]
+    if k_type == '':
+        k_type = '-'
 
     return {'wzi': wzi_st,
             'K_locus': k_type}

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Convenience wrapper for running Kleborate directly from source tree.
 

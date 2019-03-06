@@ -22,14 +22,13 @@ class TestMlst(unittest.TestCase):
     """
 
     def setUp(self):
-        self.data_folder, self.mlstblast, _, _, _ = get_resource_paths()
+        self.data_folder, _, _, _, _ = get_resource_paths()
 
     def test_chromosome_random(self):
         """
         This test has just random sequence and should give no MLST call.
         """
-        results = get_chromosome_mlst_results(self.mlstblast, self.data_folder,
-                                              'test/test_random.fasta')
+        results = get_chromosome_mlst_results(self.data_folder, 'test/test_random.fasta')
         self.assertEqual(results['gapA'], '-')
         self.assertEqual(results['infB'], '-')
         self.assertEqual(results['mdh'], '-')
@@ -43,8 +42,7 @@ class TestMlst(unittest.TestCase):
         """
         This test is an exact match for ST23.
         """
-        results = get_chromosome_mlst_results(self.mlstblast, self.data_folder,
-                                              'test/test_mlst_1.fasta')
+        results = get_chromosome_mlst_results(self.data_folder, 'test/test_mlst_1.fasta')
         self.assertEqual(results['gapA'], '2')
         self.assertEqual(results['infB'], '1')
         self.assertEqual(results['mdh'], '1')
@@ -58,8 +56,7 @@ class TestMlst(unittest.TestCase):
         """
         This test is is one base off from ST23 (single substitution in mdh_1 of G to A).
         """
-        results = get_chromosome_mlst_results(self.mlstblast, self.data_folder,
-                                              'test/test_mlst_2.fasta')
+        results = get_chromosome_mlst_results(self.data_folder, 'test/test_mlst_2.fasta')
         self.assertEqual(results['gapA'], '2')
         self.assertEqual(results['infB'], '1')
         self.assertEqual(results['mdh'], '1*')
@@ -73,8 +70,7 @@ class TestMlst(unittest.TestCase):
         """
         This test has exact matches for alleles but in an unknown ST combination
         """
-        results = get_chromosome_mlst_results(self.mlstblast, self.data_folder,
-                                              'test/test_mlst_3.fasta')
+        results = get_chromosome_mlst_results(self.data_folder, 'test/test_mlst_3.fasta')
         self.assertEqual(results['gapA'], '44')
         self.assertEqual(results['infB'], '56')
         self.assertEqual(results['mdh'], '34')
