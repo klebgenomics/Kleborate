@@ -91,7 +91,7 @@ def rmpa_blast(seqs, database, assemblies, minident):
                     info = '(' + st_info[gene_id.split('_')[1]] + ')'  # predict from best hit
                     if pcid < 100.00 or allele_length < length:
                         gene_id += '*'  # indicate imprecise hit
-                    rmpa_calls.append(gene_id+info)
+                    rmpa_calls.append(gene_id + info)
                 else:
                     if pcid < 100.00 or allele_length < length:
                         rmpa2_calls.append(gene_id + '*')  # indicate imprecise hit
