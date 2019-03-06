@@ -31,35 +31,31 @@ class TestResAlleles(unittest.TestCase):
 
     def setUp(self):
         self.args = Args()
-        self.data_folder, _, self.resblast, _, _ = get_resource_paths()
-        _, _, self.res_headers = get_output_headers(self.args, self.resblast, self.data_folder)
+        self.data_folder, _, _ = get_resource_paths()
+        _, _, self.res_headers = get_output_headers(self.args, self.data_folder)
 
     def test_both_genes_intact(self):
-        results = get_resistance_results(self.resblast, self.data_folder,
-                                         'test/test_res_mgrb_pmrb_1.fasta', self.args,
-                                         self.res_headers)
+        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_1.fasta',
+                                         self.args, self.res_headers)
         self.assertEqual(results['Col'], '-')
 
     def test_pmrb_frameshift(self):
         """
         A frameshift in pmrB should cause an early stop and lead to a colisitin resistance call.
         """
-        results = get_resistance_results(self.resblast, self.data_folder,
-                                         'test/test_res_mgrb_pmrb_2.fasta', self.args,
-                                         self.res_headers)
+        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_2.fasta',
+                                         self.args, self.res_headers)
         self.assertTrue('PmrB' in results['Col'])
 
     def test_pmrb_early_stop(self):
         """
         This tests an early stop mutation (without a frameshift) in pmrB.
         """
-        results = get_resistance_results(self.resblast, self.data_folder,
-                                         'test/test_res_mgrb_pmrb_3.fasta', self.args,
-                                         self.res_headers)
+        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_3.fasta',
+                                         self.args, self.res_headers)
         self.assertTrue('PmrB' in results['Col'])
 
     def test_mgrb_missing(self):
-        results = get_resistance_results(self.resblast, self.data_folder,
-                                         'test/test_res_mgrb_pmrb_4.fasta', self.args,
-                                         self.res_headers)
+        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_4.fasta',
+                                         self.args, self.res_headers)
         self.assertTrue('MgrB' in results['Col'])

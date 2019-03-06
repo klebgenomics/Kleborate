@@ -20,7 +20,7 @@ from kleborate.species import get_klebsiella_species
 class TestSpecies(unittest.TestCase):
 
     def setUp(self):
-        self.data_folder, _, _, _, _ = get_resource_paths()
+        self.data_folder, _, _ = get_resource_paths()
 
     def test_klebsiella_aerogenes(self):
         species, strength = get_klebsiella_species('test/GCF_000215745.1.fna.gz', self.data_folder)
