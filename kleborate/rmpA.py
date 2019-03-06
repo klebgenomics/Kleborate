@@ -1,4 +1,14 @@
 """
+Reports best match
+  * :    best matching allele is not precise match
+  -nLV : best matching ST is n-locus variant
+
+If an annotation column is provided (such as clonal complex) in the final column of the profiles
+file, this annotation will be reported in column 2 of the output table
+
+NOTE there is a bug with the culling_limit parameter in older versions of BLAST+. This code has
+been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
+
 Copyright 2017 Kat Holt
 Copyright 2017 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
@@ -12,98 +22,90 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-# reports best match
-# * : best matching allele is not precise match
-# -nLV : best matching ST is n-locus variant
-# if an annotation column is provided (such as clonal complex) in the final column of the profiles file,
-#	  this annotation will be reported in column 2 of the output table
-# NOTE there is a bug with the culling_limit parameter in older versions of BLAST+...
-# This code has been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
-
-import collections
 import os
-import sys
 import subprocess
-from optparse import OptionParser
+import argparse
+
+
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('-s', '--seqs', type=str, required=True,
+                        help='rmpA and rmpA2 allele sequences file')
+    parser.add_argument('-d', '--database', type=str, required=True,
+                        help='rmpA and rmpA2 allele sequences file')
+    parser.add_argument('-m', '--minident', type=float, default=95.0,
+                        help='Minimum percent identity (default 95)')
+    parser.add_argument('assemblies', type=str, nargs='+',
+                        help='FASTA files to query')
+    return parser.parse_args()
 
 
 def main():
-	usage = "usage: %prog [options]"
-	parser = OptionParser(usage=usage)
+    args = parse_arguments()
+    print_header()
+    results = rmpa_blast(args.seqs, args.database, args.assemblies, args.minident)
+    print('\t'.join(results))
 
-	# options
-	parser.add_option("-s", "--seqs", action="store", dest="seqs", default="",
-					  help="rmpA and rmpA2 allele sequences file")
-	parser.add_option("-d", "--rmpA_db", action="store", dest="database", default="",
-					  help="rmpA profile database (col1 = allele, col2 = lineage)")
-	parser.add_option("-m", "--minident", action="store", dest="minident", default="95",
-					  help="Minimum percent identity (default 95)")
-	return parser.parse_args()
 
-if __name__ == "__main__":
-	(options, args) = main()
+def print_header():
+    print('\t'.join(['strain', 'rmpA_allele', 'rmpA_lineage', 'rmpA2_allele']))
 
-	if options.database == "":
-		sys.exit("No rmpA profiles databse provided (-d)")
-	if options.seqs == "":
-		sys.exit("No rmpA allele sequences provided (-s)")
-	else:
-		(path, fileName) = os.path.split(options.seqs)
-		if not os.path.exists(options.seqs + ".nin"):
-			with open(os.devnull, 'w') as devnull:
-				subprocess.check_call("makeblastdb -dbtype nucl -in " + options.seqs,
-									  stdout=devnull, shell=True)
 
-	# read in rmpA database
-	st_info = {}  # key = st, value = info relating to this ST, eg clonal group
-	header = []
-	info_title = "info"
-	with open(options.database, "r") as f:
-		for line in f:
-			fields = line.rstrip().split("\t")
-			if len(header)==0:
-				header = fields
-			else:
-				st_info[fields[0]]=fields[1]
+def rmpa_blast(seqs, database, assemblies, minident):
+    if not os.path.exists(seqs + '.nin'):
+        with open(os.devnull, 'w') as devnull:
+            subprocess.check_call('makeblastdb -dbtype nucl -in ' + seqs, stdout=devnull,
+                                  shell=True)
 
-	# print header
-	print("\t".join(["strain","rmpA_allele","rmpA_lineage","rmpA2_allele"]))
+    # read in rmpA database
+    st_info = {}  # key = st, value = info relating to this ST, eg clonal group
+    header = []
+    with open(database, 'r') as f:
+        for line in f:
+            fields = line.rstrip().split('\t')
+            if len(header) == 0:
+                header = fields
+            else:
+                st_info[fields[0]] = fields[1]
 
-	# search input assemblies
-	for contigs in args:
-		(_, fileName) = os.path.split(contigs)
-		(name, ext) = os.path.splitext(fileName)
+    # search input assemblies
+    for contigs in assemblies:
+        _, file_name = os.path.split(contigs)
+        name, ext = os.path.splitext(file_name)
 
-		# blast against all rmpA and rmpA2 alleles
-		f = os.popen("blastn -task blastn -db " + options.seqs + " -query " + contigs +
-					 " -outfmt '6 sacc pident slen length score' -dust no -evalue 1E-20 -word_size 32"
-					 " -max_target_seqs 10000 -culling_limit 1 -perc_identity " + options.minident)
-					 
-		rmpA_calls = []
-		rmpA2_calls = []
-		for line in f:
-			fields = line.rstrip().split("\t")
-			(gene_id, pcid, allele_length, length, score) = (fields[0], float(fields[1]), int(fields[2]),
-															 int(fields[3]), float(fields[4]))
-			
-			if length > (allele_length/2):
-				gene = gene_id.split("_")[0]
-				if gene=="rmpA":
-					info = "("+st_info[gene_id.split("_")[1]]+")" # predict from best hit
-					if pcid < 100.00 or allele_length < length:
-						gene_id += "*" #indicate imprecise hit
-					rmpA_calls.append(gene_id+info)
-				else:
-					if pcid < 100.00 or allele_length < length:
-						rmpA2_calls.append(gene_id + "*") #indicate imprecise hit
-					else:
-						rmpA2_calls.append(gene_id)					
-					
-		f.close()
-		
-		if len(rmpA_calls) == 0:
-			rmpA_calls.append("-")
-		if len(rmpA2_calls) == 0:
-			rmpA2_calls.append("-")
-		
-		print ("\t".join([name,",".join(rmpA_calls),",".join(rmpA2_calls)]))
+        # blast against all rmpA and rmpA2 alleles
+        f = os.popen('blastn -task blastn -db ' + seqs + ' -query ' + contigs +
+                     " -outfmt '6 sacc pident slen length score' " +
+                     '-dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000 ' +
+                     '-culling_limit 1 -perc_identity ' + str(minident))
+
+        rmpa_calls, rmpa2_calls = [], []
+        for line in f:
+            fields = line.rstrip().split('\t')
+            gene_id, pcid, allele_length, length, score = \
+                fields[0], float(fields[1]), int(fields[2]), int(fields[3]), float(fields[4])
+            if length > (allele_length/2):
+                gene = gene_id.split('_')[0]
+                if gene == 'rmpA':
+                    info = '(' + st_info[gene_id.split('_')[1]] + ')'  # predict from best hit
+                    if pcid < 100.00 or allele_length < length:
+                        gene_id += '*'  # indicate imprecise hit
+                    rmpa_calls.append(gene_id+info)
+                else:
+                    if pcid < 100.00 or allele_length < length:
+                        rmpa2_calls.append(gene_id + '*')  # indicate imprecise hit
+                    else:
+                        rmpa2_calls.append(gene_id)
+        f.close()
+
+        if len(rmpa_calls) == 0:
+            rmpa_calls.append('-')
+        if len(rmpa2_calls) == 0:
+            rmpa2_calls.append('-')
+
+        return [name, ','.join(rmpa_calls), ','.join(rmpa2_calls)]
+
+
+if __name__ == '__main__':
+    main()

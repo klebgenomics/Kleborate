@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_resource_paths
+from kleborate.kleborate import get_data_path
 
 
 class TestResAlleles(unittest.TestCase):
@@ -22,4 +22,4 @@ class TestResAlleles(unittest.TestCase):
     """
 
     def setUp(self):
-        self.data_folder, _, _ = get_resource_paths()
+        self.data_folder = get_data_path()

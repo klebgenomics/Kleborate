@@ -39,7 +39,7 @@ def parse_arguments():
     parser.add_argument('-i', '--info', type=str, default='yes',
                         help='Info (clonal group, lineage, etc) provided in last column of '
                              'profiles (yes (default), no)')
-    parser.add_argument('-m', '--minident', type=int, default=95,
+    parser.add_argument('-m', '--minident', type=float, default=95.0,
                         help='Minimum percent identity (default 95)')
     parser.add_argument('-n', '--maxmissing', type=int, default=3,
                         help='Maximum missing/uncalled loci to still calculate closest ST '

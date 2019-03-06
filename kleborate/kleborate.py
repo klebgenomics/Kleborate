@@ -23,13 +23,14 @@ from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results
 from .mlstBLAST import mlst_blast
 from .resBLAST import read_class_file, get_res_headers, resblast_one_assembly
+from .rmpA import rmpa_blast
 from .version import __version__
 
 
 def main():
     args = parse_arguments()
     check_inputs_and_programs(args)
-    data_folder, clusterblast, rmpablast = get_resource_paths()
+    data_folder = get_data_path()
     kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
 
     stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
@@ -50,7 +51,7 @@ def main():
         results.update(get_clb_mlst_results(data_folder, contigs))
         results.update(get_iuc_mlst_results(data_folder, contigs))
         results.update(get_iro_mlst_results(data_folder, contigs))
-        results.update(get_hypermucoidy_results(rmpablast, data_folder, contigs))
+        results.update(get_hypermucoidy_results(data_folder, contigs))
         results.update(get_wzi_and_k_locus_results(data_folder, contigs))
         results.update(get_resistance_results(data_folder, contigs, args, res_headers))
         results.update(get_summary_results(results, res_headers))
@@ -308,11 +309,8 @@ def decompress_file(in_file, out_file):
         o.write(s)
 
 
-def get_resource_paths():
-    data_folder = resource_filename(__name__, 'data')
-    clusterblast = resource_filename(__name__, 'clusterBLAST.py')
-    rmpablast = resource_filename(__name__, 'rmpA.py')
-    return data_folder, clusterblast, rmpablast
+def get_data_path():
+    return resource_filename(__name__, 'data')
 
 
 def get_chromosome_mlst_header():
@@ -413,19 +411,14 @@ def get_iro_mlst_results(data_folder, contigs):
                                          'iro unknown', 3, get_iro_mlst_header)
 
 
-def get_hypermucoidy_results(rmpablast, data_folder, contigs):
-    f = os.popen('python ' + rmpablast +
-                 ' -s ' + data_folder + '/hypermucoidy.fasta' +
-                 ' -d ' + data_folder + '/hypermucoidy_rmpA.txt' +
-                 ' ' + contigs)
-    for line in f:
-        fields = line.rstrip().split('\t')
-        if fields[0] != 'strain':  # skip header
-            (strain, rmpA_allele, rmpA2_allele) = (fields[0], fields[1], fields[2])
-    f.close()
+def get_hypermucoidy_results(data_folder, contigs):
+    seqs = data_folder + '/hypermucoidy.fasta'
+    database = data_folder + '/hypermucoidy_rmpA.txt'
+    results = rmpa_blast(seqs, database, [contigs], 95.0)
+    rmpa_allele, rmpa2_allele = results[1], results[2]
 
-    return {'rmpA': rmpA_allele,
-            'rmpA2': rmpA2_allele}
+    return {'rmpA': rmpa_allele,
+            'rmpA2': rmpa2_allele}
 
 
 def get_wzi_and_k_locus_results(data_folder, contigs):
