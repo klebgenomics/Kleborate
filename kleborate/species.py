@@ -49,9 +49,9 @@ def get_klebsiella_species(contigs, data_folder):
 
     f.close()
 
-    if best_distance <= 0.01:
+    if best_distance <= 0.02:
         return best_species, 'strong'
-    elif best_distance <= 0.03:
+    elif best_distance <= 0.04:
         return best_species, 'weak'
     else:
         return 'unknown', ''
