@@ -22,4 +22,4 @@ class TestResAlleles(unittest.TestCase):
     """
 
     def setUp(self):
-        self.data_folder = get_data_path()
+        self.data_dir = get_data_path()

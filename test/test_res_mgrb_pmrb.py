@@ -31,11 +31,11 @@ class TestResAlleles(unittest.TestCase):
 
     def setUp(self):
         self.args = Args()
-        self.data_folder = get_data_path()
-        _, _, self.res_headers = get_output_headers(self.args, self.data_folder)
+        self.data_dir = get_data_path()
+        _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_both_genes_intact(self):
-        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_1.fasta',
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_1.fasta',
                                          self.args, self.res_headers)
         self.assertEqual(results['Col'], '-')
 
@@ -43,7 +43,7 @@ class TestResAlleles(unittest.TestCase):
         """
         A frameshift in pmrB should cause an early stop and lead to a colisitin resistance call.
         """
-        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_2.fasta',
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_2.fasta',
                                          self.args, self.res_headers)
         self.assertTrue('PmrB' in results['Col'])
 
@@ -51,11 +51,11 @@ class TestResAlleles(unittest.TestCase):
         """
         This tests an early stop mutation (without a frameshift) in pmrB.
         """
-        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_3.fasta',
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_3.fasta',
                                          self.args, self.res_headers)
         self.assertTrue('PmrB' in results['Col'])
 
     def test_mgrb_missing(self):
-        results = get_resistance_results(self.data_folder, 'test/test_res_mgrb_pmrb_4.fasta',
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_4.fasta',
                                          self.args, self.res_headers)
         self.assertTrue('MgrB' in results['Col'])
