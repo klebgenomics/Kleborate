@@ -22,13 +22,13 @@ class TestIro(unittest.TestCase):
     """
 
     def setUp(self):
-        self.data_folder = get_data_path()
+        self.data_dir = get_data_path()
 
     def test_iro_random(self):
         """
         This test has just random sequence and should give no iro call.
         """
-        results = get_iro_mlst_results(self.data_folder, 'test/test_random.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/sequences/test_random.fasta')
         self.assertEqual(results['iroB'], '-')
         self.assertEqual(results['iroC'], '-')
         self.assertEqual(results['iroD'], '-')
@@ -40,7 +40,7 @@ class TestIro(unittest.TestCase):
         """
         This test is an exact match for SmST33.
         """
-        results = get_iro_mlst_results(self.data_folder, 'test/test_iro_1.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/sequences/test_iro_1.fasta')
         self.assertEqual(results['iroB'], '22')
         self.assertEqual(results['iroC'], '33')
         self.assertEqual(results['iroD'], '12')
@@ -53,7 +53,7 @@ class TestIro(unittest.TestCase):
         This test is an inexact match for SmST33. There are single base changes in iroC and in
         iroN.
         """
-        results = get_iro_mlst_results(self.data_folder, 'test/test_iro_2.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/sequences/test_iro_2.fasta')
         self.assertEqual(results['iroB'], '22')
         self.assertEqual(results['iroC'], '33*')
         self.assertEqual(results['iroD'], '12')
@@ -65,7 +65,7 @@ class TestIro(unittest.TestCase):
         """
         This test is an exact match for alleles, but an unknown combination.
         """
-        results = get_iro_mlst_results(self.data_folder, 'test/test_iro_3.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/sequences/test_iro_3.fasta')
         self.assertEqual(results['iroB'], '11')
         self.assertEqual(results['iroC'], '1')
         self.assertEqual(results['iroD'], '18')
@@ -77,7 +77,7 @@ class TestIro(unittest.TestCase):
         """
         This test is an exact match for only one allele.
         """
-        results = get_iro_mlst_results(self.data_folder, 'test/test_iro_4.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/sequences/test_iro_4.fasta')
         self.assertEqual(results['iroB'], '-')
         self.assertEqual(results['iroC'], '1')
         self.assertEqual(results['iroD'], '-')
