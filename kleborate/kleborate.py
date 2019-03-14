@@ -441,7 +441,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers):
         trunc = data_folder + '/MgrB_and_PmrB.aa'
         seqs = data_folder + '/ARGannot_r2.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, seqs, 80.0, 90.0)
-        return {r: ';'.join(res_hits[r]) if r in res_hits else '-'
+        return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
                 for r in res_headers}
     else:
         return {}
