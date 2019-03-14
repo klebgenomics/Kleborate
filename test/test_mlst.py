@@ -17,6 +17,7 @@ import unittest
 
 from kleborate.kleborate import get_data_path, get_chromosome_mlst_results, \
     gunzip_contigs_if_necessary
+from kleborate import settings
 
 
 class TestMlst(unittest.TestCase):
@@ -62,7 +63,7 @@ class TestMlst(unittest.TestCase):
         results = get_chromosome_mlst_results(self.data_dir, 'test/sequences/test_mlst_2.fasta')
         self.assertEqual(results['gapA'], '2')
         self.assertEqual(results['infB'], '1')
-        self.assertEqual(results['mdh'], '1*')
+        self.assertEqual(results['mdh'], '1{}'.format(settings.inexact_nucleotide_match))
         self.assertEqual(results['pgi'], '1')
         self.assertEqual(results['phoE'], '9')
         self.assertEqual(results['rpoB'], '4')

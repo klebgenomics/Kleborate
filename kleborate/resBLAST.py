@@ -19,6 +19,8 @@ import subprocess
 import argparse
 import xml.etree.ElementTree as ElementTree
 
+from . import settings
+
 
 def main():
     args = parse_arguments()
@@ -163,9 +165,9 @@ def blast_against_all(seqs, mincov, minident, contigs, gene_info):
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
             if pcid < 100.00:
-                hit_allele += '*'  # imprecise match
+                hit_allele += settings.inexact_nucleotide_match
             if allele_length < length:
-                hit_allele += '?'  # partial match
+                hit_allele += settings.partial_match
             if hit_class in hits_dict:
                 hits_dict[hit_class].append(hit_allele)
             else:

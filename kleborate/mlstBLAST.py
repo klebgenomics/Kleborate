@@ -27,6 +27,8 @@ import os
 import subprocess
 import argparse
 
+from . import settings
+
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
@@ -121,7 +123,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
                 allele = gene_id
                 locus = gene_id.split('_')[0]
             if pcid < 100.00 or allele_length < length:
-                allele += '*'  # imprecise match
+                allele += settings.inexact_nucleotide_match
             # store best match for each one locus
             if locus in best_score:
                 if score > best_score[locus]:
@@ -142,11 +144,11 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
         for locus in header:
             if locus in best_allele:
                 allele = best_allele[locus]
-                allele_number = allele.replace('*', '')
-                if allele.endswith('*'):
+                allele_number = allele.replace(settings.inexact_nucleotide_match, '')
+                if allele.endswith(settings.inexact_nucleotide_match):
                     mismatch_loci_including_snps += 1
                 best_st.append(allele_number)
-                best_st_annotated.append(allele)  # will still have * if imperfect match
+                best_st_annotated.append(allele)  # will still have character if imperfect match
             else:
                 best_st.append('-')
                 best_st_annotated.append('-')
@@ -198,7 +200,7 @@ def get_closest_locus_variant(query, annotated_query, sts):
         if item == '-':
             query[index] = '0'
 
-    # get distance from closest ST, ignoring SNPs (*)
+    # get distance from closest ST, ignoring SNPs
     for st in sts:
         d = sum(map(lambda x, y: bool(int(x)-int(y)), st.split(','), query))
         if d == min_dist:
@@ -208,15 +210,15 @@ def get_closest_locus_variant(query, annotated_query, sts):
             # reset
             closest = [int(sts[st])]
             closest_alleles[sts[st]] = st
-            min_dist = d  # distance from closest ST, ignoring SNPs (*)
+            min_dist = d  # distance from closest ST, ignoring SNPs
 
     closest_st = str(min(closest))
 
     for index, item in enumerate(annotated_query):
-        if item == '-' or item.endswith('*'):
+        if item == '-' or item.endswith(settings.inexact_nucleotide_match):
             annotated_query[index] = '0'
 
-    # get distance from closest ST, including SNPs (*)
+    # get distance from closest ST, including SNPs
     min_dist_incl_snps = sum(map(lambda x, y: bool(int(x)-int(y)),
                                  closest_alleles[closest_st].split(','), annotated_query))
 
