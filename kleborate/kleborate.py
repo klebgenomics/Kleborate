@@ -12,11 +12,13 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-import os
-import sys
-import gzip
 import argparse
 import distutils.spawn
+import gzip
+import os
+import sys
+import tempfile
+
 from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stat_results
 from .kaptive import get_kaptive_paths, get_kaptive_results
@@ -36,31 +38,30 @@ def main():
     stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
     output_headers(stdout_header, full_header, args.outfile)
 
-    for contigs in args.assemblies:
-        temp_decompressed_file, contigs = gunzip_contigs_if_necessary(contigs)
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        for contigs in args.assemblies:
+            contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
 
-        # All results are stored in a dictionary where the key is the column name and the value
-        # is the result. The results are outputted in order of the header rows. This means that the
-        # column orders can be easily changed by modifying the get_output_headers function.
+            # All results are stored in a dictionary where the key is the column name and the value
+            # is the result. The results are outputted in order of the header rows. This means that
+            # the column orders can be easily changed by modifying the get_output_headers function.
 
-        results = {'strain': get_strain_name(contigs)}
-        results.update(get_contig_stat_results(contigs))
-        results.update(get_species_results(contigs, data_folder, args))
-        results.update(get_chromosome_mlst_results(data_folder, contigs))
-        results.update(get_ybt_mlst_results(data_folder, contigs))
-        results.update(get_clb_mlst_results(data_folder, contigs))
-        results.update(get_iuc_mlst_results(data_folder, contigs))
-        results.update(get_iro_mlst_results(data_folder, contigs))
-        results.update(get_hypermucoidy_results(data_folder, contigs))
-        results.update(get_wzi_and_k_locus_results(data_folder, contigs))
-        results.update(get_resistance_results(data_folder, contigs, args, res_headers))
-        results.update(get_summary_results(results, res_headers))
-        results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
-        results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
+            results = {'strain': get_strain_name(contigs)}
+            results.update(get_contig_stat_results(contigs))
+            results.update(get_species_results(contigs, data_folder, args))
+            results.update(get_chromosome_mlst_results(data_folder, contigs))
+            results.update(get_ybt_mlst_results(data_folder, contigs))
+            results.update(get_clb_mlst_results(data_folder, contigs))
+            results.update(get_iuc_mlst_results(data_folder, contigs))
+            results.update(get_iro_mlst_results(data_folder, contigs))
+            results.update(get_hypermucoidy_results(data_folder, contigs))
+            results.update(get_wzi_and_k_locus_results(data_folder, contigs))
+            results.update(get_resistance_results(data_folder, contigs, args, res_headers))
+            results.update(get_summary_results(results, res_headers))
+            results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
+            results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
 
-        output_results(stdout_header, full_header, args.outfile, results)
-        if temp_decompressed_file:
-            os.remove(contigs)
+            output_results(stdout_header, full_header, args.outfile, results)
 
 
 def parse_arguments():
@@ -303,12 +304,6 @@ def get_resistance_gene_count(res_headers, res_hits):
     return sum(0 if res_hits[i] == '-' else len(res_hits[i].split(';')) for i in res_indices)
 
 
-def decompress_file(in_file, out_file):
-    with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
-        s = i.read()
-        o.write(s)
-
-
 def get_data_path():
     return resource_filename(__name__, 'data')
 
@@ -334,15 +329,20 @@ def get_iro_mlst_header():
     return ['iroB', 'iroC', 'iroD', 'iroN']
 
 
-def gunzip_contigs_if_necessary(contigs):
+def gunzip_contigs_if_necessary(contigs, temp_dir):
     if get_compression_type(contigs) == 'gz':
-        new_contigs = contigs + '_temp_decompress.fasta'
+        name = get_strain_name(contigs)
+        new_contigs = temp_dir + '/' + name + '.fasta'
         decompress_file(contigs, new_contigs)
-        contigs = new_contigs
-        temp_decompress = True
+        return new_contigs
     else:
-        temp_decompress = False
-    return temp_decompress, contigs
+        return contigs
+
+
+def decompress_file(in_file, out_file):
+    with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
+        s = i.read()
+        o.write(s)
 
 
 def get_chromosome_mlst_results(data_folder, contigs):
