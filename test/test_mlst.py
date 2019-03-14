@@ -12,8 +12,11 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
+import tempfile
 import unittest
-from kleborate.kleborate import get_data_path, get_chromosome_mlst_results
+
+from kleborate.kleborate import get_data_path, get_chromosome_mlst_results, \
+    gunzip_contigs_if_necessary
 
 
 class TestMlst(unittest.TestCase):
@@ -79,3 +82,45 @@ class TestMlst(unittest.TestCase):
         self.assertEqual(results['rpoB'], '53')
         self.assertEqual(results['tonB'], '55')
         self.assertEqual(results['ST'], '0')
+
+    def test_83(self):
+        contigs = 'test/sequences/83.fasta.gz'
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
+            results = get_chromosome_mlst_results(self.data_dir, contigs)
+            self.assertEqual(results['gapA'], '10')
+            self.assertEqual(results['infB'], '7')
+            self.assertEqual(results['mdh'], '1')
+            self.assertEqual(results['pgi'], '1')
+            self.assertEqual(results['phoE'], '1')
+            self.assertEqual(results['rpoB'], '1')
+            self.assertEqual(results['tonB'], '35')
+            self.assertEqual(results['ST'], 'ST160')
+
+    def test_134(self):
+        contigs = 'test/sequences/134.fasta.gz'
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
+            results = get_chromosome_mlst_results(self.data_dir, contigs)
+            self.assertEqual(results['gapA'], '2')
+            self.assertEqual(results['infB'], '1')
+            self.assertEqual(results['mdh'], '2')
+            self.assertEqual(results['pgi'], '1')
+            self.assertEqual(results['phoE'], '4')
+            self.assertEqual(results['rpoB'], '4')
+            self.assertEqual(results['tonB'], '4')
+            self.assertEqual(results['ST'], 'ST16')
+
+    def test_ba779(self):
+        contigs = 'test/sequences/BA779.fasta.gz'
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
+            results = get_chromosome_mlst_results(self.data_dir, contigs)
+            self.assertEqual(results['gapA'], '2')
+            self.assertEqual(results['infB'], '1')
+            self.assertEqual(results['mdh'], '1')
+            self.assertEqual(results['pgi'], '1')
+            self.assertEqual(results['phoE'], '9')
+            self.assertEqual(results['rpoB'], '4')
+            self.assertEqual(results['tonB'], '12')
+            self.assertEqual(results['ST'], 'ST23')
