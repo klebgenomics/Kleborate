@@ -26,8 +26,6 @@ import os
 import subprocess
 import argparse
 
-from . import settings
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
@@ -92,11 +90,11 @@ def rmpa_blast(seqs, database, assemblies, minident):
                 if gene == 'rmpA':
                     info = '(' + st_info[gene_id.split('_')[1]] + ')'  # predict from best hit
                     if pcid < 100.00 or allele_length < length:
-                        gene_id += settings.inexact_nucleotide_match
+                        gene_id += '*'
                     rmpa_calls.append(gene_id + info)
                 else:
                     if pcid < 100.00 or allele_length < length:
-                        rmpa2_calls.append(gene_id + settings.inexact_nucleotide_match)
+                        rmpa2_calls.append(gene_id + '*')
                     else:
                         rmpa2_calls.append(gene_id)
         f.close()
