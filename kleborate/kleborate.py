@@ -213,7 +213,7 @@ def get_output_headers(args, data_folder):
     # If resistance genes are on, run the resBLAST.py script to get its headers.
     if args.resistance:
         gene_info, res_classes, bla_classes = \
-            read_class_file(data_folder + '/ARGannot_clustered80_r2.csv')
+            read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
         res_headers = get_res_headers(res_classes, bla_classes)
         stdout_header += res_headers
         full_header += res_headers
@@ -436,10 +436,10 @@ def get_wzi_and_k_locus_results(data_folder, contigs):
 
 def get_resistance_results(data_folder, contigs, args, res_headers):
     if args.resistance:
-        gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r2.csv')
+        gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
         qrdr = data_folder + '/QRDR_120.aa'
         trunc = data_folder + '/MgrB_and_PmrB.aa'
-        seqs = data_folder + '/ARGannot_r2.fasta'
+        seqs = data_folder + '/ARGannot_r3.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, seqs, 80.0, 90.0)
         return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
                 for r in res_headers}
