@@ -19,12 +19,9 @@ import subprocess
 import argparse
 import xml.etree.ElementTree as ElementTree
 
-from . import settings
-
 
 def main():
     args = parse_arguments()
-    build_blast_databases(args)
     gene_info, res_classes, bla_classes = read_class_file(args.resclass)
     print_header(res_classes, bla_classes)
 
@@ -35,6 +32,7 @@ def main():
 
 
 def resblast_one_assembly(contigs, gene_info, qrdr, trunc, seqs, mincov, minident):
+    build_blast_databases(seqs, qrdr, trunc)
     hits_dict = blast_against_all(seqs, mincov, minident, contigs, gene_info)
     if qrdr:
         check_for_qrdr_mutations(hits_dict, contigs, qrdr)
@@ -77,20 +75,20 @@ def parse_arguments():
     return parser.parse_args()
 
 
-def build_blast_databases(args):
-    if not os.path.exists(args.seqs + '.nin'):
+def build_blast_databases(seqs, qrdr, trunc):
+    if not os.path.exists(seqs + '.nin'):
         with open(os.devnull, 'w') as devnull:
-            subprocess.check_call('makeblastdb -dbtype nucl -in ' + args.seqs,
+            subprocess.check_call('makeblastdb -dbtype nucl -in ' + seqs,
                                   stdout=devnull, shell=True)
-    if args.qrdr:
-        if not os.path.exists(args.qrdr + '.pin'):
+    if qrdr:
+        if not os.path.exists(qrdr + '.pin'):
             with open(os.devnull, 'w') as devnull:
-                subprocess.check_call('makeblastdb -dbtype prot -in ' + args.qrdr,
+                subprocess.check_call('makeblastdb -dbtype prot -in ' + qrdr,
                                       stdout=devnull, shell=True)
-    if args.trunc:
-        if not os.path.exists(args.trunc + '.pin'):
+    if trunc:
+        if not os.path.exists(trunc + '.pin'):
             with open(os.devnull, 'w') as devnull:
-                subprocess.check_call('makeblastdb -dbtype prot -in ' + args.trunc,
+                subprocess.check_call('makeblastdb -dbtype prot -in ' + trunc,
                                       stdout=devnull, shell=True)
 
 
