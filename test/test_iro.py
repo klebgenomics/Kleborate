@@ -15,7 +15,6 @@ not, see <http://www.gnu.org/licenses/>.
 import unittest
 
 from kleborate.kleborate import get_data_path, get_iro_mlst_results
-from kleborate import settings
 
 
 class TestIro(unittest.TestCase):
@@ -57,9 +56,9 @@ class TestIro(unittest.TestCase):
         """
         results = get_iro_mlst_results(self.data_dir, 'test/sequences/test_iro_2.fasta')
         self.assertEqual(results['iroB'], '22')
-        self.assertEqual(results['iroC'], '33{}'.format(settings.inexact_nucleotide_match))
+        self.assertEqual(results['iroC'], '33*')
         self.assertEqual(results['iroD'], '12')
-        self.assertEqual(results['iroN'], '15{}'.format(settings.inexact_nucleotide_match))
+        self.assertEqual(results['iroN'], '15*')
         self.assertEqual(results['Salmochelin'], 'iro 4')
         self.assertEqual(results['SmST'], '33-2LV')
 

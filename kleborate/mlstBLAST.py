@@ -27,8 +27,6 @@ import os
 import subprocess
 import argparse
 
-from . import settings
-
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
@@ -123,7 +121,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
                 allele = gene_id
                 locus = gene_id.split('_')[0]
             if pcid < 100.00 or allele_length < length:
-                allele += settings.inexact_nucleotide_match
+                allele += '*'  # inexact match
             # store best match for each one locus
             if locus in best_score:
                 if score > best_score[locus]:
@@ -144,8 +142,8 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
         for locus in header:
             if locus in best_allele:
                 allele = best_allele[locus]
-                allele_number = allele.replace(settings.inexact_nucleotide_match, '')
-                if allele.endswith(settings.inexact_nucleotide_match):
+                allele_number = allele.replace('*', '')
+                if allele.endswith('*'):
                     mismatch_loci_including_snps += 1
                 best_st.append(allele_number)
                 best_st_annotated.append(allele)  # will still have character if imperfect match
@@ -215,7 +213,7 @@ def get_closest_locus_variant(query, annotated_query, sts):
     closest_st = str(min(closest))
 
     for index, item in enumerate(annotated_query):
-        if item == '-' or item.endswith(settings.inexact_nucleotide_match):
+        if item == '-' or item.endswith('*'):
             annotated_query[index] = '0'
 
     # get distance from closest ST, including SNPs
