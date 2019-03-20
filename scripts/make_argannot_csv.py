@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 
 """
-This script modifies the ARGannot_clustered80_r2.csv file (comes with SRST2) for use with
+This script modifies the ARGannot_clustered80_r3.csv file (comes with SRST2) for use with
 Kleborate. Specifically, it does two things:
   1) Add beta-lactamase description and class columns
   2) Removes some genes not suitable for inclusion in Kleborate
 
 It takes two arguments:
-  1) SRST2's copy of the ARGannot_clustered80_r2.csv file
+  1) SRST2's copy of the ARGannot_clustered80_r3.csv file
   2) the table made by bla_info.py
 
 Usage:
-  ./make_argannot_csv.py path/to/srst2/data/ARGannot_clustered80_r2.csv bla_info_table > ARGannot_clustered80_r2.csv
+  ./make_argannot_csv.py path/to/srst2/data/ARGannot_clustered80_r3.csv bla_info_table > ARGannot_clustered80_r3.csv
 """
 
 

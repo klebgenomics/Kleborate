@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 
 """
-This script modifies the ARGannot_r2.fasta file (comes with SRST2) for use with Kleborate.
-Specifically, it removes alleles which are not in the ARGannot_clustered80_r2.csv file.
+This script modifies the ARGannot_r3.fasta file (comes with SRST2) for use with Kleborate.
+Specifically, it removes alleles which are not in the ARGannot_clustered80_r3.csv file.
 
 It takes two arguments:
-  1) SRST2's copy of ARGannot_r2.fasta
-  2) the ARGannot_clustered80_r2.csv file made by make_argannot_csv.py
+  1) SRST2's copy of ARGannot_r3.fasta
+  2) the ARGannot_clustered80_r3.csv file made by make_argannot_csv.py
 
 Usage:
-  ./make_argannot_fasta.py path/to/srst2/data/ARGannot_r2.fasta ARGannot_clustered80_r2.csv > ARGannot_r2.fasta
+  ./make_argannot_fasta.py path/to/srst2/data/ARGannot_r3.fasta ARGannot_clustered80_r3.csv > ARGannot_r3.fasta
 """
 
 import sys

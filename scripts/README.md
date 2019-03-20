@@ -26,7 +26,7 @@ If that command completes successfully, you can go to [Microreact's upload page]
 
 ## Preparing Kleborate's resistance gene database files
 
-These instructions describe how to generate Kleborate's resistance gene database files: `ARGannot_r2.fasta` and `ARGannot_clustered80_r2.csv`.
+These instructions describe how to generate Kleborate's resistance gene database files: `ARGannot_r3.fasta` and `ARGannot_clustered80_r3.csv`.
 
 This is necessary for a couple reasons: 
 
@@ -59,11 +59,11 @@ Run the `bla_info.py` script to create a table containing a description and clas
 
 #### 3. Make the ARG-ANNOT csv file
 
-Kleborate uses the `ARGannot_r2.fasta` and `ARGannot_clustered80_r2.csv` files. These are included in [SRST2](https://github.com/katholt/srst2), but Kleborate needs slightly modified versions.
+Kleborate uses the `ARGannot_r3.fasta` and `ARGannot_clustered80_r3.csv` files. These are included in [SRST2](https://github.com/katholt/srst2), but Kleborate needs slightly modified versions.
 
 Run the `make_argannot_csv.py` to add the beta-lactamase information to SRST2's csv:
 ```
-./make_argannot_csv.py path/to/srst2/data/ARGannot_clustered80_r2.csv bla_info_table > ARGannot_clustered80_r2.csv
+./make_argannot_csv.py path/to/srst2/data/ARGannot_clustered80_r3.csv bla_info_table > ARGannot_clustered80_r3.csv
 ```
 
 
@@ -71,7 +71,7 @@ Run the `make_argannot_csv.py` to add the beta-lactamase information to SRST2's 
 
 Now you need to make a fasta file corresponding to the csv file you just made. This removes alleles that aren't in the csv:
 ```
-./make_argannot_fasta.py path/to/srst2/data/ARGannot_r2.fasta ARGannot_clustered80_r2.csv > ARGannot_r2.fasta
+./make_argannot_fasta.py path/to/srst2/data/ARGannot_r3.fasta ARGannot_clustered80_r3.csv > ARGannot_r3.fasta
 ```
 
-That's it! Put the two new files (`ARGannot_r2.fasta` and `ARGannot_clustered80_r2.csv`) in Kleborate's data directory (`Kleborate/kleborate/data/`).
+That's it! Put the two new files (`ARGannot_r3.fasta` and `ARGannot_clustered80_r3.csv`) in Kleborate's data directory (`Kleborate/kleborate/data/`).
