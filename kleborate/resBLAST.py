@@ -163,9 +163,9 @@ def blast_against_all(seqs, mincov, minident, contigs, gene_info):
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
             if pcid < 100.00:
-                hit_allele += settings.inexact_nucleotide_match
+                hit_allele += '*'
             if allele_length < length:
-                hit_allele += settings.partial_match
+                hit_allele += '?'
             if hit_class in hits_dict:
                 hits_dict[hit_class].append(hit_allele)
             else:
