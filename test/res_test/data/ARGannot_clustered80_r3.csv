@@ -1,11 +1,8 @@
 clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_contains_multiple_genes,gene_found_in_multiple_clusters,bla_description,bla_class
-0,ABC-1__1,Flq,ABC,ABC-1,1,0123456789,1-999,999,no,no,NA,NA
-0,ABC-2__2,Flq,ABC,ABC-2,2,0123456789,1-999,999,no,no,NA,NA
-0,ABC-3__3,Flq,ABC,ABC-3,3,0123456789,1-999,999,no,no,NA,NA
+0,ABC-1__1,Bla,ABC,ABC-1,1,0123456789,1-999,999,no,no,class A beta-lactamase,Bla
+0,ABC-2__2,Bla,ABC,ABC-2,2,0123456789,1-999,999,no,no,class A beta-lactamase,Bla
+0,ABC-3__3,Bla,ABC,ABC-3,3,0123456789,1-999,999,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+0,ABC-4__4,Bla,ABC,ABC-4,4,0123456789,1-999,999,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 1,XYZ-1__5,Tet,XYZ,XYZ-1,5,0123456789,1-999,999,no,no,NA,NA
 1,XYZ-2__6,Tet,XYZ,XYZ-2,6,0123456789,1-999,999,no,no,NA,NA
 1,XYZ-3__7,Tet,XYZ,XYZ-3,7,0123456789,1-999,999,no,no,NA,NA
-2,BET-1__5,Bla,BET,BET-1,8,0123456789,1-999,999,no,no,class A beta-lactamase,Bla
-2,BET-2__5,Bla,BET,BET-2,9,0123456789,1-999,999,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-2,BET-3__5,Bla,BET,BET-3,10,0123456789,1-999,999,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-2,BET-4__5,Bla,BET,BET-4,11,0123456789,1-999,999,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb

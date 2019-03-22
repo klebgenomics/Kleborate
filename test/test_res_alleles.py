@@ -34,47 +34,69 @@ class TestResAlleles(unittest.TestCase):
     def test_res_01(self):
         results = get_resistance_results(self.data_dir, 'test/res_test/01.fasta', self.args,
                                          self.res_headers)
-        self.assertEqual(results['Flq'], 'ABC-1')
         self.assertEqual(results['Tet'], '-')
-        self.assertEqual(results['Bla'], '-')
-        self.assertEqual(results['Bla_Carb'], '-')
+        self.assertEqual(results['Bla'], 'ABC-1')
         self.assertEqual(results['Bla_ESBL'], '-')
-        self.assertEqual(results['Bla_broad'], '-')
 
     def test_res_02(self):
         results = get_resistance_results(self.data_dir, 'test/res_test/02.fasta', self.args,
                                          self.res_headers)
-        self.assertEqual(results['Flq'], 'ABC-2')
         self.assertEqual(results['Tet'], '-')
-        self.assertEqual(results['Bla'], '-')
-        self.assertEqual(results['Bla_Carb'], '-')
+        self.assertEqual(results['Bla'], 'ABC-2')
         self.assertEqual(results['Bla_ESBL'], '-')
-        self.assertEqual(results['Bla_broad'], '-')
 
     def test_res_03(self):
-        """
-        This query allele is equally distant from both ABC-1 and ABC-2 (two substitutions), but an
-        exact amino acid match for each. While both alleles are an acceptable answer, we should
-        return ABC-1 because it's the lower numbered allele.
-        """
         results = get_resistance_results(self.data_dir, 'test/res_test/03.fasta', self.args,
                                          self.res_headers)
-        self.assertEqual(results['Flq'], 'ABC-1*')
         self.assertEqual(results['Tet'], '-')
         self.assertEqual(results['Bla'], '-')
-        self.assertEqual(results['Bla_Carb'], '-')
-        self.assertEqual(results['Bla_ESBL'], '-')
-        self.assertEqual(results['Bla_broad'], '-')
+        self.assertEqual(results['Bla_ESBL'], 'ABC-3')
 
     def test_res_04(self):
-        """
-        This query allele has no perfect nucleotide matches but it matches ABC-3's amino acids.
-        """
         results = get_resistance_results(self.data_dir, 'test/res_test/04.fasta', self.args,
                                          self.res_headers)
-        self.assertEqual(results['Flq'], 'ABC-3^')
         self.assertEqual(results['Tet'], '-')
         self.assertEqual(results['Bla'], '-')
-        self.assertEqual(results['Bla_Carb'], '-')
+        self.assertEqual(results['Bla_ESBL'], 'ABC-4')
+
+    def test_res_05(self):
+        results = get_resistance_results(self.data_dir, 'test/res_test/05.fasta', self.args,
+                                         self.res_headers)
+        self.assertEqual(results['Tet'], '-')
+        self.assertTrue(results['Bla'] == 'ABC-1^' or results['Bla'] == 'ABC-2^')
         self.assertEqual(results['Bla_ESBL'], '-')
-        self.assertEqual(results['Bla_broad'], '-')
+
+    def test_res_06(self):
+        results = get_resistance_results(self.data_dir, 'test/res_test/06.fasta', self.args,
+                                         self.res_headers)
+        self.assertEqual(results['Tet'], '-')
+        self.assertEqual(results['Bla'], '-')
+        self.assertTrue(results['Bla_ESBL'] == 'ABC-3^' or results['Bla_ESBL'] == 'ABC-4^')
+
+    def test_res_07(self):
+        results = get_resistance_results(self.data_dir, 'test/res_test/07.fasta', self.args,
+                                         self.res_headers)
+        self.assertEqual(results['Tet'], '-')
+        self.assertEqual(results['Bla'], 'ABC-2*')
+        self.assertEqual(results['Bla_ESBL'], '-')
+
+    def test_res_08(self):
+        results = get_resistance_results(self.data_dir, 'test/res_test/08.fasta', self.args,
+                                         self.res_headers)
+        self.assertEqual(results['Tet'], '-')
+        self.assertEqual(results['Bla'], 'ABC-1;ABC-2')
+        self.assertEqual(results['Bla_ESBL'], '-')
+
+    def test_res_09(self):
+        results = get_resistance_results(self.data_dir, 'test/res_test/09.fasta', self.args,
+                                         self.res_headers)
+        self.assertEqual(results['Tet'], '-')
+        self.assertTrue(results['Bla'] == 'ABC-1^' or results['Bla'] == 'ABC-2^')
+        self.assertTrue(results['Bla_ESBL'] == 'ABC-3^' or results['Bla_ESBL'] == 'ABC-4^')
+
+    def test_res_10(self):
+        results = get_resistance_results(self.data_dir, 'test/res_test/10.fasta', self.args,
+                                         self.res_headers)
+        self.assertEqual(results['Tet'], '-')
+        self.assertEqual(results['Bla'], 'ABC-1;ABC-2')
+        self.assertEqual(results['Bla_ESBL'], 'ABC-3*;ABC-4')
