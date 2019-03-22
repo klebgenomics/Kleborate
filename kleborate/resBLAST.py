@@ -14,9 +14,11 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
+import argparse
+import collections
 import os
 import subprocess
-import argparse
+import tempfile
 import xml.etree.ElementTree as ElementTree
 
 
@@ -121,9 +123,11 @@ def read_class_file(res_class_file):
                     bla_classes.append(bla_class)
 
     res_classes.sort()
-    res_classes.remove('Bla')
+    if 'Bla' in res_classes:
+        res_classes.remove('Bla')
     bla_classes.sort()
-    bla_classes.remove('NA')
+    if 'NA' in res_classes:
+        bla_classes.remove('NA')
 
     return gene_info, res_classes, bla_classes
 
@@ -148,30 +152,73 @@ def get_res_headers(res_classes, bla_classes):
 
 
 def blast_against_all(seqs, mincov, minident, contigs, gene_info):
-    hits_dict = {}  # key = class, value = list
+    hits_dict = collections.defaultdict(list)  # key = class, value = list
 
     f = os.popen('blastn -task blastn -db ' + seqs + ' -query ' + contigs +
-                 " -outfmt '6 sacc pident slen length score' -ungapped -dust no -evalue 1E-20 " +
-                 '-word_size 32 -max_target_seqs 10000 -culling_limit 1 -perc_identity ' +
-                 str(minident))
+                 " -outfmt '6 sacc pident slen length score qseq' -ungapped -dust no"
+                 ' -evalue 1E-20 -word_size 32 -max_target_seqs 10000 -culling_limit 1'
+                 ' -perc_identity ' + str(minident))
     for line in f:
-        fields = line.rstrip().split('\t')
-        gene_id, pcid, length, allele_length, score = \
-            fields[0], float(fields[1]), float(fields[2]), float(fields[3]), float(fields[4])
-        if (allele_length / length * 100) > mincov:
+        p = line.rstrip().split('\t')
+        gene_id, pcid, length, allele_length, score, query_seq = \
+            p[0], float(p[1]), float(p[2]), float(p[3]), float(p[4]), p[5]
+        if (allele_length / length * 100.0) > mincov:
+
+            if pcid < 100.0:
+                aa_result = check_for_exact_aa_match(seqs, query_seq)
+                if aa_result is not None:
+                    gene_id = aa_result
+            else:
+                aa_result = None
+
             (hit_allele, hit_class, hit_bla_class) = gene_info[gene_id]
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
-            if pcid < 100.00:
-                hit_allele += '*'
-            if allele_length < length:
-                hit_allele += '?'
-            if hit_class in hits_dict:
-                hits_dict[hit_class].append(hit_allele)
+
+            if aa_result is not None:
+                hit_allele += '^'
             else:
-                hits_dict[hit_class] = [hit_allele]
+                if pcid < 100.0:
+                    hit_allele += '*'
+                if allele_length < length:
+                    hit_allele += '?'
+
+            hits_dict[hit_class].append(hit_allele)
+
     f.close()
     return hits_dict
+
+
+def check_for_exact_aa_match(seqs, gene_nucl_seq):
+    """
+    This function checks to see if an exact amino acid match can be found for a sequence that had
+    an inexact nucleotide match. If so, return the gene_id, otherwise None.
+    """
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        # Save just the query allele in a temporary FASTA file.
+        q_filename = tmp_dir + '/query.fasta'
+        with open(q_filename, 'wt') as q_fasta:
+            q_fasta.write('>query\n')
+            q_fasta.write(gene_nucl_seq)
+            q_fasta.write('\n')
+
+        # tblastx: translated query to translated database
+        tblastx_cmd = 'tblastx -db ' + seqs + ' -query ' + q_filename + ' -query_gencode 11' + \
+                      " -db_gencode 11 -outfmt '6 sacc pident slen length' -culling_limit 1"
+        process = subprocess.Popen(tblastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
+        blast_output = process.communicate()[0]
+        if not isinstance(blast_output, str):
+            blast_output = blast_output.decode()
+
+        # Look for a perfect match and return the first one found.
+        for line in blast_output.splitlines():
+            p = line.strip().split('\t')
+            gene_id, pcid, length, allele_length = p[0], float(p[1]), float(p[2]), float(p[3])
+            cov = 100.0 * allele_length * 3.0 / length
+            if pcid == 100.0 and cov == 100.0:
+                return gene_id
+
+    return None
 
 
 def blastx_results_as_xml_tree(database, query):
