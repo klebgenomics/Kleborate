@@ -24,9 +24,9 @@ class Args(object):
         self.kaptive_o = False
 
 
-class TestResMgrBPmrB(unittest.TestCase):
+class TestResOmp(unittest.TestCase):
     """
-    Tests calling of colistin resistance via the truncation of mgrB/pmrB.
+    Tests calling of carbapenem resistance via the OmpK35/OmpK36 genes.
     """
 
     def setUp(self):
@@ -35,27 +35,37 @@ class TestResMgrBPmrB(unittest.TestCase):
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_both_genes_intact(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_1.fasta',
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_1.fasta',
                                          self.args, self.res_headers)
-        self.assertEqual(results['Col'], '-')
+        self.assertEqual(results['Bla_Carb'], '-')
 
-    def test_pmrb_frameshift(self):
+    def test_ompk35_frameshift(self):
         """
-        A frameshift in pmrB should cause an early stop and lead to a colisitin resistance call.
+        A frameshift in OmpK35 should cause an early stop and lead to a carbapenem resistance call.
         """
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_2.fasta',
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_2.fasta',
                                          self.args, self.res_headers)
-        self.assertTrue('PmrB-' in results['Col'])
+        self.assertTrue('OmpK35-' in results['Bla_Carb'])
 
-    def test_pmrb_early_stop(self):
+    def test_ompk35_early_stop(self):
         """
-        This tests an early stop mutation (without a frameshift) in pmrB.
+        This tests an early stop mutation (without a frameshift) in OmpK35.
         """
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_3.fasta',
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_3.fasta',
                                          self.args, self.res_headers)
-        self.assertTrue('PmrB-' in results['Col'])
+        self.assertTrue('OmpK35-' in results['Bla_Carb'])
 
-    def test_mgrb_missing(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_4.fasta',
+    def test_ompk36_missing(self):
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_4.fasta',
                                          self.args, self.res_headers)
-        self.assertTrue('MgrB-' in results['Col'])
+        self.assertTrue('OmpK36-' in results['Bla_Carb'])
+
+    def test_ompk36gd(self):
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_5.fasta',
+                                         self.args, self.res_headers)
+        self.assertTrue('OmpK36GD' in results['Bla_Carb'])
+
+    def test_ompk36td(self):
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_6.fasta',
+                                         self.args, self.res_headers)
+        self.assertTrue('OmpK36TD' in results['Bla_Carb'])

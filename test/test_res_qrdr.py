@@ -24,9 +24,9 @@ class Args(object):
         self.kaptive_o = False
 
 
-class TestResMgrBPmrB(unittest.TestCase):
+class TestResGyrAParC(unittest.TestCase):
     """
-    Tests calling of colistin resistance via the truncation of mgrB/pmrB.
+    Tests calling of fluoroquinolone resistance via snps in the GyrA and ParC genes.
     """
 
     def setUp(self):
@@ -34,28 +34,23 @@ class TestResMgrBPmrB(unittest.TestCase):
         self.data_dir = get_data_path()
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
-    def test_both_genes_intact(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_1.fasta',
+    def test_no_mutations(self):
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_qrdr_1.fasta',
                                          self.args, self.res_headers)
-        self.assertEqual(results['Col'], '-')
+        self.assertEqual(results['Flq'], '-')
 
-    def test_pmrb_frameshift(self):
-        """
-        A frameshift in pmrB should cause an early stop and lead to a colisitin resistance call.
-        """
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_2.fasta',
+    def test_gyra(self):
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_qrdr_2.fasta',
                                          self.args, self.res_headers)
-        self.assertTrue('PmrB-' in results['Col'])
+        self.assertTrue('GyrA-83C' in results['Flq'])
 
-    def test_pmrb_early_stop(self):
-        """
-        This tests an early stop mutation (without a frameshift) in pmrB.
-        """
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_3.fasta',
+    def test_parc(self):
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_qrdr_3.fasta',
                                          self.args, self.res_headers)
-        self.assertTrue('PmrB-' in results['Col'])
+        self.assertTrue('ParC-84D' in results['Flq'])
 
-    def test_mgrb_missing(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_4.fasta',
+    def test_gyra_and_parc(self):
+        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_qrdr_4.fasta',
                                          self.args, self.res_headers)
-        self.assertTrue('MgrB-' in results['Col'])
+        self.assertTrue('GyrA-83C' in results['Flq'])
+        self.assertTrue('ParC-84D' in results['Flq'])
