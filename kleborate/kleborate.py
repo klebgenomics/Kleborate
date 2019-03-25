@@ -439,8 +439,9 @@ def get_resistance_results(data_folder, contigs, args, res_headers):
         gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
         qrdr = data_folder + '/QRDR_120.aa'
         trunc = data_folder + '/MgrB_and_PmrB.aa'
+        omp = data_folder + '/OmpK.aa'
         seqs = data_folder + '/ARGannot_r3.fasta'
-        res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, seqs, 80.0, 90.0)
+        res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, 80.0, 90.0)
         return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
                 for r in res_headers}
     else:
