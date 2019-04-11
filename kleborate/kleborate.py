@@ -16,6 +16,7 @@ import argparse
 import distutils.spawn
 import gzip
 import os
+import subprocess
 import sys
 import tempfile
 
@@ -155,6 +156,23 @@ def check_inputs_and_programs(args):
     if args.species:
         if not distutils.spawn.find_executable('mash'):
             sys.exit('Error: could not find mash')
+    major, minor, patch = get_blast_version()
+    if major < 2 or (major == 2 and minor < 7):
+        sys.exit('Error: you have BLAST v{}.{}.{} installed, but Kleborate requires v2.7.1 or '
+                 'later'.format(major, minor, patch))
+
+
+def get_blast_version():
+    command = ['blastn', '-version']
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = process.communicate()
+    out = out.decode()
+    try:
+        version = out.split(': ')[1].split()[0].split('+')[0]
+        major, minor, patch = version.split('.')
+        return int(major), int(minor), patch
+    except (IndexError, ValueError):
+        sys.exit('Error: could not determine BLAST version')
 
 
 def get_output_headers(args, data_folder):
