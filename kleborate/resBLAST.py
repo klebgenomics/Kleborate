@@ -250,16 +250,16 @@ def check_for_qrdr_mutations(hits_dict, contigs, qrdr):
     complete_hits, incomplete_hits = collections.defaultdict(list), collections.defaultdict(list)
 
     root = blastx_results_as_xml_tree(qrdr, contigs)
-    for query in root[8]:
-        for hit in query[4]:
-            gene_id = hit[2].text
-            for hsp in hit[5]:
-                hsp_hit_eval = float(hsp[5].text)
-                hsp_hit_from = int(hsp[6].text)
-                hsp_hit_to = int(hsp[7].text)
-                hsp_gaps = int(hsp[12].text)
-                hsp_qseq = hsp[14].text
-                hsp_hseq = hsp[15].text
+    for query in root.find('BlastOutput_iterations'):
+        for hit in query.find('Iteration_hits'):
+            gene_id = hit.find('Hit_def').text
+            for hsp in hit.find('Hit_hsps'):
+                hsp_hit_eval = float(hsp.find('Hsp_evalue').text)
+                hsp_hit_from = int(hsp.find('Hsp_hit-from').text)
+                hsp_hit_to = int(hsp.find('Hsp_hit-to').text)
+                hsp_gaps = int(hsp.find('Hsp_gaps').text)
+                hsp_qseq = hsp.find('Hsp_qseq').text
+                hsp_hseq = hsp.find('Hsp_hseq').text
 
                 for pos, wt in qrdr_loci[gene_id]:
                     if hsp_hit_to >= pos and hsp_gaps == 0 and hsp_hit_from == 1:
@@ -294,19 +294,24 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc):
     best_mgrb_cov, best_pmrb_cov = 0.0, 0.0
 
     root = blastx_results_as_xml_tree(trunc, contigs)
-    for query in root[8]:
-        for hit in query[4]:
-            gene_id = hit[2].text
+    for query in root.find('BlastOutput_iterations'):
+        for hit in query.find('Iteration_hits'):
+            gene_id = hit.find('Hit_def').text
             assert gene_id == 'MgrB' or gene_id == 'PmrB'
-            gene_len = int(hit[4].text)
-            for hsp in hit[5]:
-                hsp_qseq = hsp[14].text
-                hit_length = max(len(x) for x in hsp_qseq.split('*'))
+            gene_len = int(hit.find('Hit_len').text)
+            for hsp in hit.find('Hit_hsps'):
+                hsp_qseq = hsp.find('Hsp_qseq').text
+                hsp_hseq = hsp.find('Hsp_hseq').text
+                identity = sum([1 if a == b else 0
+                                for a, b in zip(hsp_qseq, hsp_hseq)]) / len(hsp_hseq)
+                hsp_hit_eval = float(hsp.find('Hsp_evalue').text)
+                hit_length = max(len(x.replace('-', '')) for x in hsp_qseq.split('*'))
                 coverage = 100.0 * float(hit_length) / gene_len
-                if gene_id == 'MgrB' and coverage > best_mgrb_cov:
-                    best_mgrb_cov = coverage
-                elif gene_id == 'PmrB' and coverage > best_pmrb_cov:
-                    best_pmrb_cov = coverage
+                if hsp_hit_eval <= 0.001 and identity >= 0.9:
+                    if gene_id == 'MgrB' and coverage > best_mgrb_cov:
+                        best_mgrb_cov = coverage
+                    elif gene_id == 'PmrB' and coverage > best_pmrb_cov:
+                        best_pmrb_cov = coverage
 
     truncations = []
     if best_mgrb_cov < 90.0:
@@ -329,20 +334,24 @@ def check_for_omp_gene_truncations(hits_dict, contigs, omp):
     best_ompk35_cov, best_ompk36_cov = 0.0, 0.0
 
     root = blastx_results_as_xml_tree(omp, contigs)
-    for query in root[8]:
-        for hit in query[4]:
-            gene_id = hit[2].text
-            gene_len = int(hit[4].text)
-            for hsp in hit[5]:
-                hsp_qseq = hsp[14].text
-                hit_length = max(len(x) for x in hsp_qseq.split('*'))
+    for query in root.find('BlastOutput_iterations'):
+        for hit in query.find('Iteration_hits'):
+            gene_id = hit.find('Hit_def').text
+            gene_len = int(hit.find('Hit_len').text)
+            for hsp in hit.find('Hit_hsps'):
+                hsp_qseq = hsp.find('Hsp_qseq').text
+                hsp_hseq = hsp.find('Hsp_hseq').text
+                identity = sum([1 if a == b else 0
+                                for a, b in zip(hsp_qseq, hsp_hseq)]) / len(hsp_hseq)
+                hsp_hit_eval = float(hsp.find('Hsp_evalue').text)
+                hit_length = max(len(x.replace('-', '')) for x in hsp_qseq.split('*'))
                 coverage = 100.0 * float(hit_length) / gene_len
-
-                if gene_id == 'OmpK35' and coverage > best_ompk35_cov:
-                    best_ompk35_cov = coverage
-                elif (gene_id == 'OmpK36' or gene_id == 'OmpK36GD' or
-                      gene_id == 'OmpK36TD') and coverage > best_ompk36_cov:
-                    best_ompk36_cov = coverage
+                if hsp_hit_eval <= 0.001 and identity >= 0.9:
+                    if gene_id == 'OmpK35' and coverage > best_ompk35_cov:
+                        best_ompk35_cov = coverage
+                    elif (gene_id == 'OmpK36' or gene_id == 'OmpK36GD' or
+                          gene_id == 'OmpK36TD') and coverage > best_ompk36_cov:
+                        best_ompk36_cov = coverage
 
     truncations = []
     if best_ompk35_cov < 90.0:
@@ -358,15 +367,19 @@ def check_for_omp_gene_truncations(hits_dict, contigs, omp):
 
 def check_for_ompk36_mutations(hits_dict, contigs, omp):
     root = blastx_results_as_xml_tree(omp, contigs)
-    for query in root[8]:
-        for hit in query[4]:
-            gene_id = hit[2].text
-            gene_len = int(hit[4].text)
-            for hsp in hit[5]:
-                hsp_qseq = hsp[14].text
-                hit_length = max(len(x) for x in hsp_qseq.split('*'))
+    for query in root.find('BlastOutput_iterations'):
+        for hit in query.find('Iteration_hits'):
+            gene_id = hit.find('Hit_def').text
+            gene_len = int(hit.find('Hit_len').text)
+            for hsp in hit.find('Hit_hsps'):
+                hsp_qseq = hsp.find('Hsp_qseq').text
+                hsp_hseq = hsp.find('Hsp_hseq').text
+                identity = sum([1 if a == b else 0
+                                for a, b in zip(hsp_qseq, hsp_hseq)]) / len(hsp_hseq)
+                hsp_hit_eval = float(hsp.find('Hsp_evalue').text)
+                hit_length = max(len(x.replace('-', '')) for x in hsp_qseq.split('*'))
                 coverage = 100.0 * float(hit_length) / gene_len
-                if coverage >= 90.0:
+                if coverage >= 90.0 and hsp_hit_eval <= 0.001 and identity >= 0.9:
                     if gene_id == 'OmpK36GD' and 'GDGDTY' in hsp_qseq:
                         hits_dict['Bla_Carb'].append('OmpK36GD')
                     if gene_id == 'OmpK36TD' and 'GDTDTY' in hsp_qseq:
