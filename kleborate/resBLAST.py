@@ -136,7 +136,7 @@ def read_class_file(res_class_file):
     if 'Bla' in res_classes:
         res_classes.remove('Bla')
     bla_classes.sort()
-    if 'NA' in res_classes:
+    if 'NA' in bla_classes:
         bla_classes.remove('NA')
 
     return gene_info, res_classes, bla_classes
