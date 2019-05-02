@@ -19,7 +19,6 @@ from kleborate.kleborate import get_data_path, get_output_headers, get_resistanc
 class Args(object):
     def __init__(self):
         self.resistance = True
-        self.species = False
         self.kaptive_k = False
         self.kaptive_o = False
 

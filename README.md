@@ -63,7 +63,7 @@ Software requirements:
   * To install: `pip install setuptools`
 * BLAST+ command line tools (`makeblastdb`, `blastn`, etc.)
   * Version 2.7.1 or later is needed, as earlier versions have a bug with the `culling_limit` parameter and/or tblastx results
-* [Mash](https://github.com/marbl/Mash) is required to use the `--species` option
+* [Mash](https://github.com/marbl/Mash)
 
 As input, Kleborate takes _Klebsiella_ genome assemblies (either completed or draft). If you have unassembled reads, try assembling them with our [Unicycler](https://github.com/rrwick/Unicycler) assembler which works great on Illumina or hybrid Illumina + Nanopore/PacBio reads).
 
@@ -124,8 +124,6 @@ Required arguments:
 Screening options:
   -r, --resistance      Turn on resistance genes screening (default: no
                         resistance gene screening)
-  -s, --species         Turn on Klebsiella species identification (requires
-                        Mash, default: no species identification)
   --kaptive_k           Turn on Kaptive screening of K loci (default: do not
                         run Kaptive for K loci)
   --kaptive_o           Turn on Kaptive screening of O loci (default: do not
@@ -266,7 +264,7 @@ When resistance screening is enabled, Kleborate also quantifies how many resista
 
 ### _Klebsiella_ species
 
-By using the `--species` option, Kleborate will attempt to identify the species of _Klebsiella_. It does this by comparing the assembly using Mash to a curated set of _Klebsiella_ assemblies [from NCBI](https://www.ncbi.nlm.nih.gov/assembly) and reporting the species of the closest match. Kleborate considers a Mash distance of ≤ 0.01 to be a strong species match. A distance of > 0.01 and ≤ 0.03 is a weak match and might indicate that your sample is a novel lineage or a hybrid between multiple _Klebsiella_ species. 
+Kleborate will attempt to identify the species of each input assembly. It does this by comparing the assembly using Mash to a curated set of _Klebsiella_ assemblies [from NCBI](https://www.ncbi.nlm.nih.gov/assembly) and reporting the species of the closest match. Kleborate considers a Mash distance of ≤ 0.01 to be a strong species match. A distance of > 0.01 and ≤ 0.03 is a weak match and might indicate that your sample is a novel lineage or a hybrid between multiple _Klebsiella_ species.
 
 Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
 <p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
