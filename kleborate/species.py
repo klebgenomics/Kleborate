@@ -15,11 +15,8 @@ not, see <http://www.gnu.org/licenses/>.
 import os
 
 
-def get_species_results(contigs, data_folder, args):
-    if args.species:
-        species, species_hit_strength = get_klebsiella_species(contigs, data_folder)
-    else:
-        species, species_hit_strength = '', ''
+def get_species_results(contigs, data_folder):
+    species, species_hit_strength = get_klebsiella_species(contigs, data_folder)
     return {'species': species,
             'species_match': species_hit_strength}
 

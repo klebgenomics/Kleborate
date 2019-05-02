@@ -27,8 +27,8 @@ class TestResAlleles(unittest.TestCase):
 
     def setUp(self):
         self.data_dir = 'test/res_test/data'
-        Args = collections.namedtuple('Args', ['species', 'resistance', 'kaptive_k', 'kaptive_o'])
-        self.args = Args(species=False, resistance=True, kaptive_k=False, kaptive_o=False)
+        Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o'])
+        self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False)
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_res_01(self):

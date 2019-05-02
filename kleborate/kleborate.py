@@ -49,7 +49,7 @@ def main():
 
             results = {'strain': get_strain_name(contigs)}
             results.update(get_contig_stat_results(contigs))
-            results.update(get_species_results(contigs, data_folder, args))
+            results.update(get_species_results(contigs, data_folder))
             results.update(get_chromosome_mlst_results(data_folder, contigs))
             results.update(get_ybt_mlst_results(data_folder, contigs))
             results.update(get_clb_mlst_results(data_folder, contigs))
@@ -78,9 +78,6 @@ def parse_arguments():
     screening_args.add_argument('-r', '--resistance', action='store_true',
                                 help='Turn on resistance genes screening (default: no resistance '
                                      'gene screening)')
-    screening_args.add_argument('-s', '--species', action='store_true',
-                                help='Turn on Klebsiella species identification (requires Mash, '
-                                     'default: no species identification)')
     screening_args.add_argument('--kaptive_k', action='store_true',
                                 help='Turn on Kaptive screening of K loci (default: do not run '
                                      'Kaptive for K loci)')
@@ -121,7 +118,6 @@ def parse_arguments():
         args.kaptive_o = True
     if args.all:
         args.resistance = True
-        args.species = True
         args.kaptive_k = True
         args.kaptive_o = True
 
@@ -153,9 +149,8 @@ def check_inputs_and_programs(args):
     if args.resistance:
         if not distutils.spawn.find_executable('blastx'):
             sys.exit('Error: could not find blastx')
-    if args.species:
-        if not distutils.spawn.find_executable('mash'):
-            sys.exit('Error: could not find mash')
+    if not distutils.spawn.find_executable('mash'):
+        sys.exit('Error: could not find mash')
     major, minor, patch = get_blast_version()
     if major < 2 or (major == 2 and minor < 7):
         sys.exit('Error: you have BLAST v{}.{}.{} installed, but Kleborate requires v2.7.1 or '
@@ -183,11 +178,8 @@ def get_output_headers(args, data_folder):
     This function returns headers for both. It also returns the resistance headers in a separate
     list, as they are used to total up some resistance summaries.
     """
-    stdout_header = ['strain']
-    full_header = ['strain']
-    if args.species:
-        stdout_header += ['species']
-        full_header += ['species', 'species_match']
+    stdout_header = ['strain', 'species']
+    full_header = ['strain', 'species', 'species_match']
     stdout_header += ['ST', 'virulence_score']
     full_header += ['contig_count', 'N50', 'largest_contig', 'ST', 'virulence_score']
 
