@@ -23,7 +23,7 @@ import tempfile
 from pkg_resources import resource_filename
 from .contig_stats import load_fasta, get_compression_type, get_contig_stat_results
 from .kaptive import get_kaptive_paths, get_kaptive_results
-from .species import get_species_results
+from .species import get_species_results, is_kp_complex
 from .mlstBLAST import mlst_blast
 from .resBLAST import read_class_file, get_res_headers, resblast_one_assembly
 from .rmpA import rmpa_blast
@@ -50,6 +50,9 @@ def main():
             results = {'strain': get_strain_name(contigs)}
             results.update(get_contig_stat_results(contigs))
             results.update(get_species_results(contigs, data_folder))
+
+            kp_complex = is_kp_complex(results)
+
             results.update(get_chromosome_mlst_results(data_folder, contigs))
             results.update(get_ybt_mlst_results(data_folder, contigs))
             results.update(get_clb_mlst_results(data_folder, contigs))
@@ -57,7 +60,7 @@ def main():
             results.update(get_iro_mlst_results(data_folder, contigs))
             results.update(get_hypermucoidy_results(data_folder, contigs))
             results.update(get_wzi_and_k_locus_results(data_folder, contigs))
-            results.update(get_resistance_results(data_folder, contigs, args, res_headers))
+            results.update(get_resistance_results(data_folder, contigs, args, res_headers, kp_complex))
             results.update(get_summary_results(results, res_headers))
             results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
             results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
@@ -444,12 +447,18 @@ def get_wzi_and_k_locus_results(data_folder, contigs):
             'K_locus': k_type}
 
 
-def get_resistance_results(data_folder, contigs, args, res_headers):
+def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
     if args.resistance:
         gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
-        qrdr = data_folder + '/QRDR_120.aa'
-        trunc = data_folder + '/MgrB_and_PmrB.aa'
-        omp = data_folder + '/OmpK.aa'
+
+        # Only do mutation/truncation tests for Kp complex species.
+        if kp_complex:
+            qrdr = data_folder + '/QRDR_120.aa'
+            trunc = data_folder + '/MgrB_and_PmrB.aa'
+            omp = data_folder + '/OmpK.aa'
+        else:
+            qrdr, trunc, omp = None, None, None
+
         seqs = data_folder + '/ARGannot_r3.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, 80.0, 90.0)
         return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'

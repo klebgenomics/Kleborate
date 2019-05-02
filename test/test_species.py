@@ -14,7 +14,7 @@ not, see <http://www.gnu.org/licenses/>.
 
 import unittest
 from kleborate.kleborate import get_data_path
-from kleborate.species import get_klebsiella_species
+from kleborate.species import get_klebsiella_species, is_kp_complex
 
 
 class TestSpecies(unittest.TestCase):
@@ -85,3 +85,55 @@ class TestSpecies(unittest.TestCase):
     def test_citrobacter(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_003937345.1.fna.gz', self.data_dir)
         self.assertTrue('Citrobacter' in species)
+
+
+
+class TestKpComplex(unittest.TestCase):
+
+    def test_klebsiella_aerogenes(self):
+        self.assertFalse(is_kp_complex({'species': 'Klebsiella aerogenes'}))
+
+    def test_klebsiella_grimontii(self):
+        self.assertFalse(is_kp_complex({'species': 'Klebsiella grimontii'}))
+
+    def test_klebsiella_michiganensis(self):
+        self.assertFalse(is_kp_complex({'species': 'Klebsiella michiganensis'}))
+
+    def test_klebsiella_oxytoca(self):
+        self.assertFalse(is_kp_complex({'species': 'Klebsiella oxytoca'}))
+
+    def test_klebsiella_pneumoniae(self):
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella pneumoniae'}))
+
+    def test_klebsiella_quasipneumoniae_subsp_quasipneumoniae(self):
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella quasipneumoniae subsp. quasipneumoniae'}))
+
+    def test_klebsiella_quasipneumoniae_subsp_similipneumoniae(self):
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella quasipneumoniae subsp. similipneumoniae'}))
+
+    def test_klebsiella_quasivariicola(self):
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella quasivariicola'}))
+
+    def test_klebsiella_variicola_subsp_variicola(self):
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. variicola'}))
+
+    def test_klebsiella_variicola_subsp_tropicalensis(self):
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. tropicalensis'}))
+
+    def test_klebsiella_africanensis(self):
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella africanensis'}))
+
+    def test_raoultella_planticola(self):
+        self.assertFalse(is_kp_complex({'species': 'Raoultella planticola'}))
+
+    def test_raoultella_ornithinolytica(self):
+        self.assertFalse(is_kp_complex({'species': 'Raoultella ornithinolytica'}))
+
+    def test_raoultella_terrigena(self):
+        self.assertFalse(is_kp_complex({'species': 'Raoultella terrigena'}))
+
+    def test_salmonella(self):
+        self.assertFalse(is_kp_complex({'species': 'Salmonella enterica'}))
+
+    def test_citrobacter(self):
+        self.assertFalse(is_kp_complex({'species': 'Citrobacter freundii'}))

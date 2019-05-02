@@ -53,3 +53,21 @@ def get_klebsiella_species(contigs, data_folder):
     else:
         return 'unknown', ''
 
+
+def is_kp_complex(results):
+    """
+    Returns True if the species call is in the Kp-complex, otherwise false.
+    """
+    assert 'species' in results
+    species = results['species']
+    if species.startswith('Klebsiella pneumoniae'):
+        return True
+    if species.startswith('Klebsiella quasipneumoniae'):
+        return True
+    if species.startswith('Klebsiella variicola'):
+        return True
+    if species.startswith('Klebsiella quasivariicola'):
+        return True
+    if species.startswith('Klebsiella africanensis'):
+        return True
+    return False
