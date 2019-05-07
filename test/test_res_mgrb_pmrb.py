@@ -65,7 +65,7 @@ class TestResMgrBPmrB(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/sequences/test_res_mgrb_pmrb_4.fasta',
                                          self.args, self.res_headers, False)
-        self.assertFalse('MgrB-' in results['Col'])
+        self.assertTrue('MgrB-' not in results['Col'])
 
     def test_pmrb_early_stop_SRR2098701(self):
         results = get_resistance_results(self.data_dir, 'test/sequences/SRR2098701.fasta',

@@ -60,5 +60,5 @@ class TestResGyrAParC(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/sequences/test_res_qrdr_4.fasta',
                                          self.args, self.res_headers, False)
-        self.assertFalse('GyrA-83C' in results['Flq'])
-        self.assertFalse('ParC-84D' in results['Flq'])
+        self.assertTrue('GyrA-83C' not in results['Flq'])
+        self.assertTrue('ParC-84D' not in results['Flq'])

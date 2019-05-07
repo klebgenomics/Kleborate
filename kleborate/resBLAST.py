@@ -139,6 +139,9 @@ def read_class_file(res_class_file):
     if 'NA' in bla_classes:
         bla_classes.remove('NA')
 
+    if 'Omp' not in res_classes:
+        res_classes.append('Omp')
+
     return gene_info, res_classes, bla_classes
 
 
@@ -360,9 +363,9 @@ def check_for_omp_gene_truncations(hits_dict, contigs, omp):
         truncations.append('OmpK36-' + ('%.0f' % best_ompk36_cov) + '%')
 
     if truncations:
-        if 'Bla_Carb' not in hits_dict:
-            hits_dict['Bla_Carb'] = []
-        hits_dict['Bla_Carb'] += truncations
+        if 'Omp' not in hits_dict:
+            hits_dict['Omp'] = []
+        hits_dict['Omp'] += truncations
 
 
 def check_for_ompk36_mutations(hits_dict, contigs, omp):
@@ -381,9 +384,9 @@ def check_for_ompk36_mutations(hits_dict, contigs, omp):
                 coverage = 100.0 * float(hit_length) / gene_len
                 if coverage >= 90.0 and hsp_hit_eval <= 0.001 and identity >= 0.9:
                     if gene_id == 'OmpK36GD' and 'GDGDTY' in hsp_qseq:
-                        hits_dict['Bla_Carb'].append('OmpK36GD')
+                        hits_dict['Omp'].append('OmpK36GD')
                     if gene_id == 'OmpK36TD' and 'GDTDTY' in hsp_qseq:
-                        hits_dict['Bla_Carb'].append('OmpK36TD')
+                        hits_dict['Omp'].append('OmpK36TD')
 
 
 def get_strain_name(full_path):
