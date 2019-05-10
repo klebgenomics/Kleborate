@@ -49,14 +49,19 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
             outfile = args.kaptive_k_outfile
         else:  # locus_type == 'O':
             outfile = args.kaptive_o_outfile
-        kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile)
+
+        kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile, one_thread=False)
+        if kaptive_results is None:
+            kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile, one_thread=True)
+
         assert len(headers) == len(kaptive_results)
         return dict(zip(headers, kaptive_results))
     else:
         return {}
 
 
-def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
+def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, one_thread):
+    thread_option = ' --threads 1' if one_thread else ''
     with tempfile.TemporaryDirectory() as tmp_dir:
         kaptive_prefix = tmp_dir + '/kaptive'
         kaptive_table = kaptive_prefix + '_table.txt'
@@ -65,8 +70,8 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
                              ' -a ' + contigs +
                              ' -k ' + kaptive_db +
                              ' -o ' + kaptive_prefix +
-                             ' --verbose' +
-                             ' --no_seq_out --no_json',
+                             ' --verbose --no_seq_out --no_json' +
+                             thread_option,
                              shell=True,
                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         stdout, stderr = p.communicate()
@@ -76,6 +81,10 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file):
             stdout = stdout.decode()
         if not isinstance(stderr, str):
             stderr = stderr.decode()
+
+        # If we hit the BLAST threading problem, return None and we'll try again with one thread.
+        if 'To avoid this issue, try one of the following' in stderr:
+            return None
 
         if p.returncode != 0:
             if stderr:
