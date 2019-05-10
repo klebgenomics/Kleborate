@@ -83,7 +83,7 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, one_thread):
             stderr = stderr.decode()
 
         # If we hit the BLAST threading problem, return None and we'll try again with one thread.
-        if 'To avoid this issue, try one of the following' in stderr:
+        if 'tblastn crashed!' in stderr and not one_thread:
             return None
 
         if p.returncode != 0:
