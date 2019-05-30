@@ -273,16 +273,23 @@ Kleborate will attempt to identify the species of each input assembly. It does t
 Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
 <p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
 
-Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. 
+Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. Previously these were considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. 
 
-
-| Species                                       | Kp lineage<sup>a</sup> | Kp lineage (legacy) <sup>b</sup> | Reference |
+| Species                                       | Kp phylogroup<sup>a</sup> | Kp phylogroup (legacy) <sup>b</sup> | Reference |
 | --------------------------------------------- | ---------------------- | -------------------------------- | --------- |
 | _K. pneumoniae_                               | Kp1                    | KpI                              | [Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38) | 
-| _K. quasipneumoniae_ subsp quasipneumoniae    | Kp2                    | KpIIa                            |  | 
+| _K. quasipneumoniae_ subsp quasipneumoniae    | Kp2                    | KpIIa                            | [Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2) | 
+| _K. quasipneumoniae_ subsp similipneumoniae   | Kp4                    | KpIIb                            | [Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2) | 
+| _K. variicola_ subsp variicola                | Kp3                    | KpIII                            | [Rosenblueth et al. 2004 Syst Appl Microbiol 27:27-35](https://www.sciencedirect.com/science/article/abs/pii/S0723202004702349?via%3Dihub) | 
+| _K. variicola_ subsp tropicalensis            | Kp5                    | -                                | [Rodrigues et al. 2019 Res Microbiol ﻿S0923-2508:﻿30019-1](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub) | 
+| _K. quasivariicola_                           | Kp6                    | -                                | [Long et al. 2017 Genome Announc 5: ﻿e01057-17](https://mra.asm.org/content/5/42/e01057-17) | 
+| _K. africanensis_                             | Kp7                    | -                                | [Rodrigues et al. 2019 Res Microbiol ﻿S0923-2508:﻿30019-1](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub) | 
+
+<sup>a</sup> Kp lineage numbers as described in [Rodrigues et al. 2019 Res Microbiol S0923-2508:﻿30019-1](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub)
+<sup>b</sup> alternative (legacy) Kp lineage numbers as described in [Brisse et al. 2001  Int J Syst Evol Microbiol](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-51-3-915#tab2) and [Fevre et al. 2005 Antimicrob Agents Chemother]()
 
 
-_K. quasivariicola_ is more recently characterised and described here: [Long 2017](http://genomea.asm.org/content/5/42/e01057-17). The Kp5 group does not yet have a species name and was described in this paper: [Blin 2017](http://onlinelibrary.wiley.com/doi/10.1111/1462-2920.13689/abstract). More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included, but the virulence profiles of these are less well characterised and deserve further attention.
+More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included in the Kleborate database, but the virulence profiles of these are less well characterised and deserve further attention.
 
 Kleborate will also call other species in Enterobacteriaceae, as different species sometimes end up in _Klebsiella_ collections. These names are again assigned based on the clades in a mashtree, but were not as carefully curated as the _Klebsiella_ species (so take them with a grain of salt).
 
