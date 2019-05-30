@@ -276,9 +276,10 @@ Here is an annotated tree of the reference assemblies, made by [mashtree](https:
 Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. 
 
 
-| Species        | Kp lineage<sup>a</sup>       | Kp lineage (legacy) <sup>b</sup>       | Reference
-| ------------- | ------------- |------------------
-| _K. pneumoniae_        | Kp1         | KpI | [Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38) | 
+| Species                                       | Kp lineage<sup>a</sup> | Kp lineage (legacy) <sup>b</sup> | Reference |
+| --------------------------------------------- | ---------------------- | -------------------------------- | --------- |
+| _K. pneumoniae_                               | Kp1                    | KpI                              | [Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38) | 
+| _K. quasipneumoniae_ subsp quasipneumoniae    | Kp2                    | KpIIa                            |  | 
 
 
 _K. quasivariicola_ is more recently characterised and described here: [Long 2017](http://genomea.asm.org/content/5/42/e01057-17). The Kp5 group does not yet have a species name and was described in this paper: [Blin 2017](http://onlinelibrary.wiley.com/doi/10.1111/1462-2920.13689/abstract). More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included, but the virulence profiles of these are less well characterised and deserve further attention.
