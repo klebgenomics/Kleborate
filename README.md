@@ -1,12 +1,14 @@
 <p align="center"><img src="logo.png" alt="Kleborate" width="400"></p>
 
-Kleborate is a tool to screen _Klebsiella_ genome assemblies for:
+Kleborate is a tool to screen genome assemblies of _Klebsiella pneumoniae_ and the _Klebsiella pneumoniae_ species complex (KpSC) for:
  * MLST sequence type
  * species (e.g. _K. pneumoniae_, _K. quasipneumoniae_, _K. variicola_, etc.)
  * ICE<i>Kp</i> associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_)
  * virulence plasmid associated loci: salmochelin (_iro_), aerobactin (_iuc_), hypermucoidy (_rmpA_, _rmpA2_)
  * antimicrobial resistance genes, including quinolone resistance SNPs and colistin resistance truncations
  * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/katholt/Kaptive)
+ 
+For _Klebsiella_ outside of the KpSC, Kleborate will accurately determine the species and will report the presence of any accessory genes detected (AMR, virulence, K & O types); however species-focused markers (mutational resistance, MLST) will not be reported.
 
 A manuscript describing the Kleborate software in full is currently in preparation. (Note that the BLAST logic has been checked in the light of [this article](https://doi.org/10.1093/bioinformatics/bty833) describing a common misconception regarding the BLAST parameter -max_target_seqs.)
 
@@ -153,7 +155,7 @@ Help:
 
 ### MLST
 
-Multilocus sequencing typing of _Klebsiella_ follows the schemes described at the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository.
+Multilocus sequencing typing of _Klebsiella pneumoniae_ follows the schemes described at the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository.
 
 Some notes on Kleborate's MLST calls:
 * Kleborate makes an effort to report the closest matching ST / clonal group if a precise match is not found.
@@ -209,17 +211,19 @@ Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which result in a 
 
 ### Resistance gene detection
 
-By using the `--resistance` option, Kleborate will screen for resistance genes against the ARG-Annot database of acquired resistance genes ([SRST2](https://github.com/katholt/srst2) version), which includes allelic variants. It attempts to report the best matching variant for each locus in the genome:
-* Imprecise allele matches are indicated with `*`.
+By using the `--resistance` option, Kleborate will screen for acquired resistance genes against the ARG-Annot database of acquired resistance genes ([SRST2](https://github.com/katholt/srst2) version), which includes allelic variants. It attempts to report the best matching variant for each locus in the genome:
+* Exact nucleotide matches are reported with no further annotation (e.g. "TEM-15"). 
+* If no exact nucleotide match is found, Kleborate searches for an exact amino acid match, and will report this with a "^" symbol (e.g. "TEM-15^" indicates an exact match to the TEM-15 protein sequence but with 1 or more nucleotide differences). If no exact amino acid match is found, the closest nucleotide match is reported with "\*" symbol (e.g. "TEM-30\*" indicates no precise nucleotide or amino acid match is found, but the closest nucleotide match is to TEM-30).
 * If the length of match is less than the length of the reported allele (i.e. a partial match), this is indicated with `?`.
-* Note that narrow spectrum beta-lactamases AmpH and SHV () are core genes in _K. pneumoniae_ and so should be detected in most genomes.
+* Note that narrow spectrum beta-lactamases AmpH and SHV are core genes in _K. pneumoniae_ and so should be detected in most genomes.
   * These genes include: SHV (_K. pneumoniae_), LEN (_K. variicola_), OKP (_K. quasipneumoniae_) and AmpH (all of the above species) 
   * See [this paper](http://www.pnas.org/content/112/27/E3574.long) for more information.
 * Note that _oqxAB_ are also core genes  in _K. pneumoniae_, but have been removed from this version of the ARG-Annot DB as they don't actually confer resistance to fluoroquinolones
 
-Using the `--resistance` option also turns on screening for resistance-conferring mutations:
+Using the `--resistance` option also turns on screening for resistance-conferring mutations (ONLY IF the genome was recognised as part of the KpSC):
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
 * Colistin resistance due to truncation or loss of MgrB or PmrB (less than 90% gene coverage counts as a truncation/loss).
+* OmpK35 and OmpK36
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
 * AGly (aminoglycosides)
@@ -269,7 +273,11 @@ Kleborate will attempt to identify the species of each input assembly. It does t
 Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
 <p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
 
-Kleborate is designed for the well-studied group of species at the top right of the tree which includes the 'big three': _pneumoniae_, _quasipneumoniae_ (two subspecies) and _variicola_. _K. quasivariicola_ is more recently characterised and described here: [Long 2017](http://genomea.asm.org/content/5/42/e01057-17). The Kp5 group does not yet have a species name and was described in this paper: [Blin 2017](http://onlinelibrary.wiley.com/doi/10.1111/1462-2920.13689/abstract). More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included, but the virulence profiles of these are less well characterised and deserve further attention.
+Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. 
+
+KELLY EDIT:
+
+_K. quasivariicola_ is more recently characterised and described here: [Long 2017](http://genomea.asm.org/content/5/42/e01057-17). The Kp5 group does not yet have a species name and was described in this paper: [Blin 2017](http://onlinelibrary.wiley.com/doi/10.1111/1462-2920.13689/abstract). More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included, but the virulence profiles of these are less well characterised and deserve further attention.
 
 Kleborate will also call other species in Enterobacteriaceae, as different species sometimes end up in _Klebsiella_ collections. These names are again assigned based on the clades in a mashtree, but were not as carefully curated as the _Klebsiella_ species (so take them with a grain of salt).
 
@@ -278,15 +286,18 @@ Kleborate will also call other species in Enterobacteriaceae, as different speci
 ### Serotype prediction
 
 #### Basic capsule prediction with _wzi_ allele typing
-By default, Kleborate will report the closest match amongst the _wzi_ alleles in the BIGSdb. This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, there is a strong correlation (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)). The _wzi_ allele can provide a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages).
+By default, Kleborate will report the closest match amongst the _wzi_ alleles in the BIGSdb. This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, there is a strong correlation (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)). Note the _wzi database_ is populated with alleles from the _Klebsiella pneumoniae_ species complex and is not reliable for other species.
+
+The _wzi_ allele can provide a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages).
 
 #### Capsule (K) and O antigen (LPS) serotype prediction using Kaptive
-You can optionally turn on capsule typing using the dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive):
+You can optionally turn on capsule and O antigen typing using the dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive). Note that the Kaptive database comprises O and K loci characterised in the _Klebsiella pneumoniae_ species complex (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)); these loci are sometimes also found in other _Klebsiella_ species but you should expect many novel loci outside the KpSC that will not be detected here.
+
 * `--kaptive_k` turns on Kaptive screening of the K locus
 * `--kaptive_o` turns on Kaptive screening of the O locus
 * `--kaptive` turns on both (is equivalent to `--kaptive_k --kaptive_o`)
 
-This will significantly increase the runtime of Kleborate, but provide much more detailed information about the K and/or O loci and their genes.
+Note that running Kaptive will significantly increase the runtime of Kleborate, but provide much more detailed information about the K and/or O loci and their genes.
 
 
 ## Example output
