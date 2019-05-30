@@ -275,6 +275,7 @@ Here is an annotated tree of the reference assemblies, made by [mashtree](https:
 
 Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. 
 
+
 | Species        | Kp lineage<sup>a</sup>       | Kp lineage (legacy) <sup>b</sup>       | Reference
 | ------------- | ------------- |------------------
 | _K. pneumoniae_        | Kp1         | KpI | [Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38) | 
