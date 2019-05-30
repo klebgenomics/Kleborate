@@ -90,7 +90,7 @@ def parse_arguments():
     screening_args.add_argument('-k', '--kaptive', action='store_true',
                                 help='Equivalent to --kaptive_k --kaptive_o')
     screening_args.add_argument('--all', action='store_true',
-                                help='Equivalent to --resistance --species --kaptive')
+                                help='Equivalent to --resistance --kaptive')
 
     output_args = parser.add_argument_group('Output options')
     output_args.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
