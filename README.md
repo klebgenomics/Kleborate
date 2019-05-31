@@ -155,9 +155,22 @@ Help:
 
 ### MLST
 
-Multilocus sequencing typing of _Klebsiella pneumoniae_ follows the schemes described at the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository.
+Multilocus sequencing typing of _Klebsiella pneumoniae_ follows the schemes described at the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository. 
+Note that as of Feburary 2018, allele definitions for ST1047 and ST1078 have changed, and these new allele combinations are incorporated in Kleborate v0.4.0. 
 
-Some notes on Kleborate's MLST calls:
+|allele         |ST1047 old     |ST1047 current |ST1078 old     |ST1078 current |
+| ------------- | ------------- |---------------|---------------|---------------|
+|_gapA_         |10             |2              |16             |4              |
+|_infB_         |20             |1              |18             |5              |
+|_mdh_          |1              |2              |1              |1              |
+|_pgi_          |1              |20             |76             |3              |
+|_phoE_         |9              |7              |47             |12             |
+|_rpoB_         |11             |1              |1              |4              |
+|_tonB_         |14             |4              |124            |46             |
+
+
+
+Additional notes on Kleborate's MLST calls:
 * Kleborate makes an effort to report the closest matching ST / clonal group if a precise match is not found.
 * Imprecise allele matches are indicated with a `*`.
 * Imprecise ST calls are indicated with `-nLV`, where n indicates the number of loci that disagree with the ST reported. So `258-1LV` indicates a single-locus variant of (SLV) of ST258, i.e. 6/7 loci match ST258.
@@ -223,7 +236,7 @@ By using the `--resistance` option, Kleborate will screen for acquired resistanc
 Using the `--resistance` option also turns on screening for resistance-conferring mutations (ONLY IF the genome was recognised as part of the KpSC):
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
 * Colistin resistance due to truncation or loss of MgrB or PmrB (less than 90% gene coverage counts as a truncation/loss).
-* OmpK35 and OmpK36
+* OmpK35 and OmpK36 mutations resulting in reduced susceptibility to beta-lactamases. See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
 * AGly (aminoglycosides)
@@ -243,6 +256,8 @@ All resistance results (both for the gene screen and mutation screen) are groupe
 * Sul (sulfonamides)
 * Tet (tetracyclines)
 * Tmt (trimethoprim)
+
+Mutations in the OmpK35 and OmpK36 osmoporins are also reported in a separate column but do not contribute to the resistance genes or classes counts.  
 
 
 ### Scores and counts
