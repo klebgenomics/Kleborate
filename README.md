@@ -275,7 +275,7 @@ Here is an annotated tree of the reference assemblies, made by [mashtree](https:
 
 Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. These were previously considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. 
 
-| Species                                       | Kp phylogroup<sup>a</sup> | Kp phylogroup (alternative) <sup>b</sup> | Reference |
+| Species                                       | Kp phylogroup<sup>a</sup> | Kp phylogroup (alternative)<sup>b</sup> | Reference |
 | --------------------------------------------- | ---------------------- | -------------------------------- | --------- |
 | _K. pneumoniae_                               | Kp1                    | KpI                              | [Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38) | 
 | _K. quasipneumoniae_ subsp _quasipneumoniae_    | Kp2                    | KpIIa                            | [Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2) | 
