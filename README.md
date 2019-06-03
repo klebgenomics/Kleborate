@@ -64,7 +64,8 @@ Software requirements:
 * [setuptools](https://pypi.python.org/pypi/setuptools) (required to install Kleborate)
   * To install: `pip install setuptools`
 * BLAST+ command line tools (`makeblastdb`, `blastn`, etc.)
-  * Version 2.7.1 or later is needed, as earlier versions have a bug with the `culling_limit` parameter and/or tblastx results
+  * Version 2.7.1 or later is needed, as earlier versions have a bug with the `culling_limit` parameter and/or tblastx results.
+  * We test Kleborate on BLAST+ v2.7.1. Later versions will probably also work but stick to v2.7.1 if you want to play it safe.
 * [Mash](https://github.com/marbl/Mash)
 
 As input, Kleborate takes _Klebsiella_ genome assemblies (either completed or draft). If you have unassembled reads, try assembling them with our [Unicycler](https://github.com/rrwick/Unicycler) assembler which works great on Illumina or hybrid Illumina + Nanopore/PacBio reads).
