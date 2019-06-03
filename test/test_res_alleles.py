@@ -13,11 +13,9 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import collections
-import tempfile
 import unittest
 
-from kleborate.kleborate import get_data_path, gunzip_contigs_if_necessary, get_output_headers, \
-    get_resistance_results
+from kleborate.kleborate import get_output_headers, get_resistance_results
 
 
 class TestResAlleles(unittest.TestCase):
