@@ -217,22 +217,34 @@ def check_for_exact_aa_match(seqs, gene_nucl_seq):
 
         # tblastx: translated query to translated database
         tblastx_cmd = 'tblastx -db ' + seqs + ' -query ' + q_filename + ' -query_gencode 11' + \
-                      " -db_gencode 11 -outfmt '6 sacc pident slen length' -culling_limit 1" + \
-                      ' -strand plus'
+                      " -db_gencode 11 -outfmt '6 bitscore sacc pident slen length sstart send'"
         process = subprocess.Popen(tblastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
         blast_output = process.communicate()[0]
         if not isinstance(blast_output, str):
             blast_output = blast_output.decode()
 
-        # Look for a perfect match and return the first one found.
+        # Load in the BLAST results.
+        blast_results = []
         for line in blast_output.splitlines():
             p = line.strip().split('\t')
-            gene_id, pcid, length, allele_length = p[0], float(p[1]), float(p[2]), float(p[3])
+            bitscore, gene_id, pcid, length, allele_length, allele_start, allele_end = \
+                float(p[0]), p[1], float(p[2]), float(p[3]), float(p[4]), int(p[5]), int(p[6])
             cov = 100.0 * allele_length * 3.0 / length
-            if pcid == 100.0 and cov == 100.0:
-                return gene_id
 
-    return None
+            # Only keep perfect matches (identity and coverage of 100%) on the forward ref strand.
+            if pcid == 100.0 and cov == 100.0 and allele_start < allele_end:
+                blast_results.append((pcid, cov, bitscore, gene_id, allele_length, allele_start,
+                                      allele_end))
+        if not blast_results:
+            return None
+
+        # If there are still multiple matches, we break ties first with bitscore (higher is better)
+        # and then with gene ID (alphabetically first is better).
+        blast_results = sorted(blast_results, key=lambda r: ((1.0 / r[2]), r[3]))
+
+        best_match = blast_results[0]
+        gene_id = best_match[3]
+        return gene_id
 
 
 def blastx_results_as_xml_tree(database, query):
