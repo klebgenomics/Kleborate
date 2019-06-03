@@ -217,7 +217,8 @@ def check_for_exact_aa_match(seqs, gene_nucl_seq):
 
         # tblastx: translated query to translated database
         tblastx_cmd = 'tblastx -db ' + seqs + ' -query ' + q_filename + ' -query_gencode 11' + \
-                      " -db_gencode 11 -outfmt '6 sacc pident slen length' -culling_limit 1"
+                      " -db_gencode 11 -outfmt '6 sacc pident slen length' -culling_limit 1" + \
+                      ' -strand plus'
         process = subprocess.Popen(tblastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
         blast_output = process.communicate()[0]
         if not isinstance(blast_output, str):
