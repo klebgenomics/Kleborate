@@ -14,23 +14,11 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-import argparse
 import collections
 import os
 import subprocess
 import tempfile
 import xml.etree.ElementTree as ElementTree
-
-
-def main():
-    args = parse_arguments()
-    gene_info, res_classes, bla_classes = read_class_file(args.resclass)
-    print_header(res_classes, bla_classes)
-
-    for contigs in args.assemblies:
-        hits_dict = resblast_one_assembly(contigs, gene_info, args.qrdr, args.trunc, args.omp,
-                                          args.seqs, args.mincov, args.minident)
-        print_results(contigs, res_classes, bla_classes, hits_dict)
 
 
 def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, mincov, minident):
@@ -43,43 +31,6 @@ def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, mincov, mi
     if omp:
         check_omp_genes(hits_dict, contigs, omp)
     return hits_dict
-
-
-def parse_arguments():
-    parser = argparse.ArgumentParser(description='Klebsiella resistance screen (part of Kleborate)',
-                                     add_help=False)
-
-    parser.add_argument('assemblies', nargs='*', type=str,
-                        help='FASTA file(s) for assemblies')
-
-    required_args = parser.add_argument_group('Required arguments')
-    required_args.add_argument('-s', '--seqs', type=str, required=True,
-                               help='resistance gene sequences to screen for')
-    required_args.add_argument('-t', '--resclass', type=str, required=True,
-                               help='resistance gene classes (CSV)')
-
-    additional_screening_args = parser.add_argument_group('Additional screening')
-    additional_screening_args.add_argument('-q', '--qrdr', type=str,
-                                           help='QRDR sequences for which mutations can cause '
-                                                'fluoroquinolone resistance')
-    additional_screening_args.add_argument('-r', '--trunc', type=str,
-                                           help='MgrB and PmrB genes for which truncation can '
-                                                'cause colistin resistance')
-    additional_screening_args.add_argument('-o', '--omp', type=str,
-                                           help='OmpK genes for which truncation/mutation can '
-                                                'cause carbapenem resistance')
-
-    settings_args = parser.add_argument_group('Settings')
-    settings_args.add_argument('-m', '--minident', type=float, default=90.0,
-                               help='minimum percent identity (default 90)')
-    settings_args.add_argument('-c', '--mincov', type=float, default=80.0,
-                               help='minimum percent coverage (default 80)')
-
-    help_args = parser.add_argument_group('Help')
-    help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
-                           help='show this help message and exit')
-
-    return parser.parse_args()
 
 
 def build_blast_databases(seqs, qrdr, trunc, omp):
@@ -409,17 +360,3 @@ def get_strain_name(full_path):
     if filename.endswith('.gz'):
         filename = filename[:-3]
     return os.path.splitext(filename)[0]
-
-
-def print_results(contigs, res_classes, bla_classes, hits_dict):
-    result_string = [get_strain_name(contigs)]
-    for res_class in (res_classes + bla_classes):
-        if res_class in hits_dict:
-            result_string.append(';'.join(hits_dict[res_class]))
-        else:
-            result_string.append('-')
-    print('\t'.join(result_string))
-
-
-if __name__ == '__main__':
-    main()
