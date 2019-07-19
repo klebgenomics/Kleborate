@@ -38,6 +38,10 @@ class TestSpecies(unittest.TestCase):
         species, _ = get_klebsiella_species('test/sequences/GCF_000247855.1.fna.gz', self.data_dir)
         self.assertEqual(species, 'Klebsiella oxytoca')
 
+    def test_klebsiella_pasteurii(self):
+        species, _ = get_klebsiella_species('test/sequences/GCA_902158585.1.fna.gz', self.data_dir)
+        self.assertEqual(species, 'Klebsiella pasteurii')
+
     def test_klebsiella_pneumoniae(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000016305.1.fna.gz', self.data_dir)
         self.assertEqual(species, 'Klebsiella pneumoniae')
@@ -53,6 +57,10 @@ class TestSpecies(unittest.TestCase):
     def test_klebsiella_quasivariicola(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000523395.1.fna.gz', self.data_dir)
         self.assertEqual(species, 'Klebsiella quasivariicola')
+
+    def test_klebsiella_spallanzanii(self):
+        species, _ = get_klebsiella_species('test/sequences/GCA_901563875.1.fna.gz', self.data_dir)
+        self.assertEqual(species, 'Klebsiella spallanzanii')
 
     def test_klebsiella_variicola_subsp_variicola(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000019565.1.fna.gz', self.data_dir)
@@ -87,7 +95,6 @@ class TestSpecies(unittest.TestCase):
         self.assertTrue('Citrobacter' in species)
 
 
-
 class TestKpComplex(unittest.TestCase):
 
     def test_klebsiella_aerogenes(self):
@@ -106,10 +113,12 @@ class TestKpComplex(unittest.TestCase):
         self.assertTrue(is_kp_complex({'species': 'Klebsiella pneumoniae'}))
 
     def test_klebsiella_quasipneumoniae_subsp_quasipneumoniae(self):
-        self.assertTrue(is_kp_complex({'species': 'Klebsiella quasipneumoniae subsp. quasipneumoniae'}))
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella quasipneumoniae subsp. '
+                                                  'quasipneumoniae'}))
 
     def test_klebsiella_quasipneumoniae_subsp_similipneumoniae(self):
-        self.assertTrue(is_kp_complex({'species': 'Klebsiella quasipneumoniae subsp. similipneumoniae'}))
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella quasipneumoniae subsp. '
+                                                  'similipneumoniae'}))
 
     def test_klebsiella_quasivariicola(self):
         self.assertTrue(is_kp_complex({'species': 'Klebsiella quasivariicola'}))
