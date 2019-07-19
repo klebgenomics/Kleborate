@@ -1,0 +1,52 @@
+"""
+Copyright 2018 Kat Holt
+Copyright 2018 Ryan Wick (rrwick@gmail.com)
+https://github.com/katholt/Kleborate/
+
+This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version. Kleborate is distributed in
+the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+details. You should have received a copy of the GNU General Public License along with Kleborate. If
+not, see <http://www.gnu.org/licenses/>.
+"""
+
+import unittest
+
+from kleborate.contig_stats import get_contig_stats
+
+
+class TestContigStats(unittest.TestCase):
+
+    def test_count_1(self):
+        contig_count, _, _, _ = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        self.assertEqual(contig_count, 4)
+
+    def test_count_2(self):
+        contig_count, _, _, _ = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        self.assertEqual(contig_count, 3)
+
+    def test_n50_1(self):
+        _, n50, _, _ = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        self.assertEqual(n50, 40)
+
+    def test_n50_2(self):
+        _, n50, _, _ = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        self.assertEqual(n50, 200)
+
+    def test_longest_1(self):
+        _, _, longest_contig, _ = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        self.assertEqual(longest_contig, 45)
+
+    def test_longest_2(self):
+        _, _, longest_contig, _ = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        self.assertEqual(longest_contig, 200)
+
+    def test_n_1(self):
+        _, _, _, contains_n = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        self.assertEqual(contains_n, 'no')
+
+    def test_n_2(self):
+        _, _, _, contains_n = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        self.assertEqual(contains_n, 'yes')
