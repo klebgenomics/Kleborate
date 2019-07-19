@@ -21,12 +21,13 @@ import sys
 import tempfile
 
 from pkg_resources import resource_filename
-from .contig_stats import load_fasta, get_compression_type, get_contig_stat_results
+from .contig_stats import get_contig_stat_results
 from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results, is_kp_complex
 from .mlstBLAST import mlst_blast
 from .resBLAST import read_class_file, get_res_headers, resblast_one_assembly
 from .rmpA import rmpa_blast
+from .misc import get_compression_type, load_fasta
 from .version import __version__
 
 

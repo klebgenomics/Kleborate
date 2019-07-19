@@ -25,35 +25,6 @@ not, see <http://www.gnu.org/licenses/>.
 
 import os
 import subprocess
-import argparse
-
-
-def parse_arguments():
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument('-s', '--seqs', type=str, required=True,
-                        help='MLST allele sequences file')
-    parser.add_argument('-d', '--database', type=str, required=True,
-                        help='MLST profile database (col1=ST, other cols=loci, must have loci '
-                             'names in header)')
-    parser.add_argument('-i', '--info', type=str, default='yes',
-                        help='Info (clonal group, lineage, etc) provided in last column of '
-                             'profiles (yes (default), no)')
-    parser.add_argument('-m', '--minident', type=float, default=95.0,
-                        help='Minimum percent identity (default 95)')
-    parser.add_argument('-n', '--maxmissing', type=int, default=3,
-                        help='Maximum missing/uncalled loci to still calculate closest ST '
-                             '(default 3)')
-    parser.add_argument('assemblies', type=str, nargs='+',
-                        help='FASTA files to query')
-    return parser.parse_args()
-
-
-def main():
-    args = parse_arguments()
-    results = mlst_blast(args.seqs, args.database, args.info, args.assemblies, args.minident,
-                         args.maxmissing, print_header=True)
-    print('\t'.join(results))
 
 
 def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print_header):
@@ -98,8 +69,8 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
             print('\t'.join(['strain', 'ST'] + header))
 
     for contigs in assemblies:
-        (_, fileName) = os.path.split(contigs)
-        (name, ext) = os.path.splitext(fileName)
+        _, filename = os.path.split(contigs)
+        name, _ = os.path.splitext(filename)
 
         best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
         best_allele = {}  # key = locus, value = best allele (* if imprecise match)
@@ -221,7 +192,3 @@ def get_closest_locus_variant(query, annotated_query, sts):
                                  closest_alleles[closest_st].split(','), annotated_query))
 
     return closest_st, min_dist, min_dist_incl_snps
-
-
-if __name__ == '__main__':
-    main()
