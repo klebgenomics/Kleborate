@@ -24,15 +24,11 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
-import subprocess
+
+from .blastn import run_blastn
 
 
 def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print_header):
-    if not os.path.exists(seqs + '.nin'):
-        with open(os.devnull, 'w') as devnull:
-            subprocess.check_call('makeblastdb -dbtype nucl -in ' + seqs,
-                                  stdout=devnull, shell=True)
-
     sts = {}  # key = concatenated string of alleles, value = st
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group
     max_st = 0  # holds the highest current ST, incremented when novel combinations are encountered
@@ -75,35 +71,25 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
         best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
         best_allele = {}  # key = locus, value = best allele (* if imprecise match)
 
-        # blast against all
-        f = os.popen('blastn -task blastn -db ' + seqs + ' -query ' + contigs +
-                     " -outfmt '6 sacc pident slen length score' -ungapped -dust no " +
-                     '-evalue 1E-20 -word_size 32 -max_target_seqs 10000 -culling_limit 2 ' +
-                     '-perc_identity ' + str(minident))
-        for line in f:
-            fields = line.rstrip().split('\t')
-            gene_id, pcid, length, allele_length, score =\
-                fields[0], float(fields[1]), int(fields[2]), int(fields[3]), float(fields[4])
-            if '__' in gene_id:  # srst2 formatted file
-                gene_id_components = gene_id.split('__')
+        hits = run_blastn(seqs, contigs, minident, ungapped=True, culling_limit=2)
+        for hit in hits:
+            if '__' in hit.gene_id:  # srst2 formatted file
+                gene_id_components = hit.gene_id.split('__')
                 locus = gene_id_components[1]
                 allele = gene_id_components[2]
             else:
-                allele = gene_id
-                locus = gene_id.split('_')[0]
-            if pcid < 100.00 or allele_length < length:
+                allele = hit.gene_id
+                locus = hit.gene_id.split('_')[0]
+            if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
                 allele += '*'  # inexact match
             # store best match for each one locus
             if locus in best_score:
-                if score > best_score[locus]:
-                    # update
-                    best_score[locus] = score
+                if hit.score > best_score[locus]:    # update
+                    best_score[locus] = hit.score
                     best_allele[locus] = allele.split('_')[1]  # store number only
-            else:
-                # initialise
-                best_score[locus] = score
+            else:  # initialise
+                best_score[locus] = hit.score
                 best_allele[locus] = allele.split('_')[1]  # store number only
-        f.close()
 
         best_st = []
         best_st_annotated = []

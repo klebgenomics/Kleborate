@@ -20,33 +20,27 @@ import subprocess
 import tempfile
 import xml.etree.ElementTree as ElementTree
 
+from .blastn import run_blastn
+from .truncation import truncation_check
+
 
 def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, mincov, minident):
-    build_blast_databases(seqs, qrdr, trunc, omp)
+    build_blast_databases(qrdr, omp)
     hits_dict = blast_against_all(seqs, mincov, minident, contigs, gene_info)
     if qrdr:
         check_for_qrdr_mutations(hits_dict, contigs, qrdr)
     if trunc:
-        check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc)
+        check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc, 95.0)
     if omp:
         check_omp_genes(hits_dict, contigs, omp)
     return hits_dict
 
 
-def build_blast_databases(seqs, qrdr, trunc, omp):
-    if not os.path.exists(seqs + '.nin'):
-        with open(os.devnull, 'w') as devnull:
-            subprocess.check_call('makeblastdb -dbtype nucl -in ' + seqs,
-                                  stdout=devnull, shell=True)
+def build_blast_databases(qrdr, omp):
     if qrdr:
         if not os.path.exists(qrdr + '.pin'):
             with open(os.devnull, 'w') as devnull:
                 subprocess.check_call('makeblastdb -dbtype prot -in ' + qrdr,
-                                      stdout=devnull, shell=True)
-    if trunc:
-        if not os.path.exists(trunc + '.pin'):
-            with open(os.devnull, 'w') as devnull:
-                subprocess.check_call('makeblastdb -dbtype prot -in ' + trunc,
                                       stdout=devnull, shell=True)
     if omp:
         if not os.path.exists(omp + '.pin'):
@@ -117,39 +111,30 @@ def get_res_headers(res_classes, bla_classes):
 
 def blast_against_all(seqs, mincov, minident, contigs, gene_info):
     hits_dict = collections.defaultdict(list)  # key = class, value = list
-
-    f = os.popen('blastn -task blastn -db ' + seqs + ' -query ' + contigs +
-                 " -outfmt '6 sacc pident slen length score qseq' -ungapped -dust no"
-                 ' -evalue 1E-20 -word_size 32 -max_target_seqs 10000 -culling_limit 1'
-                 ' -perc_identity ' + str(minident))
-    for line in f:
-        p = line.rstrip().split('\t')
-        gene_id, pcid, length, allele_length, score, query_seq = \
-            p[0], float(p[1]), float(p[2]), float(p[3]), float(p[4]), p[5]
-        if (allele_length / length * 100.0) > mincov:
-
-            if pcid < 100.0:
-                aa_result = check_for_exact_aa_match(seqs, query_seq)
+    hits = run_blastn(seqs, contigs, minident, ungapped=True)
+    for hit in hits:
+        if (hit.alignment_length / hit.ref_length * 100.0) > mincov:
+            if hit.pcid < 100.0:
+                aa_result = check_for_exact_aa_match(seqs, hit.hit_seq)
                 if aa_result is not None:
-                    gene_id = aa_result
+                    hit.gene_id = aa_result
             else:
                 aa_result = None
 
-            (hit_allele, hit_class, hit_bla_class) = gene_info[gene_id]
+            hit_allele, hit_class, hit_bla_class = gene_info[hit.gene_id]
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
 
             if aa_result is not None:
                 hit_allele += '^'
             else:
-                if pcid < 100.0:
+                if hit.pcid < 100.0:
                     hit_allele += '*'
-                if allele_length < length:
+                if hit.alignment_length < hit.ref_length:
                     hit_allele += '?'
 
             hits_dict[hit_class].append(hit_allele)
 
-    f.close()
     return hits_dict
 
 
@@ -257,28 +242,17 @@ def check_for_qrdr_mutations(hits_dict, contigs, qrdr):
         hits_dict['Flq'] += snps
 
 
-def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc):
+def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, seqs, minident):
     best_mgrb_cov, best_pmrb_cov = 0.0, 0.0
 
-    root = blastx_results_as_xml_tree(trunc, contigs)
-    for query in root.find('BlastOutput_iterations'):
-        for hit in query.find('Iteration_hits'):
-            gene_id = hit.find('Hit_def').text
-            assert gene_id == 'MgrB' or gene_id == 'PmrB'
-            gene_len = int(hit.find('Hit_len').text)
-            for hsp in hit.find('Hit_hsps'):
-                hsp_qseq = hsp.find('Hsp_qseq').text
-                hsp_hseq = hsp.find('Hsp_hseq').text
-                identity = sum([1 if a == b else 0
-                                for a, b in zip(hsp_qseq, hsp_hseq)]) / len(hsp_hseq)
-                hsp_hit_eval = float(hsp.find('Hsp_evalue').text)
-                hit_length = max(len(x.replace('-', '')) for x in hsp_qseq.split('*'))
-                coverage = 100.0 * float(hit_length) / gene_len
-                if hsp_hit_eval <= 0.001 and identity >= 0.9:
-                    if gene_id == 'MgrB' and coverage > best_mgrb_cov:
-                        best_mgrb_cov = coverage
-                    elif gene_id == 'PmrB' and coverage > best_pmrb_cov:
-                        best_pmrb_cov = coverage
+    hits = run_blastn(seqs, contigs, minident)
+    for hit in hits:
+        assert hit.gene_id == 'pmrB' or hit.gene_id == 'mgrB'
+        _, coverage = truncation_check(hit)
+        if hit.gene_id == 'mgrB' and coverage > best_mgrb_cov:
+            best_mgrb_cov = coverage
+        elif hit.gene_id == 'pmrB' and coverage > best_pmrb_cov:
+            best_pmrb_cov = coverage
 
     truncations = []
     if best_mgrb_cov < 90.0:
@@ -351,12 +325,3 @@ def check_for_ompk36_mutations(hits_dict, contigs, omp):
                         hits_dict['Omp'].append('OmpK36GD')
                     if gene_id == 'OmpK36TD' and 'GDTDTY' in hsp_qseq:
                         hits_dict['Omp'].append('OmpK36TD')
-
-
-def get_strain_name(full_path):
-    filename = os.path.split(full_path)[1]
-    if filename.endswith('_temp_decompress.fasta'):
-        filename = filename[:-22]
-    if filename.endswith('.gz'):
-        filename = filename[:-3]
-    return os.path.splitext(filename)[0]

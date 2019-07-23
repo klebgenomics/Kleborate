@@ -23,8 +23,8 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
-import subprocess
 
+from .blastn import run_blastn
 from .truncation import truncation_check
 
 
@@ -33,11 +33,6 @@ def print_header():
 
 
 def rmpa_blast(seqs, database, assemblies, minident):
-    if not os.path.exists(seqs + '.nin'):
-        with open(os.devnull, 'w') as devnull:
-            subprocess.check_call('makeblastdb -dbtype nucl -in ' + seqs, stdout=devnull,
-                                  shell=True)
-
     # read in rmpA database
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group
     header = []
@@ -53,34 +48,20 @@ def rmpa_blast(seqs, database, assemblies, minident):
     for contigs in assemblies:
         _, file_name = os.path.split(contigs)
         name, ext = os.path.splitext(file_name)
-
-        # blast against all rmpA and rmpA2 alleles
-        f = os.popen('blastn -task blastn -db ' + seqs + ' -query ' + contigs +
-                     " -outfmt '6 sacc pident slen length score qseq sstrand sstart send' " +
-                     '-dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000 ' +
-                     '-culling_limit 1 -perc_identity ' + str(minident))
-
         rmpa_calls, rmpa2_calls = [], []
-        for line in f:
-            fields = line.rstrip().split('\t')
-            gene_id, pcid, ref_length, length, score, hit_seq, strand, ref_start, ref_end = \
-                fields[0], float(fields[1]), int(fields[2]), int(fields[3]), float(fields[4]),\
-                fields[5], fields[6], int(fields[7]), int(fields[8])
 
-            if length > (ref_length / 2):
-                if pcid < 100.00 or ref_length < length:
-                    gene_id += '*'
-
-
-                gene_id += truncation_check(hit_seq, strand, ref_start, ref_end, ref_length)
-
-                gene = gene_id.split('_')[0]
+        hits = run_blastn(seqs, contigs, minident)
+        for hit in hits:
+            if hit.alignment_length > (hit.ref_length / 2):
+                if hit.pcid < 100.00 or hit.ref_length < hit.alignment_length:
+                    hit.gene_id += '*'
+                hit.gene_id += truncation_check(hit)[0]
+                gene = hit.gene_id.split('_')[0]
                 if gene == 'rmpA':
-                    info = '(' + st_info[gene_id.split('_')[1]] + ')'  # predict from best hit
-                    rmpa_calls.append(gene_id + info)
+                    info = '(' + st_info[hit.gene_id.split('_')[1]] + ')'  # predict from best hit
+                    rmpa_calls.append(hit.gene_id + info)
                 else:
-                    rmpa2_calls.append(gene_id)
-        f.close()
+                    rmpa2_calls.append(hit.gene_id)
 
         if len(rmpa_calls) == 0:
             rmpa_calls.append('-')

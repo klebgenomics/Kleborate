@@ -457,7 +457,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
         # Only do mutation/truncation tests for Kp complex species.
         if kp_complex:
             qrdr = data_folder + '/QRDR_120.aa'
-            trunc = data_folder + '/MgrB_and_PmrB.aa'
+            trunc = data_folder + '/MgrB_and_PmrB.fasta'
             omp = data_folder + '/OmpK.aa'
         else:
             qrdr, trunc, omp = None, None, None

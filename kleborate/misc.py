@@ -13,6 +13,8 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import gzip
+import os
+import subprocess
 import sys
 
 
@@ -87,4 +89,3 @@ def complement_base(base):
 
 def reverse_complement(seq):
     return ''.join([complement_base(x) for x in seq][::-1])
-
