@@ -458,7 +458,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
         if kp_complex:
             qrdr = data_folder + '/QRDR_120.aa'
             trunc = data_folder + '/MgrB_and_PmrB.fasta'
-            omp = data_folder + '/OmpK.aa'
+            omp = data_folder + '/OmpK.fasta'
         else:
             qrdr, trunc, omp = None, None, None
 

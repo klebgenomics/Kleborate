@@ -20,8 +20,7 @@ from .misc import reverse_complement
 
 def truncation_check(hit, cov_threshold=90.0):
     """
-    Checks to see if the gene is truncated at the amino acid level. Returns an empty string if
-    there isn't a truncation and returns a percentage (e.g. '-70%') if there is.
+    Checks to see if the gene is truncated at the amino acid level.
     """
     # BLAST gives the aligned sequence, so we might need to remove dashes if there are deletions
     # relative to the reference.
@@ -36,7 +35,7 @@ def truncation_check(hit, cov_threshold=90.0):
 
     # The hit must start at the first base of the gene. If not, the gene is considered 0%.
     if ref_start != 1:
-        return '-0%', 0.0
+        return '-0%', 0.0, ''
 
     # If there are any Ns in the sequence, then they will break translation, probably resulting in
     # truncation call.
@@ -55,6 +54,6 @@ def truncation_check(hit, cov_threshold=90.0):
 
     coverage = 100.0 * len(translation) / ref_aa_length
     if coverage >= cov_threshold:
-        return '', coverage
+        return '', coverage, translation
     else:
-        return '-{:.0f}%'.format(coverage), coverage
+        return '-{:.0f}%'.format(coverage), coverage, translation
