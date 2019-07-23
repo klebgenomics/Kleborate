@@ -13,8 +13,6 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import gzip
-import os
-import subprocess
 import sys
 
 
@@ -51,7 +49,6 @@ def get_compression_type(filename):
                   'bz2': (b'\x42', b'\x5a', b'\x68'),
                   'zip': (b'\x50', b'\x4b', b'\x03', b'\x04')}
     max_len = max(len(x) for x in magic_dict)
-
     unknown_file = open(filename, 'rb')
     file_start = unknown_file.read(max_len)
     unknown_file.close()
