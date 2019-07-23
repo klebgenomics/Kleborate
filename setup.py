@@ -75,9 +75,10 @@ class KleborateInstall(install):
             try:
                 for fasta in ['ARGannot_r3.fasta', 'clb_alleles.fasta', 'hypermucoidy.fasta',
                               'iro_alleles.fasta', 'iuc_alleles.fasta',
-                              'Klebsiella_pneumoniae.fasta', 'wzi.fasta', 'ybt_alleles.fasta']:
+                              'Klebsiella_pneumoniae.fasta', 'wzi.fasta', 'ybt_alleles.fasta',
+                              'MgrB_and_PmrB.fasta']:
                     build_blast_db(data_dir, fasta, 'nucl')
-                for fasta in ['MgrB_and_PmrB.aa', 'QRDR_120.aa', 'OmpK.aa']:
+                for fasta in ['QRDR_120.aa', 'OmpK.aa']:
                     build_blast_db(data_dir, fasta, 'prot')
             except subprocess.CalledProcessError:
                 print('\n')

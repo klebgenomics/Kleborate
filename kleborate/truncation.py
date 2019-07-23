@@ -18,23 +18,25 @@ from Bio.Alphabet import IUPAC
 from .misc import reverse_complement
 
 
-def truncation_check(nucl_seq, strand, ref_start, ref_end, ref_length, cov_threshold=90.0):
+def truncation_check(hit, cov_threshold=90.0):
     """
     Checks to see if the gene is truncated at the amino acid level. Returns an empty string if
     there isn't a truncation and returns a percentage (e.g. '-70%') if there is.
     """
     # BLAST gives the aligned sequence, so we might need to remove dashes if there are deletions
     # relative to the reference.
-    nucl_seq = nucl_seq.replace('-', '')
+    nucl_seq = hit.hit_seq.replace('-', '')
 
     # BLAST also returns the contig's sequence so we might need to flip to the reference strand.
-    if strand == 'minus':
+    if hit.strand == 'minus':
         nucl_seq = reverse_complement(nucl_seq)
-        ref_start, ref_end = ref_end, ref_start
+        ref_start, ref_end = hit.ref_end, hit.ref_start
+    else:
+        ref_start, ref_end = hit.ref_start, hit.ref_end
 
     # The hit must start at the first base of the gene. If not, the gene is considered 0%.
     if ref_start != 1:
-        return '-0%'
+        return '-0%', 0.0
 
     # If there are any Ns in the sequence, then they will break translation, probably resulting in
     # truncation call.
@@ -46,13 +48,13 @@ def truncation_check(nucl_seq, strand, ref_start, ref_end, ref_length, cov_thres
     # The assumption is that the reference allele is a full CDS with a stop codon at the end. This
     # isn't always true (the reference sequence is sometimes broken) but will serve to make our
     # denominator for coverage.
-    ref_aa_length = (ref_length - 3) // 3
+    ref_aa_length = (hit.ref_length - 3) // 3
 
     coding_dna = Seq(nucl_seq, IUPAC.unambiguous_dna)
     translation = str(coding_dna.translate(table='Bacterial', to_stop=True))
 
     coverage = 100.0 * len(translation) / ref_aa_length
     if coverage >= cov_threshold:
-        return ''
+        return '', coverage
     else:
-        return '-{:.0f}%'.format(coverage)
+        return '-{:.0f}%'.format(coverage), coverage
