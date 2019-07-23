@@ -76,10 +76,8 @@ class KleborateInstall(install):
                 for fasta in ['ARGannot_r3.fasta', 'clb_alleles.fasta', 'hypermucoidy.fasta',
                               'iro_alleles.fasta', 'iuc_alleles.fasta',
                               'Klebsiella_pneumoniae.fasta', 'wzi.fasta', 'ybt_alleles.fasta',
-                              'MgrB_and_PmrB.fasta', 'OmpK.fasta']:
+                              'MgrB_and_PmrB.fasta', 'OmpK.fasta', 'QRDR_120.fasta']:
                     build_blast_db(data_dir, fasta, 'nucl')
-                for fasta in ['QRDR_120.aa']:
-                    build_blast_db(data_dir, fasta, 'prot')
             except subprocess.CalledProcessError:
                 print('\n')
                 print('Warning: makeblastdb failed, so BLAST databases were not built.')

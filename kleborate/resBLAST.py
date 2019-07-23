@@ -15,10 +15,11 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import collections
-import os
 import subprocess
 import tempfile
-import xml.etree.ElementTree as ElementTree
+
+from Bio import pairwise2
+from Bio.SubsMat.MatrixInfo import blosum62
 
 from .blastn import run_blastn
 from .truncation import truncation_check
@@ -27,11 +28,11 @@ from .truncation import truncation_check
 def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, mincov, minident):
     hits_dict = blast_against_all(seqs, mincov, minident, contigs, gene_info)
     if qrdr:
-        check_for_qrdr_mutations(hits_dict, contigs, qrdr)
+        check_for_qrdr_mutations(hits_dict, contigs, qrdr, minident, 90.0)
     if trunc:
-        check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc, 95.0)
+        check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc, minident)
     if omp:
-        check_omp_genes(hits_dict, contigs, omp, 90.0, 90.0)
+        check_omp_genes(hits_dict, contigs, omp, minident, 90.0)
     return hits_dict
 
 
@@ -74,17 +75,6 @@ def read_class_file(res_class_file):
         res_classes.append('Omp')
 
     return gene_info, res_classes, bla_classes
-
-
-# functions for finding snps
-def get_gapped_position(seq, position):
-    num_chars = 0
-    i = 0
-    while num_chars <= position and i < len(seq):
-        if seq[i] != '-':
-            num_chars += 1
-        i += 1
-    return i - 1
 
 
 def print_header(res_classes, bla_classes):
@@ -169,68 +159,48 @@ def check_for_exact_aa_match(seqs, gene_nucl_seq):
         return gene_id
 
 
-def blastx_results_as_xml_tree(database, query):
-    blastx_cmd = 'blastx -db ' + database + ' -query ' + query + ' -query_gencode 11' + \
-                 ' -outfmt 5 -comp_based_stats F -culling_limit 1 -max_hsps 1 -seg no'
-    process = subprocess.Popen(blastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
-    blast_output = process.communicate()[0]
-    if not isinstance(blast_output, str):
-        blast_output = blast_output.decode()
-    return ElementTree.fromstring(blast_output)
-
-
-def check_for_qrdr_mutations(hits_dict, contigs, qrdr):
-    if not os.path.exists(qrdr + '.pin'):
-        with open(os.devnull, 'w') as devnull:
-            subprocess.check_call('makeblastdb -dbtype prot -in ' + qrdr,
-                                  stdout=devnull, shell=True)
-
+def check_for_qrdr_mutations(hits_dict, contigs, qrdr, minident, mincov):
     qrdr_loci = {'GyrA': [(83, 'S'), (87, 'D')],
                  'ParC': [(80, 'S'), (84, 'E')]}
 
-    # key = (locus, pos), value = allele,
-    # if found in a simple hit starting at position 1 of the protein seq
-    complete_hits, incomplete_hits = collections.defaultdict(list), collections.defaultdict(list)
+    gyra_ref = 'MSDLAREITPVNIEEELKNSYLDYAMSVIVGRALPDVRDGLKPVHRRVLYAMNVLGNDWN' \
+               'KAYKKSARVVGDVIGKYHPHGDSAVYDTIVRMAQPFSLRYMLVDGQGNFGSIDGDSAAAM'
+    parc_ref = 'MSDMAERLALHEFTENAYLNYSMYVIMDRALPFIGDGLKPVQRRIVYAMSELGLNASAKF' \
+               'KKSARTVGDVLGKYHPHGDSACYEAMVLMAQPFSYRYPLVDGQGNWGAPDDPKSFAAMRY'
 
-    root = blastx_results_as_xml_tree(qrdr, contigs)
-    for query in root.find('BlastOutput_iterations'):
-        for hit in query.find('Iteration_hits'):
-            gene_id = hit.find('Hit_def').text
-            for hsp in hit.find('Hit_hsps'):
-                hsp_hit_eval = float(hsp.find('Hsp_evalue').text)
-                hsp_hit_from = int(hsp.find('Hsp_hit-from').text)
-                hsp_hit_to = int(hsp.find('Hsp_hit-to').text)
-                hsp_gaps = int(hsp.find('Hsp_gaps').text)
-                hsp_qseq = hsp.find('Hsp_qseq').text
-                hsp_hseq = hsp.find('Hsp_hseq').text
-
-                for pos, wt in qrdr_loci[gene_id]:
-                    if hsp_hit_to >= pos and hsp_gaps == 0 and hsp_hit_from == 1:
-                        # simple alignment
-                        complete_hits[(gene_id, pos)].append(hsp_qseq[pos - 1])
-                    else:
-                        # not a simple alignment, need to align query and hit and extract loci
-                        # manually
-                        if hsp_hit_from <= pos <= hsp_hit_to and hsp_hit_eval <= 0.00001:
-                            # locus is within aligned area, set evalue to filter out the junk
-                            # alignments
-                            pos_in_aln = get_gapped_position(hsp_hseq, pos - hsp_hit_from + 1)
-                            incomplete_hits[(gene_id, pos)].append(hsp_qseq[pos_in_aln - 1])
     snps = []
-
-    for locus in qrdr_loci:
-        for pos, wt in qrdr_loci[locus]:
-            if (locus, pos) in complete_hits:
-                if complete_hits[(locus, pos)][0] != wt:
-                    snps.append(locus + '-' + str(pos) +
-                                complete_hits[(locus, pos)][0])  # record SNP at this site
+    hits = run_blastn(qrdr, contigs, minident)
+    for hit in hits:
+        _, coverage, translation = truncation_check(hit)
+        if coverage > mincov:
+            if hit.gene_id == 'GyrA':
+                alignments = pairwise2.align.globalds(gyra_ref, translation, blosum62, -10, -0.5)
+            elif hit.gene_id == 'ParC':
+                alignments = pairwise2.align.globalds(parc_ref, translation, blosum62, -10, -0.5)
             else:
-                if (locus, pos) in incomplete_hits:
-                    if incomplete_hits[(locus, pos)][0] != wt:
-                        snps.append(locus + '-' + str(pos) +
-                                    incomplete_hits[(locus, pos)][0])  # record SNP at this site
+                assert False
+            bases_per_ref_pos = get_bases_per_ref_pos(alignments[0])
+            loci = qrdr_loci[hit.gene_id]
+            for pos, wt_base in loci:
+                assembly_base = bases_per_ref_pos[pos]
+                if pos in bases_per_ref_pos and assembly_base != wt_base and \
+                        assembly_base != '-' and assembly_base != '.':
+                    snps.append(hit.gene_id + '-' + str(pos) + assembly_base)
     if snps:
         hits_dict['Flq'] += snps
+
+
+def get_bases_per_ref_pos(alignment):
+    aligned_seq1, aligned_seq2 = alignment[0], alignment[1]
+    bases_per_ref_pos = {}
+    ref_pos = 1
+    for i, ref_b in enumerate(aligned_seq1):
+        if ref_b == '-' or ref_b == '.':
+            continue
+        assembly_b = aligned_seq2[i]
+        bases_per_ref_pos[ref_pos] = assembly_b
+        ref_pos += 1
+    return bases_per_ref_pos
 
 
 def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, seqs, minident):

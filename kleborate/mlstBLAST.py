@@ -94,7 +94,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
         best_st = []
         best_st_annotated = []
 
-        mismatch_loci, mismatch_loci_including_snps = 0, 0
+        mismatch_loci_including_snps = 0
 
         for locus in header:
             if locus in best_allele:
@@ -107,7 +107,6 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
             else:
                 best_st.append('-')
                 best_st_annotated.append('-')
-                mismatch_loci += 1
                 mismatch_loci_including_snps += 1
 
         # assign ST
@@ -121,7 +120,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
                 bst = sts[bst]
             else:
                 # determine closest ST
-                bst, mismatch_loci, mismatch_loci_including_snps = \
+                bst, _, mismatch_loci_including_snps = \
                     get_closest_locus_variant(best_st, best_st_annotated, sts)
         else:
             bst = '0'
