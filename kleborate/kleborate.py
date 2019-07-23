@@ -164,7 +164,7 @@ def check_inputs_and_programs(args):
 def get_blast_version():
     command = ['blastn', '-version']
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = process.communicate()
+    out, _ = process.communicate()
     out = out.decode()
     try:
         version = out.split(': ')[1].split()[0].split('+')[0]
@@ -366,7 +366,7 @@ def get_chromosome_mlst_results(data_folder, contigs):
     database = data_folder + '/kpneumoniae.txt'
     results = mlst_blast(seqs, database, 'no', [contigs], minident=95, maxmissing=3,
                          print_header=False)
-    strain, chr_st, chr_st_detail = results[0], results[1], results[2:]
+    chr_st, chr_st_detail = results[1], results[2:]
     if chr_st != '0':
         chr_st = 'ST' + chr_st
 
@@ -386,7 +386,7 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
     database = data_folder + '/' + profiles_txt
     results = mlst_blast(seqs, database, 'yes', [contigs], minident=95, maxmissing=3,
                          print_header=False)
-    strain, group, st, st_detail = results[0], results[1], results[2], results[3:]
+    group, st, st_detail = results[1], results[2], results[3:]
     if group == '':
         if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
             group = unknown_group_name
@@ -442,7 +442,7 @@ def get_wzi_and_k_locus_results(data_folder, contigs):
     database = data_folder + '/wzi.txt'
     results = mlst_blast(seqs, database, 'yes', [contigs], minident=95, maxmissing=3,
                          print_header=False)
-    strain, k_type, wzi_st = results[0], results[1], 'wzi' + results[2]
+    k_type, wzi_st = results[1], 'wzi' + results[2]
     if k_type == '':
         k_type = '-'
 
@@ -456,7 +456,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
 
         # Only do mutation/truncation tests for Kp complex species.
         if kp_complex:
-            qrdr = data_folder + '/QRDR_120.aa'
+            qrdr = data_folder + '/QRDR_120.fasta'
             trunc = data_folder + '/MgrB_and_PmrB.fasta'
             omp = data_folder + '/OmpK.fasta'
         else:

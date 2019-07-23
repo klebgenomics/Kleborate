@@ -47,7 +47,7 @@ def rmpa_blast(seqs, database, assemblies, minident):
     # search input assemblies
     for contigs in assemblies:
         _, file_name = os.path.split(contigs)
-        name, ext = os.path.splitext(file_name)
+        name, _ = os.path.splitext(file_name)
         rmpa_calls, rmpa2_calls = [], []
 
         hits = run_blastn(seqs, contigs, minident)
