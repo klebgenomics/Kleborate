@@ -1852,3 +1852,5 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 511,NimB__1833,Ntmdz,NimB,NimB,1833,X71443,794-1288,495,no,no,NA,NA
 512,FosX__1834,Fcyn,FosX,FosX,1834,AP010904,1708924-1709388,465,no,no,NA,NA
 513,FosA2__1735,Fcyn,FosA2,FosA2,1735,EU487198,217-642,426,no,no,NA,NA
+514,TetX3__1838,Tgc,TetX,TetX3,1838,MK134375.1,6174-7340,1167,no,no,NA,NA
+514,TetX4__1839,Tgc,TetX,TetX4,1839,MK134376.1,325-1482,1158,no,no,NA,NA
