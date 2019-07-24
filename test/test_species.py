@@ -30,6 +30,10 @@ class TestSpecies(unittest.TestCase):
         species, _ = get_klebsiella_species('test/sequences/GCF_000733495.1.fna.gz', self.data_dir)
         self.assertEqual(species, 'Klebsiella grimontii')
 
+    def test_klebsiella_indica(self):
+        species, _ = get_klebsiella_species('test/sequences/GCF_005860775.1.fna.gz', self.data_dir)
+        self.assertEqual(species, 'Klebsiella indica')
+
     def test_klebsiella_michiganensis(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000240325.1.fna.gz', self.data_dir)
         self.assertEqual(species, 'Klebsiella michiganensis')
