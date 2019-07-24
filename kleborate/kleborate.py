@@ -317,7 +317,22 @@ def get_resistance_gene_count(res_headers, res_hits):
         return '-'
     res_indices = [i for i, h in enumerate(res_headers)
                    if h.lower() != 'bla' and h.lower() != 'omp']
-    return sum(0 if res_hits[i] == '-' else len(res_hits[i].split(';')) for i in res_indices)
+
+    gene_list = []
+    for i in res_indices:
+        genes = res_hits[i].split(';')
+
+        # Exclude mutation-based flq resistance.
+        genes = [g for g in genes if 'gyra-' not in g.lower()]
+        genes = [g for g in genes if 'parc-' not in g.lower()]
+
+        # Exclude truncation-based resistance.
+        genes = [g for g in genes if '%' not in g]
+
+        genes = [g for g in genes if g != '-']
+        gene_list += genes
+
+    return len(gene_list)
 
 
 def get_data_path():

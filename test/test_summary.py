@@ -76,6 +76,54 @@ class TestResScore(unittest.TestCase):
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '6')
 
+    def test_res_counts_5(self):
+        """
+        Mutations should add to the class count but not to the gene count (because that is for
+        acquired resistance genes).
+        """
+        self.results['AGly'] = 'a'
+        self.results['Flq'] = 'GyrA-83I'
+        self.results['Tet'] = 'd;e;f'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '4')
+
+    def test_res_counts_6(self):
+        """
+        Mutations should add to the class count but not to the gene count (because that is for
+        acquired resistance genes).
+        """
+        self.results['AGly'] = 'a'
+        self.results['Flq'] = 'b;ParC-80I'
+        self.results['Tet'] = 'd;e;f'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '5')
+
+    def test_res_counts_7(self):
+        """
+        Truncations should add to the class count but not to the gene count (because that is for
+        acquired resistance genes).
+        """
+        self.results['AGly'] = 'a'
+        self.results['Tet'] = 'b;c'
+        self.results['Col'] = 'MgrB-20%'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '3')
+
+    def test_res_counts_8(self):
+        """
+        Truncations should add to the class count but not to the gene count (because that is for
+        acquired resistance genes).
+        """
+        self.results['AGly'] = 'a'
+        self.results['Tet'] = 'b;c'
+        self.results['Col'] = 'd;PmrB-20%'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '4')
+
     def test_res_score_1(self):
         self.results['Bla'] = 'a'
         summary_results = get_summary_results(self.results, self.res_headers)
