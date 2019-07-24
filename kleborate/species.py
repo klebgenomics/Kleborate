@@ -37,6 +37,7 @@ def get_klebsiella_species(contigs, data_folder):
 
         # Fix up the species name formatting a bit.
         species = species.replace('Escherichia_coli', 'Escherichia coli / Shigella')
+        species = species.replace('Raoultella', 'Klebsiella (Raoultella)')
         species = species.replace('_', ' ')
         species = species.replace(' subsp ', ' subsp. ')
 

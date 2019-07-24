@@ -80,15 +80,15 @@ class TestSpecies(unittest.TestCase):
 
     def test_raoultella_planticola(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000648315.1.fna.gz', self.data_dir)
-        self.assertEqual(species, 'Raoultella planticola')
+        self.assertEqual(species, 'Klebsiella (Raoultella) planticola')
 
     def test_raoultella_ornithinolytica(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000247895.1.fna.gz', self.data_dir)
-        self.assertEqual(species, 'Raoultella ornithinolytica')
+        self.assertEqual(species, 'Klebsiella (Raoultella) ornithinolytica')
 
     def test_raoultella_terrigena(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000829965.1.fna.gz', self.data_dir)
-        self.assertEqual(species, 'Raoultella terrigena')
+        self.assertEqual(species, 'Klebsiella (Raoultella) terrigena')
 
     def test_salmonella(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_004010735.1.fna.gz', self.data_dir)
