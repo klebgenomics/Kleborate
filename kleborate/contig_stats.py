@@ -16,11 +16,11 @@ from .misc import load_fasta
 
 
 def get_contig_stat_results(contigs):
-    contig_count, n50, longest_contig, contains_n = get_contig_stats(contigs)
+    contig_count, n50, longest_contig, ambiguous_bases = get_contig_stats(contigs)
     return {'contig_count': str(contig_count),
             'N50': str(n50),
             'largest_contig': str(longest_contig),
-            'assembly_Ns': contains_n}
+            'ambiguous_bases': ambiguous_bases}
 
 
 def get_contig_stats(assembly):
@@ -29,11 +29,17 @@ def get_contig_stats(assembly):
     """
     fasta = load_fasta(assembly)
 
-    contains_n = 'no'
+    characters = set()
     for _, seq in fasta:
-        if 'N' in seq:
-            contains_n = 'yes'
-            break
+        characters |= set(b for b in seq)
+    characters.discard('A')
+    characters.discard('C')
+    characters.discard('G')
+    characters.discard('T')
+    if characters:
+        ambiguous_bases = 'yes'
+    else:
+        ambiguous_bases = 'no'
 
     contig_lengths = sorted([len(x[1]) for x in fasta])
     if not contig_lengths:
@@ -51,4 +57,4 @@ def get_contig_stats(assembly):
     else:
         n50 = 0
 
-    return len(contig_lengths), n50, longest, contains_n
+    return len(contig_lengths), n50, longest, ambiguous_bases
