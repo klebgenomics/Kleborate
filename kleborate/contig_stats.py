@@ -32,10 +32,7 @@ def get_contig_stats(assembly):
     characters = set()
     for _, seq in fasta:
         characters |= set(b for b in seq)
-    characters.discard('A')
-    characters.discard('C')
-    characters.discard('G')
-    characters.discard('T')
+    characters -= {'A', 'C', 'G', 'T'}
     if characters:
         ambiguous_bases = 'yes'
     else:
