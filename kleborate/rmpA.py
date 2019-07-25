@@ -53,15 +53,16 @@ def rmpa_blast(seqs, database, assemblies, minident):
         hits = run_blastn(seqs, contigs, minident)
         for hit in hits:
             if hit.alignment_length > (hit.ref_length / 2):
+                gene_id = hit.gene_id
                 if hit.pcid < 100.00 or hit.ref_length < hit.alignment_length:
-                    hit.gene_id += '*'
-                hit.gene_id += truncation_check(hit)[0]
+                    gene_id += '*'
+                    gene_id += truncation_check(hit)[0]
                 gene = hit.gene_id.split('_')[0]
                 if gene == 'rmpA':
                     info = '(' + st_info[hit.gene_id.split('_')[1]] + ')'  # predict from best hit
-                    rmpa_calls.append(hit.gene_id + info)
+                    rmpa_calls.append(gene_id + info)
                 else:
-                    rmpa2_calls.append(hit.gene_id)
+                    rmpa2_calls.append(gene_id)
 
         if len(rmpa_calls) == 0:
             rmpa_calls.append('-')
