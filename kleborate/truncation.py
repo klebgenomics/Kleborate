@@ -37,9 +37,11 @@ def truncation_check(hit, cov_threshold=90.0):
     if ref_start != 1:
         return '-0%', 0.0, ''
 
-    # If there are any Ns in the sequence, then they will break translation, probably resulting in
-    # truncation call.
-    nucl_seq = nucl_seq.split('N')[0]
+    # If there are any ambiguous bases in the sequence, then they will break translation, probably
+    # resulting in truncation call.
+    ambiguous_bases = set(b for b in nucl_seq) - {'A', 'C', 'G', 'T'}
+    for b in ambiguous_bases:
+        nucl_seq = nucl_seq.split(b)[0]
 
     # BioPython doesn't like it if the sequence isn't a multiple of 3.
     nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
