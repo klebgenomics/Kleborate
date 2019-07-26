@@ -107,7 +107,7 @@ class TestGenomes(unittest.TestCase):
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_2(KpVP-1)')
-            self.assertEqual(results['rmpA2'], 'rmpA2_3')
+            self.assertEqual(results['rmpA2'], 'rmpA2_3*-0%')
             self.assertEqual(results['AGly'], '-')
 
             # PmrB is split in two: 40% (start) and 60% (end). The correct answer is 40% as that
@@ -169,7 +169,7 @@ class TestGenomes(unittest.TestCase):
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '1')
             self.assertEqual(results['rmpA'], 'rmpA_11(ICEKp1),rmpA_2(KpVP-1)')
-            self.assertEqual(results['rmpA2'], 'rmpA2_3')
+            self.assertEqual(results['rmpA2'], 'rmpA2_3-47%')
             self.assertEqual(results['AGly'], '-')
             self.assertEqual(results['Col'], '-')
             self.assertEqual(results['Fcyn'], '-')
@@ -324,3 +324,11 @@ class TestGenomes(unittest.TestCase):
             self.assertEqual(results['Bla_ESBL_inhR'], '-')
             self.assertEqual(results['Bla_broad'], '-')
             self.assertEqual(results['Bla_broad_inhR'], '-')
+
+    def test_AS7(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            contigs = gunzip_contigs_if_necessary('test/sequences/AS7.fna.gz', tmp_dir)
+            results = self.get_all_results(contigs)
+
+            # This genome is missing the start of rmpA, which counts as a truncation to 0%.
+            self.assertEqual(results['rmpA'], 'rmpA_1*-0%(KpVP-1)')
