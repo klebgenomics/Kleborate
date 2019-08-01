@@ -107,7 +107,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 83,OCH-8__631,Bla,OCH-2,OCH-8,631,DQ489307,1071-2243,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
 84,NorA__638,Flq,NorA,NorA,638,HE579073,721034-722200,1167,no,no,NA,NA
 85,TetX__639,Tet,TetX,TetX,639,M37699,586-1752,1167,no,no,NA,NA
-86,AmpH__634,Bla,AmpH,AmpH,634,CP003785,4208384-4209544,1161,no,no,NA,NA
 87,VanS-A__635,Gly,VanS-A,VanS-A,635,M97297,4649-5803,1155,no,no,NA,NA
 87,VanS-Pt2__636,Gly,VanS-A,VanS-Pt2,636,DQ018710,3721-4881,1161,no,no,NA,NA
 87,VanS-Pt__637,Gly,VanS-A,VanS-Pt,637,AY926880,1391-2551,1161,no,no,NA,NA
