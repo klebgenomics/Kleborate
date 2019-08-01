@@ -312,13 +312,18 @@ Kleborate outputs a simple categorical virulence score, and if resistance screen
   * 3 = aerobactin and/or salmochelin only (without yersiniabactin or colibactin)
   * 4 = aerobactin and/or salmochelin with yersiniabactin (without colibactin)
   * 5 = yersiniabactin, colibactin and aerobactin and/or salmochelin
+  
 * The resistance score ranges from 0 to 3:
   * 0 = no ESBL, no carbapenemase (regardless of colistin resistance)
   * 1 = ESBL, no carbapenemase (regardless of colistin resistance)
   * 2 = Carbapenemase without colistin resistance (regardless of ESBL, OmpK mutations not considered)
   * 3 = Carbapenemase with colistin resistance (regardless of ESBL, OmpK mutations not considered)
 
-When resistance screening is enabled, Kleborate also quantifies how many resistance genes are present and how many resistance classes have at least one gene. Since a resistance class can have multiple genes (as is often the case for the intrinsic genes in the Bla class), the gene count is typically higher than the class count.
+When resistance screening is enabled, Kleborate also quantifies how many acquired resistance genes are present and how many drug classes (in _addition_ to Bla/ampicillin) have at least one resistance determinant detected. A few things to note:
+  * The presence of resistance _mutations_ and core genes SHV/LEN/OKP do not contribute to the resistance _gene_ count.
+  * Mutations do contribute to the drug class count, e.g. fluoroquinolone resistance will be counted if a GyrA mutation is encountered regardless of whether or not an acquired fluoroquinolone resistance is also present. The exception is Omp mutations, which do not contribute to the drug class count as their effect depends on the strain background and the presence of acquired beta-lactamase enzymes; hence this information is provided in a separate column, and interpretation is left to the user.
+  * Note that since a drug class can have multiple resistance determinants, the gene count is typically higher than the class count.
+
 
 
 
