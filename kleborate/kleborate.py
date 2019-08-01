@@ -317,7 +317,7 @@ def get_resistance_gene_count(res_headers, res_hits):
     if not res_headers:
         return '-'
     res_indices = [i for i, h in enumerate(res_headers)
-                   if h.lower() != 'bla' and h.lower() != 'omp']
+                   if h.lower() != 'omp']
 
     gene_list = []
     for i in res_indices:
@@ -329,6 +329,11 @@ def get_resistance_gene_count(res_headers, res_hits):
 
         # Exclude truncation-based resistance.
         genes = [g for g in genes if '%' not in g]
+
+        # Exclude intrinsic bla genes.
+        genes = [g for g in genes if 'shv-' not in g.lower()]
+        genes = [g for g in genes if 'okp-' not in g.lower()]
+        genes = [g for g in genes if 'len-' not in g.lower()]
 
         genes = [g for g in genes if g != '-']
         gene_list += genes
