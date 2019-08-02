@@ -32,12 +32,13 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 * [Installation](#installation)
 * [Basic usage](#basic-usage)
 * [Full usage](#full-usage)
-* [Screening details](#screening-details)
+* [Screening functions & outputs](#screening-details)
+   * [Genome assembly quality metrics](#assembly-quality-metrics)
+   * [<em>Klebsiella</em> species](#klebsiella-species)
    * [MLST](#mlst)
    * [Virulence loci](#virulence-loci)
-   * [Resistance gene detection](#resistance-gene-detection)
-   * [Scores and counts](#scores-and-counts)
-   * [<em>Klebsiella</em> species](#klebsiella-species)
+   * [Resistance gene detection](#antimicrobial-resistance-determinants)
+   * [Resistance & virulence scores and counts](#scores-and-counts)
    * [Serotype prediction](#serotype-prediction)
 * [Example output](#example-output)
    * [Test data](#test-data)
@@ -154,6 +155,41 @@ Help:
 
 ## Screening details
 
+### Assembly quality metrics
+
+The quality and completeness of Kleborate results depends on the quality of the input genome assemblies. We provide some basic assembly statistics (contig count,	N50,	largest contig size) to help users understand their Kleborate results in the context of assembly quality, but we recommend users conduct more comprehensive QC themselves before running Kleborate (e.g. screen for contamination, etc).
+
+
+### _Klebsiella_ species
+
+Kleborate will attempt to identify the species of each input assembly. It does this by comparing the assembly using Mash to a curated set of _Klebsiella_ assemblies [from NCBI](https://www.ncbi.nlm.nih.gov/assembly) and reporting the species of the closest match. Kleborate considers a Mash distance of ≤ 0.01 to be a strong species match. A distance of > 0.01 and ≤ 0.03 is a weak match and might indicate that your sample is a novel lineage or a hybrid between multiple _Klebsiella_ species.
+
+Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
+<p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
+
+Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. These were previously considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. 
+
+| Species                                       | Kp phylogroup<sup>a</sup> | Kp phylogroup (alternative)<sup>b</sup> | Reference |
+| --------------------------------------------- | ---------------------- | -------------------------------- | --------- |
+| _K. pneumoniae_                               | Kp1                    | KpI                              | [Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38) | 
+| _K. quasipneumoniae_ subsp _quasipneumoniae_    | Kp2                    | KpIIa                            | [Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2) | 
+| _K. quasipneumoniae_ subsp _similipneumoniae_   | Kp4                    | KpIIb                            | [Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2) | 
+| _K. variicola_ subsp _variicola_                | Kp3                    | KpIII                            | [Rosenblueth et al. 2004 Syst Appl Microbiol 27:27-35](https://www.sciencedirect.com/science/article/abs/pii/S0723202004702349?via%3Dihub) | 
+| _K. variicola_ subsp _tropicalensis_            | Kp5                    | -                                | [Rodrigues et al. 2019 Res Microbiol ﻿S0923-2508:﻿30019-1](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub) | 
+| _K. quasivariicola_                           | Kp6                    | -                                | [Long et al. 2017 Genome Announc 5: ﻿e01057-17](https://mra.asm.org/content/5/42/e01057-17) | 
+| _K. africanensis_                             | Kp7                    | -                                | [Rodrigues et al. 2019 Res Microbiol ﻿S0923-2508:﻿30019-1](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub) | 
+
+<sup>a</sup> Kp phylogroup numbers as described in [Rodrigues et al. 2019](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub)
+
+<sup>b</sup> alternative (older) Kp phylogroup numbers as described in [Brisse et al. 2001](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-51-3-915#tab2) and [Fevre et al. 2005](https://aac.asm.org/content/49/12/5149) prior to the identification of _K. variicola_ subsp _tropicalensis_, _K. quasivariicola_ and _K. africanensis_.
+
+
+More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included in the Kleborate database, but the virulence profiles of these are less well characterised and deserve further attention.
+
+Kleborate will also call other species in Enterobacteriaceae, as different species sometimes end up in _Klebsiella_ collections. These names are again assigned based on the clades in a mashtree, but were not as carefully curated as the _Klebsiella_ species (so take them with a grain of salt).
+
+
+
 ### MLST
 
 Multilocus sequencing typing of _Klebsiella pneumoniae_ follows the schemes described at the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository. 
@@ -218,26 +254,26 @@ Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have b
 Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which result in a hypermucoid phenotype by upregulating capsule production. 
 
 * The two genes share ~83% nucleotide identity so are easily distinguished, and are reported in separate columns.
-* Alleles for each gene are sourced from the BIGSdb. For _rmpA_, we have also mapped thes alleles to the various known locations for _rmpA_ in _Klebsiella_ (i.e. major virulence plasmids KpVP-1 and KpVP-2; other virulences plasmids simply designated as VP; ICE<i>Kp1</i> and the chromosome in rhinoscleromatis).
+* Alleles for each gene are sourced from the BIGSdb. For _rmpA_, we have also mapped these alleles to the various known locations for _rmpA_ in _Klebsiella_ (i.e. major virulence plasmids KpVP-1 and KpVP-2; other virulences plasmids simply designated as VP; ICE<i>Kp1</i> and the chromosome in rhinoscleromatis).
 * Unique (non-overlapping) nucleotide BLAST hits with >95% identity and >50% coverage are reported. Note multiple hits to the same gene are reported if found (e.g. the NTUH-K2044 genome carries _rmpA_ in the virulence plasmid and also in ICE<i>Kp1</i>, which is reported in the _rmpA_ column as rmpA_11(ICEKp1),rmpA_2(KpVP-1)).
 
 
 
-### Resistance gene detection
+### Antimicrobial resistance determinants
 
 By using the `--resistance` option, Kleborate will screen for acquired resistance genes against the ARG-Annot database of acquired resistance genes ([SRST2](https://github.com/katholt/srst2) version), which includes allelic variants. It attempts to report the best matching variant for each locus in the genome:
 * Exact nucleotide matches are reported with no further annotation (e.g. "TEM-15"). 
 * If no exact nucleotide match is found, Kleborate searches for an exact amino acid match, and will report this with a "^" symbol (e.g. "TEM-15^" indicates an exact match to the TEM-15 protein sequence but with 1 or more nucleotide differences). If no exact amino acid match is found, the closest nucleotide match is reported with "\*" symbol (e.g. "TEM-30\*" indicates no precise nucleotide or amino acid match is found, but the closest nucleotide match is to TEM-30).
 * If the length of match is less than the length of the reported allele (i.e. a partial match), this is indicated with `?`.
-* Note that narrow spectrum beta-lactamases AmpH and SHV are core genes in _K. pneumoniae_ and so should be detected in most genomes.
-  * These genes include: SHV (_K. pneumoniae_), LEN (_K. variicola_), OKP (_K. quasipneumoniae_) and AmpH (all of the above species) 
+* Note that KpSC carry a core beta-lactamase gene (SHV in _K. pneumoniae_, LEN in _K. variicola_, OKP in _K. quasipneumoniae_) that confers clinically significant resistance to ampicillin. These should be detected in all genomes and are not included in the count of acquired resistance genes or  drug druclasses.
   * See [this paper](http://www.pnas.org/content/112/27/E3574.long) for more information.
-* Note that _oqxAB_ are also core genes  in _K. pneumoniae_, but have been removed from this version of the ARG-Annot DB as they don't actually confer resistance to fluoroquinolones
+* Note that _oqxAB_ and _fosA_ are also core genes, but have been removed from this version of the ARG-Annot DB as they don't actually confer resistance to fluoroquinolones.
 
 Using the `--resistance` option also turns on screening for resistance-conferring mutations (ONLY IF the genome was recognised as part of the KpSC):
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
 * Colistin resistance due to truncation or loss of MgrB or PmrB (less than 90% gene coverage counts as a truncation/loss).
 * OmpK35 and OmpK36 mutations resulting in reduced susceptibility to beta-lactamases. See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
+Note these do not count towards acquired resistance gene counts, but (except for Omp mutations) do count towards drug classes.
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
 * AGly (aminoglycosides)
@@ -257,8 +293,12 @@ All resistance results (both for the gene screen and mutation screen) are groupe
 * Sul (sulfonamides)
 * Tet (tetracyclines)
 * Tmt (trimethoprim)
+* Tig (tigecycline)
 
-Mutations in the OmpK35 and OmpK36 osmoporins are also reported in a separate column but do not contribute to the resistance genes or classes counts.  
+Note there is a separate column 'Omp' reporting known resistance-related mutations in the OmpK35 and OmpK36 osmoporins. 
+
+Note that Kleborate reports resistance results for all antimicrobial classes with confidently attribuatble resistance mechanisms in KpSC. Not all of these are actually used clinically for treatment of KpSC infections (e.g. Ntmdz, MLS, Rif) but they are still reported here as the presence of acquired resistance determinants to these classes is of interest to researchers for other reasons (e.g. these genes can be useful markers of MGEs and MGE spread; there is potential for use of these drugs against other organisms to select for KpSC in co-infected patients or in the environment). For an overview of antimicrobial resistance and consensus definitions of multidrug resistance (MDR), extreme drug resistance (XDR) and pan drug resistance in Enterobacteriaceae see [Magiorakos 2012](https://www.clinicalmicrobiologyandinfection.com/article/S1198-743X(14)61632-3/fulltext).
+
 
 
 ### Scores and counts
@@ -272,43 +312,18 @@ Kleborate outputs a simple categorical virulence score, and if resistance screen
   * 3 = aerobactin and/or salmochelin only (without yersiniabactin or colibactin)
   * 4 = aerobactin and/or salmochelin with yersiniabactin (without colibactin)
   * 5 = yersiniabactin, colibactin and aerobactin and/or salmochelin
+  
 * The resistance score ranges from 0 to 3:
   * 0 = no ESBL, no carbapenemase (regardless of colistin resistance)
   * 1 = ESBL, no carbapenemase (regardless of colistin resistance)
-  * 2 = Carbapenemase without colistin resistance (regardless of ESBL)
-  * 3 = Carbapenemase with colistin resistance (regardless of ESBL)
+  * 2 = Carbapenemase without colistin resistance (regardless of ESBL, OmpK mutations not considered)
+  * 3 = Carbapenemase with colistin resistance (regardless of ESBL, OmpK mutations not considered)
 
-When resistance screening is enabled, Kleborate also quantifies how many resistance genes are present and how many resistance classes have at least one gene. Since a resistance class can have multiple genes (as is often the case for the intrinsic genes in the Bla class), the gene count is typically higher than the class count.
+When resistance screening is enabled, Kleborate also quantifies how many acquired resistance genes are present and how many drug classes (in _addition_ to Bla/ampicillin) have at least one resistance determinant detected. A few things to note:
+  * The presence of resistance _mutations_ and core genes SHV/LEN/OKP do not contribute to the resistance _gene_ count.
+  * Mutations do contribute to the drug class count, e.g. fluoroquinolone resistance will be counted if a GyrA mutation is encountered regardless of whether or not an acquired fluoroquinolone resistance is also present. The exception is Omp mutations, which do not contribute to the drug class count as their effect depends on the strain background and the presence of acquired beta-lactamase enzymes; hence this information is provided in a separate column, and interpretation is left to the user.
+  * Note that since a drug class can have multiple resistance determinants, the gene count is typically higher than the class count.
 
-
-
-### _Klebsiella_ species
-
-Kleborate will attempt to identify the species of each input assembly. It does this by comparing the assembly using Mash to a curated set of _Klebsiella_ assemblies [from NCBI](https://www.ncbi.nlm.nih.gov/assembly) and reporting the species of the closest match. Kleborate considers a Mash distance of ≤ 0.01 to be a strong species match. A distance of > 0.01 and ≤ 0.03 is a weak match and might indicate that your sample is a novel lineage or a hybrid between multiple _Klebsiella_ species.
-
-Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
-<p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
-
-Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. These were previously considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. 
-
-| Species                                       | Kp phylogroup<sup>a</sup> | Kp phylogroup (alternative)<sup>b</sup> | Reference |
-| --------------------------------------------- | ---------------------- | -------------------------------- | --------- |
-| _K. pneumoniae_                               | Kp1                    | KpI                              | [Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38) | 
-| _K. quasipneumoniae_ subsp _quasipneumoniae_    | Kp2                    | KpIIa                            | [Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2) | 
-| _K. quasipneumoniae_ subsp _similipneumoniae_   | Kp4                    | KpIIb                            | [Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2) | 
-| _K. variicola_ subsp _variicola_                | Kp3                    | KpIII                            | [Rosenblueth et al. 2004 Syst Appl Microbiol 27:27-35](https://www.sciencedirect.com/science/article/abs/pii/S0723202004702349?via%3Dihub) | 
-| _K. variicola_ subsp _tropicalensis_            | Kp5                    | -                                | [Rodrigues et al. 2019 Res Microbiol ﻿S0923-2508:﻿30019-1](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub) | 
-| _K. quasivariicola_                           | Kp6                    | -                                | [Long et al. 2017 Genome Announc 5: ﻿e01057-17](https://mra.asm.org/content/5/42/e01057-17) | 
-| _K. africanensis_                             | Kp7                    | -                                | [Rodrigues et al. 2019 Res Microbiol ﻿S0923-2508:﻿30019-1](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub) | 
-
-<sup>a</sup> Kp phylogroup numbers as described in [Rodrigues et al. 2019](https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub)
-
-<sup>b</sup> alternative (older) Kp phylogroup numbers as described in [Brisse et al. 2001](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-51-3-915#tab2) and [Fevre et al. 2005](https://aac.asm.org/content/49/12/5149) prior to the identification of _K. variicola_ subsp _tropicalensis_, _K. quasivariicola_ and _K. africanensis_.
-
-
-More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included in the Kleborate database, but the virulence profiles of these are less well characterised and deserve further attention.
-
-Kleborate will also call other species in Enterobacteriaceae, as different species sometimes end up in _Klebsiella_ collections. These names are again assigned based on the clades in a mashtree, but were not as carefully curated as the _Klebsiella_ species (so take them with a grain of salt).
 
 
 
