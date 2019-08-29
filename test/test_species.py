@@ -72,7 +72,7 @@ class TestSpecies(unittest.TestCase):
 
     def test_klebsiella_variicola_subsp_tropicalensis(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_002806645.1.fna.gz', self.data_dir)
-        self.assertEqual(species, 'Klebsiella variicola subsp. tropicana')
+        self.assertEqual(species, 'Klebsiella variicola subsp. tropica')
 
     def test_klebsiella_africanensis(self):
         species, _ = get_klebsiella_species('test/sequences/ERR2835900.fna.gz', self.data_dir)
