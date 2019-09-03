@@ -54,15 +54,15 @@ class TestResScore(unittest.TestCase):
 
     def test_res_counts_3(self):
         """
-        Bla genes should not add to the counts.
+        Intrinsic Bla genes should not add to the counts.
         """
         self.results['AGly'] = 'a'
         self.results['Flq'] = 'b;c'
         self.results['Tet'] = 'd;e;f'
-        self.results['Bla'] = 'g;h'
+        self.results['Bla'] = 'g;SHV-3'
         summary_results = get_summary_results(self.results, self.res_headers)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
-        self.assertEqual(summary_results['num_resistance_genes'], '6')
+        self.assertEqual(summary_results['num_resistance_genes'], '7')
 
     def test_res_counts_4(self):
         """
