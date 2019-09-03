@@ -394,7 +394,14 @@ def get_chromosome_mlst_results(data_folder, contigs):
     chromosome_mlst_header = get_chromosome_mlst_header()
     assert len(chromosome_mlst_header) == len(chr_st_detail)
 
-    results = {'ST': chr_st,
+    # ST67 and ST90 get special 'subspecies' names.
+    chr_st_with_subsp = chr_st
+    if chr_st_with_subsp == 'ST90':
+        chr_st_with_subsp = 'ST90 (subsp. ozanae)'
+    if chr_st_with_subsp == 'ST67':
+        chr_st_with_subsp = 'ST67 (subsp. rhinoscleromatis)'
+
+    results = {'ST': chr_st_with_subsp,
                'Chr_ST': chr_st}
     results.update(dict(zip(get_chromosome_mlst_header(), chr_st_detail)))
     return results
