@@ -40,6 +40,7 @@ class TestMlst(unittest.TestCase):
         self.assertEqual(results['rpoB'], '-')
         self.assertEqual(results['tonB'], '-')
         self.assertEqual(results['ST'], '0')
+        self.assertEqual(results['Chr_ST'], '0')
 
     def test_chromosome_exact(self):
         """
@@ -54,6 +55,7 @@ class TestMlst(unittest.TestCase):
         self.assertEqual(results['rpoB'], '4')
         self.assertEqual(results['tonB'], '12')
         self.assertEqual(results['ST'], 'ST23')
+        self.assertEqual(results['Chr_ST'], 'ST23')
 
     def test_chromosome_inexact(self):
         """
@@ -68,6 +70,7 @@ class TestMlst(unittest.TestCase):
         self.assertEqual(results['rpoB'], '4')
         self.assertEqual(results['tonB'], '12')
         self.assertEqual(results['ST'], 'ST23-1LV')
+        self.assertEqual(results['Chr_ST'], 'ST23-1LV')
 
     def test_unknown_ST(self):
         """
@@ -82,6 +85,7 @@ class TestMlst(unittest.TestCase):
         self.assertEqual(results['rpoB'], '53')
         self.assertEqual(results['tonB'], '55')
         self.assertEqual(results['ST'], '0')
+        self.assertEqual(results['Chr_ST'], '0')
 
     def test_83(self):
         contigs = 'test/sequences/83.fasta.gz'
@@ -96,6 +100,7 @@ class TestMlst(unittest.TestCase):
             self.assertEqual(results['rpoB'], '1')
             self.assertEqual(results['tonB'], '35')
             self.assertEqual(results['ST'], 'ST160')
+            self.assertEqual(results['Chr_ST'], 'ST160')
 
     def test_134(self):
         contigs = 'test/sequences/134.fasta.gz'
@@ -110,6 +115,7 @@ class TestMlst(unittest.TestCase):
             self.assertEqual(results['rpoB'], '4')
             self.assertEqual(results['tonB'], '4')
             self.assertEqual(results['ST'], 'ST16')
+            self.assertEqual(results['Chr_ST'], 'ST16')
 
     def test_ba779(self):
         contigs = 'test/sequences/BA779.fasta.gz'
@@ -124,3 +130,20 @@ class TestMlst(unittest.TestCase):
             self.assertEqual(results['rpoB'], '4')
             self.assertEqual(results['tonB'], '12')
             self.assertEqual(results['ST'], 'ST23')
+            self.assertEqual(results['Chr_ST'], 'ST23')
+
+    def test_ozanae(self):
+        contigs = 'test/sequences/GCF_900451425.1.fna.gz'
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
+            results = get_chromosome_mlst_results(self.data_dir, contigs)
+            self.assertEqual(results['ST'], 'ST90 (subsp. ozanae)')
+            self.assertEqual(results['Chr_ST'], 'ST90')
+
+    def test_rhinoscleromatis(self):
+        contigs = 'test/sequences/GCF_000163455.1.fna.gz'
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
+            results = get_chromosome_mlst_results(self.data_dir, contigs)
+            self.assertEqual(results['ST'], 'ST67 (subsp. rhinoscleromatis)')
+            self.assertEqual(results['Chr_ST'], 'ST67')
