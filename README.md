@@ -256,6 +256,7 @@ Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which result in a 
 * The two genes share ~83% nucleotide identity so are easily distinguished, and are reported in separate columns.
 * Alleles for each gene are sourced from the BIGSdb. For _rmpA_, we have also mapped these alleles to the various known locations for _rmpA_ in _Klebsiella_ (i.e. major virulence plasmids KpVP-1 and KpVP-2; other virulences plasmids simply designated as VP; ICE<i>Kp1</i> and the chromosome in rhinoscleromatis).
 * Unique (non-overlapping) nucleotide BLAST hits with >95% identity and >50% coverage are reported. Note multiple hits to the same gene are reported if found (e.g. the NTUH-K2044 genome carries _rmpA_ in the virulence plasmid and also in ICE<i>Kp1</i>, which is reported in the _rmpA_ column as rmpA_11(ICEKp1),rmpA_2(KpVP-1)).
+* Truncations in the _rmpA_ and _rmpA2_ genes are expressed as a percentage of the amino acid length from the start codon i.e. rmpA_5-54% corresponds to a truncated RmpA sequence at 54% length of the intact amino acid sequence.  These truncations appear to be common, and also occur in defined allelic variants of _rmpA_ and _rmpA2_ due to insertions and deletions within a poly-G tract.
 
 
 
@@ -271,8 +272,8 @@ By using the `--resistance` option, Kleborate will screen for acquired resistanc
 
 Using the `--resistance` option also turns on screening for resistance-conferring mutations (ONLY IF the genome was recognised as part of the KpSC):
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
-* Colistin resistance due to truncation or loss of MgrB or PmrB (less than 90% gene coverage counts as a truncation/loss).
-* OmpK35 and OmpK36 mutations resulting in reduced susceptibility to beta-lactamases. See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
+* Colistin resistance due to truncation or loss of MgrB or PmrB. Truncations are expressed as %amino acid length from the start codon.
+* OmpK35 and OmpK36 truncations and mutations resulting in reduced susceptibility to beta-lactamases. See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
 Note these do not count towards acquired resistance gene counts, but (except for Omp mutations) do count towards drug classes.
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
@@ -293,7 +294,7 @@ All resistance results (both for the gene screen and mutation screen) are groupe
 * Sul (sulfonamides)
 * Tet (tetracyclines)
 * Tmt (trimethoprim)
-* Tig (tigecycline)
+* Tgc (tigecycline)
 
 Note there is a separate column 'Omp' reporting known resistance-related mutations in the OmpK35 and OmpK36 osmoporins. 
 
