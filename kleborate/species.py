@@ -69,6 +69,6 @@ def is_kp_complex(results):
         return True
     if species.startswith('Klebsiella quasivariicola'):
         return True
-    if species.startswith('Klebsiella africanensis'):
+    if species.startswith('Klebsiella africana'):
         return True
     return False
