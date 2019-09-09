@@ -131,10 +131,10 @@ class TestKpComplex(unittest.TestCase):
         self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. variicola'}))
 
     def test_klebsiella_variicola_subsp_tropicalensis(self):
-        self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. tropicalensis'}))
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. tropica'}))
 
     def test_klebsiella_africanensis(self):
-        self.assertTrue(is_kp_complex({'species': 'Klebsiella africanensis'}))
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella africana'}))
 
     def test_raoultella_planticola(self):
         self.assertFalse(is_kp_complex({'species': 'Raoultella planticola'}))
