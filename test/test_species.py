@@ -68,7 +68,7 @@ class TestSpecies(unittest.TestCase):
 
     def test_klebsiella_variicola_subsp_variicola(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_000019565.1.fna.gz', self.data_dir)
-        self.assertEqual(species, 'Klebsiella variicola subsp. variicola')
+        self.assertEqual(species, 'Klebsiella variicola subsp. variicol')
 
     def test_klebsiella_variicola_subsp_tropicalensis(self):
         species, _ = get_klebsiella_species('test/sequences/GCF_002806645.1.fna.gz', self.data_dir)
@@ -128,7 +128,7 @@ class TestKpComplex(unittest.TestCase):
         self.assertTrue(is_kp_complex({'species': 'Klebsiella quasivariicola'}))
 
     def test_klebsiella_variicola_subsp_variicola(self):
-        self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. variicola'}))
+        self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. variicol'}))
 
     def test_klebsiella_variicola_subsp_tropicalensis(self):
         self.assertTrue(is_kp_complex({'species': 'Klebsiella variicola subsp. tropica'}))
