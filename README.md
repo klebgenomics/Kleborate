@@ -34,9 +34,9 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 * [Full usage](#full-usage)
 * [Screening functions & outputs](#screening-details)
    * [Genome assembly quality metrics](#assembly-quality-metrics)
-   * [<em>Klebsiella</em> species](#klebsiella-species)
-   * [MLST](#mlst)
-   * [Virulence loci](#virulence-loci)
+   * [<em>Klebsiella</em> species identification](#klebsiella-species)
+   * [Multi-locus sequence typing (MLST)](#mlst)
+   * [Acquired hypervirulence loci](#virulence-loci)
    * [Resistance gene detection](#antimicrobial-resistance-determinants)
    * [Resistance & virulence scores and counts](#scores-and-counts)
    * [Serotype prediction](#serotype-prediction)
@@ -52,9 +52,9 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 
 ## Background
 
-_Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunistic infections, with a handful of hypervirulent lineages recognised as true human pathogens. Evidence is now mounting that other _Kp_ strains carrying acquired siderophores (yersiniabactin, salmochelin and aerobactin) and/or the genotoxin colibactin are also highly pathogenic and can cause invasive disease.
+_Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunistic infections in hospitals. _Kp_ are intrinsically resistant to ampicillin and frequently acquire additional antimicrobial resistances through horizontal gene transfer and chromosomal mutations. A handful of hypervirulent lineages are also recognised, which encode a constellation of acquired virulence factors and can cause invasive disease outside the hospital setting. Evidence is now mounting that other _Kp_ strains carrying one or more of these acquired factors – including siderophores (yersiniabactin, salmochelin and aerobactin), regulators of hypermucoidy (_rmpA/rmpA2_ genes) and/or the genotoxin colibactin – can also be highly pathogenic and cause more severe disease both inside and outside hospitals. Capsule (K) and O antigen variation is also of great interest to the research community due to its importance in host-pathogen and phage interactions, and thus potential relevance to alternative control measures such as vaccines, immunotherapy and phage therapy.
 
-Our goal is to help identify emerging pathogenic _Kp_ lineages, and to make it easy for people who are using genomic surveillance to monitor for antibiotic resistance to also look out for the convergence of antibiotic resistance and virulence. To help facilitate that, in this repo we share code for genotyping virulence and resistance genes in _K. pneumoniae_. A table of pre-computed results for 2500 public Klebs genomes is also provided in the [data directory](https://github.com/katholt/Kleborate/data).
+To make it easier to extract clinically relevant genotyping information from _K. pneumoniae_ genome data we have developed *Kleborate*, a genomic surveillance tool designed to (a) accurately identify species and sequence types, and (b) identify the key *acquired* genetic features for which there is strong evidence of association with either antibiotic resistance or hypervirulence. While many generic tools can be used to identify sequence types or resistance determinants from bacterial genomes, we hope that this organism-specific tool will help avoid many of the common confusions faced by people working with _K. pneumoniae_ genomes and also facilitate monitoring for the convergence of antibiotic resistance with the hypervirulence factors noted above. 
 
 
 
@@ -64,7 +64,7 @@ Software requirements:
 * Python (either 2.7 or 3)
 * [setuptools](https://pypi.python.org/pypi/setuptools) (required to install Kleborate)
   * To install: `pip install setuptools`
-* BLAST+ command line tools (`makeblastdb`, `blastn`, etc.)
+* [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
   * Version 2.7.1 or later is needed, as earlier versions have a bug with the `culling_limit` parameter and/or tblastx results.
   * We test Kleborate on BLAST+ v2.7.1. Later versions will probably also work but stick to v2.7.1 if you want to play it safe.
 * [Mash](https://github.com/marbl/Mash)
@@ -167,7 +167,7 @@ Kleborate will attempt to identify the species of each input assembly. It does t
 Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
 <p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
 
-Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. These were previously considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. 
+Kleborate is designed for detailed genotyping of the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. These were previously considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. 
 
 | Species                                       | Kp phylogroup<sup>a</sup> | Kp phylogroup (alternative)<sup>b</sup> | Reference |
 | --------------------------------------------- | ---------------------- | -------------------------------- | --------- |
@@ -183,17 +183,22 @@ Kleborate is designed for the well-studied _K. pneumoniae_ species complex (KpSC
 
 <sup>b</sup> alternative (older) Kp phylogroup numbers as described in [Brisse et al. 2001](https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-51-3-915#tab2) and [Fevre et al. 2005](https://aac.asm.org/content/49/12/5149) prior to the identification of _K. variicola_ subsp _tropica_, _K. quasivariicola_ and _K. africana_.
 
+More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) will be accurately identified by Kleborate, although please note that the diversty and relevance of _K. pneumoniae_ virulence factors in these species is not yet well understood.
 
-More distant _Klebsiella_ species (_oxytoca_, _michiganensis_, _grimontii_ and _aerogenes_) are also included in the Kleborate database, but the virulence profiles of these are less well characterised and deserve further attention.
-
-Kleborate will also call other species in Enterobacteriaceae, as different species sometimes end up in _Klebsiella_ collections. These names are again assigned based on the clades in a mashtree, but were not as carefully curated as the _Klebsiella_ species (so take them with a grain of salt).
+Kleborate will also yield reliable species identifications across the family Enterobacteriaceae, as different species sometimes end up in _Klebsiella_ collections. These names are again assigned based on the clades in a mashtree, but were not as carefully curated as the _Klebsiella_ species (so take them with a grain of salt).
 
 
 
 ### MLST
 
-Multilocus sequencing typing of _Klebsiella pneumoniae_ follows the schemes described at the [_Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository. 
-Note that as of Feburary 2018, allele definitions for ST1047 and ST1078 have changed, and these new allele combinations are incorporated in Kleborate v0.4.0. 
+Genomes identified by Kleborate as belonging to the _K. pneumoniae_ species complex are then subjected to multi-locus sequencing typing (MLST) using the 7-locus scheme described at the [Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository.
+
+Notes on Kleborate's MLST calls:
+* Kleborate makes an effort to report the closest matching ST / clonal group if a precise match is not found.
+* Imprecise allele matches are indicated with a `*`.
+* Imprecise ST calls are indicated with `-nLV`, where n indicates the number of loci that disagree with the ST reported. So `258-1LV` indicates a single-locus variant of (SLV) of ST258, i.e. 6/7 loci match ST258.
+
+*Note that allele definitions for ST1047 and ST1078 were changed in the MLST database in Feburary 2018, and these new allele combinations are incorporated in Kleborate since v0.4.0. This is highly unusual and other allele and ST assignment should be stable across versions.*
 
 |allele         |ST1047 old     |ST1047 current |ST1078 old     |ST1078 current |
 | ------------- | ------------- |---------------|---------------|---------------|
@@ -206,75 +211,66 @@ Note that as of Feburary 2018, allele definitions for ST1047 and ST1078 have cha
 |_tonB_         |14             |4              |124            |46             |
 
 
+### Acquired hypervirulence loci
 
-Additional notes on Kleborate's MLST calls:
-* Kleborate makes an effort to report the closest matching ST / clonal group if a precise match is not found.
-* Imprecise allele matches are indicated with a `*`.
-* Imprecise ST calls are indicated with `-nLV`, where n indicates the number of loci that disagree with the ST reported. So `258-1LV` indicates a single-locus variant of (SLV) of ST258, i.e. 6/7 loci match ST258.
-
-
-
-### Virulence loci
-
-Kleborate examines four key virulence loci in _Klebsiella_: the siderophores yersiniabactin (_ybt_), aerobactin (_iuc_) and salmochelin (_iro_), and the genotoxin colibactin (_clb_).
-* For each of these loci, Kleborate will call a sequence type using the same logic as the MLST described above.
-* If the locus is not detected, Kleborate reports the ST as `0` and the lineage as `-`.
+Kleborate examines four key acquired hypervirulence loci described in _K. pneumoniae_: the siderophores yersiniabactin (_ybt_), aerobactin (_iuc_) and salmochelin (_iro_), and the genotoxin colibactin (_clb_).
+* For each of these loci, Kleborate will call a sequence type using the same logic as the MLST described above, using the locus-specific schemes defined in the [BIGSdb](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html).
 * Kleborate will also report the lineage associated with the virulence sequence types, as outlined below and detailed in the corresponding papers (for yersiniabactin, we also report the predicted ICE<i>Kp</i> structure based on the _ybt_ lineage assignment).
+* If the locus is not detected, Kleborate reports the ST as `0` and the lineage as `-`.
 
 #### Yersiniabactin and colibactin (primarily mobilised by ICE<i>Kp</i>)
-We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Klebsiella_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ (see figure) embedded within 14 structural variants of ICE<i>Kp</i> that can integrate at any of four tRNA-Asn sites in the chromosome. Three of the _ybt_ 17 lineages were associated with three lineages of colibactin, with which they are co-located in the same ICE structure designated ICE<i>Kp10</i>. One ICE structure (ICE<i>Kp1</i>) carries the salmochelin synthesis locus _iro_ and _rmpA_ hypermucoidy gene in addition to _ybt_ (lineage 2). Additionally, we identify a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST), which is implemented in Kleborate. Annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository).
+We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Klebsiella_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ (see figure) embedded within 14 structural variants of ICE<i>Kp</i> that can integrate at any of four tRNA-Asn sites in the chromosome. Three of the _ybt_ 17 lineages were associated with three lineages of colibactin, with which they are co-located in the same ICE structure designated ICE<i>Kp10</i>. One ICE structure (ICE<i>Kp1</i>) carries the salmochelin synthesis locus _iro_ and _rmpA_ hypermucoidy gene in addition to _ybt_ (lineage 2). Additionally, we identified a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST), which is implemented in Kleborate. Annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository).
 
 <p align="left"><img src="images/ybt_trees.png" alt="ybt tree" width="70%"></p>
 
 #### Aerobactin and salmochelin (primarily mobilised by virulence plasmids)
-We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci among a dataset of 2733 _Klebsiella_ genomes (see [this preprint](https://www.biorxiv.org/content/early/2018/07/25/376236)). We identified five _iro_ and six _iuc_ lineages (see figure), each of which was associated with a specific location within _Kp_ genomes. The most common lineages were _iuc1_ and _iro1_, which are found together on the virulence plasmid KpVP-1 (typified by pK2044 or pLVPK common to the hypervirulent clones ST23, ST86, etc). _iuc2_ and _iro2_ lineages were associated with the alternative virulence plasmid KpVP-2 (typified by Kp52.145 plasmid II from the K2 ST66 lab strain known as Kp52.145 or B5055). _iuc5_ and _iro5_ originate from _E. coli_ and are carried (often together) on _E. coli_ plasmids that can transfer to _Kp_. The lineages _iuc2A_, _iuc3_ and _iro4_ were associated with other novel plasmids that have not yet been previously described in _Kp_. In addition, we found the salmochelin locus present in ICE<i>Kp1</i> constitutes its own lineage _iro3_, and the aerobactin locus present in the chromosome of ST67 _Kp_ subsp _rhinoscleromatis_ strains constitutes its own lineage _iuc4_. Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.
+We further explored the genetic diversity of the aerobactin (_iuc_) and salmochelin (_iro_) loci among a dataset of 2733 _Klebsiella_ genomes (see [this paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5)). We identified five _iro_ and six _iuc_ lineages (see figure), each of which was associated with a specific location within _Kp_ genomes. The most common lineages were _iuc1_ and _iro1_, which are found together on the virulence plasmid KpVP-1 (typified by pK2044 or pLVPK common to the hypervirulent clones ST23, ST86, etc). _iuc2_ and _iro2_ lineages were associated with the alternative virulence plasmid KpVP-2 (typified by Kp52.145 plasmid II from the K2 ST66 lab strain known as Kp52.145 or B5055). _iuc5_ and _iro5_ originate from _E. coli_ and are carried (often together) on _E. coli_ plasmids that can transfer to _Kp_. The lineages _iuc2A_, _iuc3_ and _iro4_ were associated with other novel plasmids that had not been previously described in _Kp_ but sequences for which are included in [the paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5). In addition, we found the salmochelin locus present in ICE<i>Kp1</i> constitutes its own lineage _iro3_, and the aerobactin locus present in the chromosome of ST67 _Kp_ subsp _rhinoscleromatis_ strains constitutes its own lineage _iuc4_. Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.
 
 <p align="center"><img src="images/iuc_iro_trees.png" alt="iuc and iro trees" width="70%"></p>
 
-Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have been updated between Kleborate version 0.2.0 and 0.3.0 to match the nomenclature used in [the preprint](https://www.biorxiv.org/content/early/2018/07/25/376236). The AbST and SmST allele numbers are unchanged. Lineage name re-assignments are:
+Please note that the aerobactin _iuc_ and salmochelin _iro_ lineage names have been updated between Kleborate version 0.2.0 and 0.3.0 to match the nomenclature used in [the paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5). The AbST and SmST allele numbers are unchanged. Lineage name re-assignments are:
 
-| v0.2.0        | v0.3.0        | location (see [preprint](https://www.biorxiv.org/content/early/2018/07/25/376236) for details)
+| v0.2.0        | v0.3.0        | location (see [paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5) for details)
 | ------------- | ------------- |------------------
-| iuc 2         | iuc 1         | KpVP-1 (e.g. pLVPK) |
-| iuc 3B        | iuc 2         | KpVP-2 |
-| iuc 3A        | iuc 2A        | other plasmids |
-| iuc 4         | iuc 3         | other plasmids |
-| iuc 5         | iuc 4         | rhinoscleromatis chromosome |
-| iuc 1         | iuc 5         | _E. coli_ variant |
-| iro 3         | iro 1         | KpVP-1 (e.g. pLVPK) |
-| iro 4         | iro 2         | KpVP-2 |
-| iro 5         | iro 3         | ICEKp1 |
-| iro 2         | iro 4         | _Enterobacter_ variant |
-| iro 1         | iro 5         | _E. coli_ variant |
+| *iuc 2*         | *iuc 1*         | KpVP-1 (e.g. pLVPK) |
+| *iuc 3B*        | *iuc 2*         | KpVP-2 (e.g. Kp52.145 plasmid II) |
+| *iuc 3A*        | *iuc 2A*        | other plasmids |
+| *iuc 4*         | *iuc 3*         | other plasmids |
+| *iuc 5*         | *iuc 4*         | rhinoscleromatis chromosome |
+| *iuc 1*         | *iuc 5*         | _E. coli_ variant |
+| *iro 3*         | *iro 1*         | KpVP-1 (e.g. pLVPK) |
+| *iro 4*         | *iro 2*         | KpVP-2 |
+| *iro 5*         | *iro 3*         | ICEKp1 |
+| *iro 2*         | *iro 4*         | _Enterobacter_ variant |
+| *iro 1*         | *iro 5*         | _E. coli_ variant |
 
 
 
 #### Hypermucoidy genes
 
-Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which result in a hypermucoid phenotype by upregulating capsule production. 
+Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which can result in a hypermucoid phenotype by upregulating capsule production.
 
 * The two genes share ~83% nucleotide identity so are easily distinguished, and are reported in separate columns.
-* Alleles for each gene are sourced from the BIGSdb. For _rmpA_, we have also mapped these alleles to the various known locations for _rmpA_ in _Klebsiella_ (i.e. major virulence plasmids KpVP-1 and KpVP-2; other virulences plasmids simply designated as VP; ICE<i>Kp1</i> and the chromosome in rhinoscleromatis).
+* Alleles for each gene are sourced from the [BIGSdb](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). For _rmpA_, we have also mapped these alleles to the various known locations for _rmpA_ in _Klebsiella_ (i.e. major virulence plasmids KpVP-1 and KpVP-2; other virulences plasmids simply designated as VP; ICE<i>Kp1</i> and the chromosome in rhinoscleromatis).
 * Unique (non-overlapping) nucleotide BLAST hits with >95% identity and >50% coverage are reported. Note multiple hits to the same gene are reported if found (e.g. the NTUH-K2044 genome carries _rmpA_ in the virulence plasmid and also in ICE<i>Kp1</i>, which is reported in the _rmpA_ column as rmpA_11(ICEKp1),rmpA_2(KpVP-1)).
-* Truncations in the _rmpA_ and _rmpA2_ genes are expressed as a percentage of the amino acid length from the start codon i.e. rmpA_5-54% corresponds to a truncated RmpA sequence at 54% length of the intact amino acid sequence.  These truncations appear to be common, and also occur in defined allelic variants of _rmpA_ and _rmpA2_ due to insertions and deletions within a poly-G tract.
-
+* Truncations in the _rmpA_ and _rmpA2_ genes are expressed as a percentage of the amino acid length from the start codon, e.g. rmpA_5-54% indicates the RmpA protein is truncated after 54% length of the intact amino acid sequence. These truncations appear to be common, due to insertions and deletions within a poly-G tract, and almost certainly result in loss of protein function.
 
 
 ### Antimicrobial resistance determinants
 
-By using the `--resistance` option, Kleborate will screen for acquired resistance genes against the ARG-Annot database of acquired resistance genes ([SRST2](https://github.com/katholt/srst2) version), which includes allelic variants. It attempts to report the best matching variant for each locus in the genome:
+By using the `--resistance` option, Kleborate will screen for acquired resistance genes against the ARG-Annot database of acquired resistance genes (updated version from [SRST2](https://github.com/katholt/srst2)), which includes allelic variants. It attempts to report the best matching variant for each locus in the genome:
 * Exact nucleotide matches are reported with no further annotation (e.g. "TEM-15"). 
 * If no exact nucleotide match is found, Kleborate searches for an exact amino acid match, and will report this with a "^" symbol (e.g. "TEM-15^" indicates an exact match to the TEM-15 protein sequence but with 1 or more nucleotide differences). If no exact amino acid match is found, the closest nucleotide match is reported with "\*" symbol (e.g. "TEM-30\*" indicates no precise nucleotide or amino acid match is found, but the closest nucleotide match is to TEM-30).
 * If the length of match is less than the length of the reported allele (i.e. a partial match), this is indicated with `?`.
-* Note that KpSC carry a core beta-lactamase gene (SHV in _K. pneumoniae_, LEN in _K. variicola_, OKP in _K. quasipneumoniae_) that confers clinically significant resistance to ampicillin. These should be detected in all genomes and are not included in the count of acquired resistance genes or  drug druclasses.
+* Note that KpSC carry a core beta-lactamase gene (SHV in _K. pneumoniae_, LEN in _K. variicola_, OKP in _K. quasipneumoniae_) that confers clinically significant resistance to ampicillin. As these are present in all genomes they are not included in the count of acquired resistance genes or drug classes.
   * See [this paper](http://www.pnas.org/content/112/27/E3574.long) for more information.
-* Note that _oqxAB_ and _fosA_ are also core genes, but have been removed from this version of the ARG-Annot DB as they don't actually confer resistance to fluoroquinolones.
+* Note that _oqxAB_ and _fosA_ are also core genes in _K. pneumoniae_ and don't confer clinical resistance to fluoroquinolones or fosfomycin, hence Kleborate does not report them.
 
-Using the `--resistance` option also turns on screening for resistance-conferring mutations (ONLY IF the genome was recognised as part of the KpSC):
+Using the `--resistance` option also turns on screening for chromosomal mutations for which there is strong evidence of an association with clinical resistance in KpSC (note these are ONLY reported if the genome was recognised as part of the KpSC):
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
-* Colistin resistance due to truncation or loss of MgrB or PmrB. Truncations are expressed as %amino acid length from the start codon.
+* Colistin resistance due to truncation or loss of MgrB or PmrB (truncations are expressed as %amino acid length from the start codon).
 * OmpK35 and OmpK36 truncations and mutations resulting in reduced susceptibility to beta-lactamases. See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
-Note these do not count towards acquired resistance gene counts, but (except for Omp mutations) do count towards drug classes.
+Note these do not count towards acquired resistance gene counts, but do count towards drug classes (with the exception of Omp mutations, whose spectrum of effects depends on the presence of acquired beta-lactamases and thus their impact on specific beta-lactam drug classes is hard to predict).
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
 * AGly (aminoglycosides)
@@ -298,7 +294,7 @@ All resistance results (both for the gene screen and mutation screen) are groupe
 
 Note there is a separate column 'Omp' reporting known resistance-related mutations in the OmpK35 and OmpK36 osmoporins. 
 
-Note that Kleborate reports resistance results for all antimicrobial classes with confidently attribuatble resistance mechanisms in KpSC. Not all of these are actually used clinically for treatment of KpSC infections (e.g. Ntmdz, MLS, Rif) but they are still reported here as the presence of acquired resistance determinants to these classes is of interest to researchers for other reasons (e.g. these genes can be useful markers of MGEs and MGE spread; there is potential for use of these drugs against other organisms to select for KpSC in co-infected patients or in the environment). For an overview of antimicrobial resistance and consensus definitions of multidrug resistance (MDR), extreme drug resistance (XDR) and pan drug resistance in Enterobacteriaceae see [Magiorakos 2012](https://www.clinicalmicrobiologyandinfection.com/article/S1198-743X(14)61632-3/fulltext).
+Note that Kleborate reports resistance results for all antimicrobial classes with confidently attributable resistance mechanisms in KpSC. Not all of these are actually used clinically for treatment of KpSC infections (e.g. Ntmdz, MLS, Rif) but they are still reported here as the presence of acquired resistance determinants to these classes is of interest to researchers for other reasons (e.g. these genes can be useful markers of MGEs and MGE spread; there is potential for use of these drugs against other organisms to select for KpSC in co-infected patients or in the environment). For an overview of antimicrobial resistance and consensus definitions of multidrug resistance (MDR), extreme drug resistance (XDR) and pan drug resistance in Enterobacteriaceae, see [Magiorakos 2012](https://www.clinicalmicrobiologyandinfection.com/article/S1198-743X(14)61632-3/fulltext).
 
 
 
@@ -331,12 +327,12 @@ When resistance screening is enabled, Kleborate also quantifies how many acquire
 ### Serotype prediction
 
 #### Basic capsule prediction with _wzi_ allele typing
-By default, Kleborate will report the closest match amongst the _wzi_ alleles in the BIGSdb. This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, there is a strong correlation (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)). Note the _wzi database_ is populated with alleles from the _Klebsiella pneumoniae_ species complex and is not reliable for other species.
+By default, Kleborate will report the closest match amongst the _wzi_ alleles in the [BIGSdb](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, there is a strong correlation (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102) and [Brisse et al, J Clin Micro 2013](https://jcm.asm.org/content/51/12/4073.long)). Note the _wzi database_ is populated with alleles from the _Klebsiella pneumoniae_ species complex and is not reliable for other species.
 
 The _wzi_ allele can provide a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages).
 
 #### Capsule (K) and O antigen (LPS) serotype prediction using Kaptive
-You can optionally turn on capsule and O antigen typing using the dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive). Note that the Kaptive database comprises O and K loci characterised in the _Klebsiella pneumoniae_ species complex (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)); these loci are sometimes also found in other _Klebsiella_ species but you should expect many novel loci outside the KpSC that will not be detected here.
+You can optionally turn on capsule and O antigen typing using the dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive). Note that the Kaptive database comprises O and K loci characterised in the _Klebsiella pneumoniae_ species complex (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102) for K loci, [Wick et al, J Clin Micro 2018](https://jcm.asm.org/content/56/6/e00197-18) for O loci). These loci are sometimes also found in other _Klebsiella_ species but you should expect many novel loci outside the KpSC that will not be detected here.
 
 * `--kaptive_k` turns on Kaptive screening of the K locus
 * `--kaptive_o` turns on Kaptive screening of the O locus
@@ -376,7 +372,7 @@ These are the concise Kleborate results that it prints to the terminal:
 
 ### Full results (file)
 
-Here are the full Kleborate results, written to `results.txt`:
+Here are the full Kleborate results (including allele calls for all genes in the five MLST locus schemes), written to `results.txt`:
 
 | strain        | species               | species_match | contig_count | N50     | largest_contig | ST   | virulence_score | resistance_score | num_resistance_classes | num_resistance_genes | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | rmpA                             | rmpA2    | wzi   | K_locus | K_locus_problems | K_locus_confidence | K_locus_identity | K_locus_missing_genes | O_locus | O_locus_problems | O_locus_confidence | O_locus_identity | O_locus_missing_genes | Chr_ST | gapA | infB | mdh | pgi | phoE | rpoB | tonB | ybtS | ybtX | ybtQ | ybtP | ybtA | irp2 | irp1 | ybtU | ybtT | ybtE | fyuA | clbA | clbB | clbC | clbD | clbE | clbF | clbG | clbH | clbI | clbL | clbM | clbN | clbO | clbP | clbQ | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          |
 |---------------|-----------------------|---------------|--------------|---------|----------------|------|-----------------|------------------|------------------------|----------------------|----------------|------|------------|------|------------|------|-------------|--------|----------------------------------|----------|-------|---------|------------------|--------------------|------------------|-----------------------|---------|------------------|--------------------|------------------|-----------------------|--------|------|------|-----|-----|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------|
@@ -389,7 +385,7 @@ Here are the full Kleborate results, written to `results.txt`:
 
 ## Typing from Illumina reads
 
-MLST assignment can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2):
+If you don't have good quality assemblies, MLST assignment for the chromosomal & virulence locus schemes can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2):
 
 * Download the YbST, CbST, AbST, SmST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) in this repository.
 * Install [SRST2](https://github.com/katholt/srst2) if you don't already have it (`git clone https://github.com/katholt/srst2`).
