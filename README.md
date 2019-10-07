@@ -44,7 +44,7 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
    * [Test data](#test-data)
    * [Concise results (stdout)](#concise-results-stdout)
    * [Full results (file)](#full-results-file)
-* [Typing from Illumina reads](#typing-from-illumina-reads)
+* [Using Kleborate genotyping schemes with raw Illumina reads](#typing-from-illumina-reads)
 * [Contact us](#contact-us)
 * [License](#license)
 
