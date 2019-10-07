@@ -61,13 +61,18 @@ To make it easier to extract clinically relevant genotyping information from _K.
 ## Requirements
 
 Software requirements:
-* Python (either 2.7 or 3)
+* [Python 3](https://www.python.org/) (v3.5 or later should work)
 * [setuptools](https://pypi.python.org/pypi/setuptools) (required to install Kleborate)
   * To install: `pip install setuptools`
+* [Biopython](https://biopython.org/)
+  * To install: `pip install biopython`
 * [BLAST+](https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastDocs&DOC_TYPE=Download)
   * Version 2.7.1 or later is needed, as earlier versions have a bug with the `culling_limit` parameter and/or tblastx results.
   * We test Kleborate on BLAST+ v2.7.1. Later versions will probably also work but stick to v2.7.1 if you want to play it safe.
 * [Mash](https://github.com/marbl/Mash)
+  * You can download a pre-compiled version from the [Mash releases page](https://github.com/marbl/Mash/releases) (both Mac and Linux binaries are available) and copy the executable somewhere into your PATH (e.g. `/usr/local/bin`).
+  * Alternatively, you can install Mash on a Mac with Homebrew: `brew install mash`
+
 
 As input, Kleborate takes _Klebsiella_ genome assemblies (either completed or draft). If you have unassembled reads, try assembling them with our [Unicycler](https://github.com/rrwick/Unicycler) assembler which works great on Illumina or hybrid Illumina + Nanopore/PacBio reads).
 
