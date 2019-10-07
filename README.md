@@ -139,7 +139,7 @@ Screening options:
   --kaptive_o           Turn on Kaptive screening of O loci (default: do not
                         run Kaptive for O loci)
   -k, --kaptive         Equivalent to --kaptive_k --kaptive_o
-  --all                 Equivalent to --resistance --species --kaptive
+  --all                 Equivalent to --resistance --kaptive
 
 Output options:
   -o OUTFILE, --outfile OUTFILE
@@ -349,20 +349,28 @@ Note that running Kaptive will significantly increase the runtime of Kleborate, 
 
 ## Example output
 
-### Test data
+### Test commands
 
 Run these commands test out Kleborate using some of the test data provided in the /test directory of this repository:
 
 ```
+# 1) basic genotyping (no resistance typing; K serotype prediction using wzi allele only)
 kleborate -o results.txt -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleborate/test/sequences/GCF_003095495.1.fna.gz Kleborate/test/sequences/GCF_000009885.1.fna.gz Kleborate/test/sequences/GCF_900501255.1.fna.gz Kleborate/test/sequences/GCF_000019565.1.fna.gz Kleborate/test/sequences/GCF_000492415.1.fna.gz Kleborate/test/sequences/GCF_000492795.1.fna.gz
+
+# 2) with resistance typing (K serotype prediction using wzi allele only)
+kleborate -o results_res.txt --resistance -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleborate/test/sequences/GCF_003095495.1.fna.gz Kleborate/test/sequences/GCF_000009885.1.fna.gz Kleborate/test/sequences/GCF_900501255.1.fna.gz Kleborate/test/sequences/GCF_000019565.1.fna.gz Kleborate/test/sequences/GCF_000492415.1.fna.gz Kleborate/test/sequences/GCF_000492795.1.fna.gz
+
+# 3) with resistance typing & full K/O serotype prediction using Kaptive (slower)
+kleborate -o results_res_kaptive.txt --all -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleborate/test/sequences/GCF_003095495.1.fna.gz Kleborate/test/sequences/GCF_000009885.1.fna.gz Kleborate/test/sequences/GCF_900501255.1.fna.gz Kleborate/test/sequences/GCF_000019565.1.fna.gz Kleborate/test/sequences/GCF_000492415.1.fna.gz Kleborate/test/sequences/GCF_000492795.1.fna.gz
 ```
 
 
 ### Concise results (stdout)
 
-These are the concise Kleborate results that it prints to the terminal:
+These are the concise Kleborate results that are printed to the terminal, for example 1:
 
 strain | species | ST | virulence_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 GCF_002248955.1 | Klebsiella pneumoniae | ST15 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi29 | KL106
 GCF_003095495.1 | Klebsiella pneumoniae | ST258 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi154 | KL107
 GCF_000009885.1 | Klebsiella pneumoniae | ST23 | 4 | ybt 2; ICEKp1 | 326 | - | 0 | iuc 1 | 1 | iro 3 | 18-1LV | rmpA_11(ICEKp1),rmpA_2(KpVP-1) | rmpA2_3-47% | wzi1 | KL1
@@ -371,6 +379,18 @@ GCF_900501255.1 | Klebsiella pneumoniae | ST86 | 3 | - | 0 | - | 0 | iuc 1 | 1 |
 GCF_000019565.1 | Klebsiella variicola subsp. variicola | ST146 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi159 | KL30
 GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46
 GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21
+
+For example 2 (ie with resistance typing turned on):
+
+strain | species | ST | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus | AGly | Col | Fcyn | Flq | Gly | MLS | Ntmdz | Phe | Rif | Sul | Tet | Tgc | Tmt | Omp | Bla | Bla_Carb | Bla_ESBL | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+GCF_002248955.1 | Klebsiella pneumoniae | ST15 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi29 | KL106 | Aac3-IId^ | Mcr3-1* | - | GyrA-83F;GyrA-87A;ParC-80I | - | - | - | CatA1^ | - | - | TetA | - | - | - | SHV-28^ | - | - | - | - | -
+GCF_003095495.1 | Klebsiella pneumoniae | ST258 | 0 | 3 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi154 | KL107 | Aac3-IId^;AadA2^;Aph3-Ia^;RmtB;Sat-2A;StrA^;StrB | MgrB-62%;PmrB-36% | - | GyrA-83I;ParC-80I | - | Erm42*;MphA | - | CatA1^ | - | SulI;SulII | TetG | - | DfrA12? | OmpK35-25%;OmpK36GD | TEM-1D^ | KPC-2 | CTX-M-14 | - | SHV-11 | -
+GCF_000009885.1 | Klebsiella pneumoniae | ST23 | 4 | 0 | ybt 2; ICEKp1 | 326 | - | 0 | iuc 1 | 1 | iro 3 | 18-1LV | rmpA_11(ICEKp1),rmpA_2(KpVP-1) | rmpA2_3-47% | wzi1 | KL1 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-11^ | -
+GCF_900501255.1 | Klebsiella pneumoniae | ST86 | 3 | 0 | - | 0 | - | 0 | iuc 1 | 1 | iro 1 | 1 | rmpA_2(KpVP-1) | rmpA2_4*-50% | wzi2 | KL2 (KL30) | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-187* | - | - | - | - | -
+GCF_000019565.1 | Klebsiella variicola subsp. variicola | ST146 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi159 | KL30 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | LEN-24*;LEN-24* | - | - | - | - | -
+GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46 | Aac6-Ib;StrA*;StrB* | - | - | - | - | - | - | CatA2* | - | SulII | - | - | DfrA14 | - | - | - | - | - | OKP-A-3* | -
+GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | OKP-B-7* | -
 
 
 ### Full results (file)
@@ -388,6 +408,10 @@ GCF_000019565.1 | Klebsiella variicola subsp. variicola | strong | 3 | 5641239 |
 GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | strong | 10 | 5263297 | 5263297 | yes | ST1437 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46 | ST1437 | 17 | 19 | 69 | 39 | 185 | 21 | 238 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | -
 GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | strong | 2 | 5142035 | 5142035 | yes | ST1435 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21 | ST1435 | 18 | 88 | 128 | 116 | 11 | 99 | 237 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | -
 
+
+### Code testing
+
+Unit tests are available in the /test directory of this repository
 
 
 ## Typing from Illumina reads
