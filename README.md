@@ -351,7 +351,7 @@ Note that running Kaptive will significantly increase the runtime of Kleborate, 
 
 ### Test data
 
-Run these commands to download some well-known _Klebsiella_ genomes and run Kleborate with all optional screens enabled:
+Run these commands test out Kleborate using some of the test data provided in the /test directory of this repository:
 
 ```
 kleborate -o results.txt -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleborate/test/sequences/GCF_003095495.1.fna.gz Kleborate/test/sequences/GCF_000009885.1.fna.gz Kleborate/test/sequences/GCF_900501255.1.fna.gz Kleborate/test/sequences/GCF_000019565.1.fna.gz Kleborate/test/sequences/GCF_000492415.1.fna.gz Kleborate/test/sequences/GCF_000492795.1.fna.gz
@@ -363,14 +363,11 @@ kleborate -o results.txt -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleb
 These are the concise Kleborate results that it prints to the terminal:
 
 strain | species | ST | virulence_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 GCF_002248955.1 | Klebsiella pneumoniae | ST15 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi29 | KL106
 GCF_003095495.1 | Klebsiella pneumoniae | ST258 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi154 | KL107
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 GCF_000009885.1 | Klebsiella pneumoniae | ST23 | 4 | ybt 2; ICEKp1 | 326 | - | 0 | iuc 1 | 1 | iro 3 | 18-1LV | rmpA_11(ICEKp1),rmpA_2(KpVP-1) | rmpA2_3-47% | wzi1 | KL1
 GCF_900501255.1 | Klebsiella pneumoniae | ST86 | 3 | - | 0 | - | 0 | iuc 1 | 1 | iro 1 | 1 | rmpA_2(KpVP-1) | rmpA2_4*-50% | wzi2 | KL2 (KL30)
 172 | Klebsiella pneumoniae | ST828 | 4 | ybt 2; ICEKp1 | 323-1LV | - | 0 | iuc 3 | 25-1LV | iro 3 | 7-1LV | rmpA_11(ICEKp1) | - | wzi5 | KL5
---- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 GCF_000019565.1 | Klebsiella variicola subsp. variicola | ST146 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi159 | KL30
 GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46
 GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21
