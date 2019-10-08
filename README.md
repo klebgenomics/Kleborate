@@ -53,9 +53,9 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 
 ## Background
 
-_Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunistic infections in hospitals. _Kp_ are intrinsically resistant to ampicillin and frequently acquire additional antimicrobial resistances through horizontal gene transfer and chromosomal mutations. A handful of hypervirulent lineages are also recognised, which encode a constellation of acquired virulence factors and can cause invasive disease outside the hospital setting. Evidence is now mounting that other _Kp_ strains carrying one or more of these acquired factors – including siderophores (yersiniabactin, salmochelin and aerobactin), regulators of hypermucoidy (_rmpA/rmpA2_ genes) and/or the genotoxin colibactin – can also be highly pathogenic and cause more severe disease both inside and outside hospitals. Capsule (K) and O antigen variation is also of great interest to the research community due to its importance in host-pathogen and phage interactions, and thus potential relevance to alternative control measures such as vaccines, immunotherapy and phage therapy.
+_Klebsiella pneumoniae_ (_Kp_) is a commensal bacterium that causes opportunistic infections in hospitals. _Kp_ are intrinsically resistant to ampicillin and frequently acquire additional antimicrobial resistances through horizontal gene transfer and chromosomal mutations. A handful of hypervirulent lineages are also recognised, which encode a constellation of acquired virulence factors and can cause invasive disease outside the hospital setting. Evidence is now mounting that other _Kp_ strains carrying one or more of these acquired factors – including siderophores (yersiniabactin, salmochelin and aerobactin), regulators of hypermucoidy (_rmpA/rmpA2_ genes) and/or the genotoxin colibactin – can also be highly pathogenic and cause more severe disease both inside and outside hospitals. Capsule (K) and LPS (O) antigen variation is also of great interest to the research community due to its importance in host-pathogen and phage interactions, and thus potential relevance to alternative control measures such as vaccines, immunotherapy and phage therapy.
 
-To make it easier to extract clinically relevant genotyping information from _K. pneumoniae_ genome data we have developed *Kleborate*, a genomic surveillance tool designed to (a) accurately identify species and sequence types, and (b) identify the key *acquired* genetic features for which there is strong evidence of association with either antibiotic resistance or hypervirulence. While many generic tools can be used to identify sequence types or resistance determinants from bacterial genomes, we hope that this organism-specific tool will help avoid many of the common confusions faced by people working with _K. pneumoniae_ genomes and also facilitate monitoring for the convergence of antibiotic resistance with the hypervirulence factors noted above. 
+To make it easier to extract clinically relevant genotyping information from _K. pneumoniae_ genome data we have developed *Kleborate*, a genomic surveillance tool designed to (a) accurately identify species and sequence types, and (b) identify the key *acquired* genetic features for which there is strong evidence of association with either antibiotic resistance or hypervirulence. While many generic tools can be used to identify sequence types or resistance determinants from bacterial genomes, we hope that this organism-specific tool will help avoid many of the common confusions faced by people working with _K. pneumoniae_ genomes and also facilitate monitoring for the convergence of antibiotic resistance with the hypervirulence-associated factors noted above. 
 
 
 
@@ -104,7 +104,7 @@ See [examples below](#example-output) to test out your installation on some publ
 
 ### Updating the MLST database
 
-Each Kleborate release includes a copy of the [K pneumoniae MLST database](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html) to screen against. The version included is current at the time of the release, however the BIGSdb is being updated all the time with new STs, so Kleborate users may wish to update their copy of Kleborate regularly with the latest MLST database.
+Each Kleborate release includes a copy of the [_K. pneumoniae_ MLST database](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html) to screen against. The version included is current at the time of the release, however the _K. pneumoniae_ BIGSdb is being updated all the time with new STs, so Kleborate users may wish to update their copy of Kleborate regularly with the latest MLST database.
 
 The MLST database is made up of 2 files, which are located in the `Kleborate/kleborate/data` directory:
 * `Klebsiella_pneumoniae.fasta` (allele seuqences)
@@ -216,7 +216,7 @@ Kleborate will also yield reliable species identifications across the family Ent
 
 ### MLST
 
-Genomes identified by Kleborate as belonging to the _K. pneumoniae_ species complex are then subjected to multi-locus sequencing typing (MLST) using the 7-locus scheme described at the [Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). A copy of the MLST alleles and ST definitions is stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository. See [above](#updating-the-mlst-database) for instructions on how to update the MLST database in your copy of Kleborate.
+Genomes identified by Kleborate as belonging to the _K. pneumoniae_ species complex are then subjected to multi-locus sequence typing (MLST) using the 7-locus scheme described at the [_K. pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). A copy of the MLST alleles and ST definitions is stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository. See [above](#updating-the-mlst-database) for instructions on how to update the MLST database in your copy of Kleborate.
 
 Notes on Kleborate's MLST calls:
 * Kleborate makes an effort to report the closest matching ST / clonal group if a precise match is not found.
@@ -244,7 +244,7 @@ Kleborate examines four key acquired hypervirulence loci described in _K. pneumo
 * If the locus is not detected, Kleborate reports the ST as `0` and the lineage as `-`.
 
 #### Yersiniabactin and colibactin (primarily mobilised by ICE<i>Kp</i>)
-We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Klebsiella_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ (see figure) embedded within 14 structural variants of ICE<i>Kp</i> that can integrate at any of four tRNA-Asn sites in the chromosome. Three of the _ybt_ 17 lineages were associated with three lineages of colibactin, with which they are co-located in the same ICE structure designated ICE<i>Kp10</i>. One ICE structure (ICE<i>Kp1</i>) carries the salmochelin synthesis locus _iro_ and _rmpA_ hypermucoidy gene in addition to _ybt_ (lineage 2). Additionally, we identified a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST), which is implemented in Kleborate. Annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository).
+We recently explored the diversity of the _Kp_ integrative conjugative element (ICE<i>Kp</i>), which mobilises the yersiniabactin locus _ybt_, using genomic analysis of a diverse set of 2498 _Klebsiella_ (see [this paper](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196)). Overall, we found _ybt_ in about a third of all _Kp_ genomes and _clb_ in about 14%. We identified 17 distinct lineages of _ybt_ (see figure) embedded within 14 structural variants of ICE<i>Kp</i> that can integrate at any of four tRNA-Asn sites in the chromosome. Three of the 17 _ybt_ lineages were associated with three lineages of colibactin, with which they are co-located in the same ICE structure designated ICE<i>Kp10</i>. One ICE structure (ICE<i>Kp1</i>) carries the salmochelin synthesis locus _iro_ and _rmpA_ hypermucoidy gene in addition to _ybt_ (lineage 2). Additionally, we identified a lineage of _ybt_ that is plasmid-encoded, representing a new mechanism for _ybt_ dispersal in _Kp_ populations. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST), which is implemented in Kleborate. Annotated reference sequences for each ICE<i>Kp</i> variant are included in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository).
 
 <p align="left"><img src="images/ybt_trees.png" alt="ybt tree" width="70%"></p>
 
@@ -293,8 +293,9 @@ By using the `--resistance` option, Kleborate will screen for acquired resistanc
 
 Using the `--resistance` option also turns on screening for chromosomal mutations for which there is strong evidence of an association with clinical resistance in KpSC (note these are ONLY reported if the genome was recognised as part of the KpSC):
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
-* Colistin resistance due to truncation or loss of MgrB or PmrB (truncations are expressed as %amino acid length from the start codon).
+* Colistin resistance due to truncation or loss of MgrB or PmrB (truncations are expressed as % amino acid length from the start codon).
 * OmpK35 and OmpK36 truncations and mutations resulting in reduced susceptibility to beta-lactamases. See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
+
 Note these do not count towards acquired resistance gene counts, but do count towards drug classes (with the exception of Omp mutations, whose spectrum of effects depends on the presence of acquired beta-lactamases and thus their impact on specific beta-lactam drug classes is hard to predict).
 
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
@@ -365,12 +366,14 @@ You can optionally turn on capsule and O antigen typing using the dedicated caps
 
 Note that running Kaptive will significantly increase the runtime of Kleborate, but provide much more detailed information about the K and/or O loci and their genes.
 
+If Kaptive is switched on the Kleborate report will include a column to indicate the Kaptive confidence match for the reported best-matching K or O locus (see [here](https://github.com/katholt/Kaptive/blob/master/README.md#output-files) for a description of the logic). We recommend reporting only K and O loci with a confidence level of "Good" or better. Calls with confidence level "Low" or "None" should be considered carefully as they may result from assembly problems (fragmentation) or novel variation in the K/O locus. 
+If you think you have found a novel K or O locus and would like us to add it to the Kaptive database please get in touch.
 
 ## Example output
 
 ### Test commands
 
-Run these commands test out Kleborate using some of the test data provided in the /test directory of this repository:
+Run these commands to test out Kleborate using some of the test data provided in the /test directory of this repository:
 
 ```
 # 1) basic genotyping (no resistance typing; K serotype prediction using wzi allele only)
@@ -425,7 +428,7 @@ GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 
 
 ### Full results (file)
 
-Here are the full Kleborate results (including assembly quality metrics, and allele calls for all genes in the five MLST locus schemes), written to `results_res_kaptive.txt`:
+Here are the full Kleborate results (including assembly quality metrics, and allele calls for all genes in the five MLST schemes), written to `results_res_kaptive.txt`:
 
 strain | species | ST | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly | Col | Fcyn | Flq | Gly | MLS | Ntmdz | Phe | Rif | Sul | Tet | Tgc | Tmt | Omp | Bla | Bla_Carb | Bla_ESBL | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
