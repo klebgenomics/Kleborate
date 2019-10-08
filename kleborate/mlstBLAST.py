@@ -64,84 +64,84 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
         else:
             print('\t'.join(['strain', 'ST'] + header))
 
-    for contigs in assemblies:
-        _, filename = os.path.split(contigs)
-        name, _ = os.path.splitext(filename)
+    contigs = assemblies[0]
+    _, filename = os.path.split(contigs)
+    name, _ = os.path.splitext(filename)
 
-        best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
-        best_allele = {}  # key = locus, value = best allele (* if imprecise match)
+    best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
+    best_allele = {}  # key = locus, value = best allele (* if imprecise match)
 
-        hits = run_blastn(seqs, contigs, minident, ungapped=True, culling_limit=2)
-        for hit in hits:
-            if '__' in hit.gene_id:  # srst2 formatted file
-                gene_id_components = hit.gene_id.split('__')
-                locus = gene_id_components[1]
-                allele = gene_id_components[2]
-            else:
-                allele = hit.gene_id
-                locus = hit.gene_id.split('_')[0]
-            if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
-                allele += '*'  # inexact match
-            # store best match for each one locus
-            if locus in best_score:
-                if hit.score > best_score[locus]:    # update
-                    best_score[locus] = hit.score
-                    best_allele[locus] = allele.split('_')[1]  # store number only
-            else:  # initialise
+    hits = run_blastn(seqs, contigs, minident, ungapped=True, culling_limit=2)
+    for hit in hits:
+        if '__' in hit.gene_id:  # srst2 formatted file
+            gene_id_components = hit.gene_id.split('__')
+            locus = gene_id_components[1]
+            allele = gene_id_components[2]
+        else:
+            allele = hit.gene_id
+            locus = hit.gene_id.split('_')[0]
+        if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
+            allele += '*'  # inexact match
+        # store best match for each one locus
+        if locus in best_score:
+            if hit.score > best_score[locus]:    # update
                 best_score[locus] = hit.score
                 best_allele[locus] = allele.split('_')[1]  # store number only
+        else:  # initialise
+            best_score[locus] = hit.score
+            best_allele[locus] = allele.split('_')[1]  # store number only
 
-        best_st = []
-        best_st_annotated = []
+    best_st = []
+    best_st_annotated = []
 
-        mismatch_loci_including_snps = 0
+    mismatch_loci_including_snps = 0
 
-        for locus in header:
-            if locus in best_allele:
-                allele = best_allele[locus]
-                allele_number = allele.replace('*', '')
-                if allele.endswith('*'):
-                    mismatch_loci_including_snps += 1
-                best_st.append(allele_number)
-                best_st_annotated.append(allele)  # will still have character if imperfect match
-            else:
-                best_st.append('-')
-                best_st_annotated.append('-')
+    for locus in header:
+        if locus in best_allele:
+            allele = best_allele[locus]
+            allele_number = allele.replace('*', '')
+            if allele.endswith('*'):
                 mismatch_loci_including_snps += 1
-
-        # assign ST
-        bst = ','.join(best_st)
-
-        if mismatch_loci_including_snps <= maxmissing:
-            # only report ST if enough loci are precise matches
-            if bst in sts:
-                # note may have mismatching alleles due to SNPs, this will be recorded in
-                # mismatch_loci_including_snps
-                bst = sts[bst]
-            else:
-                # determine closest ST
-                bst, _, mismatch_loci_including_snps = \
-                    get_closest_locus_variant(best_st, best_st_annotated, sts)
+            best_st.append(allele_number)
+            best_st_annotated.append(allele)  # will still have character if imperfect match
         else:
-            bst = '0'
+            best_st.append('-')
+            best_st_annotated.append('-')
+            mismatch_loci_including_snps += 1
 
-        exact_matches = len(best_st) - mismatch_loci_including_snps
-        if exact_matches < required_exact_matches:
-            bst = '0'
+    # assign ST
+    bst = ','.join(best_st)
 
-        # pull info column
-        info_final = ''
-        if info_arg == 'yes':
-            if bst in st_info:
-                info_final = st_info[bst]
-
-        if mismatch_loci_including_snps > 0 and bst != '0':
-            bst += '-' + str(mismatch_loci_including_snps) + 'LV'
-
-        if info_arg == 'yes':
-            return [name, info_final, bst] + best_st_annotated
+    if mismatch_loci_including_snps <= maxmissing:
+        # only report ST if enough loci are precise matches
+        if bst in sts:
+            # note may have mismatching alleles due to SNPs, this will be recorded in
+            # mismatch_loci_including_snps
+            bst = sts[bst]
         else:
-            return [name, bst] + best_st_annotated
+            # determine closest ST
+            bst, _, mismatch_loci_including_snps = \
+                get_closest_locus_variant(best_st, best_st_annotated, sts)
+    else:
+        bst = '0'
+
+    exact_matches = len(best_st) - mismatch_loci_including_snps
+    if exact_matches < required_exact_matches:
+        bst = '0'
+
+    # pull info column
+    info_final = ''
+    if info_arg == 'yes':
+        if bst in st_info:
+            info_final = st_info[bst]
+
+    if mismatch_loci_including_snps > 0 and bst != '0':
+        bst += '-' + str(mismatch_loci_including_snps) + 'LV'
+
+    if info_arg == 'yes':
+        return [name, info_final, bst] + best_st_annotated
+    else:
+        return [name, bst] + best_st_annotated
 
 
 def get_closest_locus_variant(query, annotated_query, sts):

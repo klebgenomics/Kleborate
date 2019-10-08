@@ -189,6 +189,15 @@ class TestGenomes(unittest.TestCase):
             self.assertEqual(results['Bla_ESBL_inhR'], '-')
             self.assertEqual(results['Bla_broad'], 'SHV-11^')
             self.assertEqual(results['Bla_broad_inhR'], '-')
+            self.assertEqual(results['wzi'], 'wzi1')
+            self.assertEqual(results['K_locus'], 'KL1')
+
+    def test_GCF_004010735(self):
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_004010735.1.fna.gz', tmp_dir)
+            results = self.get_all_results(contigs)
+            self.assertEqual(results['wzi'], '-')
+            self.assertEqual(results['K_locus'], '-')
 
     def test_GCF_000968155(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
