@@ -101,6 +101,24 @@ Kleborate/kleborate-runner.py -h
 See [examples below](#example-output) to test out your installation on some public genome data. And if you'd like to thoroughly check that everything works as intended, you can also run this repo's [automated tests](test) after installation.
 
 
+### Updating the MLST database
+
+Each Kleborate release includes a copy of the [Klebsiella pneumoniae MLST database (BIGSdb) hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The version included is current at the time of the release, however the BIGSdb is being updated all the time with new STs, so Kleborate users may wish to update their copy of Kleborate regularly with the latest MLST database.
+
+The MLST database is made up of 2 files, which are located in the `Kleborate/kleborate/data` directory:
+* `Klebsiella_pneumoniae.fasta` (allele seuqences)
+* `kpneumoniae.txt` (sequence type definitions)
+
+A python3 script to download the latest versions of these 2 files is provided in the `Kleborate/scripts` directory, the downloaded files can then just be copied into the `Kleborate/kleborate/data` directory
+
+```
+cd Kleborate/scripts
+python getmlst.py --species "Klebsiella pneumoniae"
+mv Klebsiella_pneumoniae.fasta ../kleborate/data
+mv kpneumoniae.txt ../kleborate/data
+```
+
+
 ## Basic usage
 
 __Screen some genomes for MLST and virulence loci:__<br>
