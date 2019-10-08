@@ -224,6 +224,8 @@ def get_output_headers(args, data_folder):
     full_header += get_chromosome_mlst_header()
     full_header += get_ybt_mlst_header()
     full_header += get_clb_mlst_header()
+    full_header += get_iuc_mlst_header()
+    full_header += get_iro_mlst_header()
 
     # If resistance genes are on, run the resBLAST.py script to get its headers.
     if args.resistance:
@@ -468,9 +470,13 @@ def get_hypermucoidy_results(data_folder, contigs):
 def get_wzi_and_k_locus_results(data_folder, contigs):
     seqs = data_folder + '/wzi.fasta'
     database = data_folder + '/wzi.txt'
-    results = mlst_blast(seqs, database, 'yes', [contigs], minident=95, maxmissing=3,
+    results = mlst_blast(seqs, database, 'yes', [contigs], minident=95, maxmissing=0,
                          print_header=False)
-    k_type, wzi_st = results[1], 'wzi' + results[2]
+    k_type = results[1]
+    if results[2] == '0':
+        wzi_st = '-'
+    else:
+        wzi_st = 'wzi' + results[2]
     if k_type == '':
         k_type = '-'
 
