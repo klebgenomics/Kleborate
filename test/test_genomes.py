@@ -35,7 +35,7 @@ class TestGenomes(unittest.TestCase):
         results.update(get_contig_stat_results(contigs))
         results.update(get_species_results(contigs, self.data_dir))
         kp_complex = is_kp_complex(results)
-        results.update(get_chromosome_mlst_results(self.data_dir, contigs))
+        results.update(get_chromosome_mlst_results(self.data_dir, contigs, kp_complex))
         results.update(get_ybt_mlst_results(self.data_dir, contigs))
         results.update(get_clb_mlst_results(self.data_dir, contigs))
         results.update(get_iuc_mlst_results(self.data_dir, contigs))
