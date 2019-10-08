@@ -44,7 +44,7 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
    * [Test data](#test-data)
    * [Concise results (stdout)](#concise-results-stdout)
    * [Full results (file)](#full-results-file)
-* [Typing from Illumina reads](#typing-from-illumina-reads)
+* [Using Kleborate genotyping schemes with raw Illumina reads](#typing-from-illumina-reads)
 * [Contact us](#contact-us)
 * [License](#license)
 
@@ -74,7 +74,8 @@ Software requirements:
   * Alternatively, you can install Mash on a Mac with Homebrew: `brew install mash`
 
 
-As input, Kleborate takes _Klebsiella_ genome assemblies (either completed or draft). If you have unassembled reads, try assembling them with our [Unicycler](https://github.com/rrwick/Unicycler) assembler which works great on Illumina or hybrid Illumina + Nanopore/PacBio reads).
+Input files:
+Kleborate takes _Klebsiella_ genome assemblies (either completed or draft) in fasta format (can be gzipped). If you have unassembled reads, try assembling them with our [Unicycler](https://github.com/rrwick/Unicycler) assembler which works great on Illumina or hybrid Illumina + Nanopore/PacBio reads).
 
 
 
@@ -138,7 +139,7 @@ Screening options:
   --kaptive_o           Turn on Kaptive screening of O loci (default: do not
                         run Kaptive for O loci)
   -k, --kaptive         Equivalent to --kaptive_k --kaptive_o
-  --all                 Equivalent to --resistance --species --kaptive
+  --all                 Equivalent to --resistance --kaptive
 
 Output options:
   -o OUTFILE, --outfile OUTFILE
@@ -348,49 +349,84 @@ Note that running Kaptive will significantly increase the runtime of Kleborate, 
 
 ## Example output
 
-### Test data
+### Test commands
 
-Run these commands to download some well-known _Klebsiella_ genomes and run Kleborate with all optional screens enabled:
+Run these commands test out Kleborate using some of the test data provided in the /test directory of this repository:
 
-```bash
-wget -O NTUH-K2044.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/009/885/GCA_000009885.1_ASM988v1/GCA_000009885.1_ASM988v1_genomic.fna.gz
-wget -O SGH10.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/813/595/GCA_002813595.1_ASM281359v1/GCA_002813595.1_ASM281359v1_genomic.fna.gz
-wget -O Klebs_HS11286.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/240/185/GCA_000240185.2_ASM24018v2/GCA_000240185.2_ASM24018v2_genomic.fna.gz
-wget -O MGH78578.fasta.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/016/305/GCA_000016305.1_ASM1630v1/GCA_000016305.1_ASM1630v1_genomic.fna.gz
+```
+# 1) basic genotyping (no resistance typing; K serotype prediction using wzi allele only)
+kleborate -o results.txt -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleborate/test/sequences/GCF_003095495.1.fna.gz Kleborate/test/sequences/GCF_000009885.1.fna.gz Kleborate/test/sequences/GCF_900501255.1.fna.gz Kleborate/test/sequences/GCF_000019565.1.fna.gz Kleborate/test/sequences/GCF_000492415.1.fna.gz Kleborate/test/sequences/GCF_000492795.1.fna.gz
 
-kleborate  --all -o results.txt -a *.fasta.gz
+# 2) with resistance typing (K serotype prediction using wzi allele only)
+kleborate -o results_res.txt --resistance -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleborate/test/sequences/GCF_003095495.1.fna.gz Kleborate/test/sequences/GCF_000009885.1.fna.gz Kleborate/test/sequences/GCF_900501255.1.fna.gz Kleborate/test/sequences/GCF_000019565.1.fna.gz Kleborate/test/sequences/GCF_000492415.1.fna.gz Kleborate/test/sequences/GCF_000492795.1.fna.gz
+
+# 3) with resistance typing & full K/O serotype prediction using Kaptive (slower)
+kleborate -o results_res_kaptive.txt --all -a Kleborate/test/sequences/GCF_002248955.1.fna.gz Kleborate/test/sequences/GCF_003095495.1.fna.gz Kleborate/test/sequences/GCF_000009885.1.fna.gz Kleborate/test/sequences/GCF_900501255.1.fna.gz Kleborate/test/sequences/GCF_000019565.1.fna.gz Kleborate/test/sequences/GCF_000492415.1.fna.gz Kleborate/test/sequences/GCF_000492795.1.fna.gz
 ```
 
 
 ### Concise results (stdout)
 
-These are the concise Kleborate results that it prints to the terminal:
+These are the concise Kleborate results that are printed to the terminal, for example 1:
 
-| strain        | species               | ST   | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | rmpA                             | rmpA2    | wzi   | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          |
-|---------------|-----------------------|------|-----------------|------------------|----------------|------|------------|------|------------|------|-------------|--------|----------------------------------|----------|-------|---------|--------------------|---------|--------------------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------|
-| Klebs_HS11286 | Klebsiella pneumoniae | ST11 | 1               | 2                | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi74 | KL103   | Very high          | O2v1    | Very high          | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | GyrA-83I;ParC-80I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* |
-| MGH78578      | Klebsiella pneumoniae | ST38 | 0               | 1                | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi50 | KL52    | Perfect            | OL101   | High               | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         |
-| NTUH-K2044    | Klebsiella pneumoniae | ST23 | 4               | 0                | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 1      | 1    | iro 3       | 18-1LV | rmpA_11 (ICEKp1),rmpA_2 (KpVP-1) | rmpA2_3  | wzi1  | KL1     | Perfect            | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
-| SGH10         | Klebsiella pneumoniae | ST23 | 5               | 0                | ybt 1; ICEKp10 | 53   | clb 2      | 29   | iuc 1      | 1    | iro 1       | 2      | rmpA_2 (KpVP-1)                  | rmpA2_6* | wzi1  | KL1     | Very high          | O1v2    | Very high          | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
+strain | species | ST | virulence_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+GCF_002248955.1 | Klebsiella pneumoniae | ST15 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi29 | KL106
+GCF_003095495.1 | Klebsiella pneumoniae | ST258 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi154 | KL107
+GCF_000009885.1 | Klebsiella pneumoniae | ST23 | 4 | ybt 2; ICEKp1 | 326 | - | 0 | iuc 1 | 1 | iro 3 | 18-1LV | rmpA_11(ICEKp1),rmpA_2(KpVP-1) | rmpA2_3-47% | wzi1 | KL1
+GCF_900501255.1 | Klebsiella pneumoniae | ST86 | 3 | - | 0 | - | 0 | iuc 1 | 1 | iro 1 | 1 | rmpA_2(KpVP-1) | rmpA2_4*-50% | wzi2 | KL2 (KL30)
+172 | Klebsiella pneumoniae | ST828 | 4 | ybt 2; ICEKp1 | 323-1LV | - | 0 | iuc 3 | 25-1LV | iro 3 | 7-1LV | rmpA_11(ICEKp1) | - | wzi5 | KL5
+GCF_000019565.1 | Klebsiella variicola subsp. variicola | ST146 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi159 | KL30
+GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46
+GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21
 
+For example 2 (ie with resistance typing turned on):
 
+strain | species | ST | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus | AGly | Col | Fcyn | Flq | Gly | MLS | Ntmdz | Phe | Rif | Sul | Tet | Tgc | Tmt | Omp | Bla | Bla_Carb | Bla_ESBL | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+GCF_002248955.1 | Klebsiella pneumoniae | ST15 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi29 | KL106 | Aac3-IId^ | Mcr3-1* | - | GyrA-83F;GyrA-87A;ParC-80I | - | - | - | CatA1^ | - | - | TetA | - | - | - | SHV-28^ | - | - | - | - | -
+GCF_003095495.1 | Klebsiella pneumoniae | ST258 | 0 | 3 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi154 | KL107 | Aac3-IId^;AadA2^;Aph3-Ia^;RmtB;Sat-2A;StrA^;StrB | MgrB-62%;PmrB-36% | - | GyrA-83I;ParC-80I | - | Erm42*;MphA | - | CatA1^ | - | SulI;SulII | TetG | - | DfrA12? | OmpK35-25%;OmpK36GD | TEM-1D^ | KPC-2 | CTX-M-14 | - | SHV-11 | -
+GCF_000009885.1 | Klebsiella pneumoniae | ST23 | 4 | 0 | ybt 2; ICEKp1 | 326 | - | 0 | iuc 1 | 1 | iro 3 | 18-1LV | rmpA_11(ICEKp1),rmpA_2(KpVP-1) | rmpA2_3-47% | wzi1 | KL1 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-11^ | -
+GCF_900501255.1 | Klebsiella pneumoniae | ST86 | 3 | 0 | - | 0 | - | 0 | iuc 1 | 1 | iro 1 | 1 | rmpA_2(KpVP-1) | rmpA2_4*-50% | wzi2 | KL2 (KL30) | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-187* | - | - | - | - | -
+GCF_000019565.1 | Klebsiella variicola subsp. variicola | ST146 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi159 | KL30 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | LEN-24*;LEN-24* | - | - | - | - | -
+GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46 | Aac6-Ib;StrA*;StrB* | - | - | - | - | - | - | CatA2* | - | SulII | - | - | DfrA14 | - | - | - | - | - | OKP-A-3* | -
+GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | OKP-B-7* | -
+
+For example 3 (ie with resistance typing & Kaptive serotyping turned on):
+
+strain | species | ST | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly | Col | Fcyn | Flq | Gly | MLS | Ntmdz | Phe | Rif | Sul | Tet | Tgc | Tmt | Omp | Bla | Bla_Carb | Bla_ESBL | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+GCF_002248955.1 | Klebsiella pneumoniae | ST15 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi29 | KL107 | None | O1/O2v2 | Very high | Aac3-IId^ | Mcr3-1* | - | GyrA-83F;GyrA-87A;ParC-80I | - | - | - | CatA1^ | - | - | TetA | - | - | - | SHV-28^ | - | - | - | - | -
+GCF_003095495.1 | Klebsiella pneumoniae | ST258 | 0 | 3 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi154 | KL107 | Good | O2v2 | Good | Aac3-IId^;AadA2^;Aph3-Ia^;RmtB;Sat-2A;StrA^;StrB | MgrB-62%;PmrB-36% | - | GyrA-83I;ParC-80I | - | Erm42*;MphA | - | CatA1^ | - | SulI;SulII | TetG | - | DfrA12? | OmpK35-25%;OmpK36GD | TEM-1D^ | KPC-2 | CTX-M-14 | - | SHV-11 | -
+GCF_000009885.1 | Klebsiella pneumoniae | ST23 | 4 | 0 | ybt 2; ICEKp1 | 326 | - | 0 | iuc 1 | 1 | iro 3 | 18-1LV | rmpA_11(ICEKp1),rmpA_2(KpVP-1) | rmpA2_3-47% | wzi1 | KL1 | Perfect | O1v2 | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-11^ | -
+GCF_900501255.1 | Klebsiella pneumoniae | ST86 | 3 | 0 | - | 0 | - | 0 | iuc 1 | 1 | iro 1 | 1 | rmpA_2(KpVP-1) | rmpA2_4*-50% | wzi2 | KL2 | Very high | O1v1 | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-187* | - | - | - | - | -
+GCF_000019565.1 | Klebsiella variicola subsp. variicola | ST146 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi159 | KL30 | Very high | O3/O3a | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | LEN-24*;LEN-24* | - | - | - | - | -
+GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46 | Low | O3/O3a | Very high | Aac6-Ib;StrA*;StrB* | - | - | - | - | - | - | CatA2* | - | SulII | - | - | DfrA14 | - | - | - | - | - | OKP-A-3* | -
+GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21 | Very high | O12 | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | OKP-B-7* | -
 
 ### Full results (file)
 
-Here are the full Kleborate results (including allele calls for all genes in the five MLST locus schemes), written to `results.txt`:
+Here are the full Kleborate results (including assembly quality metrics, and allele calls for all genes in the five MLST locus schemes), written to `results_res_kaptive.txt`:
 
-| strain        | species               | species_match | contig_count | N50     | largest_contig | ST   | virulence_score | resistance_score | num_resistance_classes | num_resistance_genes | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST   | rmpA                             | rmpA2    | wzi   | K_locus | K_locus_problems | K_locus_confidence | K_locus_identity | K_locus_missing_genes | O_locus | O_locus_problems | O_locus_confidence | O_locus_identity | O_locus_missing_genes | Chr_ST | gapA | infB | mdh | pgi | phoE | rpoB | tonB | ybtS | ybtX | ybtQ | ybtP | ybtA | irp2 | irp1 | ybtU | ybtT | ybtE | fyuA | clbA | clbB | clbC | clbD | clbE | clbF | clbG | clbH | clbI | clbL | clbM | clbN | clbO | clbP | clbQ | AGly                                       | Col | Fcyn | Flq               | Gly | MLS | Ntmdz | Phe          | Rif | Sul        | Tet  | Tmt     | Bla                   | Bla_Carb | Bla_ESBL          | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR          |
-|---------------|-----------------------|---------------|--------------|---------|----------------|------|-----------------|------------------|------------------------|----------------------|----------------|------|------------|------|------------|------|-------------|--------|----------------------------------|----------|-------|---------|------------------|--------------------|------------------|-----------------------|---------|------------------|--------------------|------------------|-----------------------|--------|------|------|-----|-----|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|------|--------------------------------------------|-----|------|-------------------|-----|-----|-------|--------------|-----|------------|------|---------|-----------------------|----------|-------------------|---------------|-----------|-------------------------|
-| Klebs_HS11286 | Klebsiella pneumoniae | strong        | 7            | 5333942 | 5333942        | ST11 | 1               | 2                | 9                      | 17                   | ybt 9; ICEKp3  | 15   | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi74 | KL103   | *                | Very high          | 96.69%           |                       | O2v1    | none             | Very high          | 97.72%           |                       | ST11   | 3    | 3    | 1   | 1   | 1    | 1    | 4    | 14   | 11   | 14   | 5    | 9    | 22   | 19   | 10   | 5    | 11   | 11   | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | StrB;StrA*;AadA2*;RmtB;Aac3-IId*?          | -   | -    | GyrA-83I;ParC-80I | -   | -   | -     | -            | -   | SulII      | TetG | DfrA12? | AmpH*                 | KPC-2    | CTX-M-14;CTX-M-14 | -             | SHV-11    | TEM-30*;TEM-30*;TEM-30* |
-| MGH78578      | Klebsiella pneumoniae | strong        | 6            | 5315120 | 5315120        | ST38 | 0               | 1                | 7                      | 15                   | -              | 0    | -          | 0    | -          | 0    | -           | 0      | -                                | -        | wzi50 | KL52    | none             | Perfect            | 100.00%          |                       | OL101   | *                | High               | 94.91%           |                       | ST38   | 2    | 1    | 2   | 1   | 2    | 2    | 2    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | AadA1-pm*?;Aac6-Ib;StrB;Aph3''Ia;StrA;AadB | -   | -    | GyrA-83Y          | -   | -   | -     | CmlA5;CatA1* | -   | SulI;SulII | TetD | -       | AmpH*;SHV-187*;OXA-9* | -        | SHV-12            | -             | -         | TEM-54*;TEM-30*         |
-| NTUH-K2044    | Klebsiella pneumoniae | strong        | 2            | 5248520 | 5248520        | ST23 | 4               | 0                | 0                      | 0                    | ybt 2; ICEKp1  | 326  | -          | 0    | iuc 1      | 1    | iro 3       | 18-1LV | rmpA_11 (ICEKp1),rmpA_2 (KpVP-1) | rmpA2_3  | wzi1  | KL1     | none             | Perfect            | 100.00%          |                       | O1v2    | none             | Very high          | 99.13%           |                       | ST23   | 2    | 1    | 1   | 1   | 9    | 4    | 12   | 9    | 7    | 9    | 6    | 5    | 1    | 1    | 6    | 7    | 7    | 6    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -    | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
-| SGH10         | Klebsiella pneumoniae | strong        | 2            | 5485114 | 5485114        | ST23 | 5               | 0                | 0                      | 0                    | ybt 1; ICEKp10 | 53   | clb 2      | 29   | iuc 1      | 1    | iro 1       | 2      | rmpA_2 (KpVP-1)                  | rmpA2_6* | wzi1  | KL1     | none             | Very high          | 100.00%          |                       | O1v2    | none             | Very high          | 99.11%           |                       | ST23   | 2    | 1    | 1   | 1   | 9    | 4    | 12   | 2    | 2    | 2    | 2    | 2    | 6    | 124  | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | 3    | 2    | 2    | 2    | 2    | 2    | 2    | 2    | -                                          | -   | -    | -                 | -   | -   | -     | -            | -   | -          | -    | -       | AmpH;SHV-190*         | -        | -                 | -             | -         | -                       |
+strain | species | ST | virulence_score | resistance_score | Yersiniabactin | YbST | Colibactin | CbST | Aerobactin | AbST | Salmochelin | SmST | rmpA | rmpA2 | wzi | K_locus | K_locus_confidence | O_locus | O_locus_confidence | AGly | Col | Fcyn | Flq | Gly | MLS | Ntmdz | Phe | Rif | Sul | Tet | Tgc | Tmt | Omp | Bla | Bla_Carb | Bla_ESBL | Bla_ESBL_inhR | Bla_broad | Bla_broad_inhR
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+GCF_002248955.1 | Klebsiella pneumoniae | ST15 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi29 | KL107 | None | O1/O2v2 | Very high | Aac3-IId^ | Mcr3-1* | - | GyrA-83F;GyrA-87A;ParC-80I | - | - | - | CatA1^ | - | - | TetA | - | - | - | SHV-28^ | - | - | - | - | -
+GCF_003095495.1 | Klebsiella pneumoniae | ST258 | 0 | 3 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi154 | KL107 | Good | O2v2 | Good | Aac3-IId^;AadA2^;Aph3-Ia^;RmtB;Sat-2A;StrA^;StrB | MgrB-62%;PmrB-36% | - | GyrA-83I;ParC-80I | - | Erm42*;MphA | - | CatA1^ | - | SulI;SulII | TetG | - | DfrA12? | OmpK35-25%;OmpK36GD | TEM-1D^ | KPC-2 | CTX-M-14 | - | SHV-11 | -
+GCF_000009885.1 | Klebsiella pneumoniae | ST23 | 4 | 0 | ybt 2; ICEKp1 | 326 | - | 0 | iuc 1 | 1 | iro 3 | 18-1LV | rmpA_11(ICEKp1),rmpA_2(KpVP-1) | rmpA2_3-47% | wzi1 | KL1 | Perfect | O1v2 | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-11^ | -
+GCF_900501255.1 | Klebsiella pneumoniae | ST86 | 3 | 0 | - | 0 | - | 0 | iuc 1 | 1 | iro 1 | 1 | rmpA_2(KpVP-1) | rmpA2_4*-50% | wzi2 | KL2 | Very high | O1v1 | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | SHV-187* | - | - | - | - | -
+GCF_000019565.1 | Klebsiella variicola subsp. variicola | ST146 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi159 | KL30 | Very high | O3/O3a | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | LEN-24*;LEN-24* | - | - | - | - | -
+GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi185 | KL46 | Low | O3/O3a | Very high | Aac6-Ib;StrA*;StrB* | - | - | - | - | - | - | CatA2* | - | SulII | - | - | DfrA14 | - | - | - | - | - | OKP-A-3* | -
+GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21 | Very high | O12 | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | OKP-B-7* | -
 
+
+### Code testing
+
+Unit tests are available in the /test directory of this repository
 
 
 ## Typing from Illumina reads
 
-If you don't have good quality assemblies, MLST assignment for the chromosomal & virulence locus schemes can also be achieved direct from reads using [SRST2](https://github.com/katholt/srst2):
+If you don't have good quality assemblies, MLST assignment for the chromosomal & virulence locus schemes can also be achieved direct from _K. pneumoniae_ reads using [SRST2](https://github.com/katholt/srst2):
 
 * Download the YbST, CbST, AbST, SmST allele sequences and profile tables from the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) in this repository.
 * Install [SRST2](https://github.com/katholt/srst2) if you don't already have it (`git clone https://github.com/katholt/srst2`).
