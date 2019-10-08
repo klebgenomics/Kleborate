@@ -182,7 +182,7 @@ Help:
 
 ### Assembly quality metrics
 
-The quality and completeness of Kleborate results depends on the quality of the input genome assemblies. We provide some basic assembly statistics (contig count,	N50,	largest contig size) to help users understand their Kleborate results in the context of assembly quality, but we recommend users conduct more comprehensive QC themselves before running Kleborate (e.g. screen for contamination, etc).
+The quality and completeness of Kleborate results depends on the quality of the input genome assemblies. We provide some basic assembly statistics (contig count,	N50,	largest contig size, detection of ambiguous bases) to help users understand their Kleborate results in the context of assembly quality, but we recommend users conduct more comprehensive QC themselves before running Kleborate (e.g. screen for contamination, etc).
 
 
 ### _Klebsiella_ species
