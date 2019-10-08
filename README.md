@@ -30,6 +30,7 @@ In the meantime, if you use Kleborate, please cite the component schemes that yo
 * [Background](#background)
 * [Requirements](#requirements)
 * [Installation](#installation)
+   * [Update the MLST database](#updating-the-mlst-database)
 * [Basic usage](#basic-usage)
 * [Full usage](#full-usage)
 * [Screening functions & outputs](#screening-details)
@@ -103,7 +104,7 @@ See [examples below](#example-output) to test out your installation on some publ
 
 ### Updating the MLST database
 
-Each Kleborate release includes a copy of the [Klebsiella pneumoniae MLST database (BIGSdb) hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The version included is current at the time of the release, however the BIGSdb is being updated all the time with new STs, so Kleborate users may wish to update their copy of Kleborate regularly with the latest MLST database.
+Each Kleborate release includes a copy of the [K pneumoniae MLST database](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html) to screen against. The version included is current at the time of the release, however the BIGSdb is being updated all the time with new STs, so Kleborate users may wish to update their copy of Kleborate regularly with the latest MLST database.
 
 The MLST database is made up of 2 files, which are located in the `Kleborate/kleborate/data` directory:
 * `Klebsiella_pneumoniae.fasta` (allele seuqences)
@@ -215,7 +216,7 @@ Kleborate will also yield reliable species identifications across the family Ent
 
 ### MLST
 
-Genomes identified by Kleborate as belonging to the _K. pneumoniae_ species complex are then subjected to multi-locus sequencing typing (MLST) using the 7-locus scheme described at the [Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). The alleles and schemes are stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository.
+Genomes identified by Kleborate as belonging to the _K. pneumoniae_ species complex are then subjected to multi-locus sequencing typing (MLST) using the 7-locus scheme described at the [Klebsiella pneumoniae_ BIGSdb hosted at the Pasteur Institute](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). A copy of the MLST alleles and ST definitions is stored in the [data directory](https://github.com/katholt/Kleborate/tree/master/kleborate/data) of this repository. See [above](#updating-the-mlst-database) for instructions on how to update the MLST database in your copy of Kleborate.
 
 Notes on Kleborate's MLST calls:
 * Kleborate makes an effort to report the closest matching ST / clonal group if a precise match is not found.
