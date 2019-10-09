@@ -71,7 +71,7 @@ def main():
 def get_autocolour_columns(kleborate_in):
     autocolour_columns = []
     table = pd.read_table(kleborate_in)
-    for col_name in ['ST', 'YbST', 'CbST', 'AbST', 'SmST', 'wzi', 'K_locus',
+    for col_name in ['species', 'ST', 'YbST', 'CbST', 'AbST', 'SmST', 'wzi', 'K_locus',
                      'O_locus']:
         try:
             if len(set(table[col_name])) > 1:
@@ -92,12 +92,12 @@ def get_new_header(original_header, autocolour_columns):
 
     header = list(original_header)
     for col in ['virulence_score', 'resistance_score', 'num_resistance_classes',
-                'num_resistance_genes', 'species', 'Yersiniabactin', 'Colibactin', 'Aerobactin',
-                'Salmochelin', 'hypermucoidy']:
+                'num_resistance_genes', 'Yersiniabactin', 'Colibactin', 'Aerobactin',
+                'Salmochelin', 'rmpA', 'rmpA2']:
         header.insert(find_column_index(header, col) + 1, col + '__colour')
 
     for res in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul', 'Tet',
-                'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_broad',
+                'Tgc', 'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_broad',
                 'Bla_broad_inhR']:
         header.insert(find_column_index(header, res) + 1, res + '__colour')
         header.remove(res)
@@ -126,14 +126,14 @@ def get_data(line, name_subs, original_header, new_header):
     new_data['resistance_score__colour'] = get_res_score_colour(res_score)
     new_data['num_resistance_classes__colour'] = get_res_classes_colour(res_classes)
     new_data['num_resistance_genes__colour'] = get_res_genes_colour(res_genes)
-    new_data['species__colour'] = get_species_colour(original_data['species'])
-    new_data['Yersiniabactin__colour'] = get_vir_lineage_colour(original_data['Yersiniabactin'])
+#    new_data['Yersiniabactin__colour'] = get_vir_lineage_colour(original_data['Yersiniabactin'])
     new_data['Colibactin__colour'] = get_vir_lineage_colour(original_data['Colibactin'])
     new_data['Aerobactin__colour'] = get_vir_lineage_colour(original_data['Aerobactin'])
     new_data['Salmochelin__colour'] = get_vir_lineage_colour(original_data['Salmochelin'])
-    new_data['hypermucoidy__colour'] = get_hypermucoidy_colour(original_data['hypermucoidy'])
+    new_data['rmpA__colour'] = get_rmpA_colour(original_data['rmpA'])
+    new_data['rmpA2__colour'] = get_rmpA2_colour(original_data['rmpA2'])
     for res_class in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul',
-                      'Tet', 'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_broad',
+                      'Tet', 'Tgc', 'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_broad',
                       'Bla_broad_inhR']:
         new_data[res_class + '__colour'] = get_res_class_colour(original_data[res_class])
 
@@ -255,7 +255,7 @@ def get_res_genes_colour(res_genes):
 def get_species_colour(species):
     try:
         return {'Klebsiella pneumoniae': '#875F9A',
-                'Klebsiella variicola': '#8CBDB2',
+                'Klebsiella variicola subsp. variicola': '#8CBDB2',
                 'Klebsiella quasivariicola': '#F0B663',
                 'Klebsiella quasipneumoniae subsp. quasipneumoniae': '#ED6060',
                 'Klebsiella quasipneumoniae subsp. similipneumoniae': '#EDA483'}[species]
@@ -284,8 +284,11 @@ def get_vir_lineage_colour(vir_lineage):
         return '#BFBFBF'
 
 
-def get_hypermucoidy_colour(hypermucoidy):
-    return '#FFFFFF' if hypermucoidy == '-' else '#08306B'
+def get_rmpA_colour(rmpA):
+    return '#FFFFFF' if rmpA == '-' else '#08306B'
+    
+def get_rmpA2_colour(rmpA2):
+    return '#FFFFFF' if rmpA2 == '-' else '#08306B'
 
 
 def get_res_class_colour(res_class):
