@@ -444,9 +444,14 @@ GCF_000492415.1 | Klebsiella quasipneumoniae subsp. quasipneumoniae | ST1437 | 0
 GCF_000492795.1 | Klebsiella quasipneumoniae subsp. similipneumoniae | ST1435 | 0 | 0 | - | 0 | - | 0 | - | 0 | - | 0 | - | - | wzi183 | KL21 | Very high | O12 | Very high | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | OKP-B-7* | -
 
 
-### Code testing
+#### Code testing
 
 Unit tests are available in the /test directory of this repository
+
+
+#### Visualising outputs in microreact
+
+A helper script to assist users in formating their Kleborate results for viewing in Microreact is provided in the /scripts directory of this repository
 
 
 ## Typing from Illumina reads
