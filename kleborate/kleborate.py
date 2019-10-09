@@ -385,6 +385,8 @@ def decompress_file(in_file, out_file):
 
 
 def get_chromosome_mlst_results(data_folder, contigs, kp_complex):
+    chromosome_mlst_header = get_chromosome_mlst_header()
+
     if kp_complex:
         seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
         database = data_folder + '/kpneumoniae.txt'
@@ -394,22 +396,25 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex):
         if chr_st != '0':
             chr_st = 'ST' + chr_st
 
-        chromosome_mlst_header = get_chromosome_mlst_header()
-        assert len(chromosome_mlst_header) == len(chr_st_detail)
-
         # ST67 and ST90 get special 'subspecies' names.
         chr_st_with_subsp = chr_st
         if chr_st_with_subsp == 'ST90':
             chr_st_with_subsp = 'ST90 (subsp. ozanae)'
         if chr_st_with_subsp == 'ST67':
             chr_st_with_subsp = 'ST67 (subsp. rhinoscleromatis)'
+            
+        assert len(chromosome_mlst_header) == len(chr_st_detail)
 
         results = {'ST': chr_st_with_subsp,
                    'Chr_ST': chr_st}
-        results.update(dict(zip(get_chromosome_mlst_header(), chr_st_detail)))
-        return results
+
     else:
-        return {}
+        results = {'ST': "NA",
+                   'Chr_ST': "NA"}
+        chr_st_detail = ['-'] * len(chromosome_mlst_header)
+
+    results.update(dict(zip(get_chromosome_mlst_header(), chr_st_detail)))
+    return results
 
 
 def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_txt,
