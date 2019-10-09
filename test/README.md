@@ -6,10 +6,12 @@ To run the tests, first navigate to Kleborate's root directory (i.e the director
 
 If you have [pytest](https://docs.pytest.org/en/latest/) installed, you can use it to run the tests:
 ```
+cd Kleborate
 python3 -m pytest
 ```
 
 Otherwise, the tests can be run using Python's [built-in unit testing framework](https://docs.python.org/3/library/unittest.html):
 ```
+cd Kleborate
 python3 -m unittest
 ```
