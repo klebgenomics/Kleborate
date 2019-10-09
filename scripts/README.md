@@ -9,7 +9,7 @@ If you have a phylogenetic tree of your samples, you can view Kleborate's result
 
 #### Requirements
 
-* Kleborate output table
+* Kleborate output table (including resistance results)
 * Phylogenetic tree (Newick or Nexus format)
 
 Importantly, the sample names in the table and tree must match.
@@ -20,7 +20,25 @@ Importantly, the sample names in the table and tree must match.
 kleborate_to_microreact.py --kleborate_in Kleborate_results.txt --tree_in tree.nwk --csv_out microreact.csv --tree_out microreact.nwk
 ```
 
-If that command completes successfully, you can go to [Microreact's upload page](https://microreact.org/upload) and drag the `microreact.csv` and `microreact.nwk` files onto the page. Then explore the data with the available colours, labels and blocks!
+If that command completes successfully, you can go to [Microreact's upload page](https://microreact.org/upload) and drag the `microreact.csv` and `microreact.nwk` files onto the page. Then explore the data with the available colours, labels and blocks.
+
+If you have source information or geographical information, you will need to add this to the microreact.csv file yourself, following the instructions at [https://microreact.org/instructions](https://microreact.org/instructions)
+
+
+#### Example
+
+This directory includes an example of microreact-formated tree + Kleborate results that we generated using the output of [Kleborate example command #2](https://github.com/katholt/Kleborate#test-commands) and a mash distance tree constructed from the same assemblies.
+
+```
+kleborate_to_microreact.py --kleborate_in results_res.txt --tree_in tree.nwk --csv_out microreact.csv --tree_out microreact.nwk
+```
+
+This is how it looks in microreact:
+
+<p align="center"><img src="microreact_screenshot.png" alt="Microreact_screenshot"></p>
+
+Note to achieve this view, you need to turn on 'Metadata blocks' in Microreact like this:
+<p align="center"><img src="metadata_options.png" alt="Microreact_options" width="200"></p>
 
 
 
