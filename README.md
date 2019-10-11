@@ -100,6 +100,8 @@ Kleborate/kleborate-runner.py -h
 
 See [examples below](#example-output) to test out your installation on some public genome data. And if you'd like to thoroughly check that everything works as intended, you can also run this repo's [automated tests](test) after installation.
 
+Note that Kleborate depends on a git submodule ([Kaptive](https://github.com/katholt/Kaptive)) which is why `--recursive` is required when cloning. If you update your local copy of Kleborate using `git pull`, you should also run `git submodule update` to ensure that its Kaptive is also up-to-date.
+
 
 ### Updating the MLST database
 
