@@ -40,8 +40,8 @@ def main():
     stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
     output_headers(stdout_header, full_header, args.outfile)
 
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        for contigs in args.assemblies:
+    for contigs in args.assemblies:
+        with tempfile.TemporaryDirectory() as tmp_dir:
             contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
 
             # All results are stored in a dictionary where the key is the column name and the value
