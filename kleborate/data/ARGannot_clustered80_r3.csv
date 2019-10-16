@@ -776,7 +776,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 193,CTX-M-29__154,Bla,CTX-M-1,CTX-M-29,154,AY267213,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 193,CTX-M-30__155,Bla,CTX-M-1,CTX-M-30,155,AY292654,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 193,CTX-M-32__156,Bla,CTX-M-1,CTX-M-32,156,AJ557142,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-193,CTX-M-33__157,Bla,CTX-M-1,CTX-M-33,157,AY238472,888-13,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-33__157,Bla,CTX-M-1,CTX-M-33,157,AY238472,888-13,876,no,no,class A extended-spectrum beta-lactamase,Bla_Carb
 193,CTX-M-34__158,Bla,CTX-M-1,CTX-M-34,158,AY515297,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 193,CTX-M-36__159,Bla,CTX-M-1,CTX-M-36,159,AB177384,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 193,CTX-M-37__160,Bla,CTX-M-1,CTX-M-37,160,AY649755,1641-2516,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
