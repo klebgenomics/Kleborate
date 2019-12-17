@@ -1,0 +1,10 @@
+clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_contains_multiple_genes,gene_found_in_multiple_clusters,bla_description,bla_class
+43,Aac6-31__1676,AGly,AacAad,Aac6-31,1676,AJ640197,2474-2992,519,no,no,NA,NA
+43,Aac6-Ib__1677,AGly,AacAad,Aac6-Ib,1677,NC_015515,3943-4548,606,no,no,NA,NA
+43,Aac6Ib-cr__1678,AGly,AacAad,Aac6Ib-cr,1678,EF636461,1124-1642,519,no,no,NA,NA
+43,AacA4__1679,AGly,AacAad,AacA4,1679,AF416297,2738-3304,567,no,no,NA,NA
+43,AadA10__1680,AGly,AacAad,AadA10,1680,U37105,2807-3640,834,no,no,NA,NA
+43,AadA16__1681,AGly,AacAad,AadA16,1681,EU675686,3197-4042,846,no,no,NA,NA
+43,AadA6__1682,AGly,AacAad,AadA6,1682,AF140629,61-906,846,no,no,NA,NA
+43,AadA7__1683,AGly,AacAad,AadA7,1683,AF224733,32-829,798,no,no,NA,NA
+43,Ant3''Ih-Aac6-IId__1684,AGly,AacAad,Ant3''Ih-Aac6-IId,1684,AF453998,3555-4946,1392,no,no,NA,NA
