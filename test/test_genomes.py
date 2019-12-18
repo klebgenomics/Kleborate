@@ -15,17 +15,17 @@ not, see <http://www.gnu.org/licenses/>.
 import collections
 import tempfile
 import unittest
-from kleborate.kleborate import get_data_path, get_output_headers, gunzip_contigs_if_necessary, \
-    get_strain_name, get_contig_stat_results, get_species_results, is_kp_complex, \
-    get_chromosome_mlst_results, get_ybt_mlst_results, get_clb_mlst_results, get_iuc_mlst_results, \
-    get_iro_mlst_results, get_hypermucoidy_results, get_wzi_and_k_locus_results, \
-    get_resistance_results, get_summary_results
+from kleborate.kleborate import get_output_headers, get_strain_name, get_contig_stat_results, \
+    get_species_results, is_kp_complex, get_chromosome_mlst_results, get_ybt_mlst_results, \
+    get_clb_mlst_results, get_iuc_mlst_results, get_iro_mlst_results, get_hypermucoidy_results, \
+    get_wzi_and_k_locus_results, get_resistance_results, get_summary_results, \
+    gunzip_contigs_if_necessary
 
 
 class TestGenomes(unittest.TestCase):
 
     def setUp(self):
-        self.data_dir = get_data_path()
+        self.data_dir = 'test/test_genomes/data'
         Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o'])
         self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False)
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
@@ -49,7 +49,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_900501255(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_900501255.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_900501255.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_2(KpVP-1)')
@@ -76,7 +77,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_003400925(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003400925.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003400925.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '5')
             self.assertEqual(results['rmpA'], '-')
@@ -103,7 +105,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_001068035(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_001068035.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_001068035.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_2(KpVP-1)')
@@ -134,7 +137,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_003095495(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003095495.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003095495.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '17')
             self.assertEqual(results['rmpA'], '-')
@@ -165,7 +169,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_000009885(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_000009885.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_000009885.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_11(ICEKp1),rmpA_2(KpVP-1)')
@@ -194,14 +199,16 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_004010735(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_004010735.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_004010735.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['wzi'], '-')
             self.assertEqual(results['K_locus'], '-')
 
     def test_GCF_000968155(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_000968155.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_000968155.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_9(KpVP-2)')
@@ -228,7 +235,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_002108345(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002108345.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002108345.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '11')
             self.assertEqual(results['rmpA'], '-')
@@ -255,7 +263,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_002247645(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002247645.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002247645.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '7')
             self.assertEqual(results['rmpA'], '-')
@@ -283,7 +292,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_002248955(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002248955.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002248955.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '4')
             self.assertEqual(results['rmpA'], '-')
@@ -310,7 +320,8 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_003345475(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003345475.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003345475.1.fna.gz',
+                                                  tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '5')
             self.assertEqual(results['rmpA'], '-')

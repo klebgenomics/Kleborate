@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_data_path, get_output_headers, get_resistance_results
+from kleborate.kleborate import get_output_headers, get_resistance_results
 
 
 class Args(object):
@@ -30,7 +30,7 @@ class TestResGyrAParC(unittest.TestCase):
 
     def setUp(self):
         self.args = Args()
-        self.data_dir = get_data_path()
+        self.data_dir = 'test/test_res_qrdr/data'
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_no_mutations(self):

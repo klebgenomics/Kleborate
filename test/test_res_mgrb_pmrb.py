@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_data_path, get_output_headers, get_resistance_results
+from kleborate.kleborate import get_output_headers, get_resistance_results
 
 
 class Args(object):
@@ -30,11 +30,12 @@ class TestResMgrBPmrB(unittest.TestCase):
 
     def setUp(self):
         self.args = Args()
-        self.data_dir = get_data_path()
+        self.data_dir = 'test/test_res_mgrb_pmrb/data'
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_both_genes_intact(self):
-        results = get_resistance_results(self.data_dir, 'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_1.fasta',
+        results = get_resistance_results(self.data_dir,
+                                         'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_1.fasta',
                                          self.args, self.res_headers, True)
         self.assertEqual(results['Col'], '-')
 
@@ -42,7 +43,8 @@ class TestResMgrBPmrB(unittest.TestCase):
         """
         A frameshift in pmrB should cause an early stop and lead to a colisitin resistance call.
         """
-        results = get_resistance_results(self.data_dir, 'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_2.fasta',
+        results = get_resistance_results(self.data_dir,
+                                         'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_2.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('PmrB-' in results['Col'])
 
@@ -50,12 +52,14 @@ class TestResMgrBPmrB(unittest.TestCase):
         """
         This tests an early stop mutation (without a frameshift) in pmrB.
         """
-        results = get_resistance_results(self.data_dir, 'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_3.fasta',
+        results = get_resistance_results(self.data_dir,
+                                         'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_3.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('PmrB-' in results['Col'])
 
     def test_mgrb_missing(self):
-        results = get_resistance_results(self.data_dir, 'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_4.fasta',
+        results = get_resistance_results(self.data_dir,
+                                         'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_4.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('MgrB-' in results['Col'])
 
@@ -63,7 +67,8 @@ class TestResMgrBPmrB(unittest.TestCase):
         """
         Setting the Kp complex variable to False should turn off the MgrB/PmrB tests.
         """
-        results = get_resistance_results(self.data_dir, 'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_4.fasta',
+        results = get_resistance_results(self.data_dir,
+                                         'test/test_res_mgrb_pmrb/test_res_mgrb_pmrb_4.fasta',
                                          self.args, self.res_headers, False)
         self.assertTrue('MgrB-' not in results['Col'])
 
