@@ -1,0 +1,1855 @@
+clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_contains_multiple_genes,gene_found_in_multiple_clusters,bla_description,bla_class
+1,VanTc3__534,Gly,VanTc,VanTc3,534,AY033764,1644-3746,2103,no,no,NA,NA
+1,VanTc4__535,Gly,VanTc,VanTc4,535,EU151753,1647-3749,2103,no,no,NA,NA
+2,VanT__1054,Gly,VanT,VanT,1054,AF162694,3008-5104,2097,no,no,NA,NA
+2,VanTc__1055,Gly,VanT,VanTc,1055,DQ022190,1802-3898,2097,no,no,NA,NA
+3,HugA__1172,Bla,HugA,HugA,1172,AY008342,5235-3169,2067,no,no,NA,NA
+4,MECA__1491,Bla,MECA,MECA,1491,BX571856,46925-44919,2007,no,no,NA,NA
+5,OtrA__1687,Tet,OtrA,OtrA,1687,X53401,349-2340,1992,no,no,NA,NA
+6,TetQ__345,Tet,TetQ,TetQ,345,Z21523,314-2287,1974,no,no,NA,NA
+7,TetB-P__640,Tet,TetB-P,TetB-P,640,L20800,2309-4267,1959,no,no,NA,NA
+8,TetT__1056,Tet,TetT,TetT,1056,L42544,478-2433,1956,no,no,NA,NA
+9,TetS__1454,Tet,TetS,TetS,1454,L09756,447-2372,1926,no,no,NA,NA
+10,Tet-36__830,Tet,Tet-36,Tet-36,830,AJ514254,2534-4456,1923,no,no,NA,NA
+11,Tet-44__829,Tet,Tet-44,Tet-44,829,FN594949,25245-27167,1923,no,no,NA,NA
+12,Tet-32__832,Tet,Tet-32,Tet-32,832,DQ647324,181-2100,1920,no,no,NA,NA
+13,TetM__831,Tet,TetM,TetM,831,U08812,1981-3900,1920,no,no,NA,NA
+14,TetO__834,Tet,TetO,TetO,834,M18896,207-2126,1920,no,no,NA,NA
+15,TetW__833,Tet,TetW,TetW,833,AJ222769,3687-5606,1920,no,no,NA,NA
+16,MrdA__836,Bla,MrdA,MrdA,836,CP002291,666340-664439,1902,no,no,NA,NA
+17,PenA__835,Bla,PenA,PenA,835,AB511945,1298-3049,1752,no,no,NA,NA
+18,OleB__838,MLS,OleB,OleB,838,L36601,1421-3130,1710,no,no,NA,NA
+19,OtrB__837,Tet,OtrB,OtrB,837,AF079900,40-1731,1692,no,no,NA,NA
+20,VgaB__579,MLS,VgaB,VgaB,579,U82085,629-2287,1659,no,no,NA,NA
+21,CarA__580,MLS,CarA,CarA,580,M80346,411-2066,1656,no,no,NA,NA
+22,SrmB__581,MLS,SrmB,SrmB,581,X63451,558-2210,1653,no,no,NA,NA
+23,TlrC__582,MLS,TlrC,TlrC,582,M57437,277-1923,1647,no,no,NA,NA
+24,Rif__575,Rif,Rif,Rif,575,EF541029,530-2170,1641,no,no,NA,NA
+25,TlrC__576,MLS,TlrC2,TlrC,576,NC_016113,804890-803268,1623,no,no,NA,NA
+26,VgaD__577,MLS,VgaD,VgaD,577,GQ205627,1394-2971,1578,no,no,NA,NA
+27,VgaE__578,MLS,VgaE,VgaE,578,FR772051,8741-10315,1575,no,no,NA,NA
+28,VgaA__583,MLS,VgaA,VgaA,583,M90056,909-2477,1569,no,no,NA,NA
+28,Vgaa-LC__584,MLS,VgaA,Vgaa-LC,584,DQ823382,1-1569,1569,no,no,NA,NA
+29,Tet-43__585,Tet,Tet-43,Tet-43,585,GQ244501,1619-60,1560,no,no,NA,NA
+30,TetH__302,Tet,TetH,TetH,302,EF460464,7839-6286,1554,no,no,NA,NA
+31,Tcr-3__301,Tet,Tcr-3,Tcr-3,301,D38215,516-2054,1539,no,no,NA,NA
+32,QepA__299,Flq,QepA,QepA,299,AB263754,8587-7052,1536,no,no,NA,NA
+32,QepA2__300,Flq,QepA,QepA2,300,EU847537,1672-3207,1536,no,no,NA,NA
+33,LsaA__298,MLS,LsaA,LsaA,298,AY225127,41-1537,1497,no,no,NA,NA
+34,LsaB__306,MLS,LsaB,LsaB,306,AJ579365,4150-5628,1479,no,no,NA,NA
+35,LsaC__305,MLS,LsaC,LsaC,305,HM990671,5193-6671,1479,no,no,NA,NA
+36,MsrC__304,MLS,MsrC,MsrC,304,AY004350,496-1974,1479,no,no,NA,NA
+37,MsrE__303,MLS,MsrE,MsrE,303,KR091911,85100-83625,1476,no,no,NA,NA
+38,MsrA__297,MLS,MsrA,MsrA,297,AY591760,274-1740,1467,no,no,NA,NA
+39,MsrD__296,MLS,MsrD,MsrD,296,AF274302,2462-3925,1464,no,no,NA,NA
+40,LmrA__1685,MLS,LmrA,LmrA,1685,X79146,1918-3363,1446,no,no,NA,NA
+41,Aac6-Aph2__1686,AGly,Aac6-Aph2,Aac6-Aph2,1686,M13771,304-1743,1440,no,no,NA,NA
+42,FexA__1675,Phe,FexA,FexA,1675,JQ041372,15451-14024,1428,no,no,NA,NA
+43,Aac6-31__1676,AGly,AacAad,Aac6-31,1676,AJ640197,2474-2992,519,no,no,NA,NA
+43,Aac6-Ib__1677,AGly,AacAad,Aac6-Ib,1677,NC_015515,3943-4548,606,no,no,NA,NA
+43,Aac6Ib-cr__1678,AGly,AacAad,Aac6Ib-cr,1678,EF636461,1124-1642,519,no,no,NA,NA
+43,AacA4__1679,AGly,AacAad,AacA4,1679,AF416297,2738-3304,567,no,no,NA,NA
+43,AadA10__1680,AGly,AacAad,AadA10,1680,U37105,2807-3640,834,no,no,NA,NA
+43,AadA16__1681,AGly,AacAad,AadA16,1681,EU675686,3197-4042,846,no,no,NA,NA
+43,AadA6__1682,AGly,AacAad,AadA6,1682,AF140629,61-906,846,no,no,NA,NA
+43,AadA7__1683,AGly,AacAad,AadA7,1683,AF224733,32-829,798,no,no,NA,NA
+43,Ant3''Ih-Aac6-IId__1684,AGly,AacAad,Ant3''Ih-Aac6-IId,1684,AF453998,3555-4946,1392,no,no,NA,NA
+44,TetK__1673,Tet,TetK,TetK,1673,M16217,305-1684,1380,no,no,NA,NA
+45,TetL__1674,Tet,TetL,TetL,1674,FN435329,1-1377,1377,no,no,NA,NA
+46,Tet-38__1671,Tet,Tet-38,Tet-38,1671,HE579073,127367-128719,1353,no,no,NA,NA
+47,VanS-B__1672,Gly,VanS-B,VanS-B,1672,AY655721,731-2073,1343,no,no,NA,NA
+48,CmlV__1669,Phe,CmlV,CmlV,1669,U09991,28-1338,1311,no,no,NA,NA
+49,AmpC1__1670,Bla,AmpC1_Ecoli,AmpC1,1670,FN649414,2765051-2766355,1305,no,no,NA,NA
+50,Tet-42__1543,Tet,Tet-42,Tet-42,1543,EU523697,687-1973,1287,no,no,NA,NA
+51,BlaA2__1542,Bla,BlaA2,BlaA2,1542,NC_010410,2507740-2509014,1275,no,no,NA,NA
+52,TetA__1545,Tet,TetA,TetA,1545,NC_010410,3643133-3641859,1275,no,no,NA,NA
+53,TetA-P__1544,Tet,TetA-P,TetA-P,1544,L20800,1063-2325,1263,no,no,NA,NA
+54,EreB__1539,MLS,EreB,EreB,1539,X03988,383-1642,1260,no,no,NA,NA
+55,CmlA1__1537,Phe,CmlA,CmlA1,1537,M64556,601-1860,1260,no,no,NA,NA
+55,CmlA5__1538,Phe,CmlA,CmlA5,1538,NC_010410,3659201-3657942,1260,no,no,NA,NA
+56,TetV__1541,Tet,TetV,TetV,1541,AF030344,1721-462,1260,no,no,NA,NA
+57,AmpS__1540,Bla,AmpS,AmpS,1540,NC_014932,210005-211252,1248,no,no,NA,NA
+58,PexA__1536,Phe,PexA,PexA,1536,HM537013,25302-24055,1248,no,no,NA,NA
+59,Tet-31__1535,Tet,Tet-31,Tet-31,1535,AJ250203,1651-2883,1233,no,no,NA,NA
+60,MefB__1203,MLS,MefB,MefB,1203,HQ875016,11177-9948,1230,no,no,NA,NA
+61,Tet-33__1204,Tet,Tet-33,Tet-33,1204,AJ420072,22940-24163,1224,no,no,NA,NA
+62,EreA2__48,MLS,EreA,EreA2,48,KJ668707,2797-4023,1227,no,no,NA,NA
+62,EreA__839,MLS,EreA,EreA,839,AY183453,2730-3950,1221,no,no,NA,NA
+63,Tet-40__1546,Tet,Tet-40,Tet-40,1546,AM419751,14211-15431,1221,no,no,NA,NA
+64,MefA__1210,MLS,MefA,MefA,1210,U70055,314-1531,1218,no,no,NA,NA
+65,TetE__1211,Tet,TetE,TetE,1211,DQ366299,36-1253,1218,no,no,NA,NA
+66,FloR__1212,Phe,FloR,FloR,1212,AKLJ01000508,1597-383,1215,no,no,NA,NA
+67,TetB__1213,Tet,TetB,TetB,1213,AB089594,1-1206,1206,no,no,NA,NA
+68,TetJ__1057,Tet,TetJ,TetJ,1057,AF038993,1084-2280,1197,no,no,NA,NA
+70,TetC__1051,Tet,TetC,TetC,1051,EU751612,1-1191,1191,no,no,NA,NA
+71,Dha1__1050,Phe,Dha1,Dha1,1050,HE579073,2468756-2467569,1188,no,no,NA,NA
+72,Tet-39__1049,Tet,Tet-39,Tet-39,1049,AY743590,749-1936,1188,no,no,NA,NA
+73,Tet-30__1048,Tet,Tet-30,Tet-30,1048,AF090987,1130-2314,1185,no,no,NA,NA
+74,TetD__1047,Tet,TetD,TetD,1047,AB089602,1-1185,1185,no,no,NA,NA
+75,Tet-41__1046,Tet,Tet-41,Tet-41,1046,AY264780,3006-1825,1182,no,no,NA,NA
+76,Cml__1045,Phe,Cml,Cml,1045,X59968,508-1686,1179,no,no,NA,NA
+78,CmrA__1053,Phe,CmrA,CmrA,1053,Z12001,993-2168,1176,no,no,NA,NA
+79,Cmx__58,Phe,Cmr,Cmx,58,AF024666,15877-17052,1176,no,no,NA,NA
+79,Cmr__1052,Phe,Cmr,Cmr,1052,U85507,3518-4693,1176,no,no,NA,NA
+80,TetG__632,Tet,TetG,TetG,632,NC_010410,3672607-3671432,1176,no,no,NA,NA
+81,TetY__633,Tet,TetY,TetY,633,AF070999,1680-2855,1176,no,no,NA,NA
+82,ACC-5__97,Bla,ACC-1,ACC-5,97,HE819401,1-1161,1161,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+82,ACC-1__621,Bla,ACC-1,ACC-1,621,AM939419,4945-3785,1161,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+82,ACC-2__622,Bla,ACC-1,ACC-2,622,AF180952,1565-2737,1173,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+82,ACC-3__623,Bla,ACC-1,ACC-3,623,AF180957,1-1131,1131,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+82,ACC-4__624,Bla,ACC-1,ACC-4,624,EF504260,3155-1995,1161,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+83,OCH-2__625,Bla,OCH-2,OCH-2,625,AJ295340,1-1173,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+83,OCH-3__626,Bla,OCH-2,OCH-3,626,AJ295341,1-1173,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+83,OCH-4__627,Bla,OCH-2,OCH-4,627,AJ295342,1-1173,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+83,OCH-5__628,Bla,OCH-2,OCH-5,628,AJ295343,1-1173,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+83,OCH-6__629,Bla,OCH-2,OCH-6,629,AJ295344,1-1173,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+83,OCH-7__630,Bla,OCH-2,OCH-7,630,AJ295345,1-1173,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+83,OCH-8__631,Bla,OCH-2,OCH-8,631,DQ489307,1071-2243,1173,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+84,NorA__638,Flq,NorA,NorA,638,HE579073,721034-722200,1167,no,no,NA,NA
+85,TetX__639,Tet,TetX,TetX,639,M37699,586-1752,1167,no,no,NA,NA
+87,VanS-A__635,Gly,VanS-A,VanS-A,635,M97297,4649-5803,1155,no,no,NA,NA
+87,VanS-Pt2__636,Gly,VanS-A,VanS-Pt2,636,DQ018710,3721-4881,1161,no,no,NA,NA
+87,VanS-Pt__637,Gly,VanS-A,VanS-Pt,637,AY926880,1391-2551,1161,no,no,NA,NA
+88,Erm38__614,MLS,Erm38,Erm38,614,AY154657,63-1223,1161,no,no,NA,NA
+89,AMPH__615,Bla,AMPH_Ecoli,AMPH,615,AP012030,395554-396711,1158,no,no,NA,NA
+90,TetZ__368,Tet,TetZ,TetZ,368,AF121000,13034-11880,1155,no,no,NA,NA
+91,MOX-8__101,Bla,CMY-MOX,MOX-8,101,JX173956,1-1152,1152,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,MOX-1__355,Bla,CMY-MOX,MOX-1,355,D13304,233-1381,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,MOX-2__356,Bla,CMY-MOX,MOX-2,356,AJ276453,4620-5768,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,MOX-3__357,Bla,CMY-MOX,MOX-3,357,EU515248,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,MOX-4__358,Bla,CMY-MOX,MOX-4,358,FJ262599,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,MOX-5__359,Bla,CMY-MOX,MOX-5,359,GQ152600,1-1152,1152,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,MOX-6__360,Bla,CMY-MOX,MOX-6,360,GQ152601,1-1152,1152,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,MOX-7__361,Bla,CMY-MOX,MOX-7,361,GQ152602,1-1152,1152,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+91,CMY-1__362,Bla,CMY-MOX,CMY-1,362,X92508,333-1481,1149,no,no,class C beta-lactamase,Bla
+91,CMY-8__363,Bla,CMY-MOX,CMY-8,363,AF167990,613-1761,1149,no,no,CMY-1/MOX family class C extended-spectrum beta-lactamase,Bla_ESBL
+91,CMY-9__364,Bla,CMY-MOX,CMY-9,364,AB061794,6018-7166,1149,no,no,CMY-1/MOX family class C extended-spectrum beta-lactamase,Bla_ESBL
+91,CMY-10__365,Bla,CMY-MOX,CMY-10,365,AF373217,1-1149,1149,no,no,CMY-1/MOX family class C beta-lactamase,Bla
+91,CMY-11__366,Bla,CMY-MOX,CMY-11,366,AF381626,254-1402,1149,no,no,CMY-1/MOX family class C beta-lactamase,Bla
+91,CMY-19__367,Bla,CMY-MOX,CMY-19,367,AB194410,1-1149,1149,no,no,CMY-1/MOX family class C beta-lactamase,Bla
+92,CMY-105__105,Bla,CMY,CMY-105,105,KJ207205,1040-2185,1146,no,no,class C beta-lactamase,Bla
+92,CMY-106__125,Bla,CMY,CMY-106,125,KM983294,1051-2196,1146,no,no,class C beta-lactamase,Bla
+92,CMY-108__167,Bla,CMY,CMY-108,167,KF564648,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,LAT-1__370,Bla,CMY,LAT-1,370,X78117,142-1287,1146,no,no,CMY-2 family cephalosporin-hydrolyzing class C beta-lactamase,Bla
+92,CFE-1__371,Bla,CMY,CFE-1,371,AB107899,1008-2153,1146,no,no,CMY-2 family  cephalosporin-hydrolyzing class C beta-lactamase,Bla
+92,BIL-1__372,Bla,CMY,BIL-1,372,X74512,127-1272,1146,no,no,CMY-2 family class C beta-lactamase,Bla
+92,CMY-2__373,Bla,CMY,CMY-2,373,AM779746,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-4__374,Bla,CMY,CMY-4,374,AF420597,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-5__375,Bla,CMY,CMY-5,375,Y17716,2374-3519,1146,no,no,class C beta-lactamase,Bla
+92,CMY-6__376,Bla,CMY,CMY-6,376,AJ011293,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-7__377,Bla,CMY,CMY-7,377,AJ011291,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-12__378,Bla,CMY,CMY-12,378,FR716828,847-1992,1146,no,no,class C beta-lactamase,Bla
+92,CMY-13__379,Bla,CMY,CMY-13,379,AY339625,4786-3641,1146,no,no,class C beta-lactamase,Bla
+92,CMY-14__380,Bla,CMY,CMY-14,380,EU600193,1702-2847,1146,no,no,class C beta-lactamase,Bla
+92,CMY-15__381,Bla,CMY,CMY-15,381,AJ555823,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-16__382,Bla,CMY,CMY-16,382,FM995219,4817-3672,1146,no,no,class C beta-lactamase,Bla
+92,CMY-17__383,Bla,CMY,CMY-17,383,AY513266,165-1310,1146,no,no,class C beta-lactamase,Bla
+92,CMY-18__384,Bla,CMY,CMY-18,384,AY743434,47-1198,1152,no,no,class C beta-lactamase,Bla
+92,CMY-20__385,Bla,CMY,CMY-20,385,AY960293,1-1143,1143,no,no,class C beta-lactamase,Bla
+92,CMY-21__386,Bla,CMY,CMY-21,386,DQ139328,161-1306,1146,no,no,class C beta-lactamase,Bla
+92,CMY-22__387,Bla,CMY,CMY-22,387,DQ256079,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-23__388,Bla,CMY,CMY-23,388,DQ438952,161-1306,1146,no,no,class C beta-lactamase,Bla
+92,CMY-24__389,Bla,CMY,CMY-24,389,EF415650,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-25__390,Bla,CMY,CMY-25,390,EU515249,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-26__391,Bla,CMY,CMY-26,391,AB300358,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-27__392,Bla,CMY,CMY-27,392,EU515250,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-28__393,Bla,CMY,CMY-28,393,EF561644,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-29__394,Bla,CMY,CMY-29,394,EF685371,1-1143,1143,no,no,class C beta-lactamase,Bla
+92,CMY-30__395,Bla,CMY,CMY-30,395,EF685372,1-1143,1143,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+92,CMY-31__396,Bla,CMY,CMY-31,396,EF622224,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-32__397,Bla,CMY,CMY-32,397,EU496815,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-33__398,Bla,CMY,CMY-33,398,EU496816,1-1140,1140,no,no,class C beta-lactamase,Bla
+92,CMY-34__399,Bla,CMY,CMY-34,399,EF394370,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-35__400,Bla,CMY,CMY-35,400,EF394371,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-36__401,Bla,CMY,CMY-36,401,EU331426,2375-3520,1146,no,no,class C beta-lactamase,Bla
+92,CMY-37__402,Bla,CMY,CMY-37,402,AB280919,1-1146,1146,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+92,CMY-38__403,Bla,CMY,CMY-38,403,AM931008,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-39__404,Bla,CMY,CMY-39,404,AB372224,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-40__405,Bla,CMY,CMY-40,405,EU515251,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-41__406,Bla,CMY,CMY-41,406,AB429270,15-1160,1146,no,no,class C beta-lactamase,Bla
+92,CMY-42__407,Bla,CMY,CMY-42,407,HM146927,1-1146,1146,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+92,CMY-43__408,Bla,CMY,CMY-43,408,FJ360626,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-44__409,Bla,CMY,CMY-44,409,FJ437066,1-1134,1134,no,no,class C beta-lactamase,Bla
+92,CMY-45__410,Bla,CMY,CMY-45,410,FN546177,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-46__411,Bla,CMY,CMY-46,411,FN556186,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-47__412,Bla,CMY,CMY-47,412,HM046998,1040-2185,1146,no,no,class C beta-lactamase,Bla
+92,CMY-48__413,Bla,CMY,CMY-48,413,HM569226,1040-2185,1146,no,no,class C beta-lactamase,Bla
+92,CMY-49__414,Bla,CMY,CMY-49,414,GQ402541,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-50__415,Bla,CMY,CMY-50,415,FN645444,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-51__416,Bla,CMY,CMY-51,416,JQ733571,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-53__417,Bla,CMY,CMY-53,417,HQ336940,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-54__418,Bla,CMY,CMY-54,418,HM544039,1-1152,1152,no,no,class C beta-lactamase,Bla
+92,CMY-55__419,Bla,CMY,CMY-55,419,HM544040,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-56__420,Bla,CMY,CMY-56,420,HQ322613,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-57__421,Bla,CMY,CMY-57,421,HQ285243,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-58__422,Bla,CMY,CMY-58,422,HQ185697,1268-2413,1146,no,no,class C beta-lactamase,Bla
+92,CMY-110__423,Bla,CMY,CMY-110,423,AB872957,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-60__424,Bla,CMY,CMY-60,424,JF460794,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-61__425,Bla,CMY,CMY-61,425,JF460795,1-1143,1143,no,no,class C beta-lactamase,Bla
+92,CMY-62__426,Bla,CMY,CMY-62,426,JF460796,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-63__427,Bla,CMY,CMY-63,427,HQ650104,64-1209,1146,no,no,class C beta-lactamase,Bla
+92,CMY-64__428,Bla,CMY,CMY-64,428,HQ832678,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-65__429,Bla,CMY,CMY-65,429,JN714479,1041-2186,1146,no,no,class C beta-lactamase,Bla
+92,CMY-66__430,Bla,CMY,CMY-66,430,JN714478,1035-2180,1146,no,no,class C beta-lactamase,Bla
+92,CMY-67__431,Bla,CMY,CMY-67,431,JQ711185,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-68__432,Bla,CMY,CMY-68,432,JN714480,1040-2185,1146,no,no,class C beta-lactamase,Bla
+92,CMY-69__433,Bla,CMY,CMY-69,433,JX049132,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-70__434,Bla,CMY,CMY-70,434,JX440350,1027-2172,1146,no,no,class C beta-lactamase,Bla
+92,CMY-71__435,Bla,CMY,CMY-71,435,JQ711184,1027-2172,1146,no,no,class C beta-lactamase,Bla
+92,CMY-72__436,Bla,CMY,CMY-72,436,JX440352,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-73__437,Bla,CMY,CMY-73,437,GQ351345,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-74__438,Bla,CMY,CMY-74,438,JX440349,1027-2172,1146,no,no,class C beta-lactamase,Bla
+92,CMY-75__439,Bla,CMY,CMY-75,439,JQ733572,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-76__440,Bla,CMY,CMY-76,440,JQ733573,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-77__441,Bla,CMY,CMY-77,441,JX440353,1027-2172,1146,no,no,class C beta-lactamase,Bla
+92,CMY-78__442,Bla,CMY,CMY-78,442,JQ733575,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-79__443,Bla,CMY,CMY-79,443,JQ733576,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-80__444,Bla,CMY,CMY-80,444,JQ733577,1027-2172,1146,no,no,class C beta-lactamase,Bla
+92,CMY-81__445,Bla,CMY,CMY-81,445,JQ733578,1008-2153,1146,no,no,class C beta-lactamase,Bla
+92,CMY-83__446,Bla,CMY,CMY-83,446,JX440351,1027-2172,1146,no,no,class C beta-lactamase,Bla
+92,CMY-84__447,Bla,CMY,CMY-84,447,JQ733579,1028-2173,1146,no,no,class C beta-lactamase,Bla
+92,CMY-87__448,Bla,CMY,CMY-87,448,AB699171,1-1143,1143,no,no,class C beta-lactamase,Bla
+92,CMY-94__449,Bla,CMY,CMY-94,449,JX514368,272-1417,1146,no,no,class C beta-lactamase,Bla
+92,CMY-95__450,Bla,CMY,CMY-95,450,JX514369,297-1442,1146,no,no,class C beta-lactamase,Bla
+92,CMY-104__451,Bla,CMY,CMY-104,451,KF150216,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-111__507,Bla,CMY,CMY-111,507,KJ155695,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-112__508,Bla,CMY,CMY-112,508,KM087837,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-113__522,Bla,CMY,CMY-113,522,KM087836,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-114__564,Bla,CMY,CMY-114,564,KM087846,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-115__567,Bla,CMY,CMY-115,567,KM087839,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-116__749,Bla,CMY,CMY-116,749,KM087840,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-117__851,Bla,CMY,CMY-117,851,KM087844,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-118__865,Bla,CMY,CMY-118,865,KM087838,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-119__952,Bla,CMY,CMY-119,952,KM087845,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-131__1042,Bla,CMY,CMY-131,1042,KP281294,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-132__1072,Bla,CMY,CMY-132,1072,KP862820,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-133__1086,Bla,CMY,CMY-133,1086,KP862819,1-1146,1146,no,no,class C beta-lactamase,Bla
+92,CMY-135__1129,Bla,CMY,CMY-135,1129,KP981366,1-1146,1146,no,no,class C beta-lactamase,Bla
+93,TRU-1__369,Bla,TRU-1,TRU-1,369,EU046614,1-1149,1149,no,no,class C beta-lactamase,Bla
+94,FOX-1__453,Bla,FOX-1,FOX-1,453,X77455,701-1849,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-2__454,Bla,FOX-1,FOX-2,454,Y10282,19-1167,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-3__455,Bla,FOX-1,FOX-3,455,Y11068,17-1165,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-4__456,Bla,FOX-1,FOX-4,456,AJ277535,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-5__457,Bla,FOX-1,FOX-5,457,AY007369,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-6__458,Bla,FOX-1,FOX-6,458,AY034848,52-1200,1149,no,no,NA,NA
+94,FOX-7__459,Bla,FOX-1,FOX-7,459,AJ703796,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-8__460,Bla,FOX-1,FOX-8,460,HM565917,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-9__461,Bla,FOX-1,FOX-9,461,JF896803,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+94,FOX-10__462,Bla,FOX-1,FOX-10,462,JX049131,1-1149,1149,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+95,AmpC__452,Bla,AmpC,AmpC,452,AF211348,233-1378,1146,no,no,NA,NA
+96,ACT-1__464,Bla,ACT-MIR,ACT-1,464,U58495,28-1173,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-2__465,Bla,ACT-MIR,ACT-2,465,AM076977,1-1146,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-3__466,Bla,ACT-MIR,ACT-3,466,EU427302,1476-2618,1143,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-4__467,Bla,ACT-MIR,ACT-4,467,AJ311172,12-1157,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-5__468,Bla,ACT-MIR,ACT-5,468,FJ237369,1-1146,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-6__469,Bla,ACT-MIR,ACT-6,469,FJ237366,41-1186,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-7__470,Bla,ACT-MIR,ACT-7,470,FJ237368,1-1146,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-8__471,Bla,ACT-MIR,ACT-8,471,FN645445,1-1146,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-9__472,Bla,ACT-MIR,ACT-9,472,HQ693810,1009-2151,1143,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-10__473,Bla,ACT-MIR,ACT-10,473,JN848330,1-1146,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-12__474,Bla,ACT-MIR,ACT-12,474,JX440355,752-1897,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-14__475,Bla,ACT-MIR,ACT-14,475,JX440354,757-1902,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-15__476,Bla,ACT-MIR,ACT-15,476,JX440356,755-1900,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,ACT-16__477,Bla,ACT-MIR,ACT-16,477,AB737978,1-1140,1140,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,MIR-1__478,Bla,ACT-MIR,MIR-1,478,M37839,928-2073,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,MIR-2__479,Bla,ACT-MIR,MIR-2,479,AY227752,89-1234,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,MIR-3__480,Bla,ACT-MIR,MIR-3,480,AY743435,14-1159,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,MIR-4__481,Bla,ACT-MIR,MIR-4,481,EF587233,1-1101,1101,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,MIR-6__482,Bla,ACT-MIR,MIR-6,482,JQ664733,1-1146,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,MIR-8__483,Bla,ACT-MIR,MIR-8,483,FJ237367,1-1146,1146,no,no,NA,NA
+96,CMG__484,Bla,ACT-MIR,CMG,484,AY265892,1-1054,1054,no,no,NA,NA
+96,ZEG-1__485,Bla,ACT-MIR,ZEG-1,485,AY265891,1-1013,1013,no,no,NA,NA
+96,ACT-38__1146,Bla,ACT-MIR,ACT-38,1146,KP836350,1-1146,1146,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+96,CMH-1__1148,Bla,ACT-MIR,CMH-1,1148,JQ673557,1-1146,1146,no,no,class C beta-lactamase,Bla
+96,AZECL-25__1152,Bla,ACT-MIR,AZECL-25,1152,KJ949106,1-1146,1146,no,no,NA,NA
+97,VanS-D__463,Gly,VanS-D,VanS-D,463,AB242319,689-1834,1146,no,no,NA,NA
+98,MOR__347,Bla,DHA,MOR,347,Y10283,546-1685,1140,no,no,NA,NA
+98,Mor-2__348,Bla,DHA,Mor-2,348,AY235804,110-1249,1140,no,no,NA,NA
+98,DHA-1__349,Bla,DHA,DHA-1,349,HM193083,987-2126,1140,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+98,DHA-2__350,Bla,DHA,DHA-2,350,AF259520,1513-2652,1140,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+98,DHA-3__351,Bla,DHA,DHA-3,351,AY494945,1310-2449,1140,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+98,DHA-5__352,Bla,DHA,DHA-5,352,JF273491,746-1885,1140,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+98,DHA-6__353,Bla,DHA,DHA-6,353,HQ322612,1-1140,1140,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+98,DHA-7__354,Bla,DHA,DHA-7,354,HQ456945,1-1140,1140,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+98,DHA-9__1153,Bla,DHA,DHA-9,1153,KJ207201,952-2091,1140,no,no,cephalosporin-hydrolyzing  class C beta-lactamase,Bla
+99,AmpC2__346,Bla,AmpC2_Ecoli,AmpC2,346,CP002970,332756-333889,1134,no,no,NA,NA
+100,VanS-M__290,Gly,VanS-M,VanS-M,290,FJ349556,1673-2785,1113,no,no,NA,NA
+101,ErmE__291,MLS,ErmE,ErmE,291,M11200,284-1396,1113,no,no,NA,NA
+102,Tet-35__288,Tet,Tet-35,Tet-35,288,AF353562,3322-2213,1110,no,no,NA,NA
+103,VanTr-L__289,Gly,VanTr-L,VanTr-L,289,EU250284,3558-4658,1101,no,no,NA,NA
+104,VanS-F__294,Gly,VanS-F,VanS-F,294,AF155139,2200-3297,1098,no,no,NA,NA
+105,VanS-L__295,Gly,VanS-L,VanS-L,295,EU250284,5416-6510,1095,no,no,NA,NA
+106,VanS-C__292,Gly,VanS-C,VanS-C,292,DQ022190,4672-5757,1086,no,no,NA,NA
+107,VanY-D__293,Gly,VanY-D,VanY-D,293,AB242319,1958-3025,1068,no,no,NA,NA
+108,VanSc3__285,Gly,VanSc,VanSc3,285,AY033764,4604-5662,1059,no,no,NA,NA
+108,VanSc4__286,Gly,VanSc,VanSc4,286,EU151753,4599-5663,1065,no,no,NA,NA
+109,VanE__287,Gly,VanE,VanE,287,FJ872411,39736-40794,1059,no,no,NA,NA
+110,VanH__1556,Gly,VanH,VanH,1556,DQ246438,124-1179,1056,no,no,NA,NA
+110,VanH-Ac2__1558,Gly,VanH,VanH-Ac2,1558,AY618461,1-714,714,no,no,NA,NA
+110,VanH-Ao1__1559,Gly,VanH,VanH-Ao1,1559,AF060799,534-1580,1047,no,no,NA,NA
+110,VanH-Ao2__1560,Gly,VanH,VanH-Ao2,1560,HQ679900,1-1032,1032,no,no,NA,NA
+111,OtrC__1555,Tet,OtrC,OtrC,1555,AY509111,324-1379,1056,no,no,NA,NA
+112,VanC4__1563,Gly,VanC2-4,VanC4,1563,EU151752,29-1081,1053,no,no,NA,NA
+112,VanC2-3__1564,Gly,VanC2-4,VanC2-3,1564,EU151755,29-1081,1053,no,no,NA,NA
+112,VanC2__1565,Gly,VanC2-4,VanC2,1565,L29638,33-1085,1053,no,no,NA,NA
+112,VanC3__1566,Gly,VanC2-4,VanC3,1566,AY033764,26-1078,1053,no,no,NA,NA
+113,VanA-L__1562,Gly,VanL,VanA-L,1562,EU250284,955-2004,1050,no,no,NA,NA
+114,CfrA__1548,MLS,CfrA,CfrA,1548,JQ041372,4967-6016,1050,no,no,NA,NA
+115,VanA-Ao2__1547,Gly,VanA-Ao2,VanA-Ao2,1547,HQ679900,1034-2080,1047,no,no,NA,NA
+116,VanC__1553,Gly,VanC1,VanC,1553,AF162694,1411-2442,1032,no,no,NA,NA
+116,VanC1__1554,Gly,VanC1,VanC1,1554,EU151769,31-1062,1032,no,no,NA,NA
+117,VanA-A__1550,Gly,VanA,VanA-A,1550,M97297,6979-8010,1032,no,no,NA,NA
+117,VanA-M__1551,Gly,VanA,VanA-M,1551,FJ349556,4857-5888,1032,no,no,NA,NA
+117,VanHA-Bc__1552,Gly,VanA,VanHA-Bc,1552,Y15704,23-1054,1032,no,no,NA,NA
+118,VanA-D__1568,Gly,VanA-D,VanA-D,1568,AY082011,5901-6932,1032,no,no,NA,NA
+119,VanAE-Pp__1567,Gly,VanAE-Pp,VanAE-Pp,1567,AF155139,5940-6971,1032,no,no,NA,NA
+120,VanB__1058,Gly,VanB,VanB,1058,AY655710,1-1029,1029,no,no,NA,NA
+120,VanA-B__1059,Gly,VanB,VanA-B,1059,AF192329,28835-29863,1029,no,no,NA,NA
+120,VanB__1060,Gly,VanB,VanB,1060,AY655721,4857-5885,1029,no,no,NA,NA
+121,Aph4-Ia__1061,AGly,Aph4-Ia,Aph4-Ia,1061,V01499,231-1256,1026,no,no,NA,NA
+122,ErmR__1062,MLS,ErmR,ErmR,1062,M11276,333-1355,1023,no,no,NA,NA
+123,BlaA1__1063,Bla,BlaA1,BlaA1,1063,NC_010410,1804499-1803480,1020,no,no,NA,NA
+124,Erm30__1064,MLS,Erm30,Erm30,1064,AF079138,2293-1283,1011,no,no,NA,NA
+125,Aac3-Ib__1065,AGly,Aac3-Ib,Aac3-Ib,1065,L06157,555-1085,531,no,no,NA,NA
+125,Aac3-Ib-Aac6-Ib__1066,AGly,Aac3-Ib,Aac3-Ib-Aac6-Ib,1066,AF355189,1435-2439,1005,no,no,NA,NA
+125,Aac3-If__1067,AGly,Aac3-Ib,Aac3-If,1067,AY884051,61-525,465,no,no,NA,NA
+126,Aph4-Ib__1068,AGly,Aph4-Ib,Aph4-Ib,1068,X03615,232-1230,999,no,no,NA,NA
+127,Aph9-Ia__1069,AGly,Aph9-Ia,Aph9-Ia,1069,U94857,151-1146,996,no,no,NA,NA
+128,CfxA__1070,Bla,CfxA,CfxA,1070,U38243,150-1115,966,no,no,NA,NA
+128,CfxA2__1071,Bla,CfxA,CfxA2,1071,AF504910,1-966,966,no,no,NA,NA
+128,CfxA4__1073,Bla,CfxA,CfxA4,1073,AY769933,1-966,966,no,no,NA,NA
+128,CfxA5__1074,Bla,CfxA,CfxA5,1074,AY769934,28-993,966,no,no,NA,NA
+128,CfxA6__1075,Bla,CfxA,CfxA6,1075,GQ342996,798-1793,996,no,no,NA,NA
+129,VanTm-L__1076,Gly,VanTm-L,VanTm-L,1076,EU250284,2575-3564,990,no,no,NA,NA
+130,CphA1__556,Bla,CphA1,CphA1,556,NC_000918,1270521-1269541,981,no,no,NA,NA
+131,VanH-M__554,Gly,VanH-M,VanH-M,554,FJ349556,3884-4864,981,no,no,NA,NA
+131,VanH-E__555,Gly,VanH-M,VanH-E,555,AF155139,4979-5947,969,no,no,NA,NA
+132,OleC__553,MLS,OleC,OleC,553,L06249,1528-2505,978,no,no,NA,NA
+133,VanH-B__552,Gly,VanH-B,VanH-B,552,AF192329,27871-28842,972,no,no,NA,NA
+134,VanH-D__572,Gly,VanH-D,VanH-D,572,AY082011,4937-5908,972,no,no,NA,NA
+135,VanH-Pt__569,Gly,VanH-Pt,VanH-Pt,569,DQ018710,5109-6077,969,no,no,NA,NA
+135,VanH-Pt2__570,Gly,VanH-Pt,VanH-Pt2,570,AY926880,2771-3739,969,no,no,NA,NA
+135,VanH-A__571,Gly,VanH-Pt,VanH-A,571,M97297,6018-6986,969,no,no,NA,NA
+136,Erm31__568,MLS,Erm31,Erm31,568,AF079138,154-1122,969,no,no,NA,NA
+137,PSE-4__557,Bla,CARB,PSE-4,557,AF313471,1422-2288,867,no,no,NA,NA
+137,CARB-1__558,Bla,CARB,CARB-1,558,D86225,232-1098,867,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-2__559,Bla,CARB,CARB-2,559,HQ157204,747-1613,867,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-3__560,Bla,CARB,CARB-3,560,S46063,122-1036,915,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-4__561,Bla,CARB,CARB-4,561,AY913772,1600-2466,867,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-6__562,Bla,CARB,CARB-6,562,AF030945,96-962,867,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-7__563,Bla,CARB,CARB-7,563,AF409092,888-1754,867,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-9__565,Bla,CARB,CARB-9,565,AY248038,2073-2939,867,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-11__566,Bla,CARB,CARB-11,566,AY008290,1-867,867,no,no,PSE family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+137,CARB-8__1157,Bla,CARB,CARB-8,1157,NG_035647,3623-4489,867,no,no,RTG family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+138,Zn-dependent_hydrolase__574,Bla,Zn-dependent_hydrolase,Zn-dependent_hydrolase,574,NC_010410,882015-882977,963,no,no,NA,NA
+139,ErmS__573,MLS,ErmS,ErmS,573,M19269,460-1419,960,no,no,NA,NA
+140,ErmW__548,MLS,ErmW,ErmW,548,D14532,1039-1974,936,no,no,NA,NA
+141,AST-1__549,Bla,AST-1,AST-1,549,AF279904,160-1092,933,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+142,PME-1__541,Bla,PME-1,PME-1,541,HQ541434,3071-4000,930,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+143,PER-1__542,Bla,PER-1,PER-1,542,EF535600,1-927,927,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+143,PER-2__543,Bla,PER-1,PER-2,543,X93314,278-1204,927,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+143,PER-3__544,Bla,PER-1,PER-3,544,AY740681,7103-8029,927,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+143,PER-4__545,Bla,PER-1,PER-4,545,EU748544,1-927,927,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+143,PER-5__546,Bla,PER-1,PER-5,546,FJ627180,1-926,926,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+143,PER-7__547,Bla,PER-1,PER-7,547,JQ639792,6580-7506,927,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+143,PER-8__1158,Bla,PER-1,PER-8,1158,AB985401,5557-6483,927,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+144,PER-6__539,Bla,PER-6,PER-6,539,HM453327,787-1713,927,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+145,Aph6-Ia__540,AGly,Aph6-Ia,Aph6-Ia,540,AY971801,1-924,924,no,no,NA,NA
+146,Aph6-Ib__536,AGly,Aph-Ib,Aph6-Ib,536,X05648,382-1305,924,no,no,NA,NA
+146,Aph9-Ib__537,AGly,Aph-Ib,Aph9-Ib,537,U70376,3618-4541,924,no,no,NA,NA
+147,CphA2__538,Bla,CphA2,CphA2,538,NC_000918,673738-674661,924,no,no,NA,NA
+148,Aph2''Ic__550,AGly,Aph2''Ic,Aph2''Ic,550,U51479,196-1116,921,no,no,NA,NA
+149,ROB-1__551,Bla,ROB-1,ROB-1,551,AF022114,303-1220,918,no,no,cephalosporin-hydrolyzing class A beta-lactamase,Bla
+150,AER-1__1631,Bla,AER-1,AER-1,1631,U14748,325-1239,915,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+151,AIM-1__1630,Bla,AIM-1,AIM-1,1630,AM998375,1173-2084,912,no,no,subclass B3 metallo-beta-lactamase,Bla
+152,VanY-A__1634,Gly,VanY-A,VanY-A,1634,M97297,9052-9963,912,no,no,NA,NA
+152,VanY-Pt2__1635,Gly,VanY-A,VanY-Pt2,1635,DQ018711,6234-7133,900,no,no,NA,NA
+152,VanY-Pt__1636,Gly,VanY-A,VanY-Pt,1636,AY926880,5831-6721,891,no,no,NA,NA
+153,Ant6-Ia__1633,AGly,Ant6-Ia,Ant6-Ia,1633,X92945,37965-38873,909,no,no,NA,NA
+154,MphB__1639,MLS,MphB,MphB,1639,D85892,1159-2067,909,no,no,NA,NA
+155,Aph2''Id__1637,AGly,Aph2''I,Aph2''Id,1637,AF016483,131-1036,906,no,no,NA,NA
+155,Aph2''Ie__1638,AGly,Aph2''I,Aph2''Ie,1638,AY939911,3536-4441,906,no,no,NA,NA
+156,TLA-1__1641,Bla,TLA-1,TLA-1,1641,GU441460,3220-4125,906,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+157,Erm42__1640,MLS,Erm42,Erm42,1640,FR734406,1-906,906,no,no,NA,NA
+158,MphA__1663,MLS,MphA,MphA,1663,KR091911,890-1795,906,no,no,NA,NA
+159,CTX-M-2__1642,Bla,CTX-M-2,CTX-M-2,1642,EF592570,5803-6678,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-4__1643,Bla,CTX-M-2,CTX-M-4,1643,Y14156,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-5__1644,Bla,CTX-M-2,CTX-M-5,1644,JN003855,132-1007,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-6__1645,Bla,CTX-M-2,CTX-M-6,1645,AJ005044,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-7__1646,Bla,CTX-M-2,CTX-M-7,1646,AJ005045,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-20__1647,Bla,CTX-M-2,CTX-M-20,1647,AJ416344,304-1179,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-31__1648,Bla,CTX-M-2,CTX-M-31,1648,AJ567482,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-35__1649,Bla,CTX-M-2,CTX-M-35,1649,AB176534,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-43__1650,Bla,CTX-M-2,CTX-M-43,1650,HQ734713,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-44__1651,Bla,CTX-M-2,CTX-M-44,1651,D37830,91-966,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-56__1652,Bla,CTX-M-2,CTX-M-56,1652,EF374097,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-59__1653,Bla,CTX-M-2,CTX-M-59,1653,EU622856,6869-7744,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-74__1654,Bla,CTX-M-2,CTX-M-74,1654,GQ149243,1-873,873,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-75__1655,Bla,CTX-M-2,CTX-M-75,1655,GQ149244,1-873,873,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-76__1656,Bla,CTX-M-2,CTX-M-76,1656,AM982520,5549-6424,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-77__1657,Bla,CTX-M-2,CTX-M-77,1657,AM982521,1912-2787,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-92__1658,Bla,CTX-M-2,CTX-M-92,1658,GU127598,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-95__1659,Bla,CTX-M-2,CTX-M-95,1659,FN813245,1912-2787,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-97__1660,Bla,CTX-M-2,CTX-M-97,1660,HM776707,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-124__1661,Bla,CTX-M-2,CTX-M-124,1661,JQ429324,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+159,CTX-M-131__1662,Bla,CTX-M-2,CTX-M-131,1662,JN969893,2534-3406,873,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+160,MAL-1__1445,Bla,MAL-CKO,MAL-1,1445,AJ277209,12-914,903,no,no,MAL/CKO family class A beta-lactamase,Bla
+160,CKO-1__1446,Bla,MAL-CKO,CKO-1,1446,AF477396,1-903,903,no,no,MAL/CKO family class A beta-lactamase,Bla
+161,CEPA-49__1448,Bla,CEPA-85,CEPA-49,1448,U05886,404-1306,903,no,no,NA,NA
+161,CEPA-44__1449,Bla,CEPA-85,CEPA-44,1449,U05885,557-1459,903,no,no,NA,NA
+161,CEPA-29__1450,Bla,CEPA-85,CEPA-29,1450,U05884,556-1458,903,no,no,NA,NA
+161,CEPA-29__1451,Bla,CEPA-85,CEPA-29,1451,FR688019,1-903,903,no,no,NA,NA
+162,Aac3-VIa__1452,AGly,Aac3-VIa,Aac3-VIa,1452,M88012,193-1092,900,no,no,NA,NA
+163,Aph2-Ib__1453,AGly,Aph2-Ib,Aph2-Ib,1453,AF207840,122-1021,900,no,no,NA,NA
+164,SHV-172__1201,Bla,SHV-OKP-LEN,SHV-172,1201,KF513177,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-173__1215,Bla,SHV-OKP-LEN,SHV-173,1215,KF513178,1-861,861,no,no,class A beta-lactamase,Bla
+164,OKP-A-1__1243,Bla,SHV-OKP-LEN,OKP-A-1,1243,AJ635401,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-2__1244,Bla,SHV-OKP-LEN,OKP-A-2,1244,AJ635404,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-3__1245,Bla,SHV-OKP-LEN,OKP-A-3,1245,AM051140,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-4__1246,Bla,SHV-OKP-LEN,OKP-A-4,1246,AM051142,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-5__1247,Bla,SHV-OKP-LEN,OKP-A-5,1247,AM051143,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-6__1248,Bla,SHV-OKP-LEN,OKP-A-6,1248,AM051144,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-7__1249,Bla,SHV-OKP-LEN,OKP-A-7,1249,AM051145,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-8__1250,Bla,SHV-OKP-LEN,OKP-A-8,1250,AM051147,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-9__1251,Bla,SHV-OKP-LEN,OKP-A-9,1251,AM051148,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-10__1252,Bla,SHV-OKP-LEN,OKP-A-10,1252,AM051149,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-11__1253,Bla,SHV-OKP-LEN,OKP-A-11,1253,AM850915,20-880,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-12__1254,Bla,SHV-OKP-LEN,OKP-A-12,1254,AM850916,19-879,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-13__1255,Bla,SHV-OKP-LEN,OKP-A-13,1255,FJ534513,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-14__1256,Bla,SHV-OKP-LEN,OKP-A-14,1256,FJ534512,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-15__1257,Bla,SHV-OKP-LEN,OKP-A-15,1257,FJ755841,1-846,846,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-A-16__1258,Bla,SHV-OKP-LEN,OKP-A-16,1258,FJ755840,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-1__1259,Bla,SHV-OKP-LEN,OKP-B-1,1259,AJ635402,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-2__1260,Bla,SHV-OKP-LEN,OKP-B-2,1260,AM051151,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-3__1261,Bla,SHV-OKP-LEN,OKP-B-3,1261,AM051152,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-4__1262,Bla,SHV-OKP-LEN,OKP-B-4,1262,AM051153,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-5__1263,Bla,SHV-OKP-LEN,OKP-B-5,1263,AY512506,68-928,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-6__1264,Bla,SHV-OKP-LEN,OKP-B-6,1264,AY850171,68-928,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-7__1265,Bla,SHV-OKP-LEN,OKP-B-7,1265,AM051156,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-8__1266,Bla,SHV-OKP-LEN,OKP-B-8,1266,AM051157,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-9__1267,Bla,SHV-OKP-LEN,OKP-B-9,1267,AM051159,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-10__1268,Bla,SHV-OKP-LEN,OKP-B-10,1268,AM051160,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-11__1269,Bla,SHV-OKP-LEN,OKP-B-11,1269,AM051161,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-12__1270,Bla,SHV-OKP-LEN,OKP-B-12,1270,AJ635420,1-789,789,no,no,NA,NA
+164,OKP-B-13__1271,Bla,SHV-OKP-LEN,OKP-B-13,1271,AY825330,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-14__1272,Bla,SHV-OKP-LEN,OKP-B-14,1272,DQ149136,47-907,861,no,no,NA,NA
+164,OKP-B-15__1273,Bla,SHV-OKP-LEN,OKP-B-15,1273,AM850917,18-878,861,no,no,NA,NA
+164,OKP-B-16__1274,Bla,SHV-OKP-LEN,OKP-B-16,1274,AM850918,25-885,861,no,no,NA,NA
+164,OKP-B-17__1275,Bla,SHV-OKP-LEN,OKP-B-17,1275,AM850919,25-885,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-18__1276,Bla,SHV-OKP-LEN,OKP-B-18,1276,AM850920,41-901,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-19__1277,Bla,SHV-OKP-LEN,OKP-B-19,1277,AM850921,25-885,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,OKP-B-20__1278,Bla,SHV-OKP-LEN,OKP-B-20,1278,AM850922,25-885,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-1__1279,Bla,SHV-OKP-LEN,SHV-1,1279,AF148850,6-867,862,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-2__1280,Bla,SHV-OKP-LEN,SHV-2,1280,AF148851,6-867,862,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV2A-kp__1281,Bla,SHV-OKP-LEN,SHV2A-kp,1281,X62115,1281-2141,861,no,no,NA,NA
+164,SHV-2a__1282,Bla,SHV-OKP-LEN,SHV-2a,1282,X98102,74-934,861,no,no,NA,NA
+164,SHV-5__1283,Bla,SHV-OKP-LEN,SHV-5,1283,X55640,112-972,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-6__1284,Bla,SHV-OKP-LEN,SHV-6,1284,Y11069,1-780,780,no,no,NA,NA
+164,SHV-7__1285,Bla,SHV-OKP-LEN,SHV-7,1285,U20270,125-985,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-8__1286,Bla,SHV-OKP-LEN,SHV-8,1286,U92041,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-11__1287,Bla,SHV-OKP-LEN,SHV-11,1287,HM751098,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-12__1288,Bla,SHV-OKP-LEN,SHV-12,1288,FJ685654,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-13__1289,Bla,SHV-OKP-LEN,SHV-13,1289,AF164577,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-14__1290,Bla,SHV-OKP-LEN,SHV-14,1290,AF226622,55-915,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-15__1291,Bla,SHV-OKP-LEN,SHV-15,1291,AJ011428,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-16__1292,Bla,SHV-OKP-LEN,SHV-16,1292,AF072684,118-993,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-18__1293,Bla,SHV-OKP-LEN,SHV-18,1293,EU684753,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-24__1294,Bla,SHV-OKP-LEN,SHV-24,1294,AB023477,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-25__1295,Bla,SHV-OKP-LEN,SHV-25,1295,AF208796,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-26__1296,Bla,SHV-OKP-LEN,SHV-26,1296,AF227204,74-934,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+164,SHV-27__1297,Bla,SHV-OKP-LEN,SHV-27,1297,FJ685656,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-28__1298,Bla,SHV-OKP-LEN,SHV-28,1298,EU441172,57-917,861,no,no,class A beta-lactamase,Bla
+164,SHV-29__1299,Bla,SHV-OKP-LEN,SHV-29,1299,AF301532,8-868,861,no,no,class A beta-lactamase,Bla
+164,SHV-30__1300,Bla,SHV-OKP-LEN,SHV-30,1300,AY661885,49-909,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-31__1301,Bla,SHV-OKP-LEN,SHV-31,1301,GU064396,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-32__1302,Bla,SHV-OKP-LEN,SHV-32,1302,AY037778,92-952,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-33__1303,Bla,SHV-OKP-LEN,SHV-33,1303,AY037779,89-949,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-34__1304,Bla,SHV-OKP-LEN,SHV-34,1304,AY036620,89-949,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-35__1305,Bla,SHV-OKP-LEN,SHV-35,1305,AY070258,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-36__1306,Bla,SHV-OKP-LEN,SHV-36,1306,AF467947,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-37__1307,Bla,SHV-OKP-LEN,SHV-37,1307,AF467948,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-38__1308,Bla,SHV-OKP-LEN,SHV-38,1308,GQ407124,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-39__1309,Bla,SHV-OKP-LEN,SHV-39,1309,AY150585,1-285,285,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-40__1310,Bla,SHV-OKP-LEN,SHV-40,1310,AF535128,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-41__1311,Bla,SHV-OKP-LEN,SHV-41,1311,AF535129,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-42__1312,Bla,SHV-OKP-LEN,SHV-42,1312,AF535130,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-43__1313,Bla,SHV-OKP-LEN,SHV-43,1313,AY065991,7-867,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-44__1314,Bla,SHV-OKP-LEN,SHV-44,1314,AY259119,117-977,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-45__1315,Bla,SHV-OKP-LEN,SHV-45,1315,HQ877612,1-715,715,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-46__1316,Bla,SHV-OKP-LEN,SHV-46,1316,AY210887,112-972,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-48__1317,Bla,SHV-OKP-LEN,SHV-48,1317,AY263404,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-49__1318,Bla,SHV-OKP-LEN,SHV-49,1318,AY528718,414-1274,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+164,SHV-50__1319,Bla,SHV-OKP-LEN,SHV-50,1319,AY288915,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-51__1320,Bla,SHV-OKP-LEN,SHV-51,1320,AY289548,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-52__1321,Bla,SHV-OKP-LEN,SHV-52,1321,HQ845196,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-53__1322,Bla,SHV-OKP-LEN,SHV-53,1322,AY590467,1-729,729,no,no,class A beta-lactamase,Bla
+164,SHV-55__1323,Bla,SHV-OKP-LEN,SHV-55,1323,HQ877613,1-715,715,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-56__1324,Bla,SHV-OKP-LEN,SHV-56,1324,AY352599,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+164,SHV-57__1325,Bla,SHV-OKP-LEN,SHV-57,1325,AY223863,171-1031,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-59__1326,Bla,SHV-OKP-LEN,SHV-59,1326,AY790341,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-60__1327,Bla,SHV-OKP-LEN,SHV-60,1327,AJ866283,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-61__1328,Bla,SHV-OKP-LEN,SHV-61,1328,AJ866284,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-62__1329,Bla,SHV-OKP-LEN,SHV-62,1329,AJ866285,1-837,837,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-63__1330,Bla,SHV-OKP-LEN,SHV-63,1330,EU342351,173-1033,861,no,no,class A beta-lactamase,Bla
+164,SHV-64__1331,Bla,SHV-OKP-LEN,SHV-64,1331,DQ174304,5-865,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-65__1332,Bla,SHV-OKP-LEN,SHV-65,1332,DQ174305,5-865,861,no,no,class A beta-lactamase,Bla
+164,SHV-66__1333,Bla,SHV-OKP-LEN,SHV-66,1333,DQ174306,5-865,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-67__1334,Bla,SHV-OKP-LEN,SHV-67,1334,DQ174307,5-865,861,no,no,class A beta-lactamase,Bla
+164,SHV-69__1335,Bla,SHV-OKP-LEN,SHV-69,1335,DQ174308,5-865,861,no,no,class A beta-lactamase,Bla
+164,SHV-70__1336,Bla,SHV-OKP-LEN,SHV-70,1336,DQ013287,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-71__1337,Bla,SHV-OKP-LEN,SHV-71,1337,AM176546,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-72__1338,Bla,SHV-OKP-LEN,SHV-72,1338,AM176547,31-891,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+164,SHV-73__1339,Bla,SHV-OKP-LEN,SHV-73,1339,AM176548,17-874,858,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-74__1340,Bla,SHV-OKP-LEN,SHV-74,1340,AM176549,31-891,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-75__1341,Bla,SHV-OKP-LEN,SHV-75,1341,AM176550,31-891,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-76__1342,Bla,SHV-OKP-LEN,SHV-76,1342,AM176551,31-891,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-77__1343,Bla,SHV-OKP-LEN,SHV-77,1343,AM176552,31-891,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-78__1344,Bla,SHV-OKP-LEN,SHV-78,1344,FJ685658,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-79__1345,Bla,SHV-OKP-LEN,SHV-79,1345,AM176554,31-891,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-80__1346,Bla,SHV-OKP-LEN,SHV-80,1346,AM176555,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-81__1347,Bla,SHV-OKP-LEN,SHV-81,1347,AM176556,26-886,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-82__1348,Bla,SHV-OKP-LEN,SHV-82,1348,AM176557,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-178__1349,Bla,SHV-OKP-LEN,SHV-178,1349,KF705209,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-84__1350,Bla,SHV-OKP-LEN,SHV-84,1350,AM087453,26-856,831,no,no,NA,NA
+164,SHV-85__1351,Bla,SHV-OKP-LEN,SHV-85,1351,DQ322460,16-876,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-86__1352,Bla,SHV-OKP-LEN,SHV-86,1352,DQ328802,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-89__1353,Bla,SHV-OKP-LEN,SHV-89,1353,DQ193536,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-92__1354,Bla,SHV-OKP-LEN,SHV-92,1354,DQ836922,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-93__1355,Bla,SHV-OKP-LEN,SHV-93,1355,EF373969,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-94__1356,Bla,SHV-OKP-LEN,SHV-94,1356,EF373970,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-95__1357,Bla,SHV-OKP-LEN,SHV-95,1357,EF373972,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-96__1358,Bla,SHV-OKP-LEN,SHV-96,1358,EF373971,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-97__1359,Bla,SHV-OKP-LEN,SHV-97,1359,EF373973,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-98__1360,Bla,SHV-OKP-LEN,SHV-98,1360,AM922304,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-99__1361,Bla,SHV-OKP-LEN,SHV-99,1361,AM922305,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-100__1362,Bla,SHV-OKP-LEN,SHV-100,1362,AM922306,1-900,900,no,no,class A beta-lactamase,Bla
+164,SHV-101__1363,Bla,SHV-OKP-LEN,SHV-101,1363,EU155018,1-861,861,no,no,class A beta-lactamase extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-102__1364,Bla,SHV-OKP-LEN,SHV-102,1364,EU024485,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-103__1365,Bla,SHV-OKP-LEN,SHV-103,1365,EU032604,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-104__1366,Bla,SHV-OKP-LEN,SHV-104,1366,EU274581,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-105__1367,Bla,SHV-OKP-LEN,SHV-105,1367,FJ194944,47-907,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-106__1368,Bla,SHV-OKP-LEN,SHV-106,1368,AM941847,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-107__1369,Bla,SHV-OKP-LEN,SHV-107,1369,AM941848,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+164,SHV-108__1370,Bla,SHV-OKP-LEN,SHV-108,1370,AM941849,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-109__1371,Bla,SHV-OKP-LEN,SHV-109,1371,EU418913,17-877,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-110__1372,Bla,SHV-OKP-LEN,SHV-110,1372,HQ877614,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-120__1373,Bla,SHV-OKP-LEN,SHV-120,1373,JF812965,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-121__1374,Bla,SHV-OKP-LEN,SHV-121,1374,AB538449,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-122__1375,Bla,SHV-OKP-LEN,SHV-122,1375,GQ290211,515-1,515,no,no,class A beta-lactamase,Bla
+164,SHV-128__1376,Bla,SHV-OKP-LEN,SHV-128,1376,GU932590,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-179__1377,Bla,SHV-OKP-LEN,SHV-179,1377,KF705208,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-132__1378,Bla,SHV-OKP-LEN,SHV-132,1378,GU981741,1654-794,861,no,no,class A beta-lactamase,Bla
+164,SHV-133__1379,Bla,SHV-OKP-LEN,SHV-133,1379,AB551737,15-875,861,no,no,class A beta-lactamase,Bla
+164,SHV-134__1380,Bla,SHV-OKP-LEN,SHV-134,1380,HM559945,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-135__1381,Bla,SHV-OKP-LEN,SHV-135,1381,HQ637576,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-181__1382,Bla,SHV-OKP-LEN,SHV-181,1382,KP050488,1-861,861,no,no,NA,NA
+164,SHV-137__1383,Bla,SHV-OKP-LEN,SHV-137,1383,HQ661363,72-932,861,no,no,class A beta-lactamase,Bla
+164,SHV-140__1384,Bla,SHV-OKP-LEN,SHV-140,1384,JN051143,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-141__1385,Bla,SHV-OKP-LEN,SHV-141,1385,JQ388884,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+164,SHV-142__1386,Bla,SHV-OKP-LEN,SHV-142,1386,JQ029959,29-889,861,no,no,class A beta-lactamase,Bla
+164,SHV-143__1387,Bla,SHV-OKP-LEN,SHV-143,1387,JQ341060,1742-882,861,no,no,class A beta-lactamase,Bla
+164,SHV-144__1388,Bla,SHV-OKP-LEN,SHV-144,1388,JQ926986,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-145__1389,Bla,SHV-OKP-LEN,SHV-145,1389,JX013655,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-147__1390,Bla,SHV-OKP-LEN,SHV-147,1390,JX121114,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-148__1391,Bla,SHV-OKP-LEN,SHV-148,1391,JX121115,1-858,858,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-149__1392,Bla,SHV-OKP-LEN,SHV-149,1392,JX121116,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-150__1393,Bla,SHV-OKP-LEN,SHV-150,1393,JX121117,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-151__1394,Bla,SHV-OKP-LEN,SHV-151,1394,JX121118,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-152__1395,Bla,SHV-OKP-LEN,SHV-152,1395,JX121119,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-153__1396,Bla,SHV-OKP-LEN,SHV-153,1396,JX121120,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-154__1397,Bla,SHV-OKP-LEN,SHV-154,1397,JX121121,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-155__1398,Bla,SHV-OKP-LEN,SHV-155,1398,JX121122,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-156__1399,Bla,SHV-OKP-LEN,SHV-156,1399,JX121123,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-157__1400,Bla,SHV-OKP-LEN,SHV-157,1400,JX121124,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-158__1401,Bla,SHV-OKP-LEN,SHV-158,1401,JX121125,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-159__1402,Bla,SHV-OKP-LEN,SHV-159,1402,JX121126,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-160__1403,Bla,SHV-OKP-LEN,SHV-160,1403,JX121127,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-161__1404,Bla,SHV-OKP-LEN,SHV-161,1404,JX121128,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-162__1405,Bla,SHV-OKP-LEN,SHV-162,1405,JX121129,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-163__1406,Bla,SHV-OKP-LEN,SHV-163,1406,JX121130,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-165__1407,Bla,SHV-OKP-LEN,SHV-165,1407,JX121131,1-858,858,no,no,class A beta-lactamase,Bla
+164,SHV-167__1408,Bla,SHV-OKP-LEN,SHV-167,1408,AB733453,4-849,846,no,no,class A beta-lactamase,Bla
+164,SHV-168__1409,Bla,SHV-OKP-LEN,SHV-168,1409,JX870080,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-1__1410,Bla,SHV-OKP-LEN,LEN-1,1410,X04515,286-1125,840,no,no,class A beta-lactamase,Bla
+164,LEN-2__1411,Bla,SHV-OKP-LEN,LEN-2,1411,AY037780,89-949,861,no,no,class A beta-lactamase,Bla
+164,LEN-3__1412,Bla,SHV-OKP-LEN,LEN-3,1412,AY130286,1-823,823,no,no,NA,NA
+164,LEN-4__1413,Bla,SHV-OKP-LEN,LEN-4,1413,AY130287,1-823,823,no,no,NA,NA
+164,LEN-5__1414,Bla,SHV-OKP-LEN,LEN-5,1414,AY633109,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-6__1415,Bla,SHV-OKP-LEN,LEN-6,1415,AY265890,1-472,472,no,no,NA,NA
+164,LEN-7__1416,Bla,SHV-OKP-LEN,LEN-7,1416,AJ635425,1-789,789,no,no,class A beta-lactamase,Bla
+164,LEN-8__1417,Bla,SHV-OKP-LEN,LEN-8,1417,AJ635424,1-789,789,no,no,class A beta-lactamase,Bla
+164,LEN-9__1418,Bla,SHV-OKP-LEN,LEN-9,1418,AJ635423,1-789,789,no,no,class A beta-lactamase,Bla
+164,LEN-10__1419,Bla,SHV-OKP-LEN,LEN-10,1419,AJ635419,1-789,789,no,no,class A beta-lactamase,Bla
+164,LEN-11__1420,Bla,SHV-OKP-LEN,LEN-11,1420,AJ635417,1-789,789,no,no,class A beta-lactamase,Bla
+164,LEN-12__1421,Bla,SHV-OKP-LEN,LEN-12,1421,AJ635406,1-789,789,no,no,NA,NA
+164,LEN-13__1422,Bla,SHV-OKP-LEN,LEN-13,1422,AJ635403,1-789,789,no,no,class A beta-lactamase,Bla
+164,SHV-182__1423,Bla,SHV-OKP-LEN,SHV-182,1423,KP050489,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-15__1424,Bla,SHV-OKP-LEN,LEN-15,1424,AF452105,1-840,840,no,no,class A beta-lactamase,Bla
+164,LEN-16__1425,Bla,SHV-OKP-LEN,LEN-16,1425,AY743416,68-928,861,no,no,class A beta-lactamase,Bla
+164,LEN-17__1426,Bla,SHV-OKP-LEN,LEN-17,1426,DQ149134,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-18__1427,Bla,SHV-OKP-LEN,LEN-18,1427,AM850908,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-19__1428,Bla,SHV-OKP-LEN,LEN-19,1428,AM850909,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-20__1429,Bla,SHV-OKP-LEN,LEN-20,1429,AM850910,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-21__1430,Bla,SHV-OKP-LEN,LEN-21,1430,AM850911,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-22__1431,Bla,SHV-OKP-LEN,LEN-22,1431,AM850912,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-23__1432,Bla,SHV-OKP-LEN,LEN-23,1432,AM850913,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-24__1433,Bla,SHV-OKP-LEN,LEN-24,1433,AM850914,1-891,891,no,no,class A beta-lactamase,Bla
+164,LEN-25__1434,Bla,SHV-OKP-LEN,LEN-25,1434,HQ709169,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-183__1447,Bla,SHV-OKP-LEN,SHV-183,1447,HG934764,1-864,864,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+164,SHV-185__1474,Bla,SHV-OKP-LEN,SHV-185,1474,KM233164,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-186__1487,Bla,SHV-OKP-LEN,SHV-186,1487,KM233165,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-187__1549,Bla,SHV-OKP-LEN,SHV-187,1549,LN515533,1-867,867,no,no,class A beta-lactamase,Bla
+164,SHV-188__1557,Bla,SHV-OKP-LEN,SHV-188,1557,LN515534,1-873,873,no,no,class A beta-lactamase Hydrolyses beta-lactam antibiotics extended spectrum,Bla_ESBL
+164,SHV-189__1561,Bla,SHV-OKP-LEN,SHV-189,1561,KP050494,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-190__1604,Bla,SHV-OKP-LEN,SHV-190,1604,KP868753,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-191__1632,Bla,SHV-OKP-LEN,SHV-191,1632,KP868754,1-861,861,no,no,class A beta-lactamase,Bla
+164,SHV-193__1689,Bla,SHV-OKP-LEN,SHV-193,1689,KR347170,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-26__1690,Bla,SHV-OKP-LEN,LEN-26,1690,JX124390,1-861,861,no,no,class A beta-lactamase,Bla
+164,LEN-35__1691,Bla,SHV-OKP-LEN,LEN-35,1691,KR738737,1-861,861,no,no,NA,NA
+164,LEN-36__1692,Bla,SHV-OKP-LEN,LEN-36,1692,KR738738,1-861,861,no,no,NA,NA
+164,LEN-37__1693,Bla,SHV-OKP-LEN,LEN-37,1693,KR738739,1-861,861,no,no,NA,NA
+165,VEB-1__1435,Bla,VEB-1,VEB-1,1435,NC_010410,3661636-3660737,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-2__1436,Bla,VEB-1,VEB-2,1436,AY027870,47-946,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-3__1437,Bla,VEB-1,VEB-3,1437,AY536519,38-937,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-4__1438,Bla,VEB-1,VEB-4,1438,EF136375,1-900,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-5__1439,Bla,VEB-1,VEB-5,1439,EF420108,38-937,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-6__1440,Bla,VEB-1,VEB-6,1440,EU259884,7311-6412,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-7__1441,Bla,VEB-1,VEB-7,1441,FJ825622,1-900,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-8__1442,Bla,VEB-1,VEB-8,1442,JX679208,1-900,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-1a__1694,Bla,VEB-1,VEB-1a,1694,AF324833,1-900,900,no,no,NA,NA
+165,VEB-1b__1695,Bla,VEB-1,VEB-1b,1695,AF324834,1-900,900,no,no,NA,NA
+165,VEB-11__1696,Bla,VEB-1,VEB-11,1696,KP681692,1-900,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+165,VEB-12__1697,Bla,VEB-1,VEB-12,1697,KP681693,1-900,900,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+166,ErmH__1443,MLS,ErmH,ErmH,1443,M16503,244-1143,900,no,no,NA,NA
+167,MphC__1444,MLS,MphC,MphC,1444,AF167161,5665-6564,900,no,no,NA,NA
+168,VgbA__1241,MLS,VgbA,VgbA,1241,AF117258,3768-2869,900,no,no,NA,NA
+169,HugA__1242,Bla,HugA2,HugA,1242,AF324468,1221-2117,897,no,no,NA,NA
+170,CARB-5__782,Bla,CARB-5,CARB-5,782,AF135373,12-908,897,no,no,RTG family carbenicillin-hydrolyzing class A beta-lactamase,Bla
+170,CARB-10__783,Bla,CARB-5,CARB-10,783,EU850412,2270-3166,897,no,no,RTG family carbenicillin-hydrolyzing class A extended-spectrum beta-lactamase,Bla_ESBL
+170,CARB-8_OU__1698,Bla,CARB-5,CARB-8_OU,1698,AY178993,575-1471,897,no,no,NA,NA
+171,FAR-1__781,Bla,FAR-1,FAR-1,781,AF024601,303-1196,894,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+172,Lut-1__780,Bla,Lut-1,Lut-1,780,AY695112,1-891,891,no,no,NA,NA
+173,AadE-Pp__778,AGly,AadE-K,AadE-Pp,778,HE577054,1299623-1300477,855,no,no,NA,NA
+173,AadK-Pm__779,AGly,AadE-K,AadK-Pm,779,CP002869,4442322-4441435,888,no,no,NA,NA
+174,SED-1__777,Bla,SED-1,SED-1,777,AF321608,1-888,888,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+175,RAHN-1__775,Bla,RAHN-1,RAHN-1,775,AF338038,4685-5572,888,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+175,RAHN-2__776,Bla,RAHN-1,RAHN-2,776,HM114350,377-1264,888,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+176,L-1__774,Bla,L-1,L-1,774,AJ272109,1-888,888,no,no,NA,NA
+177,FONA-1__768,Bla,FONA-1,FONA-1,768,AJ251239,1054-1941,888,no,no,class A beta-lactamase,Bla
+177,FONA-2__769,Bla,FONA-1,FONA-2,769,AJ251240,1054-1941,888,no,no,class A beta-lactamase,Bla
+177,FONA-3__770,Bla,FONA-1,FONA-3,770,AJ251241,1054-1941,888,no,no,class A beta-lactamase,Bla
+177,FONA-4__771,Bla,FONA-1,FONA-4,771,AJ251242,1054-1941,888,no,no,class A beta-lactamase,Bla
+177,FONA-5__772,Bla,FONA-1,FONA-5,772,AJ251243,1054-1941,888,no,no,class A beta-lactamase,Bla
+177,FONA-6__773,Bla,FONA-1,FONA-6,773,AJ251244,1054-1941,888,no,no,class A beta-lactamase,Bla
+178,CME-1__767,Bla,CME-1,CME-1,767,AJ006275,72-959,888,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+179,VgbB__766,MLS,VgbB,VgbB,766,AF015628,399-1286,888,no,no,NA,NA
+180,BlaA__789,Bla,BlaA,BlaA,789,CP003048,775069-774185,885,no,no,NA,NA
+181,BIC-1__790,Bla,BIC-1,BIC-1,790,GQ260093,1-885,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+182,SME-1__785,Bla,SME-1,SME-1,785,Z28968,128-1012,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+182,SME-2__786,Bla,SME-1,SME-2,786,AF275256,1-885,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+182,SME-3__787,Bla,SME-1,SME-3,787,AY584237,124-1008,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+182,SME-4__1699,Bla,SME-1,SME-4,1699,KF481967,1-885,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+182,SME-5__1700,Bla,SME-1,SME-5,1700,KJ188748,1-885,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+183,MphE__788,MLS,MphE,MphE,788,JF769133,8777-9661,885,no,no,NA,NA
+184,KPC-1__796,Bla,KPC-1,KPC-1,796,AF297554,131-1012,882,no,no,NA,NA
+184,KPC-2__797,Bla,KPC-1,KPC-2,797,JN048642,1227-2108,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-3__798,Bla,KPC-1,KPC-3,798,JN255861,139-1020,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-4__799,Bla,KPC-1,KPC-4,799,FJ473382,364-1245,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-5__800,Bla,KPC-1,KPC-5,800,EU400222,2160-3041,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-6__801,Bla,KPC-1,KPC-6,801,EU555534,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-7__802,Bla,KPC-1,KPC-7,802,EU729727,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-8__803,Bla,KPC-1,KPC-8,803,FJ234412,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-9__804,Bla,KPC-1,KPC-9,804,FJ624872,1-854,854,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-10__805,Bla,KPC-1,KPC-10,805,GQ140348,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-11__806,Bla,KPC-1,KPC-11,806,HM066995,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-12__807,Bla,KPC-1,KPC-12,807,HQ342889,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-13__808,Bla,KPC-1,KPC-13,808,HQ342890,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-14__809,Bla,KPC-1,KPC-14,809,JX524191,396-1271,876,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-15__810,Bla,KPC-1,KPC-15,810,KC433553,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-16__1701,Bla,KPC-1,KPC-16,1701,KC465199,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-17__1702,Bla,KPC-1,KPC-17,1702,KC465200,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-19__1703,Bla,KPC-1,KPC-19,1703,KJ775801,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-22__1704,Bla,KPC-1,KPC-22,1704,KM379100,1-882,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+184,KPC-24__1705,Bla,KPC-1,KPC-24,1705,KR052099,5212-6093,882,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+185,ERP-1__811,Bla,ERP-1,ERP-1,811,AY077733,1-882,882,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+186,VanYF-Pp__791,Gly,VanYF-Pp,VanYF-Pp,791,AF155139,3397-4278,882,no,no,NA,NA
+187,IMI-1__792,Bla,IMI,IMI-1,792,U50278,1264-2142,879,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+187,IMI-2__793,Bla,IMI,IMI-2,793,JN412066,2891-3769,879,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+187,IMI-3__794,Bla,IMI,IMI-3,794,GU015024,1-879,879,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+187,NMC-A__795,Bla,IMI,NMC-A,795,Z21956,1221-2099,879,no,no,IMI family carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+187,IMI-4__1706,Bla,IMI,IMI-4,1706,KF958750,1-879,879,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+187,IMI-7__1707,Bla,IMI,IMI-7,1707,KM103296,1-879,879,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+187,IMI-8__1708,Bla,IMI,IMI-8,1708,KP081315,1-879,879,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+188,GOB-1__812,Bla,GOB-1,GOB-1,812,AF090141,243-1115,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-2__813,Bla,GOB-1,GOB-2,813,AF189296,1-756,756,no,no,NA,NA
+188,GOB-3__814,Bla,GOB-1,GOB-3,814,AF189291,1-756,756,no,no,NA,NA
+188,GOB-4__815,Bla,GOB-1,GOB-4,815,AF189293,1-756,756,no,no,NA,NA
+188,GOB-5__816,Bla,GOB-1,GOB-5,816,AF189290,1-756,756,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-6__817,Bla,GOB-1,GOB-6,817,AF189292,1-756,756,no,no,NA,NA
+188,GOB-7__818,Bla,GOB-1,GOB-7,818,AF189297,1-756,756,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-8__819,Bla,GOB-1,GOB-8,819,AY348327,1-873,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-9__820,Bla,GOB-1,GOB-9,820,AY647246,1-873,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-10__821,Bla,GOB-1,GOB-10,821,AY647247,1-873,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-11__822,Bla,GOB-1,GOB-11,822,AY647248,1-879,879,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-12__823,Bla,GOB-1,GOB-12,823,AY647249,1-873,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-13__824,Bla,GOB-1,GOB-13,824,AY647250,1-879,879,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-14__825,Bla,GOB-1,GOB-14,825,AY647252,1-879,879,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-15__826,Bla,GOB-1,GOB-15,826,AY775547,1-879,879,no,no,subclass B3 metallo-beta-lactamase,Bla
+188,GOB-18__827,Bla,GOB-1,GOB-18,827,DQ004496,1-873,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+189,BES-1__828,Bla,BES-1,BES-1,828,AF234999,190-1068,879,no,no,class A extended spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-9__100,Bla,CTX-M-9,CTX-M-9,100,AM040708,5582-6457,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-14__102,Bla,CTX-M-9,CTX-M-14,102,AF252622,1741-2616,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-16__103,Bla,CTX-M-9,CTX-M-16,103,AY029068,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-17__104,Bla,CTX-M-9,CTX-M-17,104,AY033516,2836-3711,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-19__106,Bla,CTX-M-9,CTX-M-19,106,AF325134,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-21__107,Bla,CTX-M-9,CTX-M-21,107,AJ416346,557-1432,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-24__108,Bla,CTX-M-9,CTX-M-24,108,AY143430,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-27__109,Bla,CTX-M-9,CTX-M-27,109,AY156923,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-45__110,Bla,CTX-M-9,CTX-M-45,110,D89862,112-981,870,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-46__111,Bla,CTX-M-9,CTX-M-46,111,AY847147,82-957,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-47__112,Bla,CTX-M-9,CTX-M-47,112,AY847143,83-958,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-48__113,Bla,CTX-M-9,CTX-M-48,113,AY847144,82-957,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-49__114,Bla,CTX-M-9,CTX-M-49,114,AY847145,82-957,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-50__115,Bla,CTX-M-9,CTX-M-50,115,AY847146,83-958,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-51__116,Bla,CTX-M-9,CTX-M-51,116,DQ211987,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-65__117,Bla,CTX-M-9,CTX-M-65,117,EF418608,10-885,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-67__118,Bla,CTX-M-9,CTX-M-67,118,EF581888,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-81__119,Bla,CTX-M-9,CTX-M-81,119,EU136031,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-82__120,Bla,CTX-M-9,CTX-M-82,120,EU545409,81-956,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-83__121,Bla,CTX-M-9,CTX-M-83,121,FJ214366,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-84__122,Bla,CTX-M-9,CTX-M-84,122,FJ214367,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-85__123,Bla,CTX-M-9,CTX-M-85,123,FJ214368,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-86__124,Bla,CTX-M-9,CTX-M-86,124,FJ214369,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-90__126,Bla,CTX-M-9,CTX-M-90,126,FJ907381,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-93__127,Bla,CTX-M-9,CTX-M-93,127,HQ166709,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-98__128,Bla,CTX-M-9,CTX-M-98,128,HQ637575,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-99__129,Bla,CTX-M-9,CTX-M-99,129,HM803271,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-102__130,Bla,CTX-M-9,CTX-M-102,130,HQ398215,245-1120,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-104__131,Bla,CTX-M-9,CTX-M-104,131,HQ833652,236-1111,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-105__132,Bla,CTX-M-9,CTX-M-105,132,HQ833651,245-1120,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-106__133,Bla,CTX-M-9,CTX-M-106,133,HQ913565,1-870,870,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-110__134,Bla,CTX-M-9,CTX-M-110,134,JF274242,1-877,877,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-111__135,Bla,CTX-M-9,CTX-M-111,135,JF274243,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-112__136,Bla,CTX-M-9,CTX-M-112,136,JF274246,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-113__137,Bla,CTX-M-9,CTX-M-113,137,JF274247,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-121__138,Bla,CTX-M-9,CTX-M-121,138,JN790862,245-1120,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-122__139,Bla,CTX-M-9,CTX-M-122,139,JN790863,233-1108,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-125__140,Bla,CTX-M-9,CTX-M-125,140,JQ724542,175-1050,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-126__141,Bla,CTX-M-9,CTX-M-126,141,AB703103,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-129__142,Bla,CTX-M-9,CTX-M-129,142,JX017364,239-1114,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-130__143,Bla,CTX-M-9,CTX-M-130,143,JX017365,245-1120,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+190,CTX-M-134__144,Bla,CTX-M-9,CTX-M-134,144,JX896165,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+191,SFO-1__99,Bla,SFO-1,SFO-1,99,FJ848785,5594-4719,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+192,OXY1-1__194,Bla,OXY,OXY1-1,194,Z30177,349-1224,876,no,no,NA,NA
+192,OXY1-2__195,Bla,OXY,OXY1-2,195,AJ871865,1-876,876,no,no,NA,NA
+192,OXY1-3__196,Bla,OXY,OXY1-3,196,AY077482,162-1037,876,no,no,NA,NA
+192,OXY1-4__197,Bla,OXY,OXY1-4,197,AY077483,183-1055,873,no,no,NA,NA
+192,OXY1-5__198,Bla,OXY,OXY1-5,198,AY077486,181-1056,876,no,no,NA,NA
+192,OXY1a__199,Bla,OXY,OXY1a,199,Y17715,147-1022,876,no,no,NA,NA
+192,OXY2-1__200,Bla,OXY,OXY2-1,200,AJ871866,1-873,873,no,no,NA,NA
+192,OXY2-2__201,Bla,OXY,OXY2-2,201,AJ871867,1-873,873,no,no,NA,NA
+192,OXY2-3__202,Bla,OXY,OXY2-3,202,AY077488,162-1031,870,no,no,NA,NA
+192,OXY2-4__203,Bla,OXY,OXY2-4,203,Y17714,147-1016,870,no,no,NA,NA
+192,OXY2-5__204,Bla,OXY,OXY2-5,204,AY077487,180-1049,870,no,no,NA,NA
+192,OXY2-6__205,Bla,OXY,OXY2-6,205,AY077485,184-1056,873,no,no,NA,NA
+192,OXY2-7__206,Bla,OXY,OXY2-7,206,Z49084,312-1184,873,no,no,NA,NA
+192,OXY2-8__207,Bla,OXY,OXY2-8,207,AY055205,182-1054,873,no,no,NA,NA
+192,OXY2-9__208,Bla,OXY,OXY2-9,208,FJ785625,132-1001,870,no,no,NA,NA
+192,OXY2-10__209,Bla,OXY,OXY2-10,209,FJ785626,132-1004,873,no,no,NA,NA
+192,OXY3-1__210,Bla,OXY,OXY3-1,210,AF491278,184-1050,867,no,no,NA,NA
+192,OXY4-1__211,Bla,OXY,OXY4-1,211,AY077481,186-1058,873,no,no,NA,NA
+192,OXY5-1__212,Bla,OXY,OXY5-1,212,AJ871868,1-873,873,no,no,NA,NA
+192,OXY5-2__213,Bla,OXY,OXY5-2,213,AJ871871,1-873,873,no,no,NA,NA
+192,OXY6-1__214,Bla,OXY,OXY6-1,214,AJ871873,1-876,876,no,no,NA,NA
+192,OXY6-2__215,Bla,OXY,OXY6-2,215,AJ871875,1-873,873,no,no,NA,NA
+192,OXY6-3__216,Bla,OXY,OXY6-3,216,AJ871876,1-876,876,no,no,NA,NA
+192,OXY6-4__217,Bla,OXY,OXY6-4,217,AJ871877,1-876,876,no,no,NA,NA
+193,CTX-M-1__145,Bla,CTX-M-1,CTX-M-1,145,X92506,63-938,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-3__146,Bla,CTX-M-1,CTX-M-3,146,Y10278,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-10__147,Bla,CTX-M-1,CTX-M-10,147,AF255298,1-873,873,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-11__148,Bla,CTX-M-1,CTX-M-11,148,AY005110,1-846,846,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-12__149,Bla,CTX-M-1,CTX-M-12,149,AY293073,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-15__150,Bla,CTX-M-1,CTX-M-15,150,JX424423,108985-108110,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-22__151,Bla,CTX-M-1,CTX-M-22,151,AY080894,4-879,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-23__152,Bla,CTX-M-1,CTX-M-23,152,AF488377,63-938,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-28__153,Bla,CTX-M-1,CTX-M-28,153,AJ549244,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-29__154,Bla,CTX-M-1,CTX-M-29,154,AY267213,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-30__155,Bla,CTX-M-1,CTX-M-30,155,AY292654,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-32__156,Bla,CTX-M-1,CTX-M-32,156,AJ557142,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-33__157,Bla,CTX-M-1,CTX-M-33,157,AY238472,888-13,876,no,no,class A extended-spectrum beta-lactamase,Bla_Carb
+193,CTX-M-34__158,Bla,CTX-M-1,CTX-M-34,158,AY515297,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-36__159,Bla,CTX-M-1,CTX-M-36,159,AB177384,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-37__160,Bla,CTX-M-1,CTX-M-37,160,AY649755,1641-2516,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-38__161,Bla,CTX-M-1,CTX-M-38,161,AY753197,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-42__162,Bla,CTX-M-1,CTX-M-42,162,DQ061159,347-1222,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-52__163,Bla,CTX-M-1,CTX-M-52,163,GU125667,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-53__164,Bla,CTX-M-1,CTX-M-53,164,NC_011604,5892-6767,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-54__165,Bla,CTX-M-1,CTX-M-54,165,DQ303459,2175-3050,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-55__166,Bla,CTX-M-1,CTX-M-55,166,HM748991,321-1196,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-58__168,Bla,CTX-M-1,CTX-M-58,168,HQ734707,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-60__169,Bla,CTX-M-1,CTX-M-60,169,AM411407,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-61__170,Bla,CTX-M-1,CTX-M-61,170,GU125683,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-62__171,Bla,CTX-M-1,CTX-M-62,171,GU125669,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-64__172,Bla,CTX-M-1,CTX-M-64,172,GQ300937,239-1114,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-66__173,Bla,CTX-M-1,CTX-M-66,173,EF576988,240-1115,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-68__174,Bla,CTX-M-1,CTX-M-68,174,EU177100,5-880,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-69__175,Bla,CTX-M-1,CTX-M-69,175,EU402393,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-71__176,Bla,CTX-M-1,CTX-M-71,176,FJ815436,196-1071,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-72__177,Bla,CTX-M-1,CTX-M-72,177,AY847148,9-884,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-79__178,Bla,CTX-M-1,CTX-M-79,178,GU125702,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-80__179,Bla,CTX-M-1,CTX-M-80,179,EU202673,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-88__180,Bla,CTX-M-1,CTX-M-88,180,FJ873739,1-875,875,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-96__181,Bla,CTX-M-1,CTX-M-96,181,AJ704396,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-101__182,Bla,CTX-M-1,CTX-M-101,182,HQ398214,250-1125,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-107__183,Bla,CTX-M-1,CTX-M-107,183,JF274244,864-1,864,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-108__184,Bla,CTX-M-1,CTX-M-108,184,JF274245,1-864,864,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-109__185,Bla,CTX-M-1,CTX-M-109,185,JF274248,865-1,865,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-114__186,Bla,CTX-M-1,CTX-M-114,186,GQ351346,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-116__187,Bla,CTX-M-1,CTX-M-116,187,JF966749,158-1033,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-117__188,Bla,CTX-M-1,CTX-M-117,188,JN227085,352-1227,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-123__189,Bla,CTX-M-1,CTX-M-123,189,JN790864,239-1114,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-132__190,Bla,CTX-M-1,CTX-M-132,190,JX313020,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-133__191,Bla,CTX-M-1,CTX-M-133,191,AB185834,1-876,876,no,no,NA,NA
+193,CTX-M-136__192,Bla,CTX-M-1,CTX-M-136,192,KC351754,158-1033,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+193,CTX-M-139__193,Bla,CTX-M-1,CTX-M-139,193,KC107824,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-8__77,Bla,CTX-M-8,CTX-M-8,77,AF189721,274-1149,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-25__78,Bla,CTX-M-8,CTX-M-25,78,AF518567,2321-3196,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-26__79,Bla,CTX-M-8,CTX-M-26,79,AY157676,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-39__80,Bla,CTX-M-8,CTX-M-39,80,AY954516,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-40__81,Bla,CTX-M-8,CTX-M-40,81,AY750914,207-1079,873,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-41__82,Bla,CTX-M-8,CTX-M-41,82,DQ023162,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-63__83,Bla,CTX-M-8,CTX-M-63,83,AB205197,4-876,873,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-78__84,Bla,CTX-M-8,CTX-M-78,84,AM982522,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-89__85,Bla,CTX-M-8,CTX-M-89,85,FJ971899,31-906,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-91__86,Bla,CTX-M-8,CTX-M-91,86,GQ870432,31-906,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-94__87,Bla,CTX-M-8,CTX-M-94,87,HM167760,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+194,CTX-M-100__88,Bla,CTX-M-8,CTX-M-100,88,FR682582,1-876,876,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+195,ErmN__76,MLS,ErmN,ErmN,76,X97721,160-1035,876,no,no,NA,NA
+196,HERA-1__91,Bla,HERA-1,HERA-1,91,AF311385,1-873,873,no,no,NA,NA
+196,HERA-2__92,Bla,HERA-1,HERA-2,92,AF398334,1-873,873,no,no,NA,NA
+196,HERA-3__93,Bla,HERA-1,HERA-3,93,AF398335,1-873,873,no,no,NA,NA
+196,HERA-4__94,Bla,HERA-1,HERA-4,94,AJ536088,1-873,873,no,no,NA,NA
+196,HERA-5__95,Bla,HERA-1,HERA-5,95,AJ536089,1-873,873,no,no,NA,NA
+196,HERA-6__96,Bla,HERA-1,HERA-6,96,AJ536090,1-873,873,no,no,NA,NA
+196,HERA-8__98,Bla,HERA-1,HERA-8,98,AJ536092,1-873,873,no,no,NA,NA
+197,GOB-16__89,Bla,GOB-16,GOB-16,89,GU188443,1-873,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+197,GOB-17__90,Bla,GOB-16,GOB-17,90,AY899332,1-873,873,no,no,subclass B3 metallo-beta-lactamase,Bla
+198,OXA-55__75,Bla,OXA-55,OXA-55,75,AY343493,77-946,870,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+199,Aac3-VII__74,AGly,Aac3-VII,Aac3-VII,74,M22999,493-1359,867,no,no,NA,NA
+200,SCO-1__881,Bla,SCO-1,SCO-1,881,AM939419,2458-1592,867,no,no,class A beta-lactamase,Bla
+201,GES-1__859,Bla,GES,GES-1,859,HM370522,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-2__860,Bla,GES,GES-2,860,AF326355,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-3__861,Bla,GES,GES-3,861,AY494717,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-4__862,Bla,GES,GES-4,862,AB116260,1330-2193,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-5__863,Bla,GES,GES-5,863,GQ337064,2847-3710,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-6__864,Bla,GES,GES-6,864,AY494718,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,IBC-2__866,Bla,GES,IBC-2,866,AF329699,373-1236,864,no,no,NA,NA
+201,GES-9__867,Bla,GES,GES-9,867,AY920928,2690-3553,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-10__868,Bla,GES,GES-10,868,FJ820124,1124-1987,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-11__869,Bla,GES,GES-11,869,JN253503,37-900,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-12__870,Bla,GES,GES-12,870,FN554543,1-864,864,no,no,class A beta-lactamase hydrolyses beta-lactams including carbapenems,Bla_Carb
+201,GES-13__871,Bla,GES,GES-13,871,GU169702,609-1472,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-14__872,Bla,GES,GES-14,872,HM451497,5872-6735,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-15__873,Bla,GES,GES-15,873,GU208678,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-16__874,Bla,GES,GES-16,874,HM173356,512-1375,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-17__875,Bla,GES,GES-17,875,HQ874631,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-18__876,Bla,GES,GES-18,876,JQ028729,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-19__877,Bla,GES,GES-19,877,JN596280,1919-2782,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-20__878,Bla,GES,GES-20,878,JN596280,2848-3711,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-21__879,Bla,GES,GES-21,879,JQ772478,141-1004,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-22__880,Bla,GES,GES-22,880,JX023441,38-901,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-24__1709,Bla,GES,GES-24,1709,AB901141,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+201,GES-26__1710,Bla,GES,GES-26,1710,KP096411,1-864,864,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+202,ErmD__886,MLS,ErmD,ErmD,886,M29832,430-1293,864,no,no,NA,NA
+203,Aac3-IIa__882,AGly,Aac3-IIa,Aac3-IIa,882,X51534,91-951,861,no,no,NA,NA
+203,Aac3-IIc__883,AGly,Aac3-IIa,Aac3-IIc,883,X54723,819-1679,861,no,no,NA,NA
+203,Aac3-IId__884,AGly,Aac3-IIa,Aac3-IId,884,EU022314,1-861,861,no,no,NA,NA
+203,Aac3-IIe__885,AGly,Aac3-IIa,Aac3-IIe,885,EU022315,1-861,861,no,no,NA,NA
+204,Aac8__1038,AGly,Aac8,Aac8,1038,M55426,466-1326,861,no,no,NA,NA
+205,TEM-1D__887,Bla,TEM-1D,TEM-1D,887,AF188200,215-1075,861,no,no,NA,NA
+205,TEM-1__888,Bla,TEM-1D,TEM-1,888,JQ735917,1-810,810,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-2__889,Bla,TEM-1D,TEM-2,889,AY529705,167-1027,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-3__890,Bla,TEM-1D,TEM-3,890,X64523,1337-477,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-6__891,Bla,TEM-1D,TEM-6,891,X57972,340-1200,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-7__892,Bla,TEM-1D,TEM-7,892,AF527798,1-785,785,no,no,NA,NA
+205,TEM-8__893,Bla,TEM-1D,TEM-8,893,X65252,176-1036,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-10__894,Bla,TEM-1D,TEM-10,894,U09188,198-1005,808,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-11__895,Bla,TEM-1D,TEM-11,895,AY874537,178-1038,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-12__896,Bla,TEM-1D,TEM-12,896,M88143,368-1228,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-15__897,Bla,TEM-1D,TEM-15,897,AM849805,263-1123,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-16__898,Bla,TEM-1D,TEM-16,898,X65254,176-1036,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-17__899,Bla,TEM-1D,TEM-17,899,Y14574,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-20__900,Bla,TEM-1D,TEM-20,900,EU527189,4132-4992,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-21__901,Bla,TEM-1D,TEM-21,901,AF466526,1346-2206,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-22__902,Bla,TEM-1D,TEM-22,902,Y17583,214-1071,858,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-24__903,Bla,TEM-1D,TEM-24,903,GQ293500,4033-4893,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-26B__904,Bla,TEM-1D,TEM-26B,904,L19940,198-1006,809,no,no,NA,NA
+205,TEM-28__905,Bla,TEM-1D,TEM-28,905,U37195,76-936,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-29__906,Bla,TEM-1D,TEM-29,906,AJ277416,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-30__907,Bla,TEM-1D,TEM-30,907,AJ437107,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-33__908,Bla,TEM-1D,TEM-33,908,GU371926,51165-50305,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-34__909,Bla,TEM-1D,TEM-34,909,KC292503,4335-5195,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-42__910,Bla,TEM-1D,TEM-42,910,X98047,1-844,844,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-43__911,Bla,TEM-1D,TEM-43,911,U95363,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-47__912,Bla,TEM-1D,TEM-47,912,Y10279,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-48__913,Bla,TEM-1D,TEM-48,913,Y10280,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-49__914,Bla,TEM-1D,TEM-49,914,Y10281,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-52__915,Bla,TEM-1D,TEM-52,915,Y13612,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-53__916,Bla,TEM-1D,TEM-53,916,AF104441,194-1054,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-54__917,Bla,TEM-1D,TEM-54,917,AF104442,194-1054,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-55__918,Bla,TEM-1D,TEM-55,918,DQ286729,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-57__919,Bla,TEM-1D,TEM-57,919,FJ405211,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-59__920,Bla,TEM-1D,TEM-59,920,AF062386,31-862,832,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-60__921,Bla,TEM-1D,TEM-60,921,AF047171,136-996,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-63__922,Bla,TEM-1D,TEM-63,922,AF332513,104-964,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-67__923,Bla,TEM-1D,TEM-67,923,AF091113,451-1311,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-68__924,Bla,TEM-1D,TEM-68,924,AJ239002,1-861,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-70__925,Bla,TEM-1D,TEM-70,925,AF188199,215-1075,861,no,no,class A beta-lactamase,Bla
+205,TEM-71__926,Bla,TEM-1D,TEM-71,926,AF203816,211-1071,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-72__927,Bla,TEM-1D,TEM-72,927,AF157553,148-1008,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-75__928,Bla,TEM-1D,TEM-75,928,AY130284,1-785,785,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-76__929,Bla,TEM-1D,TEM-76,929,AF190694,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-77__930,Bla,TEM-1D,TEM-77,930,AF190695,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-78__931,Bla,TEM-1D,TEM-78,931,AF190693,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-79__932,Bla,TEM-1D,TEM-79,932,AF190692,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-80__933,Bla,TEM-1D,TEM-80,933,AF347054,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-81__934,Bla,TEM-1D,TEM-81,934,AF427127,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-82__935,Bla,TEM-1D,TEM-82,935,AF427128,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-83__936,Bla,TEM-1D,TEM-83,936,AF427129,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-84__937,Bla,TEM-1D,TEM-84,937,AF427130,209-1069,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-85__938,Bla,TEM-1D,TEM-85,938,AJ277414,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-86__939,Bla,TEM-1D,TEM-86,939,AJ277415,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-87__940,Bla,TEM-1D,TEM-87,940,AF250872,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-88__941,Bla,TEM-1D,TEM-88,941,AY027590,113-973,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-89__942,Bla,TEM-1D,TEM-89,942,AY039040,189-1022,834,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-90__943,Bla,TEM-1D,TEM-90,943,AF351241,90-950,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-91__944,Bla,TEM-1D,TEM-91,944,AB049569,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-92__945,Bla,TEM-1D,TEM-92,945,AF143804,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-93__946,Bla,TEM-1D,TEM-93,946,AJ318093,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-94__947,Bla,TEM-1D,TEM-94,947,AJ318094,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-95__948,Bla,TEM-1D,TEM-95,948,AJ308558,182-1042,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-96__949,Bla,TEM-1D,TEM-96,949,AY092401,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-97__950,Bla,TEM-1D,TEM-97,950,AF397067,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-98__951,Bla,TEM-1D,TEM-98,951,AF397068,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-101__953,Bla,TEM-1D,TEM-101,953,AF495873,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-102__954,Bla,TEM-1D,TEM-102,954,AY029354,3-833,831,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-104__955,Bla,TEM-1D,TEM-104,955,AF516719,215-1075,861,no,no,class A beta-lactamase,Bla
+205,TEM-105__956,Bla,TEM-1D,TEM-105,956,AF516720,215-1075,861,no,no,class A beta-lactamase,Bla
+205,TEM-106__957,Bla,TEM-1D,TEM-106,957,AY101578,215-1075,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-107__958,Bla,TEM-1D,TEM-107,958,AY101764,207-1067,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-108__959,Bla,TEM-1D,TEM-108,959,AF506748,39-899,861,no,no,class A beta-lactamase,Bla
+205,TEM-109__960,Bla,TEM-1D,TEM-109,960,AY628175,211-1071,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-110__961,Bla,TEM-1D,TEM-110,961,AY130283,1-785,785,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-111__962,Bla,TEM-1D,TEM-111,962,AF468003,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-112__963,Bla,TEM-1D,TEM-112,963,AY589493,167-1027,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-113__964,Bla,TEM-1D,TEM-113,964,AY589494,194-1054,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-114__965,Bla,TEM-1D,TEM-114,965,AY589495,182-1042,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-115__966,Bla,TEM-1D,TEM-115,966,AF535127,209-1069,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-116__967,Bla,TEM-1D,TEM-116,967,AY425988,6-866,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-117__968,Bla,TEM-1D,TEM-117,968,AY130282,1-764,764,no,no,class A beta-lactamase,Bla
+205,TEM-118__969,Bla,TEM-1D,TEM-118,969,AY130285,1-785,785,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-120__970,Bla,TEM-1D,TEM-120,970,AY243512,209-1069,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-121__971,Bla,TEM-1D,TEM-121,971,AY307374,1-861,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-122__972,Bla,TEM-1D,TEM-122,972,AY307100,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-123__973,Bla,TEM-1D,TEM-123,973,AY327539,1-858,858,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-124__974,Bla,TEM-1D,TEM-124,974,AY327540,1-858,858,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-125__975,Bla,TEM-1D,TEM-125,975,AY628176,76-936,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-126__976,Bla,TEM-1D,TEM-126,976,AY628199,204-1064,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-127__977,Bla,TEM-1D,TEM-127,977,AY368236,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-128__978,Bla,TEM-1D,TEM-128,978,AY359287,186-1046,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-129__979,Bla,TEM-1D,TEM-129,979,AY452662,184-1044,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-130__980,Bla,TEM-1D,TEM-130,980,AJ866988,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-131__981,Bla,TEM-1D,TEM-131,981,AY436361,132-992,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-132__982,Bla,TEM-1D,TEM-132,982,AY491682,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-133__983,Bla,TEM-1D,TEM-133,983,AY528425,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-134__984,Bla,TEM-1D,TEM-134,984,AY574271,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-135__985,Bla,TEM-1D,TEM-135,985,JQ060998,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-136__986,Bla,TEM-1D,TEM-136,986,AY826417,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-137__987,Bla,TEM-1D,TEM-137,987,AM286274,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-138__988,Bla,TEM-1D,TEM-138,988,AY853593,215-1075,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-139__989,Bla,TEM-1D,TEM-139,989,DQ072853,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-141__990,Bla,TEM-1D,TEM-141,990,AY956335,39-899,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-142__991,Bla,TEM-1D,TEM-142,991,DQ388882,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-143__992,Bla,TEM-1D,TEM-143,992,DQ075245,218-1078,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-144__993,Bla,TEM-1D,TEM-144,993,DQ256080,215-1075,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-145__994,Bla,TEM-1D,TEM-145,994,DQ105528,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-146__995,Bla,TEM-1D,TEM-146,995,DQ105529,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-147__996,Bla,TEM-1D,TEM-147,996,DQ279850,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-148__997,Bla,TEM-1D,TEM-148,997,AM087454,209-1069,861,no,no,class A beta-lactamase,Bla
+205,TEM-149__998,Bla,TEM-1D,TEM-149,998,DQ369751,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-150__999,Bla,TEM-1D,TEM-150,999,AM183304,209-1069,861,no,no,class A beta-lactamase,Bla
+205,TEM-151__1000,Bla,TEM-1D,TEM-151,1000,DQ834729,206-1066,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-152__1001,Bla,TEM-1D,TEM-152,1001,DQ834728,206-1066,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-153__1002,Bla,TEM-1D,TEM-153,1002,KC149518,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-154__1003,Bla,TEM-1D,TEM-154,1003,FJ807656,1-861,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-155__1004,Bla,TEM-1D,TEM-155,1004,DQ679961,115-975,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-156__1005,Bla,TEM-1D,TEM-156,1005,AM941159,209-1069,861,no,no,class A beta-lactamase,Bla
+205,TEM-157__1006,Bla,TEM-1D,TEM-157,1006,DQ909059,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-158__1007,Bla,TEM-1D,TEM-158,1007,EF534736,214-1074,861,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-159__1008,Bla,TEM-1D,TEM-159,1008,EF136376,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-160__1009,Bla,TEM-1D,TEM-160,1009,EF136377,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-162__1010,Bla,TEM-1D,TEM-162,1010,EF468463,67-927,861,no,no,class A beta-lactamase,Bla
+205,TEM-163__1011,Bla,TEM-1D,TEM-163,1011,EU815939,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-164__1012,Bla,TEM-1D,TEM-164,1012,EU274580,215-1075,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-166__1013,Bla,TEM-1D,TEM-166,1013,FJ197316,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-167__1014,Bla,TEM-1D,TEM-167,1014,FJ360884,214-1074,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-168__1015,Bla,TEM-1D,TEM-168,1015,FJ919776,209-1069,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-169__1016,Bla,TEM-1D,TEM-169,1016,FJ873740,1-858,858,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-171__1017,Bla,TEM-1D,TEM-171,1017,GQ149347,5270-6130,861,no,no,class A beta-lactamase,Bla
+205,TEM-176__1018,Bla,TEM-1D,TEM-176,1018,GU550123,145-1005,861,no,no,class A beta-lactamase,Bla
+205,TEM-177__1019,Bla,TEM-1D,TEM-177,1019,FN652295,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-178__1020,Bla,TEM-1D,TEM-178,1020,X97254,154-1011,858,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR
+205,TEM-182__1021,Bla,TEM-1D,TEM-182,1021,HQ317449,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-183__1022,Bla,TEM-1D,TEM-183,1022,HQ529916,111-971,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-185__1023,Bla,TEM-1D,TEM-185,1023,JF795538,1-861,861,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+205,TEM-186__1024,Bla,TEM-1D,TEM-186,1024,JN227084,309-1169,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-187__1025,Bla,TEM-1D,TEM-187,1025,HM246246,212-1069,858,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-188__1026,Bla,TEM-1D,TEM-188,1026,JN211012,214-1074,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-189__1027,Bla,TEM-1D,TEM-189,1027,JN254627,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-190__1028,Bla,TEM-1D,TEM-190,1028,JN416112,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-191__1029,Bla,TEM-1D,TEM-191,1029,JF949916,1-757,757,no,no,class A beta-lactamase,Bla
+205,TEM-192__1030,Bla,TEM-1D,TEM-192,1030,JF949915,1-754,754,no,no,class A beta-lactamase,Bla
+205,TEM-193__1031,Bla,TEM-1D,TEM-193,1031,JN935135,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-194__1032,Bla,TEM-1D,TEM-194,1032,JN935136,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-195__1033,Bla,TEM-1D,TEM-195,1033,JN935137,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-197__1034,Bla,TEM-1D,TEM-197,1034,HQ877606,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-198__1035,Bla,TEM-1D,TEM-198,1035,AB700703,162-1022,861,no,no,class A beta-lactamase,Bla
+205,TEM-199__1036,Bla,TEM-1D,TEM-199,1036,JX050178,1-853,853,no,no,class A beta-lactamase,Bla
+205,TEM-201__1037,Bla,TEM-1D,TEM-201,1037,JX310327,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-205__1711,Bla,TEM-1D,TEM-205,1711,KC900516,1-858,858,no,no,class A beta-lactamase,Bla
+205,TEM-206__1712,Bla,TEM-1D,TEM-206,1712,KC783461,1-861,861,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+205,TEM-207__1713,Bla,TEM-1D,TEM-207,1713,KC818234,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-208__1714,Bla,TEM-1D,TEM-208,1714,KC865667,184-1044,861,no,no,class A beta-lactamase,Bla
+205,TEM-209__1715,Bla,TEM-1D,TEM-209,1715,KF240808,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-211__1716,Bla,TEM-1D,TEM-211,1716,KF513179,1-861,861,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+205,TEM-213__1717,Bla,TEM-1D,TEM-213,1717,KF663615,1-858,858,no,no,class A beta-lactamase,Bla
+205,TEM-214__1718,Bla,TEM-1D,TEM-214,1718,KP050491,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-215__1719,Bla,TEM-1D,TEM-215,1719,KP050492,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-216__1720,Bla,TEM-1D,TEM-216,1720,KF944358,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-217__1721,Bla,TEM-1D,TEM-217,1721,HG934763,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-219__1722,Bla,TEM-1D,TEM-219,1722,KM114268,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-220__1723,Bla,TEM-1D,TEM-220,1723,KM998962,1-861,861,no,no,class A beta-lactamase,Bla
+205,TEM-99__1724,Bla,TEM-1D,TEM-99,1724,AF397066,1-861,861,no,no,class A beta-lactamase,Bla
+206,Ant6-Ib__1040,AGly,Ant6-Ib,Ant6-Ib,1040,FN594949,27482-28339,858,no,no,NA,NA
+207,OXA-62__1039,Bla,OXA-62,OXA-62,1039,AY423074,1-858,858,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+208,Aac3-Xa__1043,AGly,Aac3-Xa,Aac3-Xa,1043,AB028210,3565-2711,855,no,no,NA,NA
+209,ACI-1__1041,Bla,ACI-1,ACI-1,1041,AJ007350,240-1094,855,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+210,ErmX__1482,MLS,ErmX,ErmX,1482,M36726,296-1150,855,no,no,NA,NA
+210,ErmCX__1725,MLS,ErmX,ErmCX,1725,AF024666,2208-2969,762,no,no,NA,NA
+211,BEL-1__1483,Bla,BEL-1,BEL-1,1483,GU250439,763-1614,852,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+211,BEL-2__1484,Bla,BEL-1,BEL-2,1484,FJ666063,1-852,852,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+211,BEL-3__1485,Bla,BEL-1,BEL-3,1485,GQ202694,1-852,852,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+212,Str__1480,AGly,Str,Str,1480,X92946,18908-18060,849,no,no,NA,NA
+213,ErmZ__1481,MLS,ErmZ,ErmZ,1481,AM709783,3665-2817,849,no,no,NA,NA
+214,Aac3-IXa__1478,AGly,Aac3-IXa,Aac3-IXa,1478,M55427,274-1119,846,no,no,NA,NA
+215,RmtC__1479,AGly,RmtC,RmtC,1479,AB194779,6903-7748,846,no,no,NA,NA
+216,BlaZ__1476,Bla,BlaZ,BlaZ,1476,BX571856,1913827-1914672,846,no,no,NA,NA
+217,Erm34__1477,MLS,Erm34,Erm34,1477,AY234334,355-1200,846,no,no,NA,NA
+218,Erm36__1486,MLS,Erm36,Erm36,1486,AF462611,186-1031,846,no,no,NA,NA
+219,Sph__1488,AGly,Aph,Sph,1488,AY037297,2706-3548,843,no,no,NA,NA
+220,OXA-58__1623,Bla,OXA-58,OXA-58,1623,AY665723,4143-3301,843,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+220,OXA-96__1624,Bla,OXA-58,OXA-96,1624,DQ519090,63-905,843,no,no,OXA-58 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+220,OXA-97__1625,Bla,OXA-58,OXA-97,1625,EF102240,12565-11723,843,no,no,OXA-58 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+220,OXA-164__1626,Bla,OXA-58,OXA-164,1626,GU831575,1-843,843,no,no,OXA-58 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+221,Erm32__1622,MLS,Erm32,Erm32,1622,AJ009971,1790-2632,843,no,no,NA,NA
+222,Aac3-IIIb__1620,AGly,Aac3-III,Aac3-IIIb,1620,L06160,984-1721,738,no,no,NA,NA
+222,Aac3-IIIc__1621,AGly,Aac3-III,Aac3-IIIc,1621,L06161,106-945,840,no,no,NA,NA
+223,OXA-9__1619,Bla,OXA-9,OXA-9,1619,NC_015515,5451-6290,840,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+224,LmrB__1617,MLS,LmrB,LmrB,1617,X79146,28679-27840,840,no,no,NA,NA
+224,LmrB__1618,MLS,LmrB,LmrB,1618,X62867,361-1197,837,no,no,NA,NA
+225,SulI__1616,Sul,SulI,SulI,1616,U37105,4069-4908,840,no,no,NA,NA
+226,AadA9__1615,AGly,AadA9,AadA9,1615,AJ420072,26773-27609,837,no,no,NA,NA
+227,StrB__1614,AGly,StrB,StrB,1614,KR091911,169145-169981,837,no,no,NA,NA
+227,Aph(6)-Id__1726,AGly,StrB,Aph(6)-Id,1726,KP119857,3827-4663,837,no,no,NA,NA
+228,MphD__1613,MLS,MphD,MphD,1613,NC_017312,2292413-2291580,834,no,no,NA,NA
+229,AadA1-pm__1597,AGly,AadA,AadA1-pm,1597,JQ690540,7968-8798,831,no,no,NA,NA
+229,AadA1__1598,AGly,AadA,AadA1,1598,M95287,3320-4111,792,no,no,NA,NA
+229,AadA11__1599,AGly,AadA,AadA11,1599,AJ567827,1-792,792,no,no,NA,NA
+229,AadA12__1600,AGly,AadA,AadA12,1600,AY665771,1-792,792,no,no,NA,NA
+229,AadA13__1601,AGly,AadA,AadA13,1601,JN118546,736-1533,798,no,no,NA,NA
+229,AadA15__1602,AGly,AadA,AadA15,1602,DQ393783,1800-2591,792,no,no,NA,NA
+229,AadA17__1603,AGly,AadA,AadA17,1603,FJ460181,1791-2582,792,no,no,NA,NA
+229,AadA2__1605,AGly,AadA,AadA2,1605,X68227,166-945,780,no,no,NA,NA
+229,AadA21__1606,AGly,AadA,AadA21,1606,AY171244,47-838,792,no,no,NA,NA
+229,AadA22__1607,AGly,AadA,AadA22,1607,AM261837,74-865,792,no,no,NA,NA
+229,AadA23__1608,AGly,AadA,AadA23,1608,AJ809407,119-898,780,no,no,NA,NA
+229,AadA24__1609,AGly,AadA,AadA24,1609,AB901036,954-1733,780,no,no,NA,NA
+229,AadA3__1610,AGly,AadA,AadA3,1610,AF047479,1296-2087,792,no,no,NA,NA
+229,AadA8__1611,AGly,AadA,AadA8,1611,AF326210,1-792,792,no,no,NA,NA
+229,AadA8b__1612,AGly,AadA,AadA8b,1612,AM040708,1174-1965,792,no,no,NA,NA
+229,AadA24__1688,AGly,AadA,AadA24,1688,HQ123586,88-867,780,no,no,NA,NA
+230,SPM-1__519,Bla,SPM-1,SPM-1,519,GU831565,1-831,831,no,no,subclass B1 metallo-beta-lactamase carbapenemase,Bla_Carb
+231,OXA-1__520,Bla,OXA-1,OXA-1,520,JX424423,99823-100653,831,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+231,OXA-4__521,Bla,OXA-1,OXA-4,521,JN129451,1037-1867,831,no,no,OXA-1 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+231,OXA-31__523,Bla,OXA-1,OXA-31,523,AF294653,754-1584,831,no,no,OXA-1 family class D extended-spectrum beta-lactamase,Bla_ESBL
+231,OXA-47__524,Bla,OXA-1,OXA-47,524,AY237830,1-831,831,no,no,OXA-1 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+231,OXA-224__525,Bla,OXA-1,OXA-224,525,JN596991,2281-3111,831,no,no,OXA-1 family class D beta-lactamase confers resistance to extended spectrum beta-lactams,Bla_ESBL
+231,OXA-320__526,Bla,OXA-1,OXA-320,526,KF151169,1-831,831,no,no,OXA-1 family class D beta-lactamase,Bla
+232,OXA-228__527,Bla,OXA-228,OXA-228,527,JQ422053,100-930,831,no,no,OXA-229 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+232,OXA-229__528,Bla,OXA-228,OXA-229,528,JQ422052,1100-1930,831,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+232,OXA-230__529,Bla,OXA-228,OXA-230,529,JQ422054,101-931,831,no,no,OXA-229 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+233,OXA-237__530,Bla,OXA-237,OXA-237,530,JQ820241,1-831,831,no,no,OXA-134 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+233,OXA-236__531,Bla,OXA-237,OXA-236,531,JQ820242,1-831,831,no,no,OXA-134 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+233,OXA-235__532,Bla,OXA-237,OXA-235,532,JQ820240,591-1421,831,no,no,OXA-134 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+233,OXA-278__533,Bla,OXA-237,OXA-278,533,KC771279,1-831,831,no,no,OXA-134 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+234,OXA-2__488,Bla,OXA-2,OXA-2,488,M95287,2456-3283,828,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+234,OXA-3__489,Bla,OXA-2,OXA-3,489,L07945,61-888,828,no,no,OXA-2 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+234,OXA-15__490,Bla,OXA-2,OXA-15,490,U63835,128-955,828,no,no,OXA-2 family class D extended-spectrum beta-lactamase,Bla_ESBL
+234,OXA-21__491,Bla,OXA-2,OXA-21,491,DQ522237,3974-4801,828,no,no,OXA-2 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+234,OXA-32__492,Bla,OXA-2,OXA-32,492,AF315351,673-1500,828,no,no,OXA-2 family class D extended-spectrum beta-lactamase,Bla_ESBL
+234,OXA-34__493,Bla,OXA-2,OXA-34,493,AF350424,1-771,771,no,no,class D extended-spectrum beta-lactamase,Bla_ESBL
+234,OXA-36__494,Bla,OXA-2,OXA-36,494,AF300985,1-739,739,no,no,class D extended-spectrum beta-lactamase,Bla_ESBL
+234,OXA-46__495,Bla,OXA-2,OXA-46,495,JX131372,1479-2279,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+234,OXA-53__496,Bla,OXA-2,OXA-53,496,AY289608,617-1444,828,no,no,OXA-2 family class D extended-spectrum beta-lactamase,Bla_ESBL
+234,OXA-118__497,Bla,OXA-2,OXA-118,497,AF371964,119-919,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+234,OXA-119__498,Bla,OXA-2,OXA-119,498,AY139598,1487-2287,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+234,OXA-141__499,Bla,OXA-2,OXA-141,499,EF552405,13-840,828,no,no,OXA-2 family class D extended-spectrum beta-lactamase,Bla_ESBL
+234,OXA-161__500,Bla,OXA-2,OXA-161,500,GQ202693,1172-1999,828,no,no,OXA-2 family class D extended-spectrum beta-lactamase,Bla_ESBL
+234,OXA-205__501,Bla,OXA-2,OXA-205,501,JF800667,658-1458,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+234,OXA-210__502,Bla,OXA-2,OXA-210,502,JF795487,1-828,828,no,no,OXA-2 family class D beta-lactamase,Bla
+235,OXA-18__503,Bla,OXA-18,OXA-18,503,EU503121,2921-3748,828,no,no,class D extended-spectrum beta-lactamase,Bla_ESBL
+236,OXA-24__504,Bla,OXA-24,OXA-24,504,AJ239129,1-828,828,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-25__505,Bla,OXA-24,OXA-25,505,AF201826,22-849,828,no,no,OXA-24 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-26__506,Bla,OXA-24,OXA-26,506,AF201827,22-849,828,no,no,OXA-24 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-72__509,Bla,OXA-24,OXA-72,509,AY739646,1-828,828,no,no,OXA-24 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-139__510,Bla,OXA-24,OXA-139,510,AM991978,1-828,828,no,no,OXA-24 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-143__511,Bla,OXA-24,OXA-143,511,GQ861437,2914-3741,828,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-160__512,Bla,OXA-24,OXA-160,512,GU199038,1196-2023,828,no,no,OXA-24 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-182__513,Bla,OXA-24,OXA-182,513,HM640278,1-828,828,no,no,OXA-143 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-207__514,Bla,OXA-24,OXA-207,514,JQ838185,1-828,828,no,no,OXA-24 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+236,OXA-231__515,Bla,OXA-24,OXA-231,515,JQ326200,194-1021,828,no,no,OXA-143 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+237,OXA-114__516,Bla,OXA-114,OXA-114,516,EU188842,1-828,828,no,no,NA,NA
+237,OXA-243a__517,Bla,OXA-114,OXA-243a,517,JX206446,1-828,828,no,no,NA,NA
+237,OXA-258__518,Bla,OXA-114,OXA-258,518,HE614014,1-825,825,no,no,class D beta-lactamase,Bla
+238,OXA-214__486,Bla,OXA-214,OXA-214,486,JN861782,1-828,828,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+238,OXA-215__1727,Bla,OXA-214,OXA-215,1727,JN861783,1-828,828,no,no,OXA-214 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+239,VanW-B__487,Gly,VanW-B,VanW-B,487,AY655721,3069-3896,828,no,no,NA,NA
+240,ApmA__649,AGly,ApmA,ApmA,649,FN806789,2694-3518,825,no,no,NA,NA
+241,OXA-22__648,Bla,OXA-22,OXA-22,648,AF064820,952-1776,825,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+242,OXA-23__731,Bla,OXA-23,OXA-23,731,EF120622,1499-2320,822,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-27__732,Bla,OXA-23,OXA-27,732,AF201828,116-937,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-49__733,Bla,OXA-23,OXA-49,733,AY288523,1-825,825,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-73__734,Bla,OXA-23,OXA-73,734,AY762325,116-937,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-133__735,Bla,OXA-23,OXA-133,735,EU571228,823-1644,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-134__736,Bla,OXA-23,OXA-134,736,FJ195387,695-1516,822,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-146__737,Bla,OXA-23,OXA-146,737,FJ194460,174-998,825,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-165__738,Bla,OXA-23,OXA-165,738,HM488986,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-166__739,Bla,OXA-23,OXA-166,739,HM488987,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-167__740,Bla,OXA-23,OXA-167,740,HM488988,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-168__741,Bla,OXA-23,OXA-168,741,HM488989,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-169__742,Bla,OXA-23,OXA-169,742,HM488990,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-170__743,Bla,OXA-23,OXA-170,743,HM488991,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-171__744,Bla,OXA-23,OXA-171,744,HM488992,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-225__745,Bla,OXA-23,OXA-225,745,JN638887,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+242,OXA-239__746,Bla,OXA-23,OXA-239,746,JQ837239,1-822,822,no,no,OXA-23 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-51__650,Bla,OXA-51,OXA-51,650,DQ385606,669-1493,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-64__651,Bla,OXA-51,OXA-64,651,AY750907,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-65__652,Bla,OXA-51,OXA-65,652,AY750908,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-66__653,Bla,OXA-51,OXA-66,653,EF051061,485-1309,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-67__654,Bla,OXA-51,OXA-67,654,DQ491200,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-68__655,Bla,OXA-51,OXA-68,655,AY750910,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-69__656,Bla,OXA-51,OXA-69,656,NC_010410,2175317-2176141,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-70__657,Bla,OXA-51,OXA-70,657,AY750912,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-71__658,Bla,OXA-51,OXA-71,658,AY750913,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-75__659,Bla,OXA-51,OXA-75,659,AY859529,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-76__660,Bla,OXA-51,OXA-76,660,AY949203,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-77__661,Bla,OXA-51,OXA-77,661,AY949202,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-78__662,Bla,OXA-51,OXA-78,662,AY862132,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-79__663,Bla,OXA-51,OXA-79,663,EU019534,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-80__664,Bla,OXA-51,OXA-80,664,HQ637467,1233-2057,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-82__665,Bla,OXA-51,OXA-82,665,GQ352402,8775-9599,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-83__666,Bla,OXA-51,OXA-83,666,DQ309277,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-84__667,Bla,OXA-51,OXA-84,667,DQ309276,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-86__668,Bla,OXA-51,OXA-86,668,DQ149247,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-87__669,Bla,OXA-51,OXA-87,669,DQ348075,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-88__670,Bla,OXA-51,OXA-88,670,DQ392963,9-833,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-89__671,Bla,OXA-51,OXA-89,671,DQ445683,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-90__672,Bla,OXA-51,OXA-90,672,EU547443,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-91__673,Bla,OXA-51,OXA-91,673,DQ519086,1199-2023,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-92__674,Bla,OXA-51,OXA-92,674,DQ335566,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-93__675,Bla,OXA-51,OXA-93,675,DQ519087,39-863,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-94__676,Bla,OXA-51,OXA-94,676,DQ519088,9-833,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-95__677,Bla,OXA-51,OXA-95,677,DQ519089,9-833,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-98__678,Bla,OXA-51,OXA-98,678,AM279652,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-99__679,Bla,OXA-51,OXA-99,679,DQ888718,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-100__680,Bla,OXA-51,OXA-100,680,AM231720,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-106__681,Bla,OXA-51,OXA-106,681,EF650032,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-107__682,Bla,OXA-51,OXA-107,682,EF650033,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-108__683,Bla,OXA-51,OXA-108,683,EF650034,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-109__684,Bla,OXA-51,OXA-109,684,FJ157357,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-110__685,Bla,OXA-51,OXA-110,685,EF650036,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-111__686,Bla,OXA-51,OXA-111,686,EF650037,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-112__687,Bla,OXA-51,OXA-112,687,EF650038,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-113__688,Bla,OXA-51,OXA-113,688,EF653400,435-1259,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-115__689,Bla,OXA-51,OXA-115,689,EU029998,576-1400,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-116__690,Bla,OXA-51,OXA-116,690,EU220744,1-786,786,no,no,class D beta-lactamase,Bla
+243,OXA-117__691,Bla,OXA-51,OXA-117,691,GQ423625,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-120__692,Bla,OXA-51,OXA-120,692,HE963768,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-128__693,Bla,OXA-51,OXA-128,693,EU375515,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-130__694,Bla,OXA-51,OXA-130,694,EU547445,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-131__695,Bla,OXA-51,OXA-131,695,EU547446,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-132__696,Bla,OXA-51,OXA-132,696,EU547447,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-138__697,Bla,OXA-51,OXA-138,697,EU670845,1595-2419,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-144__698,Bla,OXA-51,OXA-144,698,FJ872530,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-148__699,Bla,OXA-51,OXA-148,699,GQ853679,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-149__700,Bla,OXA-51,OXA-149,700,GQ853680,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-150__701,Bla,OXA-51,OXA-150,701,GQ853681,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-172__702,Bla,OXA-51,OXA-172,702,HM113558,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-173__703,Bla,OXA-51,OXA-173,703,HM113559,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-174__704,Bla,OXA-51,OXA-174,704,HM113560,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-175__705,Bla,OXA-51,OXA-175,705,HM113561,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-176__706,Bla,OXA-51,OXA-176,706,HM113562,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-177__707,Bla,OXA-51,OXA-177,707,HM113563,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-178__708,Bla,OXA-51,OXA-178,708,HM113564,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-179__709,Bla,OXA-51,OXA-179,709,HM570035,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-180__710,Bla,OXA-51,OXA-180,710,HM570036,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-194__711,Bla,OXA-51,OXA-194,711,HQ425492,1-822,822,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-195__712,Bla,OXA-51,OXA-195,712,HQ425493,1-822,822,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-196__713,Bla,OXA-51,OXA-196,713,HQ425494,1-822,822,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-197__714,Bla,OXA-51,OXA-197,714,HQ425495,1-822,822,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-199__715,Bla,OXA-51,OXA-199,715,HQ637466,1233-2057,825,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-200__716,Bla,OXA-51,OXA-200,716,HQ734811,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-201__717,Bla,OXA-51,OXA-201,717,HQ734812,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-202__718,Bla,OXA-51,OXA-202,718,HQ734813,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-203__719,Bla,OXA-51,OXA-203,719,HQ998857,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-206__720,Bla,OXA-51,OXA-206,720,AB634250,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-208__721,Bla,OXA-51,OXA-208,721,FR853176,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-216__722,Bla,OXA-51,OXA-216,722,FR865168,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-217__723,Bla,OXA-51,OXA-217,723,JN603240,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-219__724,Bla,OXA-51,OXA-219,724,JN215211,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-223__725,Bla,OXA-51,OXA-223,725,JN248564,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-241__726,Bla,OXA-51,OXA-241,726,JX025021,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-242__727,Bla,OXA-51,OXA-242,727,JX025022,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-248__728,Bla,OXA-51,OXA-248,728,HE963769,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-249__729,Bla,OXA-51,OXA-249,729,HE963770,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+243,OXA-250__730,Bla,OXA-51,OXA-250,730,HE963771,1-825,825,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+244,OXA-209__644,Bla,OXA-209,OXA-209,644,JF268688,6232-5408,825,no,no,class D beta-lactamase,Bla
+244,OXA-347__645,Bla,OXA-209,OXA-347,645,JN086160,2407-1583,825,no,no,class D beta-lactamase,Bla
+245,OXA-211__641,Bla,OXA-211,OXA-211,641,JN861779,1-825,825,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+245,OXA-212__642,Bla,OXA-211,OXA-212,642,JN861780,1-825,825,no,no,OXA-211 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+245,OXA-309__643,Bla,OXA-211,OXA-309,643,HF947514,1-825,825,no,no,OXA-211 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+246,RmtE__647,AGly,RmtE,RmtE,647,GU201947,55-876,822,no,no,NA,NA
+247,OXA-104__646,Bla,OXA-104,OXA-104,646,EF581285,1-822,822,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+248,OXA-213__748,Bla,OXA-213,OXA-213,748,JN861781,1-822,822,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+249,LnuF__747,MLS,LnuF,LnuF,747,EU118119,1030-1851,822,no,no,NA,NA
+250,Aac-IIIa__1216,AGly,Aac-IIIa,Aac-IIIa,1216,X55652,1124-1939,816,no,no,NA,NA
+251,Aph3''Ia__1217,AGly,Aph3''Ia,Aph3''Ia,1217,X62115,410-1225,816,no,no,NA,NA
+251,Aph3-Ia__1218,AGly,Aph3''Ia,Aph3-Ia,1218,HQ840942,23569-24384,816,no,no,NA,NA
+251,Aph(3')-Ic__1728,AGly,Aph3''Ia,Aph(3')-Ic,1728,KP119857,914-1729,816,no,no,NA,NA
+252,Aph3-Id__1214,AGly,Aph3-Id,Aph3-Id,1214,Z48231,820-1635,816,no,no,NA,NA
+253,Aph3-Ib__784,AGly,Aph3-Ib,Aph3-Ib,784,M20305,779-1594,816,no,no,NA,NA
+254,OXA-60__1228,Bla,OXA-60,OXA-60,1228,AY664505,1-816,816,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+255,VanZ-Pa__1229,Gly,VanZ-Pa,VanZ-Pa,1229,DQ018711,2047-2862,816,no,no,NA,NA
+256,SulII__1219,Sul,SulII,SulII,1219,EU360945,1617-2432,816,no,no,NA,NA
+257,NDM-1__1220,Bla,NDM-1,NDM-1,1220,KR091911,68724-67912,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-2__1221,Bla,NDM-1,NDM-2,1221,JN112341,2504-1692,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-3__1222,Bla,NDM-1,NDM-3,1222,JQ734687,1-813,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-4__1223,Bla,NDM-1,NDM-4,1223,JQ348841,1-813,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-5__1224,Bla,NDM-1,NDM-5,1224,JN104597,115-927,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-6__1225,Bla,NDM-1,NDM-6,1225,JN967644,1-813,813,no,no,subclass B1 metallo-beta-lactamase carbapenemase,Bla_Carb
+257,NDM-7__1226,Bla,NDM-1,NDM-7,1226,JX412225,1-813,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-8__1227,Bla,NDM-1,NDM-8,1227,AB744718,1-813,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-9__1729,Bla,NDM-1,NDM-9,1729,KC999080,380-1192,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-10__1730,Bla,NDM-1,NDM-10,1730,KF361506,1-813,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-12__1731,Bla,NDM-1,NDM-12,1731,AB926431,511-1323,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-13__1732,Bla,NDM-1,NDM-13,1732,LC012596,3586-4398,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-15__1733,Bla,NDM-1,NDM-15,1733,KP735848,1-813,813,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+257,NDM-16__1734,Bla,NDM-1,NDM-16,1734,KP862821,1-813,813,no,no,subclass B1 metallo-beta-lactamase,Bla
+258,Aac3-Vb__1205,AGly,Aac3-Vb,Aac3-Vb,1205,M97172,656-1465,810,no,no,NA,NA
+259,OXA-42__1206,Bla,OXA-42,OXA-42,1206,AJ488302,1-810,810,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+259,OXA-43__1207,Bla,OXA-42,OXA-43,1207,AJ488303,1-810,810,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+259,OXA-57__1208,Bla,OXA-42,OXA-57,1208,AJ631966,1-810,810,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+259,OXA-59__1209,Bla,OXA-42,OXA-59,1209,AJ632249,1-810,810,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+260,OXA-63__1504,Bla,OXA-63,OXA-63,1504,AY619003,704-1510,807,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+260,OXA-136__1505,Bla,OXA-63,OXA-136,1505,EU086830,89-898,810,no,no,OXA-63 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+260,OXA-137__1506,Bla,OXA-63,OXA-137,1506,EU086835,89-898,810,no,no,OXA-63 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+260,OXA-192__1507,Bla,OXA-63,OXA-192,1507,JF273470,1-810,810,no,no,OXA-63 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+261,Aph3-IIb__1503,AGly,Aph3-IIb,Aph3-IIb,1503,X90856,388-1194,807,no,no,NA,NA
+262,VanY-B__1502,Gly,VanY-B,VanY-B,1502,AY655721,2245-3051,807,no,no,NA,NA
+263,StrA__1501,AGly,StrA,StrA,1501,AJ627643,3725-4528,804,no,no,NA,NA
+264,Aph3-IIc__1513,AGly,Aph3-IIc,Aph3-IIc,1513,HQ424460,2-805,804,no,no,NA,NA
+265,AphVIII__1511,AGly,Aph3,AphVIII,1511,AF182845,1-804,804,no,no,NA,NA
+265,Aph3-Va__1512,AGly,Aph3,Aph3-Va,1512,U24442,680-1456,777,no,no,NA,NA
+266,OXA-5__1509,Bla,OXA-5,OXA-5,1509,X58272,80-883,804,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+266,OXA-129__1510,Bla,OXA-5,OXA-129,1510,AM932669,699-1502,804,no,no,OXA-5 family class D beta-lactamase,Bla
+267,LinB__1508,MLS,LinB,LinB,1508,AJ238249,127-930,804,no,no,NA,NA
+267,LnuB__1736,MLS,LinB,LnuB,1736,KC688833,1-804,804,no,no,NA,NA
+268,APH-Stph__1534,AGly,APH-Stph,APH-Stph,1534,HE579073,1779213-1778413,801,no,no,NA,NA
+269,OXA-7__1514,Bla,OXA-7,OXA-7,1514,X75562,135-935,801,no,no,OXA-10 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+269,OXA-10__1515,Bla,OXA-7,OXA-10,1515,U37105,1307-2107,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+269,OXA-11__1516,Bla,OXA-7,OXA-11,1516,Z22590,155-955,801,no,no,OXA-10 family class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-13__1517,Bla,OXA-7,OXA-13,1517,U59183,940-1740,801,no,no,OXA-10 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+269,OXA-14__1518,Bla,OXA-7,OXA-14,1518,L38523,1-775,775,no,no,OXA-10 family oxacillin-hydrolyzing class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-16__1519,Bla,OXA-7,OXA-16,1519,AF043100,1-775,775,no,no,oxacillin-hydrolyzing class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-17__1520,Bla,OXA-7,OXA-17,1520,DQ902344,2717-3517,801,no,no,OXA-10 family oxacillin-hydrolyzing class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-19__1521,Bla,OXA-7,OXA-19,1521,FJ906752,1236-2036,801,no,no,OXA-10 family class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-28__1522,Bla,OXA-7,OXA-28,1522,FJ374756,1337-2137,801,no,no,OXA-10 family class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-35__1523,Bla,OXA-7,OXA-35,1523,FJ957893,1271-2071,801,no,no,OXA-10 family oxacillin-hydrolyzing class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-56__1524,Bla,OXA-7,OXA-56,1524,DQ914960,2239-3039,801,no,no,OXA-10 family oxacillin-hydrolyzing class D beta-lactamase,Bla
+269,OXA-74__1525,Bla,OXA-7,OXA-74,1525,AJ854182,1-801,801,no,no,OXA-10 family class D beta-lactamase,Bla
+269,OXA-101__1526,Bla,OXA-7,OXA-101,1526,AM412777,118-918,801,no,no,OXA-10 family class D beta-lactamase,Bla
+269,OXA-142__1527,Bla,OXA-7,OXA-142,1527,EU358785,721-1521,801,no,no,OXA-10 family oxacillin-hydrolyzing class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-145__1528,Bla,OXA-7,OXA-145,1528,FJ790516,1288-2085,798,no,no,OXA-10 family class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-147__1529,Bla,OXA-7,OXA-147,1529,FJ848783,1271-2071,801,no,no,OXA-10 family class D extended-spectrum beta-lactamase,Bla_ESBL
+269,OXA-183__1530,Bla,OXA-7,OXA-183,1530,HQ111474,1057-1857,801,no,no,OXA-10 family class D beta-lactamase,Bla
+269,OXA-240__1531,Bla,OXA-7,OXA-240,1531,JX089628,1-801,801,no,no,OXA-10 family class D beta-lactamase,Bla
+269,OXA-251__1532,Bla,OXA-7,OXA-251,1532,JN118546,1762-2562,801,no,no,OXA-10 family class D beta-lactamase,Bla
+269,OXA-256__1533,Bla,OXA-7,OXA-256,1533,HE616889,1827-2627,801,no,no,OXA-10 family class D beta-lactamase,Bla
+270,OXA-20__218,Bla,OXA-20,OXA-20,218,AF024602,1238-2038,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+270,OXA-37__219,Bla,OXA-20,OXA-37,219,AY007784,1123-1923,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+271,OXA-29__220,Bla,OXA-29,OXA-29,220,AJ400619,34-834,801,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+272,VIM-1__221,Bla,VIM-1,VIM-1,221,Y18050,3225-4025,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-2__222,Bla,VIM-1,VIM-2,222,EF614235,2949-3749,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-3__223,Bla,VIM-1,VIM-3,223,GU966683,80-880,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-4__224,Bla,VIM-1,VIM-4,224,JF905459,707-1507,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-5__225,Bla,VIM-1,VIM-5,225,DQ023222,1316-2116,801,no,no,subclass B1 metallo-beta-lactamase carbapenemase,Bla_Carb
+272,VIM-6__226,Bla,VIM-1,VIM-6,226,AY165025,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-8__227,Bla,VIM-1,VIM-8,227,AY524987,1-801,801,no,no,subclass B1 metallo-beta-lactamase carbapenem-hydrolyzing beta-lactamase,Bla_Carb
+272,VIM-9__228,Bla,VIM-1,VIM-9,228,AY524988,1-801,801,no,no,subclass B1 metallo-beta-lactamase carbapenem-hydrolyzing beta-lactamase,Bla_Carb
+272,VIM-10__229,Bla,VIM-1,VIM-10,229,AY524989,1-801,801,no,no,subclass B1 metallo-beta-lactamase carbapenem-hydrolyzing beta-lactamase,Bla_Carb
+272,VIM-11__230,Bla,VIM-1,VIM-11,230,EF116550,128-928,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-12__231,Bla,VIM-1,VIM-12,231,DQ143913,1775-2575,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-13__232,Bla,VIM-1,VIM-13,232,DQ365886,1-801,801,no,no,subclass B1 metallo-beta-lactamase carbapenemase,Bla_Carb
+272,VIM-14__233,Bla,VIM-1,VIM-14,233,EF055455,1-801,801,no,no,subclass B1 metallo-beta-lactamase carbapenem-hydrolyzing beta-lactamase,Bla_Carb
+272,VIM-15__234,Bla,VIM-1,VIM-15,234,EU419745,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-16__235,Bla,VIM-1,VIM-16,235,EU419746,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-17__236,Bla,VIM-1,VIM-17,236,EU118148,1011-1811,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-18__237,Bla,VIM-1,VIM-18,237,AM778091,27-815,789,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-19__238,Bla,VIM-1,VIM-19,238,FJ915116,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-20__239,Bla,VIM-1,VIM-20,239,GQ414736,1-801,801,no,no,subclass B1 metallo-beta-lactamase,Bla
+272,VIM-23__240,Bla,VIM-1,VIM-23,240,GQ242167,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-24__241,Bla,VIM-1,VIM-24,241,HM855205,1-801,801,no,no,subclass B1 metallo-beta-lactamase carbapenem-hydrolyzing beta-lactamase,Bla_Carb
+272,VIM-25__242,Bla,VIM-1,VIM-25,242,HM750249,91-891,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-26__243,Bla,VIM-1,VIM-26,243,FR748153,260-1060,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-27__244,Bla,VIM-1,VIM-27,244,HQ858608,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-28__245,Bla,VIM-1,VIM-28,245,JF900599,1-801,801,no,no,subclass B1 metallo-beta-lactamase confers carbapenem resistance,Bla_Carb
+272,VIM-29__246,Bla,VIM-1,VIM-29,246,JX311308,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-30__247,Bla,VIM-1,VIM-30,247,JN129451,88-888,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-31__248,Bla,VIM-1,VIM-31,248,JN982330,246-1046,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-32__249,Bla,VIM-1,VIM-32,249,JN676230,1550-2350,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-33__250,Bla,VIM-1,VIM-33,250,JX258134,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-34__251,Bla,VIM-1,VIM-34,251,JX013656,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-35__252,Bla,VIM-1,VIM-35,252,JX982634,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-36__253,Bla,VIM-1,VIM-36,253,JX982635,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-37__254,Bla,VIM-1,VIM-37,254,JX982636,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-38__255,Bla,VIM-1,VIM-38,255,KC469971,1-801,801,no,no,subclass B1 metallo-beta-lactamase carbapenem-hydrolyzing beta-lactamase,Bla_Carb
+272,VIM-39__1737,Bla,VIM-1,VIM-39,1737,KF131539,1-801,801,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+272,VIM-42__1738,Bla,VIM-1,VIM-42,1738,KP071470,1-801,801,no,no,subclass B1 metallo-beta-lactamase,Bla
+272,VIM-43__1739,Bla,VIM-1,VIM-43,1739,KP096412,1-801,801,no,no,subclass B1 metallo-beta-lactamase,Bla
+272,VIM-44__1740,Bla,VIM-1,VIM-44,1740,KP681696,1-801,801,no,no,subclass B1 metallo-beta-lactamase,Bla
+272,VIM-45__1741,Bla,VIM-1,VIM-45,1741,KP681695,1-801,801,no,no,subclass B1 metallo-beta-lactamase,Bla
+272,VIM-46__1742,Bla,VIM-1,VIM-46,1742,KP749829,1-801,801,no,no,subclass B1 metallo-beta-lactamase,Bla
+273,Erm35__256,MLS,Erm35,Erm35,256,AF319779,33-833,801,no,no,NA,NA
+274,ErmF__257,MLS,ErmF,ErmF,257,M14730,241-1041,801,no,no,NA,NA
+275,OXA-48__258,Bla,OXA-48,OXA-48,258,AY236073,2188-2985,798,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-54__259,Bla,OXA-48,OXA-54,259,AY500137,1-798,798,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-162__260,Bla,OXA-48,OXA-162,260,GU197550,1-798,798,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-163__261,Bla,OXA-48,OXA-163,261,HQ700343,1-786,786,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-181__262,Bla,OXA-48,OXA-181,262,HM992946,1-798,798,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-204__263,Bla,OXA-48,OXA-204,263,JQ809466,5375-6172,798,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-232__1837,Bla,OXA-48,OXA-232,1837,JX423831,2677-3474,798,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-244__264,Bla,OXA-48,OXA-244,264,JX438000,1-798,798,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-245__265,Bla,OXA-48,OXA-245,265,JX438001,1-798,798,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+275,OXA-247__266,Bla,OXA-48,OXA-247,266,JX893517,1-786,786,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+276,VIM-7__267,Bla,VIM-7,VIM-7,267,AJ536835,150-947,798,no,no,subclass B1 metallo-beta-lactamase carbapenemase,Bla_Carb
+277,Aph3-III__268,AGly,Aph3-III,Aph3-III,268,X92945,39505-40299,795,no,no,NA,NA
+278,Aph3-Vb__269,AGly,Aph3-Vb,Aph3-Vb,269,M22126,373-1164,792,no,no,NA,NA
+278,Aph3-Vc__270,AGly,Aph3-Vb,Aph3-Vc,270,S81599,282-1076,795,no,no,NA,NA
+279,AphA15__271,AGly,AphA15,AphA15,271,Y18050,4758-5552,795,no,no,NA,NA
+280,RmtG__1493,AGly,RmtG,RmtG,1493,JX486113,1-795,795,no,no,NA,NA
+281,AphA2__1492,AGly,AphA2,AphA2,1492,X57709,1-795,795,no,no,NA,NA
+282,OXA-12__1495,Bla,OXA-12,OXA-12,1495,U10251,181-975,795,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+283,OXA-45__1494,Bla,OXA-45,OXA-45,1494,AM849110,2553-3347,795,no,no,oxacillin-hydrolyzing class D extended-spectrum beta-lactamase,Bla_ESBL
+284,SulIII__1498,Sul,SulIII,SulIII,1498,HQ875016,8187-7396,792,no,no,NA,NA
+285,AadA4__1496,AGly,AadA4-5,AadA4,1496,Z50802,1306-2094,789,no,no,NA,NA
+285,AadA5__1497,AGly,AadA4-5,AadA5,1497,KR091911,9280-8492,789,no,no,NA,NA
+286,Aph3-IV__1500,AGly,Aph3-IV,Aph3-IV,1500,X03364,277-1065,789,no,no,NA,NA
+287,OXA-50__1499,Bla,OXA-50,OXA-50,1499,AM117128,1-789,789,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+288,OXA-198__1490,Bla,OXA-198,OXA-198,1490,HQ634775,3013-3801,789,no,no,class D beta-lactamase,Bla
+289,Aac3-Iva__1489,AGly,Aac3-Iva,Aac3-Iva,1489,X01385,244-1029,786,no,no,NA,NA
+290,AadA14__72,AGly,AadA14,AadA14,72,AJ884726,1325-540,786,no,no,NA,NA
+291,Spc__73,AGly,Spc,Spc,73,X03216,3643-4425,783,no,no,NA,NA
+292,Nps1__69,Bla,LCR,Nps1,69,AY027589,46-828,783,no,no,NA,NA
+292,LCR-1__70,Bla,LCR,LCR-1,70,X56809,112-894,783,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+293,ErmO__71,MLS,ErmO,ErmO,71,M74717,40-822,783,no,no,NA,NA
+294,AphA6__66,AGly,AphA6,AphA6,66,JF949760,695-1474,780,no,no,NA,NA
+294,Aph3-VIb__67,AGly,AphA6,Aph3-VIb,67,AJ627643,4934-5713,780,no,no,NA,NA
+295,RmtF__68,AGly,RmtF,RmtF,68,JQ808129,1599-2378,780,no,no,NA,NA
+296,ErmV__64,MLS,ErmV,ErmV,64,U59450,397-1176,780,no,no,NA,NA
+297,ArmA__65,AGly,ArmA,ArmA,65,AY220558,1978-2751,774,no,no,NA,NA
+298,ErmQ__62,MLS,ErmQ,ErmQ,62,L22689,262-1035,774,no,no,NA,NA
+299,AadD__63,AGly,AadD,AadD,63,AF181950,3176-3946,771,no,no,NA,NA
+300,Ant4-Ib__1581,AGly,Ant4-Ib,Ant4-Ib,1581,AJ506108,209-979,771,no,no,NA,NA
+301,Aad9__1582,AGly,Aad9,Aad9,1582,M69221,271-1038,768,no,no,NA,NA
+302,CEPH-A3__1583,Bla,CEPH,CEPH-A3,1583,AY112998,197-961,765,no,no,NA,NA
+302,IMIS__1584,Bla,CEPH,IMIS,1584,Y10415,126-893,768,no,no,NA,NA
+302,IMIH__1585,Bla,CEPH,IMIH,1585,AJ548797,924-1688,765,no,no,NA,NA
+302,CphA__1586,Bla,CEPH,CphA,1586,AY261378,1-765,765,no,no,NA,NA
+302,CphA4__1587,Bla,CEPH,CphA4,1587,AY227050,131-895,765,no,no,NA,NA
+302,CphA5__1588,Bla,CEPH,CphA5,1588,AY227051,1-765,765,no,no,NA,NA
+302,CphA6__1589,Bla,CEPH,CphA6,1589,AY227052,1-765,765,no,no,NA,NA
+302,CphA7__1590,Bla,CEPH,CphA7,1590,AY227053,1-765,765,no,no,NA,NA
+302,CphA8__1591,Bla,CEPH,CphA8,1591,AY261375,1-765,765,no,no,NA,NA
+303,Aph3''Ic__1592,AGly,Aph3''Ic,Aph3''Ic,1592,DQ336355,603-1367,765,no,no,NA,NA
+304,OXA-85__1593,Bla,OXA-85,OXA-85,1593,AY227054,1-765,765,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+305,Ant4-IIa__1594,AGly,Ant4-IIa,Ant4-IIa,1594,M98270,145-903,759,no,no,NA,NA
+306,RmtH__1595,AGly,RmtH,RmtH,1595,KC544262,666-1424,759,no,no,NA,NA
+307,Ant4-IIb__1596,AGly,Ant4-IIb,Ant4-IIb,1596,AY114142,1061-1816,756,no,no,NA,NA
+308,RmtA__1579,AGly,RmtA,RmtA,1579,AB120321,6677-7432,756,no,no,NA,NA
+309,RmtB__1580,AGly,RmtB,RmtB,1580,AB263754,2843-3598,756,no,no,NA,NA
+309,RmtB2__1743,AGly,RmtB,RmtB2,1743,JN968578,1-756,756,no,no,NA,NA
+310,DIM-1__1139,Bla,DIM-1,DIM-1,1139,GU323019,1-756,756,no,no,subclass B1 metallo-beta-lactamase,Bla
+311,Erm40__1138,MLS,Erm40,Erm40,1138,AY570506,2035-2790,756,no,no,NA,NA
+312,Aph3-VIIa__1137,AGly,Aph3-VIIa,Aph3-VIIa,1137,M29953,296-1048,753,no,no,NA,NA
+313,GIM-1__1136,Bla,GIM-1,GIM-1,1136,JF414726,394-1146,753,no,no,subclass B1 metallo-beta-lactamase,Bla
+313,GIM-2__1744,Bla,GIM-1,GIM-2,1744,KM659858,402-1154,753,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-1__1159,Bla,B-1,B-1,1159,AF189298,1-750,750,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-2__1160,Bla,B-1,B-2,1160,AF189300,1-750,750,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-3__1161,Bla,B-1,B-3,1161,AF162284,1-750,750,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-5__1162,Bla,B-1,B-5,1162,AF189303,1-750,750,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-6__1163,Bla,B-1,B-6,1163,AF189302,1-747,747,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-7__1164,Bla,B-1,B-7,1164,AF189304,1-747,747,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-8__1165,Bla,B-1,B-8,1165,AF189305,1-747,747,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-9__1166,Bla,B-1,B-9,1166,AY348324,1-746,746,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-10__1167,Bla,B-1,B-10,1167,AY348325,1-747,747,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-11__1168,Bla,B-1,B-11,1168,AY348326,1-750,750,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-12__1169,Bla,B-1,B-12,1169,EF595958,1-750,750,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-13__1170,Bla,B-1,B-13,1170,EF595959,1-750,750,no,no,subclass B1 metallo-beta-lactamase,Bla
+314,B-14__1171,Bla,B-1,B-14,1171,JN635697,973-1719,747,no,no,subclass B1 metallo-beta-lactamase,Bla
+315,CfiA1__1142,Bla,CfiA,CfiA1,1142,AB087225,1-750,750,no,no,NA,NA
+315,CfiA2__1143,Bla,CfiA,CfiA2,1143,AB087226,1-750,750,no,no,NA,NA
+315,CfiA3__1144,Bla,CfiA,CfiA3,1144,AB087228,1-750,750,no,no,NA,NA
+315,CfiA4__1145,Bla,CfiA,CfiA4,1145,AB087229,1-750,750,no,no,NA,NA
+315,CfiA6__1147,Bla,CfiA,CfiA6,1147,AB087231,1-750,750,no,no,NA,NA
+315,CfiA8__1149,Bla,CfiA,CfiA8,1149,AB087233,1-750,750,no,no,NA,NA
+315,CfiA9__1150,Bla,CfiA,CfiA9,1150,AB087234,1-750,750,no,no,NA,NA
+315,CfiA10__1151,Bla,CfiA,CfiA10,1151,AB087227,1-750,750,no,no,NA,NA
+315,CfiA13__1154,Bla,CfiA,CfiA13,1154,FM200787,3-752,750,no,no,NA,NA
+315,CfiA14__1155,Bla,CfiA,CfiA14,1155,FM200789,162-911,750,no,no,NA,NA
+315,CfiA15__1156,Bla,CfiA,CfiA15,1156,AF429432,1501-2250,750,no,no,NA,NA
+315,CCR-A__1745,Bla,CfiA,CCR-A,1745,M63556,91-840,750,no,no,NA,NA
+316,TUS-1__1141,Bla,TUS-1,TUS-1,1141,AF441287,261-1007,747,no,no,subclass B1 metallo-beta-lactamase,Bla
+317,JOHN-1__1140,Bla,JOHN-1,JOHN-1,1140,CP000685,4163958-4163212,747,no,no,subclass B1 metallo-beta-lactamase,Bla
+318,IMP-1__1097,Bla,IMP-1,IMP-1,1097,HM036079,114-854,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-2__1098,Bla,IMP-1,IMP-2,1098,AB182996,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-3__1099,Bla,IMP-1,IMP-3,1099,AB010417,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-4__1100,Bla,IMP-1,IMP-4,1100,AF244145,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-5__1101,Bla,IMP-1,IMP-5,1101,AF290912,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-6__1102,Bla,IMP-1,IMP-6,1102,AB616660,5191-5931,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-7__1103,Bla,IMP-1,IMP-7,1103,AY625685,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-8__1104,Bla,IMP-1,IMP-8,1104,HQ651093,3019-3759,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-9__1105,Bla,IMP-1,IMP-9,1105,HM106459,3-740,738,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-10__1106,Bla,IMP-1,IMP-10,1106,AJ420864,156-896,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-11__1107,Bla,IMP-1,IMP-11,1107,AB074436,17-754,738,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-13__1108,Bla,IMP-1,IMP-13,1108,JN091097,261-1001,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-14__1109,Bla,IMP-1,IMP-14,1109,AY553332,114-854,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-15__1110,Bla,IMP-1,IMP-15,1110,AY553333,114-854,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-16__1111,Bla,IMP-1,IMP-16,1111,AJ584652,1044-1784,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-18__1112,Bla,IMP-1,IMP-18,1112,AB587676,1366-2106,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-19__1113,Bla,IMP-1,IMP-19,1113,AB201265,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-20__1114,Bla,IMP-1,IMP-20,1114,AB196988,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-21__1115,Bla,IMP-1,IMP-21,1115,AB204557,1-738,738,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-22__1116,Bla,IMP-1,IMP-22,1116,FM876313,116-856,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-24__1117,Bla,IMP-1,IMP-24,1117,EF192154,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-25__1118,Bla,IMP-1,IMP-25,1118,EU352796,1-738,738,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-26__1119,Bla,IMP-1,IMP-26,1119,GU045307,101-841,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-27__1120,Bla,IMP-1,IMP-27,1120,JF894248,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-28__1121,Bla,IMP-1,IMP-28,1121,HQ263342,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-29__1122,Bla,IMP-1,IMP-29,1122,HQ438058,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-30__1123,Bla,IMP-1,IMP-30,1123,HQ875573,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-32__1124,Bla,IMP-1,IMP-32,1124,JQ002629,114-854,741,no,no,subclass B1 metallo-beta-lactamase carbapenemase,Bla_Carb
+318,IMP-33__1125,Bla,IMP-1,IMP-33,1125,JN848782,1828-2568,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-34__1126,Bla,IMP-1,IMP-34,1126,AB715422,27226-27966,741,no,no,subclass B1 metallo-beta-lactamase,Bla
+318,IMP-35__1127,Bla,IMP-1,IMP-35,1127,JF816544,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-37__1128,Bla,IMP-1,IMP-37,1128,JX131372,97-843,747,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-39__1130,Bla,IMP-1,IMP-39,1130,D50438,1195-1935,741,no,no,NA,NA
+318,IMP-40__1131,Bla,IMP-1,IMP-40,1131,AB753457,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-41__1132,Bla,IMP-1,IMP-41,1132,AB753458,1-738,738,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-42__1133,Bla,IMP-1,IMP-42,1133,AB753456,1-741,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-43__1134,Bla,IMP-1,IMP-43,1134,AB777500,2035-2775,741,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-44__1135,Bla,IMP-1,IMP-44,1135,AB777501,1399-2136,738,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+318,IMP-49__1746,Bla,IMP-1,IMP-49,1746,KP681694,1-741,741,no,no,subclass B1 metallo-beta-lactamase,Bla
+318,IMP-51__1747,Bla,IMP-1,IMP-51,1747,LC031883,5072-5812,741,no,no,subclass B1 metallo-beta-lactamase,Bla
+318,IMP-52__1748,Bla,IMP-1,IMP-52,1748,LC055762,566-1306,741,no,no,subclass B1 metallo-beta-lactamase,Bla
+319,RmtD__1095,AGly,RmtD,RmtD,1095,DQ914960,9632-8889,744,no,no,NA,NA
+319,RmtD2__1096,AGly,RmtD,RmtD2,1096,HQ401565,14882-14139,744,no,no,NA,NA
+320,MUS-1__842,Bla,MUS-1,MUS-1,842,AF441286,225-965,741,no,no,subclass B1 metallo-beta-lactamase,Bla
+321,SIM-1__843,Bla,SIM-1,SIM-1,843,GQ288397,1-741,741,no,no,subclass B1 metallo-beta-lactamase,Bla
+322,Erm39__840,MLS,Erm39,Erm39,840,AY487229,2153-2893,741,no,no,NA,NA
+323,ErmB__841,MLS,ErmB,ErmB,841,M11180,714-1451,738,no,no,NA,NA
+324,ErmC__853,MLS,ErmC,ErmC,853,M19652,1722-988,735,no,no,NA,NA
+324,ErmT__854,MLS,ErmC,ErmT,854,M64090,168-902,735,no,no,NA,NA
+325,ErmG__855,MLS,ErmG,ErmG,855,M15332,672-1406,735,no,no,NA,NA
+326,ErmY__844,MLS,ErmY,ErmY,844,AB014481,556-1290,735,no,no,NA,NA
+327,IND-2__845,Bla,IND,IND-2,845,EF394439,1-732,732,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+327,IND-13__846,Bla,IND,IND-13,846,HM245381,57-788,732,no,no,NA,NA
+327,IND-2b__847,Bla,IND,IND-2b,847,EF672681,1-732,732,no,no,NA,NA
+327,IND-2c__848,Bla,IND,IND-2c,848,GU186042,57-788,732,no,no,NA,NA
+327,IND-11__849,Bla,IND,IND-11,849,HM245379,57-788,732,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+327,IND-12__850,Bla,IND,IND-12,850,HM245380,28-759,732,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+327,IND-15__852,Bla,IND,IND-15,852,AB563173,33-764,732,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+328,Erm33__856,MLS,ErmA,Erm33,856,AJ579365,9898-10629,732,no,no,NA,NA
+328,ErmA__857,MLS,ErmA,ErmA,857,X03216,5282-4551,732,no,no,NA,NA
+329,IND-4__858,Bla,IND-4,IND-4,858,AF219135,1-729,729,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+330,CGB-1__332,Bla,CGB-1,CGB-1,332,EF672680,1-729,729,no,no,IND family subclass B1 metallo-beta-lactamase,Bla
+331,KHM-1__331,Bla,KHM-1,KHM-1,331,AB364006,62-787,726,no,no,subclass B1 metallo-beta-lactamase,Bla
+332,IND-1__334,Bla,IND-1,IND-1,334,EF394436,1-720,720,no,no,subclass B1 metallo-beta-lactamase carbapenemase,Bla_Carb
+332,IND-3__335,Bla,IND-1,IND-3,335,AF219133,1-720,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+332,IND-5__336,Bla,IND-1,IND-5,336,AY504627,1-720,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+332,IND-6__337,Bla,IND-1,IND-6,337,AM087455,292-1011,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+332,IND-7__338,Bla,IND-1,IND-7,338,AB529520,1-720,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+332,IND-8__339,Bla,IND-1,IND-8,339,GU186044,40-759,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+332,IND-9__340,Bla,IND-1,IND-9,340,GU186045,35-754,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+332,IND-10__341,Bla,IND-1,IND-10,341,GU206353,19-738,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+332,IND-14__342,Bla,IND-1,IND-14,342,HM367709,8-727,720,no,no,carbapenem-hydrolyzing metallo-beta-lactamase,Bla_Carb
+333,EBR-1__333,Bla,EBR-1,EBR-1,333,AF416700,57-764,708,no,no,subclass B1 metallo-beta-lactamase carbapenem-hydrolyzing beta-lactamase,Bla_Carb
+334,VanY-M__328,Gly,VanY-M,VanY-M,328,FJ349556,3057-3758,702,no,no,NA,NA
+335,VanR-M__327,Gly,VanR-M,VanR-M,327,FJ349556,982-1680,699,no,no,NA,NA
+336,VanR-D__330,Gly,VanR-D,VanR-D,330,AY082011,1-699,699,no,no,NA,NA
+337,Mbl__329,Bla,Mbl,Mbl,329,NC_010410,1997136-1996441,696,no,no,NA,NA
+338,VanR-F__326,Gly,VanR-F,VanR-F,326,AF155139,1512-2207,696,no,no,NA,NA
+339,VanR-L__325,Gly,VanR-L,VanR-L,325,EU250284,4731-5426,696,no,no,NA,NA
+340,VanRc3__52,Gly,VanRc,VanRc3,52,AY033764,3846-4541,696,no,no,NA,NA
+340,VanRc4__53,Gly,VanRc,VanRc4,53,EU151753,3848-4543,696,no,no,NA,NA
+341,VanR-A__54,Gly,VanR-A,VanR-A,54,M97297,3976-4671,696,no,no,NA,NA
+341,VanR-Pt__55,Gly,VanR-A,VanR-Pt,55,DQ018711,1-696,696,no,no,NA,NA
+341,VanR-Pt2__56,Gly,VanR-A,VanR-Pt2,56,AY926880,718-1413,696,no,no,NA,NA
+342,VanR-C__57,Gly,VanR-C,VanR-C,57,DQ022190,3987-4682,696,no,no,NA,NA
+343,CatA10__59,Phe,CatA10,CatA10,59,AY238971,1055-1741,687,no,no,NA,NA
+344,QnrB1__1,Flq,QnrB,QnrB1,1,DQ351241,1-681,681,no,no,NA,NA
+344,QnrB10__2,Flq,QnrB,QnrB10,2,EF636461,12267-11587,681,no,no,NA,NA
+344,QnrB9__3,Flq,QnrB,QnrB9,3,EF653270,1-648,648,no,no,NA,NA
+344,QnrB12__4,Flq,QnrB,QnrB12,4,AM774474,2432-3079,648,no,no,NA,NA
+344,QnrB13__5,Flq,QnrB,QnrB13,5,EU273756,1-681,681,no,no,NA,NA
+344,QnrB14__6,Flq,QnrB,QnrB14,6,EU273757,1-681,681,no,no,NA,NA
+344,QnrB15__7,Flq,QnrB,QnrB15,7,EU302865,1-681,681,no,no,NA,NA
+344,QnrB17__8,Flq,QnrB,QnrB17,8,AM919398,1-681,681,no,no,NA,NA
+344,QnrB18__9,Flq,QnrB,QnrB18,9,AM919399,1-681,681,no,no,NA,NA
+344,QnrB19__10,Flq,QnrB,QnrB19,10,EU432277,1-645,645,no,no,NA,NA
+344,QnrB2__11,Flq,QnrB,QnrB2,11,DQ351242,1-645,645,no,no,NA,NA
+344,QnrB20__12,Flq,QnrB,QnrB20,12,AB379831,1-681,681,no,no,NA,NA
+344,QnrB21__13,Flq,QnrB,QnrB21,13,FJ611948,1-645,645,no,no,NA,NA
+344,QnrB22__14,Flq,QnrB,QnrB22,14,FJ981621,1-648,648,no,no,NA,NA
+344,QnrB23__15,Flq,QnrB,QnrB23,15,FJ981622,1-681,681,no,no,NA,NA
+344,QnrB24__16,Flq,QnrB,QnrB24,16,HM192542,1-681,681,no,no,NA,NA
+344,QnrB25__17,Flq,QnrB,QnrB25,17,HQ172108,1-645,645,no,no,NA,NA
+344,QnrB26__18,Flq,QnrB,QnrB26,18,HQ386846,1-681,681,no,no,NA,NA
+344,QnrB27__19,Flq,QnrB,QnrB27,19,HM439641,1-645,645,no,no,NA,NA
+344,QnrB28__20,Flq,QnrB,QnrB28,20,HM439643,1-645,645,no,no,NA,NA
+344,QnrB29__21,Flq,QnrB,QnrB29,21,HM439649,1-681,681,no,no,NA,NA
+344,QnrB3__22,Flq,QnrB,QnrB3,22,DQ303920,1-681,681,no,no,NA,NA
+344,QnrB30__23,Flq,QnrB,QnrB30,23,HM439650,1-681,681,no,no,NA,NA
+344,QnrB31__24,Flq,QnrB,QnrB31,24,HQ418999,1-681,681,no,no,NA,NA
+344,QnrB32__25,Flq,QnrB,QnrB32,25,JN173054,1-681,681,no,no,NA,NA
+344,QnrB33__26,Flq,QnrB,QnrB33,26,JN173055,36-680,645,no,no,NA,NA
+344,QnrB34__27,Flq,QnrB,QnrB34,27,JN173056,36-683,648,no,no,NA,NA
+344,QnrB35__28,Flq,QnrB,QnrB35,28,JN173057,2307-2951,645,no,no,NA,NA
+344,QnrB36__29,Flq,QnrB,QnrB36,29,JN173058,37-681,645,no,no,NA,NA
+344,QnrB37__30,Flq,QnrB,QnrB37,30,JN173059,36-680,645,no,no,NA,NA
+344,QnrB38__31,Flq,QnrB,QnrB38,31,JN173060,2307-2951,645,no,no,NA,NA
+344,QnrB4__32,Flq,QnrB,QnrB4,32,DQ303921,1-648,648,no,no,NA,NA
+344,QnrB40__33,Flq,QnrB,QnrB40,33,JN166689,1-660,660,no,no,NA,NA
+344,QnrB41__34,Flq,QnrB,QnrB41,34,JN166690,1-681,681,no,no,NA,NA
+344,QnrB42__35,Flq,QnrB,QnrB42,35,JN680743,1-645,645,no,no,NA,NA
+344,QnrB43__36,Flq,QnrB,QnrB43,36,JQ349151,1-680,680,no,no,NA,NA
+344,QnrB44__37,Flq,QnrB,QnrB44,37,JQ349153,1-680,680,no,no,NA,NA
+344,QnrB45__38,Flq,QnrB,QnrB45,38,JQ349152,1-680,680,no,no,NA,NA
+344,QnrB46__39,Flq,QnrB,QnrB46,39,JQ349154,1-680,680,no,no,NA,NA
+344,QnrB47__40,Flq,QnrB,QnrB47,40,JQ349155,1-680,680,no,no,NA,NA
+344,QnrB48__41,Flq,QnrB,QnrB48,41,JQ762640,37-681,645,no,no,NA,NA
+344,QnrB49__42,Flq,QnrB,QnrB49,42,JQ582718,1-681,681,no,no,NA,NA
+344,QnrB53__43,Flq,QnrB,QnrB53,43,HQ704413,1-681,681,no,no,NA,NA
+344,QnrB5__44,Flq,QnrB,QnrB5,44,DQ303919,1-681,681,no,no,NA,NA
+344,QnrB6__45,Flq,QnrB,QnrB6,45,EF520349,1-681,681,no,no,NA,NA
+344,QnrB7__46,Flq,QnrB,QnrB7,46,EU043311,1-645,645,no,no,NA,NA
+344,QnrB8__47,Flq,QnrB,QnrB8,47,EU043312,1-645,645,no,no,NA,NA
+344,QnrB72__1749,Flq,QnrB,QnrB72,1749,KC741443,1-645,645,no,no,NA,NA
+345,VanX-Pt__343,Gly,VanX,VanX-Pt,343,DQ018710,7107-7715,609,yes,no,NA,NA
+345,VanXE-Pp__344,Gly,VanX,VanXE-Pp,344,AF155139,6977-7648,672,yes,no,NA,NA
+346,QnrC__50,Flq,QnrC,QnrC,50,EU917444,1717-2382,666,no,no,NA,NA
+347,VatF__51,MLS,VatF,VatF,51,AF170730,70-735,666,no,no,NA,NA
+348,Cat-86__60,Phe,Cat-86,Cat-86,60,K00544,145-807,663,no,no,NA,NA
+349,NpmA__61,AGly,NpmA,NpmA,61,AB261016,91164-91823,660,no,no,NA,NA
+350,VanR-B__1472,Gly,VanR-B,VanR-B,1472,AY655721,69-728,660,no,no,NA,NA
+351,VatA__1471,MLS,VatA,VatA,1471,L07778,258-917,660,no,no,NA,NA
+352,CatA1__1470,Phe,CatA1,CatA1,1470,V00622,244-903,660,no,no,NA,NA
+353,CatB__1469,Phe,CatB,CatB,1469,M93113,145-804,660,no,no,NA,NA
+354,CatQ__1468,Phe,CatQ,CatQ,1468,M55620,459-1118,660,no,no,NA,NA
+355,Qnr-A1__1461,Flq,Qnr-A,Qnr-A1,1461,AY070235,303-959,657,no,no,NA,NA
+355,Qnr-A2__1462,Flq,Qnr-A,Qnr-A2,1462,AY675584,1-657,657,no,no,NA,NA
+355,QnrA3__1463,Flq,Qnr-A,QnrA3,1463,DQ058661,1-657,657,no,no,NA,NA
+355,QnrA4__1464,Flq,Qnr-A,QnrA4,1464,DQ058662,1-657,657,no,no,NA,NA
+355,QnrA5__1465,Flq,Qnr-A,QnrA5,1465,DQ058663,1-657,657,no,no,NA,NA
+355,QnrA6__1466,Flq,Qnr-A,QnrA6,1466,DQ151889,1-657,657,no,no,NA,NA
+355,QnrA7__1467,Flq,Qnr-A,QnrA7,1467,GQ463707,1-657,657,no,no,NA,NA
+356,Qnr-AS__1460,Flq,Qnr-AS,Qnr-AS,1460,FM178379,1700140-1699484,657,no,no,NA,NA
+357,Qnr-S1__1455,Flq,Qnr-S,Qnr-S1,1455,HF545434,62361-63017,657,no,no,NA,NA
+357,QnrS2__1456,Flq,Qnr-S,QnrS2,1456,DQ485530,1-657,657,no,no,NA,NA
+357,QnrS3__1457,Flq,Qnr-S,QnrS3,1457,EU077611,1-656,656,no,no,NA,NA
+357,QnrS__1458,Flq,Qnr-S,QnrS,1458,FJ418153,1-657,657,no,no,NA,NA
+357,Qnr-S5__1459,Flq,Qnr-S,Qnr-S5,1459,HQ631377,1-657,657,no,no,NA,NA
+358,CatA9__1475,Phe,CatA9,CatA9,1475,K01998,288-938,651,no,no,NA,NA
+360,Cat-pC221__1183,Phe,CatA,Cat-pC221,1183,X02529,2267-2914,648,no,no,NA,NA
+360,Cat-pC223__1184,Phe,CatA,Cat-pC223,1184,AY355285,1000-1647,648,no,no,NA,NA
+360,CatA7__1185,Phe,CatA,CatA7,1185,M64281,208-855,648,no,no,NA,NA
+360,CatA8__1186,Phe,CatA,CatA8,1186,X92946,22563-21916,648,no,no,NA,NA
+361,QnrD__1187,Flq,QnrD,QnrD,1187,FJ228229,554-1198,645,no,no,NA,NA
+362,VatE__1181,MLS,VatE,VatE,1181,AF139725,63-707,645,no,no,NA,NA
+363,CatA2__1182,Phe,CatA2,CatA2,1182,X53796,187-828,642,no,no,NA,NA
+364,CatA3__1179,Phe,CatA3,CatA3,1179,X07848,272-913,642,no,no,NA,NA
+365,VatB__1180,MLS,VatB,VatB,1180,U19459,67-705,639,no,no,NA,NA
+366,VatC__1177,MLS,VatC,VatC,1177,AF015628,1307-1945,639,no,no,NA,NA
+367,CatB7__1178,Phe,CatB7,CatB7,1178,AF036933,177-815,639,no,no,NA,NA
+368,CatD__1173,Phe,Cat,CatD,1173,X15100,91-729,639,no,no,NA,NA
+368,CatP__1174,Phe,Cat,CatP,1174,U15027,2953-3576,624,no,no,NA,NA
+368,CatS__1175,Phe,Cat,CatS,1175,X74948,1-492,492,no,no,NA,NA
+369,Aac2-Id__1176,AGly,Aac2-Id,Aac2-Id,1176,U72743,386-1018,633,no,no,NA,NA
+370,CatB2__604,Phe,CatB2,CatB2,604,JN676230,4337-4969,633,no,no,NA,NA
+371,CatB3__601,Phe,CatBx,CatB3,601,AJ310778,2329-2961,633,no,no,NA,NA
+371,CatB4__602,Phe,CatBx,CatB4,602,JX424423,100791-101339,549,no,no,NA,NA
+371,CatB8__603,Phe,CatBx,CatB8,603,AF227506,253-885,633,no,no,NA,NA
+372,CatB10__606,Phe,CatB10,CatB10,606,AJ878850,1197-1829,633,no,no,NA,NA
+374,VatD__608,MLS,VatD,VatD,608,L12033,162-791,630,no,no,NA,NA
+375,CatB1__607,Phe,CatB1,CatB1,607,M58472,148-777,630,no,no,NA,NA
+376,CatB5__610,Phe,CatB5,CatB5,610,AAWG01000020,33604-34233,630,no,no,NA,NA
+376,CatB9__611,Phe,CatB5,CatB9,611,AF462019,27-656,630,no,no,NA,NA
+377,VanZF-Pp__609,Gly,VanZF-Pp,VanZF-Pp,609,AF155139,4339-4959,621,no,no,NA,NA
+378,VanX-Ac1__597,Gly,VanX-Ac1,VanX-Ac1,597,DQ246438,2221-2835,615,no,no,NA,NA
+378,VanX-Ac2__598,Gly,VanX-Ac1,VanX-Ac2,598,AY618461,1756-2316,561,no,no,NA,NA
+378,VanX-Ao1__599,Gly,VanX-Ac1,VanX-Ao1,599,AF060799,2604-3212,609,no,no,NA,NA
+378,VanX-Ao2__600,Gly,VanX-Ac1,VanX-Ao2,600,HQ679900,2070-2678,609,no,no,NA,NA
+379,CatB6__596,Phe,CatB6,CatB6,596,AJ223604,3727-4341,615,no,no,NA,NA
+380,VanX-M__1188,Gly,VanX-M,VanX-M,1188,FJ349556,5894-6502,609,no,yes,NA,NA
+380,VanX-A__1189,Gly,VanX-M,VanX-A,1189,M97297,8016-8624,609,yes,yes,NA,NA
+380,VanX-Pt2__1190,Gly,VanX-M,VanX-Pt2,1190,AY926880,4769-5377,609,no,yes,NA,NA
+381,VanX-B__1191,Gly,VanX-B,VanX-B,1191,AY655721,5891-6499,609,no,no,NA,NA
+382,VanX-D__1192,Gly,VanX-D,VanX-D,1192,AY082011,6938-7546,609,no,no,NA,NA
+383,VanX-Sc__1193,Gly,VanX-Sc,VanX-Sc,1193,AL939117,55404-56012,609,no,no,NA,NA
+384,Aac2-Ib__1194,AGly,Aac2-Ib,Aac2-Ib,1194,U41471,265-852,588,no,no,NA,NA
+385,Aac6-IIc__1195,AGly,Aac6-IIc,Aac6-IIc,1195,HM173356,2099-2680,582,no,no,NA,NA
+386,VanXY-L__1196,Gly,VanXY-L,VanXY-L,1196,EU250284,1997-2578,582,no,no,NA,NA
+387,VanXYc2-2__1197,Gly,VanXYc,VanXYc2-2,1197,EU151760,1078-1650,573,no,no,NA,NA
+387,VanXYc3__1198,Gly,VanXYc,VanXYc3,1198,AY033764,1075-1647,573,no,no,NA,NA
+387,VanXYc4__1199,Gly,VanXYc,VanXYc4,1199,EU151753,1078-1650,573,no,no,NA,NA
+388,VanX-Yc__1200,Gly,VanX-Yc,VanX-Yc,1200,DQ022190,1233-1805,573,no,no,NA,NA
+389,DfrA19__1202,Tmt,DfrA19,DfrA19,1202,AJ310778,7004-7573,570,no,no,NA,NA
+390,Aac6-Iae__1628,AGly,Aac6-Iai-e,Aac6-Iae,1628,AB104852,1935-2486,552,no,no,NA,NA
+390,Aac6-Iai__1629,AGly,Aac6-Iai-e,Aac6-Iai,1629,EU886977,544-1110,567,no,no,NA,NA
+391,AacA43__1627,AGly,AacA43,AacA43,1627,HQ247816,639-1202,564,no,no,NA,NA
+392,DfrA10__613,Tmt,DfrA10,DfrA10,613,NC_010410,3652397-3651834,564,no,no,NA,NA
+393,DfrA23__612,Tmt,DfrA23,DfrA23,612,AJ746361,7303-6743,561,no,no,NA,NA
+394,Aac6-Ia__620,AGly,Aac6-Ia,Aac6-Ia,620,M18967,757-1314,558,no,no,NA,NA
+395,DfrA24__619,Tmt,DfrA24,DfrA24,619,AJ972619,83-640,558,no,no,NA,NA
+396,Aac__618,AGly,Aac,Aac,618,AJ628983,1985-2539,555,no,no,NA,NA
+397,Aac6-32__616,AGly,Aac6-32,Aac6-32,616,EF614235,2247-2801,555,no,no,NA,NA
+397,Aac6-IIa__617,AGly,Aac6-32,Aac6-IIa,617,M29695,707-1261,555,no,no,NA,NA
+398,Aac6-33__1667,AGly,Aac6-33,Aac6-33,1667,JN596280,1203-1757,555,no,no,NA,NA
+398,Aac6-I30__1668,AGly,Aac6-33,Aac6-I30,1668,AY289608,1524-2078,555,no,no,NA,NA
+399,Aac6-Iaf__1664,AGly,Aac6-Iaf,Aac6-Iaf,1664,AB462903,1200-1751,552,no,no,NA,NA
+399,Aac6-IL__1665,AGly,Aac6-Iaf,Aac6-IL,1665,Z54241,530-1051,522,no,no,NA,NA
+399,Aac6-Iq__1666,AGly,Aac6-Iaf,Aac6-Iq,1666,AF047556,127-678,552,no,no,NA,NA
+400,DfrA26__593,Tmt,DfrA26,DfrA26,593,AM403715,303-854,552,no,no,NA,NA
+401,Aac2-Ie__592,AGly,Aac2-Ie,Aac2-Ie,592,NC_011896,3039059-3039607,549,no,no,NA,NA
+402,Aac6-Ii__591,AGly,Aac6-Ii,Aac6-Ii,591,L12710,169-717,549,no,no,NA,NA
+403,FosC__590,Fcyn,FosC,FosC,590,Z33413,387-935,549,no,no,NA,NA
+404,Aac2-Ic__589,AGly,Aac2-Ic,Aac2-Ic,589,U72714,373-918,546,no,no,NA,NA
+405,Aac6-IIb__588,AGly,Aac6-IIb,Aac6-IIb,588,L06163,532-1074,543,no,no,NA,NA
+406,Sat3__587,AGly,Sat3,Sat3,587,Z48231,221-763,543,no,no,NA,NA
+407,Sat4A__586,AGly,Sat4A,Sat4A,586,X92945,38870-39412,543,no,no,NA,NA
+408,Aac2-Ia__595,AGly,Aac2-Ia,Aac2-Ia,595,L06156,264-800,537,no,no,NA,NA
+409,Aac6-Im__594,AGly,Aac6-Im,Aac6-Im,594,AF337947,1215-1751,537,no,no,NA,NA
+410,Aac3-I__1083,AGly,Aac3-I,Aac3-I,1083,AJ877225,5757-5293,465,no,no,NA,NA
+410,Aac3-I__1084,AGly,Aac3-I,Aac3-I,1084,X15852,1250-1783,534,no,no,NA,NA
+411,AadB__1085,AGly,AadB,AadB,1085,X12618,314-847,534,no,no,NA,NA
+412,DfrA9__1087,Tmt,DfrA9,DfrA9,1087,X57730,726-1259,534,no,no,NA,NA
+413,Sat-2A__1088,AGly,Sat-2A,Sat-2A,1088,X51546,518-1042,525,no,no,NA,NA
+414,Erm41__1077,MLS,Erm41,Erm41,1077,EU590124,258-779,522,no,no,NA,NA
+415,DfrA20__1078,Tmt,DfrA20,DfrA20,1078,AJ605332,1304-1813,510,no,no,NA,NA
+416,DfrA8__1079,Tmt,DfrA8,DfrA8,1079,U10186,711-1220,510,no,no,NA,NA
+417,DfrD__1080,Tmt,Dfr,DfrD,1080,Z50141,82-582,501,no,no,NA,NA
+417,DfrG__1081,Tmt,Dfr,DfrG,1081,AB205645,1013-1510,498,no,no,NA,NA
+417,DfrK__1082,Tmt,Dfr,DfrK,1082,FM207105,2788-3279,492,no,no,NA,NA
+418,DfrA12__1089,Tmt,DfrA,DfrA12,1089,Z21672,310-807,498,no,no,NA,NA
+418,DfrA13__1090,Tmt,DfrA,DfrA13,1090,Z50802,718-1215,498,no,no,NA,NA
+418,DfrA21__1091,Tmt,DfrA,DfrA21,1091,AY552589,1-498,498,no,no,NA,NA
+418,DfrA22__1092,Tmt,DfrA,DfrA22,1092,HM173356,1497-1994,498,no,no,NA,NA
+418,DfrA33__1093,Tmt,DfrA,DfrA33,1093,FM957884,88-585,498,no,no,NA,NA
+419,LnuC__1094,MLS,LnuC,LnuC,1094,AY928180,1150-1644,495,no,no,NA,NA
+420,LnuD__1572,MLS,LnuD,LnuD,1572,EF452177,19-513,495,no,no,NA,NA
+421,DfrA3__1571,Tmt,DfrA3,DfrA3,1571,J03306,103-591,489,no,no,NA,NA
+422,VanZ-A__1574,Gly,VanZ-A,VanZ-A,1574,M97297,10116-10601,486,no,no,NA,NA
+423,LnuA__1573,MLS,LnuA,LnuA,1573,M14039,413-898,486,no,no,NA,NA
+424,DfrC__1576,Tmt,DfrC,DfrC,1576,Z48233,337-822,486,no,no,NA,NA
+425,VanZ-Pa__1575,Gly,VanZ-Pa2,VanZ-Pa,1575,DQ018711,7169-7648,480,no,no,NA,NA
+426,DfrA3b__1578,Tmt,DfrA3b,DfrA3b,1578,AY162283,5616-6095,480,no,no,NA,NA
+427,Aac3-Id__1577,AGly,Aac3-Id,Aac3-Id,1577,AB114632,104-580,477,no,no,NA,NA
+428,Aac3-Ig__1570,AGly,Aac3-Ig,Aac3-Ig,1570,CP000282,2333620-2334096,477,no,no,NA,NA
+429,AadC__1569,AGly,AadC,AadC,1569,V01282,701-225,477,no,no,NA,NA
+430,DfrA1__319,Tmt,DfrA1,DfrA1,319,NC_010410,3677389-3676916,474,no,no,NA,NA
+430,DfrA15__320,Tmt,DfrA1,DfrA15,320,JN108895,93-551,459,no,no,NA,NA
+430,DfrA15b__321,Tmt,DfrA1,DfrA15b,321,AJ867237,177-650,474,no,no,NA,NA
+431,DfrA14__322,Tmt,DfrA5,DfrA14,322,JX424423,121613-122086,474,no,no,NA,NA
+431,DfrA30__323,Tmt,DfrA5,DfrA30,323,AM997279,705-1178,474,no,no,NA,NA
+431,DfrA5__324,Tmt,DfrA5,DfrA5,324,X12868,1306-1779,474,no,no,NA,NA
+432,DfrA16__315,Tmt,DfrA16,DfrA16,315,AF077008,115-588,474,no,no,NA,NA
+433,DfrA17__316,Tmt,DfrA7,DfrA17,316,KR091911,9884-9411,474,no,no,NA,NA
+433,DfrA32__317,Tmt,DfrA7,DfrA32,317,GU067642,535-1008,474,no,no,NA,NA
+433,DfrA7__318,Tmt,DfrA7,DfrA7,318,X58425,594-1067,474,no,no,NA,NA
+434,DfrA27__311,Tmt,DfrA27,DfrA27,311,JF806499,1220-747,474,no,no,NA,NA
+434,DfrA28__312,Tmt,DfrA27,DfrA28,312,FM877476,116-589,474,no,no,NA,NA
+435,DfrA31__313,Tmt,DfrA6,DfrA31,313,AB200915,1832-2305,474,no,no,NA,NA
+435,DfrA6__314,Tmt,DfrA6,DfrA6,314,Z86002,336-809,474,no,no,NA,NA
+436,DfrA29__309,Tmt,DfrA29,DfrA29,309,AM237806,615-1086,472,no,no,NA,NA
+437,Aac3-Ic__310,AGly,Aac3-Ic,Aac3-Ic,310,AJ511268,1295-1765,471,no,no,NA,NA
+438,Tet-34__307,Tet,Tet-34,Tet-34,307,AB061440,770-306,465,no,no,NA,NA
+439,Aac6-Iz__308,AGly,Aac6-Iz,Aac6-Iz,308,AF140221,390-851,462,no,no,NA,NA
+440,Aac3-Ih__279,AGly,Aac3-Ih,Aac3-Ih,279,CP000490,509912-510370,459,no,no,NA,NA
+441,Aac3-Ii__278,AGly,Aac3-Ii,Aac3-Ii,278,CP000356,638720-638262,459,no,no,NA,NA
+442,DfrA25__277,Tmt,DfrA25,DfrA25,277,DQ267940,54-512,459,no,no,NA,NA
+443,Arr2__274,Rif,Arr,Arr2,274,NC_010410,3659974-3659522,453,no,no,NA,NA
+443,Arr3__275,Rif,Arr,Arr3,275,JF806499,1353-1805,453,no,no,NA,NA
+443,Arr6__276,Rif,Arr,Arr6,276,JF922883,1-453,453,no,no,NA,NA
+444,Arr4__283,Rif,Arr4,Arr4,283,EF660562,1672-2124,453,no,no,NA,NA
+444,Arr7__284,Rif,Arr4,Arr7,284,FN397623,1189-1641,453,no,no,NA,NA
+445,Arr5__282,Rif,Arr5,Arr5,282,EF660563,393-845,453,no,no,NA,NA
+446,Aac6-Id__281,AGly,Aac6-Id,Aac6-Id,281,X12618,905-1354,450,no,no,NA,NA
+447,VanA-G__280,Gly,VanA-G,VanA-G,280,AY271782,157-606,450,no,no,NA,NA
+448,Aac3-Ik__273,AGly,Aac3-Ik,Aac3-Ik,273,BX571856,765853-766296,444,no,no,NA,NA
+449,Aac6-Ic__272,AGly,Aac6-Ic,Aac6-Ic,272,M94066,1554-1994,441,no,no,NA,NA
+450,Aac6-Ih__752,AGly,Aac6-Ih,Aac6-Ih,752,L29044,352-792,441,no,no,NA,NA
+450,Aac6-Is__753,AGly,Aac6-Ih,Aac6-Is,753,AF031327,1-441,441,no,no,NA,NA
+450,Aac6-It__754,AGly,Aac6-Ih,Aac6-It,754,AF031328,1-441,441,no,no,NA,NA
+450,Aac6-Iu__755,AGly,Aac6-Ih,Aac6-Iu,755,AF031329,1-441,441,no,no,NA,NA
+450,Aac6-Iv__756,AGly,Aac6-Ih,Aac6-Iv,756,AF031330,1-441,441,no,no,NA,NA
+451,Aac6-Ij__757,AGly,Aac6-Ij,Aac6-Ij,757,L29045,260-700,441,no,no,NA,NA
+452,Aac6-Ir__758,AGly,Aac6-Ir,Aac6-Ir,758,AF031326,1-441,441,no,no,NA,NA
+453,Aac6-Iw__759,AGly,Aac6-Iw,Aac6-Iw,759,AF031331,1-441,441,no,no,NA,NA
+454,Aac6-Iaa__760,AGly,Aac6-Iaa,Aac6-Iaa,760,NC_003197,1707352-1707789,438,no,no,NA,NA
+454,Aac6-Iy__761,AGly,Aac6-Iaa,Aac6-Iy,761,AF144880,3542-3979,438,no,no,NA,NA
+455,Aac6-Ig__762,AGly,Aac6-Ig,Aac6-Ig,762,L09246,544-981,438,no,no,NA,NA
+455,Aac6-Ik__763,AGly,Aac6-Ig,Aac6-Ik,763,L29510,369-806,438,no,no,NA,NA
+456,Aac6-Iad__764,AGly,Aac6-Iad,Aac6-Iad,764,AB119105,1-435,435,no,no,NA,NA
+457,Aac6-If__765,AGly,Aac6-If,Aac6-If,765,X55353,279-713,435,no,no,NA,NA
+458,FosB__750,Fcyn,FosB,FosB,750,AHLO01000073,63139-63558,420,no,no,NA,NA
+459,FosA__751,Fcyn,FosA,FosA,751,KR091911,182019-181603,417,no,no,NA,NA
+460,Aac6__1238,AGly,Aac6,Aac6,1238,DQ302723,81-482,402,no,no,NA,NA
+461,AacA29b__1237,AGly,AacA29b,AacA29b,1237,AY139599,768-1148,381,no,no,NA,NA
+462,Tet-37__1240,Tet,Tet-37,Tet-37,1240,AF540889,1-327,327,no,no,NA,NA
+463,TetU__1239,Tet,TetU,TetU,1239,U01917,413-730,318,no,no,NA,NA
+464,DfrB1__1232,Tmt,DfrB,DfrB1,1232,JN676230,3086-3379,294,no,no,NA,NA
+464,DfrB5__1233,Tmt,DfrB,DfrB5,1233,AY943084,2856-3092,237,no,no,NA,NA
+464,DfrB6__1234,Tmt,DfrB,DfrB6,1234,DQ274503,394-630,237,no,no,NA,NA
+464,DfrB8__1235,Tmt,DfrB,DfrB8,1235,GU295656,1048-1296,249,no,no,NA,NA
+465,DfrB2__1230,Tmt,DfrB2,DfrB2,1230,AY139592,1709-1945,237,no,no,NA,NA
+465,DfrB3__1231,Tmt,DfrB2,DfrB3,1231,GQ150744,123-359,237,no,no,NA,NA
+466,DfrB4__1236,Tmt,DfrB4,DfrB4,1236,FM877484,148-384,237,no,no,NA,NA
+467,Mcr1-2__1750,Col,Mcr1,Mcr1-2,1750,KX236309,3137-4762,1626,no,no,NA,NA
+467,Mcr1-3__1751,Col,Mcr1,Mcr1-3,1751,NG_052861,101-1726,1626,no,no,NA,NA
+467,Mcr1-4__1752,Col,Mcr1,Mcr1-4,1752,KY041856,1-1626,1626,no,no,NA,NA
+467,Mcr1-5__1753,Col,Mcr1,Mcr1-5,1753,KY283125,1-1626,1626,no,no,NA,NA
+467,Mcr1-6__1754,Col,Mcr1,Mcr1-6,1754,NG_052893,101-1726,1626,no,no,NA,NA
+467,Mcr1-7__1755,Col,Mcr1,Mcr1-7,1755,KY488488,1-1626,1626,no,no,NA,NA
+467,Mcr1-8__1781,Col,Mcr1,Mcr1-8,1781,KY683842.1,1-1626,1626,no,no,NA,NA
+467,Mcr1-9__1782,Col,Mcr1,Mcr1-9,1782,KY964067.1,27201-28809,1626,no,no,NA,NA
+467,Mcr1-10__1783,Col,Mcr1,Mcr1-10,1783,MF176238.1,1-1626,1626,no,no,NA,NA
+467,Mcr1-11__1784,Col,Mcr1,Mcr1-11,1784,KY853650.1,1-1629,1629,no,no,NA,NA
+467,Mcr1-12__1785,Col,Mcr1,Mcr1-12,1785,LC337668.1,1-1626,1626,no,no,NA,NA
+467,Mcr1-1__1835,Col,Mcr1,Mcr1-1,1835,KP347127,22413-24038,1626,no,no,NA,NA
+468,Mcr2-2__1786,Col,Mcr2,Mcr2-2,1786,MF176239.1,1-1617,1617,no,no,NA,NA
+468,Mcr2-1__1836,Col,Mcr2,Mcr2-1,1836,LT598652,26779-28395,1617,no,no,NA,NA
+469,PBP1b__1756,Bla,PBP1b,PBP1b,1756,AF101781,1-2466,2466,no,no,NA,NA
+470,PBP1a__1757,Bla,PBP1a,PBP1a,1757,JN645776,1-2160,2160,no,no,NA,NA
+471,MEC-C__1758,Bla,MEC,MEC-C,1758,HG515014,42996-44993,1998,no,no,NA,NA
+473,Mcr3-1__1760,Col,Mcr3,Mcr3-1,1760,KY924928,161134-162759,1626,no,no,NA,NA
+473,Mcr3-2__1787,Col,Mcr3,Mcr3-2,1787,NMWW01000143.1,316-1942,1626,no,no,NA,NA
+473,Mcr3-3__1788,Col,Mcr3,Mcr3-3,1788,MF495680.1,240178-241801,1623,no,no,NA,NA
+473,Mcr3-4__1789,Col,Mcr3,Mcr3-4,1789,NQCO01000074.1,2954-4580,1626,no,no,NA,NA
+473,Mcr3-5__1790,Col,Mcr3,Mcr3-5,1790,MF489760.1,49179-50805,1626,no,no,NA,NA
+473,Mcr3-6__1791,Col,Mcr3,Mcr3-6,1791,MF598076.1,0-1623,1623,no,no,NA,NA
+473,Mcr3-7__1792,Col,Mcr3,Mcr3-7,1792,MF598077.1,93-1719,1626,no,no,NA,NA
+473,Mcr3-8__1793,Col,Mcr3,Mcr3-8,1793,MF598078.1,0-1623,1623,no,no,NA,NA
+473,Mcr3-9__1794,Col,Mcr3,Mcr3-9,1794,MF598080.1,0-1626,1626,no,no,NA,NA
+473,Mcr3-10__1795,Col,Mcr3,Mcr3-10,1795,MG214531.1,6792-8418,1626,no,no,NA,NA
+473,Mcr3-11__1796,Col,Mcr3,Mcr3-11,1796,MG489958.1,0-1626,1626,no,no,NA,NA
+473,Mcr3-12__1797,Col,Mcr3,Mcr3-12,1797,MG564491.1,0-1626,1626,no,no,NA,NA
+474,Mcr4-1__1761,Col,Mcr4,Mcr4-1,1761,MF543359,5808-7433,1626,no,no,NA,NA
+474,Mcr4-2__1798,Col,Mcr4,Mcr4-2,1798,MG581979.1,9-1630,1621,no,no,NA,NA
+475,IRI__1762,Rif,IRI,IRI,1762,U56415,280-1719,1440,no,no,NA,NA
+476,CmlB1__1763,Phe,CmlB1,CmlB1,1763,NG_047658,101-1366,1266,no,no,NA,NA
+477,ADC-25__1764,Bla,ADC,ADC-25,1764,EF016355,1-1152,1152,no,no,class C beta-lactamase,Bla
+477,ADC-30__1765,Bla,ADC,ADC-30,1765,JF265068,955-2106,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-56__1766,Bla,ADC,ADC-56,1766,JF265067,955-2106,1152,no,no,cefepime-hydrolyzing class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-58__1767,Bla,ADC,ADC-58,1767,JQ319653,1-1152,1152,no,no,class C beta-lactamase,Bla
+477,ADC-59__1768,Bla,ADC,ADC-59,1768,JQ319654,1-1152,1152,no,no,class C beta-lactamase,Bla
+477,ADC-60__1769,Bla,ADC,ADC-60,1769,JQ692087,1-1152,1152,no,no,class C beta-lactamase,Bla
+477,ADC-61__1770,Bla,ADC,ADC-61,1770,JQ753702,1-1152,1152,no,no,class C beta-lactamase,Bla
+477,ADC-62__1771,Bla,ADC,ADC-62,1771,JQ867374,1-1152,1152,no,no,class C beta-lactamase,Bla
+477,ADC-68__1772,Bla,ADC,ADC-68,1772,KC866352,1-1152,1152,no,no,carbapenem-hydrolyzing class C beta-lactamase,Bla_Carb
+477,ADC-67__1773,Bla,ADC,ADC-67,1773,JX169789,1-1152,1152,no,no,class C beta-lactamase,Bla
+477,ADC-73__1774,Bla,ADC,ADC-73,1774,KP881233,1-1152,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-74__1775,Bla,ADC,ADC-74,1775,KP881234,1-1152,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-75__1776,Bla,ADC,ADC-75,1776,KP881235,1-1152,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-76__1777,Bla,ADC,ADC-76,1777,KP881236,1-1152,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-77__1778,Bla,ADC,ADC-77,1778,KP881237,54-1205,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-78__1779,Bla,ADC,ADC-78,1779,KP881238,1-1152,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+477,ADC-11__1780,Bla,ADC,ADC-11,1780,NC_010410,1184557-1185708,1152,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+478,CEPH__1781,Bla,CEPH-AQU,CEPH,1781,AJ276030,2668-3816,1149,no,no,NA,NA
+478,AQU1__1782,Bla,CEPH-AQU,AQU1,1782,AB765395,1-1143,1143,no,no,NA,NA
+478,AQU2__1783,Bla,CEPH-AQU,AQU2,1783,KF730243,1-1143,1143,no,no,NA,NA
+478,AQU3__1784,Bla,CEPH-AQU,AQU3,1784,KF730244,1-1149,1149,no,no,NA,NA
+478,Mcr5-1__1799,Col,Mcr5,Mcr5-1,1799,KY807920.1,9895-11539,1644,no,no,NA,NA
+478,Mcr5-2__1800,Col,Mcr5,Mcr5-2,1800,MG384740.1,1-1641,1641,no,no,NA,NA
+479,SRT-1__1785,Bla,SRT-SST,SRT-1,1785,AB008454,154-1290,1137,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL
+479,SST-1__1786,Bla,SRT-SST,SST-1,1786,AB008455,152-1288,1137,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
+479,Mcr6-1__1801,Col,Mcr6,Mcr6-1,1801,MF176240.1,1-1617,1617,no,no,NA,NA
+480,DES-1__1787,Bla,DES,DES-1,1787,AF426161,119-1093,975,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+480,Mcr7-1__1802,Col,Mcr7,Mcr7-1,1802,MG267386.1,23609-25229,1621,no,no,NA,NA
+481,THIN-B__1788,Bla,THIN,THIN-B,1788,AJ250876,37-987,951,no,no,NA,NA
+482,BRO-1__1789,Bla,BRO,BRO-1,1789,Z54180,84-1028,945,no,no,class A beta-lactamase,Bla
+482,BRO-2__1790,Bla,BRO,BRO-2,1790,Z54181,63-1007,945,no,no,class A beta-lactamase,Bla
+483,BKC-1__1791,Bla,BKC,BKC-1,1791,KP689347,8603-9544,942,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+484,SFC-1__1792,Bla,SFC,SFC-1,1792,AY354402,82-1011,930,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+485,BLA-1__1793,Bla,BLA,BLA-1,1793,AY453161,501-1430,930,no,no,NA,NA
+486,BCL-1__1794,Bla,BCL,BCL-1,1794,EF540343,3313-4236,924,no,no,class A beta-lactamase,Bla
+487,Aph7__1795,AGly,Aph7,Aph7,1795,GG774704,686456-687373,918,no,no,NA,NA
+488,FRI-1__1796,Bla,FRI,FRI-1,1796,KT192551,3492-4376,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+488,FRI-2__1797,Bla,FRI,FRI-2,1797,LC178555,1-885,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+488,FRI-3__1798,Bla,FRI,FRI-3,1798,KY524440,1-885,885,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+489,SPU-1__1799,Bla,SPU,SPU-1,1799,GQ919044,1-882,882,no,no,CSP family class A extended-spectrum beta-lactamase,Bla_ESBL
+490,CGA-1__1800,Bla,CGA,CGA-1,1800,AF339733,437-1315,879,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+491,CIA-1__1801,Bla,CIA,CIA-1,1801,AB639753,1-879,879,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+491,CIA-2__1802,Bla,CIA,CIA-2,1802,AB674566,1-879,879,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+491,CIA-3__1803,Bla,CIA,CIA-3,1803,AB674567,1-879,879,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+491,CIA-4__1804,Bla,CIA,CIA-4,1804,AB674568,1-879,879,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+492,ORN1a__1805,Bla,ORN-PLA,ORN1a,1805,AY307386,209-1084,876,no,no,NA,NA
+492,ORN1b__1806,Bla,ORN-PLA,ORN1b,1806,AY307387,170-1045,876,no,no,NA,NA
+492,PLA1a__1807,Bla,ORN-PLA,PLA1a,1807,AY302757,187-1062,876,no,no,NA,NA
+492,PLA2a__1808,Bla,ORN-PLA,PLA2a,1808,AY307385,162-1037,876,no,no,NA,NA
+493,VHW-1__1809,Bla,VHW,VHW-1,1809,AF217648,133-1005,873,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+493,VHH-1__1810,Bla,VHW,VHH-1,1810,AF217649,134-985,852,no,no,carbenicillin-hydrolyzing class A beta-lactamase,Bla
+494,CAU-1__1811,Bla,CAU,CAU-1,1811,AJ308331,1-870,870,no,no,subclass B3 metallo-beta-lactamase,Bla
+495,Pam-1__1812,Bla,Pam,Pam-1,1812,AB858498,1-864,864,no,no,NA,NA
+496,POM-1__1813,Bla,POM,POM-1,1813,EU315252,972-1832,861,no,no,subclass B3 metallo-beta-lactamase,Bla
+497,LAP-1__1814,Bla,LAP,LAP-1,1814,EF026092,1-858,858,no,no,class A beta-lactamase,Bla
+497,LAP-2__1815,Bla,LAP,LAP-2,1815,EU159120,1-858,858,no,no,class A beta-lactamase,Bla
+498,VCC-1__1816,Bla,VCC,VCC-1,1816,NG_050316,101-955,855,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
+499,FEZ-1__1817,Bla,FEZ,FEZ-1,1817,Y17896,1-849,849,no,no,subclass B3 metallo-beta-lactamase,Bla
+500,SMB-1__1818,Bla,SMB,SMB-1,1818,AB636283,1-843,843,no,no,subclass B3 metallo-beta-lactamase,Bla
+501,FIM-1__1819,Bla,FIM,FIM-1,1819,JX570731,1937-2725,789,no,no,subclass B1 metallo-beta-lactamase,Bla
+502,OXA-61__1820,Bla,OXA-61,OXA-61,1820,AY587956,123-896,774,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla
+503,OXA-372__1821,Bla,OXA-372,OXA-372,1821,KJ746496,1-774,774,no,no,carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+504,SFH-1__1822,Bla,SFH,SFH-1,1822,NZ_AUZV01000091,3453-4220,768,no,no,subclass B2 metallo-beta-lactamase,Bla
+505,SLB-1__1823,Bla,SLB,SLB-1,1823,AY590118,1-750,750,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
+506,Tmb-1__1824,Bla,Tmb,Tmb-1,1824,FR771847,16-753,738,no,no,NA,NA
+506,Tmb-2__1825,Bla,Tmb,Tmb-2,1825,AB758278,99-836,738,no,no,NA,NA
+507,SFB-1__1826,Bla,SFB,SFB-1,1826,AY590119,1-735,735,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
+508,QnrVC1__1827,Flq,QnrVC1,QnrVC1,1827,JX861889,3123-3779,657,no,no,NA,NA
+508,QnrVC6__1828,Flq,QnrVC1,QnrVC6,1828,KC202804,3875-4531,657,no,no,NA,NA
+509,QnrVC5__1829,Flq,QnrVC5,QnrVC5,1829,NC_021292,1176-1832,657,no,no,NA,NA
+509,QnrVC4__1830,Flq,QnrVC5,QnrVC4,1830,JX173954,1366-2022,657,no,no,NA,NA
+509,QnrVC7__1831,Flq,QnrVC5,QnrVC7,1831,KM555152,1-657,657,no,no,NA,NA
+511,NimB__1833,Ntmdz,NimB,NimB,1833,X71443,794-1288,495,no,no,NA,NA
+512,FosX__1834,Fcyn,FosX,FosX,1834,AP010904,1708924-1709388,465,no,no,NA,NA
+513,FosA2__1735,Fcyn,FosA2,FosA2,1735,EU487198,217-642,426,no,no,NA,NA
+514,TetX3__1838,Tgc,TetX,TetX3,1838,MK134375.1,6174-7340,1167,no,no,NA,NA
+514,TetX4__1839,Tgc,TetX,TetX4,1839,MK134376.1,325-1482,1158,no,no,NA,NA
