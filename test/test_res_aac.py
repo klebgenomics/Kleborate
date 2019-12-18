@@ -52,4 +52,12 @@ class TestResAlleles(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/aac_test/04.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6Ib-cr*')
+        self.assertEqual(results['AGly'], 'Aac6Ib-cr^')
+
+    def test_res_05(self):
+        """
+        Same as test_res_04, but with the hit on the other strand.
+        """
+        results = get_resistance_results(self.data_dir, 'test/aac_test/05.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['AGly'], 'Aac6Ib-cr^')

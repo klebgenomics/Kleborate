@@ -28,7 +28,7 @@ import os
 from .blastn import run_blastn
 
 
-def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print_header):
+def mlst_blast(seqs, database, info_arg, assemblies, min_ident, maxmissing, print_header):
     sts = {}  # key = concatenated string of alleles, value = st
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group
     max_st = 0  # holds the highest current ST, incremented when novel combinations are encountered
@@ -71,7 +71,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, minident, maxmissing, print
     best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
     best_allele = {}  # key = locus, value = best allele (* if imprecise match)
 
-    hits = run_blastn(seqs, contigs, minident, ungapped=True, culling_limit=2)
+    hits = run_blastn(seqs, contigs, None, min_ident, ungapped=True, culling_limit=2)
     for hit in hits:
         if '__' in hit.gene_id:  # srst2 formatted file
             gene_id_components = hit.gene_id.split('__')
