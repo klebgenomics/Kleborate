@@ -20,42 +20,42 @@ from kleborate.contig_stats import get_contig_stats
 class TestContigStats(unittest.TestCase):
 
     def test_count_1(self):
-        contig_count, _, _, _ = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        contig_count, _, _, _ = get_contig_stats('test/test_contig_stats/contig_stats_1.fasta')
         self.assertEqual(contig_count, 4)
 
     def test_count_2(self):
-        contig_count, _, _, _ = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        contig_count, _, _, _ = get_contig_stats('test/test_contig_stats/contig_stats_2.fasta')
         self.assertEqual(contig_count, 3)
 
     def test_n50_1(self):
-        _, n50, _, _ = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        _, n50, _, _ = get_contig_stats('test/test_contig_stats/contig_stats_1.fasta')
         self.assertEqual(n50, 40)
 
     def test_n50_2(self):
-        _, n50, _, _ = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        _, n50, _, _ = get_contig_stats('test/test_contig_stats/contig_stats_2.fasta')
         self.assertEqual(n50, 200)
 
     def test_longest_1(self):
-        _, _, longest_contig, _ = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        _, _, longest_contig, _ = get_contig_stats('test/test_contig_stats/contig_stats_1.fasta')
         self.assertEqual(longest_contig, 45)
 
     def test_longest_2(self):
-        _, _, longest_contig, _ = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        _, _, longest_contig, _ = get_contig_stats('test/test_contig_stats/contig_stats_2.fasta')
         self.assertEqual(longest_contig, 200)
 
     def test_ambiguous_bases_1(self):
-        _, _, _, ambiguous_bases = get_contig_stats('test/sequences/contig_stats_1.fasta')
+        _, _, _, ambiguous_bases = get_contig_stats('test/test_contig_stats/contig_stats_1.fasta')
         self.assertEqual(ambiguous_bases, 'no')
 
     def test_ambiguous_bases_2(self):
-        _, _, _, ambiguous_bases = get_contig_stats('test/sequences/contig_stats_2.fasta')
+        _, _, _, ambiguous_bases = get_contig_stats('test/test_contig_stats/contig_stats_2.fasta')
         self.assertEqual(ambiguous_bases, 'yes')
 
     def test_ambiguous_bases_3(self):
-        _, _, _, ambiguous_bases = get_contig_stats('test/sequences/contig_stats_3.fasta')
+        _, _, _, ambiguous_bases = get_contig_stats('test/test_contig_stats/contig_stats_3.fasta')
         self.assertEqual(ambiguous_bases, 'no')
 
     def test_ambiguous_bases_4(self):
-        _, _, _, ambiguous_bases = get_contig_stats('test/sequences/contig_stats_4.fasta')
+        _, _, _, ambiguous_bases = get_contig_stats('test/test_contig_stats/contig_stats_4.fasta')
         self.assertEqual(ambiguous_bases, 'yes')
 

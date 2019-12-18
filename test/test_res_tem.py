@@ -35,7 +35,7 @@ class TestResTem(unittest.TestCase):
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_tem(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/tem.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_tem/tem.fasta',
                                          self.args, self.res_headers, True)
         self.assertEqual(results['Bla_ESBL'], '-')
         self.assertEqual(results['Bla'], 'TEM-1D^')

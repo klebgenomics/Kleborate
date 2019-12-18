@@ -50,9 +50,6 @@ def cull_redundant_hits(blast_hits):
     """
     # Sort the hits from best to worst. Hit quality is defined as the product of gene coverage and
     # identity.
-    # blast_hits = sorted(blast_hits, key=lambda x: (x.ref_cov * x.pcid), reverse=True)
-    # blast_hits = sorted(blast_hits, key=lambda x: (1/x.score, x.gene_id))
-    # blast_hits = sorted(blast_hits, key=lambda x: (1/x.pcid, 1/x.ref_hit_len, x.gene_id))
     blast_hits = sorted(blast_hits, key=lambda x: (1/(x.pcid * x.score), x.gene_id))
 
     filtered_blast_hits = []

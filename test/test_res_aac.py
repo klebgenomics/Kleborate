@@ -24,23 +24,23 @@ class TestResAlleles(unittest.TestCase):
     """
 
     def setUp(self):
-        self.data_dir = 'test/aac_test/data'
+        self.data_dir = 'test/test_res_aac/data'
         Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o'])
         self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False)
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_res_01(self):
-        results = get_resistance_results(self.data_dir, 'test/aac_test/01.fasta', self.args,
+        results = get_resistance_results(self.data_dir, 'test/test_res_aac/01.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['AGly'], '-')
 
     def test_res_02(self):
-        results = get_resistance_results(self.data_dir, 'test/aac_test/02.fasta', self.args,
+        results = get_resistance_results(self.data_dir, 'test/test_res_aac/02.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['AGly'], 'Aac6-31')
 
     def test_res_03(self):
-        results = get_resistance_results(self.data_dir, 'test/aac_test/03.fasta', self.args,
+        results = get_resistance_results(self.data_dir, 'test/test_res_aac/03.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['AGly'], 'Aac6-31*')
 
@@ -50,7 +50,7 @@ class TestResAlleles(unittest.TestCase):
         match is for a partial hit to Ant3''Ih-Aac6-IId, but the correct answer is Aac6Ib-cr, which
         has a full coverage hit.
         """
-        results = get_resistance_results(self.data_dir, 'test/aac_test/04.fasta', self.args,
+        results = get_resistance_results(self.data_dir, 'test/test_res_aac/04.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['AGly'], 'Aac6Ib-cr^')
 
@@ -58,6 +58,6 @@ class TestResAlleles(unittest.TestCase):
         """
         Same as test_res_04, but with the hit on the other strand.
         """
-        results = get_resistance_results(self.data_dir, 'test/aac_test/05.fasta', self.args,
+        results = get_resistance_results(self.data_dir, 'test/test_res_aac/05.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['AGly'], 'Aac6Ib-cr^')
