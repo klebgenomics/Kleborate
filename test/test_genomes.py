@@ -49,7 +49,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_900501255(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_900501255.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_900501255.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_2(KpVP-1)')
@@ -76,7 +76,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_003400925(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_003400925.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003400925.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '5')
             self.assertEqual(results['rmpA'], '-')
@@ -103,7 +103,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_001068035(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_001068035.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_001068035.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_2(KpVP-1)')
@@ -134,7 +134,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_003095495(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_003095495.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003095495.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '17')
             self.assertEqual(results['rmpA'], '-')
@@ -165,7 +165,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_000009885(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_000009885.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_000009885.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_11(ICEKp1),rmpA_2(KpVP-1)')
@@ -194,14 +194,14 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_004010735(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_004010735.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_004010735.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['wzi'], '-')
             self.assertEqual(results['K_locus'], '-')
 
     def test_GCF_000968155(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_000968155.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_000968155.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '0')
             self.assertEqual(results['rmpA'], 'rmpA_9(KpVP-2)')
@@ -228,7 +228,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_002108345(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_002108345.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002108345.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '11')
             self.assertEqual(results['rmpA'], '-')
@@ -255,7 +255,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_002247645(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_002247645.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002247645.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '7')
             self.assertEqual(results['rmpA'], '-')
@@ -283,7 +283,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_002248955(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_002248955.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_002248955.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '4')
             self.assertEqual(results['rmpA'], '-')
@@ -310,7 +310,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_GCF_003345475(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/GCF_003345475.1.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/GCF_003345475.1.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
             self.assertEqual(results['num_resistance_genes'], '5')
             self.assertEqual(results['rmpA'], '-')
@@ -337,7 +337,7 @@ class TestGenomes(unittest.TestCase):
 
     def test_AS7(self):
         with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary('test/sequences/AS7.fna.gz', tmp_dir)
+            contigs = gunzip_contigs_if_necessary('test/test_genomes/AS7.fna.gz', tmp_dir)
             results = self.get_all_results(contigs)
 
             # This genome is missing the start of rmpA, which counts as a truncation to 0%.

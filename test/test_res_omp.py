@@ -34,7 +34,7 @@ class TestResOmp(unittest.TestCase):
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_both_genes_intact(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_1.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_1.fasta',
                                          self.args, self.res_headers, True)
         self.assertEqual(results['Omp'], '-')
 
@@ -42,7 +42,7 @@ class TestResOmp(unittest.TestCase):
         """
         A frameshift in OmpK35 should cause an early stop and lead to a carbapenem resistance call.
         """
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_2.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_2.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('OmpK35-' in results['Omp'])
 
@@ -50,22 +50,22 @@ class TestResOmp(unittest.TestCase):
         """
         This tests an early stop mutation (without a frameshift) in OmpK35.
         """
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_3.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_3.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('OmpK35-' in results['Omp'])
 
     def test_ompk36_missing(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_4.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_4.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('OmpK36-' in results['Omp'])
 
     def test_ompk36gd(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_5.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_5.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('OmpK36GD' in results['Omp'])
 
     def test_ompk36td(self):
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_6.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_6.fasta',
                                          self.args, self.res_headers, True)
         self.assertTrue('OmpK36TD' in results['Omp'])
 
@@ -73,6 +73,6 @@ class TestResOmp(unittest.TestCase):
         """
         Setting the Kp complex variable to False should turn off the OmpK tests.
         """
-        results = get_resistance_results(self.data_dir, 'test/sequences/test_res_omp_6.fasta',
+        results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_6.fasta',
                                          self.args, self.res_headers, False)
         self.assertTrue('OmpK36TD' not in results['Omp'])

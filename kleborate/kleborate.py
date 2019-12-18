@@ -16,6 +16,7 @@ import argparse
 import distutils.spawn
 import gzip
 import os
+import pathlib
 import subprocess
 import sys
 import tempfile
@@ -493,6 +494,8 @@ def get_wzi_and_k_locus_results(data_folder, contigs):
 
 
 def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
+    if not pathlib.Path(contigs).is_file():
+        raise OSError
     if args.resistance:
         gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
 
