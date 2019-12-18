@@ -25,14 +25,14 @@ from .blastn import run_blastn
 from .truncation import truncation_check
 
 
-def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, mincov, minident):
-    hits_dict = blast_against_all(seqs, mincov, minident, contigs, gene_info)
+def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, min_ident):
+    hits_dict = blast_against_all(seqs, min_cov, min_ident, contigs, gene_info)
     if qrdr:
-        check_for_qrdr_mutations(hits_dict, contigs, qrdr, minident, 90.0)
+        check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, 90.0)
     if trunc:
-        check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc, minident)
+        check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, trunc, min_ident)
     if omp:
-        check_omp_genes(hits_dict, contigs, omp, minident, 90.0)
+        check_omp_genes(hits_dict, contigs, omp, min_ident, 90.0)
     return hits_dict
 
 
@@ -85,11 +85,11 @@ def get_res_headers(res_classes, bla_classes):
     return res_classes + bla_classes
 
 
-def blast_against_all(seqs, mincov, minident, contigs, gene_info):
+def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info):
     hits_dict = collections.defaultdict(list)  # key = class, value = list
-    hits = run_blastn(seqs, contigs, minident, ungapped=True)
+    hits = run_blastn(seqs, contigs, min_cov, min_ident, ungapped=True)
     for hit in hits:
-        if (hit.alignment_length / hit.ref_length * 100.0) > mincov:
+        if (hit.alignment_length / hit.ref_length * 100.0) > min_cov:
             if hit.pcid < 100.0:
                 aa_result = check_for_exact_aa_match(seqs, hit.hit_seq)
                 if aa_result is not None:
@@ -159,7 +159,7 @@ def check_for_exact_aa_match(seqs, gene_nucl_seq):
         return gene_id
 
 
-def check_for_qrdr_mutations(hits_dict, contigs, qrdr, minident, mincov):
+def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
     qrdr_loci = {'GyrA': [(83, 'S'), (87, 'D')],
                  'ParC': [(80, 'S'), (84, 'E')]}
 
@@ -169,10 +169,10 @@ def check_for_qrdr_mutations(hits_dict, contigs, qrdr, minident, mincov):
                'KKSARTVGDVLGKYHPHGDSACYEAMVLMAQPFSYRYPLVDGQGNWGAPDDPKSFAAMRY'
 
     snps = []
-    hits = run_blastn(qrdr, contigs, minident)
+    hits = run_blastn(qrdr, contigs, None, min_ident)
     for hit in hits:
         _, coverage, translation = truncation_check(hit)
-        if coverage > mincov:
+        if coverage > min_cov:
             if hit.gene_id == 'GyrA':
                 alignments = pairwise2.align.globalds(gyra_ref, translation, blosum62, -10, -0.5)
             elif hit.gene_id == 'ParC':
@@ -203,10 +203,10 @@ def get_bases_per_ref_pos(alignment):
     return bases_per_ref_pos
 
 
-def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, seqs, minident):
+def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, seqs, min_ident):
     best_mgrb_cov, best_pmrb_cov = 0.0, 0.0
 
-    hits = run_blastn(seqs, contigs, minident)
+    hits = run_blastn(seqs, contigs, None, min_ident)
     for hit in hits:
         assert hit.gene_id == 'pmrB' or hit.gene_id == 'mgrB'
         _, coverage, _ = truncation_check(hit)
@@ -227,10 +227,10 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, seqs, minident):
         hits_dict['Col'] += truncations
 
 
-def check_omp_genes(hits_dict, contigs, omp, minident, mincov):
+def check_omp_genes(hits_dict, contigs, omp, min_ident, min_cov):
     best_ompk35_cov, best_ompk36_cov = 0.0, 0.0
 
-    hits = run_blastn(omp, contigs, minident)
+    hits = run_blastn(omp, contigs, None, min_ident)
     for hit in hits:
         _, coverage, translation = truncation_check(hit)
         if hit.gene_id == 'OmpK35':
@@ -239,7 +239,7 @@ def check_omp_genes(hits_dict, contigs, omp, minident, mincov):
         elif hit.gene_id == 'OmpK36':
             if coverage > best_ompk36_cov:
                 best_ompk36_cov = coverage
-            if coverage >= mincov:
+            if coverage >= min_cov:
                 if 'GDGDTY' in translation:
                     hits_dict['Omp'].append('OmpK36GD')
                 elif 'GDTDTY' in translation:
