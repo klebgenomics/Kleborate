@@ -391,8 +391,9 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex):
     if kp_complex:
         seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
         database = data_folder + '/kpneumoniae.txt'
-        results = mlst_blast(seqs, database, 'no', [contigs], min_ident=95, maxmissing=3,
-                             print_header=False)
+        results = mlst_blast(seqs, database, 'no', [contigs], min_cov=80,
+                             min_ident=95,  # deliberately high threshold for MLST
+                             maxmissing=3, print_header=False)
         chr_st, chr_st_detail = results[1], results[2:]
         if chr_st != '0':
             chr_st = 'ST' + chr_st
@@ -423,7 +424,7 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
                                   header_function):
     seqs = data_folder + '/' + alleles_fasta
     database = data_folder + '/' + profiles_txt
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_ident=95, maxmissing=3,
+    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=80, min_ident=95, maxmissing=3,
                          print_header=False)
     group, st, st_detail = results[1], results[2], results[3:]
     if group == '':
@@ -479,7 +480,7 @@ def get_hypermucoidy_results(data_folder, contigs):
 def get_wzi_and_k_locus_results(data_folder, contigs):
     seqs = data_folder + '/wzi.fasta'
     database = data_folder + '/wzi.txt'
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_ident=95, maxmissing=0,
+    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=80, min_ident=95, maxmissing=0,
                          print_header=False)
     k_type = results[1]
     if results[2] == '0':
@@ -509,7 +510,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
 
         seqs = data_folder + '/ARGannot_r3.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
-                                         80.0, 90.0)
+                                         min_cov=80.0, min_ident=90.0)
         return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
                 for r in res_headers}
     else:

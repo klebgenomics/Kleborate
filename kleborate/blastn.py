@@ -16,7 +16,7 @@ import os
 import subprocess
 
 
-def run_blastn(db, query, min_cov, min_ident, culling_limit=1, ungapped=False):
+def run_blastn(db, query, min_cov, min_ident, ungapped=False):
     build_blast_database_if_needed(db)
 
     cmd = 'blastn -task blastn -db {} -query {}'.format(db, query)
@@ -75,7 +75,13 @@ def overlapping(hit, existing_hits):
 
 
 def hits_overlap(a, b):
-    return a.contig_start <= b.contig_end and b.contig_start <= a.contig_end
+    if a.contig_start <= b.contig_end and b.contig_start <= a.contig_end:  # There is some overlap
+        allowed_overlap = 50
+        overlap_size = len(range(max(a.contig_start, b.contig_start),
+                                 min(a.contig_end, b.contig_end) + 1))
+        return overlap_size > allowed_overlap
+    else:
+        return False
 
 
 class BlastHit(object):
