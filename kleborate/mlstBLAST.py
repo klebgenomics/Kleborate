@@ -7,9 +7,6 @@ Reports best match
 If an annotation column is provided (such as clonal complex) in the final column of the profiles
 file, this annotation will be reported in column 2 of the output table.
 
-NOTE there is a bug with the culling_limit parameter in older versions of BLAST+. This code has
-been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
-
 Copyright 2018 Kat Holt
 Copyright 2018 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
@@ -28,7 +25,7 @@ import os
 from .blastn import run_blastn
 
 
-def mlst_blast(seqs, database, info_arg, assemblies, min_ident, maxmissing, print_header):
+def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmissing, print_header):
     sts = {}  # key = concatenated string of alleles, value = st
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group
     max_st = 0  # holds the highest current ST, incremented when novel combinations are encountered
@@ -71,7 +68,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_ident, maxmissing, prin
     best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
     best_allele = {}  # key = locus, value = best allele (* if imprecise match)
 
-    hits = run_blastn(seqs, contigs, None, min_ident, ungapped=True, culling_limit=2)
+    hits = run_blastn(seqs, contigs, min_cov, min_ident, ungapped=True)
     for hit in hits:
         if '__' in hit.gene_id:  # srst2 formatted file
             gene_id_components = hit.gene_id.split('__')
