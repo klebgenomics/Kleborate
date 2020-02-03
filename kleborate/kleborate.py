@@ -186,7 +186,7 @@ def get_output_headers(args, data_folder):
     stdout_header = ['strain', 'species']
     full_header = ['strain', 'species', 'species_match']
     stdout_header += ['ST', 'virulence_score']
-    full_header += ['contig_count', 'N50', 'largest_contig', 'ambiguous_bases', 'ST',
+    full_header += ['contig_count', 'N50', 'largest_contig', 'total_size', 'ambiguous_bases', 'ST',
                     'virulence_score']
 
     if args.resistance:
