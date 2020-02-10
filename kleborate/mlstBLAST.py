@@ -68,7 +68,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmiss
     best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
     best_allele = {}  # key = locus, value = best allele (* if imprecise match)
 
-    hits = run_blastn(seqs, contigs, min_cov, min_ident, ungapped=True)
+    hits = run_blastn(seqs, contigs, min_cov, min_ident)
     for hit in hits:
         if '__' in hit.gene_id:  # srst2 formatted file
             gene_id_components = hit.gene_id.split('__')

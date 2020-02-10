@@ -16,7 +16,7 @@ import os
 import subprocess
 
 
-def run_blastn(db, query, min_cov, min_ident, ungapped=False):
+def run_blastn(db, query, min_cov, min_ident):
     build_blast_database_if_needed(db)
 
     cmd = 'blastn -task blastn -db {} -query {}'.format(db, query)
@@ -24,8 +24,6 @@ def run_blastn(db, query, min_cov, min_ident, ungapped=False):
            " qacc qstart qend qframe'"
     cmd += ' -dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000'
     cmd += ' -perc_identity {}'.format(min_ident)
-    if ungapped:
-        cmd += ' -ungapped'
 
     # TODO: switch this over to subprocess
     blast_hits = []
