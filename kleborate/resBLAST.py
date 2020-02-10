@@ -87,7 +87,7 @@ def get_res_headers(res_classes, bla_classes):
 
 def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info):
     hits_dict = collections.defaultdict(list)  # key = class, value = list
-    hits = run_blastn(seqs, contigs, min_cov, min_ident, ungapped=True)
+    hits = run_blastn(seqs, contigs, min_cov, min_ident)
     for hit in hits:
         if (hit.alignment_length / hit.ref_length * 100.0) > min_cov:
             if hit.pcid < 100.0:
