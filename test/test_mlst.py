@@ -12,6 +12,7 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
+import collections
 import tempfile
 import unittest
 
@@ -25,13 +26,15 @@ class TestMlst(unittest.TestCase):
 
     def setUp(self):
         self.data_dir = 'test/test_mlst/data'
+        Args = collections.namedtuple('Args', ['min_coverage', 'min_identity'])
+        self.args = Args(min_coverage=80.0, min_identity=90.0)
 
     def test_chromosome_random(self):
         """
         This test has just random sequence and should give no MLST call.
         """
         results = get_chromosome_mlst_results(self.data_dir,
-                                              'test/test_mlst/test_random.fasta', True)
+                                              'test/test_mlst/test_random.fasta', True, self.args)
         self.assertEqual(results['gapA'], '-')
         self.assertEqual(results['infB'], '-')
         self.assertEqual(results['mdh'], '-')
@@ -47,7 +50,7 @@ class TestMlst(unittest.TestCase):
         This test is an exact match for ST23.
         """
         results = get_chromosome_mlst_results(self.data_dir,
-                                              'test/test_mlst/test_mlst_1.fasta', True)
+                                              'test/test_mlst/test_mlst_1.fasta', True, self.args)
         self.assertEqual(results['gapA'], '2')
         self.assertEqual(results['infB'], '1')
         self.assertEqual(results['mdh'], '1')
@@ -63,7 +66,7 @@ class TestMlst(unittest.TestCase):
         This test is is one base off from ST23 (single substitution in mdh_1 of G to A).
         """
         results = get_chromosome_mlst_results(self.data_dir,
-                                              'test/test_mlst/test_mlst_2.fasta', True)
+                                              'test/test_mlst/test_mlst_2.fasta', True, self.args)
         self.assertEqual(results['gapA'], '2')
         self.assertEqual(results['infB'], '1')
         self.assertEqual(results['mdh'], '1*')
@@ -79,7 +82,7 @@ class TestMlst(unittest.TestCase):
         This test has exact matches for alleles but in an unknown ST combination
         """
         results = get_chromosome_mlst_results(self.data_dir,
-                                              'test/test_mlst/test_mlst_3.fasta', True)
+                                              'test/test_mlst/test_mlst_3.fasta', True, self.args)
         self.assertEqual(results['gapA'], '44')
         self.assertEqual(results['infB'], '56')
         self.assertEqual(results['mdh'], '34')
@@ -94,7 +97,7 @@ class TestMlst(unittest.TestCase):
         contigs = 'test/test_mlst/83.fasta.gz'
         with tempfile.TemporaryDirectory() as tmp_dir:
             contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
-            results = get_chromosome_mlst_results(self.data_dir, contigs, True)
+            results = get_chromosome_mlst_results(self.data_dir, contigs, True, self.args)
             self.assertEqual(results['gapA'], '10')
             self.assertEqual(results['infB'], '7')
             self.assertEqual(results['mdh'], '1')
@@ -109,7 +112,7 @@ class TestMlst(unittest.TestCase):
         contigs = 'test/test_mlst/134.fasta.gz'
         with tempfile.TemporaryDirectory() as tmp_dir:
             contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
-            results = get_chromosome_mlst_results(self.data_dir, contigs, True)
+            results = get_chromosome_mlst_results(self.data_dir, contigs, True, self.args)
             self.assertEqual(results['gapA'], '2')
             self.assertEqual(results['infB'], '1')
             self.assertEqual(results['mdh'], '2')
@@ -124,7 +127,7 @@ class TestMlst(unittest.TestCase):
         contigs = 'test/test_mlst/BA779.fasta.gz'
         with tempfile.TemporaryDirectory() as tmp_dir:
             contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
-            results = get_chromosome_mlst_results(self.data_dir, contigs, True)
+            results = get_chromosome_mlst_results(self.data_dir, contigs, True, self.args)
             self.assertEqual(results['gapA'], '2')
             self.assertEqual(results['infB'], '1')
             self.assertEqual(results['mdh'], '1')
@@ -139,7 +142,7 @@ class TestMlst(unittest.TestCase):
         contigs = 'test/test_mlst/GCF_900451425.1.fna.gz'
         with tempfile.TemporaryDirectory() as tmp_dir:
             contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
-            results = get_chromosome_mlst_results(self.data_dir, contigs, True)
+            results = get_chromosome_mlst_results(self.data_dir, contigs, True, self.args)
             self.assertEqual(results['ST'], 'ST90 (subsp. ozanae)')
             self.assertEqual(results['Chr_ST'], 'ST90')
 
@@ -147,6 +150,6 @@ class TestMlst(unittest.TestCase):
         contigs = 'test/test_mlst/GCF_000163455.1.fna.gz'
         with tempfile.TemporaryDirectory() as tmp_dir:
             contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
-            results = get_chromosome_mlst_results(self.data_dir, contigs, True)
+            results = get_chromosome_mlst_results(self.data_dir, contigs, True, self.args)
             self.assertEqual(results['ST'], 'ST67 (subsp. rhinoscleromatis)')
             self.assertEqual(results['Chr_ST'], 'ST67')

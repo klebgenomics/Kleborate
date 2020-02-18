@@ -55,14 +55,15 @@ def main():
 
             kp_complex = is_kp_complex(results)
 
-            results.update(get_chromosome_mlst_results(data_folder, contigs, kp_complex))
-            results.update(get_ybt_mlst_results(data_folder, contigs))
-            results.update(get_clb_mlst_results(data_folder, contigs))
-            results.update(get_iuc_mlst_results(data_folder, contigs))
-            results.update(get_iro_mlst_results(data_folder, contigs))
-            results.update(get_hypermucoidy_results(data_folder, contigs))
-            results.update(get_wzi_and_k_locus_results(data_folder, contigs))
-            results.update(get_resistance_results(data_folder, contigs, args, res_headers, kp_complex))
+            results.update(get_chromosome_mlst_results(data_folder, contigs, kp_complex, args))
+            results.update(get_ybt_mlst_results(data_folder, contigs, args))
+            results.update(get_clb_mlst_results(data_folder, contigs, args))
+            results.update(get_iuc_mlst_results(data_folder, contigs, args))
+            results.update(get_iro_mlst_results(data_folder, contigs, args))
+            results.update(get_hypermucoidy_results(data_folder, contigs, args))
+            results.update(get_wzi_and_k_locus_results(data_folder, contigs, args))
+            results.update(get_resistance_results(data_folder, contigs, args, res_headers,
+                                                  kp_complex))
             results.update(get_summary_results(results, res_headers))
             results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
             results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
@@ -103,6 +104,16 @@ def parse_arguments():
     output_args.add_argument('--kaptive_o_outfile', type=str,
                              help='File for full Kaptive O locus output (default: do not '
                                   'save Kaptive O locus results to separate file)')
+
+    setting_args = parser.add_argument_group('Settings')
+    setting_args.add_argument('--min_identity', type=float, default=90.0,
+                              help='Minimum alignment identity for main results')
+    setting_args.add_argument('--min_coverage', type=float, default=80.0,
+                              help='Minimum alignment coverage for main results')
+    setting_args.add_argument('--min_identity_low', type=float, default=80.0,
+                              help='Minimum alignment identity for low-quality results')
+    setting_args.add_argument('--min_coverage_low', type=float, default=40.0,
+                              help='Minimum alignment coverage for low-quality results')
 
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
@@ -385,15 +396,14 @@ def decompress_file(in_file, out_file):
         o.write(s)
 
 
-def get_chromosome_mlst_results(data_folder, contigs, kp_complex):
+def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
     chromosome_mlst_header = get_chromosome_mlst_header()
 
     if kp_complex:
         seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
         database = data_folder + '/kpneumoniae.txt'
-        results = mlst_blast(seqs, database, 'no', [contigs], min_cov=80,
-                             min_ident=95,  # deliberately high threshold for MLST
-                             maxmissing=3, print_header=False)
+        results = mlst_blast(seqs, database, 'no', [contigs], min_cov=args.min_coverage,
+                             min_ident=args.min_identity, maxmissing=3, print_header=False)
         chr_st, chr_st_detail = results[1], results[2:]
         if chr_st != '0':
             chr_st = 'ST' + chr_st
@@ -421,11 +431,11 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex):
 
 def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_txt,
                                   vir_name, vir_st_name, unknown_group_name, min_gene_count,
-                                  header_function):
+                                  header_function, args):
     seqs = data_folder + '/' + alleles_fasta
     database = data_folder + '/' + profiles_txt
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=80, min_ident=95, maxmissing=3,
-                         print_header=False)
+    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
+                         min_ident=args.min_identity, maxmissing=3, print_header=False)
     group, st, st_detail = results[1], results[2], results[3:]
     if group == '':
         if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
@@ -443,45 +453,45 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
     return results
 
 
-def get_ybt_mlst_results(data_folder, contigs):
+def get_ybt_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'ybt_alleles.fasta',
                                          'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
-                                         'ybt unknown', 8, get_ybt_mlst_header)
+                                         'ybt unknown', 8, get_ybt_mlst_header, args)
 
 
-def get_clb_mlst_results(data_folder, contigs):
+def get_clb_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'clb_alleles.fasta',
                                          'CbST_profiles.txt', 'Colibactin', 'CbST',
-                                         'clb unknown', 12, get_clb_mlst_header)
+                                         'clb unknown', 12, get_clb_mlst_header, args)
 
 
-def get_iuc_mlst_results(data_folder, contigs):
+def get_iuc_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'iuc_alleles.fasta',
                                          'AbST_profiles.txt', 'Aerobactin', 'AbST',
-                                         'iuc unknown', 3, get_iuc_mlst_header)
+                                         'iuc unknown', 3, get_iuc_mlst_header, args)
 
 
-def get_iro_mlst_results(data_folder, contigs):
+def get_iro_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'iro_alleles.fasta',
                                          'SmST_profiles.txt', 'Salmochelin', 'SmST',
-                                         'iro unknown', 3, get_iro_mlst_header)
+                                         'iro unknown', 3, get_iro_mlst_header, args)
 
 
-def get_hypermucoidy_results(data_folder, contigs):
+def get_hypermucoidy_results(data_folder, contigs, args):
     seqs = data_folder + '/hypermucoidy.fasta'
     database = data_folder + '/hypermucoidy_rmpA.txt'
-    results = rmpa_blast(seqs, database, [contigs], 95.0)
+    results = rmpa_blast(seqs, database, [contigs], args.min_coverage, args.min_identity)
     rmpa_allele, rmpa2_allele = results[1], results[2]
 
     return {'rmpA': rmpa_allele,
             'rmpA2': rmpa2_allele}
 
 
-def get_wzi_and_k_locus_results(data_folder, contigs):
+def get_wzi_and_k_locus_results(data_folder, contigs, args):
     seqs = data_folder + '/wzi.fasta'
     database = data_folder + '/wzi.txt'
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=80, min_ident=95, maxmissing=0,
-                         print_header=False)
+    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
+                         min_ident=args.min_identity, maxmissing=0, print_header=False)
     k_type = results[1]
     if results[2] == '0':
         wzi_st = '-'
@@ -510,7 +520,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
 
         seqs = data_folder + '/ARGannot_r3.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
-                                         min_cov=80.0, min_ident=90.0)
+                                         min_cov=args.min_coverage, min_ident=args.min_identity)
         return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
                 for r in res_headers}
     else:
