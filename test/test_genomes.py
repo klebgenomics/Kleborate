@@ -54,8 +54,10 @@ class TestGenomes(unittest.TestCase):
 
     def setUp(self):
         self.data_dir = 'test/test_genomes/data'
-        Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o'])
-        self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False)
+        Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o',
+                                               'min_coverage', 'min_identity'])
+        self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False,
+                         min_coverage=80.0, min_identity=90.0)
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def one_genome_test(self, filename):
@@ -72,13 +74,13 @@ class TestGenomes(unittest.TestCase):
         results.update(get_contig_stat_results(contigs))
         results.update(get_species_results(contigs, self.data_dir))
         kp_complex = is_kp_complex(results)
-        results.update(get_chromosome_mlst_results(self.data_dir, contigs, kp_complex))
-        results.update(get_ybt_mlst_results(self.data_dir, contigs))
-        results.update(get_clb_mlst_results(self.data_dir, contigs))
-        results.update(get_iuc_mlst_results(self.data_dir, contigs))
-        results.update(get_iro_mlst_results(self.data_dir, contigs))
-        results.update(get_hypermucoidy_results(self.data_dir, contigs))
-        results.update(get_wzi_and_k_locus_results(self.data_dir, contigs))
+        results.update(get_chromosome_mlst_results(self.data_dir, contigs, kp_complex, self.args))
+        results.update(get_ybt_mlst_results(self.data_dir, contigs, self.args))
+        results.update(get_clb_mlst_results(self.data_dir, contigs, self.args))
+        results.update(get_iuc_mlst_results(self.data_dir, contigs, self.args))
+        results.update(get_iro_mlst_results(self.data_dir, contigs, self.args))
+        results.update(get_hypermucoidy_results(self.data_dir, contigs, self.args))
+        results.update(get_wzi_and_k_locus_results(self.data_dir, contigs, self.args))
         results.update(get_resistance_results(self.data_dir, contigs, self.args, self.res_headers,
                                               kp_complex))
         results.update(get_summary_results(results, self.res_headers))

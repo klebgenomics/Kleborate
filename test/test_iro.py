@@ -12,6 +12,7 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
+import collections
 import unittest
 
 from kleborate.kleborate import get_iro_mlst_results
@@ -24,12 +25,14 @@ class TestIro(unittest.TestCase):
 
     def setUp(self):
         self.data_dir = 'test/test_iro/data'
+        Args = collections.namedtuple('Args', ['min_coverage', 'min_identity'])
+        self.args = Args(min_coverage=80.0, min_identity=90.0)
 
     def test_iro_random(self):
         """
         This test has just random sequence and should give no iro call.
         """
-        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_random.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_random.fasta', self.args)
         self.assertEqual(results['iroB'], '-')
         self.assertEqual(results['iroC'], '-')
         self.assertEqual(results['iroD'], '-')
@@ -41,7 +44,7 @@ class TestIro(unittest.TestCase):
         """
         This test is an exact match for SmST33.
         """
-        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_1.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_1.fasta', self.args)
         self.assertEqual(results['iroB'], '22')
         self.assertEqual(results['iroC'], '33')
         self.assertEqual(results['iroD'], '12')
@@ -54,7 +57,7 @@ class TestIro(unittest.TestCase):
         This test is an inexact match for SmST33. There are single base changes in iroC and in
         iroN.
         """
-        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_2.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_2.fasta', self.args)
         self.assertEqual(results['iroB'], '22')
         self.assertEqual(results['iroC'], '33*')
         self.assertEqual(results['iroD'], '12')
@@ -66,7 +69,7 @@ class TestIro(unittest.TestCase):
         """
         This test is an exact match for alleles, but an unknown combination.
         """
-        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_3.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_3.fasta', self.args)
         self.assertEqual(results['iroB'], '11')
         self.assertEqual(results['iroC'], '1')
         self.assertEqual(results['iroD'], '18')
@@ -78,7 +81,7 @@ class TestIro(unittest.TestCase):
         """
         This test is an exact match for only one allele.
         """
-        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_4.fasta')
+        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_4.fasta', self.args)
         self.assertEqual(results['iroB'], '-')
         self.assertEqual(results['iroC'], '1')
         self.assertEqual(results['iroD'], '-')

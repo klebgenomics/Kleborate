@@ -32,7 +32,7 @@ def print_header():
     print('\t'.join(['strain', 'rmpA_allele', 'rmpA_lineage', 'rmpA2_allele']))
 
 
-def rmpa_blast(seqs, database, assemblies, min_ident):
+def rmpa_blast(seqs, database, assemblies, min_cov, min_ident):
     # read in rmpA database
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group
     header = []
@@ -50,7 +50,7 @@ def rmpa_blast(seqs, database, assemblies, min_ident):
         name, _ = os.path.splitext(file_name)
         rmpa_calls, rmpa2_calls = [], []
 
-        hits = run_blastn(seqs, contigs, None, min_ident)
+        hits = run_blastn(seqs, contigs, min_cov, min_ident)
         for hit in hits:
             if hit.alignment_length > (hit.ref_length / 2):
                 gene_id = hit.gene_id

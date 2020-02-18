@@ -57,8 +57,8 @@ def getText(element):
 	return normaliseText(result)
 
 # remove unwanted whitespace including linebreaks etc.
-def normaliseText(str):
-	return ' '.join(str.split())
+def normaliseText(s):
+	return ' '.join(s.split())
 
 # A collection of interesting information about a taxa
 class SpeciesInfo(object):
