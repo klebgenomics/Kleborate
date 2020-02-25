@@ -25,8 +25,10 @@ from .blastn import run_blastn
 from .truncation import truncation_check
 
 
-def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, min_ident):
-    hits_dict = blast_against_all(seqs, min_cov, min_ident, contigs, gene_info)
+def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, min_ident,
+                          min_spurious_cov, min_spurious_ident):
+    hits_dict = blast_against_all(seqs, min_cov, min_ident, contigs, gene_info,
+                                  min_spurious_cov, min_spurious_ident)
     if qrdr:
         check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, 90.0)
     if trunc:
@@ -85,11 +87,13 @@ def get_res_headers(res_classes, bla_classes):
     return res_classes + bla_classes
 
 
-def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info):
+def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious_cov,
+                      min_spurious_ident):
     hits_dict = collections.defaultdict(list)  # key = class, value = list
-    hits = run_blastn(seqs, contigs, min_cov, min_ident)
+    hits = run_blastn(seqs, contigs, min_spurious_cov, min_spurious_ident)
     for hit in hits:
-        if (hit.alignment_length / hit.ref_length * 100.0) > min_cov:
+        coverage = hit.alignment_length / hit.ref_length * 100.0
+        if coverage >= min_spurious_cov:
             if hit.pcid < 100.0:
                 aa_result = check_for_exact_aa_match(seqs, hit.hit_seq)
                 if aa_result is not None:
@@ -110,7 +114,15 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info):
                     hit_allele += '?'
                 hit_allele += truncation_check(hit)[0]
 
-            hits_dict[hit_class].append(hit_allele)
+            # If the hit is decent (above the min coverage and identity thresholds), it goes in the
+            # column for the class.
+            if coverage >= min_cov and hit.pcid >= min_ident:
+                hits_dict[hit_class].append(hit_allele)
+
+            # If the hit is bad (below the min coverage and identity thresholds but above the
+            # thresholds for spurious hits) then it goes in the spurious hit column.
+            else:
+                hits_dict['spurious_resistance_hits'].append(hit_allele)
 
     return hits_dict
 
