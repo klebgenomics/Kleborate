@@ -108,6 +108,7 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info):
                     hit_allele += '*'
                 if hit.alignment_length < hit.ref_length:
                     hit_allele += '?'
+                hit_allele += truncation_check(hit)[0]
 
             hits_dict[hit_class].append(hit_allele)
 

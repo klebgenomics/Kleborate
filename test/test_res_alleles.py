@@ -100,3 +100,23 @@ class TestResAlleles(unittest.TestCase):
         self.assertEqual(results['Tet'], '-')
         self.assertEqual(results['Bla'], 'ABC-1;ABC-2')
         self.assertEqual(results['Bla_ESBL'], 'ABC-3*;ABC-4')
+
+    def test_res_11(self):
+        """
+        This test has the ABC-1 gene but with a stop codon in the middle.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/11.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Tet'], '-')
+        self.assertEqual(results['Bla'], 'ABC-1*-50%')
+        self.assertEqual(results['Bla_ESBL'], '-')
+
+    def test_res_12(self):
+        """
+        This test has the ABC-1 gene but missing the first (start) codon.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/12.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Tet'], '-')
+        self.assertEqual(results['Bla'], 'ABC-1?-0%')
+        self.assertEqual(results['Bla_ESBL'], '-')

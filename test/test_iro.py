@@ -45,8 +45,8 @@ class TestIro(unittest.TestCase):
         This test is an exact match for SmST33.
         """
         results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_1.fasta', self.args)
-        self.assertEqual(results['iroB'], '22')
-        self.assertEqual(results['iroC'], '33')
+        self.assertEqual(results['iroB'], '22-29%')
+        self.assertEqual(results['iroC'], '33-4%')
         self.assertEqual(results['iroD'], '12')
         self.assertEqual(results['iroN'], '15')
         self.assertEqual(results['Salmochelin'], 'iro 4')
@@ -58,8 +58,8 @@ class TestIro(unittest.TestCase):
         iroN.
         """
         results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_2.fasta', self.args)
-        self.assertEqual(results['iroB'], '22')
-        self.assertEqual(results['iroC'], '33*')
+        self.assertEqual(results['iroB'], '22-29%')
+        self.assertEqual(results['iroC'], '33*-4%')
         self.assertEqual(results['iroD'], '12')
         self.assertEqual(results['iroN'], '15*')
         self.assertEqual(results['Salmochelin'], 'iro 4')

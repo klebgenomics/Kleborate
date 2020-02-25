@@ -21,11 +21,14 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import os
+import re
 
 from .blastn import run_blastn
+from .truncation import truncation_check
 
 
-def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmissing, print_header):
+def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmissing, print_header,
+               check_for_truncation=False):
     sts = {}  # key = concatenated string of alleles, value = st
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group
     max_st = 0  # holds the highest current ST, incremented when novel combinations are encountered
@@ -79,6 +82,8 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmiss
             locus = hit.gene_id.split('_')[0]
         if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
             allele += '*'  # inexact match
+        if check_for_truncation:
+            allele += truncation_check(hit)[0]
         # store best match for each one locus
         if locus in best_score:
             if hit.score > best_score[locus]:    # update
@@ -96,8 +101,12 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmiss
     for locus in header:
         if locus in best_allele:
             allele = best_allele[locus]
+
+            # Remove * (inexact match) and truncation percentages
             allele_number = allele.replace('*', '')
-            if allele.endswith('*'):
+            allele_number = re.sub(r'-\d+%', '', allele_number)
+
+            if '*' in allele:
                 mismatch_loci_including_snps += 1
             best_st.append(allele_number)
             best_st_annotated.append(allele)  # will still have character if imperfect match

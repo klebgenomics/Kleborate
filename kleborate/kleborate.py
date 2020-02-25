@@ -435,7 +435,8 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
     seqs = data_folder + '/' + alleles_fasta
     database = data_folder + '/' + profiles_txt
     results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                         min_ident=args.min_identity, maxmissing=3, print_header=False)
+                         min_ident=args.min_identity, maxmissing=3, print_header=False,
+                         check_for_truncation=True)
     group, st, st_detail = results[1], results[2], results[3:]
     if group == '':
         if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
