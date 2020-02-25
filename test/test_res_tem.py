@@ -27,9 +27,11 @@ class TestResTem(unittest.TestCase):
     def setUp(self):
         self.data_dir = 'test/test_res_tem/data'
         Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o',
-                                               'min_coverage', 'min_identity'])
+                                               'min_coverage', 'min_identity',
+                                               'min_spurious_coverage', 'min_spurious_identity'])
         self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False,
-                         min_coverage=80.0, min_identity=90.0)
+                         min_coverage=80.0, min_identity=90.0,
+                         min_spurious_coverage=40.0, min_spurious_identity=80.0)
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_tem(self):

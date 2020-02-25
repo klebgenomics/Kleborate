@@ -110,10 +110,10 @@ def parse_arguments():
                               help='Minimum alignment identity for main results')
     setting_args.add_argument('--min_coverage', type=float, default=80.0,
                               help='Minimum alignment coverage for main results')
-    setting_args.add_argument('--min_identity_low', type=float, default=80.0,
-                              help='Minimum alignment identity for low-quality results')
-    setting_args.add_argument('--min_coverage_low', type=float, default=40.0,
-                              help='Minimum alignment coverage for low-quality results')
+    setting_args.add_argument('--min_spurious_identity', type=float, default=80.0,
+                              help='Minimum alignment identity for spurious results')
+    setting_args.add_argument('--min_spurious_coverage', type=float, default=40.0,
+                              help='Minimum alignment coverage for spurious results')
 
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
@@ -246,6 +246,8 @@ def get_output_headers(args, data_folder):
         res_headers = get_res_headers(res_classes, bla_classes)
         stdout_header += res_headers
         full_header += res_headers
+        full_header.append('spurious_resistance_hits')
+        res_headers.append('spurious_resistance_hits')
     else:
         res_headers = []
 
@@ -521,7 +523,8 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
 
         seqs = data_folder + '/ARGannot_r3.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
-                                         min_cov=args.min_coverage, min_ident=args.min_identity)
+                                         args.min_coverage,  args.min_identity,
+                                         args.min_spurious_coverage, args.min_spurious_identity)
         return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
                 for r in res_headers}
     else:
