@@ -27,42 +27,13 @@ from .blastn import run_blastn
 from .truncation import truncation_check
 
 
-def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmissing, print_header,
-               check_for_truncation=False):
-    sts = {}  # key = concatenated string of alleles, value = st
-    st_info = {}  # key = st, value = info relating to this ST, eg clonal group
-    max_st = 0  # holds the highest current ST, incremented when novel combinations are encountered
-    header = []
-    info_title = 'info'
-    with open(database, 'r') as f:
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if len(header) == 0:
-                header = fields
-                header.pop(0)  # remove st label
-                if info_arg == 'yes':
-                    info_title = header.pop()  # remove info label
-            else:
-                st = fields.pop(0)
-                if info_arg == 'yes':
-                    info = fields.pop()
-                else:
-                    info = ''
-                sts[','.join(fields)] = st
-                if int(st) > max_st:
-                    max_st = int(st)
-                if info_arg == 'yes':
-                    st_info[st] = info
+def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_missing,
+               check_for_truncation=False, report_incomplete=False):
+    sts, st_info, max_st, header = load_st_database(database, info_arg)
 
     # In order to call an ST, there needs to be an exact match for half (rounded down) of the
     # relevant alleles.
     required_exact_matches = int(len(header) / 2)
-
-    if print_header:
-        if info_arg == 'yes':
-            print('\t'.join(['strain', info_title, 'ST'] + header))
-        else:
-            print('\t'.join(['strain', 'ST'] + header))
 
     contigs = assemblies[0]
     _, filename = os.path.split(contigs)
@@ -96,7 +67,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmiss
     best_st = []
     best_st_annotated = []
 
-    mismatch_loci_including_snps = 0
+    mismatch_loci_including_snps, missing_loci = 0, 0
 
     for locus in header:
         if locus in best_allele:
@@ -114,11 +85,12 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmiss
             best_st.append('-')
             best_st_annotated.append('-')
             mismatch_loci_including_snps += 1
+            missing_loci += 1
 
     # assign ST
     bst = ','.join(best_st)
 
-    if mismatch_loci_including_snps <= maxmissing:
+    if mismatch_loci_including_snps <= max_missing:
         # only report ST if enough loci are precise matches
         if bst in sts:
             # note may have mismatching alleles due to SNPs, this will be recorded in
@@ -137,9 +109,10 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmiss
 
     # pull info column
     info_final = ''
-    if info_arg == 'yes':
-        if bst in st_info:
-            info_final = st_info[bst]
+    if info_arg == 'yes' and bst in st_info:
+        info_final = st_info[bst]
+        if report_incomplete and missing_loci > 0:
+            info_final += ' (incomplete)'
 
     if mismatch_loci_including_snps > 0 and bst != '0':
         bst += '-' + str(mismatch_loci_including_snps) + 'LV'
@@ -148,6 +121,33 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, maxmiss
         return [name, info_final, bst] + best_st_annotated
     else:
         return [name, bst] + best_st_annotated
+
+
+def load_st_database(database, info_arg):
+    sts = {}  # key = concatenated string of alleles, value = st
+    st_info = {}  # key = st, value = info relating to this ST, eg clonal group
+    max_st = 0  # holds the highest current ST, incremented when novel combinations are encountered
+    header = []
+    with open(database, 'r') as f:
+        for line in f:
+            fields = line.rstrip().split('\t')
+            if len(header) == 0:
+                header = fields
+                header.pop(0)  # remove st label
+                if info_arg == 'yes':
+                    header.pop()  # remove info label
+            else:
+                st = fields.pop(0)
+                if info_arg == 'yes':
+                    info = fields.pop()
+                else:
+                    info = ''
+                sts[','.join(fields)] = st
+                if int(st) > max_st:
+                    max_st = int(st)
+                if info_arg == 'yes':
+                    st_info[st] = info
+    return sts, st_info, max_st, header
 
 
 def get_closest_locus_variant(query, annotated_query, sts):
