@@ -28,10 +28,6 @@ from .blastn import run_blastn
 from .truncation import truncation_check
 
 
-def print_header():
-    print('\t'.join(['strain', 'rmpA_allele', 'rmpA_lineage', 'rmpA2_allele']))
-
-
 def rmpa_blast(seqs, database, assemblies, min_cov, min_ident):
     # read in rmpA database
     st_info = {}  # key = st, value = info relating to this ST, eg clonal group

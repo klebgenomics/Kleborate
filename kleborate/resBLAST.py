@@ -79,10 +79,6 @@ def read_class_file(res_class_file):
     return gene_info, res_classes, bla_classes
 
 
-def print_header(res_classes, bla_classes):
-    print('\t'.join(['strain'] + get_res_headers(res_classes, bla_classes)))
-
-
 def get_res_headers(res_classes, bla_classes):
     return res_classes + bla_classes
 
