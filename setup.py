@@ -122,7 +122,7 @@ setup(name='Kleborate',
       author='Kathryn Holt',
       author_email='',
       packages=['kleborate', 'kaptive'],
-      entry_points={'console_scripts': ['kleborate = kleborate.kleborate:main']},
+      entry_points={'console_scripts': ['kleborate = kleborate.__main__:main']},
       include_package_data=True,
       zip_safe=False,
       cmdclass={'install': KleborateInstall})
