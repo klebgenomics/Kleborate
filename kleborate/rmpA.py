@@ -9,8 +9,8 @@ file, this annotation will be reported in column 2 of the output table
 NOTE there is a bug with the culling_limit parameter in older versions of BLAST+. This code has
 been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
 
-Copyright 2017 Kat Holt
-Copyright 2017 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
