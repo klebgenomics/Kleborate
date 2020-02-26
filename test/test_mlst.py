@@ -16,7 +16,7 @@ import collections
 import tempfile
 import unittest
 
-from kleborate.kleborate import get_chromosome_mlst_results, gunzip_contigs_if_necessary
+from kleborate.__main__ import get_chromosome_mlst_results, gunzip_contigs_if_necessary
 
 
 class TestMlst(unittest.TestCase):

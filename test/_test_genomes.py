@@ -17,7 +17,7 @@ import tempfile
 import os
 import unittest
 
-from kleborate.kleborate import get_output_headers, get_strain_name, get_contig_stat_results, \
+from kleborate.__main__ import get_output_headers, get_strain_name, get_contig_stat_results, \
     get_species_results, is_kp_complex, get_chromosome_mlst_results, get_ybt_mlst_results, \
     get_clb_mlst_results, get_iuc_mlst_results, get_iro_mlst_results, get_hypermucoidy_results, \
     get_wzi_and_k_locus_results, get_resistance_results, get_summary_results, \

@@ -14,7 +14,7 @@ not, see <http://www.gnu.org/licenses/>.
 
 import collections
 import unittest
-from kleborate.kleborate import get_data_path, get_output_headers, get_summary_results
+from kleborate.__main__ import get_data_path, get_output_headers, get_summary_results
 
 
 class TestResScore(unittest.TestCase):
