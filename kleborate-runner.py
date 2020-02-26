@@ -15,7 +15,7 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-from kleborate.kleborate import main
+from kleborate.__main__ import main
 
 
 if __name__ == '__main__':
