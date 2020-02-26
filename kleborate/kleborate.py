@@ -118,7 +118,7 @@ def parse_arguments():
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                            help='Show this help message and exit')
-    help_args.add_argument('--version', action='version', version=__version__,
+    help_args.add_argument('--version', action='version', version='Kleborate v' + __version__,
                            help="Show program's version number and exit")
 
     # If no arguments were used, print the entire help (argparse default is to just give an error
