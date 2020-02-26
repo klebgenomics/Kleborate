@@ -40,7 +40,7 @@ class TestIro(unittest.TestCase):
         self.assertEqual(results['Salmochelin'], '-')
         self.assertEqual(results['SmST'], '0')
 
-    def test_iro_exact(self):
+    def test_iro_exact_33(self):
         """
         This test is an exact match for SmST33.
         """
@@ -88,3 +88,27 @@ class TestIro(unittest.TestCase):
         self.assertEqual(results['iroN'], '-')
         self.assertEqual(results['Salmochelin'], '-')
         self.assertEqual(results['SmST'], '0')
+
+    def test_iro_exact_1(self):
+        """
+        This test is an exact match for SmST1.
+        """
+        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_5.fasta', self.args)
+        self.assertEqual(results['iroB'], '1')
+        self.assertEqual(results['iroC'], '1')
+        self.assertEqual(results['iroD'], '1')
+        self.assertEqual(results['iroN'], '1')
+        self.assertEqual(results['Salmochelin'], 'iro 1')
+        self.assertEqual(results['SmST'], '1')
+
+    def test_iro_missing_1(self):
+        """
+        This test is a match for SmST1, except that it's missing iroN.
+        """
+        results = get_iro_mlst_results(self.data_dir, 'test/test_iro/test_iro_6.fasta', self.args)
+        self.assertEqual(results['iroB'], '1')
+        self.assertEqual(results['iroC'], '1')
+        self.assertEqual(results['iroD'], '1')
+        self.assertEqual(results['iroN'], '-')
+        self.assertEqual(results['Salmochelin'], 'iro 1 (incomplete)')
+        self.assertEqual(results['SmST'], '1-1LV')
