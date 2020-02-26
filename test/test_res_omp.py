@@ -15,7 +15,7 @@ not, see <http://www.gnu.org/licenses/>.
 import collections
 import unittest
 
-from kleborate.kleborate import get_output_headers, get_resistance_results
+from kleborate.__main__ import get_output_headers, get_resistance_results
 
 
 class TestResOmp(unittest.TestCase):

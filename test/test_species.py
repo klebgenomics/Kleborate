@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_data_path
+from kleborate.__main__ import get_data_path
 from kleborate.species import get_klebsiella_species, is_kp_complex
 
 

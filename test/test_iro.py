@@ -15,7 +15,7 @@ not, see <http://www.gnu.org/licenses/>.
 import collections
 import unittest
 
-from kleborate.kleborate import get_iro_mlst_results
+from kleborate.__main__ import get_iro_mlst_results
 
 
 class TestIro(unittest.TestCase):
