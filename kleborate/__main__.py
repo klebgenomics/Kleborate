@@ -336,19 +336,22 @@ def get_resistance_gene_count(res_headers, res_hits):
 
     gene_list = []
     for i in res_indices:
+        header = res_headers[i].lower()
         genes = res_hits[i].split(';')
 
         # Exclude mutation-based flq resistance.
         genes = [g for g in genes if 'gyra-' not in g.lower()]
         genes = [g for g in genes if 'parc-' not in g.lower()]
 
-        # Exclude truncation-based resistance.
-        genes = [g for g in genes if '%' not in g]
+        # Exclude truncation-based colistin resistance.
+        genes = [g for g in genes if 'mgrb-' not in g.lower()]
+        genes = [g for g in genes if 'pmrb-' not in g.lower()]
 
-        # Exclude intrinsic bla genes.
-        genes = [g for g in genes if 'shv-' not in g.lower()]
-        genes = [g for g in genes if 'okp-' not in g.lower()]
-        genes = [g for g in genes if 'len-' not in g.lower()]
+        # Exclude intrinsic bla genes (SHV, OKP or LEN in the Bla column - if they are in another
+        # column we assume they are acquired).
+        genes = [g for g in genes if not ('shv-' in g.lower() and header == 'bla')]
+        genes = [g for g in genes if not ('okp-' in g.lower() and header == 'bla')]
+        genes = [g for g in genes if not ('len-' in g.lower() and header == 'bla')]
 
         genes = [g for g in genes if g != '-']
         gene_list += genes

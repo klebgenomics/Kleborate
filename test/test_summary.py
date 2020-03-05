@@ -66,6 +66,27 @@ class TestResScore(unittest.TestCase):
 
     def test_res_counts_4(self):
         """
+        Bla genes in columns other than 'Bla' (e.g. 'Bla_ESBL') should add to the counts.
+        """
+        self.results['Tet'] = 'd;e;f'
+        self.results['Bla'] = 'g;SHV-3'
+        self.results['Bla_ESBL'] = 'SHV-4'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['num_resistance_classes'], '2')
+        self.assertEqual(summary_results['num_resistance_genes'], '5')
+
+    def test_res_counts_5(self):
+        """
+        Bla genes in columns other than 'Bla' (e.g. 'Bla_broad') should add to the counts.
+        """
+        self.results['Tet'] = 'd;e;f'
+        self.results['Bla_broad'] = 'SHV-5'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['num_resistance_classes'], '2')
+        self.assertEqual(summary_results['num_resistance_genes'], '4')
+
+    def test_res_counts_6(self):
+        """
         Omp genes should not add to the counts.
         """
         self.results['AGly'] = 'a'
@@ -76,7 +97,7 @@ class TestResScore(unittest.TestCase):
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '6')
 
-    def test_res_counts_5(self):
+    def test_res_counts_7(self):
         """
         Mutations should add to the class count but not to the gene count (because that is for
         acquired resistance genes).
@@ -88,7 +109,7 @@ class TestResScore(unittest.TestCase):
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
-    def test_res_counts_6(self):
+    def test_res_counts_8(self):
         """
         Mutations should add to the class count but not to the gene count (because that is for
         acquired resistance genes).
@@ -100,7 +121,7 @@ class TestResScore(unittest.TestCase):
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '5')
 
-    def test_res_counts_7(self):
+    def test_res_counts_9(self):
         """
         Truncations should add to the class count but not to the gene count (because that is for
         acquired resistance genes).
@@ -112,7 +133,7 @@ class TestResScore(unittest.TestCase):
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '3')
 
-    def test_res_counts_8(self):
+    def test_res_counts_10(self):
         """
         Truncations should add to the class count but not to the gene count (because that is for
         acquired resistance genes).
