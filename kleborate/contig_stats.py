@@ -17,13 +17,15 @@ import collections
 from .misc import load_fasta
 
 
-def get_contig_stat_results(contigs):
+def get_contig_stat_results(contigs, kp_complex):
     contig_count, n50, longest_contig, total_size, ambiguous_bases = get_contig_stats(contigs)
+    qc_warnings = get_qc_warnings(total_size, n50, ambiguous_bases, kp_complex)
     return {'contig_count': str(contig_count),
             'N50': str(n50),
             'largest_contig': str(longest_contig),
             'total_size': str(total_size),
-            'ambiguous_bases': ambiguous_bases}
+            'ambiguous_bases': ambiguous_bases,
+            'QC_warnings': qc_warnings}
 
 
 def get_contig_stats(assembly):
@@ -61,3 +63,26 @@ def get_contig_stats(assembly):
         n50 = 0
 
     return len(contig_lengths), n50, longest, total_size, ambiguous_bases
+
+
+def get_qc_warnings(total_size, n50, ambiguous_bases, kp_complex):
+    warnings = []
+
+    # Genome size should be 5 to 6.5 Mbp for KpSC genomes. For non-KpSC genomes, we don't check
+    # the genome size.
+    if kp_complex:
+        if total_size < 5000000:
+            warnings.append('total_size')
+        elif total_size > 6500000:
+            warnings.append('total_size')
+
+    if n50 < 10000:
+        warnings.append('N50')
+
+    if 'yes' in ambiguous_bases:
+        warnings.append('ambiguous_bases')
+
+    if warnings:
+        return ','.join(warnings)
+    else:
+        return '-'
