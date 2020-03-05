@@ -50,10 +50,9 @@ def main():
             # the column orders can be easily changed by modifying the get_output_headers function.
 
             results = {'strain': get_strain_name(contigs)}
-            results.update(get_contig_stat_results(contigs))
             results.update(get_species_results(contigs, data_folder))
-
             kp_complex = is_kp_complex(results)
+            results.update(get_contig_stat_results(contigs, kp_complex))
 
             results.update(get_chromosome_mlst_results(data_folder, contigs, kp_complex, args))
             results.update(get_ybt_mlst_results(data_folder, contigs, args))
@@ -197,8 +196,8 @@ def get_output_headers(args, data_folder):
     stdout_header = ['strain', 'species']
     full_header = ['strain', 'species', 'species_match']
     stdout_header += ['ST', 'virulence_score']
-    full_header += ['contig_count', 'N50', 'largest_contig', 'total_size', 'ambiguous_bases', 'ST',
-                    'virulence_score']
+    full_header += ['contig_count', 'N50', 'largest_contig', 'total_size', 'ambiguous_bases',
+                    'QC_warnings', 'ST', 'virulence_score']
 
     if args.resistance:
         stdout_header.append('resistance_score')
