@@ -175,7 +175,8 @@ def get_closest_locus_variant(query, annotated_query, sts):
     closest_st = str(min(closest))
 
     for index, item in enumerate(annotated_query):
-        if item == '-' or item.endswith('*'):
+        annotated_query[index] = re.sub(r'-\d+%', '', item)
+        if item == '-' or '*' in item:
             annotated_query[index] = '0'
 
     # get distance from closest ST, including SNPs
