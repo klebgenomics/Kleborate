@@ -19,8 +19,8 @@ import unittest
 
 from kleborate.__main__ import get_output_headers, get_strain_name, get_contig_stat_results, \
     get_species_results, is_kp_complex, get_chromosome_mlst_results, get_ybt_mlst_results, \
-    get_clb_mlst_results, get_iuc_mlst_results, get_iro_mlst_results, get_hypermucoidy_results, \
-    get_wzi_and_k_locus_results, get_resistance_results, get_summary_results, \
+    get_clb_mlst_results, get_iuc_mlst_results, get_iro_mlst_results, get_rmp_mlst_results,\
+    get_rmpa2_results, get_wzi_and_k_locus_results, get_resistance_results, get_summary_results, \
     gunzip_contigs_if_necessary
 
 
@@ -71,15 +71,16 @@ class TestGenomes(unittest.TestCase):
 
     def get_all_results(self, contigs):
         results = {'strain': get_strain_name(contigs)}
-        results.update(get_contig_stat_results(contigs))
         results.update(get_species_results(contigs, self.data_dir))
         kp_complex = is_kp_complex(results)
+        results.update(get_contig_stat_results(contigs, is_kp_complex))
         results.update(get_chromosome_mlst_results(self.data_dir, contigs, kp_complex, self.args))
         results.update(get_ybt_mlst_results(self.data_dir, contigs, self.args))
         results.update(get_clb_mlst_results(self.data_dir, contigs, self.args))
         results.update(get_iuc_mlst_results(self.data_dir, contigs, self.args))
         results.update(get_iro_mlst_results(self.data_dir, contigs, self.args))
-        results.update(get_hypermucoidy_results(self.data_dir, contigs, self.args))
+        results.update(get_rmp_mlst_results(self.data_dir, contigs, self.args))
+        results.update(get_rmpa2_results(self.data_dir, contigs, self.args))
         results.update(get_wzi_and_k_locus_results(self.data_dir, contigs, self.args))
         results.update(get_resistance_results(self.data_dir, contigs, self.args, self.res_headers,
                                               kp_complex))

@@ -27,7 +27,7 @@ from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results, is_kp_complex
 from .mlstBLAST import mlst_blast
 from .resBLAST import read_class_file, get_res_headers, resblast_one_assembly
-from .rmpA import rmpa_blast
+from .rmpA import rmpa2_blast
 from .misc import get_compression_type, load_fasta
 from .version import __version__
 
@@ -59,7 +59,8 @@ def main():
             results.update(get_clb_mlst_results(data_folder, contigs, args))
             results.update(get_iuc_mlst_results(data_folder, contigs, args))
             results.update(get_iro_mlst_results(data_folder, contigs, args))
-            results.update(get_hypermucoidy_results(data_folder, contigs, args))
+            results.update(get_rmp_mlst_results(data_folder, contigs, args))
+            results.update(get_rmpa2_results(data_folder, contigs, args))
             results.update(get_wzi_and_k_locus_results(data_folder, contigs, args))
             results.update(get_resistance_results(data_folder, contigs, args, res_headers,
                                                   kp_complex))
@@ -209,7 +210,8 @@ def get_output_headers(args, data_folder):
                      'Colibactin', 'CbST',
                      'Aerobactin', 'AbST',
                      'Salmochelin', 'SmST',
-                     'rmpA', 'rmpA2',
+                     'RmpADC', 'RmST',
+                     'rmpA2',
                      'wzi', 'K_locus']
     stdout_header += other_columns
     full_header += other_columns
@@ -237,6 +239,7 @@ def get_output_headers(args, data_folder):
     full_header += get_clb_mlst_header()
     full_header += get_iuc_mlst_header()
     full_header += get_iro_mlst_header()
+    full_header += get_rmp_mlst_header()
 
     # If resistance genes are on, run the resBLAST.py script to get its headers.
     if args.resistance:
@@ -384,6 +387,10 @@ def get_iro_mlst_header():
     return ['iroB', 'iroC', 'iroD', 'iroN']
 
 
+def get_rmp_mlst_header():
+    return ['rmpA', 'rmpD', 'rmpC']
+
+
 def gunzip_contigs_if_necessary(contigs, temp_dir):
     if get_compression_type(contigs) == 'gz':
         name = get_strain_name(contigs)
@@ -482,14 +489,16 @@ def get_iro_mlst_results(data_folder, contigs, args):
                                          'iro unknown', 3, get_iro_mlst_header, args)
 
 
-def get_hypermucoidy_results(data_folder, contigs, args):
-    seqs = data_folder + '/hypermucoidy.fasta'
-    database = data_folder + '/hypermucoidy_rmpA.txt'
-    results = rmpa_blast(seqs, database, [contigs], args.min_coverage, args.min_identity)
-    rmpa_allele, rmpa2_allele = results[1], results[2]
+def get_rmp_mlst_results(data_folder, contigs, args):
+    return get_virulence_cluster_results(data_folder, contigs, 'rmp_alleles.fasta',
+                                         'RmST_profiles.txt', 'RmpADC', 'RmST',
+                                         'rmp unknown', 2, get_rmp_mlst_header, args)
 
-    return {'rmpA': rmpa_allele,
-            'rmpA2': rmpa2_allele}
+
+def get_rmpa2_results(data_folder, contigs, args):
+    seqs = data_folder + '/rmpA2.fasta'
+    rmpa2_allele = rmpa2_blast(seqs, [contigs], args.min_coverage, args.min_identity)
+    return {'rmpA2': rmpa2_allele}
 
 
 def get_wzi_and_k_locus_results(data_folder, contigs, args):

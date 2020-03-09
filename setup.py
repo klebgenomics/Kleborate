@@ -73,8 +73,8 @@ class KleborateInstall(install):
             check_dir_write_permission(data_dir)
             print('Building BLAST databases with makeblastdb:')
             try:
-                for fasta in ['ARGannot_r3.fasta', 'clb_alleles.fasta', 'hypermucoidy.fasta',
-                              'iro_alleles.fasta', 'iuc_alleles.fasta',
+                for fasta in ['ARGannot_r3.fasta', 'clb_alleles.fasta', 'rmpA2.fasta',
+                              'iro_alleles.fasta', 'iuc_alleles.fasta', 'rmp_alleles.fasta',
                               'Klebsiella_pneumoniae.fasta', 'wzi.fasta', 'ybt_alleles.fasta',
                               'MgrB_and_PmrB.fasta', 'OmpK.fasta', 'QRDR_120.fasta']:
                     build_blast_db(data_dir, fasta, 'nucl')
