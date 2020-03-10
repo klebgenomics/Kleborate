@@ -413,9 +413,9 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
     if kp_complex:
         seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
         database = data_folder + '/kpneumoniae.txt'
-        results = mlst_blast(seqs, database, 'no', [contigs], min_cov=args.min_coverage,
-                             min_ident=args.min_identity, max_missing=3)
-        chr_st, chr_st_detail = results[1], results[2:]
+        chr_st, chr_st_detail, _ = \
+            mlst_blast(seqs, database, 'no', [contigs], min_cov=args.min_coverage,
+                       min_ident=args.min_identity, max_missing=3, allow_multiple=False)
         if chr_st != '0':
             chr_st = 'ST' + chr_st
 
@@ -445,10 +445,10 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
                                   header_function, args):
     seqs = data_folder + '/' + alleles_fasta
     database = data_folder + '/' + profiles_txt
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                         min_ident=args.min_identity, max_missing=3,
-                         check_for_truncation=True, report_incomplete=True)
-    group, st, st_detail = results[1], results[2], results[3:]
+    st, st_detail, group = \
+        mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
+                   min_ident=args.min_identity, max_missing=3, check_for_truncation=True,
+                   report_incomplete=True, allow_multiple=True)
     if group == '':
         if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
             group = unknown_group_name
@@ -504,16 +504,14 @@ def get_rmpa2_results(data_folder, contigs, args):
 def get_wzi_and_k_locus_results(data_folder, contigs, args):
     seqs = data_folder + '/wzi.fasta'
     database = data_folder + '/wzi.txt'
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                         min_ident=args.min_identity, max_missing=0)
-    k_type = results[1]
-    if results[2] == '0':
+    bst, _, k_type = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
+                                min_ident=args.min_identity, max_missing=0, allow_multiple=False)
+    if bst == '0':
         wzi_st = '-'
     else:
-        wzi_st = 'wzi' + results[2]
+        wzi_st = 'wzi' + bst
     if k_type == '':
         k_type = '-'
-
     return {'wzi': wzi_st,
             'K_locus': k_type}
 
