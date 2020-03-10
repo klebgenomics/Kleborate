@@ -38,7 +38,15 @@ def run_blastn(db, query, min_cov, min_ident):
     if min_cov is not None:
         blast_hits = [h for h in blast_hits if h.ref_cov * 100 >= min_cov]
 
-    return cull_redundant_hits(blast_hits)
+    # Clean up redundant hits so we only have one hit for each part of the genome.
+    blast_hits = cull_redundant_hits(blast_hits)
+
+    # Get rid of any hits that start with 'delete_'. This is used in cases where there can be
+    # confounding homologous hits. E.g. searching for rmpA2 alleles but not wanting to be misled by
+    # homologous rmpA alleles.
+    blast_hits = [h for h in blast_hits if not h.gene_id.startswith('delete_')]
+
+    return blast_hits
 
 
 def cull_redundant_hits(blast_hits):
