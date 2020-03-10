@@ -20,6 +20,7 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
+import collections
 import os
 import re
 
@@ -28,8 +29,8 @@ from .truncation import truncation_check
 
 
 def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_missing,
-               check_for_truncation=False, report_incomplete=False):
-    sts, st_info, max_st, header = load_st_database(database, info_arg)
+               check_for_truncation=False, report_incomplete=False, allow_multiple=False):
+    st_names, alleles_to_st, st_to_info, header = load_st_database(database, info_arg)
 
     # In order to call an ST, there needs to be an exact match for half (rounded down) of the
     # relevant alleles.
@@ -39,30 +40,11 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
     _, filename = os.path.split(contigs)
     name, _ = os.path.splitext(filename)
 
-    best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
-    best_allele = {}  # key = locus, value = best allele (* if imprecise match)
-
     hits = run_blastn(seqs, contigs, min_cov, min_ident)
-    for hit in hits:
-        if '__' in hit.gene_id:  # srst2 formatted file
-            gene_id_components = hit.gene_id.split('__')
-            locus = gene_id_components[1]
-            allele = gene_id_components[2]
-        else:
-            allele = hit.gene_id
-            locus = hit.gene_id.split('_')[0]
-        if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
-            allele += '*'  # inexact match
-        if check_for_truncation:
-            allele += truncation_check(hit)[0]
-        # store best match for each one locus
-        if locus in best_score:
-            if hit.score > best_score[locus]:    # update
-                best_score[locus] = hit.score
-                best_allele[locus] = allele.split('_')[1]  # store number only
-        else:  # initialise
-            best_score[locus] = hit.score
-            best_allele[locus] = allele.split('_')[1]  # store number only
+    if not allow_multiple:
+        hits = keep_only_one_hit_per_locus(hits)
+
+    best_allele = get_best_allele_per_locus(hits, check_for_truncation)
 
     best_st = []
     best_st_annotated = []
@@ -92,14 +74,14 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
 
     if mismatch_loci_including_snps <= max_missing:
         # only report ST if enough loci are precise matches
-        if bst in sts:
+        if bst in alleles_to_st:
             # note may have mismatching alleles due to SNPs, this will be recorded in
             # mismatch_loci_including_snps
-            bst = sts[bst]
+            bst = alleles_to_st[bst]
         else:
             # determine closest ST
             bst, _, mismatch_loci_including_snps = \
-                get_closest_locus_variant(best_st, best_st_annotated, sts)
+                get_closest_locus_variant(best_st, best_st_annotated, alleles_to_st)
     else:
         bst = '0'
 
@@ -109,24 +91,70 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
 
     # pull info column
     info_final = ''
-    if info_arg == 'yes' and bst in st_info:
-        info_final = st_info[bst]
+    if info_arg == 'yes' and bst in st_to_info:
+        info_final = st_to_info[bst]
         if report_incomplete and missing_loci > 0:
             info_final += ' (incomplete)'
 
     if mismatch_loci_including_snps > 0 and bst != '0':
         bst += '-' + str(mismatch_loci_including_snps) + 'LV'
 
-    if info_arg == 'yes':
-        return [name, info_final, bst] + best_st_annotated
+    return bst, best_st_annotated, info_final
+
+
+def get_allele_and_locus(hit):
+    """
+    Parses the allele name and locus name from the hit's gene ID.
+    """
+    if '__' in hit.gene_id:  # srst2 formatted file
+        gene_id_components = hit.gene_id.split('__')
+        locus = gene_id_components[1]
+        allele = gene_id_components[2]
     else:
-        return [name, bst] + best_st_annotated
+        allele = hit.gene_id
+        locus = hit.gene_id.split('_')[0]
+    return allele, locus
+
+
+def keep_only_one_hit_per_locus(hits):
+    hits_per_locus = collections.defaultdict(list)
+    for hit in hits:
+        _, locus = get_allele_and_locus(hit)
+        hits_per_locus[locus].append(hit)
+    kept_hits = []
+    for locus, locus_hits in hits_per_locus.items():
+        locus_hits = sorted(locus_hits, key=lambda x: x.score, reverse=True)  # sort best to worst
+        best_hit = locus_hits[0]
+        kept_hits.append(best_hit)
+    return kept_hits
+
+
+def get_best_allele_per_locus(hits, check_for_truncation):
+    best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
+    best_allele = {}  # key = locus, value = best allele (* if imprecise match)
+
+    for hit in hits:
+        allele, locus = get_allele_and_locus(hit)
+        if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
+            allele += '*'  # inexact match
+        if check_for_truncation:
+            allele += truncation_check(hit)[0]
+        # store best match for each one locus
+        if locus in best_score:
+            if hit.score > best_score[locus]:    # update
+                best_score[locus] = hit.score
+                best_allele[locus] = allele.split('_')[1]  # store number only
+        else:  # initialise
+            best_score[locus] = hit.score
+            best_allele[locus] = allele.split('_')[1]  # store number only
+
+    return best_allele
 
 
 def load_st_database(database, info_arg):
-    sts = {}  # key = concatenated string of alleles, value = st
-    st_info = {}  # key = st, value = info relating to this ST, eg clonal group
-    max_st = 0  # holds the highest current ST, incremented when novel combinations are encountered
+    st_names = []
+    alleles_to_st = {}  # key = concatenated string of alleles, value = st
+    st_to_info = {}  # key = st, value = info relating to this ST, eg clonal group
     header = []
     with open(database, 'r') as f:
         for line in f:
@@ -142,12 +170,11 @@ def load_st_database(database, info_arg):
                     info = fields.pop()
                 else:
                     info = ''
-                sts[','.join(fields)] = st
-                if int(st) > max_st:
-                    max_st = int(st)
+                st_names.append(st)
+                alleles_to_st[','.join(fields)] = st
                 if info_arg == 'yes':
-                    st_info[st] = info
-    return sts, st_info, max_st, header
+                    st_to_info[st] = info
+    return st_names, alleles_to_st, st_to_info, header
 
 
 def get_closest_locus_variant(query, annotated_query, sts):
