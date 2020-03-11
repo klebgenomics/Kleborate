@@ -33,7 +33,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
     st_names, alleles_to_st, st_to_info, header = load_st_database(database, info_arg)
 
     # In order to call an ST, there needs to be an exact match for half (rounded down) of the
-    # relevant alleles.
+    # alleles.
     required_exact_matches = int(len(header) / 2)
 
     contigs = assemblies[0]
@@ -41,10 +41,34 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
     name, _ = os.path.splitext(filename)
 
     hits = run_blastn(seqs, contigs, min_cov, min_ident)
-    if not allow_multiple:
-        hits = keep_only_one_hit_per_locus(hits)
 
-    best_allele = get_best_allele_per_locus(hits, check_for_truncation)
+    final_call = ''
+    final_alleles = [''] * len(header)
+    final_info = ''
+
+    if allow_multiple:
+        hit_groups = cluster_hits_by_contig(hits)
+    else:
+        hits = keep_only_one_hit_per_locus(hits)
+        hit_groups = [hits]
+
+    for hit_group in hit_groups:
+        call, alleles, info = \
+            call_one_st(hit_group, header, check_for_truncation, max_missing, alleles_to_st,
+                        required_exact_matches, info_arg, st_to_info, report_incomplete)
+        final_call = add_to_string(final_call, call)
+        final_alleles = add_to_strings(final_alleles, alleles)
+        final_info = add_to_string(final_info, info)
+
+    final_call = simplify_st_str(final_call)
+    final_alleles = [simplify_allele_str(a) for a in final_alleles]
+
+    return final_call, final_alleles, final_info
+
+
+def call_one_st(hits, header, check_for_truncation, max_missing, alleles_to_st,
+                required_exact_matches, info_arg, st_to_info, report_incomplete):
+    best_alleles = get_best_allele_per_locus(hits, check_for_truncation)
 
     best_st = []
     best_st_annotated = []
@@ -52,8 +76,8 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
     mismatch_loci_including_snps, missing_loci = 0, 0
 
     for locus in header:
-        if locus in best_allele:
-            allele = best_allele[locus]
+        if locus in best_alleles:
+            allele = best_alleles[locus]
 
             # Remove * (inexact match) and truncation percentages
             allele_number = allele.replace('*', '')
@@ -130,8 +154,8 @@ def keep_only_one_hit_per_locus(hits):
 
 
 def get_best_allele_per_locus(hits, check_for_truncation):
-    best_score = {}   # key = locus, value = BLAST score for best allele encountered so far
-    best_allele = {}  # key = locus, value = best allele (* if imprecise match)
+    best_scores = {}   # key = locus, value = BLAST score for best allele encountered so far
+    best_alleles = {}  # key = locus, value = best allele (* if imprecise match)
 
     for hit in hits:
         allele, locus = get_allele_and_locus(hit)
@@ -140,15 +164,15 @@ def get_best_allele_per_locus(hits, check_for_truncation):
         if check_for_truncation:
             allele += truncation_check(hit)[0]
         # store best match for each one locus
-        if locus in best_score:
-            if hit.score > best_score[locus]:    # update
-                best_score[locus] = hit.score
-                best_allele[locus] = allele.split('_')[1]  # store number only
+        if locus in best_scores:
+            if hit.score > best_scores[locus]:    # update
+                best_scores[locus] = hit.score
+                best_alleles[locus] = allele.split('_')[1]  # store number only
         else:  # initialise
-            best_score[locus] = hit.score
-            best_allele[locus] = allele.split('_')[1]  # store number only
+            best_scores[locus] = hit.score
+            best_alleles[locus] = allele.split('_')[1]  # store number only
 
-    return best_allele
+    return best_alleles
 
 
 def load_st_database(database, info_arg):
@@ -211,3 +235,51 @@ def get_closest_locus_variant(query, annotated_query, sts):
                                  closest_alleles[closest_st].split(','), annotated_query))
 
     return closest_st, min_dist, min_dist_incl_snps
+
+
+def add_to_string(existing_str, new_str):
+    if existing_str == '':
+        return new_str
+    elif new_str == '':
+        return existing_str
+    else:
+        return existing_str + ',' + new_str
+
+
+def add_to_strings(existing_strs, new_strs):
+    assert len(existing_strs) == len(new_strs)
+    return [add_to_string(existing_str, new_str)
+            for existing_str, new_str in zip(existing_strs, new_strs)]
+
+
+def cluster_hits_by_contig(hits):
+    hits_by_contig = collections.defaultdict(list)
+    for h in hits:
+        hits_by_contig[h.contig_name].append(h)
+    return [x for x in hits_by_contig.values()]
+
+
+def simplify_st_str(st):
+    """
+    Removes extra '0' bits of the comma-delimited st calls.
+    E.g. 3,0,0,5 -> 3,5
+    """
+    parts = st.split(',')
+    parts = [p for p in parts if p != '0']
+    st = ','.join(parts)
+    if st == '':
+        st = '0'
+    return st
+
+
+def simplify_allele_str(alleles):
+    """
+    Removes extra '-' bits of the comma-delimited allele calls.
+    E.g. 3,-,-,5 -> 3,5
+    """
+    parts = alleles.split(',')
+    parts = [p for p in parts if p != '-']
+    alleles = ','.join(parts)
+    if alleles == '':
+        alleles = '-'
+    return alleles
