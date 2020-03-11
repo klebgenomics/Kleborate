@@ -46,11 +46,18 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
     final_alleles = [''] * len(header)
     final_info = ''
 
-    if allow_multiple:
+    # See if we have any loci for which there are multiple genes.
+    hits_one_per_locus = keep_only_one_hit_per_locus(hits)
+    any_multiple_hits = len(hits_one_per_locus) < len(hits)
+
+    # If we have multiple hits and allow multiple MLST calls, then we cluster the hits by contig
+    # before continuing.
+    if any_multiple_hits and allow_multiple:
         hit_groups = cluster_hits_by_contig(hits)
+
+    # If we aren't considering multiple MLST calls, then all the hits go into a single cluster.
     else:
-        hits = keep_only_one_hit_per_locus(hits)
-        hit_groups = [hits]
+        hit_groups = [hits_one_per_locus]
 
     for hit_group in hit_groups:
         call, alleles, info = \
