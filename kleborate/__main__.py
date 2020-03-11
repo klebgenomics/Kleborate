@@ -442,13 +442,13 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
 
 def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_txt,
                                   vir_name, vir_st_name, unknown_group_name, min_gene_count,
-                                  header_function, args, allow_multiple):
+                                  header_function, args):
     seqs = data_folder + '/' + alleles_fasta
     database = data_folder + '/' + profiles_txt
     st, st_detail, group = \
         mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
                    min_ident=args.min_identity, max_missing=3, check_for_truncation=True,
-                   report_incomplete=True, allow_multiple=allow_multiple)
+                   report_incomplete=True, allow_multiple=True)
 
     if group == '':
         if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
@@ -469,36 +469,31 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
 def get_ybt_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'ybt_alleles.fasta',
                                          'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
-                                         'ybt unknown', 8, get_ybt_mlst_header, args,
-                                         allow_multiple=False)
+                                         'ybt unknown', 8, get_ybt_mlst_header, args)
 
 
 def get_clb_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'clb_alleles.fasta',
                                          'CbST_profiles.txt', 'Colibactin', 'CbST',
-                                         'clb unknown', 12, get_clb_mlst_header, args,
-                                         allow_multiple=False)
+                                         'clb unknown', 12, get_clb_mlst_header, args)
 
 
 def get_iuc_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'iuc_alleles.fasta',
                                          'AbST_profiles.txt', 'Aerobactin', 'AbST',
-                                         'iuc unknown', 3, get_iuc_mlst_header, args,
-                                         allow_multiple=False)
+                                         'iuc unknown', 3, get_iuc_mlst_header, args)
 
 
 def get_iro_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'iro_alleles.fasta',
                                          'SmST_profiles.txt', 'Salmochelin', 'SmST',
-                                         'iro unknown', 3, get_iro_mlst_header, args,
-                                         allow_multiple=True)
+                                         'iro unknown', 3, get_iro_mlst_header, args)
 
 
 def get_rmp_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'rmp_alleles.fasta',
                                          'RmST_profiles.txt', 'RmpADC', 'RmST',
-                                         'rmp unknown', 2, get_rmp_mlst_header, args,
-                                         allow_multiple=True)
+                                         'rmp unknown', 2, get_rmp_mlst_header, args)
 
 
 def get_rmpa2_results(data_folder, contigs, args):
