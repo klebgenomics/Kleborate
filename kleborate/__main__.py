@@ -448,14 +448,8 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
     st, st_detail, group = \
         mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
                    min_ident=args.min_identity, max_missing=3, check_for_truncation=True,
-                   report_incomplete=True, allow_multiple=True)
-
-    if group == '':
-        if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
-            group = unknown_group_name
-            st = '0'
-        else:
-            group = '-'
+                   report_incomplete=True, allow_multiple=True,
+                   min_gene_count=min_gene_count, unknown_group_name=unknown_group_name)
 
     mlst_header = header_function()
     assert len(mlst_header) == len(st_detail)
