@@ -29,7 +29,8 @@ from .truncation import truncation_check
 
 
 def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_missing,
-               check_for_truncation=False, report_incomplete=False, allow_multiple=False):
+               check_for_truncation=False, report_incomplete=False, allow_multiple=False,
+               min_gene_count=None, unknown_group_name=None):
     st_names, alleles_to_st, st_to_info, header = load_st_database(database, info_arg)
 
     # In order to call an ST, there needs to be an exact match for half (rounded down) of the
@@ -62,19 +63,18 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
     for hit_group in hit_groups:
         call, alleles, info = \
             call_one_st(hit_group, header, check_for_truncation, max_missing, alleles_to_st,
-                        required_exact_matches, info_arg, st_to_info, report_incomplete)
+                        required_exact_matches, info_arg, st_to_info, report_incomplete,
+                        min_gene_count, unknown_group_name)
         final_call = add_to_string(final_call, call)
         final_alleles = add_to_strings(final_alleles, alleles)
         final_info = add_to_string(final_info, info)
-
-    final_call = simplify_st_str(final_call)
-    final_alleles = [simplify_allele_str(a) for a in final_alleles]
 
     return final_call, final_alleles, final_info
 
 
 def call_one_st(hits, header, check_for_truncation, max_missing, alleles_to_st,
-                required_exact_matches, info_arg, st_to_info, report_incomplete):
+                required_exact_matches, info_arg, st_to_info, report_incomplete,
+                min_gene_count, unknown_group_name):
     best_alleles = get_best_allele_per_locus(hits, check_for_truncation)
 
     best_st = []
@@ -129,6 +129,14 @@ def call_one_st(hits, header, check_for_truncation, max_missing, alleles_to_st,
 
     if mismatch_loci_including_snps > 0 and bst != '0':
         bst += '-' + str(mismatch_loci_including_snps) + 'LV'
+
+    if min_gene_count is not None and unknown_group_name is not None:
+        if info_final == '':
+            if sum(0 if x == '-' else 1 for x in best_st_annotated) >= min_gene_count:
+                info_final = unknown_group_name
+                bst = '0'
+            else:
+                info_final = '-'
 
     return bst, best_st_annotated, info_final
 
@@ -264,29 +272,3 @@ def cluster_hits_by_contig(hits):
     for h in hits:
         hits_by_contig[h.contig_name].append(h)
     return [x for x in hits_by_contig.values()]
-
-
-def simplify_st_str(st):
-    """
-    Removes extra '0' bits of the comma-delimited st calls.
-    E.g. 3,0,0,5 -> 3,5
-    """
-    parts = st.split(',')
-    parts = [p for p in parts if p != '0']
-    st = ','.join(parts)
-    if st == '':
-        st = '0'
-    return st
-
-
-def simplify_allele_str(alleles):
-    """
-    Removes extra '-' bits of the comma-delimited allele calls.
-    E.g. 3,-,-,5 -> 3,5
-    """
-    parts = alleles.split(',')
-    parts = [p for p in parts if p != '-']
-    alleles = ','.join(parts)
-    if alleles == '':
-        alleles = '-'
-    return alleles
