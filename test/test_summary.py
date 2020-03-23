@@ -145,6 +145,18 @@ class TestResScore(unittest.TestCase):
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
+    def test_res_counts_11(self):
+        """
+        Spurious hits should not add to either the gene or class counts.
+        """
+        self.results['AGly'] = 'a'
+        self.results['Flq'] = 'b'
+        self.results['Tet'] = 'c'
+        self.results['spurious_resistance_hits'] = 'd;e;f'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '3')
+
     def test_res_score_1(self):
         self.results['Bla'] = 'a'
         summary_results = get_summary_results(self.results, self.res_headers)
