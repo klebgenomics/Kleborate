@@ -47,7 +47,7 @@ class TestRmp(unittest.TestCase):
         self.assertEqual(results['rmpA'], '7')
         self.assertEqual(results['rmpD'], '8')
         self.assertEqual(results['rmpC'], '3')
-        self.assertEqual(results['RmpADC'], '2A')
+        self.assertEqual(results['RmpADC'], 'rmp 2A; VP')
         self.assertEqual(results['RmST'], '19')
 
     def test_rmp_21(self):
@@ -58,7 +58,7 @@ class TestRmp(unittest.TestCase):
         self.assertEqual(results['rmpA'], '7')
         self.assertEqual(results['rmpD'], '36')
         self.assertEqual(results['rmpC'], '4-17%')
-        self.assertEqual(results['RmpADC'], '2A')
+        self.assertEqual(results['RmpADC'], 'rmp 2A; VP')
         self.assertEqual(results['RmST'], '21')
 
     def test_rmp_novel(self):
@@ -80,7 +80,7 @@ class TestRmp(unittest.TestCase):
         self.assertEqual(results['rmpA'], '41-54%')
         self.assertEqual(results['rmpD'], '20')
         self.assertEqual(results['rmpC'], '-')
-        self.assertEqual(results['RmpADC'], '2A (incomplete)')
+        self.assertEqual(results['RmpADC'], 'rmp 2A; VP (incomplete)')
         self.assertEqual(results['RmST'], '1-1LV')
 
     def test_rmpa2_random(self):
