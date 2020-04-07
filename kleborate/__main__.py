@@ -446,13 +446,15 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
                                   header_function, args):
     seqs = data_folder + '/' + alleles_fasta
     database = data_folder + '/' + profiles_txt
+    mlst_header = header_function()
+    max_missing = len(mlst_header) - min_gene_count
+
     st, st_detail, group = \
         mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                   min_ident=args.min_identity, max_missing=3, check_for_truncation=True,
+                   min_ident=args.min_identity, max_missing=max_missing, check_for_truncation=True,
                    report_incomplete=True, allow_multiple=True,
                    min_gene_count=min_gene_count, unknown_group_name=unknown_group_name)
 
-    mlst_header = header_function()
     assert len(mlst_header) == len(st_detail)
 
     results = {vir_name: group,
@@ -464,13 +466,13 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
 def get_ybt_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'ybt_alleles.fasta',
                                          'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
-                                         'ybt unknown', 8, get_ybt_mlst_header, args)
+                                         'ybt unknown', 6, get_ybt_mlst_header, args)
 
 
 def get_clb_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'clb_alleles.fasta',
                                          'CbST_profiles.txt', 'Colibactin', 'CbST',
-                                         'clb unknown', 12, get_clb_mlst_header, args)
+                                         'clb unknown', 8, get_clb_mlst_header, args)
 
 
 def get_iuc_mlst_results(data_folder, contigs, args):
@@ -482,7 +484,7 @@ def get_iuc_mlst_results(data_folder, contigs, args):
 def get_iro_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'iro_alleles.fasta',
                                          'SmST_profiles.txt', 'Salmochelin', 'SmST',
-                                         'iro unknown', 3, get_iro_mlst_header, args)
+                                         'iro unknown', 2, get_iro_mlst_header, args)
 
 
 def get_rmp_mlst_results(data_folder, contigs, args):
