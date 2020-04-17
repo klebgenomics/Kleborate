@@ -244,7 +244,7 @@ def get_output_headers(args, data_folder):
     # If resistance genes are on, run the resBLAST.py script to get its headers.
     if args.resistance:
         gene_info, res_classes, bla_classes = \
-            read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
+            read_class_file(data_folder + '/CARD_AMR_clustered.csv')
         res_headers = get_res_headers(res_classes, bla_classes)
         stdout_header += res_headers
         full_header += res_headers
@@ -518,7 +518,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
     if not pathlib.Path(contigs).is_file():
         raise OSError
     if args.resistance:
-        gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
+        gene_info, _, _ = read_class_file(data_folder + '/CARD_AMR_clustered.csv')
 
         # Only do mutation/truncation tests for Kp complex species.
         if kp_complex:
@@ -528,7 +528,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
         else:
             qrdr, trunc, omp = None, None, None
 
-        seqs = data_folder + '/ARGannot_r3.fasta'
+        seqs = data_folder + '/CARD_v3.0.8.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
                                          args.min_coverage,  args.min_identity,
                                          args.min_spurious_coverage, args.min_spurious_identity)
