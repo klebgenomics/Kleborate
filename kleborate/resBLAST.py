@@ -91,7 +91,7 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
         coverage = hit.alignment_length / hit.ref_length * 100.0
         if coverage >= min_spurious_cov:
             if hit.pcid < 100.0:
-                aa_result = check_for_exact_aa_match(seqs, hit.hit_seq)
+                aa_result = check_for_exact_aa_match(seqs, hit.hit_seq.replace('-', ''))
                 if aa_result is not None:
                     hit.gene_id = aa_result
             else:
