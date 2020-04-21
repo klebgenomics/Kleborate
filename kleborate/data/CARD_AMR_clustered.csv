@@ -2105,8 +2105,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 251,vanYM,Gly,VanYM,vanYM,2104,ARO_3002961,-,-,no,no,NA,NA
 252,vanZA,Gly,VanZA,vanZA,2105,ARO_3002962,-,-,no,no,NA,NA
 253,vanZF,Gly,VanZF,vanZF,2106,ARO_3002963,-,-,no,no,NA,NA
-254,mef(B),MFS,MefB,mef(B),2107,ARO_3003107,-,-,no,no,NA,NA
-255,mel,MFS,Mel,mel,2108,ARO_3000616,-,-,no,no,NA,NA
+254,mef(B),MLS,MefB,mef(B),2107,ARO_3003107,-,-,no,no,NA,NA
+255,mel,MLS,Mel,mel,2108,ARO_3000616,-,-,no,no,NA,NA
 256,carA,MLS,CarA,carA,2109,ARO_3002817,-,-,no,no,NA,NA
 258,cfr(B),MLS,CfrB,cfr(B),2111,ARO_3004649,-,-,no,no,NA,NA
 257,cfrA,MLS,CfrA,cfrA,2110,ARO_3003441,-,-,no,no,NA,NA
