@@ -191,7 +191,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 8,spd,AGly,ANT(9),spd,135,ARO_3002631,-,-,no,no,NA,NA
 13,sph.v1,AGly,APH(6),sph.v1,169,ARG_AY037297,-,-,no,no,NA,NA
 13,sph.v2,AGly,APH(6),sph.v2,170,ARO_3002659,-,-,no,no,NA,NA
-31,sta,Agly,Sta,sta,193,ARO_3004699,-,-,no,no,NA,NA
+31,sta,AGly,Sta,sta,193,ARO_3004699,-,-,no,no,NA,NA
 32,ACC-1,Bla,ACC,ACC-1,194,ARO_3001815,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
 32,ACC-2,Bla,ACC,ACC-2,195,ARO_3001816,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
 32,ACC-3,Bla,ACC,ACC-3,196,ARO_3001817,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla
