@@ -25,8 +25,10 @@ class TestIro(unittest.TestCase):
 
     def setUp(self):
         self.data_dir = 'test/test_iro/data'
-        Args = collections.namedtuple('Args', ['min_coverage', 'min_identity'])
-        self.args = Args(min_coverage=80.0, min_identity=90.0)
+        Args = collections.namedtuple('Args', ['min_coverage', 'min_identity',
+                                               'min_spurious_coverage', 'min_spurious_identity'])
+        self.args = Args(min_coverage=80.0, min_identity=90.0,
+                         min_spurious_coverage=40.0, min_spurious_identity=80.0)
 
     def test_iro_random(self):
         """
