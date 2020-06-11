@@ -55,11 +55,7 @@ def main():
             results.update(get_contig_stat_results(contigs, kp_complex))
 
             results.update(get_chromosome_mlst_results(data_folder, contigs, kp_complex, args))
-            results.update(get_ybt_mlst_results(data_folder, contigs, args))
-            results.update(get_clb_mlst_results(data_folder, contigs, args))
-            results.update(get_iuc_mlst_results(data_folder, contigs, args))
-            results.update(get_iro_mlst_results(data_folder, contigs, args))
-            results.update(get_rmp_mlst_results(data_folder, contigs, args))
+            results.update(get_all_virulence_results(data_folder, contigs, args))
             results.update(get_rmpa2_results(data_folder, contigs, args))
             results.update(get_wzi_and_k_locus_results(data_folder, contigs, args))
             results.update(get_resistance_results(data_folder, contigs, args, res_headers,
@@ -248,10 +244,14 @@ def get_output_headers(args, data_folder):
         res_headers = get_res_headers(res_classes, bla_classes)
         stdout_header += res_headers
         full_header += res_headers
-        full_header.append('spurious_resistance_hits')
-        res_headers.append('spurious_resistance_hits')
     else:
         res_headers = []
+
+    # Spurious hit columns go at the end.
+    full_header.append('spurious_virulence_hits')
+    if args.resistance:
+        full_header.append('spurious_resistance_hits')
+        res_headers.append('spurious_resistance_hits')
 
     return stdout_header, full_header, res_headers
 
@@ -414,7 +414,7 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
     if kp_complex:
         seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
         database = data_folder + '/kpneumoniae.txt'
-        chr_st, chr_st_detail, _ = \
+        chr_st, chr_st_detail, _, _ = \
             mlst_blast(seqs, database, 'no', [contigs], min_cov=args.min_coverage,
                        min_ident=args.min_identity, max_missing=3, allow_multiple=False)
         if chr_st != '0':
@@ -426,7 +426,7 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
             chr_st_with_subsp = 'ST90 (subsp. ozanae)'
         if chr_st_with_subsp == 'ST67':
             chr_st_with_subsp = 'ST67 (subsp. rhinoscleromatis)'
-            
+
         assert len(chromosome_mlst_header) == len(chr_st_detail)
 
         results = {'ST': chr_st_with_subsp,
@@ -449,17 +449,47 @@ def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_
     mlst_header = header_function()
     max_missing = len(mlst_header) - min_gene_count
 
-    st, st_detail, group = \
+    st, st_detail, group, spurious_hits = \
         mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
                    min_ident=args.min_identity, max_missing=max_missing, check_for_truncation=True,
                    report_incomplete=True, allow_multiple=True,
-                   min_gene_count=min_gene_count, unknown_group_name=unknown_group_name)
+                   min_gene_count=min_gene_count, unknown_group_name=unknown_group_name,
+                   min_spurious_cov=args.min_spurious_coverage,
+                   min_spurious_ident=args.min_spurious_identity)
 
     assert len(mlst_header) == len(st_detail)
 
     results = {vir_name: group,
                vir_st_name: st}
     results.update(dict(zip(mlst_header, st_detail)))
+    results['spurious_virulence_hits'] = ';'.join(spurious_hits)
+    return results
+
+
+def get_all_virulence_results(data_folder, contigs, args):
+    virulence_results = [get_ybt_mlst_results(data_folder, contigs, args),
+                         get_clb_mlst_results(data_folder, contigs, args),
+                         get_iuc_mlst_results(data_folder, contigs, args),
+                         get_iro_mlst_results(data_folder, contigs, args),
+                         get_rmp_mlst_results(data_folder, contigs, args)]
+
+    # Merge the results from different loci together. All columns should be unique between them
+    # except for the 'spurious_virulence_hits' column which will be common to all of them.
+    results = {'spurious_virulence_hits': []}
+    for r in virulence_results:
+        for column, val in r.items():
+            if column not in results:
+                results[column] = val
+            elif column == 'spurious_virulence_hits':
+                if val != '':
+                    results['spurious_virulence_hits'].append(val)
+            else:
+                assert False
+
+    if len(results['spurious_virulence_hits']) == 0:
+        results['spurious_virulence_hits'] = '-'
+    else:
+        results['spurious_virulence_hits'] = ';'.join(results['spurious_virulence_hits'])
     return results
 
 
@@ -502,8 +532,8 @@ def get_rmpa2_results(data_folder, contigs, args):
 def get_wzi_and_k_locus_results(data_folder, contigs, args):
     seqs = data_folder + '/wzi.fasta'
     database = data_folder + '/wzi.txt'
-    bst, _, k_type = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                                min_ident=args.min_identity, max_missing=0, allow_multiple=False)
+    bst, _, k_type, _ = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
+                                   min_ident=args.min_identity, max_missing=0, allow_multiple=False)
     if bst == '0':
         wzi_st = '-'
     else:
