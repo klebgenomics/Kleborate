@@ -30,7 +30,8 @@ from .truncation import truncation_check
 
 def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_missing,
                check_for_truncation=False, report_incomplete=False, allow_multiple=False,
-               min_gene_count=None, unknown_group_name=None):
+               min_gene_count=None, unknown_group_name=None,
+               min_spurious_cov=None, min_spurious_ident=None):
     st_names, alleles_to_st, st_to_info, header = load_st_database(database, info_arg)
 
     # In order to call an ST, there needs to be an exact match for half (rounded down) of the
@@ -41,7 +42,16 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
     _, filename = os.path.split(contigs)
     name, _ = os.path.splitext(filename)
 
-    hits = run_blastn(seqs, contigs, min_cov, min_ident)
+    if min_spurious_cov is not None:
+        hits = run_blastn(seqs, contigs, min_spurious_cov, min_spurious_ident)
+        num_hits_before = len(hits)
+        spurious_hits = [h for h in hits
+                         if h.ref_cov * 100 < min_cov or h.pcid * 100 < min_ident]
+        hits = [h for h in hits if h.ref_cov * 100 >= min_cov and h.pcid * 100 >= min_ident]
+        assert len(hits) + len(spurious_hits) == num_hits_before
+    else:
+        hits = run_blastn(seqs, contigs, min_cov, min_ident)
+        spurious_hits = None
 
     final_call = ''
     final_alleles = [''] * len(header)
@@ -69,7 +79,10 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
         final_alleles = add_to_strings(final_alleles, alleles)
         final_info = add_to_string(final_info, info)
 
-    return final_call, final_alleles, final_info
+    if spurious_hits is not None:
+        spurious_hits = process_spurious_hits(spurious_hits)
+
+    return final_call, final_alleles, final_info, spurious_hits
 
 
 def call_one_st(hits, header, check_for_truncation, max_missing, alleles_to_st,
@@ -188,6 +201,17 @@ def get_best_allele_per_locus(hits, check_for_truncation):
             best_alleles[locus] = allele.split('_')[1]  # store number only
 
     return best_alleles
+
+
+def process_spurious_hits(hits):
+    hit_strings = []
+    for hit in hits:
+        allele, locus = get_allele_and_locus(hit)
+        if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
+            allele += '*'  # inexact match
+        allele += truncation_check(hit)[0]
+        hit_strings.append(allele)
+    return hit_strings
 
 
 def load_st_database(database, info_arg):
