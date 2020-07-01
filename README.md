@@ -299,7 +299,7 @@ By using the `--resistance` option, Kleborate will screen for acquired resistanc
 Using the `--resistance` option also turns on screening for chromosomal mutations for which there is strong evidence of an association with clinical resistance in KpSC (note these are ONLY reported if the genome was recognised as part of the KpSC):
 * Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
 * Colistin resistance due to truncation or loss of MgrB or PmrB (truncations are expressed as % amino acid length from the start codon).
-* OmpK35 and OmpK36 truncations and mutations resulting in reduced susceptibility to beta-lactamases. See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
+* OmpK35 and OmpK36 truncations and mutations resulting in reduced susceptibility to beta-lactamases (truncations are expressed as % amino acid length from the start codon). See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
 
 Note these do not count towards acquired resistance gene counts, but do count towards drug classes (with the exception of Omp mutations, whose spectrum of effects depends on the presence of acquired beta-lactamases and thus their impact on specific beta-lactam drug classes is hard to predict).
 
