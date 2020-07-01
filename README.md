@@ -287,22 +287,26 @@ Kleborate screens for alleles of the _rmpA_ and _rmpA2_ genes which can result i
 
 ### Antimicrobial resistance determinants
 
-By using the `--resistance` option, Kleborate will screen for acquired resistance genes against the ARG-Annot database of acquired resistance genes (updated version from [SRST2](https://github.com/katholt/srst2)), which includes allelic variants. It attempts to report the best matching variant for each locus in the genome:
+By using the `--resistance` option, Kleborate will screen for acquired resistance genes and some chromosomal mutations for which there is good evidence of association with drug resistance.
+
+#### Acquired AMR genes
+Kleborate screens input genomes against the ARG-Annot database of acquired resistance genes (updated version from [SRST2](https://github.com/katholt/srst2)), which includes allelic variants. It attempts to report the best matching variant for each locus in the genome:
 * Exact nucleotide matches are reported with no further annotation (e.g. "TEM-15"). 
 * If no exact nucleotide match is found, Kleborate searches for an exact amino acid match, and will report this with a "^" symbol (e.g. "TEM-15^" indicates an exact match to the TEM-15 protein sequence but with 1 or more nucleotide differences). If no exact amino acid match is found, the closest nucleotide match is reported with "\*" symbol (e.g. "TEM-30\*" indicates no precise nucleotide or amino acid match is found, but the closest nucleotide match is to TEM-30).
 * If the length of match is less than the length of the reported allele (i.e. a partial match), this is indicated with `?`.
 * Note that KpSC carry a core beta-lactamase gene (SHV in _K. pneumoniae_, LEN in _K. variicola_, OKP in _K. quasipneumoniae_) that confers clinically significant resistance to ampicillin. As these are present in all genomes, non-ESBL alleles of these genes are not included in the count of acquired resistance genes or drug classes.
-* ESBL alleles of SHV are almost always carried on plasmids (in addition to the intrinsic narrow-spectrum SHV/LEN/OKP allele in the chromosome). However it is possible to have a mutation in a chromosomal SHV gene that gives a match to an ESBL allele, which would be reported in the ESBL column and counted as an acquired gene (and it is very hard to tell the difference without manual exploration of the genetic context).
-  * See [this paper](http://www.pnas.org/content/112/27/E3574.long) for more information.
+* ESBL alleles of SHV are almost always carried on plasmids (in addition to the intrinsic narrow-spectrum SHV/LEN/OKP allele in the chromosome). However it is possible to have a mutation in a chromosomal SHV gene that gives a match to an ESBL allele, which would be reported in the ESBL column and counted as an acquired gene (and it is very hard to tell the difference without manual exploration of the genetic context). See [this paper](http://www.pnas.org/content/112/27/E3574.long) for more information.
 * Note that _oqxAB_ and _fosA_ are also core genes in _K. pneumoniae_ and don't confer clinical resistance to fluoroquinolones or fosfomycin, hence Kleborate does not report them.
 
+#### Chromosomal mutations associated with AMR
 Using the `--resistance` option also turns on screening for chromosomal mutations for which there is strong evidence of an association with clinical resistance in KpSC (note these are ONLY reported if the genome was recognised as part of the KpSC):
-* Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84.
-* Colistin resistance due to truncation or loss of MgrB or PmrB (truncations are expressed as % amino acid length from the start codon).
-* OmpK35 and OmpK36 truncations and mutations resulting in reduced susceptibility to beta-lactamases (truncations are expressed as % amino acid length from the start codon). See [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) for more information.
+* Fluoroquinolone resistance SNPs: GyrA 83 & 87 and ParC 80 & 84. These appear in the 'Flq' column along with acquired _qnr_ genes.
+* Colistin resistance due to truncation or loss of core genes MgrB or PmrB. If these genes are missing or truncated, this information will be reported in the 'Col' column along with acquired _mcr_ genes (truncations are expressed as % amino acid length from the start codon). Note if MgrB and PmrB are present and not truncated then nothing about them will be reported in the 'Col' column.
+* OmpK35 and OmpK36 truncations and point mutations shown to result in reduced susceptibility to beta-lactamases. This information will be reported in the 'Omp' column (truncations are expressed as % amino acid length from the start codon). Note if these core genes are present and not truncated then nothing about them will be reported in the 'Omp' column. The specific effect of OmpK mutations on drug susceptibility depends on multiple factors including what combinations of OmpK35 and OmpK36 alleles are present and what beta-lactamase genes are present (this is why we report them in their own column separate to Bla genes). See e.g. [this paper](https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218) and [this one](https://www.nature.com/articles/s41467-019-11756-y) for more information on OmpK genes and drug resistance.
 
 Note these do not count towards acquired resistance gene counts, but do count towards drug classes (with the exception of Omp mutations, whose spectrum of effects depends on the presence of acquired beta-lactamases and thus their impact on specific beta-lactam drug classes is hard to predict).
 
+#### Reporting of AMR determinants by drug class
 All resistance results (both for the gene screen and mutation screen) are grouped by drug class (according to the [ARG-Annot](https://www.ncbi.nlm.nih.gov/pubmed/24145532) DB), with beta-lactamases broken down into [Lahey](https://www.lahey.org/Studies/) classes, as follows: 
 * AGly (aminoglycosides)
 * Bla (beta-lactamases)
@@ -323,9 +327,9 @@ All resistance results (both for the gene screen and mutation screen) are groupe
 * Tmt (trimethoprim)
 * Tgc (tigecycline)
 
-Note there is a separate column 'Omp' reporting known resistance-related mutations in the OmpK35 and OmpK36 osmoporins. 
+Note there is a separate column 'Omp' reporting known resistance-related mutations in the OmpK35 and OmpK36 osmoporins. See above for details.
 
-Note that Kleborate reports resistance results for all antimicrobial classes with confidently attributable resistance mechanisms in KpSC. Not all of these are actually used clinically for treatment of KpSC infections (e.g. Ntmdz, MLS, Rif) but they are still reported here as the presence of acquired resistance determinants to these classes is of interest to researchers for other reasons (e.g. these genes can be useful markers of MGEs and MGE spread; there is potential for use of these drugs against other organisms to select for KpSC in co-infected patients or in the environment). For an overview of antimicrobial resistance and consensus definitions of multidrug resistance (MDR), extreme drug resistance (XDR) and pan drug resistance in Enterobacteriaceae, see [Magiorakos 2012](https://www.clinicalmicrobiologyandinfection.com/article/S1198-743X(14)61632-3/fulltext).
+Note that Kleborate reports resistance results for all antimicrobial classes with confidently attributable resistance mechanisms in KpSC. Not all of these are actually used clinically for treatment of KpSC infections (e.g. Ntmdz, MLS, Rif) but they are still reported as the presence of acquired resistance determinants to these classes is of interest to researchers for other reasons (e.g. these genes can be useful markers of MGEs and MGE spread; there is potential for use of these drugs against other organisms to select for KpSC in co-infected patients or in the environment). For an overview of antimicrobial resistance and consensus definitions of multidrug resistance (MDR), extreme drug resistance (XDR) and pan drug resistance in Enterobacteriaceae, see [Magiorakos 2012](https://www.clinicalmicrobiologyandinfection.com/article/S1198-743X(14)61632-3/fulltext).
 
 
 
@@ -344,12 +348,12 @@ Kleborate outputs a simple categorical virulence score, and if resistance screen
 * The resistance score ranges from 0 to 3:
   * 0 = no ESBL, no carbapenemase (regardless of colistin resistance)
   * 1 = ESBL, no carbapenemase (regardless of colistin resistance)
-  * 2 = Carbapenemase without colistin resistance (regardless of ESBL, OmpK mutations not considered)
-  * 3 = Carbapenemase with colistin resistance (regardless of ESBL, OmpK mutations not considered)
+  * 2 = Carbapenemase without colistin resistance (regardless of ESBL genes or OmpK mutations)
+  * 3 = Carbapenemase with colistin resistance (regardless of ESBL genes or OmpK mutations)
 
-When resistance screening is enabled, Kleborate also quantifies how many acquired resistance genes are present and how many drug classes (in _addition_ to Bla/ampicillin) have at least one resistance determinant detected. A few things to note:
+When resistance screening is enabled, Kleborate also quantifies how many acquired resistance genes are present and how many drug classes (in _addition_ to the intrinsic Bla/ampicillin phenotype) have at least one resistance determinant detected. A few things to note:
   * The presence of resistance _mutations_, and non-ESBL forms of core genes SHV/LEN/OKP, do not contribute to the resistance _gene_ count.
-  * Mutations do contribute to the drug class count, e.g. fluoroquinolone resistance will be counted if a GyrA mutation is encountered regardless of whether or not an acquired fluoroquinolone resistance is also present. The exception is Omp mutations, which do not contribute to the drug class count as their effect depends on the strain background and the presence of acquired beta-lactamase enzymes; hence this information is provided in a separate column, and interpretation is left to the user.
+  * Mutations do contribute to the drug class count, e.g. fluoroquinolone resistance will be counted if a GyrA mutation is encountered regardless of whether or not an acquired quinolone resistance (_qnr_) gene is also present. The exception is Omp mutations, which do not contribute to the drug class count as their effect depends on the strain background and the presence of acquired beta-lactamase enzymes; hence this information is provided in a separate column, and interpretation is left to the user (see above).
   * Note that since a drug class can have multiple resistance determinants, the gene count is typically higher than the class count.
 
 
@@ -360,7 +364,7 @@ When resistance screening is enabled, Kleborate also quantifies how many acquire
 #### Basic capsule prediction with _wzi_ allele typing
 By default, Kleborate will report the closest match amongst the _wzi_ alleles in the [BIGSdb](http://bigsdb.pasteur.fr/klebsiella/klebsiella.html). This is a marker of capsule locus (KL) type, which is highly predictive of capsule (K) serotype. Although there is not a 1-1 relationship between wzi allele and KL/K type, there is a strong correlation (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102) and [Brisse et al, J Clin Micro 2013](https://jcm.asm.org/content/51/12/4073.long)). Note the _wzi database_ is populated with alleles from the _Klebsiella pneumoniae_ species complex and is not reliable for other species.
 
-The _wzi_ allele can provide a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages).
+The _wzi_ allele can provide a handy way of spotting the virulence-associated types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the wzi type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages). But users who are particularly interested in predicting serotype should switch on Kaptive (`--kaptive`) as described below.
 
 #### Capsule (K) and O antigen (LPS) serotype prediction using Kaptive
 You can optionally turn on capsule and O antigen typing using the dedicated capsule typing tool [Kaptive](https://github.com/katholt/Kaptive). Note that the Kaptive database comprises O and K loci characterised in the _Klebsiella pneumoniae_ species complex (see [Wyres et al, MGen 2016](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102) for K loci, [Wick et al, J Clin Micro 2018](https://jcm.asm.org/content/56/6/e00197-18) for O loci). These loci are sometimes also found in other _Klebsiella_ species but you should expect many novel loci outside the KpSC that will not be detected here.
@@ -369,10 +373,10 @@ You can optionally turn on capsule and O antigen typing using the dedicated caps
 * `--kaptive_o` turns on Kaptive screening of the O locus
 * `--kaptive` turns on both (is equivalent to `--kaptive_k --kaptive_o`)
 
-Note that running Kaptive will significantly increase the runtime of Kleborate, but provide much more detailed information about the K and/or O loci and their genes.
+Note that running Kaptive will significantly increase the runtime for Kleborate (>1 minute extra per genome), but provide much more detailed information about the K and/or O loci and their genes.
 
 If Kaptive is switched on the Kleborate report will include a column to indicate the Kaptive confidence match for the reported best-matching K or O locus (see [here](https://github.com/katholt/Kaptive/blob/master/README.md#output-files) for a description of the logic). We recommend reporting only K and O loci with a confidence level of "Good" or better. Calls with confidence level "Low" or "None" should be considered carefully as they may result from assembly problems (fragmentation) or novel variation in the K/O locus. 
-If you think you have found a novel K or O locus and would like us to add it to the Kaptive database please get in touch.
+If you think you have found a novel K or O locus and would like us to add it to the Kaptive database please get in touch or post an issue in the [Kaptive GitHub repo](https://github.com/katholt/Kaptive).
 
 ## Example output
 
