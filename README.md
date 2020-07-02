@@ -10,6 +10,11 @@ Kleborate is a tool to screen genome assemblies of _Klebsiella pneumoniae_ and t
  
 For _Klebsiella_ outside of the KpSC, Kleborate will accurately determine the species and will report the presence of any accessory genes detected (AMR, virulence, K & O types); however species-focused markers (mutational resistance, MLST) will not be reported.
 
+To learn more about taxonomy and population genomics of the _Klebsiella pneumoniae_ and the species complex, and what we know so far about the distribution of AMR, virulence and K types in the _Klebsiella pneumoniae_ population, see [Wyres, Lam & Holt, 2020, Nature Reviews Microbiology](https://www.nature.com/articles/s41579-019-0315-1).
+
+
+#### Citing Kleborate
+
 A manuscript describing the Kleborate software in full is currently in preparation. (Note that the BLAST logic has been checked in the light of [this article](https://doi.org/10.1093/bioinformatics/bty833) describing a common misconception regarding the BLAST parameter -max_target_seqs.)
 
 In the meantime, if you use Kleborate, please cite the component schemes that you report:<br>
@@ -193,7 +198,7 @@ Kleborate will attempt to identify the species of each input assembly. It does t
 Here is an annotated tree of the reference assemblies, made by [mashtree](https://github.com/lskatz/mashtree):
 <p align="center"><img src="images/species_tree.png" alt="Klebsiella species tree" width="90%"></p>
 
-Kleborate is designed for detailed genotyping of the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. These were previously considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. 
+Kleborate is designed for detailed genotyping of the well-studied _K. pneumoniae_ species complex (KpSC) labelled on the tree, which includes the seven species listed in the table below. These were previously considered as phylogroups within _K. pneumoniae_. We've included the phylogroup numbers in the table below to allow backwards compatibility, but these are not reported in the Kleborate output. See [this review](https://www.nature.com/articles/s41579-019-0315-1) for an overview of the complex.
 
 | Species                                       | Kp phylogroup<sup>a</sup> | Kp phylogroup (alternative)<sup>b</sup> | Reference |
 | --------------------------------------------- | ---------------------- | -------------------------------- | --------- |
@@ -338,12 +343,15 @@ Note that Kleborate reports resistance results for all antimicrobial classes wit
 Kleborate outputs a simple categorical virulence score, and if resistance screening is enabled, an antimicrobial resistance score as well. These scores provide a rough categorisation of the strains to facilitate monitoring resistance-virulence convergence:
 
 * The virulence score ranges from 0 to 5:
-  * 0 = none of the acquired virulence loci (i.e. negative for all of yersiniabactin, colibactin, aerobactin, salmochelin)
-  * 1 = yersiniabactin only
-  * 2 = yersiniabactin and colibactin, or colibactin only 
-  * 3 = aerobactin and/or salmochelin only (without yersiniabactin or colibactin)
-  * 4 = aerobactin and/or salmochelin with yersiniabactin (without colibactin)
-  * 5 = yersiniabactin, colibactin and aerobactin and/or salmochelin
+  *	0 = none of the acquired virulence loci (i.e. negative for all of yersiniabactin, colibactin, aerobactin)
+  *	1 = yersiniabactin
+  *	2 = yersiniabactin and colibactin (or colibactin only)
+  *	3 = aerobactin (without yersiniabactin or colibactin)
+  *	4 = aerobactin with yersiniabactin (without colibactin)
+  *	5 = yersiniabactin, colibactin and aerobactin
+
+Note salmochelin (_iro_) is not explicitly considered in the virulence score, for simplicity. Salmochelin typically appears alongside aerobactin on the _Kp_ virulence plasmids, and so presence of aerobactin (score of 3-5) generally implies presence of salmochelin. However we prioritise aerobactin in the calculation of the score, as aerobactin is specifically associated with growth in blood and is a stronger predictor of the hypervirulence phenotype (see [this review](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6349525/)). Salmochelin is also occasionally present with _ybt_, in the ICE_Kp_ variant - ICE_Kp1_, but this will still score 1.
+
   
 * The resistance score ranges from 0 to 3:
   * 0 = no ESBL, no carbapenemase (regardless of colistin resistance)
