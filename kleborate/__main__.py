@@ -324,7 +324,7 @@ def get_resistance_class_count(res_headers, res_hits):
     if not res_headers:
         return '-'
     res_indices = [i for i, h in enumerate(res_headers)
-                   if h.lower() != 'bla' and h.lower() != 'omp'
+                   if h.lower() != 'bla' and h.lower() != 'omp_truncations'
                    and h.lower() != 'spurious_resistance_hits']
     return sum(0 if res_hits[i] == '-' else 1 for i in res_indices)
 
@@ -336,7 +336,7 @@ def get_resistance_gene_count(res_headers, res_hits):
     if not res_headers:
         return '-'
     res_indices = [i for i, h in enumerate(res_headers)
-                   if h.lower() != 'omp' and h.lower() != 'spurious_resistance_hits']
+                   if h.lower() != 'omp_truncations' and h.lower() != 'spurious_resistance_hits']
 
     gene_list = []
     for i in res_indices:

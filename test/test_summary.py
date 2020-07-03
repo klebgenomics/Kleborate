@@ -92,7 +92,7 @@ class TestResScore(unittest.TestCase):
         self.results['AGly'] = 'a'
         self.results['Flq'] = 'b;c'
         self.results['Tet'] = 'd;e;f'
-        self.results['Omp'] = 'g;h'
+        self.results['Omp_truncations'] = 'g;h'
         summary_results = get_summary_results(self.results, self.res_headers)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '6')
