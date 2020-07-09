@@ -123,8 +123,8 @@ class TestResScore(unittest.TestCase):
 
     def test_res_counts_9(self):
         """
-        Truncations should add to the class count but not to the gene count (because that is for
-        acquired resistance genes).
+        Resistance-by-truncation should add to the class count but not to the gene count (because
+        that is for acquired resistance genes).
         """
         self.results['AGly'] = 'a'
         self.results['Tet'] = 'b;c'
@@ -135,8 +135,8 @@ class TestResScore(unittest.TestCase):
 
     def test_res_counts_10(self):
         """
-        Truncations should add to the class count but not to the gene count (because that is for
-        acquired resistance genes).
+        Resistance-by-truncation should add to the class count but not to the gene count (because
+        that is for acquired resistance genes).
         """
         self.results['AGly'] = 'a'
         self.results['Tet'] = 'b;c'

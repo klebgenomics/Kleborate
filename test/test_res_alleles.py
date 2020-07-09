@@ -120,9 +120,9 @@ class TestResAlleles(unittest.TestCase):
         results = get_resistance_results(self.data_dir, 'test/test_res_alleles/11.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Tet'], '-')
-        self.assertEqual(results['Bla'], 'ABC-1*-50%')
+        self.assertEqual(results['Bla'], '-')
         self.assertEqual(results['Bla_ESBL'], '-')
-        self.assertEqual(results['spurious_resistance_hits'], '-')
+        self.assertEqual(results['spurious_resistance_hits'], 'ABC-1*-50%')
 
     def test_res_12(self):
         """
@@ -131,9 +131,9 @@ class TestResAlleles(unittest.TestCase):
         results = get_resistance_results(self.data_dir, 'test/test_res_alleles/12.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Tet'], '-')
-        self.assertEqual(results['Bla'], 'ABC-1?-0%')
+        self.assertEqual(results['Bla'], '-')
         self.assertEqual(results['Bla_ESBL'], '-')
-        self.assertEqual(results['spurious_resistance_hits'], '-')
+        self.assertEqual(results['spurious_resistance_hits'], 'ABC-1?-0%')
 
     def test_res_13(self):
         """
