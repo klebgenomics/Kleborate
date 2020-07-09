@@ -101,6 +101,7 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
 
+            trunc_cov = 100.0
             if aa_result is not None:
                 hit_allele += '^'
             else:
@@ -108,11 +109,12 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
                     hit_allele += '*'
                 if hit.alignment_length < hit.ref_length:
                     hit_allele += '?'
-                hit_allele += truncation_check(hit)[0]
+                trunc_suffix, trunc_cov, _ = truncation_check(hit)
+                hit_allele += trunc_suffix
 
             # If the hit is decent (above the min coverage and identity thresholds), it goes in the
             # column for the class.
-            if coverage >= min_cov and hit.pcid >= min_ident:
+            if coverage >= min_cov and hit.pcid >= min_ident and trunc_cov >= 90.0:
                 hits_dict[hit_class].append(hit_allele)
 
             # If the hit is bad (below the min coverage and identity thresholds but above the
