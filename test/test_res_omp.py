@@ -36,7 +36,7 @@ class TestResOmp(unittest.TestCase):
     def test_both_genes_intact(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_1.fasta',
                                          self.args, self.res_headers, True)
-        self.assertEqual(results['Omp_truncations'], '-')
+        self.assertEqual(results['Omp_mutations'], '-')
 
     def test_ompk35_frameshift(self):
         """
@@ -44,7 +44,7 @@ class TestResOmp(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_2.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('OmpK35-' in results['Omp_truncations'])
+        self.assertTrue('OmpK35-' in results['Omp_mutations'])
 
     def test_ompk35_early_stop(self):
         """
@@ -52,22 +52,22 @@ class TestResOmp(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_3.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('OmpK35-' in results['Omp_truncations'])
+        self.assertTrue('OmpK35-' in results['Omp_mutations'])
 
     def test_ompk36_missing(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_4.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('OmpK36-' in results['Omp_truncations'])
+        self.assertTrue('OmpK36-' in results['Omp_mutations'])
 
     def test_ompk36gd(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_5.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('OmpK36GD' in results['Omp_truncations'])
+        self.assertTrue('OmpK36GD' in results['Omp_mutations'])
 
     def test_ompk36td(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_6.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('OmpK36TD' in results['Omp_truncations'])
+        self.assertTrue('OmpK36TD' in results['Omp_mutations'])
 
     def test_ompk36td_non_kp_complex(self):
         """
@@ -75,4 +75,4 @@ class TestResOmp(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_omp/test_res_omp_6.fasta',
                                          self.args, self.res_headers, False)
-        self.assertTrue('OmpK36TD' not in results['Omp_truncations'])
+        self.assertTrue('OmpK36TD' not in results['Omp_mutations'])

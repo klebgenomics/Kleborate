@@ -73,8 +73,10 @@ def read_class_file(res_class_file):
     if 'NA' in bla_classes:
         bla_classes.remove('NA')
 
-    if 'Omp_truncations' not in res_classes:
-        res_classes.append('Omp_truncations')
+    if 'Omp_mutations' not in res_classes:
+        res_classes.append('Omp_mutations')
+    if 'Col_mutations' not in res_classes:
+        res_classes.append('Col_mutations')
     if 'QRDR_mutations' not in res_classes:
         res_classes.append('QRDR_mutations')
 
@@ -235,9 +237,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, seqs, min_ident):
         truncations.append('PmrB-' + ('%.0f' % best_pmrb_cov) + '%')
 
     if truncations:
-        if 'Col' not in hits_dict:
-            hits_dict['Col'] = []
-        hits_dict['Col'] += truncations
+        hits_dict['Col_mutations'] += truncations
 
 
 def check_omp_genes(hits_dict, contigs, omp, min_ident, min_cov):
@@ -254,9 +254,9 @@ def check_omp_genes(hits_dict, contigs, omp, min_ident, min_cov):
                 best_ompk36_cov = coverage
             if coverage >= min_cov:
                 if 'GDGDTY' in translation:
-                    hits_dict['Omp_truncations'].append('OmpK36GD')
+                    hits_dict['Omp_mutations'].append('OmpK36GD')
                 elif 'GDTDTY' in translation:
-                    hits_dict['Omp_truncations'].append('OmpK36TD')
+                    hits_dict['Omp_mutations'].append('OmpK36TD')
         else:
             assert False
 
@@ -267,6 +267,6 @@ def check_omp_genes(hits_dict, contigs, omp, min_ident, min_cov):
         truncations.append('OmpK36-' + ('%.0f' % best_ompk36_cov) + '%')
 
     if truncations:
-        if 'Omp_truncations' not in hits_dict:
-            hits_dict['Omp_truncations'] = []
-        hits_dict['Omp_truncations'] += truncations
+        if 'Omp_mutations' not in hits_dict:
+            hits_dict['Omp_mutations'] = []
+        hits_dict['Omp_mutations'] += truncations
