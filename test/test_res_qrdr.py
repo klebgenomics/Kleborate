@@ -36,23 +36,23 @@ class TestResGyrAParC(unittest.TestCase):
     def test_no_mutations(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_qrdr/test_res_qrdr_1.fasta',
                                          self.args, self.res_headers, True)
-        self.assertEqual(results['Flq'], '-')
+        self.assertEqual(results['QRDR_mutations'], '-')
 
     def test_gyra(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_qrdr/test_res_qrdr_2.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('GyrA-83C' in results['Flq'])
+        self.assertTrue('GyrA-83C' in results['QRDR_mutations'])
 
     def test_parc(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_qrdr/test_res_qrdr_3.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('ParC-84D' in results['Flq'])
+        self.assertTrue('ParC-84D' in results['QRDR_mutations'])
 
     def test_gyra_and_parc(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_qrdr/test_res_qrdr_4.fasta',
                                          self.args, self.res_headers, True)
-        self.assertTrue('GyrA-83C' in results['Flq'])
-        self.assertTrue('ParC-84D' in results['Flq'])
+        self.assertTrue('GyrA-83C' in results['QRDR_mutations'])
+        self.assertTrue('ParC-84D' in results['QRDR_mutations'])
 
     def test_gyra_and_parc_non_kp_complex(self):
         """
@@ -60,5 +60,5 @@ class TestResGyrAParC(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_qrdr/test_res_qrdr_4.fasta',
                                          self.args, self.res_headers, False)
-        self.assertTrue('GyrA-83C' not in results['Flq'])
-        self.assertTrue('ParC-84D' not in results['Flq'])
+        self.assertTrue('GyrA-83C' not in results['QRDR_mutations'])
+        self.assertTrue('ParC-84D' not in results['QRDR_mutations'])
