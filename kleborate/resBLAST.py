@@ -41,7 +41,8 @@ def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, m
 def read_class_file(res_class_file):
     gene_info = {}  # key = sequence id (fasta header in seq file), value = (allele,class,Bla_Class)
     res_classes = []
-    bla_classes = []
+    bla_classes = ['Bla_chr', 'Bla', 'Bla_broad', 'Bla_broad_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR',
+                   'Bla_Carb']
 
     with open(res_class_file, 'r') as f:
         header = 0
@@ -69,7 +70,6 @@ def read_class_file(res_class_file):
     res_classes.sort()
     if 'Bla' in res_classes:
         res_classes.remove('Bla')
-    bla_classes.sort()
     if 'NA' in bla_classes:
         bla_classes.remove('NA')
 

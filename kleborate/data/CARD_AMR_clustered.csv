@@ -1406,177 +1406,177 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 132,SED-1,Bla,SED,SED-1,1405,ARO_3003561,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
 133,SFB-1,Bla,SFB,SFB-1,1406,ARO_3003557,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
 134,SFH-1,Bla,SFH,SFH-1,1407,ARO_3000849,-,-,no,no,carbapenem-hydrolyzing subclass B2 metallo-beta-lactamase,Bla_Carb
-135,LEN-11,Bla,SHV-OKP-LEN,LEN-11,1408,ARO_3001442,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-17,Bla,SHV-OKP-LEN,LEN-17,1409,ARO_3002473,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-30,Bla,SHV-OKP-LEN,LEN-30,1410,ARO_3004838,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-38,Bla,SHV-OKP-LEN,LEN-38,1411,ARO_3004841,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-39,Bla,SHV-OKP-LEN,LEN-39,1412,ARO_3004842,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-40,Bla,SHV-OKP-LEN,LEN-40,1413,ARO_3004843,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-41,Bla,SHV-OKP-LEN,LEN-41,1414,ARO_3004844,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-42,Bla,SHV-OKP-LEN,LEN-42,1415,ARO_3004845,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-43,Bla,SHV-OKP-LEN,LEN-43,1416,ARO_3004846,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-51,Bla,SHV-OKP-LEN,LEN-51,1417,ARO_3004847,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-55,Bla,SHV-OKP-LEN,LEN-55,1418,ARO_3004848,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-58,Bla,SHV-OKP-LEN,LEN-58,1419,ARO_3004849,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-100,Bla,SHV-OKP-LEN,SHV-100,1420,ARO_3001338,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-103,Bla,SHV-OKP-LEN,SHV-103,1421,ARO_3001152,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-108,Bla,SHV-OKP-LEN,SHV-108,1422,ARO_3001157,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-111,Bla,SHV-OKP-LEN,SHV-111,1423,ARO_3001160,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-119,Bla,SHV-OKP-LEN,SHV-119,1424,ARO_3001340,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-120,Bla,SHV-OKP-LEN,SHV-120,1425,ARO_3001167,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-121,Bla,SHV-OKP-LEN,SHV-121,1426,ARO_3001168,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-122,Bla,SHV-OKP-LEN,SHV-122,1427,ARO_3001169,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-133,Bla,SHV-OKP-LEN,SHV-133,1428,ARO_3001177,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-135,Bla,SHV-OKP-LEN,SHV-135,1429,ARO_3001179,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-137,Bla,SHV-OKP-LEN,SHV-137,1430,ARO_3001181,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-142,Bla,SHV-OKP-LEN,SHV-142,1431,ARO_3001184,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-143,Bla,SHV-OKP-LEN,SHV-143,1432,ARO_3001344,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-144,Bla,SHV-OKP-LEN,SHV-144,1433,ARO_3001345,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-147,Bla,SHV-OKP-LEN,SHV-147,1434,ARO_3001186,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-149,Bla,SHV-OKP-LEN,SHV-149,1435,ARO_3001188,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-150,Bla,SHV-OKP-LEN,SHV-150,1436,ARO_3001189,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-151,Bla,SHV-OKP-LEN,SHV-151,1437,ARO_3001190,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-152,Bla,SHV-OKP-LEN,SHV-152,1438,ARO_3001191,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-153,Bla,SHV-OKP-LEN,SHV-153,1439,ARO_3001192,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-154,Bla,SHV-OKP-LEN,SHV-154,1440,ARO_3001193,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-155,Bla,SHV-OKP-LEN,SHV-155,1441,ARO_3001194,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-156,Bla,SHV-OKP-LEN,SHV-156,1442,ARO_3001195,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-157,Bla,SHV-OKP-LEN,SHV-157,1443,ARO_3001196,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-158,Bla,SHV-OKP-LEN,SHV-158,1444,ARO_3001197,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-159,Bla,SHV-OKP-LEN,SHV-159,1445,ARO_3001198,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-160,Bla,SHV-OKP-LEN,SHV-160,1446,ARO_3001199,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-161,Bla,SHV-OKP-LEN,SHV-161,1447,ARO_3001200,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-162,Bla,SHV-OKP-LEN,SHV-162,1448,ARO_3001201,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-163,Bla,SHV-OKP-LEN,SHV-163,1449,ARO_3001202,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-165,Bla,SHV-OKP-LEN,SHV-165,1450,ARO_3001203,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-168,Bla,SHV-OKP-LEN,SHV-168,1451,ARO_3001352,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-172,Bla,SHV-OKP-LEN,SHV-172,1452,ARO_3001356,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-173,Bla,SHV-OKP-LEN,SHV-173,1453,ARO_3001357,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-178,Bla,SHV-OKP-LEN,SHV-178,1454,ARO_3001361,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-179,Bla,SHV-OKP-LEN,SHV-179,1455,ARO_3001362,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-180,Bla,SHV-OKP-LEN,SHV-180,1456,ARO_3001350,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-182,Bla,SHV-OKP-LEN,SHV-182,1457,ARO_3001364,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-185,Bla,SHV-OKP-LEN,SHV-185,1458,ARO_3003152,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-186,Bla,SHV-OKP-LEN,SHV-186,1459,ARO_3003153,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-187,Bla,SHV-OKP-LEN,SHV-187,1460,ARO_3003154,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-189,Bla,SHV-OKP-LEN,SHV-189,1461,ARO_3003156,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-28.v1,Bla,SHV-OKP-LEN,SHV-28.v1,1462,ARG_EU441172,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-28.v2,Bla,SHV-OKP-LEN,SHV-28.v2,1463,ARO_3001086,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-29,Bla,SHV-OKP-LEN,SHV-29,1464,ARO_3001087,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-35,Bla,SHV-OKP-LEN,SHV-35,1465,ARO_3001093,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-36,Bla,SHV-OKP-LEN,SHV-36,1466,ARO_3001094,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-37,Bla,SHV-OKP-LEN,SHV-37,1467,ARO_3001095,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-4,Bla,SHV-OKP-LEN,SHV-4,1468,ARO_3001063,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-50,Bla,SHV-OKP-LEN,SHV-50,1469,ARO_3001107,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-51,Bla,SHV-OKP-LEN,SHV-51,1470,ARO_3001108,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-52,Bla,SHV-OKP-LEN,SHV-52,1471,ARO_3001109,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-59,Bla,SHV-OKP-LEN,SHV-59,1472,ARO_3001114,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-63,Bla,SHV-OKP-LEN,SHV-63,1473,ARO_3001118,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-9,Bla,SHV-OKP-LEN,SHV-9,1474,ARO_3001068,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-92,Bla,SHV-OKP-LEN,SHV-92,1475,ARO_3001144,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-93,Bla,SHV-OKP-LEN,SHV-93,1476,ARO_3001145,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-94,Bla,SHV-OKP-LEN,SHV-94,1477,ARO_3001146,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-95,Bla,SHV-OKP-LEN,SHV-95,1478,ARO_3001147,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-96,Bla,SHV-OKP-LEN,SHV-96,1479,ARO_3001148,-,-,no,no,class A beta-lactamase,Bla
-135,SHV-97,Bla,SHV-OKP-LEN,SHV-97,1480,ARO_3001149,-,-,no,no,class A beta-lactamase,Bla
-135,LEN-1,Bla,SHV-OKP-LEN,LEN-1,1481,ARO_3002454,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-10,Bla,SHV-OKP-LEN,LEN-10,1482,ARO_3002460,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-12,Bla,SHV-OKP-LEN,LEN-12,1483,ARO_3002462,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-15,Bla,SHV-OKP-LEN,LEN-15,1484,ARO_3002478,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-16,Bla,SHV-OKP-LEN,LEN-16,1485,ARO_3002464,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-18,Bla,SHV-OKP-LEN,LEN-18,1486,ARO_3002465,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-19,Bla,SHV-OKP-LEN,LEN-19,1487,ARO_3002466,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-2,Bla,SHV-OKP-LEN,LEN-2,1488,ARO_3002455,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-20,Bla,SHV-OKP-LEN,LEN-20,1489,ARO_3002467,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-21,Bla,SHV-OKP-LEN,LEN-21,1490,ARO_3002468,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-22,Bla,SHV-OKP-LEN,LEN-22,1491,ARO_3002469,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-23,Bla,SHV-OKP-LEN,LEN-23,1492,ARO_3002470,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-24,Bla,SHV-OKP-LEN,LEN-24,1493,ARO_3002471,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-25,Bla,SHV-OKP-LEN,LEN-25,1494,ARO_3002479,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-26,Bla,SHV-OKP-LEN,LEN-26,1495,ARO_3002474,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-32,Bla,SHV-OKP-LEN,LEN-32,1496,ARO_3004839,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-34,Bla,SHV-OKP-LEN,LEN-34,1497,ARO_3004840,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-35,Bla,SHV-OKP-LEN,LEN-35,1498,ARO_3004827,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-36,Bla,SHV-OKP-LEN,LEN-36,1499,ARO_3004828,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-37,Bla,SHV-OKP-LEN,LEN-37,1500,ARO_3004829,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-5,Bla,SHV-OKP-LEN,LEN-5,1501,ARO_3002456,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-9,Bla,SHV-OKP-LEN,LEN-9,1502,ARO_3002459,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-135,LEN-11,Bla,SHV-OKP-LEN,LEN-11,1503,ARO_3002461,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,LEN-13,Bla,SHV-OKP-LEN,LEN-13,1504,ARO_3002463,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,LEN-7,Bla,SHV-OKP-LEN,LEN-7,1505,ARO_3002457,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,LEN-8,Bla,SHV-OKP-LEN,LEN-8,1506,ARO_3002458,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-1,Bla,SHV-OKP-LEN,OKP-A-1,1507,ARO_3002418,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-10,Bla,SHV-OKP-LEN,OKP-A-10,1508,ARO_3002427,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-11,Bla,SHV-OKP-LEN,OKP-A-11,1509,ARO_3002428,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-12,Bla,SHV-OKP-LEN,OKP-A-12,1510,ARO_3002429,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-13,Bla,SHV-OKP-LEN,OKP-A-13,1511,ARO_3002430,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-14,Bla,SHV-OKP-LEN,OKP-A-14,1512,ARO_3002431,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-15,Bla,SHV-OKP-LEN,OKP-A-15,1513,ARO_3002432,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-16,Bla,SHV-OKP-LEN,OKP-A-16,1514,ARO_3002433,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-2,Bla,SHV-OKP-LEN,OKP-A-2,1515,ARO_3002419,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-3,Bla,SHV-OKP-LEN,OKP-A-3,1516,ARO_3002420,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-4,Bla,SHV-OKP-LEN,OKP-A-4,1517,ARO_3002421,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-5,Bla,SHV-OKP-LEN,OKP-A-5,1518,ARO_3002422,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-6,Bla,SHV-OKP-LEN,OKP-A-6,1519,ARO_3002423,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-7,Bla,SHV-OKP-LEN,OKP-A-7,1520,ARO_3002424,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-8,Bla,SHV-OKP-LEN,OKP-A-8,1521,ARO_3002425,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-A-9,Bla,SHV-OKP-LEN,OKP-A-9,1522,ARO_3002426,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-1,Bla,SHV-OKP-LEN,OKP-B-1,1523,ARO_3002434,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-10,Bla,SHV-OKP-LEN,OKP-B-10,1524,ARO_3002443,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-11,Bla,SHV-OKP-LEN,OKP-B-11,1525,ARO_3002444,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-13,Bla,SHV-OKP-LEN,OKP-B-13,1526,ARO_3002446,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-17,Bla,SHV-OKP-LEN,OKP-B-17,1527,ARO_3002450,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-18,Bla,SHV-OKP-LEN,OKP-B-18,1528,ARO_3002451,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-19,Bla,SHV-OKP-LEN,OKP-B-19,1529,ARO_3002452,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-2,Bla,SHV-OKP-LEN,OKP-B-2,1530,ARO_3002435,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-20,Bla,SHV-OKP-LEN,OKP-B-20,1531,ARO_3002453,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-3,Bla,SHV-OKP-LEN,OKP-B-3,1532,ARO_3002436,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-4,Bla,SHV-OKP-LEN,OKP-B-4,1533,ARO_3002437,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-5,Bla,SHV-OKP-LEN,OKP-B-5,1534,ARO_3002438,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-6,Bla,SHV-OKP-LEN,OKP-B-6,1535,ARO_3002439,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-7,Bla,SHV-OKP-LEN,OKP-B-7,1536,ARO_3002440,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-8,Bla,SHV-OKP-LEN,OKP-B-8,1537,ARO_3002441,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,OKP-B-9,Bla,SHV-OKP-LEN,OKP-B-9,1538,ARO_3002442,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-1,Bla,SHV-OKP-LEN,SHV-1,1539,ARO_3001059,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-109,Bla,SHV-OKP-LEN,SHV-109,1540,ARO_3001158,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-11.v1,Bla,SHV-OKP-LEN,SHV-11.v1,1541,ARG_HM751098,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-11.v2,Bla,SHV-OKP-LEN,SHV-11.v2,1542,ARO_3001070,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-14,Bla,SHV-OKP-LEN,SHV-14,1543,ARO_3001073,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-141,Bla,SHV-OKP-LEN,SHV-141,1544,ARO_3001183,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-164,Bla,SHV-OKP-LEN,SHV-164,1545,ARO_3001347,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-25,Bla,SHV-OKP-LEN,SHV-25,1546,ARO_3001083,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-32,Bla,SHV-OKP-LEN,SHV-32,1547,ARO_3001090,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-33,Bla,SHV-OKP-LEN,SHV-33,1548,ARO_3001091,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-43,Bla,SHV-OKP-LEN,SHV-43,1549,ARO_3001101,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-44,Bla,SHV-OKP-LEN,SHV-44,1550,ARO_3001102,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-48,Bla,SHV-OKP-LEN,SHV-48,1551,ARO_3001105,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-60,Bla,SHV-OKP-LEN,SHV-60,1552,ARO_3001115,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-61,Bla,SHV-OKP-LEN,SHV-61,1553,ARO_3001116,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-62,Bla,SHV-OKP-LEN,SHV-62,1554,ARO_3001117,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-71,Bla,SHV-OKP-LEN,SHV-71,1555,ARO_3001125,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-73,Bla,SHV-OKP-LEN,SHV-73,1556,ARO_3001127,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-74,Bla,SHV-OKP-LEN,SHV-74,1557,ARO_3001128,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-75,Bla,SHV-OKP-LEN,SHV-75,1558,ARO_3001129,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-76,Bla,SHV-OKP-LEN,SHV-76,1559,ARO_3001130,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-77,Bla,SHV-OKP-LEN,SHV-77,1560,ARO_3001131,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-78,Bla,SHV-OKP-LEN,SHV-78,1561,ARO_3001132,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-79,Bla,SHV-OKP-LEN,SHV-79,1562,ARO_3001133,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-80,Bla,SHV-OKP-LEN,SHV-80,1563,ARO_3001134,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-81,Bla,SHV-OKP-LEN,SHV-81,1564,ARO_3001135,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-82,Bla,SHV-OKP-LEN,SHV-82,1565,ARO_3001136,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-85,Bla,SHV-OKP-LEN,SHV-85,1566,ARO_3001139,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-135,SHV-89,Bla,SHV-OKP-LEN,SHV-89,1567,ARO_3001141,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+135,LEN-11,Bla,SHV-OKP-LEN,LEN-11,1408,ARO_3001442,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-17,Bla,SHV-OKP-LEN,LEN-17,1409,ARO_3002473,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-30,Bla,SHV-OKP-LEN,LEN-30,1410,ARO_3004838,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-38,Bla,SHV-OKP-LEN,LEN-38,1411,ARO_3004841,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-39,Bla,SHV-OKP-LEN,LEN-39,1412,ARO_3004842,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-40,Bla,SHV-OKP-LEN,LEN-40,1413,ARO_3004843,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-41,Bla,SHV-OKP-LEN,LEN-41,1414,ARO_3004844,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-42,Bla,SHV-OKP-LEN,LEN-42,1415,ARO_3004845,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-43,Bla,SHV-OKP-LEN,LEN-43,1416,ARO_3004846,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-51,Bla,SHV-OKP-LEN,LEN-51,1417,ARO_3004847,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-55,Bla,SHV-OKP-LEN,LEN-55,1418,ARO_3004848,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-58,Bla,SHV-OKP-LEN,LEN-58,1419,ARO_3004849,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-100,Bla,SHV-OKP-LEN,SHV-100,1420,ARO_3001338,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-103,Bla,SHV-OKP-LEN,SHV-103,1421,ARO_3001152,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-108,Bla,SHV-OKP-LEN,SHV-108,1422,ARO_3001157,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-111,Bla,SHV-OKP-LEN,SHV-111,1423,ARO_3001160,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-119,Bla,SHV-OKP-LEN,SHV-119,1424,ARO_3001340,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-120,Bla,SHV-OKP-LEN,SHV-120,1425,ARO_3001167,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-121,Bla,SHV-OKP-LEN,SHV-121,1426,ARO_3001168,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-122,Bla,SHV-OKP-LEN,SHV-122,1427,ARO_3001169,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-133,Bla,SHV-OKP-LEN,SHV-133,1428,ARO_3001177,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-135,Bla,SHV-OKP-LEN,SHV-135,1429,ARO_3001179,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-137,Bla,SHV-OKP-LEN,SHV-137,1430,ARO_3001181,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-142,Bla,SHV-OKP-LEN,SHV-142,1431,ARO_3001184,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-143,Bla,SHV-OKP-LEN,SHV-143,1432,ARO_3001344,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-144,Bla,SHV-OKP-LEN,SHV-144,1433,ARO_3001345,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-147,Bla,SHV-OKP-LEN,SHV-147,1434,ARO_3001186,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-149,Bla,SHV-OKP-LEN,SHV-149,1435,ARO_3001188,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-150,Bla,SHV-OKP-LEN,SHV-150,1436,ARO_3001189,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-151,Bla,SHV-OKP-LEN,SHV-151,1437,ARO_3001190,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-152,Bla,SHV-OKP-LEN,SHV-152,1438,ARO_3001191,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-153,Bla,SHV-OKP-LEN,SHV-153,1439,ARO_3001192,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-154,Bla,SHV-OKP-LEN,SHV-154,1440,ARO_3001193,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-155,Bla,SHV-OKP-LEN,SHV-155,1441,ARO_3001194,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-156,Bla,SHV-OKP-LEN,SHV-156,1442,ARO_3001195,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-157,Bla,SHV-OKP-LEN,SHV-157,1443,ARO_3001196,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-158,Bla,SHV-OKP-LEN,SHV-158,1444,ARO_3001197,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-159,Bla,SHV-OKP-LEN,SHV-159,1445,ARO_3001198,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-160,Bla,SHV-OKP-LEN,SHV-160,1446,ARO_3001199,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-161,Bla,SHV-OKP-LEN,SHV-161,1447,ARO_3001200,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-162,Bla,SHV-OKP-LEN,SHV-162,1448,ARO_3001201,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-163,Bla,SHV-OKP-LEN,SHV-163,1449,ARO_3001202,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-165,Bla,SHV-OKP-LEN,SHV-165,1450,ARO_3001203,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-168,Bla,SHV-OKP-LEN,SHV-168,1451,ARO_3001352,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-172,Bla,SHV-OKP-LEN,SHV-172,1452,ARO_3001356,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-173,Bla,SHV-OKP-LEN,SHV-173,1453,ARO_3001357,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-178,Bla,SHV-OKP-LEN,SHV-178,1454,ARO_3001361,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-179,Bla,SHV-OKP-LEN,SHV-179,1455,ARO_3001362,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-180,Bla,SHV-OKP-LEN,SHV-180,1456,ARO_3001350,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-182,Bla,SHV-OKP-LEN,SHV-182,1457,ARO_3001364,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-185,Bla,SHV-OKP-LEN,SHV-185,1458,ARO_3003152,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-186,Bla,SHV-OKP-LEN,SHV-186,1459,ARO_3003153,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-187,Bla,SHV-OKP-LEN,SHV-187,1460,ARO_3003154,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-189,Bla,SHV-OKP-LEN,SHV-189,1461,ARO_3003156,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-28.v1,Bla,SHV-OKP-LEN,SHV-28.v1,1462,ARG_EU441172,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-28.v2,Bla,SHV-OKP-LEN,SHV-28.v2,1463,ARO_3001086,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-29,Bla,SHV-OKP-LEN,SHV-29,1464,ARO_3001087,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-35,Bla,SHV-OKP-LEN,SHV-35,1465,ARO_3001093,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-36,Bla,SHV-OKP-LEN,SHV-36,1466,ARO_3001094,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-37,Bla,SHV-OKP-LEN,SHV-37,1467,ARO_3001095,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-4,Bla,SHV-OKP-LEN,SHV-4,1468,ARO_3001063,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-50,Bla,SHV-OKP-LEN,SHV-50,1469,ARO_3001107,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-51,Bla,SHV-OKP-LEN,SHV-51,1470,ARO_3001108,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-52,Bla,SHV-OKP-LEN,SHV-52,1471,ARO_3001109,-,-,no,no,class A beta-lactamase,Bla_broad_inhR
+135,SHV-59,Bla,SHV-OKP-LEN,SHV-59,1472,ARO_3001114,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-63,Bla,SHV-OKP-LEN,SHV-63,1473,ARO_3001118,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-9,Bla,SHV-OKP-LEN,SHV-9,1474,ARO_3001068,-,-,no,no,class A beta-lactamase,Bla_ESBL
+135,SHV-92,Bla,SHV-OKP-LEN,SHV-92,1475,ARO_3001144,-,-,no,no,class A beta-lactamase,Bla_broad_inhR
+135,SHV-93,Bla,SHV-OKP-LEN,SHV-93,1476,ARO_3001145,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-94,Bla,SHV-OKP-LEN,SHV-94,1477,ARO_3001146,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-95,Bla,SHV-OKP-LEN,SHV-95,1478,ARO_3001147,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-96,Bla,SHV-OKP-LEN,SHV-96,1479,ARO_3001148,-,-,no,no,class A beta-lactamase,Bla_chr
+135,SHV-97,Bla,SHV-OKP-LEN,SHV-97,1480,ARO_3001149,-,-,no,no,class A beta-lactamase,Bla_chr
+135,LEN-1,Bla,SHV-OKP-LEN,LEN-1,1481,ARO_3002454,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-10,Bla,SHV-OKP-LEN,LEN-10,1482,ARO_3002460,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-12,Bla,SHV-OKP-LEN,LEN-12,1483,ARO_3002462,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-15,Bla,SHV-OKP-LEN,LEN-15,1484,ARO_3002478,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-16,Bla,SHV-OKP-LEN,LEN-16,1485,ARO_3002464,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-18,Bla,SHV-OKP-LEN,LEN-18,1486,ARO_3002465,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-19,Bla,SHV-OKP-LEN,LEN-19,1487,ARO_3002466,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-2,Bla,SHV-OKP-LEN,LEN-2,1488,ARO_3002455,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-20,Bla,SHV-OKP-LEN,LEN-20,1489,ARO_3002467,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-21,Bla,SHV-OKP-LEN,LEN-21,1490,ARO_3002468,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-22,Bla,SHV-OKP-LEN,LEN-22,1491,ARO_3002469,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-23,Bla,SHV-OKP-LEN,LEN-23,1492,ARO_3002470,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-24,Bla,SHV-OKP-LEN,LEN-24,1493,ARO_3002471,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-25,Bla,SHV-OKP-LEN,LEN-25,1494,ARO_3002479,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-26,Bla,SHV-OKP-LEN,LEN-26,1495,ARO_3002474,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-32,Bla,SHV-OKP-LEN,LEN-32,1496,ARO_3004839,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-34,Bla,SHV-OKP-LEN,LEN-34,1497,ARO_3004840,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-35,Bla,SHV-OKP-LEN,LEN-35,1498,ARO_3004827,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-36,Bla,SHV-OKP-LEN,LEN-36,1499,ARO_3004828,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-37,Bla,SHV-OKP-LEN,LEN-37,1500,ARO_3004829,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-5,Bla,SHV-OKP-LEN,LEN-5,1501,ARO_3002456,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-9,Bla,SHV-OKP-LEN,LEN-9,1502,ARO_3002459,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
+135,LEN-11,Bla,SHV-OKP-LEN,LEN-11,1503,ARO_3002461,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,LEN-13,Bla,SHV-OKP-LEN,LEN-13,1504,ARO_3002463,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,LEN-7,Bla,SHV-OKP-LEN,LEN-7,1505,ARO_3002457,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,LEN-8,Bla,SHV-OKP-LEN,LEN-8,1506,ARO_3002458,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-1,Bla,SHV-OKP-LEN,OKP-A-1,1507,ARO_3002418,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-10,Bla,SHV-OKP-LEN,OKP-A-10,1508,ARO_3002427,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-11,Bla,SHV-OKP-LEN,OKP-A-11,1509,ARO_3002428,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-12,Bla,SHV-OKP-LEN,OKP-A-12,1510,ARO_3002429,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-13,Bla,SHV-OKP-LEN,OKP-A-13,1511,ARO_3002430,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-14,Bla,SHV-OKP-LEN,OKP-A-14,1512,ARO_3002431,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-15,Bla,SHV-OKP-LEN,OKP-A-15,1513,ARO_3002432,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-16,Bla,SHV-OKP-LEN,OKP-A-16,1514,ARO_3002433,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-2,Bla,SHV-OKP-LEN,OKP-A-2,1515,ARO_3002419,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-3,Bla,SHV-OKP-LEN,OKP-A-3,1516,ARO_3002420,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-4,Bla,SHV-OKP-LEN,OKP-A-4,1517,ARO_3002421,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-5,Bla,SHV-OKP-LEN,OKP-A-5,1518,ARO_3002422,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-6,Bla,SHV-OKP-LEN,OKP-A-6,1519,ARO_3002423,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-7,Bla,SHV-OKP-LEN,OKP-A-7,1520,ARO_3002424,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-8,Bla,SHV-OKP-LEN,OKP-A-8,1521,ARO_3002425,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-A-9,Bla,SHV-OKP-LEN,OKP-A-9,1522,ARO_3002426,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-1,Bla,SHV-OKP-LEN,OKP-B-1,1523,ARO_3002434,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-10,Bla,SHV-OKP-LEN,OKP-B-10,1524,ARO_3002443,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-11,Bla,SHV-OKP-LEN,OKP-B-11,1525,ARO_3002444,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-13,Bla,SHV-OKP-LEN,OKP-B-13,1526,ARO_3002446,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-17,Bla,SHV-OKP-LEN,OKP-B-17,1527,ARO_3002450,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-18,Bla,SHV-OKP-LEN,OKP-B-18,1528,ARO_3002451,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-19,Bla,SHV-OKP-LEN,OKP-B-19,1529,ARO_3002452,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-2,Bla,SHV-OKP-LEN,OKP-B-2,1530,ARO_3002435,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-20,Bla,SHV-OKP-LEN,OKP-B-20,1531,ARO_3002453,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-3,Bla,SHV-OKP-LEN,OKP-B-3,1532,ARO_3002436,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-4,Bla,SHV-OKP-LEN,OKP-B-4,1533,ARO_3002437,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-5,Bla,SHV-OKP-LEN,OKP-B-5,1534,ARO_3002438,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-6,Bla,SHV-OKP-LEN,OKP-B-6,1535,ARO_3002439,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-7,Bla,SHV-OKP-LEN,OKP-B-7,1536,ARO_3002440,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-8,Bla,SHV-OKP-LEN,OKP-B-8,1537,ARO_3002441,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,OKP-B-9,Bla,SHV-OKP-LEN,OKP-B-9,1538,ARO_3002442,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-1,Bla,SHV-OKP-LEN,SHV-1,1539,ARO_3001059,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-109,Bla,SHV-OKP-LEN,SHV-109,1540,ARO_3001158,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-11.v1,Bla,SHV-OKP-LEN,SHV-11.v1,1541,ARG_HM751098,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-11.v2,Bla,SHV-OKP-LEN,SHV-11.v2,1542,ARO_3001070,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-14,Bla,SHV-OKP-LEN,SHV-14,1543,ARO_3001073,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-141,Bla,SHV-OKP-LEN,SHV-141,1544,ARO_3001183,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_ESBL
+135,SHV-164,Bla,SHV-OKP-LEN,SHV-164,1545,ARO_3001347,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-25,Bla,SHV-OKP-LEN,SHV-25,1546,ARO_3001083,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-32,Bla,SHV-OKP-LEN,SHV-32,1547,ARO_3001090,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-33,Bla,SHV-OKP-LEN,SHV-33,1548,ARO_3001091,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-43,Bla,SHV-OKP-LEN,SHV-43,1549,ARO_3001101,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-44,Bla,SHV-OKP-LEN,SHV-44,1550,ARO_3001102,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-48,Bla,SHV-OKP-LEN,SHV-48,1551,ARO_3001105,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-60,Bla,SHV-OKP-LEN,SHV-60,1552,ARO_3001115,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-61,Bla,SHV-OKP-LEN,SHV-61,1553,ARO_3001116,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-62,Bla,SHV-OKP-LEN,SHV-62,1554,ARO_3001117,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-71,Bla,SHV-OKP-LEN,SHV-71,1555,ARO_3001125,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-73,Bla,SHV-OKP-LEN,SHV-73,1556,ARO_3001127,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-74,Bla,SHV-OKP-LEN,SHV-74,1557,ARO_3001128,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-75,Bla,SHV-OKP-LEN,SHV-75,1558,ARO_3001129,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-76,Bla,SHV-OKP-LEN,SHV-76,1559,ARO_3001130,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-77,Bla,SHV-OKP-LEN,SHV-77,1560,ARO_3001131,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-78,Bla,SHV-OKP-LEN,SHV-78,1561,ARO_3001132,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-79,Bla,SHV-OKP-LEN,SHV-79,1562,ARO_3001133,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-80,Bla,SHV-OKP-LEN,SHV-80,1563,ARO_3001134,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-81,Bla,SHV-OKP-LEN,SHV-81,1564,ARO_3001135,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-82,Bla,SHV-OKP-LEN,SHV-82,1565,ARO_3001136,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-85,Bla,SHV-OKP-LEN,SHV-85,1566,ARO_3001139,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-89,Bla,SHV-OKP-LEN,SHV-89,1567,ARO_3001141,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
 135,SHV-107,Bla,SHV-OKP-LEN,SHV-107,1568,ARO_3001156,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-135,SHV-26,Bla,SHV-OKP-LEN,SHV-26,1569,ARO_3001084,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+135,SHV-26,Bla,SHV-OKP-LEN,SHV-26,1569,ARO_3001084,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_chr
 135,SHV-49,Bla,SHV-OKP-LEN,SHV-49,1570,ARO_3001106,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-135,SHV-56.v1,Bla,SHV-OKP-LEN,SHV-56.v1,1571,ARG_AY352599,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+135,SHV-56.v1,Bla,SHV-OKP-LEN,SHV-56.v1,1571,ARG_AY352599,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_ESBL
 135,SHV-56.v2,Bla,SHV-OKP-LEN,SHV-56.v2,1572,ARO_3001112,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
 135,SHV-72,Bla,SHV-OKP-LEN,SHV-72,1573,ARO_3001126,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-135,SHV-110,Bla,SHV-OKP-LEN,SHV-110,1574,ARO_3001159,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-145,Bla,SHV-OKP-LEN,SHV-145,1575,ARO_3001185,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-101,Bla,SHV-OKP-LEN,SHV-101,1576,ARO_3001150,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-110,Bla,SHV-OKP-LEN,SHV-110,1574,ARO_3001159,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
+135,SHV-145,Bla,SHV-OKP-LEN,SHV-145,1575,ARO_3001185,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
+135,SHV-101,Bla,SHV-OKP-LEN,SHV-101,1576,ARO_3001150,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-102,Bla,SHV-OKP-LEN,SHV-102,1577,ARO_3001151,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-104,Bla,SHV-OKP-LEN,SHV-104,1578,ARO_3001153,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-104,Bla,SHV-OKP-LEN,SHV-104,1578,ARO_3001153,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-105,Bla,SHV-OKP-LEN,SHV-105,1579,ARO_3001154,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-106,Bla,SHV-OKP-LEN,SHV-106,1580,ARO_3001155,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-12,Bla,SHV-OKP-LEN,SHV-12,1581,ARO_3001071,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
@@ -1584,41 +1584,41 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-129,Bla,SHV-OKP-LEN,SHV-129,1583,ARO_3001176,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-13,Bla,SHV-OKP-LEN,SHV-13,1584,ARO_3001072,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-134,Bla,SHV-OKP-LEN,SHV-134,1585,ARO_3001178,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-148,Bla,SHV-OKP-LEN,SHV-148,1586,ARO_3001187,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-148,Bla,SHV-OKP-LEN,SHV-148,1586,ARO_3001187,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-15,Bla,SHV-OKP-LEN,SHV-15,1587,ARO_3001074,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-16,Bla,SHV-OKP-LEN,SHV-16,1588,ARO_3001075,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-18,Bla,SHV-OKP-LEN,SHV-18,1589,ARO_3001076,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-183,Bla,SHV-OKP-LEN,SHV-183,1590,ARO_3001351,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-188,Bla,SHV-OKP-LEN,SHV-188,1591,ARO_3003155,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-188,Bla,SHV-OKP-LEN,SHV-188,1591,ARO_3003155,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-2,Bla,SHV-OKP-LEN,SHV-2,1592,ARO_3001060,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-24,Bla,SHV-OKP-LEN,SHV-24,1593,ARO_3001082,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-27,Bla,SHV-OKP-LEN,SHV-27,1594,ARO_3001085,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-27,Bla,SHV-OKP-LEN,SHV-27,1594,ARO_3001085,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-2A,Bla,SHV-OKP-LEN,SHV-2A,1595,ARO_3001061,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-3,Bla,SHV-OKP-LEN,SHV-3,1596,ARO_3001062,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-30,Bla,SHV-OKP-LEN,SHV-30,1597,ARO_3001088,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-31.v1,Bla,SHV-OKP-LEN,SHV-31.v1,1598,ARG_GU064396,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-31.v2,Bla,SHV-OKP-LEN,SHV-31.v2,1599,ARO_3001089,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-34,Bla,SHV-OKP-LEN,SHV-34,1600,ARO_3001092,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-38,Bla,SHV-OKP-LEN,SHV-38,1601,ARO_3001096,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-40,Bla,SHV-OKP-LEN,SHV-40,1602,ARO_3001098,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-41,Bla,SHV-OKP-LEN,SHV-41,1603,ARO_3001099,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-42,Bla,SHV-OKP-LEN,SHV-42,1604,ARO_3001100,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-38,Bla,SHV-OKP-LEN,SHV-38,1601,ARO_3001096,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
+135,SHV-40,Bla,SHV-OKP-LEN,SHV-40,1602,ARO_3001098,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
+135,SHV-41,Bla,SHV-OKP-LEN,SHV-41,1603,ARO_3001099,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
+135,SHV-42,Bla,SHV-OKP-LEN,SHV-42,1604,ARO_3001100,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-45,Bla,SHV-OKP-LEN,SHV-45,1605,ARO_3001103,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-46,Bla,SHV-OKP-LEN,SHV-46,1606,ARO_3001104,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-5,Bla,SHV-OKP-LEN,SHV-5,1607,ARO_3001064,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-55,Bla,SHV-OKP-LEN,SHV-55,1608,ARO_3001111,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-57,Bla,SHV-OKP-LEN,SHV-57,1609,ARO_3001113,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-64,Bla,SHV-OKP-LEN,SHV-64,1610,ARO_3001119,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-65,Bla,SHV-OKP-LEN,SHV-65,1611,ARO_3001120,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-65,Bla,SHV-OKP-LEN,SHV-65,1611,ARO_3001120,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-66,Bla,SHV-OKP-LEN,SHV-66,1612,ARO_3001121,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-67,Bla,SHV-OKP-LEN,SHV-67,1613,ARO_3001122,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-69,Bla,SHV-OKP-LEN,SHV-69,1614,ARO_3001123,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-67,Bla,SHV-OKP-LEN,SHV-67,1613,ARO_3001122,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
+135,SHV-69,Bla,SHV-OKP-LEN,SHV-69,1614,ARO_3001123,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-7,Bla,SHV-OKP-LEN,SHV-7,1615,ARO_3001066,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-70,Bla,SHV-OKP-LEN,SHV-70,1616,ARO_3001124,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-8,Bla,SHV-OKP-LEN,SHV-8,1617,ARO_3001067,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-86,Bla,SHV-OKP-LEN,SHV-86,1618,ARO_3001140,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-98,Bla,SHV-OKP-LEN,SHV-98,1619,ARO_3001336,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-99,Bla,SHV-OKP-LEN,SHV-99,1620,ARO_3001337,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-98,Bla,SHV-OKP-LEN,SHV-98,1619,ARO_3001336,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
+135,SHV-99,Bla,SHV-OKP-LEN,SHV-99,1620,ARO_3001337,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 136,SIM-1,Bla,SIM,SIM-1,1621,ARO_3000846,-,-,no,no,subclass B1 broad-spectrum metallo-beta-lactamase,Bla_broad
 137,SLB-1,Bla,SLB,SLB-1,1622,ARO_3003556,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
 138,SMB-1,Bla,SMB,SMB-1,1623,ARO_3000854,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
