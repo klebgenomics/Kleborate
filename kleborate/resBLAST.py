@@ -41,8 +41,8 @@ def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, m
 def read_class_file(res_class_file):
     gene_info = {}  # key = sequence id (fasta header in seq file), value = (allele,class,Bla_Class)
     res_classes = []
-    bla_classes = ['Bla_chr', 'Bla', 'Bla_broad', 'Bla_broad_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR',
-                   'Bla_Carb']
+    bla_classes = ['Bla', 'Bla_broad', 'Bla_broad_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR',
+                   'Bla_Carb', 'Bla_chr']
 
     with open(res_class_file, 'r') as f:
         header = 0
@@ -84,7 +84,17 @@ def read_class_file(res_class_file):
 
 
 def get_res_headers(res_classes, bla_classes):
-    return res_classes + bla_classes
+    res_headers = res_classes + bla_classes
+
+    # Rearrange the headers a bit. First move Bla_chr to the end:
+    res_headers = ([h for h in res_headers if h != 'Bla_chr'] +
+                   [h for h in res_headers if h == 'Bla_chr'])
+
+    # Then move mutation columns to the end:
+    res_headers = ([h for h in res_headers if '_mutations' not in h] +
+                   [h for h in res_headers if '_mutations' in h])
+
+    return res_headers
 
 
 def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious_cov,
