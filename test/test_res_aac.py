@@ -33,17 +33,17 @@ class TestResAac(unittest.TestCase):
     def test_res_01(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/01.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], '-')
+        self.assertEqual(results['AGly_acquired'], '-')
 
     def test_res_02(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/02.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6-31')
+        self.assertEqual(results['AGly_acquired'], 'Aac6-31')
 
     def test_res_03(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/03.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6-31*')
+        self.assertEqual(results['AGly_acquired'], 'Aac6-31*')
 
     def test_res_04(self):
         """
@@ -53,7 +53,7 @@ class TestResAac(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/04.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6Ib-cr^')
+        self.assertEqual(results['AGly_acquired'], 'Aac6Ib-cr^')
 
     def test_res_05(self):
         """
@@ -61,4 +61,4 @@ class TestResAac(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/05.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6Ib-cr^')
+        self.assertEqual(results['AGly_acquired'], 'Aac6Ib-cr^')
