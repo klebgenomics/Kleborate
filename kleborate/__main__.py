@@ -296,15 +296,15 @@ def get_resistance_score(res_headers, res_hits):
         return '-'
 
     # Look for a hit in any 'ESBL' column (e.g. 'Bla_ESBL' or 'Bla_ESBL_inhR').
-    esbl_header_indices = [i for i, h in enumerate(res_headers) if 'esbl' in h.lower()]
+    esbl_header_indices = [i for i, h in enumerate(res_headers) if '_esbl' in h.lower()]
     has_esbl = any(res_hits[i] != '-' for i in esbl_header_indices)
 
     # Look for a hit in any 'Carb' column (e.g. 'Bla_Carb').
-    carb_header_indices = [i for i, h in enumerate(res_headers) if 'carb' in h.lower()]
+    carb_header_indices = [i for i, h in enumerate(res_headers) if '_carb' in h.lower()]
     has_carb = any(res_hits[i] != '-' for i in carb_header_indices)
 
     # Look for a hit in the 'Col' column.
-    col_header_indices = [i for i, h in enumerate(res_headers) if h.lower() == 'col']
+    col_header_indices = [i for i, h in enumerate(res_headers) if h.lower() == 'col_acquired']
     has_col = any(res_hits[i] != '-' for i in col_header_indices)
 
     if has_carb and has_col:
@@ -319,14 +319,17 @@ def get_resistance_score(res_headers, res_hits):
 
 def get_resistance_class_count(res_headers, res_hits):
     """
-    Counts up all resistance gene classes, excluding the 'Bla' class which is intrinsic.
+    Counts up all resistance gene classes, excluding the 'Bla_chr' class which is intrinsic.
     """
     if not res_headers:
         return '-'
-    res_indices = [i for i, h in enumerate(res_headers)
-                   if h.lower() != 'bla' and h.lower() != 'omp_truncations'
-                   and h.lower() != 'spurious_resistance_hits']
-    return sum(0 if res_hits[i] == '-' else 1 for i in res_indices)
+    res_classes = [h for i, h in enumerate(res_headers) if
+                   res_hits[i] != '-' and
+                   not (h.lower() == 'bla_chr' or
+                        h.lower() == 'spurious_resistance_hits')]
+    res_classes = [c.replace('_acquired', '') for c in res_classes]
+    res_classes = [c.replace('_mutations', '') for c in res_classes]
+    return len(set(res_classes))
 
 
 def get_resistance_gene_count(res_headers, res_hits):
@@ -335,28 +338,12 @@ def get_resistance_gene_count(res_headers, res_hits):
     """
     if not res_headers:
         return '-'
-    res_indices = [i for i, h in enumerate(res_headers)
-                   if h.lower() != 'omp_truncations' and h.lower() != 'spurious_resistance_hits']
-
+    res_indices = [i for i, h in enumerate(res_headers) if
+                   not (h.lower().endswith('_mutations') or h.lower() == 'bla_chr' or
+                        h.lower() == 'spurious_resistance_hits')]
     gene_list = []
     for i in res_indices:
-        header = res_headers[i].lower()
         genes = res_hits[i].split(';')
-
-        # Exclude mutation-based flq resistance.
-        genes = [g for g in genes if 'gyra-' not in g.lower()]
-        genes = [g for g in genes if 'parc-' not in g.lower()]
-
-        # Exclude truncation-based colistin resistance.
-        genes = [g for g in genes if 'mgrb-' not in g.lower()]
-        genes = [g for g in genes if 'pmrb-' not in g.lower()]
-
-        # Exclude intrinsic bla genes (SHV, OKP or LEN in the Bla column - if they are in another
-        # column we assume they are acquired).
-        genes = [g for g in genes if not ('shv-' in g.lower() and header == 'bla')]
-        genes = [g for g in genes if not ('okp-' in g.lower() and header == 'bla')]
-        genes = [g for g in genes if not ('len-' in g.lower() and header == 'bla')]
-
         genes = [g for g in genes if g != '-']
         gene_list += genes
 

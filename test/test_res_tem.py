@@ -37,5 +37,5 @@ class TestResTem(unittest.TestCase):
     def test_tem(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_tem/tem.fasta',
                                          self.args, self.res_headers, True)
-        self.assertEqual(results['Bla_ESBL'], '-')
-        self.assertEqual(results['Bla'], 'TEM-1D^')
+        self.assertEqual(results['Bla_ESBL_acquired'], '-')
+        self.assertEqual(results['Bla_acquired'], 'TEM-1D^')

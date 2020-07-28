@@ -94,6 +94,10 @@ def get_res_headers(res_classes, bla_classes):
     res_headers = ([h for h in res_headers if '_mutations' not in h] +
                    [h for h in res_headers if '_mutations' in h])
 
+    # Add '_acquired' to the end of the rest of the columns:
+    res_headers = [h if h.endswith('_chr') or h.endswith('_mutations') else h + '_acquired'
+                   for h in res_headers]
+
     return res_headers
 
 
@@ -114,6 +118,8 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
             hit_allele, hit_class, hit_bla_class = gene_info[hit.gene_id]
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
+            if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
+                hit_class += '_acquired'
 
             trunc_cov = 100.0
             if aa_result is not None:
