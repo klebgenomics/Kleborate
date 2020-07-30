@@ -15,23 +15,12 @@ not, see <http://www.gnu.org/licenses/>.
 from Bio.Seq import Seq
 from Bio.Alphabet import IUPAC
 
-from .misc import reverse_complement
-
 
 def truncation_check(hit, cov_threshold=90.0):
     """
     Checks to see if the gene is truncated at the amino acid level.
     """
-    # BLAST gives the aligned sequence, so we might need to remove dashes if there are deletions
-    # relative to the reference.
-    nucl_seq = hit.hit_seq.replace('-', '')
-
-    # BLAST also returns the contig's sequence so we might need to flip to the reference strand.
-    if hit.strand == 'minus':
-        nucl_seq = reverse_complement(nucl_seq)
-        ref_start, ref_end = hit.ref_end, hit.ref_start
-    else:
-        ref_start, ref_end = hit.ref_start, hit.ref_end
+    nucl_seq, ref_start, _ = hit.get_seq_start_end_pos_strand()
 
     # The hit must start at the first base of the gene. If not, the gene is considered 0%.
     if ref_start != 1:

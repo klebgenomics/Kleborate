@@ -15,6 +15,8 @@ not, see <http://www.gnu.org/licenses/>.
 import os
 import subprocess
 
+from .misc import reverse_complement
+
 
 def run_blastn(db, query, min_cov, min_ident):
     build_blast_database_if_needed(db)
@@ -117,6 +119,17 @@ class BlastHit(object):
         assert self.contig_end >= self.contig_start
 
         self.ref_cov = self.ref_hit_len / self.ref_length
+
+    def get_seq_start_end_pos_strand(self):
+        # BLAST gives the aligned sequence, so we might need to remove dashes if there are
+        # deletions relative to the reference.
+        nucl_seq = self.hit_seq.replace('-', '')
+
+        # BLAST also returns the contig's sequence so we might need to flip to the ref strand.
+        if self.strand == 'minus':
+            return reverse_complement(nucl_seq), self.ref_end, self.ref_start
+        else:
+            return nucl_seq, self.ref_start, self.ref_end
 
 
 def build_blast_database_if_needed(seqs):

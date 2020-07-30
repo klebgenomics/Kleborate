@@ -22,6 +22,7 @@ from Bio import pairwise2
 from Bio.SubsMat.MatrixInfo import blosum62
 
 from .blastn import run_blastn
+from .shv_mutations import check_for_shv_mutations
 from .truncation import truncation_check
 
 
@@ -73,6 +74,8 @@ def read_class_file(res_class_file):
     if 'NA' in bla_classes:
         bla_classes.remove('NA')
 
+    if 'SHV_mutations' not in res_classes:
+        res_classes.append('SHV_mutations')
     if 'Omp_mutations' not in res_classes:
         res_classes.append('Omp_mutations')
     if 'Col_mutations' not in res_classes:
@@ -116,8 +119,16 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
                 aa_result = None
 
             hit_allele, hit_class, hit_bla_class = gene_info[hit.gene_id]
+
+            hit_bla_class, shv_muts, class_changing_muts, omega_loop_seq = \
+                check_for_shv_mutations(hit, hit_allele, hit_bla_class)
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
+
+            hits_dict['SHV_mutations'] += shv_muts
+            if omega_loop_seq is not None:
+                hits_dict['SHV_mutations'].append(f'omega-loop={omega_loop_seq}')
+
             if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
                 hit_class += '_acquired'
 
@@ -131,6 +142,9 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
                     hit_allele += '?'
                 trunc_suffix, trunc_cov, _ = truncation_check(hit)
                 hit_allele += trunc_suffix
+
+            if class_changing_muts:
+                hit_allele += '-' + '-'.join(class_changing_muts)
 
             # If the hit is decent (above the min coverage and identity thresholds), it goes in the
             # column for the class.
