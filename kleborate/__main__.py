@@ -325,10 +325,9 @@ def get_resistance_class_count(res_headers, res_hits):
         return '-'
     res_classes = [h for i, h in enumerate(res_headers) if
                    res_hits[i] != '-' and
-                   not (h.lower() == 'bla_chr' or
-                        h.lower() == 'spurious_resistance_hits')]
-    res_classes = [c.replace('_acquired', '') for c in res_classes]
-    res_classes = [c.replace('_mutations', '') for c in res_classes]
+                   (h.lower().endswith('_acquired') or h == 'Col_mutations' or
+                    h == 'Flq_mutations')]
+    res_classes = [c.replace('_acquired', '').replace('_mutations', '') for c in res_classes]
     return len(set(res_classes))
 
 
@@ -338,15 +337,12 @@ def get_resistance_gene_count(res_headers, res_hits):
     """
     if not res_headers:
         return '-'
-    res_indices = [i for i, h in enumerate(res_headers) if
-                   not (h.lower().endswith('_mutations') or h.lower() == 'bla_chr' or
-                        h.lower() == 'spurious_resistance_hits')]
+    res_indices = [i for i, h in enumerate(res_headers) if h.lower().endswith('_acquired')]
     gene_list = []
     for i in res_indices:
         genes = res_hits[i].split(';')
         genes = [g for g in genes if g != '-']
         gene_list += genes
-
     return len(gene_list)
 
 
