@@ -40,7 +40,7 @@ class TestResAlleles(unittest.TestCase):
         results = get_resistance_results(self.data_dir, 'test/test_shv/01.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Bla_chr'], 'SHV-1')
-        self.assertEqual(results['SHV_mutations'], '')
+        self.assertEqual(results['SHV_mutations'], '-')
 
     def test_shv_02(self):
         """
@@ -69,7 +69,7 @@ class TestResAlleles(unittest.TestCase):
         results = get_resistance_results(self.data_dir, 'test/test_shv/04.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Bla_chr'], 'SHV-1*')
-        self.assertEqual(results['SHV_mutations'], '')
+        self.assertEqual(results['SHV_mutations'], '-')
 
     def test_shv_05(self):
         """
@@ -97,7 +97,7 @@ class TestResAlleles(unittest.TestCase):
         results = get_resistance_results(self.data_dir, 'test/test_shv/07.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Bla_chr'], 'SHV-1*')
-        self.assertEqual(results['SHV_mutations'], '')
+        self.assertEqual(results['SHV_mutations'], '-')
 
     def test_shv_08(self):
         """
@@ -106,7 +106,7 @@ class TestResAlleles(unittest.TestCase):
         results = get_resistance_results(self.data_dir, 'test/test_shv/08.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Bla_chr'], 'SHV-1^')
-        self.assertEqual(results['SHV_mutations'], '')
+        self.assertEqual(results['SHV_mutations'], '-')
 
     def test_shv_09(self):
         """
