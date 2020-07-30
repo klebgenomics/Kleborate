@@ -128,6 +128,8 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
             hits_dict['SHV_mutations'] += shv_muts
             if omega_loop_seq is not None:
                 hits_dict['SHV_mutations'].append(f'omega-loop={omega_loop_seq}')
+            if not hits_dict['SHV_mutations']:
+                del hits_dict['SHV_mutations']
 
             if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
                 hit_class += '_acquired'
