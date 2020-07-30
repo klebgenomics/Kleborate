@@ -89,14 +89,14 @@ class TestResScore(unittest.TestCase):
 
     def test_res_counts_6(self):
         """
-        Omp gene truncations should not add to the gene counts.
+        Omp gene truncations should not add to the gene or class counts.
         """
         self.results['AGly_acquired'] = 'a'
         self.results['Flq_acquired'] = 'b;c'
         self.results['Tet_acquired'] = 'd;e;f'
         self.results['Omp_mutations'] = 'g;h'
         summary_results = get_summary_results(self.results, self.res_headers)
-        self.assertEqual(summary_results['num_resistance_classes'], '4')
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '6')
 
     def test_res_counts_7(self):
