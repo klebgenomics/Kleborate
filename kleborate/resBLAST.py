@@ -80,8 +80,8 @@ def read_class_file(res_class_file):
         res_classes.append('Omp_mutations')
     if 'Col_mutations' not in res_classes:
         res_classes.append('Col_mutations')
-    if 'QRDR_mutations' not in res_classes:
-        res_classes.append('QRDR_mutations')
+    if 'Flq_mutations' not in res_classes:
+        res_classes.append('Flq_mutations')
 
     return gene_info, res_classes, bla_classes
 
@@ -232,7 +232,7 @@ def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
                         assembly_base != '-' and assembly_base != '.':
                     snps.append(hit.gene_id + '-' + str(pos) + assembly_base)
     if snps:
-        hits_dict['QRDR_mutations'] += snps
+        hits_dict['Flq_mutations'] += snps
 
 
 def get_bases_per_ref_pos(alignment):

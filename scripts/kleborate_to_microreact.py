@@ -135,7 +135,7 @@ def get_data(line, name_subs, original_header, new_header):
     for res_class in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul',
                       'Tet', 'Tgc', 'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR',
                       'Bla_broad', 'Bla_broad_inhR', 'Omp_mutations', 'Col_mutations',
-                      'QRDR_mutations']:
+                      'Flq_mutations']:
         new_data[res_class + '__colour'] = get_res_class_colour(original_data[res_class])
 
     return [new_data[h] for h in new_header]
