@@ -105,7 +105,7 @@ class TestResScore(unittest.TestCase):
         acquired resistance genes).
         """
         self.results['AGly_acquired'] = 'a'
-        self.results['QRDR_mutations'] = 'b'
+        self.results['Flq_mutations'] = 'b'
         self.results['Tet_acquired'] = 'c;d;e'
         summary_results = get_summary_results(self.results, self.res_headers)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
@@ -117,7 +117,7 @@ class TestResScore(unittest.TestCase):
         acquired resistance genes).
         """
         self.results['AGly_acquired'] = 'a'
-        self.results['QRDR_mutations'] = 'b;c'
+        self.results['Flq_mutations'] = 'b;c'
         self.results['Tet_acquired'] = 'd;e;f'
         summary_results = get_summary_results(self.results, self.res_headers)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
