@@ -97,8 +97,8 @@ def get_new_header(original_header, autocolour_columns):
         header.insert(find_column_index(header, col) + 1, col + '__colour')
 
     for res in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul', 'Tet',
-                'Tgc', 'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_broad',
-                'Bla_broad_inhR', 'Omp_mutations']:
+                'Tgc', 'Tmt', 'Bla', 'Bla_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_Carb',
+                'Omp_mutations']:
         header.insert(find_column_index(header, res) + 1, res + '__colour')
         header.remove(res)
 
@@ -133,9 +133,8 @@ def get_data(line, name_subs, original_header, new_header):
     new_data['rmpA__colour'] = get_rmpA_colour(original_data['rmpA'])
     new_data['rmpA2__colour'] = get_rmpA2_colour(original_data['rmpA2'])
     for res_class in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul',
-                      'Tet', 'Tgc', 'Tmt', 'Bla', 'Bla_Carb', 'Bla_ESBL', 'Bla_ESBL_inhR',
-                      'Bla_broad', 'Bla_broad_inhR', 'Omp_mutations', 'Col_mutations',
-                      'Flq_mutations']:
+                      'Tet', 'Tgc', 'Tmt', 'Bla', 'Bla_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR',
+                      'Bla_Carb', 'Omp_mutations', 'Col_mutations', 'Flq_mutations']:
         new_data[res_class + '__colour'] = get_res_class_colour(original_data[res_class])
 
     return [new_data[h] for h in new_header]
