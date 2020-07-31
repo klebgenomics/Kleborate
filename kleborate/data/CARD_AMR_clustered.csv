@@ -294,7 +294,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 41,ARL-4,Bla,ARL,ARL-4,293,ARO_3004737,-,-,no,no,class A beta-lactamase,Bla
 41,ARL-5,Bla,ARL,ARL-5,294,ARO_3004738,-,-,no,no,class A beta-lactamase,Bla
 41,ARL-6,Bla,ARL,ARL-6,295,ARO_3004739,-,-,no,no,class A beta-lactamase,Bla
-42,AST-1,Bla,AST-1,AST-1,296,ARO_3004740,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+42,AST-1,Bla,AST-1,AST-1,296,ARO_3004740,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
 43,BAT-1,Bla,BAT-1,BAT-1,297,ARO_3004747,-,-,no,no,class D beta-lactamase,Bla
 44,BcI,Bla,BcI,BcI,298,ARO_3002877,-,-,no,no,class A beta-lactamase,Bla
 45,BcII,Bla,BcII,BcII,299,ARO_3002878,-,-,no,no,subclass B1 metallo beta-lactamase,Bla
@@ -320,24 +320,24 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 61,CAM-1,Bla,CAM-1,CAM-1,319,ARO_3004559,-,-,no,no,subclass B1 metallo beta-lactamase,Bla
 62,CARB-21,Bla,CARB,CARB-21,320,ARO_3003176,-,-,no,no,class A beta-lactamase,Bla
 62,CARB-23,Bla,CARB,CARB-23,321,ARO_3003186,-,-,no,no,class A beta-lactamase,Bla
-62,CARB-12,Bla,CARB,CARB-12,322,ARO_3002250,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-62,CARB-17,Bla,CARB,CARB-17,323,ARO_3002254,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-62,CARB-18,Bla,CARB,CARB-18,324,ARO_3003174,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-62,CARB-19,Bla,CARB,CARB-19,325,ARO_3003175,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-62,CARB-20,Bla,CARB,CARB-20,326,ARO_3003150,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-62,CARB-22,Bla,CARB,CARB-22,327,ARO_3003151,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-62,CARB-8,Bla,CARB,CARB-8,328,ARO_3002247,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-62,CARB-1,Bla,CARB,CARB-1,329,ARO_3002240,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-2.v1,Bla,CARB,CARB-2.v1,330,ARG_HQ157204,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-2.v2,Bla,CARB,CARB-2.v2,331,ARO_3002241,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-3,Bla,CARB,CARB-3,332,ARO_3002242,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-4,Bla,CARB,CARB-4,333,ARO_3002243,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-6,Bla,CARB,CARB-6,334,ARO_3002245,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-7,Bla,CARB,CARB-7,335,ARO_3002246,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-9,Bla,CARB,CARB-9,336,ARO_3002248,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-5,Bla,CARB,CARB-5,337,ARO_3002244,-,-,no,no,RTG family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-14,Bla,CARB,CARB-14,338,ARO_3002252,-,-,no,no,RTG family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
-62,CARB-16,Bla,CARB,CARB-16,339,ARO_3002255,-,-,no,no,RTG family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla_broad
+62,CARB-12,Bla,CARB,CARB-12,322,ARO_3002250,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+62,CARB-17,Bla,CARB,CARB-17,323,ARO_3002254,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+62,CARB-18,Bla,CARB,CARB-18,324,ARO_3003174,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+62,CARB-19,Bla,CARB,CARB-19,325,ARO_3003175,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+62,CARB-20,Bla,CARB,CARB-20,326,ARO_3003150,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+62,CARB-22,Bla,CARB,CARB-22,327,ARO_3003151,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+62,CARB-8,Bla,CARB,CARB-8,328,ARO_3002247,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+62,CARB-1,Bla,CARB,CARB-1,329,ARO_3002240,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-2.v1,Bla,CARB,CARB-2.v1,330,ARG_HQ157204,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-2.v2,Bla,CARB,CARB-2.v2,331,ARO_3002241,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-3,Bla,CARB,CARB-3,332,ARO_3002242,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-4,Bla,CARB,CARB-4,333,ARO_3002243,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-6,Bla,CARB,CARB-6,334,ARO_3002245,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-7,Bla,CARB,CARB-7,335,ARO_3002246,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-9,Bla,CARB,CARB-9,336,ARO_3002248,-,-,no,no,PSE family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-5,Bla,CARB,CARB-5,337,ARO_3002244,-,-,no,no,RTG family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-14,Bla,CARB,CARB-14,338,ARO_3002252,-,-,no,no,RTG family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
+62,CARB-16,Bla,CARB,CARB-16,339,ARO_3002255,-,-,no,no,RTG family carbenicillin-hydrolyzing class A broad-spectrum beta-lactamase,Bla
 62,CARB-10,Bla,CARB,CARB-10,340,ARO_3002249,-,-,no,no,RTG family carbenicillin-hydrolyzing class A extended-spectrum beta-lactamase,Bla_ESBL
 63,CAU-1,Bla,CAU,CAU-1,341,ARO_3000855,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
 64,cblA-1,Bla,CblA,cblA-1,342,ARO_3002999,-,-,no,no,class A beta-lactamase,Bla
@@ -345,8 +345,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 66,cepA,Bla,CepA,cepA,344,ARO_3003559,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 67,cepS,Bla,CepS,cepS,345,ARO_3003553,-,-,no,no,class C beta-lactamase,Bla
 68,ccrA,Bla,CfiA,ccrA,346,ARO_3000578,-,-,no,no,subclass B1 metallo beta-lactamase,Bla
-69,cfxA,Bla,CfxA,cfxA,347,ARO_3003001,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-69,cfxA5,Bla,CfxA,cfxA5,348,ARO_3003096,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
+69,cfxA,Bla,CfxA,cfxA,347,ARO_3003001,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+69,cfxA5,Bla,CfxA,cfxA5,348,ARO_3003096,-,-,no,no,class A broad spectrum beta-lactamase,Bla
 69,cfxA2.v1,Bla,CfxA,cfxA2.v1,349,ARG_AF504910,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 69,cfxA3,Bla,CfxA,cfxA3,350,ARO_3003003,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 69,cfxA4,Bla,CfxA,cfxA4,351,ARO_3003005,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
@@ -358,7 +358,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 72,CIA-2,Bla,CIA,CIA-2,357,ARO_3004769,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 72,CIA-3,Bla,CIA,CIA-3,358,ARO_3004770,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 72,CIA-4,Bla,CIA,CIA-4,359,ARO_3004771,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-73,CKO-1,Bla,CKO,CKO-1,360,ARO_3004773,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
+73,CKO-1,Bla,CKO,CKO-1,360,ARO_3004773,-,-,no,no,class A broad spectrum beta-lactamase,Bla
 74,CME-1,Bla,CME,CME-1,361,ARO_3004775,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 75,CMH-1,Bla,CMH,CMH-1,362,ARO_3004777,-,-,no,no,class C beta-lactamase,Bla
 76,CFE-1,Bla,CMY,CFE-1,363,ARO_3001856,-,-,no,no,class C beta-lactamase,Bla
@@ -722,13 +722,13 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 96,GOB-7,Bla,GOB,GOB-7,721,ARO_3004814,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
 96,GOB-8,Bla,GOB,GOB-8,722,ARO_3004815,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
 96,GOB-9,Bla,GOB,GOB-9,723,ARO_3004816,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
-97,HERA-1,Bla,HERA,HERA-1,724,ARO_3004448,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-97,HERA-2,Bla,HERA,HERA-2,725,ARO_3004817,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-97,HERA-3,Bla,HERA,HERA-3,726,ARO_3004818,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-97,HERA-4,Bla,HERA,HERA-4,727,ARO_3004819,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-97,HERA-5,Bla,HERA,HERA-5,728,ARO_3004820,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-97,HERA-6,Bla,HERA,HERA-6,729,ARO_3004821,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-97,HERA-8,Bla,HERA,HERA-8,730,ARO_3004822,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
+97,HERA-1,Bla,HERA,HERA-1,724,ARO_3004448,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+97,HERA-2,Bla,HERA,HERA-2,725,ARO_3004817,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+97,HERA-3,Bla,HERA,HERA-3,726,ARO_3004818,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+97,HERA-4,Bla,HERA,HERA-4,727,ARO_3004819,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+97,HERA-5,Bla,HERA,HERA-5,728,ARO_3004820,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+97,HERA-6,Bla,HERA,HERA-6,729,ARO_3004821,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+97,HERA-8,Bla,HERA,HERA-8,730,ARO_3004822,-,-,no,no,class A broad spectrum beta-lactamase,Bla
 98,HMB-1,Bla,HMB,HMB-1,731,ARO_3004092,-,-,no,no,subclass B1 metallo beta-lactamase,Bla
 99,IMI-1,Bla,IMI,IMI-1,732,ARO_3001858,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
 99,IMI-2,Bla,IMI,IMI-2,733,ARO_3001859,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
@@ -825,7 +825,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 104,KPC-8,Bla,KPC,KPC-8,824,ARO_3002318,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
 105,L1,Bla,L1,L1,825,ARO_3000582,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
 106,LAP-2,Bla,LAP,LAP-2,826,ARO_3004826,-,-,no,no,class A beta-lactamase,Bla
-106,LAP-1,Bla,LAP,LAP-1,827,ARO_3004825,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
+106,LAP-1,Bla,LAP,LAP-1,827,ARO_3004825,-,-,no,no,class A broad spectrum beta-lactamase,Bla
 107,LCR-1,Bla,LCR,LCR-1,828,ARO_3002997,-,-,no,no,class D beta-lactamase,Bla
 108,LHK-7,Bla,LHK,LHK-7,829,ARO_3004292,-,-,no,no,class C beta-lactamase,Bla
 109,LRA-13,Bla,LRA,LRA-13,830,ARO_3002484,-,-,no,no,class A beta-lactamase,Bla
@@ -1401,9 +1401,9 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 128,ROB-1.v1,Bla,ROB,ROB-1.v1,1400,ARG_AF022114,-,-,no,no,cephalosporin-hydrolyzing class A beta-lactamase,Bla
 129,RSA-1,Bla,RSA,RSA-1,1401,ARO_3004444,-,-,no,no,NA,NA
 129,RSA-2,Bla,RSA,RSA-2,1402,ARO_3004445,-,-,no,no,NA,NA
-130,SCO-1,Bla,SCO,SCO-1,1403,ARO_3004856,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-131,SDA-A-1,Bla,SDA-A,SDA-A-1,1404,ARO_3003564,-,-,no,no,class A broad spectrum beta-lactamase,Bla_broad
-132,SED-1,Bla,SED,SED-1,1405,ARO_3003561,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
+130,SCO-1,Bla,SCO,SCO-1,1403,ARO_3004856,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+131,SDA-A-1,Bla,SDA-A,SDA-A-1,1404,ARO_3003564,-,-,no,no,class A broad spectrum beta-lactamase,Bla
+132,SED-1,Bla,SED,SED-1,1405,ARO_3003561,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
 133,SFB-1,Bla,SFB,SFB-1,1406,ARO_3003557,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
 134,SFH-1,Bla,SFH,SFH-1,1407,ARO_3000849,-,-,no,no,carbapenem-hydrolyzing subclass B2 metallo-beta-lactamase,Bla_Carb
 135,LEN-11,Bla,SHV-OKP-LEN,LEN-11,1408,ARO_3001442,-,-,no,no,class A beta-lactamase,Bla_chr
@@ -1469,11 +1469,11 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-4,Bla,SHV-OKP-LEN,SHV-4,1468,ARO_3001063,-,-,no,no,class A beta-lactamase,Bla_ESBL
 135,SHV-50,Bla,SHV-OKP-LEN,SHV-50,1469,ARO_3001107,-,-,no,no,class A beta-lactamase,Bla_chr
 135,SHV-51,Bla,SHV-OKP-LEN,SHV-51,1470,ARO_3001108,-,-,no,no,class A beta-lactamase,Bla_chr
-135,SHV-52,Bla,SHV-OKP-LEN,SHV-52,1471,ARO_3001109,-,-,no,no,class A beta-lactamase,Bla_broad_inhR
+135,SHV-52,Bla,SHV-OKP-LEN,SHV-52,1471,ARO_3001109,-,-,no,no,class A beta-lactamase,Bla_inhR
 135,SHV-59,Bla,SHV-OKP-LEN,SHV-59,1472,ARO_3001114,-,-,no,no,class A beta-lactamase,Bla_chr
 135,SHV-63,Bla,SHV-OKP-LEN,SHV-63,1473,ARO_3001118,-,-,no,no,class A beta-lactamase,Bla_chr
 135,SHV-9,Bla,SHV-OKP-LEN,SHV-9,1474,ARO_3001068,-,-,no,no,class A beta-lactamase,Bla_ESBL
-135,SHV-92,Bla,SHV-OKP-LEN,SHV-92,1475,ARO_3001144,-,-,no,no,class A beta-lactamase,Bla_broad_inhR
+135,SHV-92,Bla,SHV-OKP-LEN,SHV-92,1475,ARO_3001144,-,-,no,no,class A beta-lactamase,Bla_inhR
 135,SHV-93,Bla,SHV-OKP-LEN,SHV-93,1476,ARO_3001145,-,-,no,no,class A beta-lactamase,Bla_chr
 135,SHV-94,Bla,SHV-OKP-LEN,SHV-94,1477,ARO_3001146,-,-,no,no,class A beta-lactamase,Bla_chr
 135,SHV-95,Bla,SHV-OKP-LEN,SHV-95,1478,ARO_3001147,-,-,no,no,class A beta-lactamase,Bla_chr
@@ -1566,12 +1566,12 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-82,Bla,SHV-OKP-LEN,SHV-82,1565,ARO_3001136,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
 135,SHV-85,Bla,SHV-OKP-LEN,SHV-85,1566,ARO_3001139,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
 135,SHV-89,Bla,SHV-OKP-LEN,SHV-89,1567,ARO_3001141,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
-135,SHV-107,Bla,SHV-OKP-LEN,SHV-107,1568,ARO_3001156,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+135,SHV-107,Bla,SHV-OKP-LEN,SHV-107,1568,ARO_3001156,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-26,Bla,SHV-OKP-LEN,SHV-26,1569,ARO_3001084,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_chr
-135,SHV-49,Bla,SHV-OKP-LEN,SHV-49,1570,ARO_3001106,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+135,SHV-49,Bla,SHV-OKP-LEN,SHV-49,1570,ARO_3001106,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-56.v1,Bla,SHV-OKP-LEN,SHV-56.v1,1571,ARG_AY352599,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_ESBL
-135,SHV-56.v2,Bla,SHV-OKP-LEN,SHV-56.v2,1572,ARO_3001112,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-135,SHV-72,Bla,SHV-OKP-LEN,SHV-72,1573,ARO_3001126,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+135,SHV-56.v2,Bla,SHV-OKP-LEN,SHV-56.v2,1572,ARO_3001112,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+135,SHV-72,Bla,SHV-OKP-LEN,SHV-72,1573,ARO_3001126,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-110,Bla,SHV-OKP-LEN,SHV-110,1574,ARO_3001159,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-145,Bla,SHV-OKP-LEN,SHV-145,1575,ARO_3001185,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-101,Bla,SHV-OKP-LEN,SHV-101,1576,ARO_3001150,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
@@ -1619,7 +1619,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-86,Bla,SHV-OKP-LEN,SHV-86,1618,ARO_3001140,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-98,Bla,SHV-OKP-LEN,SHV-98,1619,ARO_3001336,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-99,Bla,SHV-OKP-LEN,SHV-99,1620,ARO_3001337,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
-136,SIM-1,Bla,SIM,SIM-1,1621,ARO_3000846,-,-,no,no,subclass B1 broad-spectrum metallo-beta-lactamase,Bla_broad
+136,SIM-1,Bla,SIM,SIM-1,1621,ARO_3000846,-,-,no,no,subclass B1 broad-spectrum metallo-beta-lactamase,Bla
 137,SLB-1,Bla,SLB,SLB-1,1622,ARO_3003556,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
 138,SMB-1,Bla,SMB,SMB-1,1623,ARO_3000854,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
 139,SME-1,Bla,SME,SME-1,1624,ARO_3002379,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb
@@ -1665,45 +1665,45 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 143,TEM-220,Bla,TEM,TEM-220,1664,ARO_3003158,-,-,no,no,class A beta-lactamase,Bla
 143,TEM-70,Bla,TEM,TEM-70,1665,ARO_3000936,-,-,no,no,class A beta-lactamase,Bla
 143,TEM-96,Bla,TEM,TEM-96,1666,ARO_3000963,-,-,no,no,class A beta-lactamase,Bla
-143,TEM-1,Bla,TEM,TEM-1,1667,ARO_3000873,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-110,Bla,TEM,TEM-110,1668,ARO_3000973,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-127,Bla,TEM,TEM-127,1669,ARO_3000989,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-128.v1,Bla,TEM,TEM-128.v1,1670,ARG_AY359287,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-128.v2,Bla,TEM,TEM-128.v2,1671,ARO_3000990,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-135.v1,Bla,TEM,TEM-135.v1,1672,ARG_JQ060998,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-135.v2,Bla,TEM,TEM-135.v2,1673,ARO_3000999,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-141,Bla,TEM,TEM-141,1674,ARO_3001004,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-183,Bla,TEM,TEM-183,1675,ARO_3001045,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-186,Bla,TEM,TEM-186,1676,ARO_3001046,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-2,Bla,TEM,TEM-2,1677,ARO_3000874,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-206,Bla,TEM,TEM-206,1678,ARO_3001383,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-55,Bla,TEM,TEM-55,1679,ARO_3000924,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-57,Bla,TEM,TEM-57,1680,ARO_3000926,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-90,Bla,TEM,TEM-90,1681,ARO_3000957,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-95,Bla,TEM,TEM-95,1682,ARO_3000962,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_broad
-143,TEM-122,Bla,TEM,TEM-122,1683,ARO_3000984,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-145,Bla,TEM,TEM-145,1684,ARO_3001012,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-159,Bla,TEM,TEM-159,1685,ARO_3001025,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-160,Bla,TEM,TEM-160,1686,ARO_3001026,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-163,Bla,TEM,TEM-163,1687,ARO_3001029,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-182,Bla,TEM,TEM-182,1688,ARO_3001373,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-185,Bla,TEM,TEM-185,1689,ARO_3001374,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-30,Bla,TEM,TEM-30,1690,ARO_3000900,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-33,Bla,TEM,TEM-33,1691,ARO_3000903,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-34,Bla,TEM,TEM-34,1692,ARO_3000904,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-40,Bla,TEM,TEM-40,1693,ARO_3000910,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-45,Bla,TEM,TEM-45,1694,ARO_3000914,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-54,Bla,TEM,TEM-54,1695,ARO_3000923,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-67,Bla,TEM,TEM-67,1696,ARO_3000934,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-73,Bla,TEM,TEM-73,1697,ARO_3000939,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-76,Bla,TEM,TEM-76,1698,ARO_3000942,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-78,Bla,TEM,TEM-78,1699,ARO_3000944,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-79,Bla,TEM,TEM-79,1700,ARO_3000946,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-80,Bla,TEM,TEM-80,1701,ARO_3000947,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-81,Bla,TEM,TEM-81,1702,ARO_3000948,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-82,Bla,TEM,TEM-82,1703,ARO_3000949,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-83,Bla,TEM,TEM-83,1704,ARO_3000950,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
-143,TEM-84,Bla,TEM,TEM-84,1705,ARO_3000951,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_broad_inhR
+143,TEM-1,Bla,TEM,TEM-1,1667,ARO_3000873,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-110,Bla,TEM,TEM-110,1668,ARO_3000973,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-127,Bla,TEM,TEM-127,1669,ARO_3000989,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-128.v1,Bla,TEM,TEM-128.v1,1670,ARG_AY359287,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-128.v2,Bla,TEM,TEM-128.v2,1671,ARO_3000990,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-135.v1,Bla,TEM,TEM-135.v1,1672,ARG_JQ060998,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-135.v2,Bla,TEM,TEM-135.v2,1673,ARO_3000999,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-141,Bla,TEM,TEM-141,1674,ARO_3001004,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-183,Bla,TEM,TEM-183,1675,ARO_3001045,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-186,Bla,TEM,TEM-186,1676,ARO_3001046,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-2,Bla,TEM,TEM-2,1677,ARO_3000874,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-206,Bla,TEM,TEM-206,1678,ARO_3001383,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-55,Bla,TEM,TEM-55,1679,ARO_3000924,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-57,Bla,TEM,TEM-57,1680,ARO_3000926,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-90,Bla,TEM,TEM-90,1681,ARO_3000957,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-95,Bla,TEM,TEM-95,1682,ARO_3000962,-,-,no,no,class A broad-spectrum beta-lactamase,Bla
+143,TEM-122,Bla,TEM,TEM-122,1683,ARO_3000984,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-145,Bla,TEM,TEM-145,1684,ARO_3001012,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-159,Bla,TEM,TEM-159,1685,ARO_3001025,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-160,Bla,TEM,TEM-160,1686,ARO_3001026,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-163,Bla,TEM,TEM-163,1687,ARO_3001029,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-182,Bla,TEM,TEM-182,1688,ARO_3001373,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-185,Bla,TEM,TEM-185,1689,ARO_3001374,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-30,Bla,TEM,TEM-30,1690,ARO_3000900,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-33,Bla,TEM,TEM-33,1691,ARO_3000903,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-34,Bla,TEM,TEM-34,1692,ARO_3000904,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-40,Bla,TEM,TEM-40,1693,ARO_3000910,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-45,Bla,TEM,TEM-45,1694,ARO_3000914,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-54,Bla,TEM,TEM-54,1695,ARO_3000923,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-67,Bla,TEM,TEM-67,1696,ARO_3000934,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-73,Bla,TEM,TEM-73,1697,ARO_3000939,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-76,Bla,TEM,TEM-76,1698,ARO_3000942,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-78,Bla,TEM,TEM-78,1699,ARO_3000944,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-79,Bla,TEM,TEM-79,1700,ARO_3000946,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-80,Bla,TEM,TEM-80,1701,ARO_3000947,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-81,Bla,TEM,TEM-81,1702,ARO_3000948,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-82,Bla,TEM,TEM-82,1703,ARO_3000949,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-83,Bla,TEM,TEM-83,1704,ARO_3000950,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+143,TEM-84,Bla,TEM,TEM-84,1705,ARO_3000951,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 143,TEM-10.v2,Bla,TEM,TEM-10.v2,1706,ARO_3000882,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 143,TEM-101,Bla,TEM,TEM-101,1707,ARO_3000964,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 143,TEM-102.v2,Bla,TEM,TEM-102.v2,1708,ARO_3000965,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
