@@ -42,6 +42,12 @@ def check_for_shv_mutations(hit, hit_allele, bla_class):
                 'ARGIVALLGPNNKAERIVVIYLRDTPASMAERNQQIAGIGAALIEHWQR'
 
     alignments = pairwise2.align.globalds(shv_1_ref, translation, blosum62, -10, -0.5)
+
+    # If we didn't get any global amino acid alignments, then it's not appropriate to look for SHV
+    # mutations in this hit.
+    if not alignments:
+        return bla_class, [], [], None
+
     alignment = alignments[0]
     ref_aligned, hit_aligned, score, _, _ = alignment
 
