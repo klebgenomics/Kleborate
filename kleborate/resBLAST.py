@@ -132,6 +132,8 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
 
             if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
                 hit_class += '_acquired'
+            if hit_class == 'Bla_chr_inhR_acquired':
+                hit_class = 'Bla_inhR_acquired'
 
             trunc_cov = 100.0
             if aa_result is not None:
