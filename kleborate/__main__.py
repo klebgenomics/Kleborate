@@ -574,6 +574,12 @@ def output_results(stdout_header, full_header, outfile, results):
         o.write('\t'.join([results[x] for x in full_header]))
         o.write('\n')
 
+    # Double check that there weren't any results without a corresponding output header.
+    for h in results.keys():
+        if h not in full_header:
+            sys.exit(f'Error: results contained a value ({h}) that is not covered by the output '
+                     f'headers')
+
 
 def get_strain_name(full_path):
     filename = os.path.split(full_path)[1]
