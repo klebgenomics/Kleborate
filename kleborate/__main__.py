@@ -545,8 +545,14 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
                                          args.min_coverage,  args.min_identity,
                                          args.min_spurious_coverage, args.min_spurious_identity)
-        return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
-                for r in res_headers}
+
+        # Double check that there weren't any results without a corresponding output header.
+        for h in res_hits.keys():
+            if h not in res_headers:
+                sys.exit( f'Error: results contained a value ({h}) that is not covered by the '
+                          f'output headers')
+
+        return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-' for r in res_headers}
     else:
         return {}
 
