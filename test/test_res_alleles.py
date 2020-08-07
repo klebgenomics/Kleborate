@@ -124,7 +124,7 @@ class TestResAlleles(unittest.TestCase):
         self.assertEqual(results['Tet_acquired'], '-')
         self.assertEqual(results['Bla_acquired'], '-')
         self.assertEqual(results['Bla_ESBL_acquired'], '-')
-        self.assertEqual(results['spurious_resistance_hits'], 'ABC-1*-50%')
+        self.assertEqual(results['truncated_resistance_hits'], 'ABC-1*-50%')
 
     def test_res_12(self):
         """
@@ -135,7 +135,7 @@ class TestResAlleles(unittest.TestCase):
         self.assertEqual(results['Tet_acquired'], '-')
         self.assertEqual(results['Bla_acquired'], '-')
         self.assertEqual(results['Bla_ESBL_acquired'], '-')
-        self.assertEqual(results['spurious_resistance_hits'], 'ABC-1?-0%')
+        self.assertEqual(results['truncated_resistance_hits'], 'ABC-1?-0%')
 
     def test_res_13(self):
         """
