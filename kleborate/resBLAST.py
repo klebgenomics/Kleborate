@@ -154,6 +154,11 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
             if coverage >= min_cov and hit.pcid >= min_ident and trunc_cov >= 90.0:
                 hits_dict[hit_class].append(hit_allele)
 
+            # If the hit is decent but the gene is truncated, it goes in the
+            # truncated_resistance_hits column.
+            elif coverage >= min_cov and hit.pcid >= min_ident and trunc_cov < 90.0:
+                hits_dict['truncated_resistance_hits'].append(hit_allele)
+
             # If the hit is bad (below the min coverage and identity thresholds but above the
             # thresholds for spurious hits) then it goes in the spurious hit column.
             else:

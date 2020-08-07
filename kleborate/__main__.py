@@ -250,7 +250,9 @@ def get_output_headers(args, data_folder):
     # Spurious hit columns go at the end.
     full_header.append('spurious_virulence_hits')
     if args.resistance:
+        full_header.append('truncated_resistance_hits')
         full_header.append('spurious_resistance_hits')
+        res_headers.append('truncated_resistance_hits')
         res_headers.append('spurious_resistance_hits')
 
     return stdout_header, full_header, res_headers
