@@ -114,13 +114,18 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
                 aa_result = check_for_exact_aa_match(seqs, hit.hit_seq.replace('-', ''))
                 if aa_result is not None:
                     hit.gene_id = aa_result
+                    exact_match = True
+                else:
+                    exact_match = False
             else:
                 aa_result = None
+                exact_match = True
 
             hit_allele, hit_class, hit_bla_class = gene_info[hit.gene_id]
 
             hit_bla_class, shv_muts, class_changing_muts, omega_loop_seq = \
-                check_for_shv_mutations(hit, hit_allele, hit_bla_class)
+                check_for_shv_mutations(hit, hit_allele, hit_bla_class, exact_match)
+
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
 
@@ -132,8 +137,6 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
 
             if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
                 hit_class += '_acquired'
-            if hit_class == 'Bla_chr_inhR_acquired':
-                hit_class = 'Bla_inhR_acquired'
 
             trunc_cov = 100.0
             if aa_result is not None:

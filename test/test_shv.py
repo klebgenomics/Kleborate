@@ -16,11 +16,12 @@ import collections
 import unittest
 
 from kleborate.__main__ import get_output_headers, get_resistance_results
+from kleborate.shv_mutations import get_new_bla_class, get_class_changing_mutations
 
 
-class TestResAlleles(unittest.TestCase):
+class TestShvMutations(unittest.TestCase):
     """
-    Tests calling of resistance via alleles.
+    Tests SHV mutation logic.
     """
 
     def setUp(self):
@@ -114,6 +115,49 @@ class TestResAlleles(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/09.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['Bla_chr'], 'SHV-1*')
-        self.assertEqual(results['SHV_mutations'], 'omega-loop=RWETELNEALRGDARD')
+        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1*-174R')
+        self.assertEqual(results['SHV_mutations'], '174R;omega-loop=RWETELNEALRGDARD')
 
+    def test_bla_class_01(self):
+        self.assertEqual(get_new_bla_class(False, False), 'Bla_chr')
+
+    def test_bla_class_02(self):
+        self.assertEqual(get_new_bla_class(True, False), 'Bla_ESBL')
+
+    def test_bla_class_03(self):
+        self.assertEqual(get_new_bla_class(False, True), 'Bla_inhR')
+
+    def test_bla_class_04(self):
+        self.assertEqual(get_new_bla_class(True, True), 'Bla_ESBL_inhR')
+
+    def test_get_class_changing_mutations_01(self):
+        mutations = get_class_changing_mutations('Bla_chr', 'Bla_chr', ['A'], ['B'])
+        self.assertEqual(mutations, [])
+
+    def test_get_class_changing_mutations_02(self):
+        mutations = get_class_changing_mutations('Bla_ESBL', 'Bla_ESBL', ['A'], ['B'])
+        self.assertEqual(mutations, [])
+
+    def test_get_class_changing_mutations_03(self):
+        mutations = get_class_changing_mutations('Bla_chr', 'Bla_ESBL', ['A'], ['B'])
+        self.assertEqual(mutations, ['A'])
+
+    def test_get_class_changing_mutations_04(self):
+        mutations = get_class_changing_mutations('Bla_ESBL', 'Bla_chr', ['A'], ['B'])
+        self.assertEqual(mutations, ['A'])
+
+    def test_get_class_changing_mutations_05(self):
+        mutations = get_class_changing_mutations('Bla_chr', 'Bla_inhR', ['A'], ['B'])
+        self.assertEqual(mutations, ['B'])
+
+    def test_get_class_changing_mutations_06(self):
+        mutations = get_class_changing_mutations('Bla_inhR', 'Bla_chr', ['A'], ['B'])
+        self.assertEqual(mutations, ['B'])
+
+    def test_get_class_changing_mutations_07(self):
+        mutations = get_class_changing_mutations('Bla_chr', 'Bla_ESBL_inhR', ['A'], ['B'])
+        self.assertEqual(mutations, ['A', 'B'])
+
+    def test_get_class_changing_mutations_08(self):
+        mutations = get_class_changing_mutations('Bla_ESBL_inhR', 'Bla_chr', ['A'], ['B'])
+        self.assertEqual(mutations, ['A', 'B'])
