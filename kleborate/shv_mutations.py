@@ -91,11 +91,12 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
 
     # Mutations at these sites will lead to inhibition:
     pos_069_mut, pos_069_aa = get_mut(ref_aligned, hit_aligned,  64,  69, 'M')
+    pos_130_mut, pos_130_aa = get_mut(ref_aligned, hit_aligned, 125, 130, 'S')
     pos_234_mut, pos_234_aa = get_mut(ref_aligned, hit_aligned, 229, 234, 'K')
     pos_235_mut, pos_235_aa = get_mut(ref_aligned, hit_aligned, 230, 235, 'T')
 
-    has_inhr = (pos_069_mut or pos_234_mut or pos_235_mut)
-    inhr_mutations = [pos_069_mut, pos_234_mut, pos_235_mut]
+    has_inhr = (pos_069_mut or pos_130_mut or pos_234_mut or pos_235_mut)
+    inhr_mutations = [pos_069_mut, pos_130_mut, pos_234_mut, pos_235_mut]
 
     # Mutations at these sites don't change the class, but will still be reported:
     pos_025_mut, pos_025_aa = get_mut(ref_aligned, hit_aligned,  20,  25, 'A')
@@ -111,11 +112,11 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     if omega_loop_seq == 'RWETELNEALPGDARD':  # if it's the same as SHV-1
         omega_loop_seq = None
 
-    shv_mutations = [pos_025_mut, pos_035_mut, pos_069_mut, pos_146_mut, pos_148_mut, pos_156_mut,
-                     pos_164_mut, pos_165_mut, pos_166_mut, pos_167_mut, pos_168_mut, pos_169_mut,
-                     pos_170_mut, pos_171_mut, pos_172_mut, pos_173_mut, pos_174_mut, pos_175_mut,
-                     pos_176_mut, pos_177_mut, pos_178_mut, pos_179_mut, pos_234_mut, pos_235_mut,
-                     pos_238_mut, pos_240_mut]
+    shv_mutations = [pos_025_mut, pos_035_mut, pos_069_mut, pos_130_mut, pos_146_mut, pos_148_mut,
+                     pos_156_mut, pos_164_mut, pos_165_mut, pos_166_mut, pos_167_mut, pos_168_mut,
+                     pos_169_mut, pos_170_mut, pos_171_mut, pos_172_mut, pos_173_mut, pos_174_mut,
+                     pos_175_mut, pos_176_mut, pos_177_mut, pos_178_mut, pos_179_mut, pos_234_mut,
+                     pos_235_mut, pos_238_mut, pos_240_mut]
     shv_mutations = [m for m in shv_mutations if m]
 
     if exact_match:
