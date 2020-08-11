@@ -305,8 +305,9 @@ def get_resistance_score(res_headers, res_hits):
     carb_header_indices = [i for i, h in enumerate(res_headers) if '_carb' in h.lower()]
     has_carb = any(res_hits[i] != '-' for i in carb_header_indices)
 
-    # Look for a hit in the 'Col' column.
-    col_header_indices = [i for i, h in enumerate(res_headers) if h.lower() == 'col_acquired']
+    # Look for a hit in the 'Col' columns.
+    col_header_indices = [i for i, h in enumerate(res_headers)
+                          if h.lower() == 'col_acquired' or h.lower() == 'col_mutations']
     has_col = any(res_hits[i] != '-' for i in col_header_indices)
 
     if has_carb and has_col:
