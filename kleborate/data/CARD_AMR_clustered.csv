@@ -2022,7 +2022,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 179,qnrVC5,Flq,QnrVC,qnrVC5,2021,ARO_3002802,-,-,no,no,NA,NA
 179,qnrVC6,Flq,QnrVC,qnrVC6,2022,ARO_3002803,-,-,no,no,NA,NA
 179,qnrVC7,Flq,QnrVC,qnrVC7,2023,ARO_3003193,-,-,no,no,NA,NA
-180,bleMBL,Gly,BRP(MBL),bleMBL,2024,ARO_3001205,-,-,no,no,NA,NA
 181,vanA,Gly,VanA,vanA,2025,ARO_3000010,-,-,no,no,NA,NA
 182,vanB,Gly,VanB,vanB,2026,ARO_3000013,-,-,no,no,NA,NA
 183,vanC,Gly,VanC,vanC,2027,ARO_3000368,-,-,no,no,NA,NA
