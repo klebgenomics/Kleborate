@@ -199,6 +199,14 @@ class TestResScore(unittest.TestCase):
         self.assertEqual(summary_results['resistance_score'], '3')
 
     def test_res_score_7(self):
+        self.results['Bla_chr'] = 'a'
+        self.results['Bla_ESBL_acquired'] = 'b'
+        self.results['Bla_Carb_acquired'] = 'c'
+        self.results['Col_mutations'] = 'd'
+        summary_results = get_summary_results(self.results, self.res_headers)
+        self.assertEqual(summary_results['resistance_score'], '3')
+
+    def test_res_score_8(self):
         self.results['Col_acquired'] = 'a'
         summary_results = get_summary_results(self.results, self.res_headers)
         self.assertEqual(summary_results['resistance_score'], '0')
