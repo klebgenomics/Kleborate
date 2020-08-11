@@ -36,6 +36,8 @@ def main():
     args = parse_arguments()
     check_inputs_and_programs(args)
     data_folder = get_data_path()
+    if args.force_index:
+        rebuild_blast_indices(data_folder)
     kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
 
     stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
@@ -110,6 +112,10 @@ def parse_arguments():
                               help='Minimum alignment identity for spurious results')
     setting_args.add_argument('--min_spurious_coverage', type=float, default=40.0,
                               help='Minimum alignment coverage for spurious results')
+
+    other_args = parser.add_argument_group('Other')
+    other_args.add_argument('--force_index', action='store_true',
+                            help='Rebuild the BLAST index at the start of execution')
 
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
@@ -597,6 +603,13 @@ def get_strain_name(full_path):
     if filename.endswith('.gz'):
         filename = filename[:-3]
     return os.path.splitext(filename)[0]
+
+
+def rebuild_blast_indices(data_dir):
+    for fasta in pathlib.Path(data_dir).glob('*.fasta'):
+        makeblastdb_cmd = ['makeblastdb', '-dbtype', 'nucl', '-in', str(fasta)]
+        with open(os.devnull, 'w') as devnull:
+            subprocess.check_call(makeblastdb_cmd, stdout=devnull)
 
 
 if __name__ == '__main__':
