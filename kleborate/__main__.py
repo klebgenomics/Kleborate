@@ -219,7 +219,6 @@ def get_output_headers(args, data_folder):
     full_header += other_columns
 
     if args.kaptive_k:
-        # K_locus is already in the header.
         stdout_header.append('K_locus_confidence')
         full_header.append('K_locus_problems')
         full_header.append('K_locus_confidence')
@@ -235,6 +234,16 @@ def get_output_headers(args, data_folder):
         full_header.append('O_locus_identity')
         full_header.append('O_locus_missing_genes')
 
+    if args.resistance:
+        gene_info, res_classes, bla_classes = \
+            read_class_file(data_folder + '/CARD_AMR_clustered.csv')
+        res_headers = get_res_headers(res_classes, bla_classes)
+        res_headers += ['truncated_resistance_hits', 'spurious_resistance_hits']
+        stdout_header += res_headers
+        full_header += res_headers
+    else:
+        res_headers = []
+
     full_header.append('Chr_ST')
     full_header += get_chromosome_mlst_header()
     full_header += get_ybt_mlst_header()
@@ -243,23 +252,7 @@ def get_output_headers(args, data_folder):
     full_header += get_iro_mlst_header()
     full_header += get_rmp_mlst_header()
 
-    # If resistance genes are on, run the resBLAST.py script to get its headers.
-    if args.resistance:
-        gene_info, res_classes, bla_classes = \
-            read_class_file(data_folder + '/CARD_AMR_clustered.csv')
-        res_headers = get_res_headers(res_classes, bla_classes)
-        stdout_header += res_headers
-        full_header += res_headers
-    else:
-        res_headers = []
-
-    # Spurious hit columns go at the end.
     full_header.append('spurious_virulence_hits')
-    if args.resistance:
-        full_header.append('truncated_resistance_hits')
-        full_header.append('spurious_resistance_hits')
-        res_headers.append('truncated_resistance_hits')
-        res_headers.append('spurious_resistance_hits')
 
     return stdout_header, full_header, res_headers
 
