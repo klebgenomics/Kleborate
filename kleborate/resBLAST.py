@@ -150,7 +150,7 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
                 hit_allele += trunc_suffix
 
             if class_changing_muts:
-                hit_allele += '-' + '-'.join(class_changing_muts)
+                hit_allele += ' +' + ' +'.join(class_changing_muts)
 
             # If the hit is decent (above the min coverage and identity thresholds), it goes in the
             # column for the class.

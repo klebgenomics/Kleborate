@@ -50,7 +50,7 @@ class TestShvMutations(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/02.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1*-238Y')
+        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1* +238Y')
         self.assertEqual(results['SHV_mutations'], '238Y')
 
     def test_shv_03(self):
@@ -59,7 +59,7 @@ class TestShvMutations(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/03.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1*-238Y')
+        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1* +238Y')
         self.assertEqual(results['SHV_mutations'], '238Y')
 
     def test_shv_04(self):
@@ -87,7 +87,7 @@ class TestShvMutations(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/06.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['Bla_ESBL_inhR_acquired'], 'SHV-29*-234Y')
+        self.assertEqual(results['Bla_ESBL_inhR_acquired'], 'SHV-29* +234Y')
         self.assertEqual(results['SHV_mutations'], '234Y;238A;35Q')
 
     def test_shv_07(self):
@@ -115,7 +115,7 @@ class TestShvMutations(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/09.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1*-174R')
+        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1* +174R')
         self.assertEqual(results['SHV_mutations'], '174R;omega-loop=RWETELNEALRGDARD')
 
     def test_bla_class_01(self):
