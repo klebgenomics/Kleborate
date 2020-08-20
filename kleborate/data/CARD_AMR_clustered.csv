@@ -129,7 +129,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 6,ant(4')-Ib,AGly,ANT(4'),ant(4')-Ib,128,ARO_3003905,-,-,no,no,NA,NA
 6,ant(4')-IIa,AGly,ANT(4'),ant(4')-IIa,129,ARO_3002624,-,-,no,no,NA,NA
 6,ant(4')-IIb,AGly,ANT(4'),ant(4')-IIb,130,ARO_3002625,-,-,no,no,NA,NA
-7,aad(6),AGly,ANT(6),aad(6),131,ARO_3002628,-,-,no,no,NA,NA
 7,aadK,AGly,ANT(6),aadK,132,ARO_3002627,-,-,no,no,NA,NA
 7,aadS,AGly,ANT(6),aadS,133,ARO_3004683,-,-,no,no,NA,NA
 7,ant(6)-Ia,AGly,ANT(6),ant(6)-Ia,134,ARO_3002626,-,-,no,no,NA,NA
@@ -1501,7 +1500,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,LEN-37,Bla,SHV-OKP-LEN,LEN-37,1500,ARO_3004829,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
 135,LEN-5,Bla,SHV-OKP-LEN,LEN-5,1501,ARO_3002456,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
 135,LEN-9,Bla,SHV-OKP-LEN,LEN-9,1502,ARO_3002459,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr
-135,LEN-11,Bla,SHV-OKP-LEN,LEN-11,1503,ARO_3002461,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
 135,LEN-13,Bla,SHV-OKP-LEN,LEN-13,1504,ARO_3002463,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
 135,LEN-7,Bla,SHV-OKP-LEN,LEN-7,1505,ARO_3002457,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
 135,LEN-8,Bla,SHV-OKP-LEN,LEN-8,1506,ARO_3002458,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
