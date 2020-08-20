@@ -1164,6 +1164,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 117,OXA-112,Bla,OXA,OXA-112,1164,ARO_3001643,-,-,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
 117,OXA-113,Bla,OXA,OXA-113,1165,ARO_3001644,-,-,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
 117,OXA-115,Bla,OXA,OXA-115,1166,ARO_3001440,-,-,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
+117,OXA-117,Bla,OXA,OXA-117,2416,ARO_3001442,-,-,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
 117,OXA-120,Bla,OXA,OXA-120,1167,ARO_3001672,-,-,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
 117,OXA-121,Bla,OXA,OXA-121,1168,ARO_3001443,-,-,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
 117,OXA-122,Bla,OXA,OXA-122,1169,ARO_3001444,-,-,no,no,OXA-51 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb
