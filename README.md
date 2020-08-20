@@ -497,14 +497,3 @@ For more on our lab, including other software, see [http://holtlab.net](http://h
 ## License
 
 [GNU General Public License, version 3](https://www.gnu.org/licenses/gpl-3.0.html)
-
-
-
-<br>
-
--------------
-
-Stop! Kleborate and listen<br>
-ICE<i>Kp</i> is back with my brand-new invention<br>
-If there was a problem, Klebs'll solve it<br>
-Check out the hook while Klebs evolves it
