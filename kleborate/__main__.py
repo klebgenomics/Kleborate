@@ -62,7 +62,7 @@ def main():
             results.update(get_wzi_and_k_locus_results(data_folder, contigs, args))
             results.update(get_resistance_results(data_folder, contigs, args, res_headers,
                                                   kp_complex))
-            results.update(get_summary_results(results, res_headers))
+            results.update(get_summary_results(results, res_headers, args))
             results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
             results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
 
@@ -559,14 +559,16 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
         return {}
 
 
-def get_summary_results(results, res_headers):
-    res_hits = [results[x] for x in res_headers]
-    return {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
-                                                       results['Colibactin'],
-                                                       results['Aerobactin'])),
-            'resistance_score': str(get_resistance_score(res_headers, res_hits)),
-            'num_resistance_classes': str(get_resistance_class_count(res_headers, res_hits)),
-            'num_resistance_genes': str(get_resistance_gene_count(res_headers, res_hits))}
+def get_summary_results(results, res_headers, args):
+    summary = {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
+                                                          results['Colibactin'],
+                                                          results['Aerobactin']))}
+    if args.resistance:
+        res_hits = [results[x] for x in res_headers]
+        summary['resistance_score'] = str(get_resistance_score(res_headers, res_hits))
+        summary['num_resistance_classes'] = str(get_resistance_class_count(res_headers, res_hits))
+        summary['num_resistance_genes'] = str(get_resistance_gene_count(res_headers, res_hits))
+    return summary
 
 
 def output_headers(stdout_header, full_header, outfile):
