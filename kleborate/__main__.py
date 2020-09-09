@@ -408,7 +408,7 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
         # ST67 and ST90 get special 'subspecies' names.
         chr_st_with_subsp = chr_st
         if chr_st_with_subsp == 'ST90':
-            chr_st_with_subsp = 'ST90 (subsp. ozanae)'
+            chr_st_with_subsp = 'ST90 (subsp. ozaenae)'
         if chr_st_with_subsp == 'ST67':
             chr_st_with_subsp = 'ST67 (subsp. rhinoscleromatis)'
 

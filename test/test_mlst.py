@@ -138,12 +138,12 @@ class TestMlst(unittest.TestCase):
             self.assertEqual(results['ST'], 'ST23')
             self.assertEqual(results['Chr_ST'], 'ST23')
 
-    def test_ozanae(self):
+    def test_ozaenae(self):
         contigs = 'test/test_mlst/GCF_900451425.1.fna.gz'
         with tempfile.TemporaryDirectory() as tmp_dir:
             contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
             results = get_chromosome_mlst_results(self.data_dir, contigs, True, self.args)
-            self.assertEqual(results['ST'], 'ST90 (subsp. ozanae)')
+            self.assertEqual(results['ST'], 'ST90 (subsp. ozaenae)')
             self.assertEqual(results['Chr_ST'], 'ST90')
 
     def test_rhinoscleromatis(self):
