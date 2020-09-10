@@ -404,13 +404,7 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
                        min_ident=args.min_identity, max_missing=3, allow_multiple=False)
         if chr_st != '0':
             chr_st = 'ST' + chr_st
-
-        # ST67 and ST90 get special 'subspecies' names.
-        chr_st_with_subsp = chr_st
-        if chr_st_with_subsp == 'ST90':
-            chr_st_with_subsp = 'ST90 (subsp. ozaenae)'
-        if chr_st_with_subsp == 'ST67':
-            chr_st_with_subsp = 'ST67 (subsp. rhinoscleromatis)'
+        chr_st_with_subsp = get_kp_subspecies_based_on_st(chr_st)
 
         assert len(chromosome_mlst_header) == len(chr_st_detail)
 
@@ -424,6 +418,18 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
 
     results.update(dict(zip(get_chromosome_mlst_header(), chr_st_detail)))
     return results
+
+
+def get_kp_subspecies_based_on_st(chr_st):
+    ozaenae_sts = {'ST90', 'ST91', 'ST92', 'ST93', 'ST95', 'ST96', 'ST97', 'ST381', 'ST777',
+                   'ST3193', 'ST3766', 'ST3768', 'ST3771', 'ST3781', 'ST3782', 'ST3784', 'ST3802',
+                   'ST3803'}
+    rhinoscleromatis_sts = {'ST67', 'ST68', 'ST69', 'ST3772', 'ST3819'}
+    if chr_st in ozaenae_sts:
+        return chr_st + ' (subsp. ozaenae)'
+    if chr_st in rhinoscleromatis_sts:
+        return chr_st + ' (subsp. rhinoscleromatis)'
+    return chr_st
 
 
 def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_txt,

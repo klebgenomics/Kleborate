@@ -16,7 +16,8 @@ import collections
 import tempfile
 import unittest
 
-from kleborate.__main__ import get_chromosome_mlst_results, gunzip_contigs_if_necessary
+from kleborate.__main__ import get_chromosome_mlst_results, gunzip_contigs_if_necessary, \
+    get_kp_subspecies_based_on_st
 
 
 class TestMlst(unittest.TestCase):
@@ -153,3 +154,38 @@ class TestMlst(unittest.TestCase):
             results = get_chromosome_mlst_results(self.data_dir, contigs, True, self.args)
             self.assertEqual(results['ST'], 'ST67 (subsp. rhinoscleromatis)')
             self.assertEqual(results['Chr_ST'], 'ST67')
+
+    def test_kp_subspecies_1(self):
+        self.assertEqual(get_kp_subspecies_based_on_st('ST1'), 'ST1')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST12'), 'ST12')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST123'), 'ST123')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST1234'), 'ST1234')
+
+    def test_kp_subspecies_2(self):
+        self.assertEqual(get_kp_subspecies_based_on_st('ST90'), 'ST90 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST91'), 'ST91 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST92'), 'ST92 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST93'), 'ST93 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST95'), 'ST95 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST96'), 'ST96 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST97'), 'ST97 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST381'), 'ST381 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST777'), 'ST777 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3193'), 'ST3193 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3766'), 'ST3766 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3768'), 'ST3768 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3771'), 'ST3771 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3781'), 'ST3781 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3782'), 'ST3782 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3784'), 'ST3784 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3802'), 'ST3802 (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3803'), 'ST3803 (subsp. ozaenae)')
+
+    def test_kp_subspecies_3(self):
+        self.assertEqual(get_kp_subspecies_based_on_st('ST67'), 'ST67 (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST68'), 'ST68 (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST69'), 'ST69 (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3772'),
+                         'ST3772 (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3819'),
+                         'ST3819 (subsp. rhinoscleromatis)')
