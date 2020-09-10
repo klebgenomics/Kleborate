@@ -425,9 +425,10 @@ def get_kp_subspecies_based_on_st(chr_st):
                    'ST3193', 'ST3766', 'ST3768', 'ST3771', 'ST3781', 'ST3782', 'ST3784', 'ST3802',
                    'ST3803'}
     rhinoscleromatis_sts = {'ST67', 'ST68', 'ST69', 'ST3772', 'ST3819'}
-    if chr_st in ozaenae_sts:
+    chr_st_minus_1lv = chr_st.replace('-1LV', '')  # 1LV still results in a subspecies call
+    if chr_st_minus_1lv in ozaenae_sts:
         return chr_st + ' (subsp. ozaenae)'
-    if chr_st in rhinoscleromatis_sts:
+    if chr_st_minus_1lv in rhinoscleromatis_sts:
         return chr_st + ' (subsp. rhinoscleromatis)'
     return chr_st
 

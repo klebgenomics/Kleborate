@@ -30,7 +30,7 @@ class TestResScore(unittest.TestCase):
         self.results['Aerobactin'] = '-'
 
     def test_nothing(self):
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '0')
         self.assertEqual(summary_results['resistance_score'], '0')
         self.assertEqual(summary_results['num_resistance_classes'], '0')
@@ -40,7 +40,7 @@ class TestResScore(unittest.TestCase):
         self.results['AGly_acquired'] = 'a'
         self.results['Flq_acquired'] = 'b'
         self.results['Tet_acquired'] = 'c'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '3')
 
@@ -48,7 +48,7 @@ class TestResScore(unittest.TestCase):
         self.results['AGly_acquired'] = 'a'
         self.results['Flq_acquired'] = 'b;c'
         self.results['Tet_acquired'] = 'd;e;f'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '6')
 
@@ -61,7 +61,7 @@ class TestResScore(unittest.TestCase):
         self.results['Tet_acquired'] = 'd;e;f'
         self.results['Bla_acquired'] = 'g'
         self.results['Bla_chr'] = 'h'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '4')
         self.assertEqual(summary_results['num_resistance_genes'], '7')
 
@@ -73,7 +73,7 @@ class TestResScore(unittest.TestCase):
         self.results['Tet_acquired'] = 'a;b;c'
         self.results['Bla_chr'] = 'd'
         self.results['Bla_ESBL_acquired'] = 'e'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '2')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
@@ -83,7 +83,7 @@ class TestResScore(unittest.TestCase):
         """
         self.results['Tet_acquired'] = 'a;b;c'
         self.results['Bla_acquired'] = 'd'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '2')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
@@ -95,7 +95,7 @@ class TestResScore(unittest.TestCase):
         self.results['Flq_acquired'] = 'b;c'
         self.results['Tet_acquired'] = 'd;e;f'
         self.results['Omp_mutations'] = 'g;h'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '6')
 
@@ -107,7 +107,7 @@ class TestResScore(unittest.TestCase):
         self.results['AGly_acquired'] = 'a'
         self.results['Flq_mutations'] = 'b'
         self.results['Tet_acquired'] = 'c;d;e'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
@@ -119,7 +119,7 @@ class TestResScore(unittest.TestCase):
         self.results['AGly_acquired'] = 'a'
         self.results['Flq_mutations'] = 'b;c'
         self.results['Tet_acquired'] = 'd;e;f'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
@@ -131,7 +131,7 @@ class TestResScore(unittest.TestCase):
         self.results['AGly_acquired'] = 'a'
         self.results['Tet_acquired'] = 'b;c'
         self.results['Col_mutations'] = 'd'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '3')
 
@@ -144,7 +144,7 @@ class TestResScore(unittest.TestCase):
         self.results['Tet_acquired'] = 'b'
         self.results['Col_acquired'] = 'c'
         self.results['Col_mutations'] = 'd'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '3')
 
@@ -156,38 +156,38 @@ class TestResScore(unittest.TestCase):
         self.results['Flq_acquired'] = 'b'
         self.results['Tet_acquired'] = 'c'
         self.results['spurious_resistance_hits'] = 'd;e;f'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '3')
 
     def test_res_score_1(self):
         self.results['Bla_chr'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '0')
 
     def test_res_score_2(self):
         self.results['Bla_chr'] = 'a'
         self.results['Bla_ESBL_acquired'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '1')
 
     def test_res_score_3(self):
         self.results['Bla_chr'] = 'a'
         self.results['Bla_ESBL_inhR_acquired'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '1')
 
     def test_res_score_4(self):
         self.results['Bla_chr'] = 'a'
         self.results['Bla_Carb_acquired'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '2')
 
     def test_res_score_5(self):
         self.results['Bla_chr'] = 'a'
         self.results['Bla_ESBL_acquired'] = 'b'
         self.results['Bla_Carb_acquired'] = 'c'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '2')
 
     def test_res_score_6(self):
@@ -195,7 +195,7 @@ class TestResScore(unittest.TestCase):
         self.results['Bla_ESBL_acquired'] = 'b'
         self.results['Bla_Carb_acquired'] = 'c'
         self.results['Col_acquired'] = 'd'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '3')
 
     def test_res_score_7(self):
@@ -203,50 +203,50 @@ class TestResScore(unittest.TestCase):
         self.results['Bla_ESBL_acquired'] = 'b'
         self.results['Bla_Carb_acquired'] = 'c'
         self.results['Col_mutations'] = 'd'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '3')
 
     def test_res_score_8(self):
         self.results['Col_acquired'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '0')
 
     def test_vir_score_1(self):
         self.results['Yersiniabactin'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '1')
 
     def test_vir_score_2(self):
         self.results['Colibactin'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '2')
 
     def test_vir_score_3(self):
         self.results['Colibactin'] = 'a'
         self.results['Yersiniabactin'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '2')
 
     def test_vir_score_4(self):
         self.results['Aerobactin'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '3')
 
     def test_vir_score_5(self):
         self.results['Aerobactin'] = 'a'
         self.results['Yersiniabactin'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '4')
 
     def test_vir_score_6(self):
         self.results['Aerobactin'] = 'a'
         self.results['Colibactin'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '5')
 
     def test_vir_score_7(self):
         self.results['Aerobactin'] = 'a'
         self.results['Colibactin'] = 'b'
         self.results['Yersiniabactin'] = 'c'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '5')
