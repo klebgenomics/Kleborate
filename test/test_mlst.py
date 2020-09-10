@@ -156,12 +156,22 @@ class TestMlst(unittest.TestCase):
             self.assertEqual(results['Chr_ST'], 'ST67')
 
     def test_kp_subspecies_1(self):
+        # Just test some non-ozaenae non-rhinoscleromatis STs.
         self.assertEqual(get_kp_subspecies_based_on_st('ST1'), 'ST1')
         self.assertEqual(get_kp_subspecies_based_on_st('ST12'), 'ST12')
         self.assertEqual(get_kp_subspecies_based_on_st('ST123'), 'ST123')
         self.assertEqual(get_kp_subspecies_based_on_st('ST1234'), 'ST1234')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST1-1LV'), 'ST1-1LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST12-1LV'), 'ST12-1LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST123-1LV'), 'ST123-1LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST1234-1LV'), 'ST1234-1LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST1-2LV'), 'ST1-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST12-2LV'), 'ST12-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST123-2LV'), 'ST123-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST1234-2LV'), 'ST1234-2LV')
 
     def test_kp_subspecies_2(self):
+        # Test the ozaenae STs.
         self.assertEqual(get_kp_subspecies_based_on_st('ST90'), 'ST90 (subsp. ozaenae)')
         self.assertEqual(get_kp_subspecies_based_on_st('ST91'), 'ST91 (subsp. ozaenae)')
         self.assertEqual(get_kp_subspecies_based_on_st('ST92'), 'ST92 (subsp. ozaenae)')
@@ -182,6 +192,49 @@ class TestMlst(unittest.TestCase):
         self.assertEqual(get_kp_subspecies_based_on_st('ST3803'), 'ST3803 (subsp. ozaenae)')
 
     def test_kp_subspecies_3(self):
+        # Test the ozaenae STs with 1LV - should still result in ozaenae.
+        self.assertEqual(get_kp_subspecies_based_on_st('ST90-1LV'), 'ST90-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST91-1LV'), 'ST91-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST92-1LV'), 'ST92-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST93-1LV'), 'ST93-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST95-1LV'), 'ST95-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST96-1LV'), 'ST96-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST97-1LV'), 'ST97-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST381-1LV'), 'ST381-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST777-1LV'), 'ST777-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3193-1LV'), 'ST3193-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3766-1LV'), 'ST3766-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3768-1LV'), 'ST3768-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3771-1LV'), 'ST3771-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3781-1LV'), 'ST3781-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3782-1LV'), 'ST3782-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3784-1LV'), 'ST3784-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3802-1LV'), 'ST3802-1LV (subsp. ozaenae)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3803-1LV'), 'ST3803-1LV (subsp. ozaenae)')
+
+    def test_kp_subspecies_4(self):
+        # Test the ozaenae STs with 2LV - should no longer result in ozaenae.
+        self.assertEqual(get_kp_subspecies_based_on_st('ST90-2LV'), 'ST90-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST91-2LV'), 'ST91-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST92-2LV'), 'ST92-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST93-2LV'), 'ST93-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST95-2LV'), 'ST95-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST96-2LV'), 'ST96-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST97-2LV'), 'ST97-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST381-2LV'), 'ST381-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST777-2LV'), 'ST777-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3193-2LV'), 'ST3193-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3766-2LV'), 'ST3766-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3768-2LV'), 'ST3768-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3771-2LV'), 'ST3771-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3781-2LV'), 'ST3781-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3782-2LV'), 'ST3782-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3784-2LV'), 'ST3784-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3802-2LV'), 'ST3802-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3803-2LV'), 'ST3803-2LV')
+
+    def test_kp_subspecies_5(self):
+        # Test the rhinoscleromatis STs.
         self.assertEqual(get_kp_subspecies_based_on_st('ST67'), 'ST67 (subsp. rhinoscleromatis)')
         self.assertEqual(get_kp_subspecies_based_on_st('ST68'), 'ST68 (subsp. rhinoscleromatis)')
         self.assertEqual(get_kp_subspecies_based_on_st('ST69'), 'ST69 (subsp. rhinoscleromatis)')
@@ -189,3 +242,24 @@ class TestMlst(unittest.TestCase):
                          'ST3772 (subsp. rhinoscleromatis)')
         self.assertEqual(get_kp_subspecies_based_on_st('ST3819'),
                          'ST3819 (subsp. rhinoscleromatis)')
+
+    def test_kp_subspecies_6(self):
+        # Test the rhinoscleromatis STs with 1LV - should still result in rhinoscleromatis.
+        self.assertEqual(get_kp_subspecies_based_on_st('ST67-1LV'),
+                         'ST67-1LV (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST68-1LV'),
+                         'ST68-1LV (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST69-1LV'),
+                         'ST69-1LV (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3772-1LV'),
+                         'ST3772-1LV (subsp. rhinoscleromatis)')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3819-1LV'),
+                         'ST3819-1LV (subsp. rhinoscleromatis)')
+
+    def test_kp_subspecies_7(self):
+        # Test the rhinoscleromatis STs with 2LV - should no longer result in rhinoscleromatis.
+        self.assertEqual(get_kp_subspecies_based_on_st('ST67-2LV'), 'ST67-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST68-2LV'), 'ST68-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST69-2LV'), 'ST69-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3772-2LV'), 'ST3772-2LV')
+        self.assertEqual(get_kp_subspecies_based_on_st('ST3819-2LV'), 'ST3819-2LV')
