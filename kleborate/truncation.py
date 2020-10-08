@@ -13,7 +13,6 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 from Bio.Seq import Seq
-from Bio.Alphabet import IUPAC
 
 
 def truncation_check(hit, cov_threshold=90.0):
@@ -40,7 +39,7 @@ def truncation_check(hit, cov_threshold=90.0):
     # denominator for coverage.
     ref_aa_length = (hit.ref_length - 3) // 3
 
-    coding_dna = Seq(nucl_seq, IUPAC.unambiguous_dna)
+    coding_dna = Seq(nucl_seq)
     translation = str(coding_dna.translate(table='Bacterial', to_stop=True))
 
     coverage = 100.0 * len(translation) / ref_aa_length

@@ -19,7 +19,7 @@ import subprocess
 import tempfile
 
 from Bio import pairwise2
-from Bio.SubsMat.MatrixInfo import blosum62
+from Bio.Align import substitution_matrices
 
 from .blastn import run_blastn
 from .shv_mutations import check_for_shv_mutations
@@ -223,6 +223,8 @@ def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
                'KAYKKSARVVGDVIGKYHPHGDSAVYDTIVRMAQPFSLRYMLVDGQGNFGSIDGDSAAAM'
     parc_ref = 'MSDMAERLALHEFTENAYLNYSMYVIMDRALPFIGDGLKPVQRRIVYAMSELGLNASAKF' \
                'KKSARTVGDVLGKYHPHGDSACYEAMVLMAQPFSYRYPLVDGQGNWGAPDDPKSFAAMRY'
+
+    blosum62 = substitution_matrices.load('BLOSUM62')
 
     snps = []
     hits = run_blastn(qrdr, contigs, None, min_ident)

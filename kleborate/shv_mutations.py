@@ -13,9 +13,8 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 from Bio.Seq import Seq
-from Bio.Alphabet import IUPAC
 from Bio import pairwise2
-from Bio.SubsMat.MatrixInfo import blosum62
+from Bio.Align import substitution_matrices
 
 
 def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
@@ -33,7 +32,7 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     # BioPython doesn't like it if the sequence isn't a multiple of 3.
     nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
 
-    coding_dna = Seq(nucl_seq, IUPAC.unambiguous_dna)
+    coding_dna = Seq(nucl_seq)
     translation = str(coding_dna.translate(table='Bacterial', to_stop=True))
 
     shv_1_ref = 'MRYIRLCIISLLATLPLAVHASPQPLEQIKLSESQLSGRVGMIEMDLASGRTLTAWRADERFPMMSTFKVVLCGAVLAR' \
@@ -41,6 +40,7 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
                 'DRWETELNEALPGDARDTTTPASMAATLRKLLTSQRLSARSQRQLLQWMVDDRVAGPLIRSVLPAGWFIADKTGAGERG' \
                 'ARGIVALLGPNNKAERIVVIYLRDTPASMAERNQQIAGIGAALIEHWQR'
 
+    blosum62 = substitution_matrices.load('BLOSUM62')
     alignments = pairwise2.align.globalds(shv_1_ref, translation, blosum62, -10, -0.5)
 
     # If we didn't get any global amino acid alignments, then it's not appropriate to look for SHV
