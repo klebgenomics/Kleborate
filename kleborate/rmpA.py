@@ -22,8 +22,6 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-import os
-
 from .blastn import run_blastn
 from .truncation import truncation_check
 
