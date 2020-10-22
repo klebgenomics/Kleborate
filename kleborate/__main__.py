@@ -229,6 +229,7 @@ def get_output_headers(args, data_folder):
         stdout_header.append('O_locus')
         stdout_header.append('O_locus_confidence')
         full_header.append('O_locus')
+        full_header.append('O_type')
         full_header.append('O_locus_problems')
         full_header.append('O_locus_confidence')
         full_header.append('O_locus_identity')
