@@ -1,6 +1,6 @@
 """
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -13,25 +13,13 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 from Bio.Seq import Seq
-from Bio.Alphabet import IUPAC
-
-from .misc import reverse_complement
 
 
 def truncation_check(hit, cov_threshold=90.0):
     """
     Checks to see if the gene is truncated at the amino acid level.
     """
-    # BLAST gives the aligned sequence, so we might need to remove dashes if there are deletions
-    # relative to the reference.
-    nucl_seq = hit.hit_seq.replace('-', '')
-
-    # BLAST also returns the contig's sequence so we might need to flip to the reference strand.
-    if hit.strand == 'minus':
-        nucl_seq = reverse_complement(nucl_seq)
-        ref_start, ref_end = hit.ref_end, hit.ref_start
-    else:
-        ref_start, ref_end = hit.ref_start, hit.ref_end
+    nucl_seq, ref_start, _ = hit.get_seq_start_end_pos_strand()
 
     # The hit must start at the first base of the gene. If not, the gene is considered 0%.
     if ref_start != 1:
@@ -51,7 +39,7 @@ def truncation_check(hit, cov_threshold=90.0):
     # denominator for coverage.
     ref_aa_length = (hit.ref_length - 3) // 3
 
-    coding_dna = Seq(nucl_seq, IUPAC.unambiguous_dna)
+    coding_dna = Seq(nucl_seq)
     translation = str(coding_dna.translate(table='Bacterial', to_stop=True))
 
     coverage = 100.0 * len(translation) / ref_aa_length

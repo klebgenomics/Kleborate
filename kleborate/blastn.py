@@ -1,6 +1,6 @@
 """
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -15,8 +15,10 @@ not, see <http://www.gnu.org/licenses/>.
 import os
 import subprocess
 
+from .misc import reverse_complement
 
-def run_blastn(db, query, min_cov, min_ident, ungapped=False):
+
+def run_blastn(db, query, min_cov, min_ident):
     build_blast_database_if_needed(db)
 
     cmd = 'blastn -task blastn -db {} -query {}'.format(db, query)
@@ -24,8 +26,6 @@ def run_blastn(db, query, min_cov, min_ident, ungapped=False):
            " qacc qstart qend qframe'"
     cmd += ' -dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000'
     cmd += ' -perc_identity {}'.format(min_ident)
-    if ungapped:
-        cmd += ' -ungapped'
 
     # TODO: switch this over to subprocess
     blast_hits = []
@@ -40,7 +40,15 @@ def run_blastn(db, query, min_cov, min_ident, ungapped=False):
     if min_cov is not None:
         blast_hits = [h for h in blast_hits if h.ref_cov * 100 >= min_cov]
 
-    return cull_redundant_hits(blast_hits)
+    # Clean up redundant hits so we only have one hit for each part of the genome.
+    blast_hits = cull_redundant_hits(blast_hits)
+
+    # Get rid of any hits that start with 'delete_'. This is used in cases where there can be
+    # confounding homologous hits. E.g. searching for rmpA2 alleles but not wanting to be misled by
+    # homologous rmpA alleles.
+    blast_hits = [h for h in blast_hits if not h.gene_id.startswith('delete_')]
+
+    return blast_hits
 
 
 def cull_redundant_hits(blast_hits):
@@ -48,9 +56,9 @@ def cull_redundant_hits(blast_hits):
     Cull out redundant hits here (essentially implementing BLAST's -culling_limit 1 feature but
     with our own logic).
     """
-    # Sort the hits from best to worst. Hit quality is defined as the product of gene coverage and
-    # identity.
-    blast_hits = sorted(blast_hits, key=lambda x: (1/(x.pcid * x.score), x.gene_id))
+    # Sort the hits from best to worst. Hit quality is defined as the product of gene coverage,
+    # identity and score.
+    blast_hits = sorted(blast_hits, key=lambda x: (1/(x.pcid * x.score * x.ref_cov), x.gene_id))
 
     filtered_blast_hits = []
 
@@ -111,6 +119,17 @@ class BlastHit(object):
         assert self.contig_end >= self.contig_start
 
         self.ref_cov = self.ref_hit_len / self.ref_length
+
+    def get_seq_start_end_pos_strand(self):
+        # BLAST gives the aligned sequence, so we might need to remove dashes if there are
+        # deletions relative to the reference.
+        nucl_seq = self.hit_seq.replace('-', '')
+
+        # BLAST also returns the contig's sequence so we might need to flip to the ref strand.
+        if self.strand == 'minus':
+            return reverse_complement(nucl_seq), self.ref_end, self.ref_start
+        else:
+            return nucl_seq, self.ref_start, self.ref_end
 
 
 def build_blast_database_if_needed(seqs):

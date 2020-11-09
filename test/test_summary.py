@@ -1,6 +1,6 @@
 """
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -14,7 +14,7 @@ not, see <http://www.gnu.org/licenses/>.
 
 import collections
 import unittest
-from kleborate.kleborate import get_data_path, get_output_headers, get_summary_results
+from kleborate.__main__ import get_data_path, get_output_headers, get_summary_results
 
 
 class TestResScore(unittest.TestCase):
@@ -30,25 +30,25 @@ class TestResScore(unittest.TestCase):
         self.results['Aerobactin'] = '-'
 
     def test_nothing(self):
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '0')
         self.assertEqual(summary_results['resistance_score'], '0')
         self.assertEqual(summary_results['num_resistance_classes'], '0')
         self.assertEqual(summary_results['num_resistance_genes'], '0')
 
     def test_res_counts_1(self):
-        self.results['AGly'] = 'a'
-        self.results['Flq'] = 'b'
-        self.results['Tet'] = 'c'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['AGly_acquired'] = 'a'
+        self.results['Flq_acquired'] = 'b'
+        self.results['Tet_acquired'] = 'c'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '3')
 
     def test_res_counts_2(self):
-        self.results['AGly'] = 'a'
-        self.results['Flq'] = 'b;c'
-        self.results['Tet'] = 'd;e;f'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['AGly_acquired'] = 'a'
+        self.results['Flq_acquired'] = 'b;c'
+        self.results['Tet_acquired'] = 'd;e;f'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '6')
 
@@ -56,153 +56,197 @@ class TestResScore(unittest.TestCase):
         """
         Intrinsic Bla genes should not add to the counts.
         """
-        self.results['AGly'] = 'a'
-        self.results['Flq'] = 'b;c'
-        self.results['Tet'] = 'd;e;f'
-        self.results['Bla'] = 'g;SHV-3'
-        summary_results = get_summary_results(self.results, self.res_headers)
-        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.results['AGly_acquired'] = 'a'
+        self.results['Flq_acquired'] = 'b;c'
+        self.results['Tet_acquired'] = 'd;e;f'
+        self.results['Bla_acquired'] = 'g'
+        self.results['Bla_chr'] = 'h'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['num_resistance_classes'], '4')
         self.assertEqual(summary_results['num_resistance_genes'], '7')
 
     def test_res_counts_4(self):
         """
-        Omp genes should not add to the counts.
+        Bla genes in columns other than 'Bla_chr' (e.g. 'Bla_ESBL_acquired') should add to the
+        counts.
         """
-        self.results['AGly'] = 'a'
-        self.results['Flq'] = 'b;c'
-        self.results['Tet'] = 'd;e;f'
-        self.results['Omp'] = 'g;h'
-        summary_results = get_summary_results(self.results, self.res_headers)
-        self.assertEqual(summary_results['num_resistance_classes'], '3')
-        self.assertEqual(summary_results['num_resistance_genes'], '6')
+        self.results['Tet_acquired'] = 'a;b;c'
+        self.results['Bla_chr'] = 'd'
+        self.results['Bla_ESBL_acquired'] = 'e'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['num_resistance_classes'], '2')
+        self.assertEqual(summary_results['num_resistance_genes'], '4')
 
     def test_res_counts_5(self):
         """
-        Mutations should add to the class count but not to the gene count (because that is for
-        acquired resistance genes).
+        Bla genes in columns other than 'Bla_chr' (e.g. 'Bla_acquired') should add to the counts.
         """
-        self.results['AGly'] = 'a'
-        self.results['Flq'] = 'GyrA-83I'
-        self.results['Tet'] = 'd;e;f'
-        summary_results = get_summary_results(self.results, self.res_headers)
-        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.results['Tet_acquired'] = 'a;b;c'
+        self.results['Bla_acquired'] = 'd'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['num_resistance_classes'], '2')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
     def test_res_counts_6(self):
         """
-        Mutations should add to the class count but not to the gene count (because that is for
-        acquired resistance genes).
+        Omp gene truncations should not add to the gene or class counts.
         """
-        self.results['AGly'] = 'a'
-        self.results['Flq'] = 'b;ParC-80I'
-        self.results['Tet'] = 'd;e;f'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['AGly_acquired'] = 'a'
+        self.results['Flq_acquired'] = 'b;c'
+        self.results['Tet_acquired'] = 'd;e;f'
+        self.results['Omp_mutations'] = 'g;h'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
-        self.assertEqual(summary_results['num_resistance_genes'], '5')
+        self.assertEqual(summary_results['num_resistance_genes'], '6')
 
     def test_res_counts_7(self):
         """
-        Truncations should add to the class count but not to the gene count (because that is for
+        Mutations should add to the class count but not to the gene count (because that is for
         acquired resistance genes).
         """
-        self.results['AGly'] = 'a'
-        self.results['Tet'] = 'b;c'
-        self.results['Col'] = 'MgrB-20%'
-        summary_results = get_summary_results(self.results, self.res_headers)
-        self.assertEqual(summary_results['num_resistance_classes'], '3')
-        self.assertEqual(summary_results['num_resistance_genes'], '3')
-
-    def test_res_counts_8(self):
-        """
-        Truncations should add to the class count but not to the gene count (because that is for
-        acquired resistance genes).
-        """
-        self.results['AGly'] = 'a'
-        self.results['Tet'] = 'b;c'
-        self.results['Col'] = 'd;PmrB-20%'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['AGly_acquired'] = 'a'
+        self.results['Flq_mutations'] = 'b'
+        self.results['Tet_acquired'] = 'c;d;e'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['num_resistance_classes'], '3')
         self.assertEqual(summary_results['num_resistance_genes'], '4')
 
+    def test_res_counts_8(self):
+        """
+        Mutations should add to the class count but not to the gene count (because that is for
+        acquired resistance genes).
+        """
+        self.results['AGly_acquired'] = 'a'
+        self.results['Flq_mutations'] = 'b;c'
+        self.results['Tet_acquired'] = 'd;e;f'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '4')
+
+    def test_res_counts_9(self):
+        """
+        Mutations should add to the class count but not to the gene count (because that is for
+        acquired resistance genes).
+        """
+        self.results['AGly_acquired'] = 'a'
+        self.results['Tet_acquired'] = 'b;c'
+        self.results['Col_mutations'] = 'd'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '3')
+
+    def test_res_counts_10(self):
+        """
+        Resistance-by-truncation should add to the class count but not to the gene count (because
+        that is for acquired resistance genes).
+        """
+        self.results['AGly_acquired'] = 'a'
+        self.results['Tet_acquired'] = 'b'
+        self.results['Col_acquired'] = 'c'
+        self.results['Col_mutations'] = 'd'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '3')
+
+    def test_res_counts_11(self):
+        """
+        Spurious hits should not add to either the gene or class counts.
+        """
+        self.results['AGly_acquired'] = 'a'
+        self.results['Flq_acquired'] = 'b'
+        self.results['Tet_acquired'] = 'c'
+        self.results['spurious_resistance_hits'] = 'd;e;f'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['num_resistance_classes'], '3')
+        self.assertEqual(summary_results['num_resistance_genes'], '3')
+
     def test_res_score_1(self):
-        self.results['Bla'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['Bla_chr'] = 'a'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '0')
 
     def test_res_score_2(self):
-        self.results['Bla'] = 'a'
-        self.results['Bla_ESBL'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['Bla_chr'] = 'a'
+        self.results['Bla_ESBL_acquired'] = 'b'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '1')
 
     def test_res_score_3(self):
-        self.results['Bla'] = 'a'
-        self.results['Bla_ESBL_inhR'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['Bla_chr'] = 'a'
+        self.results['Bla_ESBL_inhR_acquired'] = 'b'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '1')
 
     def test_res_score_4(self):
-        self.results['Bla'] = 'a'
-        self.results['Bla_Carb'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['Bla_chr'] = 'a'
+        self.results['Bla_Carb_acquired'] = 'b'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '2')
 
     def test_res_score_5(self):
-        self.results['Bla'] = 'a'
-        self.results['Bla_ESBL'] = 'b'
-        self.results['Bla_Carb'] = 'c'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['Bla_chr'] = 'a'
+        self.results['Bla_ESBL_acquired'] = 'b'
+        self.results['Bla_Carb_acquired'] = 'c'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '2')
 
     def test_res_score_6(self):
-        self.results['Bla'] = 'a'
-        self.results['Bla_ESBL'] = 'b'
-        self.results['Bla_Carb'] = 'c'
-        self.results['Col'] = 'd'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['Bla_chr'] = 'a'
+        self.results['Bla_ESBL_acquired'] = 'b'
+        self.results['Bla_Carb_acquired'] = 'c'
+        self.results['Col_acquired'] = 'd'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '3')
 
     def test_res_score_7(self):
-        self.results['Col'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        self.results['Bla_chr'] = 'a'
+        self.results['Bla_ESBL_acquired'] = 'b'
+        self.results['Bla_Carb_acquired'] = 'c'
+        self.results['Col_mutations'] = 'd'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
+        self.assertEqual(summary_results['resistance_score'], '3')
+
+    def test_res_score_8(self):
+        self.results['Col_acquired'] = 'a'
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['resistance_score'], '0')
 
     def test_vir_score_1(self):
         self.results['Yersiniabactin'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '1')
 
     def test_vir_score_2(self):
         self.results['Colibactin'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '2')
 
     def test_vir_score_3(self):
         self.results['Colibactin'] = 'a'
         self.results['Yersiniabactin'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '2')
 
     def test_vir_score_4(self):
         self.results['Aerobactin'] = 'a'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '3')
 
     def test_vir_score_5(self):
         self.results['Aerobactin'] = 'a'
         self.results['Yersiniabactin'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '4')
 
     def test_vir_score_6(self):
         self.results['Aerobactin'] = 'a'
         self.results['Colibactin'] = 'b'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '5')
 
     def test_vir_score_7(self):
         self.results['Aerobactin'] = 'a'
         self.results['Colibactin'] = 'b'
         self.results['Yersiniabactin'] = 'c'
-        summary_results = get_summary_results(self.results, self.res_headers)
+        summary_results = get_summary_results(self.results, self.res_headers, self.args)
         self.assertEqual(summary_results['virulence_score'], '5')

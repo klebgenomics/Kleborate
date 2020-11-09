@@ -1,6 +1,6 @@
 """
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -43,6 +43,7 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
                'K_locus_missing_genes']
     if locus_type == 'O':
         headers = [x.replace('K_locus', 'O_locus') for x in headers]
+        headers.append('O_type')
 
     if (args.kaptive_k and locus_type == 'K') or (args.kaptive_o and locus_type == 'O'):
         if locus_type == 'K':
@@ -53,6 +54,9 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
         kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile, one_thread=False)
         if kaptive_results is None:
             kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile, one_thread=True)
+        if locus_type == 'O':
+            o_locus = kaptive_results[0]
+            kaptive_results.append(get_o_type(o_locus))
 
         assert len(headers) == len(kaptive_results)
         return dict(zip(headers, kaptive_results))
@@ -132,3 +136,19 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, one_thread):
         sys.exit('Error: Kaptive failed to produce the expected output')
 
     return [locus, confidence, problems, identity, ','.join(missing)]
+
+
+def get_o_type(o_locus):
+    """
+    This function returns an O type using the O locus. In many cases, they are the same, except for:
+    * loci O1v1 and O1v2 = type O1
+    * loci O2v1 and O2v2 = type O2
+    * loci O1/O2v1 and O1/O2v2 = either O1/O2 or 'unknown' (thoughts?)
+    """
+    if 'O1/O2' in o_locus:
+        return 'unknown'
+    if 'v1' in o_locus:
+        return o_locus.replace('v1', '')
+    if 'v2' in o_locus:
+        return o_locus.replace('v2', '')
+    return o_locus

@@ -1,6 +1,6 @@
 """
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -15,34 +15,35 @@ not, see <http://www.gnu.org/licenses/>.
 import collections
 import unittest
 
-from kleborate.kleborate import get_output_headers, get_resistance_results
+from kleborate.__main__ import get_output_headers, get_resistance_results
 
 
-class TestResAlleles(unittest.TestCase):
-    """
-    Tests calling of resistance via alleles.
-    """
+class TestResAac(unittest.TestCase):
 
     def setUp(self):
         self.data_dir = 'test/test_res_aac/data'
-        Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o'])
-        self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False)
+        Args = collections.namedtuple('Args', ['resistance', 'kaptive_k', 'kaptive_o',
+                                               'min_coverage', 'min_identity',
+                                               'min_spurious_coverage', 'min_spurious_identity'])
+        self.args = Args(resistance=True, kaptive_k=False, kaptive_o=False,
+                         min_coverage=80.0, min_identity=90.0,
+                         min_spurious_coverage=40.0, min_spurious_identity=80.0)
         _, _, self.res_headers = get_output_headers(self.args, self.data_dir)
 
     def test_res_01(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/01.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], '-')
+        self.assertEqual(results['AGly_acquired'], '-')
 
     def test_res_02(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/02.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6-31')
+        self.assertEqual(results['AGly_acquired'], 'Aac6-31')
 
     def test_res_03(self):
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/03.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6-31*')
+        self.assertEqual(results['AGly_acquired'], 'Aac6-31*')
 
     def test_res_04(self):
         """
@@ -52,7 +53,7 @@ class TestResAlleles(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/04.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6Ib-cr^')
+        self.assertEqual(results['AGly_acquired'], 'Aac6Ib-cr^')
 
     def test_res_05(self):
         """
@@ -60,4 +61,4 @@ class TestResAlleles(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/05.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly'], 'Aac6Ib-cr^')
+        self.assertEqual(results['AGly_acquired'], 'Aac6Ib-cr^')
