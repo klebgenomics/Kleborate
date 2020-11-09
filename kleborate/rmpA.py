@@ -9,8 +9,8 @@ file, this annotation will be reported in column 2 of the output table
 NOTE there is a bug with the culling_limit parameter in older versions of BLAST+. This code has
 been tested with BLAST+2.2.30. It does not work with BLAST2.2.25. Not sure about other versions.
 
-Copyright 2017 Kat Holt
-Copyright 2017 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -22,51 +22,21 @@ details. You should have received a copy of the GNU General Public License along
 not, see <http://www.gnu.org/licenses/>.
 """
 
-import os
-
 from .blastn import run_blastn
 from .truncation import truncation_check
 
 
-def print_header():
-    print('\t'.join(['strain', 'rmpA_allele', 'rmpA_lineage', 'rmpA2_allele']))
-
-
-def rmpa_blast(seqs, database, assemblies, min_ident):
-    # read in rmpA database
-    st_info = {}  # key = st, value = info relating to this ST, eg clonal group
-    header = []
-    with open(database, 'r') as f:
-        for line in f:
-            fields = line.rstrip().split('\t')
-            if len(header) == 0:
-                header = fields
-            else:
-                st_info[fields[0]] = fields[1]
-
-    # search input assemblies
+def rmpa2_blast(seqs, assemblies, min_cov, min_ident):
     for contigs in assemblies:
-        _, file_name = os.path.split(contigs)
-        name, _ = os.path.splitext(file_name)
-        rmpa_calls, rmpa2_calls = [], []
-
-        hits = run_blastn(seqs, contigs, None, min_ident)
+        rmpa2_calls = []
+        hits = run_blastn(seqs, contigs, min_cov, min_ident)
         for hit in hits:
-            if hit.alignment_length > (hit.ref_length / 2):
+            if hit.alignment_length > hit.ref_length / 2:
                 gene_id = hit.gene_id
                 if hit.pcid < 100.00 or hit.alignment_length < hit.ref_length:
                     gene_id += '*'
                 gene_id += truncation_check(hit)[0]
-                gene = hit.gene_id.split('_')[0]
-                if gene == 'rmpA':
-                    info = '(' + st_info[hit.gene_id.split('_')[1]] + ')'  # predict from best hit
-                    rmpa_calls.append(gene_id + info)
-                else:
-                    rmpa2_calls.append(gene_id)
-
-        if len(rmpa_calls) == 0:
-            rmpa_calls.append('-')
+                rmpa2_calls.append(gene_id)
         if len(rmpa2_calls) == 0:
             rmpa2_calls.append('-')
-
-        return [name, ','.join(rmpa_calls), ','.join(rmpa2_calls)]
+        return ','.join(rmpa2_calls)

@@ -1,6 +1,6 @@
 """
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -13,7 +13,7 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import unittest
-from kleborate.kleborate import get_data_path
+from kleborate.__main__ import get_data_path
 from kleborate.species import get_klebsiella_species, is_kp_complex
 
 
@@ -87,7 +87,7 @@ class TestSpecies(unittest.TestCase):
                                             self.data_dir)
         self.assertEqual(species, 'Klebsiella variicola subsp. tropica')
 
-    def test_klebsiella_africanensis(self):
+    def test_klebsiella_africana(self):
         species, _ = get_klebsiella_species('test/test_genomes/ERR2835900.fna.gz',
                                             self.data_dir)
         self.assertEqual(species, 'Klebsiella africana')

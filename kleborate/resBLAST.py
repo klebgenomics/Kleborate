@@ -1,8 +1,8 @@
 """
 Blast for resistance genes, summarise by class (one class per column)
 
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -19,14 +19,17 @@ import subprocess
 import tempfile
 
 from Bio import pairwise2
-from Bio.SubsMat.MatrixInfo import blosum62
+from Bio.Align import substitution_matrices
 
 from .blastn import run_blastn
+from .shv_mutations import check_for_shv_mutations
 from .truncation import truncation_check
 
 
-def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, min_ident):
-    hits_dict = blast_against_all(seqs, min_cov, min_ident, contigs, gene_info)
+def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, min_ident,
+                          min_spurious_cov, min_spurious_ident):
+    hits_dict = blast_against_all(seqs, min_cov, min_ident, contigs, gene_info,
+                                  min_spurious_cov, min_spurious_ident)
     if qrdr:
         check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, 90.0)
     if trunc:
@@ -39,7 +42,7 @@ def resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs, min_cov, m
 def read_class_file(res_class_file):
     gene_info = {}  # key = sequence id (fasta header in seq file), value = (allele,class,Bla_Class)
     res_classes = []
-    bla_classes = []
+    bla_classes = ['Bla', 'Bla_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_Carb', 'Bla_chr']
 
     with open(res_class_file, 'r') as f:
         header = 0
@@ -67,40 +70,75 @@ def read_class_file(res_class_file):
     res_classes.sort()
     if 'Bla' in res_classes:
         res_classes.remove('Bla')
-    bla_classes.sort()
     if 'NA' in bla_classes:
         bla_classes.remove('NA')
 
-    if 'Omp' not in res_classes:
-        res_classes.append('Omp')
+    if 'SHV_mutations' not in res_classes:
+        res_classes.append('SHV_mutations')
+    if 'Omp_mutations' not in res_classes:
+        res_classes.append('Omp_mutations')
+    if 'Col_mutations' not in res_classes:
+        res_classes.append('Col_mutations')
+    if 'Flq_mutations' not in res_classes:
+        res_classes.append('Flq_mutations')
 
     return gene_info, res_classes, bla_classes
 
 
-def print_header(res_classes, bla_classes):
-    print('\t'.join(['strain'] + get_res_headers(res_classes, bla_classes)))
-
-
 def get_res_headers(res_classes, bla_classes):
-    return res_classes + bla_classes
+    res_headers = res_classes + bla_classes
+
+    # Rearrange the headers a bit. First move Bla_chr to the end:
+    res_headers = ([h for h in res_headers if h != 'Bla_chr'] +
+                   [h for h in res_headers if h == 'Bla_chr'])
+
+    # Then move mutation columns to the end:
+    res_headers = ([h for h in res_headers if '_mutations' not in h] +
+                   [h for h in res_headers if '_mutations' in h])
+
+    # Add '_acquired' to the end of the rest of the columns:
+    res_headers = [h if h.endswith('_chr') or h.endswith('_mutations') else h + '_acquired'
+                   for h in res_headers]
+
+    return res_headers
 
 
-def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info):
+def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious_cov,
+                      min_spurious_ident):
     hits_dict = collections.defaultdict(list)  # key = class, value = list
-    hits = run_blastn(seqs, contigs, min_cov, min_ident, ungapped=True)
+    hits = run_blastn(seqs, contigs, min_spurious_cov, min_spurious_ident)
     for hit in hits:
-        if (hit.alignment_length / hit.ref_length * 100.0) > min_cov:
+        coverage = hit.alignment_length / hit.ref_length * 100.0
+        if coverage >= min_spurious_cov:
             if hit.pcid < 100.0:
-                aa_result = check_for_exact_aa_match(seqs, hit.hit_seq)
+                aa_result = check_for_exact_aa_match(seqs, hit.hit_seq.replace('-', ''))
                 if aa_result is not None:
                     hit.gene_id = aa_result
+                    exact_match = True
+                else:
+                    exact_match = False
             else:
                 aa_result = None
+                exact_match = True
 
             hit_allele, hit_class, hit_bla_class = gene_info[hit.gene_id]
+
+            hit_bla_class, shv_muts, class_changing_muts, omega_loop_seq = \
+                check_for_shv_mutations(hit, hit_allele, hit_bla_class, exact_match)
+
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
 
+            hits_dict['SHV_mutations'] += shv_muts
+            if omega_loop_seq is not None:
+                hits_dict['SHV_mutations'].append(f'omega-loop={omega_loop_seq}')
+            if not hits_dict['SHV_mutations']:
+                del hits_dict['SHV_mutations']
+
+            if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
+                hit_class += '_acquired'
+
+            trunc_cov = 100.0
             if aa_result is not None:
                 hit_allele += '^'
             else:
@@ -108,8 +146,26 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info):
                     hit_allele += '*'
                 if hit.alignment_length < hit.ref_length:
                     hit_allele += '?'
+                trunc_suffix, trunc_cov, _ = truncation_check(hit)
+                hit_allele += trunc_suffix
 
-            hits_dict[hit_class].append(hit_allele)
+            if class_changing_muts:
+                hit_allele += ' +' + ' +'.join(class_changing_muts)
+
+            # If the hit is decent (above the min coverage and identity thresholds), it goes in the
+            # column for the class.
+            if coverage >= min_cov and hit.pcid >= min_ident and trunc_cov >= 90.0:
+                hits_dict[hit_class].append(hit_allele)
+
+            # If the hit is decent but the gene is truncated, it goes in the
+            # truncated_resistance_hits column.
+            elif coverage >= min_cov and hit.pcid >= min_ident and trunc_cov < 90.0:
+                hits_dict['truncated_resistance_hits'].append(hit_allele)
+
+            # If the hit is bad (below the min coverage and identity thresholds but above the
+            # thresholds for spurious hits) then it goes in the spurious hit column.
+            else:
+                hits_dict['spurious_resistance_hits'].append(hit_allele)
 
     return hits_dict
 
@@ -168,6 +224,8 @@ def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
     parc_ref = 'MSDMAERLALHEFTENAYLNYSMYVIMDRALPFIGDGLKPVQRRIVYAMSELGLNASAKF' \
                'KKSARTVGDVLGKYHPHGDSACYEAMVLMAQPFSYRYPLVDGQGNWGAPDDPKSFAAMRY'
 
+    blosum62 = substitution_matrices.load('BLOSUM62')
+
     snps = []
     hits = run_blastn(qrdr, contigs, None, min_ident)
     for hit in hits:
@@ -187,7 +245,7 @@ def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
                         assembly_base != '-' and assembly_base != '.':
                     snps.append(hit.gene_id + '-' + str(pos) + assembly_base)
     if snps:
-        hits_dict['Flq'] += snps
+        hits_dict['Flq_mutations'] += snps
 
 
 def get_bases_per_ref_pos(alignment):
@@ -222,9 +280,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, contigs, seqs, min_ident):
         truncations.append('PmrB-' + ('%.0f' % best_pmrb_cov) + '%')
 
     if truncations:
-        if 'Col' not in hits_dict:
-            hits_dict['Col'] = []
-        hits_dict['Col'] += truncations
+        hits_dict['Col_mutations'] += truncations
 
 
 def check_omp_genes(hits_dict, contigs, omp, min_ident, min_cov):
@@ -241,9 +297,9 @@ def check_omp_genes(hits_dict, contigs, omp, min_ident, min_cov):
                 best_ompk36_cov = coverage
             if coverage >= min_cov:
                 if 'GDGDTY' in translation:
-                    hits_dict['Omp'].append('OmpK36GD')
+                    hits_dict['Omp_mutations'].append('OmpK36GD')
                 elif 'GDTDTY' in translation:
-                    hits_dict['Omp'].append('OmpK36TD')
+                    hits_dict['Omp_mutations'].append('OmpK36TD')
         else:
             assert False
 
@@ -254,6 +310,6 @@ def check_omp_genes(hits_dict, contigs, omp, min_ident, min_cov):
         truncations.append('OmpK36-' + ('%.0f' % best_ompk36_cov) + '%')
 
     if truncations:
-        if 'Omp' not in hits_dict:
-            hits_dict['Omp'] = []
-        hits_dict['Omp'] += truncations
+        if 'Omp_mutations' not in hits_dict:
+            hits_dict['Omp_mutations'] = []
+        hits_dict['Omp_mutations'] += truncations

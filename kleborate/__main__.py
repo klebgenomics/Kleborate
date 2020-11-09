@@ -1,6 +1,6 @@
 """
-Copyright 2018 Kat Holt
-Copyright 2018 Ryan Wick (rrwick@gmail.com)
+Copyright 2020 Kat Holt
+Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -27,7 +27,7 @@ from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results, is_kp_complex
 from .mlstBLAST import mlst_blast
 from .resBLAST import read_class_file, get_res_headers, resblast_one_assembly
-from .rmpA import rmpa_blast
+from .rmpA import rmpa2_blast
 from .misc import get_compression_type, load_fasta
 from .version import __version__
 
@@ -36,6 +36,8 @@ def main():
     args = parse_arguments()
     check_inputs_and_programs(args)
     data_folder = get_data_path()
+    if args.force_index:
+        rebuild_blast_indices(data_folder)
     kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
 
     stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
@@ -50,20 +52,17 @@ def main():
             # the column orders can be easily changed by modifying the get_output_headers function.
 
             results = {'strain': get_strain_name(contigs)}
-            results.update(get_contig_stat_results(contigs))
             results.update(get_species_results(contigs, data_folder))
-
             kp_complex = is_kp_complex(results)
+            results.update(get_contig_stat_results(contigs, kp_complex))
 
-            results.update(get_chromosome_mlst_results(data_folder, contigs, kp_complex))
-            results.update(get_ybt_mlst_results(data_folder, contigs))
-            results.update(get_clb_mlst_results(data_folder, contigs))
-            results.update(get_iuc_mlst_results(data_folder, contigs))
-            results.update(get_iro_mlst_results(data_folder, contigs))
-            results.update(get_hypermucoidy_results(data_folder, contigs))
-            results.update(get_wzi_and_k_locus_results(data_folder, contigs))
-            results.update(get_resistance_results(data_folder, contigs, args, res_headers, kp_complex))
-            results.update(get_summary_results(results, res_headers))
+            results.update(get_chromosome_mlst_results(data_folder, contigs, kp_complex, args))
+            results.update(get_all_virulence_results(data_folder, contigs, args))
+            results.update(get_rmpa2_results(data_folder, contigs, args))
+            results.update(get_wzi_and_k_locus_results(data_folder, contigs, args))
+            results.update(get_resistance_results(data_folder, contigs, args, res_headers,
+                                                  kp_complex))
+            results.update(get_summary_results(results, res_headers, args))
             results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
             results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
 
@@ -104,10 +103,24 @@ def parse_arguments():
                              help='File for full Kaptive O locus output (default: do not '
                                   'save Kaptive O locus results to separate file)')
 
+    setting_args = parser.add_argument_group('Settings')
+    setting_args.add_argument('--min_identity', type=float, default=90.0,
+                              help='Minimum alignment identity for main results')
+    setting_args.add_argument('--min_coverage', type=float, default=80.0,
+                              help='Minimum alignment coverage for main results')
+    setting_args.add_argument('--min_spurious_identity', type=float, default=80.0,
+                              help='Minimum alignment identity for spurious results')
+    setting_args.add_argument('--min_spurious_coverage', type=float, default=40.0,
+                              help='Minimum alignment coverage for spurious results')
+
+    other_args = parser.add_argument_group('Other')
+    other_args.add_argument('--force_index', action='store_true',
+                            help='Rebuild the BLAST index at the start of execution')
+
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                            help='Show this help message and exit')
-    help_args.add_argument('--version', action='version', version=__version__,
+    help_args.add_argument('--version', action='version', version='Kleborate v' + __version__,
                            help="Show program's version number and exit")
 
     # If no arguments were used, print the entire help (argparse default is to just give an error
@@ -186,8 +199,8 @@ def get_output_headers(args, data_folder):
     stdout_header = ['strain', 'species']
     full_header = ['strain', 'species', 'species_match']
     stdout_header += ['ST', 'virulence_score']
-    full_header += ['contig_count', 'N50', 'largest_contig', 'ambiguous_bases', 'ST',
-                    'virulence_score']
+    full_header += ['contig_count', 'N50', 'largest_contig', 'total_size', 'ambiguous_bases',
+                    'QC_warnings', 'ST', 'virulence_score']
 
     if args.resistance:
         stdout_header.append('resistance_score')
@@ -199,13 +212,13 @@ def get_output_headers(args, data_folder):
                      'Colibactin', 'CbST',
                      'Aerobactin', 'AbST',
                      'Salmochelin', 'SmST',
-                     'rmpA', 'rmpA2',
+                     'RmpADC', 'RmST',
+                     'rmpA2',
                      'wzi', 'K_locus']
     stdout_header += other_columns
     full_header += other_columns
 
     if args.kaptive_k:
-        # K_locus is already in the header.
         stdout_header.append('K_locus_confidence')
         full_header.append('K_locus_problems')
         full_header.append('K_locus_confidence')
@@ -216,10 +229,21 @@ def get_output_headers(args, data_folder):
         stdout_header.append('O_locus')
         stdout_header.append('O_locus_confidence')
         full_header.append('O_locus')
+        full_header.append('O_type')
         full_header.append('O_locus_problems')
         full_header.append('O_locus_confidence')
         full_header.append('O_locus_identity')
         full_header.append('O_locus_missing_genes')
+
+    if args.resistance:
+        gene_info, res_classes, bla_classes = \
+            read_class_file(data_folder + '/CARD_AMR_clustered.csv')
+        res_headers = get_res_headers(res_classes, bla_classes)
+        res_headers += ['truncated_resistance_hits', 'spurious_resistance_hits']
+        stdout_header += res_headers
+        full_header += res_headers
+    else:
+        res_headers = []
 
     full_header.append('Chr_ST')
     full_header += get_chromosome_mlst_header()
@@ -227,16 +251,9 @@ def get_output_headers(args, data_folder):
     full_header += get_clb_mlst_header()
     full_header += get_iuc_mlst_header()
     full_header += get_iro_mlst_header()
+    full_header += get_rmp_mlst_header()
 
-    # If resistance genes are on, run the resBLAST.py script to get its headers.
-    if args.resistance:
-        gene_info, res_classes, bla_classes = \
-            read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
-        res_headers = get_res_headers(res_classes, bla_classes)
-        stdout_header += res_headers
-        full_header += res_headers
-    else:
-        res_headers = []
+    full_header.append('spurious_virulence_hits')
 
     return stdout_header, full_header, res_headers
 
@@ -281,15 +298,16 @@ def get_resistance_score(res_headers, res_hits):
         return '-'
 
     # Look for a hit in any 'ESBL' column (e.g. 'Bla_ESBL' or 'Bla_ESBL_inhR').
-    esbl_header_indices = [i for i, h in enumerate(res_headers) if 'esbl' in h.lower()]
+    esbl_header_indices = [i for i, h in enumerate(res_headers) if '_esbl' in h.lower()]
     has_esbl = any(res_hits[i] != '-' for i in esbl_header_indices)
 
     # Look for a hit in any 'Carb' column (e.g. 'Bla_Carb').
-    carb_header_indices = [i for i, h in enumerate(res_headers) if 'carb' in h.lower()]
+    carb_header_indices = [i for i, h in enumerate(res_headers) if '_carb' in h.lower()]
     has_carb = any(res_hits[i] != '-' for i in carb_header_indices)
 
-    # Look for a hit in the 'Col' column.
-    col_header_indices = [i for i, h in enumerate(res_headers) if h.lower() == 'col']
+    # Look for a hit in the 'Col' columns.
+    col_header_indices = [i for i, h in enumerate(res_headers)
+                          if h.lower() == 'col_acquired' or h.lower() == 'col_mutations']
     has_col = any(res_hits[i] != '-' for i in col_header_indices)
 
     if has_carb and has_col:
@@ -304,13 +322,16 @@ def get_resistance_score(res_headers, res_hits):
 
 def get_resistance_class_count(res_headers, res_hits):
     """
-    Counts up all resistance gene classes, excluding the 'Bla' class which is intrinsic.
+    Counts up all resistance gene classes, excluding the 'Bla_chr' class which is intrinsic.
     """
     if not res_headers:
         return '-'
-    res_indices = [i for i, h in enumerate(res_headers)
-                   if h.lower() != 'bla' and h.lower() != 'omp']
-    return sum(0 if res_hits[i] == '-' else 1 for i in res_indices)
+    res_classes = [h for i, h in enumerate(res_headers) if
+                   res_hits[i] != '-' and
+                   (h.lower().endswith('_acquired') or h == 'Col_mutations' or
+                    h == 'Flq_mutations')]
+    res_classes = [c.replace('_acquired', '').replace('_mutations', '') for c in res_classes]
+    return len(set(res_classes))
 
 
 def get_resistance_gene_count(res_headers, res_hits):
@@ -319,28 +340,12 @@ def get_resistance_gene_count(res_headers, res_hits):
     """
     if not res_headers:
         return '-'
-    res_indices = [i for i, h in enumerate(res_headers)
-                   if h.lower() != 'omp']
-
+    res_indices = [i for i, h in enumerate(res_headers) if h.lower().endswith('_acquired')]
     gene_list = []
     for i in res_indices:
         genes = res_hits[i].split(';')
-
-        # Exclude mutation-based flq resistance.
-        genes = [g for g in genes if 'gyra-' not in g.lower()]
-        genes = [g for g in genes if 'parc-' not in g.lower()]
-
-        # Exclude truncation-based resistance.
-        genes = [g for g in genes if '%' not in g]
-
-        # Exclude intrinsic bla genes.
-        genes = [g for g in genes if 'shv-' not in g.lower()]
-        genes = [g for g in genes if 'okp-' not in g.lower()]
-        genes = [g for g in genes if 'len-' not in g.lower()]
-
         genes = [g for g in genes if g != '-']
         gene_list += genes
-
     return len(gene_list)
 
 
@@ -369,6 +374,10 @@ def get_iro_mlst_header():
     return ['iroB', 'iroC', 'iroD', 'iroN']
 
 
+def get_rmp_mlst_header():
+    return ['rmpA', 'rmpD', 'rmpC']
+
+
 def gunzip_contigs_if_necessary(contigs, temp_dir):
     if get_compression_type(contigs) == 'gz':
         name = get_strain_name(contigs)
@@ -385,26 +394,19 @@ def decompress_file(in_file, out_file):
         o.write(s)
 
 
-def get_chromosome_mlst_results(data_folder, contigs, kp_complex):
+def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
     chromosome_mlst_header = get_chromosome_mlst_header()
 
     if kp_complex:
         seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
         database = data_folder + '/kpneumoniae.txt'
-        results = mlst_blast(seqs, database, 'no', [contigs], min_cov=80,
-                             min_ident=95,  # deliberately high threshold for MLST
-                             maxmissing=3, print_header=False)
-        chr_st, chr_st_detail = results[1], results[2:]
+        chr_st, chr_st_detail, _, _ = \
+            mlst_blast(seqs, database, 'no', [contigs], min_cov=args.min_coverage,
+                       min_ident=args.min_identity, max_missing=3, allow_multiple=False)
         if chr_st != '0':
             chr_st = 'ST' + chr_st
+        chr_st_with_subsp = get_kp_subspecies_based_on_st(chr_st)
 
-        # ST67 and ST90 get special 'subspecies' names.
-        chr_st_with_subsp = chr_st
-        if chr_st_with_subsp == 'ST90':
-            chr_st_with_subsp = 'ST90 (subsp. ozanae)'
-        if chr_st_with_subsp == 'ST67':
-            chr_st_with_subsp = 'ST67 (subsp. rhinoscleromatis)'
-            
         assert len(chromosome_mlst_header) == len(chr_st_detail)
 
         results = {'ST': chr_st_with_subsp,
@@ -419,77 +421,118 @@ def get_chromosome_mlst_results(data_folder, contigs, kp_complex):
     return results
 
 
+def get_kp_subspecies_based_on_st(chr_st):
+    ozaenae_sts = {'ST90', 'ST91', 'ST92', 'ST93', 'ST95', 'ST96', 'ST97', 'ST381', 'ST777',
+                   'ST3193', 'ST3766', 'ST3768', 'ST3771', 'ST3781', 'ST3782', 'ST3784', 'ST3802',
+                   'ST3803'}
+    rhinoscleromatis_sts = {'ST67', 'ST68', 'ST69', 'ST3772', 'ST3819'}
+    chr_st_minus_1lv = chr_st.replace('-1LV', '')  # 1LV still results in a subspecies call
+    if chr_st_minus_1lv in ozaenae_sts:
+        return chr_st + ' (subsp. ozaenae)'
+    if chr_st_minus_1lv in rhinoscleromatis_sts:
+        return chr_st + ' (subsp. rhinoscleromatis)'
+    return chr_st
+
+
 def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_txt,
                                   vir_name, vir_st_name, unknown_group_name, min_gene_count,
-                                  header_function):
+                                  header_function, args):
     seqs = data_folder + '/' + alleles_fasta
     database = data_folder + '/' + profiles_txt
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=80, min_ident=95, maxmissing=3,
-                         print_header=False)
-    group, st, st_detail = results[1], results[2], results[3:]
-    if group == '':
-        if sum(0 if x == '-' else 1 for x in st_detail) >= min_gene_count:
-            group = unknown_group_name
-            st = '0'
-        else:
-            group = '-'
-
     mlst_header = header_function()
+    max_missing = len(mlst_header) - min_gene_count
+
+    st, st_detail, group, spurious_hits = \
+        mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
+                   min_ident=args.min_identity, max_missing=max_missing, check_for_truncation=True,
+                   report_incomplete=True, allow_multiple=True,
+                   min_gene_count=min_gene_count, unknown_group_name=unknown_group_name,
+                   min_spurious_cov=args.min_spurious_coverage,
+                   min_spurious_ident=args.min_spurious_identity)
+
     assert len(mlst_header) == len(st_detail)
 
     results = {vir_name: group,
                vir_st_name: st}
     results.update(dict(zip(mlst_header, st_detail)))
+    results['spurious_virulence_hits'] = ';'.join(spurious_hits)
     return results
 
 
-def get_ybt_mlst_results(data_folder, contigs):
+def get_all_virulence_results(data_folder, contigs, args):
+    virulence_results = [get_ybt_mlst_results(data_folder, contigs, args),
+                         get_clb_mlst_results(data_folder, contigs, args),
+                         get_iuc_mlst_results(data_folder, contigs, args),
+                         get_iro_mlst_results(data_folder, contigs, args),
+                         get_rmp_mlst_results(data_folder, contigs, args)]
+
+    # Merge the results from different loci together. All columns should be unique between them
+    # except for the 'spurious_virulence_hits' column which will be common to all of them.
+    results = {'spurious_virulence_hits': []}
+    for r in virulence_results:
+        for column, val in r.items():
+            if column not in results:
+                results[column] = val
+            elif column == 'spurious_virulence_hits':
+                if val != '':
+                    results['spurious_virulence_hits'].append(val)
+            else:
+                assert False
+
+    if len(results['spurious_virulence_hits']) == 0:
+        results['spurious_virulence_hits'] = '-'
+    else:
+        results['spurious_virulence_hits'] = ';'.join(results['spurious_virulence_hits'])
+    return results
+
+
+def get_ybt_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'ybt_alleles.fasta',
                                          'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
-                                         'ybt unknown', 8, get_ybt_mlst_header)
+                                         'ybt unknown', 6, get_ybt_mlst_header, args)
 
 
-def get_clb_mlst_results(data_folder, contigs):
+def get_clb_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'clb_alleles.fasta',
                                          'CbST_profiles.txt', 'Colibactin', 'CbST',
-                                         'clb unknown', 12, get_clb_mlst_header)
+                                         'clb unknown', 8, get_clb_mlst_header, args)
 
 
-def get_iuc_mlst_results(data_folder, contigs):
+def get_iuc_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'iuc_alleles.fasta',
                                          'AbST_profiles.txt', 'Aerobactin', 'AbST',
-                                         'iuc unknown', 3, get_iuc_mlst_header)
+                                         'iuc unknown', 3, get_iuc_mlst_header, args)
 
 
-def get_iro_mlst_results(data_folder, contigs):
+def get_iro_mlst_results(data_folder, contigs, args):
     return get_virulence_cluster_results(data_folder, contigs, 'iro_alleles.fasta',
                                          'SmST_profiles.txt', 'Salmochelin', 'SmST',
-                                         'iro unknown', 3, get_iro_mlst_header)
+                                         'iro unknown', 2, get_iro_mlst_header, args)
 
 
-def get_hypermucoidy_results(data_folder, contigs):
-    seqs = data_folder + '/hypermucoidy.fasta'
-    database = data_folder + '/hypermucoidy_rmpA.txt'
-    results = rmpa_blast(seqs, database, [contigs], 95.0)
-    rmpa_allele, rmpa2_allele = results[1], results[2]
-
-    return {'rmpA': rmpa_allele,
-            'rmpA2': rmpa2_allele}
+def get_rmp_mlst_results(data_folder, contigs, args):
+    return get_virulence_cluster_results(data_folder, contigs, 'rmp_alleles.fasta',
+                                         'RmST_profiles.txt', 'RmpADC', 'RmST',
+                                         'rmp unknown', 2, get_rmp_mlst_header, args)
 
 
-def get_wzi_and_k_locus_results(data_folder, contigs):
+def get_rmpa2_results(data_folder, contigs, args):
+    seqs = data_folder + '/rmpA2.fasta'
+    rmpa2_allele = rmpa2_blast(seqs, [contigs], args.min_coverage, args.min_identity)
+    return {'rmpA2': rmpa2_allele}
+
+
+def get_wzi_and_k_locus_results(data_folder, contigs, args):
     seqs = data_folder + '/wzi.fasta'
     database = data_folder + '/wzi.txt'
-    results = mlst_blast(seqs, database, 'yes', [contigs], min_cov=80, min_ident=95, maxmissing=0,
-                         print_header=False)
-    k_type = results[1]
-    if results[2] == '0':
+    bst, _, k_type, _ = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
+                                   min_ident=args.min_identity, max_missing=0, allow_multiple=False)
+    if bst == '0':
         wzi_st = '-'
     else:
-        wzi_st = 'wzi' + results[2]
+        wzi_st = 'wzi' + bst
     if k_type == '':
         k_type = '-'
-
     return {'wzi': wzi_st,
             'K_locus': k_type}
 
@@ -498,7 +541,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
     if not pathlib.Path(contigs).is_file():
         raise OSError
     if args.resistance:
-        gene_info, _, _ = read_class_file(data_folder + '/ARGannot_clustered80_r3.csv')
+        gene_info, _, _ = read_class_file(data_folder + '/CARD_AMR_clustered.csv')
 
         # Only do mutation/truncation tests for Kp complex species.
         if kp_complex:
@@ -508,23 +551,32 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
         else:
             qrdr, trunc, omp = None, None, None
 
-        seqs = data_folder + '/ARGannot_r3.fasta'
+        seqs = data_folder + '/CARD_v3.0.8.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
-                                         min_cov=80.0, min_ident=90.0)
-        return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-'
-                for r in res_headers}
+                                         args.min_coverage,  args.min_identity,
+                                         args.min_spurious_coverage, args.min_spurious_identity)
+
+        # Double check that there weren't any results without a corresponding output header.
+        for h in res_hits.keys():
+            if h not in res_headers:
+                sys.exit( f'Error: results contained a value ({h}) that is not covered by the '
+                          f'output headers')
+
+        return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-' for r in res_headers}
     else:
         return {}
 
 
-def get_summary_results(results, res_headers):
-    res_hits = [results[x] for x in res_headers]
-    return {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
-                                                       results['Colibactin'],
-                                                       results['Aerobactin'])),
-            'resistance_score': str(get_resistance_score(res_headers, res_hits)),
-            'num_resistance_classes': str(get_resistance_class_count(res_headers, res_hits)),
-            'num_resistance_genes': str(get_resistance_gene_count(res_headers, res_hits))}
+def get_summary_results(results, res_headers, args):
+    summary = {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
+                                                          results['Colibactin'],
+                                                          results['Aerobactin']))}
+    if args.resistance:
+        res_hits = [results[x] for x in res_headers]
+        summary['resistance_score'] = str(get_resistance_score(res_headers, res_hits))
+        summary['num_resistance_classes'] = str(get_resistance_class_count(res_headers, res_hits))
+        summary['num_resistance_genes'] = str(get_resistance_gene_count(res_headers, res_hits))
+    return summary
 
 
 def output_headers(stdout_header, full_header, outfile):
@@ -540,6 +592,12 @@ def output_results(stdout_header, full_header, outfile, results):
         o.write('\t'.join([results[x] for x in full_header]))
         o.write('\n')
 
+    # Double check that there weren't any results without a corresponding output header.
+    for h in results.keys():
+        if h not in full_header:
+            sys.exit(f'Error: results contained a value ({h}) that is not covered by the output '
+                     f'headers')
+
 
 def get_strain_name(full_path):
     filename = os.path.split(full_path)[1]
@@ -548,6 +606,13 @@ def get_strain_name(full_path):
     if filename.endswith('.gz'):
         filename = filename[:-3]
     return os.path.splitext(filename)[0]
+
+
+def rebuild_blast_indices(data_dir):
+    for fasta in pathlib.Path(data_dir).glob('*.fasta'):
+        makeblastdb_cmd = ['makeblastdb', '-dbtype', 'nucl', '-in', str(fasta)]
+        with open(os.devnull, 'w') as devnull:
+            subprocess.check_call(makeblastdb_cmd, stdout=devnull)
 
 
 if __name__ == '__main__':
