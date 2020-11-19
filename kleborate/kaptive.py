@@ -70,7 +70,7 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, one_thread):
         kaptive_prefix = tmp_dir + '/kaptive'
         kaptive_table = kaptive_prefix + '_table.txt'
 
-        p = subprocess.Popen('python3 ' + kaptive_py +
+        p = subprocess.Popen(sys.executable + ' ' + kaptive_py +
                              ' -a ' + contigs +
                              ' -k ' + kaptive_db +
                              ' -o ' + kaptive_prefix +
