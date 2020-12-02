@@ -1568,8 +1568,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-107,Bla,SHV-OKP-LEN,SHV-107,1568,ARO_3001156,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-26,Bla,SHV-OKP-LEN,SHV-26,1569,ARO_3001084,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_chr
 135,SHV-49,Bla,SHV-OKP-LEN,SHV-49,1570,ARO_3001106,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
-135,SHV-56.v1,Bla,SHV-OKP-LEN,SHV-56.v1,1571,ARG_AY352599,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_ESBL
-135,SHV-56.v2,Bla,SHV-OKP-LEN,SHV-56.v2,1572,ARO_3001112,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
+135,SHV-56,Bla,SHV-OKP-LEN,SHV-56,1572,ARO_3001112,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-72,Bla,SHV-OKP-LEN,SHV-72,1573,ARO_3001126,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-110,Bla,SHV-OKP-LEN,SHV-110,1574,ARO_3001159,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
 135,SHV-145,Bla,SHV-OKP-LEN,SHV-145,1575,ARO_3001185,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_chr
