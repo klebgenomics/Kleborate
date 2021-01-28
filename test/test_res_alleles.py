@@ -148,3 +148,43 @@ class TestResAlleles(unittest.TestCase):
         self.assertEqual(results['Bla_ESBL_acquired'], '-')
         self.assertEqual(results['spurious_resistance_hits'], 'ABC-1?-50%')
 
+    def test_res_14(self):
+        """
+        I added this test to catch a weird BLAST-related bug where an exact amino acid match for
+        SHV-51 was present but not being found.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/14.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Bla_chr'], 'SHV-51^')
+        self.assertEqual(results['Bla_acquired'], '-')
+        self.assertEqual(results['Bla_ESBL_acquired'], '-')
+        self.assertEqual(results['spurious_resistance_hits'], '-')
+
+    def test_res_15(self):
+        """
+        Same as the previous test, but with the nucleotide sequence reverse-complemented.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/15.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Bla_chr'], 'SHV-51^')
+        self.assertEqual(results['Bla_acquired'], '-')
+        self.assertEqual(results['Bla_ESBL_acquired'], '-')
+        self.assertEqual(results['spurious_resistance_hits'], '-')
+
+    def test_res_16(self):
+        """
+        I added this test to catch a weird BLAST-related bug where an exact amino acid match for
+        sul2 was present but not being found.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/16.fasta', self.args,
+                                         self.res_headers, True)
+        print(results)
+        self.assertEqual(results['Sul_acquired'], 'sul2^')
+
+    def test_res_17(self):
+        """
+        Same as the previous test, but with the nucleotide sequence reverse-complemented.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/17.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Sul_acquired'], 'sul2^')
