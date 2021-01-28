@@ -20,6 +20,7 @@ import tempfile
 
 from Bio import pairwise2
 from Bio.Align import substitution_matrices
+from Bio.Seq import Seq
 
 from .blastn import run_blastn
 from .shv_mutations import check_for_shv_mutations
@@ -111,7 +112,8 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
         coverage = hit.alignment_length / hit.ref_length * 100.0
         if coverage >= min_spurious_cov:
             if hit.pcid < 100.0:
-                aa_result = check_for_exact_aa_match(seqs, hit.hit_seq.replace('-', ''))
+                hit_seq, _, _ = hit.get_seq_start_end_pos_strand()
+                aa_result = check_for_exact_aa_match(seqs, hit_seq)
                 if aa_result is not None:
                     hit.gene_id = aa_result
                     exact_match = True
@@ -175,18 +177,22 @@ def check_for_exact_aa_match(seqs, gene_nucl_seq):
     This function checks to see if an exact amino acid match can be found for a sequence that had
     an inexact nucleotide match. If so, return the gene_id, otherwise None.
     """
+    # Translate the gene sequence to protein:
+    coding_dna = Seq(gene_nucl_seq)
+    gene_prot_seq = str(coding_dna.translate(table='Bacterial', to_stop=False))
+
     with tempfile.TemporaryDirectory() as tmp_dir:
         # Save just the query allele in a temporary FASTA file.
         q_filename = tmp_dir + '/query.fasta'
         with open(q_filename, 'wt') as q_fasta:
             q_fasta.write('>query\n')
-            q_fasta.write(gene_nucl_seq)
+            q_fasta.write(gene_prot_seq)
             q_fasta.write('\n')
 
         # tblastx: translated query to translated database
-        tblastx_cmd = 'tblastx -db ' + seqs + ' -query ' + q_filename + ' -query_gencode 11' + \
-                      " -db_gencode 11 -outfmt '6 bitscore sacc pident slen length sstart send'"
-        process = subprocess.Popen(tblastx_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
+        tblastn_cmd = 'tblastn -db ' + seqs + ' -query ' + q_filename + ' -db_gencode 11' + \
+                      " -outfmt '6 bitscore sacc pident slen length sstart send'"
+        process = subprocess.Popen(tblastn_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
         blast_output = process.communicate()[0]
         if not isinstance(blast_output, str):
             blast_output = blast_output.decode()
