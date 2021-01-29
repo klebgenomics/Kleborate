@@ -23,6 +23,7 @@ from Bio.Align import substitution_matrices
 from Bio.Seq import Seq
 
 from .blastn import run_blastn
+from .misc import load_fasta
 from .shv_mutations import check_for_shv_mutations
 from .truncation import truncation_check
 
@@ -177,48 +178,18 @@ def check_for_exact_aa_match(seqs, gene_nucl_seq):
     This function checks to see if an exact amino acid match can be found for a sequence that had
     an inexact nucleotide match. If so, return the gene_id, otherwise None.
     """
-    # Translate the gene sequence to protein:
-    coding_dna = Seq(gene_nucl_seq)
-    gene_prot_seq = str(coding_dna.translate(table='Bacterial', to_stop=False))
+    gene_prot_seq = str(Seq(gene_nucl_seq).translate(table='Bacterial', to_stop=False))
 
-    with tempfile.TemporaryDirectory() as tmp_dir:
-        # Save just the query allele in a temporary FASTA file.
-        q_filename = tmp_dir + '/query.fasta'
-        with open(q_filename, 'wt') as q_fasta:
-            q_fasta.write('>query\n')
-            q_fasta.write(gene_prot_seq)
-            q_fasta.write('\n')
+    exact_matches = []
+    for name, ref_nucl_seq in load_fasta(seqs):
+        ref_prot_seq = str(Seq(ref_nucl_seq).translate(table='Bacterial', to_stop=False))
+        if gene_prot_seq == ref_prot_seq:
+            exact_matches.append(name)
 
-        # tblastx: translated query to translated database
-        tblastn_cmd = 'tblastn -db ' + seqs + ' -query ' + q_filename + ' -db_gencode 11' + \
-                      " -outfmt '6 bitscore sacc pident slen length sstart send'"
-        process = subprocess.Popen(tblastn_cmd, stdout=subprocess.PIPE, stderr=None, shell=True)
-        blast_output = process.communicate()[0]
-        if not isinstance(blast_output, str):
-            blast_output = blast_output.decode()
-
-        # Load in the BLAST results.
-        blast_results = []
-        for line in blast_output.splitlines():
-            p = line.strip().split('\t')
-            bitscore, gene_id, pcid, length, allele_length, allele_start, allele_end = \
-                float(p[0]), p[1], float(p[2]), float(p[3]), float(p[4]), int(p[5]), int(p[6])
-            cov = 100.0 * allele_length * 3.0 / length
-
-            # Only keep perfect matches (identity and coverage of 100%) on the forward ref strand.
-            if pcid == 100.0 and cov == 100.0 and allele_start < allele_end:
-                blast_results.append((pcid, cov, bitscore, gene_id, allele_length, allele_start,
-                                      allele_end))
-        if not blast_results:
-            return None
-
-        # If there are still multiple matches, we break ties first with bitscore (higher is better)
-        # and then with gene ID (alphabetically first is better).
-        blast_results = sorted(blast_results, key=lambda r: ((1.0 / r[2]), r[3]))
-
-        best_match = blast_results[0]
-        gene_id = best_match[3]
-        return gene_id
+    if not exact_matches:
+        return None
+    else:
+        return sorted(exact_matches)[0]
 
 
 def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
