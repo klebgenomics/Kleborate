@@ -178,18 +178,26 @@ def check_for_exact_aa_match(seqs, gene_nucl_seq):
     This function checks to see if an exact amino acid match can be found for a sequence that had
     an inexact nucleotide match. If so, return the gene_id, otherwise None.
     """
-    gene_prot_seq = str(Seq(gene_nucl_seq).translate(table='Bacterial', to_stop=False))
-
     exact_matches = []
     for name, ref_nucl_seq in load_fasta(seqs):
-        ref_prot_seq = str(Seq(ref_nucl_seq).translate(table='Bacterial', to_stop=False))
-        if gene_prot_seq == ref_prot_seq:
+        if is_exact_aa_match(gene_nucl_seq, ref_nucl_seq):
             exact_matches.append(name)
-
     if not exact_matches:
         return None
     else:
         return sorted(exact_matches)[0]
+
+
+def is_exact_aa_match(nucl_seq_1, nucl_seq_2):
+    # Make seqs a multiple of three in length.
+    truncated_nucl_seq_1 = nucl_seq_1[:len(nucl_seq_1) // 3 * 3]
+    truncated_nucl_seq_2 = nucl_seq_2[:len(nucl_seq_2) // 3 * 3]
+    assert len(truncated_nucl_seq_1) % 3 == 0
+    assert len(truncated_nucl_seq_2) % 3 == 0
+
+    prot_seq_1 = str(Seq(truncated_nucl_seq_1).translate(table='Bacterial', to_stop=False))
+    prot_seq_2 = str(Seq(truncated_nucl_seq_2).translate(table='Bacterial', to_stop=False))
+    return prot_seq_1 == prot_seq_2
 
 
 def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):

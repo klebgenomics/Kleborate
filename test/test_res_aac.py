@@ -48,12 +48,12 @@ class TestResAac(unittest.TestCase):
     def test_res_04(self):
         """
         This is a tricky one (and the one which first highlighted the problem). The best bit-score
-        match is for a partial hit to Ant3''Ih-Aac6-IId, but the correct answer is Aac6Ib-cr, which
-        has a full coverage hit.
+        match is for a partial hit to Ant3''Ih-Aac6-IId, and there is an exact amino acid match to
+        Aac6Ib-cr, but the best overall match is to a truncated allele: Aac6-Ib.
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/04.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly_acquired'], 'Aac6Ib-cr^')
+        self.assertEqual(results['truncated_resistance_hits'], 'Aac6-Ib*?-0%')
 
     def test_res_05(self):
         """
@@ -61,4 +61,4 @@ class TestResAac(unittest.TestCase):
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_aac/05.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['AGly_acquired'], 'Aac6Ib-cr^')
+        self.assertEqual(results['truncated_resistance_hits'], 'Aac6-Ib*?-0%')
