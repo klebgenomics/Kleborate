@@ -16,6 +16,7 @@ import collections
 import unittest
 
 from kleborate.__main__ import get_output_headers, get_resistance_results
+from kleborate.resBLAST import is_exact_aa_match
 
 
 class TestResAlleles(unittest.TestCase):
@@ -188,3 +189,83 @@ class TestResAlleles(unittest.TestCase):
         results = get_resistance_results(self.data_dir, 'test/test_res_alleles/17.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Sul_acquired'], 'sul2^')
+
+    def test_exact_aa_match_1(self):
+        """
+        Simple case: full protein sequence ending in a stop codon.
+          seq_1 -> MNKSLIIFGI*
+          seq_2 -> MNKSLIIFGI*
+        """
+        seq_1 = 'ATGAATAAATCGCTAATCATTTTCGGCATCTAA'
+        seq_2 = 'ATGAATAAATCGCTAATCATTTTCGGCATCTAA'
+        self.assertTrue(is_exact_aa_match(seq_1, seq_2))
+
+    def test_exact_aa_match_2(self):
+        """
+        These two seqs have a stop codon in the middle but still match exactly.
+          seq_1 -> MNKSLIIF*GI
+          seq_2 -> MNKSLIIF*GI
+        """
+        seq_1 = 'ATGAATAAATCGCTAATCATTTTCTAAGGCATC'
+        seq_2 = 'ATGAACAAGTCGCTCATCATTTTCTAAGGCATC'
+        self.assertTrue(is_exact_aa_match(seq_1, seq_2))
+
+    def test_exact_aa_match_3(self):
+        """
+        These two seqs have a stop codon in the middle and mismatch after the stop.
+          seq_1 -> MNKSLIIF*GI
+          seq_2 -> MNKSLIIF*TL
+        """
+        seq_1 = 'ATGAATAAATCGCTAATCATTTTCTAAGGCATC'
+        seq_2 = 'ATGAACAAGTCGCTCATCATTTTCTAAACCTTA'
+        self.assertFalse(is_exact_aa_match(seq_1, seq_2))
+
+    def test_exact_aa_match_4(self):
+        """
+        These two seqs have a stop codon in the middle and mismatch after the stop.
+          seq_1 -> MNK*NYRTDYD
+          seq_2 -> MNK*VD*LAGP
+        """
+        seq_1 = 'ATGAATAAATAAAACTATCGTACGGACTACGAC'
+        seq_2 = 'ATGAACAAGTAAGTCGACTGACTAGCTGGACCC'
+        self.assertFalse(is_exact_aa_match(seq_1, seq_2))
+
+    def test_exact_aa_match_5(self):
+        """
+        These two seqs are non-multiple-of-three in length and match in their remainder.
+          seq_1 -> MNKSLIIFG (+AT)
+          seq_2 -> MNKSLIIFG (+AT)
+        """
+        seq_1 = 'ATGAATAAATCGCTAATCATTTTCGGCAT'
+        seq_2 = 'ATGAACAAGTCGCTCATCATTTTCGGGAT'
+        self.assertTrue(is_exact_aa_match(seq_1, seq_2))
+
+    def test_exact_aa_match_6(self):
+        """
+        These two seqs are non-multiple-of-three in length and match in their remainder.
+          seq_1 -> MNKSLIIFG (+AT)
+          seq_2 -> MNKSLIIFG (+A)
+        """
+        seq_1 = 'ATGAATAAATCGCTAATCATTTTCGGCAT'
+        seq_2 = 'ATGAACAAGTCGCTCATCATTTTCGGGA'
+        self.assertTrue(is_exact_aa_match(seq_1, seq_2))
+
+    def test_exact_aa_match_7(self):
+        """
+        These two seqs are non-multiple-of-three in length and don't match in their remainder.
+          seq_1 -> MNKSLIIFG (+AT)
+          seq_2 -> MNKSLIIFG (+CC)
+        """
+        seq_1 = 'ATGAATAAATCGCTAATCATTTTCGGCAT'
+        seq_2 = 'ATGAACAAGTCGCTCATCATTTTCGGGCC'
+        self.assertTrue(is_exact_aa_match(seq_1, seq_2))
+
+    def test_exact_aa_match_8(self):
+        """
+        The first seq's protein sequence contains the second seq's protein sequence.
+          seq_1 -> DTMNKSLGI*RS
+          seq_2 -> MNKSLGI*
+        """
+        seq_1 = 'GACACGATGAATAAATCGCTAGGCATCTAACGATCA'
+        seq_2 = 'ATGAACAAGTCGCTCGGGATCTAA'
+        self.assertFalse(is_exact_aa_match(seq_1, seq_2))
