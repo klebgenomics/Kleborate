@@ -268,4 +268,4 @@ class TestResAlleles(unittest.TestCase):
         """
         seq_1 = 'GACACGATGAATAAATCGCTAGGCATCTAACGATCA'
         seq_2 = 'ATGAACAAGTCGCTCGGGATCTAA'
-        self.assertFalse(is_exact_aa_match(seq_1, seq_2))
+        self.assertTrue(is_exact_aa_match(seq_1, seq_2))

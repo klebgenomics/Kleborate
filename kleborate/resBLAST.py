@@ -176,28 +176,49 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
 def check_for_exact_aa_match(seqs, gene_nucl_seq):
     """
     This function checks to see if an exact amino acid match can be found for a sequence that had
-    an inexact nucleotide match. If so, return the gene_id, otherwise None.
+    an inexact nucleotide match. If so, return the gene_id, otherwise None. If multiple references
+    have exact amino acid matches, it returns the longest one. If multiple references have
+    equally-long exact amino acid matches, it returns the alphabetically first.
     """
-    exact_matches = []
+    best_match_length = 0
+    best_matches = []
     for name, ref_nucl_seq in load_fasta(seqs):
         if is_exact_aa_match(gene_nucl_seq, ref_nucl_seq):
-            exact_matches.append(name)
-    if not exact_matches:
+            if len(ref_nucl_seq) > best_match_length:
+                best_matches = [name]
+                best_match_length = len(ref_nucl_seq)
+            elif len(ref_nucl_seq) == best_match_length:
+                best_matches.append(name)
+    if not best_matches:
         return None
     else:
-        return sorted(exact_matches)[0]
+        return sorted(best_matches)[0]
 
 
-def is_exact_aa_match(nucl_seq_1, nucl_seq_2):
-    # Make seqs a multiple of three in length.
-    truncated_nucl_seq_1 = nucl_seq_1[:len(nucl_seq_1) // 3 * 3]
-    truncated_nucl_seq_2 = nucl_seq_2[:len(nucl_seq_2) // 3 * 3]
-    assert len(truncated_nucl_seq_1) % 3 == 0
-    assert len(truncated_nucl_seq_2) % 3 == 0
+def is_exact_aa_match(gene_nucl_seq_1, ref_nucl_seq):
+    # We look at the gene nucleotide sequence in all three frames of the forward strand.
+    gene_nucl_seq_2 = gene_nucl_seq_1[1:]
+    gene_nucl_seq_3 = gene_nucl_seq_1[2:]
+    truncated_gene_nucl_seq_1 = gene_nucl_seq_1[:len(gene_nucl_seq_1) // 3 * 3]
+    truncated_gene_nucl_seq_2 = gene_nucl_seq_2[:len(gene_nucl_seq_2) // 3 * 3]
+    truncated_gene_nucl_seq_3 = gene_nucl_seq_3[:len(gene_nucl_seq_3) // 3 * 3]
+    assert len(truncated_gene_nucl_seq_1) % 3 == 0
+    assert len(truncated_gene_nucl_seq_2) % 3 == 0
+    assert len(truncated_gene_nucl_seq_3) % 3 == 0
 
-    prot_seq_1 = str(Seq(truncated_nucl_seq_1).translate(table='Bacterial', to_stop=False))
-    prot_seq_2 = str(Seq(truncated_nucl_seq_2).translate(table='Bacterial', to_stop=False))
-    return prot_seq_1 == prot_seq_2
+    # The reference nucleotide sequence is only used in its first frame.
+    truncated_ref_nucl_seq = ref_nucl_seq[:len(ref_nucl_seq) // 3 * 3]
+    assert len(truncated_ref_nucl_seq) % 3 == 0
+
+    # Since they are all multiples-of-three in length, we can now translate them.
+    gene_prot_1 = str(Seq(truncated_gene_nucl_seq_1).translate(table='Bacterial', to_stop=False))
+    gene_prot_2 = str(Seq(truncated_gene_nucl_seq_2).translate(table='Bacterial', to_stop=False))
+    gene_prot_3 = str(Seq(truncated_gene_nucl_seq_3).translate(table='Bacterial', to_stop=False))
+    ref_prot = str(Seq(truncated_ref_nucl_seq).translate(table='Bacterial', to_stop=False))
+
+    # If the reference protein sequence is contained within any frame of the gene protein sequence,
+    # that counts as a match.
+    return (ref_prot in gene_prot_1) or (ref_prot in gene_prot_2) or (ref_prot in gene_prot_3)
 
 
 def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
