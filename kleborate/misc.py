@@ -18,7 +18,7 @@ import sys
 
 def load_fasta(filename):
     """
-    Returns the names and sequences for the given fasta file.
+    Returns the names and sequences for the given fasta file as a list of tuples (name, seq).
     """
     fasta_seqs = []
     with get_open_func(filename)(filename, 'rt') as fasta_file:
