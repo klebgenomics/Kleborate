@@ -101,6 +101,10 @@ gh-md-toc
 *.nhr
 *.nin
 *.nsq
+*.ndb
+*.not
+*.ntf
+*.nto
 *.phr
 *.pin
 *.psq
