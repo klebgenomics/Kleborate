@@ -15,15 +15,14 @@ not, see <http://www.gnu.org/licenses/>.
 """
 
 import collections
-import subprocess
-import tempfile
 
 from Bio import pairwise2
 from Bio.Align import substitution_matrices
 from Bio.Seq import Seq
+from Bio.Data.CodonTable import TranslationError
 
 from .blastn import run_blastn
-from .misc import load_fasta
+from .misc import load_fasta, reverse_complement
 from .shv_mutations import check_for_shv_mutations
 from .truncation import truncation_check
 
@@ -113,8 +112,7 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
         coverage = hit.alignment_length / hit.ref_length * 100.0
         if coverage >= min_spurious_cov:
             if hit.pcid < 100.0:
-                hit_seq, _, _ = hit.get_seq_start_end_pos_strand()
-                aa_result = check_for_exact_aa_match(seqs, hit_seq)
+                aa_result = check_for_exact_aa_match(seqs, hit, contigs)
                 if aa_result is not None:
                     hit.gene_id = aa_result
                     exact_match = True
@@ -173,17 +171,62 @@ def blast_against_all(seqs, min_cov, min_ident, contigs, gene_info, min_spurious
     return hits_dict
 
 
-def check_for_exact_aa_match(seqs, gene_nucl_seq):
+def check_for_exact_aa_match(seqs, hit, contigs):
     """
     This function checks to see if an exact amino acid match can be found for a sequence that had
     an inexact nucleotide match. If so, return the gene_id, otherwise None. If multiple references
     have exact amino acid matches, it returns the longest one. If multiple references have
     equally-long exact amino acid matches, it returns the alphabetically first.
     """
+    # First, we extract the nucleotide sequence from the assembly.
+    hit_seq, _, _ = hit.get_seq_start_end_pos_strand()
+    assembly_seqs = dict(load_fasta(contigs))
+    contig_start, contig_end = hit.contig_start-1, hit.contig_end  # 1-based to 0-based indexing
+    contig_length = len(assembly_seqs[hit.contig_name])
+    gene_nucl_seq = assembly_seqs[hit.contig_name][contig_start:contig_end]
+    if hit.strand == 'minus':
+        gene_nucl_seq = reverse_complement(gene_nucl_seq)
+    assert hit_seq == gene_nucl_seq
+
+    # We also need to check whether the first few or last few bases of the sequence is missing.
+    # This is to catch cases where an alternative start/stop codon can lead to an incomplete
+    # nucleotide match even when there is an exact amino acid match. If we find that the hit is
+    # missing start or end bases (relative to the reference), then we add those back on and will
+    # include this augmented sequence in the exact amino acid check.
+    ref_seqs = load_fasta(seqs)
+    ref_length = len(dict(ref_seqs)[hit.gene_id])
+    ref_start, ref_end = sorted([hit.ref_start, hit.ref_end])
+    ref_start -= 1  # 1-based to 0-based indexing
+    missing_start = ref_start
+    missing_end = ref_length - ref_end
+    if missing_start == 0 and missing_end == 0:
+        augmented_gene_nucl_seq = None
+    elif missing_start > 10 and missing_end > 10:  # don't bother with too much missing start/end
+        augmented_gene_nucl_seq = None
+    else:
+        if hit.strand == 'plus':
+            contig_start -= missing_start
+            contig_end += missing_end
+        elif hit.strand == 'minus':
+            contig_start -= missing_end
+            contig_end += missing_start
+        else:
+            assert False
+        contig_start = max(contig_start, 0)
+        contig_end = min(contig_end, contig_length)
+        augmented_gene_nucl_seq = assembly_seqs[hit.contig_name][contig_start:contig_end]
+        if hit.strand == 'minus':
+            augmented_gene_nucl_seq = reverse_complement(augmented_gene_nucl_seq)
+
+    # Look for an amino acid match between the assembly sequence and any reference sequence.
     best_match_length = 0
     best_matches = []
-    for name, ref_nucl_seq in load_fasta(seqs):
-        if is_exact_aa_match(gene_nucl_seq, ref_nucl_seq):
+    for name, ref_nucl_seq in ref_seqs:
+        match = is_exact_aa_match(gene_nucl_seq, ref_nucl_seq)
+        if augmented_gene_nucl_seq is not None and \
+                is_exact_aa_match(augmented_gene_nucl_seq, ref_nucl_seq):
+            match = True
+        if match:
             if len(ref_nucl_seq) > best_match_length:
                 best_matches = [name]
                 best_match_length = len(ref_nucl_seq)
@@ -199,26 +242,30 @@ def is_exact_aa_match(gene_nucl_seq_1, ref_nucl_seq):
     # We look at the gene nucleotide sequence in all three frames of the forward strand.
     gene_nucl_seq_2 = gene_nucl_seq_1[1:]
     gene_nucl_seq_3 = gene_nucl_seq_1[2:]
-    truncated_gene_nucl_seq_1 = gene_nucl_seq_1[:len(gene_nucl_seq_1) // 3 * 3]
-    truncated_gene_nucl_seq_2 = gene_nucl_seq_2[:len(gene_nucl_seq_2) // 3 * 3]
-    truncated_gene_nucl_seq_3 = gene_nucl_seq_3[:len(gene_nucl_seq_3) // 3 * 3]
-    assert len(truncated_gene_nucl_seq_1) % 3 == 0
-    assert len(truncated_gene_nucl_seq_2) % 3 == 0
-    assert len(truncated_gene_nucl_seq_3) % 3 == 0
 
-    # The reference nucleotide sequence is only used in its first frame.
-    truncated_ref_nucl_seq = ref_nucl_seq[:len(ref_nucl_seq) // 3 * 3]
-    assert len(truncated_ref_nucl_seq) % 3 == 0
-
-    # Since they are all multiples-of-three in length, we can now translate them.
-    gene_prot_1 = str(Seq(truncated_gene_nucl_seq_1).translate(table='Bacterial', to_stop=False))
-    gene_prot_2 = str(Seq(truncated_gene_nucl_seq_2).translate(table='Bacterial', to_stop=False))
-    gene_prot_3 = str(Seq(truncated_gene_nucl_seq_3).translate(table='Bacterial', to_stop=False))
-    ref_prot = str(Seq(truncated_ref_nucl_seq).translate(table='Bacterial', to_stop=False))
+    gene_prot_1 = translate_nucl_to_prot(gene_nucl_seq_1)
+    gene_prot_2 = translate_nucl_to_prot(gene_nucl_seq_2)
+    gene_prot_3 = translate_nucl_to_prot(gene_nucl_seq_3)
+    ref_prot = translate_nucl_to_prot(ref_nucl_seq)
 
     # If the reference protein sequence is contained within any frame of the gene protein sequence,
     # that counts as a match.
     return (ref_prot in gene_prot_1) or (ref_prot in gene_prot_2) or (ref_prot in gene_prot_3)
+
+
+def translate_nucl_to_prot(nucl_seq):
+    # First try to translate as a complete coding sequence. This will allow for alternative start
+    # codons (e.g. GTG -> M) if it works. We have to manually add the stop codon (*) here because
+    # using cds=True turns that off.
+    try:
+        return str(Seq(nucl_seq).translate(table='Bacterial', to_stop=False, cds=True)) + '*'
+    except TranslationError:
+        pass
+
+    # If that failed, we will translate in a more relaxed way using a nucleotide sequence truncated
+    # to a multiple-of-three length.
+    truncated_nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
+    return str(Seq(truncated_nucl_seq).translate(table='Bacterial', to_stop=False, cds=False))
 
 
 def check_for_qrdr_mutations(hits_dict, contigs, qrdr, min_ident, min_cov):
