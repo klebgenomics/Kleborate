@@ -190,6 +190,24 @@ class TestResAlleles(unittest.TestCase):
                                          self.res_headers, True)
         self.assertEqual(results['Sul_acquired'], 'sul2^')
 
+    def test_res_18(self):
+        """
+        I added this test to catch a bug where there is an exact amino acid match but inexact
+        nucleotide match, and it's the very last base that differs (alternate stop codon).
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/18.fasta', self.args,
+                                         self.res_headers, True)
+        print(results)
+        self.assertEqual(results['Bla_chr'], 'OKP-B-6^')
+
+    def test_res_19(self):
+        """
+        Same as the previous test, but with the nucleotide sequence reverse-complemented.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/19.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Bla_chr'], 'OKP-B-6^')
+
     def test_exact_aa_match_1(self):
         """
         Simple case: full protein sequence ending in a stop codon.
