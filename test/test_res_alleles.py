@@ -192,8 +192,8 @@ class TestResAlleles(unittest.TestCase):
 
     def test_res_18(self):
         """
-        I added this test to catch a bug where there is an exact amino acid match but inexact
-        nucleotide match, and it's the very last base that differs (alternate stop codon).
+        This is the uncomplicated case for a OKP-B-6^ result (later tests cover more challenging
+        cases).
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_alleles/18.fasta', self.args,
                                          self.res_headers, True)
@@ -205,6 +205,42 @@ class TestResAlleles(unittest.TestCase):
         Same as the previous test, but with the nucleotide sequence reverse-complemented.
         """
         results = get_resistance_results(self.data_dir, 'test/test_res_alleles/19.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Bla_chr'], 'OKP-B-6^')
+
+    def test_res_20(self):
+        """
+        I added this test to catch a bug where there is an exact amino acid match but inexact
+        nucleotide match, and it's the very last base that differs (alternate stop codon).
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/20.fasta', self.args,
+                                         self.res_headers, True)
+        print(results)
+        self.assertEqual(results['Bla_chr'], 'OKP-B-6^')
+
+    def test_res_21(self):
+        """
+        Same as the previous test, but with the nucleotide sequence reverse-complemented.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/21.fasta', self.args,
+                                         self.res_headers, True)
+        self.assertEqual(results['Bla_chr'], 'OKP-B-6^')
+
+    def test_res_22(self):
+        """
+        I added this test to catch a bug where there is an exact amino acid match but inexact
+        nucleotide match, and it's the very first base that differs (alternate start codon).
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/22.fasta', self.args,
+                                         self.res_headers, True)
+        print(results)
+        self.assertEqual(results['Bla_chr'], 'OKP-B-6^')
+
+    def test_res_23(self):
+        """
+        Same as the previous test, but with the nucleotide sequence reverse-complemented.
+        """
+        results = get_resistance_results(self.data_dir, 'test/test_res_alleles/23.fasta', self.args,
                                          self.res_headers, True)
         self.assertEqual(results['Bla_chr'], 'OKP-B-6^')
 
