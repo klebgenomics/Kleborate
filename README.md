@@ -12,7 +12,7 @@ For full documentation, please [go to the Kleborate wiki](https://github.com/kat
 
 If you use Kleborate, please cite the preprint: [Lam, MMC. et al. Genomic surveillance framework and global population structure for Klebsiella pneumoniae. bioRxiv (2020).](https://www.biorxiv.org/content/10.1101/2020.12.14.422303v2).
 
-You may also be interested in [KleborateViz](https://kleborate.erc.monash.edu/), a ShinyR app for visualising Kleborate output.
+You may also be interested in [Kleborate-viz](https://kleborate.erc.monash.edu/), a ShinyR app for visualising Kleborate output.
 
-Users not comfortable runnnig Kleborate locally via the commandline may like to try uploading your genomes (reads or assemblies) to the drag-and-drop genomic epi online platform [PathogenWatch](https://pathogen.watch/) - all genomes identified as _Klebsiella pneumoniae_ will automatically be passed to Kleborate and Kaptive to generate a genotyping report, which can be downloaded in tabular format.
+Users not comfortable runnnig Kleborate locally via the commandline may like to try uploading your genomes (reads or assemblies) to the drag-and-drop genomic epi online platform [PathogenWatch](https://pathogen.watch/) - all genomes identified as _Klebsiella pneumoniae_ will automatically be passed to Kleborate and Kaptive to generate a genotyping report, which can be downloaded in tabular format compatible with Kleborate-viz
 
