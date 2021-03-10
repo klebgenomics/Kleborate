@@ -14,7 +14,7 @@ not, see <http://www.gnu.org/licenses/>.
 
 import unittest
 
-from kleborate.kaptive import get_o_type
+from kleborate.kaptive import get_o_type, confidence_meets_threshold
 
 
 class TestKaptive(unittest.TestCase):
@@ -66,3 +66,33 @@ class TestKaptive(unittest.TestCase):
 
     def test_o_type_16(self):
         self.assertEqual(get_o_type('OL104'), 'OL104')
+
+    def test_confidence_meets_threshold_01(self):
+        self.assertTrue(confidence_meets_threshold('None', 'None'))
+
+    def test_confidence_meets_threshold_02(self):
+        self.assertTrue(confidence_meets_threshold('Good', 'Good'))
+
+    def test_confidence_meets_threshold_03(self):
+        self.assertTrue(confidence_meets_threshold('Very high', 'Very_high'))
+
+    def test_confidence_meets_threshold_04(self):
+        self.assertTrue(confidence_meets_threshold('Perfect', 'Perfect'))
+
+    def test_confidence_meets_threshold_05(self):
+        self.assertTrue(confidence_meets_threshold('Perfect', 'Good'))
+
+    def test_confidence_meets_threshold_06(self):
+        self.assertTrue(confidence_meets_threshold('Perfect', 'Very_high'))
+
+    def test_confidence_meets_threshold_07(self):
+        self.assertFalse(confidence_meets_threshold('Very high', 'Perfect'))
+
+    def test_confidence_meets_threshold_08(self):
+        self.assertFalse(confidence_meets_threshold('High', 'Very_high'))
+
+    def test_confidence_meets_threshold_09(self):
+        self.assertFalse(confidence_meets_threshold('Good', 'High'))
+
+    def test_confidence_meets_threshold_10(self):
+        self.assertFalse(confidence_meets_threshold('Low', 'Good'))

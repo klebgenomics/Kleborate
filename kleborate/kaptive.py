@@ -51,9 +51,11 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
         else:  # locus_type == 'O':
             outfile = args.kaptive_o_outfile
 
-        kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile, one_thread=False)
+        kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile,
+                                      args.min_kaptive_confidence, one_thread=False)
         if kaptive_results is None:
-            kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile, one_thread=True)
+            kaptive_results = run_kaptive(kaptive_py, kaptive_db, contigs, outfile,
+                                          args.min_kaptive_confidence, one_thread=True)
         if locus_type == 'O':
             o_locus = kaptive_results[0]
             kaptive_results.append(get_o_type(o_locus))
@@ -64,7 +66,7 @@ def get_kaptive_results(locus_type, kaptive_py, kaptive_db, contigs, args):
         return {}
 
 
-def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, one_thread):
+def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, min_confidence, one_thread):
     thread_option = ' --threads 1' if one_thread else ''
     with tempfile.TemporaryDirectory() as tmp_dir:
         kaptive_prefix = tmp_dir + '/kaptive'
@@ -92,7 +94,8 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, one_thread):
 
         if p.returncode != 0:
             if stderr:
-                sys.exit('Error: Kaptive failed to run with the following error:\n' + stderr.strip())
+                sys.exit('Error: Kaptive failed to run with the following error:\n' +
+                         stderr.strip())
             else:
                 sys.exit('Error: Kaptive failed to run')
 
@@ -135,7 +138,19 @@ def run_kaptive(kaptive_py, kaptive_db, contigs, output_file, one_thread):
     if locus is None or confidence is None or problems is None or identity is None:
         sys.exit('Error: Kaptive failed to produce the expected output')
 
+    if not confidence_meets_threshold(confidence, min_confidence):
+        locus = f'unknown (best match = {locus})'
+
     return [locus, confidence, problems, identity, ','.join(missing)]
+
+
+def confidence_meets_threshold(confidence, min_confidence):
+    """
+    Returns True if the confidence level meets or exceeds the minimum confidence level.
+    """
+    min_confidence = min_confidence.replace('_', ' ')
+    scores = {'None': 0, 'Low': 1, 'Good': 2, 'High': 3, 'Very high': 4, 'Perfect': 5}
+    return scores[confidence] >= scores[min_confidence]
 
 
 def get_o_type(o_locus):
@@ -143,8 +158,10 @@ def get_o_type(o_locus):
     This function returns an O type using the O locus. In many cases, they are the same, except for:
     * loci O1v1 and O1v2 = type O1
     * loci O2v1 and O2v2 = type O2
-    * loci O1/O2v1 and O1/O2v2 = either O1/O2 or 'unknown' (thoughts?)
+    * loci O1/O2v1 and O1/O2v2 = 'unknown'
     """
+    if 'unknown' in o_locus.lower():
+        return 'unknown'
     if 'O1/O2' in o_locus:
         return 'unknown'
     if 'v1' in o_locus:

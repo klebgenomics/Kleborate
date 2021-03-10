@@ -23,6 +23,7 @@ import tempfile
 
 from pkg_resources import resource_filename
 from .contig_stats import get_contig_stat_results
+from .help_formatter import MyParser, MyHelpFormatter
 from .kaptive import get_kaptive_paths, get_kaptive_results
 from .species import get_species_results, is_kp_complex
 from .mlstBLAST import mlst_blast
@@ -70,9 +71,9 @@ def main():
 
 
 def parse_arguments():
-    parser = argparse.ArgumentParser(description='Kleborate: a tool for characterising '
-                                                 'virulence and resistance in Klebsiella',
-                                     add_help=False)
+    parser = MyParser(description='Kleborate: a tool for characterising virulence and resistance '
+                                  'in Klebsiella',
+                      formatter_class=MyHelpFormatter, add_help=False)
 
     required_args = parser.add_argument_group('Required arguments')
     required_args.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
@@ -89,9 +90,9 @@ def parse_arguments():
                                 help='Turn on Kaptive screening of O loci (default: do not run '
                                      'Kaptive for O loci)')
     screening_args.add_argument('-k', '--kaptive', action='store_true',
-                                help='Equivalent to --kaptive_k --kaptive_o')
+                                help='Equivalent to --kaptive_k --kaptive_o NO_DEFAULT')
     screening_args.add_argument('--all', action='store_true',
-                                help='Equivalent to --resistance --kaptive')
+                                help='Equivalent to --resistance --kaptive NO_DEFAULT')
 
     output_args = parser.add_argument_group('Output options')
     output_args.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
@@ -105,17 +106,23 @@ def parse_arguments():
 
     setting_args = parser.add_argument_group('Settings')
     setting_args.add_argument('--min_identity', type=float, default=90.0,
-                              help='Minimum alignment identity for main results')
+                              help='Minimum alignment percent identity for main results')
     setting_args.add_argument('--min_coverage', type=float, default=80.0,
-                              help='Minimum alignment coverage for main results')
+                              help='Minimum alignment percent coverage for main results')
     setting_args.add_argument('--min_spurious_identity', type=float, default=80.0,
-                              help='Minimum alignment identity for spurious results')
+                              help='Minimum alignment percent identity for spurious results')
     setting_args.add_argument('--min_spurious_coverage', type=float, default=40.0,
-                              help='Minimum alignment coverage for spurious results')
+                              help='Minimum alignment percent coverage for spurious results')
+    setting_args.add_argument('--min_kaptive_confidence', type=str,
+                              choices=['None', 'Low', 'Good', 'High', 'Very_high', 'Perfect'],
+                              default='Good',
+                              help='Minimum Kaptive confidence to call K/O loci - confidence '
+                                   'levels below this will be reported as unknown')
 
     other_args = parser.add_argument_group('Other')
     other_args.add_argument('--force_index', action='store_true',
-                            help='Rebuild the BLAST index at the start of execution')
+                            help='Rebuild the BLAST index at the start of execution (default: '
+                                 'only build BLAST indices when they are missing)')
 
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
