@@ -96,9 +96,9 @@ def get_new_header(original_header, autocolour_columns):
                 'Salmochelin', 'rmpA', 'rmpA2']:
         header.insert(find_column_index(header, col) + 1, col + '__colour')
 
-    for res in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul', 'Tet',
-                'Tgc', 'Tmt', 'Bla', 'Bla_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR', 'Bla_Carb',
-                'Omp_mutations']:
+    for res in ['AGly_acquired', 'Col_acquired', 'Fcyn_acquired', 'Flq_acquired', 'Gly_acquired', 'MLS_acquired', 'Phe_acquired', 'Rif_acquired', 'Sul_acquired', 'Tet_acquired',
+                'Tgc_acquired', 'Tmt_acquired', 'Bla_acquired', 'Bla_inhR_acquired', 'Bla_ESBL_acquired', 'Bla_ESBL_inhR_acquired', 'Bla_Carb_acquired', 'Bla_chr', 'SHV_mutations', 
+                'Col_mutations', 'Flq_mutations', 'Omp_mutations']:
         header.insert(find_column_index(header, res) + 1, res + '__colour')
         header.remove(res)
 
@@ -132,9 +132,9 @@ def get_data(line, name_subs, original_header, new_header):
     new_data['Salmochelin__colour'] = get_vir_lineage_colour(original_data['Salmochelin'])
     new_data['rmpA__colour'] = get_rmpA_colour(original_data['rmpA'])
     new_data['rmpA2__colour'] = get_rmpA2_colour(original_data['rmpA2'])
-    for res_class in ['AGly', 'Col', 'Fcyn', 'Flq', 'Gly', 'MLS', 'Ntmdz', 'Phe', 'Rif', 'Sul',
-                      'Tet', 'Tgc', 'Tmt', 'Bla', 'Bla_inhR', 'Bla_ESBL', 'Bla_ESBL_inhR',
-                      'Bla_Carb', 'Omp_mutations', 'Col_mutations', 'Flq_mutations']:
+    for res_class in ['AGly_acquired', 'Col_acquired', 'Fcyn_acquired', 'Flq_acquired', 'Gly_acquired', 'MLS_acquired', 'Phe_acquired', 'Rif_acquired', 'Sul_acquired', 'Tet_acquired',
+                      'Tgc_acquired', 'Tmt_acquired', 'Bla_acquired', 'Bla_inhR_acquired', 'Bla_ESBL_acquired', 'Bla_ESBL_inhR_acquired', 'Bla_Carb_acquired', 'Bla_chr', 'SHV_mutations', 
+                      'Col_mutations', 'Flq_mutations', 'Omp_mutations']:
         new_data[res_class + '__colour'] = get_res_class_colour(original_data[res_class])
 
     return [new_data[h] for h in new_header]
