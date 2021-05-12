@@ -40,6 +40,8 @@ def get_klebsiella_species(contigs, data_folder):
         species = species.replace('Raoultella', 'Klebsiella (Raoultella)')
         species = species.replace('_', ' ')
         species = species.replace(' subsp ', ' subsp. ')
+        if species.endswith(' unknown'):
+            species = species.replace(' unknown', ' (unknown species)')
 
         if distance < best_distance:
             best_distance = distance
