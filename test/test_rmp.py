@@ -60,7 +60,7 @@ class TestRmp(unittest.TestCase):
         self.assertEqual(results['rmpA'], '7')
         self.assertEqual(results['rmpD'], '36')
         self.assertEqual(results['rmpC'], '4-17%')
-        self.assertEqual(results['RmpADC'], 'rmp 2A; VP')
+        self.assertEqual(results['RmpADC'], 'rmp 2A; VP (truncated)')
         self.assertEqual(results['RmST'], '21')
 
     def test_rmp_novel(self):
@@ -82,7 +82,7 @@ class TestRmp(unittest.TestCase):
         self.assertEqual(results['rmpA'], '41-54%')
         self.assertEqual(results['rmpD'], '20')
         self.assertEqual(results['rmpC'], '-')
-        self.assertEqual(results['RmpADC'], 'rmp 2A; VP (incomplete)')
+        self.assertEqual(results['RmpADC'], 'rmp 2A; VP (incomplete) (truncated)')
         self.assertEqual(results['RmST'], '1-1LV')
 
     def test_rmpa2_random(self):
