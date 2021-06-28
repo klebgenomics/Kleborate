@@ -10,9 +10,14 @@ Kleborate is a tool to screen genome assemblies of _Klebsiella pneumoniae_ and t
 
 For full documentation, please [go to the Kleborate wiki](https://github.com/katholt/Kleborate/wiki)!
 
-If you use Kleborate, please cite the preprint: [Lam, MMC. et al. Genomic surveillance framework and global population structure for Klebsiella pneumoniae. bioRxiv (2020)](https://www.biorxiv.org/content/10.1101/2020.12.14.422303v2).
+### Citations
+If you use Kleborate, please cite the preprint: [Lam, MMC. et al. Genomic surveillance framework and global population structure for Klebsiella pneumoniae. bioRxiv (2020)](https://www.biorxiv.org/content/10.1101/2020.12.14.422303v2). 
 
+If you turn on the [Kaptive](https://github.com/katholt/Kaptive) option for full K and O typing, please also cite Kaptive directly:
+[Identification of _Klebsiella_ capsule synthesis loci from whole genome data. Microbial Genomics (2016).](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
+
+### Related tools
 You may also be interested in [Kleborate-viz](https://kleborate.erc.monash.edu/), a ShinyR app for visualising Kleborate output.
 
-Users not comfortable runnnig Kleborate locally via the commandline may like to try uploading your genomes (reads or assemblies) to the drag-and-drop genomic epi online platform [PathogenWatch](https://pathogen.watch/) - all genomes identified as _Klebsiella pneumoniae_ will automatically be passed to Kleborate and Kaptive to generate a genotyping report, which can be downloaded in tabular format compatible with Kleborate-viz
+Users not comfortable runnnig Kleborate locally via the commandline may like to try uploading your genomes (reads or assemblies) to the drag-and-drop genomic epi online platform [PathogenWatch](https://pathogen.watch/) - all genomes identified as _Klebsiella pneumoniae_ will automatically be passed to Kleborate and Kaptive to generate a genotyping report, which can be downloaded in tabular format compatible with Kleborate-viz. See this preprint for more about [Klebsiella Pathogenwatch](https://www.biorxiv.org/content/10.1101/2021.06.22.448967v2).
 
