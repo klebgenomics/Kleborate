@@ -73,7 +73,14 @@ def main():
 def parse_arguments():
     parser = MyParser(description='Kleborate: a tool for characterising virulence and resistance '
                                   'in Klebsiella',
-                      formatter_class=MyHelpFormatter, add_help=False)
+                      formatter_class=MyHelpFormatter, add_help=False,
+                      epilog='R|If you use Kleborate, please cite the paper:\n'
+                             '    Lam MMC, et al. A genomic surveillance framework and genotyping tool\n'
+                             '    for Klebsiella pneumoniae and its related species complex. Nature\n'
+                             '    Communications. 2021. doi:10.1038/s41467-021-24448-3.\n\n'
+                             'If you turn on the Kaptive option for full K and O typing, please also cite Kaptive:\n'
+                             '    Wyres KL, et al. Identification of Klebsiella capsule synthesis loci from\n'
+                             '    whole genome data. Microbial Genomics. 2016. doi:10.1099/mgen.0.000102.')
 
     required_args = parser.add_argument_group('Required arguments')
     required_args.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
