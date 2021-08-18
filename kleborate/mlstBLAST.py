@@ -88,7 +88,7 @@ def mlst_blast(seqs, database, info_arg, assemblies, min_cov, min_ident, max_mis
 def call_one_st(hits, header, check_for_truncation, max_missing, alleles_to_st,
                 required_exact_matches, info_arg, st_to_info, report_incomplete,
                 min_gene_count, unknown_group_name):
-    best_alleles = get_best_allele_per_locus(hits, check_for_truncation)
+    best_alleles, any_truncations = get_best_allele_per_locus(hits, check_for_truncation)
 
     best_st = []
     best_st_annotated = []
@@ -139,6 +139,8 @@ def call_one_st(hits, header, check_for_truncation, max_missing, alleles_to_st,
         info_final = st_to_info[bst]
         if report_incomplete and missing_loci > 0:
             info_final += ' (incomplete)'
+        if check_for_truncation and any_truncations:
+            info_final += ' (truncated)'
 
     if mismatch_loci_including_snps > 0 and bst != '0':
         bst += '-' + str(mismatch_loci_including_snps) + 'LV'
@@ -200,7 +202,13 @@ def get_best_allele_per_locus(hits, check_for_truncation):
             best_scores[locus] = hit.score
             best_alleles[locus] = allele.split('_')[1]  # store number only
 
-    return best_alleles
+    any_truncations = False
+    if check_for_truncation:
+        for allele in best_alleles.values():
+            if allele.endswith('%'):
+                any_truncations = True
+
+    return best_alleles, any_truncations
 
 
 def process_spurious_hits(hits):
