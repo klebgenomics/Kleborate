@@ -95,17 +95,17 @@ class TestSpecies(unittest.TestCase):
     def test_raoultella_planticola(self):
         species, _ = get_klebsiella_species('test/test_genomes/GCF_000648315.1.fna.gz',
                                             self.data_dir)
-        self.assertEqual(species, 'Klebsiella (Raoultella) planticola')
+        self.assertEqual(species, 'Klebsiella planticola')
 
     def test_raoultella_ornithinolytica(self):
         species, _ = get_klebsiella_species('test/test_genomes/GCF_000247895.1.fna.gz',
                                             self.data_dir)
-        self.assertEqual(species, 'Klebsiella (Raoultella) ornithinolytica')
+        self.assertEqual(species, 'Klebsiella ornithinolytica')
 
     def test_raoultella_terrigena(self):
         species, _ = get_klebsiella_species('test/test_genomes/GCF_000829965.1.fna.gz',
                                             self.data_dir)
-        self.assertEqual(species, 'Klebsiella (Raoultella) terrigena')
+        self.assertEqual(species, 'Klebsiella terrigena')
 
     def test_salmonella(self):
         species, _ = get_klebsiella_species('test/test_genomes/GCF_004010735.1.fna.gz',
@@ -116,6 +116,11 @@ class TestSpecies(unittest.TestCase):
         species, _ = get_klebsiella_species('test/test_genomes/GCF_003937345.1.fna.gz',
                                             self.data_dir)
         self.assertTrue('Citrobacter' in species)
+
+    def test_yersinia_unknown(self):
+        species, _ = get_klebsiella_species('test/test_genomes/GCF_001123825.1.fna.gz',
+                                            self.data_dir)
+        self.assertEqual(species, 'Yersinia (unknown species)')
 
 
 class TestKpComplex(unittest.TestCase):
@@ -156,13 +161,13 @@ class TestKpComplex(unittest.TestCase):
         self.assertTrue(is_kp_complex({'species': 'Klebsiella africana'}))
 
     def test_raoultella_planticola(self):
-        self.assertFalse(is_kp_complex({'species': 'Raoultella planticola'}))
+        self.assertFalse(is_kp_complex({'species': 'Klebsiella planticola'}))
 
     def test_raoultella_ornithinolytica(self):
-        self.assertFalse(is_kp_complex({'species': 'Raoultella ornithinolytica'}))
+        self.assertFalse(is_kp_complex({'species': 'Klebsiella ornithinolytica'}))
 
     def test_raoultella_terrigena(self):
-        self.assertFalse(is_kp_complex({'species': 'Raoultella terrigena'}))
+        self.assertFalse(is_kp_complex({'species': 'Klebsiella terrigena'}))
 
     def test_salmonella(self):
         self.assertFalse(is_kp_complex({'species': 'Salmonella enterica'}))
