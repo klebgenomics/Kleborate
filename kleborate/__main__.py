@@ -39,7 +39,7 @@ def main():
     data_folder = get_data_path()
     if args.force_index:
         rebuild_blast_indices(data_folder)
-    kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths()
+    kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths(args.kaptive_path)
 
     stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
     output_headers(stdout_header, full_header, args.outfile)
@@ -87,6 +87,8 @@ def parse_arguments():
                                help='FASTA file(s) for assemblies')
 
     screening_args = parser.add_argument_group('Screening options')
+    screening_args.add_argument('--kaptive_path', type=str, 
+                                help='Specify the location of the kaptive data files')
     screening_args.add_argument('-r', '--resistance', action='store_true',
                                 help='Turn on resistance genes screening (default: no resistance '
                                      'gene screening)')
