@@ -234,6 +234,7 @@ def get_output_headers(args, data_folder):
 
     if args.kaptive_k:
         stdout_header.append('K_locus_confidence')
+        full_header.append('K_type')
         full_header.append('K_locus_problems')
         full_header.append('K_locus_confidence')
         full_header.append('K_locus_identity')
