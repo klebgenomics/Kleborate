@@ -892,9 +892,12 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 104,KPC-25,Bla,KPC,KPC-25,2506,ARO_3005357,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-25,Bla_Carb
 104,KPC-26,Bla,KPC,KPC-26,2507,ARO_3005358,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-26,Bla_Carb
 104,KPC-27,Bla,KPC,KPC-27,2508,ARO_3005359,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-27,Bla_Carb
+104,KPC-28,Bla,KPC,KPC-28,2690,ARO_3005361,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase KPC-28,Bla_ESBL_inhR
 104,KPC-29,Bla,KPC,KPC-29,2509,ARO_3005360,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-29,Bla_Carb
 104,KPC-30,Bla,KPC,KPC-30,2510,ARO_3005364,-,-,no,no,inhibitor-resistant carbapenem-hydrolyzing class A beta-lactamase KPC-30,Bla_Carb
+104,KPC-31,Bla,KPC,KPC-31,2691,ARO_3005362,-,-,no,no,inhibitor-resistant carbapenem-hydrolyzing class A beta-lactamase KPC-31,Bla_ESBL_inhR
 104,KPC-32,Bla,KPC,KPC-32,2511,ARO_3005363,-,-,no,no,inhibitor-resistant carbapenem-hydrolyzing class A beta-lactamase KPC-32,Bla_Carb
+104,KPC-33,Bla,KPC,KPC-33,2692,ARO_3005365,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase KPC-33,Bla_ESBL_inhR
 104,KPC-34,Bla,KPC,KPC-34,2512,ARO_3005366,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-34,Bla_Carb
 104,KPC-35,Bla,KPC,KPC-35,2513,ARO_3005367,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-35,Bla_Carb
 104,KPC-36,Bla,KPC,KPC-36,2514,ARO_3005368,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-36,Bla_Carb
@@ -906,8 +909,11 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 104,KPC-42,Bla,KPC,KPC-42,2520,ARO_3005374,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-42,Bla_Carb
 104,KPC-43,Bla,KPC,KPC-43,2521,ARO_3005375,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-43,Bla_Carb
 104,KPC-45,Bla,KPC,KPC-45,2522,ARO_3005376,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-45,Bla_Carb
+104,KPC-46,Bla,KPC,KPC-46,2693,ARO_3005377,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase KPC-46,Bla_ESBL_inhR
 104,KPC-49,Bla,KPC,KPC-49,2523,ARO_3005378,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-49,Bla_Carb
 104,KPC-50,Bla,KPC,KPC-50,2524,ARO_3005379,-,-,no,no,inhibitor-resistant class A beta-lactamase KPC-50,Bla_Carb
+104,KPC-51,Bla,KPC,KPC-51,2694,ARO_3005380,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase KPC-51,Bla_ESBL
+104,KPC-52,Bla,KPC,KPC-52,2695,ARO_3005381,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase KPC-52,Bla_ESBL
 104,KPC-54,Bla,KPC,KPC-54,2525,ARO_3005382,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-54,Bla_Carb
 104,KPC-55,Bla,KPC,KPC-55,2526,ARO_3005383,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-55,Bla_Carb
 104,KPC-56,Bla,KPC,KPC-56,2527,ARO_3005384,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase KPC-56,Bla_Carb
@@ -1438,6 +1444,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 117,OXA-496,Bla,OXA,OXA-496,2530,ARO_3005335,-,-,no,no,OXA-134 family carbapenem-hydrolyzing class D beta-lactamase OXA-496,Bla_Carb
 117,OXA-499,Bla,OXA,OXA-499,2531,ARO_3005343,-,-,no,no,OXA-143 family carbapenem-hydrolyzing class D beta-lactamase OXA-499,Bla_Carb
 117,OXA-539,Bla,OXA,OXA-539,2532,ARO_3005317,-,-,no,no,OXA-2 family inhibitor-resistant class D extended-spectrum beta-lactamase OXA-539,Bla
+117,OXA-570,Bla,OXA,OXA-570,2696,ARO_3005324,-,-,no,no,OXA-60 family carbapenem-hydrolyzing class D beta-lactamase OXA-570,Bla
+117,OXA-573,Bla,OXA,OXA-573,2697,ARO_3005325,-,-,no,no,OXA-60 family carbapenem-hydrolyzing class D beta-lactamase OXA-573,Bla
 117,OXA-641,Bla,OXA,OXA-641,2533,ARO_3005333,-,-,no,no,OXA-372 family carbapenem-hydrolyzing class D beta-lactamase OXA-641,Bla_Carb
 117,OXA-649,Bla,OXA,OXA-649,2534,ARO_3005340,-,-,no,no,OXA-143 family carbapenem-hydrolyzing class D beta-lactamase OXA-649,Bla_Carb
 117,OXA-668,Bla,OXA,OXA-668,2535,ARO_3005158,-,-,no,no,OXA-274 family class D beta-lactamase OXA-668,Bla
