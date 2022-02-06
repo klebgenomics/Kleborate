@@ -331,7 +331,7 @@ ST	ybtS	ybtX	ybtQ	ybtP	ybtA	irp2	irp1	ybtU	ybtT	ybtE	fyuA	lineage_ICE
 330	12	2	2	2	2	6	6	2	2	2	2	ybt 1; ICEKp10
 331	5	19	26	5	1	79	145	9	5	5	21	ybt 9; ICEKp3
 332	8	7	9	6	5	13	165	6	7	7	6	ybt 2; ICEKp1
-333	8	7	8	6	5	13	14	6	7	7	6	ybt 2; ICEKp1
+333	8	7	9	6	5	13	14	6	7	7	6	ybt 2; ICEKp1
 334	2	2	2	2	2	12	6	2	2	2	2	ybt 1; ICEKp10
 335	2	2	2	2	2	180	6	2	2	2	2	ybt 1; ICEKp10
 336	2	2	2	2	2	179	6	2	2	2	2	ybt 1; ICEKp10
