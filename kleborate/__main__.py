@@ -566,7 +566,7 @@ def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
         else:
             qrdr, trunc, omp = None, None, None
 
-        seqs = data_folder + '/CARD_v3.0.8.fasta'
+        seqs = data_folder + '/CARD_v3.1.13.fasta'
         res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
                                          args.min_coverage,  args.min_identity,
                                          args.min_spurious_coverage, args.min_spurious_identity)
