@@ -27,11 +27,10 @@ def run_blastn(db, query, min_cov, min_ident):
     cmd += ' -dust no -evalue 1E-20 -word_size 32 -max_target_seqs 10000'
     cmd += ' -perc_identity {}'.format(min_ident)
 
-    # TODO: switch this over to subprocess
     blast_hits = []
-    f = os.popen(cmd)
+    f = subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True).stdout
     for line in f:
-        blast_hits.append(BlastHit(line))
+        blast_hits.append(BlastHit(line.decode()))
     f.close()
 
     # Toss out low identity and low coverage hits.
