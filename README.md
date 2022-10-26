@@ -23,14 +23,25 @@ Users not comfortable runnnig Kleborate locally via the commandline may like to 
 
 ### Installation
 Clone the repository with --recursive flag
+
 `git clone https://github.com/katholt/Kleborate.git --recursive`
+
 [Optional] Create and activate a virtual env
+
 `python3 -m venv ~/.venv/kleborate`
+
 `source ~/.venv/kleborate/bin/activate`
+
 Enter Kleborate directory
+
 `cd Kleborate`
+
 Upgrade pip and install requirements
+
 `pip install --upgrade pip`
+
 `pip install -r requirements.txt`
+
 Install Kleborate
+
 `python setup.py install`
