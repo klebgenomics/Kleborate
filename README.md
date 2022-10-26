@@ -8,7 +8,9 @@ Kleborate is a tool to screen genome assemblies of _Klebsiella pneumoniae_ and t
  * antimicrobial resistance determinants: acquired genes, SNPs, gene truncations and intrinsic β-lactamases
  * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/katholt/Kaptive)
 
-For full documentation, please [go to the Kleborate wiki](https://github.com/katholt/Kleborate/wiki)!
+
+### Installation, usage and documentaton
+All the info you need to install Kleborate, run it, and interpret results is in the [Kleborate wiki](https://github.com/katholt/Kleborate/wiki)!
 
 ### Citations
 If you use Kleborate, please cite the paper: [Lam, MMC. et al. A genomic surveillance framework and genotyping tool for Klebsiella pneumoniae and its related species complex. Nature Communications (2021)](https://www.nature.com/articles/s41467-021-24448-3). 
