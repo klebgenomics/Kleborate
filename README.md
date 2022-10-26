@@ -21,3 +21,11 @@ You may also be interested in [Kleborate-viz](https://kleborate.erc.monash.edu/)
 
 Users not comfortable runnnig Kleborate locally via the commandline may like to try uploading your genomes (reads or assemblies) to the drag-and-drop genomic epi online platform [PathogenWatch](https://pathogen.watch/) - all genomes identified as _Klebsiella pneumoniae_ will automatically be passed to Kleborate and Kaptive to generate a genotyping report, which can be downloaded in tabular format compatible with Kleborate-viz. See this preprint for more about [Klebsiella Pathogenwatch](https://www.biorxiv.org/content/10.1101/2021.06.22.448967v2).
 
+### Installation
+git clone https://github.com/katholt/Kleborate.git --recursive
+python3 -m venv ~/.venv/kleborate
+source ~/.venv/kleborate/bin/activate
+cd Kleborate
+pip install --upgrade pip
+pip install -r requirements.txt
+python setup.py install
