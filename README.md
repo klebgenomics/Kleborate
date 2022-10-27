@@ -12,6 +12,8 @@ Kleborate is a tool to screen genome assemblies of _Klebsiella pneumoniae_ and t
 ### Installation, usage and documentaton
 All the info you need to install Kleborate, run it, and interpret results is in the [Kleborate wiki](https://github.com/katholt/Kleborate/wiki)!
 
+A step-by-step tutorial, illustrating how to use Kleborate and interpret the data, is available at [bit.ly/kleborate-workshop](bit.ly/kleborate-workshop)
+
 ### Citations
 If you use Kleborate, please cite the paper: [Lam, MMC. et al. A genomic surveillance framework and genotyping tool for Klebsiella pneumoniae and its related species complex. Nature Communications (2021)](https://www.nature.com/articles/s41467-021-24448-3). 
 
