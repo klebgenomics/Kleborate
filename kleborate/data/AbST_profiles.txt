@@ -68,7 +68,7 @@ ST	iucA	iucB	iucC	iucD	iutA	iuc_lineage
 67	51	1	39	1	37	iuc 1
 68	51	1	40	1	38	iuc 1
 69	12	29	42	34	13	iuc 3
-70	52	33	12	8	34	iuc 3
+70	9	33	12	8	34	iuc 3
 71	12	14	42	38	30	iuc 3
 72	12	30	22	37	33	iuc 3
 73	12	30	22	37	31	iuc 3
@@ -80,8 +80,7 @@ ST	iucA	iucB	iucC	iucD	iutA	iuc_lineage
 79	9	34	38	8	9	iuc 3
 80	9	7	12	8	35	iuc 3
 81	9	35	12	8	17	iuc 3
-82	52	7	12	8	17	iuc 3
-83	52	33	12	8	17	iuc 3
+83	9	33	12	8	17	iuc 3
 84	53	2	13	2	26	iuc 2
 85	12	14	22	36	51	iuc 3
 86	12	30	22	37	13	iuc 3
