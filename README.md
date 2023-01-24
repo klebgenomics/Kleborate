@@ -1,4 +1,4 @@
-<p align="center"><img src="logo.png" alt="Kleborate" width="400"></p>
+<p align="center"><picture><source srcset="images/logo-dark.png" media="(prefers-color-scheme: dark)"><img src="images/logo.png" alt="Kleborate" width="400"></picture></p>
 
 Kleborate is a tool to screen genome assemblies of _Klebsiella pneumoniae_ and the _Klebsiella pneumoniae_ species complex (KpSC) for:
  * MLST sequence type
