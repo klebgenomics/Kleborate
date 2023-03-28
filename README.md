@@ -23,5 +23,6 @@ If you turn on the [Kaptive](https://github.com/katholt/Kaptive) option for full
 ### Related tools
 You may also be interested in [Kleborate-viz](https://kleborate.erc.monash.edu/), a ShinyR app for visualising Kleborate output.
 
-Users not comfortable runnnig Kleborate locally via the commandline may like to try uploading your genomes (reads or assemblies) to the drag-and-drop genomic epi online platform [PathogenWatch](https://pathogen.watch/) - all genomes identified as _Klebsiella pneumoniae_ will automatically be passed to Kleborate and Kaptive to generate a genotyping report, which can be downloaded in tabular format compatible with Kleborate-viz. See this preprint for more about [Klebsiella Pathogenwatch](https://www.biorxiv.org/content/10.1101/2021.06.22.448967v2).
+Users not comfortable runnnig Kleborate locally via the commandline may like to try uploading your genomes (reads or assemblies) to the drag-and-drop genomic epi online platform [PathogenWatch](https://pathogen.watch/) - all genomes identified as _Klebsiella pneumoniae_ will automatically be passed to Kleborate and Kaptive to generate a genotyping report, which can be downloaded in tabular format compatible with Kleborate-viz. See this paper for more about [Klebsiella Pathogenwatch](https://doi.org/10.1093/cid/ciab784).
 
+[![DOI](https://zenodo.org/badge/76227387.svg)](https://zenodo.org/badge/latestdoi/76227387)
