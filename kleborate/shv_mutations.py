@@ -72,7 +72,7 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     has_esbl = (pos_169_mut or pos_179_mut or pos_238_mut or pos_148_mut or 
     										(pos_240_aa and pos_035_aa))
 
-    esbl_mutations = [pos_169_mut, pos_179_mut, pos_238_mut, pos_148_mut, pos_240_aa]
+    esbl_mutations = [pos_169_mut, pos_179_mut, pos_238_mut, pos_148_mut, pos_240_mut]
 
     # Mutations at these sites will lead to inhibition:
     pos_069_mut, pos_069_aa = get_mut(ref_aligned, hit_aligned,  64,  69, 'M')
