@@ -70,7 +70,7 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     pos_240_mut, pos_240_aa = get_mut(ref_aligned, hit_aligned, 234, 240, 'E')
 
     has_esbl = (pos_169_mut or pos_179_mut or pos_238_mut or pos_148_mut or 
-    										(pos_240_aa and pos_035_aa))
+    										(pos_240_mut and pos_035_mut))
 
     esbl_mutations = [pos_169_mut, pos_179_mut, pos_238_mut, pos_148_mut, pos_240_mut]
 
