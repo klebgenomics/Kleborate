@@ -1856,10 +1856,10 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-190,Bla,SHV-OKP-LEN,SHV-190,2703,ARO_3003590,-,-,no,no,class A beta-lactamase SHV-190,Bla_chr
 135,SHV-191,Bla,SHV-OKP-LEN,SHV-191,2704,ARO_3003591,-,-,no,no,class A beta-lactamase SHV-191,Bla_chr
 135,SHV-202,Bla,SHV-OKP-LEN,SHV-202,2705,ARO_3005253,-,-,no,no,class A beta-lactamase SHV-202,Bla_chr
-135,SHV-229,Bla,SHV-OKP-LEN,SHV-229,2706,GenBank_MZ748304,-,-,no,no,broad-spectrum class A beta-lactamase,Bla_chr
-135,SHV-230,Bla,SHV-OKP-LEN,SHV-230,2707,GenBank_OP762696,-,-,no,no,class A beta-lactamase SHV-230,Bla_chr
+135,SHV-229,Bla,SHV-OKP-LEN,SHV-229,2706,GenBank_MZ748304,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr
+135,SHV-230,Bla,SHV-OKP-LEN,SHV-230,2707,GenBank_OP762696,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
 135,SHV-231,Bla,SHV-OKP-LEN,SHV-231,2708,GenBank_OP951208,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-135,SHV-232,Bla,SHV-OKP-LEN,SHV-232,2709,GenBank_OR224963,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
+135,SHV-232,Bla,SHV-OKP-LEN,SHV-232,2709,GenBank_OR224963,-,-,no,no,class A beta-lactamase SHV-232,Bla_chr
 136,SIM-1,Bla,SIM,SIM-1,1621,ARO_3000846,-,-,no,no,subclass B1 broad-spectrum metallo-beta-lactamase,Bla
 137,SLB-1,Bla,SLB,SLB-1,1622,ARO_3003556,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
 138,SMB-1,Bla,SMB,SMB-1,1623,ARO_3000854,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
