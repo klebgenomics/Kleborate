@@ -1,5 +1,5 @@
 """
-Copyright 2020 Kat Holt
+Copyright 2023 Kat Holt (drkatholt@gmail.com)
 Copyright 2020 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
@@ -57,37 +57,22 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     if identity < 0.9:
         return bla_class, [], [], None
 
+    
+    
     # Mutations at these sites will lead to an ESBL class:
-    pos_164_mut, pos_164_aa = get_mut(ref_aligned, hit_aligned, 159, 164, 'R')
-    pos_165_mut, pos_165_aa = get_mut(ref_aligned, hit_aligned, 160, 165, 'W')
-    pos_166_mut, pos_166_aa = get_mut(ref_aligned, hit_aligned, 161, 166, 'E')
-    pos_167_mut, pos_167_aa = get_mut(ref_aligned, hit_aligned, 162, 167, 'T')
-    pos_168_mut, pos_168_aa = get_mut(ref_aligned, hit_aligned, 163, 168, 'E')
     pos_169_mut, pos_169_aa = get_mut(ref_aligned, hit_aligned, 164, 169, 'L')
-    pos_170_mut, pos_170_aa = get_mut(ref_aligned, hit_aligned, 165, 170, 'N')
-    pos_171_mut, pos_171_aa = get_mut(ref_aligned, hit_aligned, 166, 171, 'E')
-    pos_172_mut, pos_172_aa = get_mut(ref_aligned, hit_aligned, 167, 172, 'A')
-    pos_173_mut, pos_173_aa = get_mut(ref_aligned, hit_aligned, 168, 173, 'L')
-    pos_174_mut, pos_174_aa = get_mut(ref_aligned, hit_aligned, 169, 174, 'P')
-    pos_175_mut, pos_175_aa = get_mut(ref_aligned, hit_aligned, 170, 175, 'G')
-    pos_176_mut, pos_176_aa = get_mut(ref_aligned, hit_aligned, 171, 176, 'D')
-    pos_177_mut, pos_177_aa = get_mut(ref_aligned, hit_aligned, 172, 177, 'A')
-    pos_178_mut, pos_178_aa = get_mut(ref_aligned, hit_aligned, 173, 178, 'R')
     pos_179_mut, pos_179_aa = get_mut(ref_aligned, hit_aligned, 174, 179, 'D')
     pos_238_mut, pos_238_aa = get_mut(ref_aligned, hit_aligned, 233, 238, 'G')
-
-    # Mutations at site Ambler-148 will lead to an ESBL class, but only if site Ambler-39 is Q.
-    pos_039_mut, pos_039_aa = get_mut(ref_aligned, hit_aligned,  34,  39, 'Q')
     pos_148_mut, pos_148_aa = get_mut(ref_aligned, hit_aligned, 143, 148, 'L')
+    
+    # Mutations at site Ambler-240 will lead to an ESBL class, but only if site Ambler-35 is also mutated.
+    pos_035_mut, pos_035_aa = get_mut(ref_aligned, hit_aligned,  30,  35, 'L')
+    pos_240_mut, pos_240_aa = get_mut(ref_aligned, hit_aligned, 234, 240, 'E')
 
-    has_esbl = (pos_164_mut or pos_165_mut or pos_166_mut or pos_167_mut or pos_168_mut or
-                pos_169_mut or pos_170_mut or pos_171_mut or pos_172_mut or pos_173_mut or
-                pos_174_mut or pos_175_mut or pos_176_mut or pos_177_mut or pos_178_mut or
-                pos_179_mut or pos_238_mut or (pos_148_mut and pos_039_mut == ''))
+    has_esbl = (pos_169_mut or pos_179_mut or pos_238_mut or pos_148_mut or 
+    										(pos_240_mut and pos_035_mut))
 
-    esbl_mutations = [pos_148_mut, pos_164_mut, pos_165_mut, pos_166_mut, pos_167_mut, pos_168_mut,
-                      pos_169_mut, pos_170_mut, pos_171_mut, pos_172_mut, pos_173_mut, pos_174_mut,
-                      pos_175_mut, pos_176_mut, pos_177_mut, pos_178_mut, pos_179_mut, pos_238_mut]
+    esbl_mutations = [pos_169_mut, pos_179_mut, pos_238_mut, pos_148_mut, pos_240_mut]
 
     # Mutations at these sites will lead to inhibition:
     pos_069_mut, pos_069_aa = get_mut(ref_aligned, hit_aligned,  64,  69, 'M')
@@ -103,12 +88,28 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     pos_035_mut, pos_035_aa = get_mut(ref_aligned, hit_aligned,  30,  35, 'L')
     pos_146_mut, pos_146_aa = get_mut(ref_aligned, hit_aligned, 141, 146, 'A')
     pos_156_mut, pos_156_aa = get_mut(ref_aligned, hit_aligned, 151, 156, 'G')
-    pos_240_mut, pos_240_aa = get_mut(ref_aligned, hit_aligned, 234, 240, 'E')
+
+    # Mutations in the omega loop, for tracking only (not class modification):
+    pos_164_mut, pos_164_aa = get_mut(ref_aligned, hit_aligned, 159, 164, 'R')
+    pos_165_mut, pos_165_aa = get_mut(ref_aligned, hit_aligned, 160, 165, 'W')
+    pos_166_mut, pos_166_aa = get_mut(ref_aligned, hit_aligned, 161, 166, 'E')
+    pos_167_mut, pos_167_aa = get_mut(ref_aligned, hit_aligned, 162, 167, 'T')
+    pos_168_mut, pos_168_aa = get_mut(ref_aligned, hit_aligned, 163, 168, 'E')
+    pos_170_mut, pos_170_aa = get_mut(ref_aligned, hit_aligned, 165, 170, 'N')
+    pos_171_mut, pos_171_aa = get_mut(ref_aligned, hit_aligned, 166, 171, 'E')
+    pos_172_mut, pos_172_aa = get_mut(ref_aligned, hit_aligned, 167, 172, 'A')
+    pos_173_mut, pos_173_aa = get_mut(ref_aligned, hit_aligned, 168, 173, 'L')
+    pos_174_mut, pos_174_aa = get_mut(ref_aligned, hit_aligned, 169, 174, 'P')
+    pos_175_mut, pos_175_aa = get_mut(ref_aligned, hit_aligned, 170, 175, 'G')
+    pos_176_mut, pos_176_aa = get_mut(ref_aligned, hit_aligned, 171, 176, 'D')
+    pos_177_mut, pos_177_aa = get_mut(ref_aligned, hit_aligned, 172, 177, 'A')
+    pos_178_mut, pos_178_aa = get_mut(ref_aligned, hit_aligned, 173, 178, 'R')
 
     omega_loop_seq = ''.join([pos_164_aa, pos_165_aa, pos_166_aa, pos_167_aa, pos_168_aa,
                               pos_169_aa, pos_170_aa, pos_171_aa, pos_172_aa, pos_173_aa,
                               pos_174_aa, pos_175_aa, pos_176_aa, pos_177_aa, pos_178_aa,
                               pos_179_aa])
+                              
     if omega_loop_seq == 'RWETELNEALPGDARD':  # if it's the same as SHV-1
         omega_loop_seq = None
 
@@ -117,6 +118,7 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
                      pos_169_mut, pos_170_mut, pos_171_mut, pos_172_mut, pos_173_mut, pos_174_mut,
                      pos_175_mut, pos_176_mut, pos_177_mut, pos_178_mut, pos_179_mut, pos_234_mut,
                      pos_235_mut, pos_238_mut, pos_240_mut]
+                     
     shv_mutations = [m for m in shv_mutations if m]
 
     if exact_match:
