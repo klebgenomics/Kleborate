@@ -46,7 +46,7 @@ class TestShvMutations(unittest.TestCase):
     def test_shv_02(self):
         """
         This test has a match for SHV-1 with a mutation at site 238 (G -> Y). This changes the
-        class to ESBL, so the mutation is included in the
+        class to ESBL.
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/02.fasta', self.args,
                                          self.res_headers, True)
@@ -64,8 +64,8 @@ class TestShvMutations(unittest.TestCase):
 
     def test_shv_04(self):
         """
-        This test has a match for SHV-1 with a mutation at site 50 (G -> Y). This doesn't change
-        resistance and so won't be reported.
+        This test has a match for SHV-1 with a mutation at site 50 (G -> Y). This is not class-modifying 
+        and so won't be reported.
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/04.fasta', self.args,
                                          self.res_headers, True)
@@ -83,7 +83,7 @@ class TestShvMutations(unittest.TestCase):
 
     def test_shv_06(self):
         """
-        This test has SHV-29 plus an inhibition mutation.
+        This test has SHV-29 plus an beta-lactamase inhibitor resistant mutation.
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/06.fasta', self.args,
                                          self.res_headers, True)
@@ -92,7 +92,7 @@ class TestShvMutations(unittest.TestCase):
 
     def test_shv_07(self):
         """
-        This test has SHV-1 with position 238 deleted. Since it's not in the omega loop, this isn't
+        This test has SHV-1 with position 238 deleted. Is not 
         reported and doesn't have an effect.
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/07.fasta', self.args,
@@ -102,7 +102,7 @@ class TestShvMutations(unittest.TestCase):
 
     def test_shv_08(self):
         """
-        This test has SHV-1 with a synonymous mutation in the omega loop (so not reported).
+        This test has SHV-1 with a synonymous mutation in the omega loop (not ESBL-conferring mutation).
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/08.fasta', self.args,
                                          self.res_headers, True)
@@ -111,11 +111,11 @@ class TestShvMutations(unittest.TestCase):
 
     def test_shv_09(self):
         """
-        This test has SHV-1 with a nonsynonymous mutation in the omega loop (so it is reported).
+        This test has SHV-1 with a nonsynonymous mutation in the omega loop (reported but not ESBL-conferring mutation).
         """
         results = get_resistance_results(self.data_dir, 'test/test_shv/09.fasta', self.args,
                                          self.res_headers, True)
-        self.assertEqual(results['Bla_ESBL_acquired'], 'SHV-1* +174R')
+        self.assertEqual(results['Bla_chr'], 'SHV-1*')
         self.assertEqual(results['SHV_mutations'], '174R;omega-loop=RWETELNEALRGDARD')
 
     def test_bla_class_01(self):
