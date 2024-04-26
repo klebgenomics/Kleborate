@@ -92,3 +92,9 @@ ST	iucA	iucB	iucC	iucD	iutA	iuc_lineage
 92	25	36	25	31	52	iuc 3
 93	25	9	44	31	52	iuc 3
 94	45	12	33	35	22	iuc 5
+95	46	1	1	1	1	iuc 1
+96	25	9	25	23	80	iuc 3
+97	56	7	12	8	9	iuc 3
+98	57	7	12	8	35	iuc 3
+99	58	9	25	31	52	iuc 3
+100	25	9	25	23	39	iuc 3
