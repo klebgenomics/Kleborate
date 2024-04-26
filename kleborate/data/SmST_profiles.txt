@@ -47,3 +47,4 @@ ST	iroB	iroC	iroD	iroN	iro_lineage
 46	2	3	2	34	iro 2
 47	23	60	18	20	iro 5
 48	32	16	9	8	iro 2
+49	1	4	27	1	iro 1
