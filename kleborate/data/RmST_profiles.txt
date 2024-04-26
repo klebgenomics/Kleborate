@@ -169,3 +169,4 @@ ST	rmpA	rmpD	rmpC	rmp_lineage
 168	91	76	5	rmp 2; KpVP-2
 169	41	21	10	rmp 2A; plasmid/chr
 170	31	20	10	rmp 2A; plasmid/chr
+171	97	2	2	rmp 1; KpVP-1
