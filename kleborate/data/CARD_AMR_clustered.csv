@@ -1870,6 +1870,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-241,Bla,SHV-OKP-LEN,SHV-241,2717,GenBank_OR876333,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-242,Bla,SHV-OKP-LEN,SHV-242,2718,GenBank_OR876334,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR
 135,SHV-243,Bla,SHV-OKP-LEN,SHV-243,2719,GenBank_OR876335,-,-,no,no,class A beta-lactamase SHV-243,Bla_chr
+135,SHV-238,Bla,SHV-OKP-LEN,SHV-238,2720,GenBank_OR880707,-,-,no,no,class A extended-spectrum and inhibitor-resistant beta-lactamase,Bla_ESBL_inhR
 136,SIM-1,Bla,SIM,SIM-1,1621,ARO_3000846,-,-,no,no,subclass B1 broad-spectrum metallo-beta-lactamase,Bla
 137,SLB-1,Bla,SLB,SLB-1,1622,ARO_3003556,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla
 138,SMB-1,Bla,SMB,SMB-1,1623,ARO_3000854,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla
