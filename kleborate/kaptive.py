@@ -18,9 +18,9 @@ import sys
 import tempfile
 
 
-def get_kaptive_paths():
+def get_kaptive_paths(kaptive_path):
     this_file = os.path.realpath(__file__)
-    kaptive_dir = os.path.join(os.path.dirname(os.path.dirname(this_file)), 'kaptive')
+    kaptive_dir = kaptive_path if kaptive_path else os.path.join(os.path.dirname(os.path.dirname(this_file)), 'kaptive')
     if not os.path.isdir(kaptive_dir):
         sys.exit('Error: could not find Kaptive directory. Did you git clone with --recursive?')
     kaptive_py = os.path.join(kaptive_dir, 'kaptive.py')
