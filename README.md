@@ -1,6 +1,6 @@
 <p align="center"><picture><source srcset="images/logo-dark.png" media="(prefers-color-scheme: dark)"><img src="images/logo.png" alt="Kleborate logo" width="400"></picture></p>
 
-Kleborate v3 includes a rewrite of [Kleborate](https://github.com/klebgenomics/kleborate). It aims to:
+Kleborate v3 includes a rewrite of Kleborate v2. It aims to:
 * Modularise the code for easier extensibility and maintenance
 * Provide functionality for other species, e.g. _Klebsiella oxytoca_ and _Escherichia coli_
 * Replace the BLAST dependency with [minimap2](https://lh3.github.io/minimap2/minimap2.html)
