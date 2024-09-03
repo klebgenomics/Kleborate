@@ -27,7 +27,7 @@ Kleborate was primarily developed to screen genome assemblies of *Klebsiella pne
 * K (capsule) and O antigen (LPS) serotype prediction, via *wzi* alleles and `Kaptive <https://github.com/klebgenomics/Kaptive>`_
 
 
-`Kleborate v3 <https://github.com/klebgenomics/KleborateModular>`_ includes a rewrite of the code to (i) replace the use of BLAST with minimap (faster and less buggy); and (ii) introduce a modular structure making it easy to add new typing modules, including for other species.
+`Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ includes a rewrite of the code to (i) replace the use of BLAST with minimap (faster and less buggy); and (ii) introduce a modular structure making it easy to add new typing modules, including for other species.
 
 
 For *K. pneumoniae* species complex, **Kleborate v3 can reproduce the outputs of Kleborate v2 by running the preset modules for KpSC via:**
@@ -110,7 +110,7 @@ Contact us
 
 Kleborate is under active development with many other Klebs genomic analysis tools and projects in progress (see `github.com/klebgenomics <https://github.com/klebgenomics>`_). 
 
-Please get in touch via the GitHub `issues tracker <https://github.com/klebgenomics/KleborateModular/issues>`_ if you have any issues, questions or ideas.
+Please get in touch via the GitHub `issues tracker <https://github.com/klebgenomics/Kleborate/issues>`_ if you have any issues, questions or ideas.
 
 For more on our lab, including other software, see `http://holtlab.net <http://holtlab.net>`_
 

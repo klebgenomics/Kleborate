@@ -28,9 +28,9 @@ dependencies = ["biopython","numpy","dna_features_viewer","kaptive","mash"]
 test = ["pytest", "pytest-mock"]  # needed for running automated tests
 
 [project.urls]
-homepage = "https://github.com/klebgenomics/KleborateModular"
-documentation = "https://kleboratemodular.readthedocs.io/"
-repository = "https://github.com/klebgenomics/KleborateModular"
+homepage = "https://github.com/klebgenomics/Kleborate"
+documentation = "https://kleborate.readthedocs.io/"
+repository = "https://github.com/klebgenomics/Kleborate"
 
 [project.scripts]
 kleborate = "kleborate.__main__:main"  # create an executable file named "kleborate"
