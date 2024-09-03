@@ -1,7 +1,6 @@
 """
-Copyright 2020 Kat Holt
-Copyright 2020 Ryan Wick (rrwick@gmail.com)
-https://github.com/katholt/Kleborate/
+Copyright 2024 Mary Maranga, Kat Holt, Ryan Wick
+https://github.com/klebgenomics/KleborateModular/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
@@ -9,611 +8,352 @@ either version 3 of the License, or (at your option) any later version. Kleborat
 the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 details. You should have received a copy of the GNU General Public License along with Kleborate. If
-not, see <http://www.gnu.org/licenses/>.
+not, see <https://www.gnu.org/licenses/>.
 """
 
 import argparse
-import distutils.spawn
+import graphlib
 import gzip
+import importlib
+import importlib.metadata
 import os
 import pathlib
+import re
+import shutil
 import subprocess
 import sys
 import tempfile
+import textwrap
+import uuid
+from glob import glob
 
-from pkg_resources import resource_filename
-from .contig_stats import get_contig_stat_results
-from .help_formatter import MyParser, MyHelpFormatter
-from .kaptive import get_kaptive_paths, get_kaptive_results
-from .species import get_species_results, is_kp_complex
-from .mlstBLAST import mlst_blast
-from .resBLAST import read_class_file, get_res_headers, resblast_one_assembly
-from .rmpA import rmpa2_blast
-from .misc import get_compression_type, load_fasta
-from .version import __version__
+from .shared.help_formatter import MyParser, MyHelpFormatter
+from .shared.misc import get_compression_type, load_fasta,reverse_complement
+from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
 
 
-def main():
-    args = parse_arguments()
-    check_inputs_and_programs(args)
-    data_folder = get_data_path()
-    if args.force_index:
-        rebuild_blast_indices(data_folder)
-    kaptive_py, kaptive_k_db, kaptive_o_db = get_kaptive_paths(args.kaptive_path)
-
-    stdout_header, full_header, res_headers = get_output_headers(args, data_folder)
-    output_headers(stdout_header, full_header, args.outfile)
-
-    for contigs in args.assemblies:
-        with tempfile.TemporaryDirectory() as tmp_dir:
-            contigs = gunzip_contigs_if_necessary(contigs, tmp_dir)
-
-            # All results are stored in a dictionary where the key is the column name and the value
-            # is the result. The results are outputted in order of the header rows. This means that
-            # the column orders can be easily changed by modifying the get_output_headers function.
-
-            results = {'strain': get_strain_name(contigs)}
-            results.update(get_species_results(contigs, data_folder))
-            kp_complex = is_kp_complex(results)
-            results.update(get_contig_stat_results(contigs, kp_complex))
-
-            results.update(get_chromosome_mlst_results(data_folder, contigs, kp_complex, args))
-            results.update(get_all_virulence_results(data_folder, contigs, args))
-            results.update(get_rmpa2_results(data_folder, contigs, args))
-            results.update(get_wzi_and_k_locus_results(data_folder, contigs, args))
-            results.update(get_resistance_results(data_folder, contigs, args, res_headers,
-                                                  kp_complex))
-            results.update(get_summary_results(results, res_headers, args))
-            results.update(get_kaptive_results('K', kaptive_py, kaptive_k_db, contigs, args))
-            results.update(get_kaptive_results('O', kaptive_py, kaptive_o_db, contigs, args))
-
-            output_results(stdout_header, full_header, args.outfile, results)
-
-
-def parse_arguments():
+def parse_arguments(args, all_module_names, modules):
+    """
+    This function does the CLI argument parsing for Kleborate. Module-specific arguments are added
+    by each module's add_cli_options function.
+    """
     parser = MyParser(description='Kleborate: a tool for characterising virulence and resistance '
-                                  'in Klebsiella',
-                      formatter_class=MyHelpFormatter, add_help=False,
-                      epilog='R|If you use Kleborate, please cite the paper:\n'
-                             '    Lam MMC, et al. A genomic surveillance framework and genotyping tool\n'
-                             '    for Klebsiella pneumoniae and its related species complex. Nature\n'
-                             '    Communications. 2021. doi:10.1038/s41467-021-24448-3.\n\n'
-                             'If you turn on the Kaptive option for full K and O typing, please also cite Kaptive:\n'
-                             '    Wyres KL, et al. Identification of Klebsiella capsule synthesis loci from\n'
-                             '    whole genome data. Microbial Genomics. 2016. doi:10.1099/mgen.0.000102.')
+                                  'in pathogen assemblies',
+                      formatter_class=MyHelpFormatter, add_help=False, epilog=paper_refs())
 
-    required_args = parser.add_argument_group('Required arguments')
-    required_args.add_argument('-a', '--assemblies', nargs='+', type=str, required=True,
-                               help='FASTA file(s) for assemblies')
+    if '--helpall' in args or '--allhelp' in args or '--all_help' in args:
+        args.append('--help_all')
 
-    screening_args = parser.add_argument_group('Screening options')
-    screening_args.add_argument('--kaptive_path', type=str, 
-                                help='Specify the location of the kaptive data files')
-    screening_args.add_argument('-r', '--resistance', action='store_true',
-                                help='Turn on resistance genes screening (default: no resistance '
-                                     'gene screening)')
-    screening_args.add_argument('--kaptive_k', action='store_true',
-                                help='Turn on Kaptive screening of K loci (default: do not run '
-                                     'Kaptive for K loci)')
-    screening_args.add_argument('--kaptive_o', action='store_true',
-                                help='Turn on Kaptive screening of O loci (default: do not run '
-                                     'Kaptive for O loci)')
-    screening_args.add_argument('-k', '--kaptive', action='store_true',
-                                help='Equivalent to --kaptive_k --kaptive_o NO_DEFAULT')
-    screening_args.add_argument('--all', action='store_true',
-                                help='Equivalent to --resistance --kaptive NO_DEFAULT')
+    io_args = parser.add_argument_group('Input/output')
+    io_args.add_argument('-a', '--assemblies', nargs='+', type=str,
+                         help='FASTA file(s) for assemblies')
 
-    output_args = parser.add_argument_group('Output options')
-    output_args.add_argument('-o', '--outfile', type=str, default='Kleborate_results.txt',
-                             help='File for detailed output (default: Kleborate_results.txt)')
-    output_args.add_argument('--kaptive_k_outfile', type=str,
-                             help='File for full Kaptive K locus output (default: do not '
-                                  'save Kaptive K locus results to separate file)')
-    output_args.add_argument('--kaptive_o_outfile', type=str,
-                             help='File for full Kaptive O locus output (default: do not '
-                                  'save Kaptive O locus results to separate file)')
+    io_args.add_argument('-o', '--outdir', type=str,
+                         help='Directory for storing output files')
 
-    setting_args = parser.add_argument_group('Settings')
-    setting_args.add_argument('--min_identity', type=float, default=90.0,
-                              help='Minimum alignment percent identity for main results')
-    setting_args.add_argument('--min_coverage', type=float, default=80.0,
-                              help='Minimum alignment percent coverage for main results')
-    setting_args.add_argument('--min_spurious_identity', type=float, default=80.0,
-                              help='Minimum alignment percent identity for spurious results')
-    setting_args.add_argument('--min_spurious_coverage', type=float, default=40.0,
-                              help='Minimum alignment percent coverage for spurious results')
-    setting_args.add_argument('--min_kaptive_confidence', type=str,
-                              choices=['None', 'Low', 'Good', 'High', 'Very_high', 'Perfect'],
-                              default='Good',
-                              help='Minimum Kaptive confidence to call K/O loci - confidence '
-                                   'levels below this will be reported as unknown')
+    io_args.add_argument('-r', '--resume', action='store_true',
+                         help='append the output files')
 
-    other_args = parser.add_argument_group('Other')
-    other_args.add_argument('--force_index', action='store_true',
-                            help='Rebuild the BLAST index at the start of execution (default: '
-                                 'only build BLAST indices when they are missing)')
+    io_args.add_argument('--trim_headers', action='store_true',
+                         help='Trim headers in the output files')
+
+    module_args = parser.add_argument_group('Modules')
+    module_args.add_argument('--list_modules', action='store_true',
+                             help='Print a list of all available modules and then quit')
+    module_args.add_argument('-p', '--preset', type=str,
+                             help=f'Module presets, choose from: ' + ', '.join(get_presets()))
+    module_args.add_argument('-m', '--modules', type=str,
+                             help='Comma-delimited list of Kleborate modules to use')
+
+    add_module_cli_arguments(parser, args, all_module_names, modules)
 
     help_args = parser.add_argument_group('Help')
     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
                            help='Show this help message and exit')
-    help_args.add_argument('--version', action='version', version='Kleborate v' + __version__,
+    help_args.add_argument('--help_all', action='help',
+                           help='Show a help message with all module options')
+    help_args.add_argument('--version', action='version', version=f'Kleborate v{get_version()}',
                            help="Show program's version number and exit")
 
-    # If no arguments were used, print the entire help (argparse default is to just give an error
-    # like '-a is required').
-    if len(sys.argv) == 1:
+    if not args:
         parser.print_help(file=sys.stderr)
         sys.exit(1)
 
-    args = parser.parse_args()
-
-    if args.kaptive:
-        args.kaptive_k = True
-        args.kaptive_o = True
-    if args.all:
-        args.resistance = True
-        args.kaptive_k = True
-        args.kaptive_o = True
-
-    if args.kaptive_k_outfile and not args.kaptive_k:
-        sys.exit('Error: you must use --kaptive_k (or --kaptive) to use --kaptive_k_outfile')
-    if args.kaptive_o_outfile and not args.kaptive_o:
-        sys.exit('Error: you must use --kaptive_o (or --kaptive) to use --kaptive_o_outfile')
-
-    return args
+    return parser.parse_args(args)
 
 
-def check_inputs_and_programs(args):
+def main():
+    all_module_names, modules = import_modules()
+    args = parse_arguments(sys.argv[1:], all_module_names, modules)
+    print_modules(args, all_module_names, modules)
+
+    module_names, check_module_list, pass_modules = get_used_module_names(args, all_module_names, get_presets())
+
+    # Define preset_check_modules
+    preset_check_modules = []
+    if args.preset:
+        presets = get_presets()
+        preset_check_modules = [module for module, _ in presets[args.preset]['check']]
+
+    module_names, module_run_order, external_programs = check_modules(args, modules, module_names, check_module_list, pass_modules)
+
+    full_headers, stdout_headers = get_headers(module_names, modules)
+    print('\t'.join([h.split('__')[-1] for h in stdout_headers]))
+
+    # Ensure the output directory exists
+    if not os.path.exists(args.outdir):
+        os.makedirs(args.outdir)
+
+    # If the resume flag is not set, remove existing output files
+    if args.modules:
+        module_name = args.modules.split(',')[0]  
+        out_files_suffixes = [f'{module_name}_output.txt']
+    else:
+        out_files_suffixes = ['klebsiella_pneumo_complex_output.txt',
+                              'klebsiella_oxytoca_complex_output.txt',
+                              'escherichia_output.txt']
+    if not args.resume:
+        for suffix in out_files_suffixes:
+            for file in glob(f'{args.outdir}/*{suffix}'):
+                os.remove(file)
+
+
     for assembly in args.assemblies:
-        if os.path.isdir(assembly):
-            sys.exit('Error: ' + assembly + ' is a directory (please specify assembly files)')
-        if not os.path.isfile(assembly):
-            sys.exit('Error: could not find ' + assembly)
-        fasta = load_fasta(assembly)
-        if len(fasta) < 1:
-            sys.exit('Error: invalid FASTA file: ' + assembly)
-        for record in fasta:
-            header, seq = record
-            if len(seq) == 0:
-                sys.exit('Error: invalid FASTA file (contains a zero-length sequence): ' + assembly)
-    if not distutils.spawn.find_executable('makeblastdb'):
-        sys.exit('Error: could not find makeblastdb')
-    if not distutils.spawn.find_executable('blastn'):
-        sys.exit('Error: could not find blastn')
-    if args.resistance:
-        if not distutils.spawn.find_executable('blastx'):
-            sys.exit('Error: could not find blastx')
-    if not distutils.spawn.find_executable('mash'):
-        sys.exit('Error: could not find mash')
-    major, minor, patch = get_blast_version()
-    if major < 2 or (major == 2 and minor < 7):
-        sys.exit('Error: you have BLAST v{}.{}.{} installed, but Kleborate requires v2.7.1 or '
-                 'later'.format(major, minor, patch))
+        check_assembly(assembly)  # Check assembly before processing
 
+        with tempfile.TemporaryDirectory() as temp_dir:
+            unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
+            minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
+            results = {'strain': get_strain_name(assembly)}
 
-def get_blast_version():
-    command = ['blastn', '-version']
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, _ = process.communicate()
-    out = out.decode()
-    try:
-        version = out.split(': ')[1].split()[0].split('+')[0]
-        major, minor, patch = version.split('.')
-        return int(major), int(minor), patch
-    except (IndexError, ValueError):
-        sys.exit('Error: could not determine BLAST version')
+            pass_check = True  # default, assume no check and run all modules
 
+            # if we have 'check' modules in the preset, run these
+            if args.preset and len(check_module_list) > 0:
+                for module, check in presets[args.preset]['check']:
+                    try:
+                        module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
 
-def get_output_headers(args, data_folder):
-    """
-    There are two levels of output:
-      * stdout is simpler and displayed to the console
-      * full contains more and is saved to file
-    This function returns headers for both. It also returns the resistance headers in a separate
-    list, as they are used to total up some resistance summaries.
-    """
-    stdout_header = ['strain', 'species']
-    full_header = ['strain', 'species', 'species_match']
-    stdout_header += ['ST', 'virulence_score']
-    full_header += ['contig_count', 'N50', 'largest_contig', 'total_size', 'ambiguous_bases',
-                    'QC_warnings', 'ST', 'virulence_score']
+                        results.update({f'{module}__{header}': result for header, result in module_results.items()})
+                        check_function = globals()[check]
 
-    if args.resistance:
-        stdout_header.append('resistance_score')
-        full_header.append('resistance_score')
-        full_header.append('num_resistance_classes')
-        full_header.append('num_resistance_genes')
+                        if not check_function(module_results):
+                            pass_check = False
+                            print(f"Assembly {assembly} failed in check {check}.")
+                            break  # Exit the for loop since this assembly failed the check
 
-    other_columns = ['Yersiniabactin', 'YbST',
-                     'Colibactin', 'CbST',
-                     'Aerobactin', 'AbST',
-                     'Salmochelin', 'SmST',
-                     'RmpADC', 'RmST',
-                     'rmpA2',
-                     'wzi', 'K_locus']
-    stdout_header += other_columns
-    full_header += other_columns
+                    except Exception as e:
+                        print(f"Error encountered while processing {assembly} with {module}: {e}.")
+                        pass_check = False
+                        break  # Exit the for loop since an error occurred
 
-    if args.kaptive_k:
-        stdout_header.append('K_locus_confidence')
-        full_header.append('K_type')
-        full_header.append('K_locus_problems')
-        full_header.append('K_locus_confidence')
-        full_header.append('K_locus_identity')
-        full_header.append('K_locus_missing_genes')
-
-    if args.kaptive_o:
-        stdout_header.append('O_locus')
-        stdout_header.append('O_locus_confidence')
-        full_header.append('O_locus')
-        full_header.append('O_type')
-        full_header.append('O_locus_problems')
-        full_header.append('O_locus_confidence')
-        full_header.append('O_locus_identity')
-        full_header.append('O_locus_missing_genes')
-
-    if args.resistance:
-        gene_info, res_classes, bla_classes = \
-            read_class_file(data_folder + '/CARD_AMR_clustered.csv')
-        res_headers = get_res_headers(res_classes, bla_classes)
-        res_headers += ['truncated_resistance_hits', 'spurious_resistance_hits']
-        stdout_header += res_headers
-        full_header += res_headers
-    else:
-        res_headers = []
-
-    full_header.append('Chr_ST')
-    full_header += get_chromosome_mlst_header()
-    full_header += get_ybt_mlst_header()
-    full_header += get_clb_mlst_header()
-    full_header += get_iuc_mlst_header()
-    full_header += get_iro_mlst_header()
-    full_header += get_rmp_mlst_header()
-
-    full_header.append('spurious_virulence_hits')
-
-    return stdout_header, full_header, res_headers
-
-
-def get_virulence_score(yersiniabactin, colibactin, aerobactin):
-    """
-    Six possible virulence scores:
-      * 0 = no virulence (no yersiniabactin, colibactin or aerobactin)
-      * 1 = just yersiniabactin (no colibactin or aerobactin)
-      * 2 = colibactin but no aerobactin (regardless of yersiniabactin, which is probably present)
-      * 3 = just aerobactin (no yersiniabactin or colibactin)
-      * 4 = aerobactin and yersiniabactin (but not colibactin)
-      * 5 = colibactin and aerobactin (regardless of yersiniabactin, which is probably present)
-    """
-    has_ybt = (yersiniabactin != '-')
-    has_aero = (aerobactin != '-')
-    has_coli = (colibactin != '-')
-
-    if has_coli and has_aero:
-        return 5
-    elif has_aero and has_ybt:
-        return 4
-    elif has_aero:
-        return 3
-    elif has_coli:
-        return 2
-    elif has_ybt:
-        return 1
-    else:
-        return 0
-
-
-def get_resistance_score(res_headers, res_hits):
-    """
-    Four possible resistance scores:
-      * 0 = no ESBL, no carbapenemase (regardless of colistin resistance)
-      * 1 = ESBL, no carbapenemase (regardless of colistin resistance)
-      * 2 = Carbapenemase without colistin resistance
-      * 3 = Carbapenemase and colistin resistance
-    """
-    if not res_headers:
-        return '-'
-
-    # Look for a hit in any 'ESBL' column (e.g. 'Bla_ESBL' or 'Bla_ESBL_inhR').
-    esbl_header_indices = [i for i, h in enumerate(res_headers) if '_esbl' in h.lower()]
-    has_esbl = any(res_hits[i] != '-' for i in esbl_header_indices)
-
-    # Look for a hit in any 'Carb' column (e.g. 'Bla_Carb').
-    carb_header_indices = [i for i, h in enumerate(res_headers) if '_carb' in h.lower()]
-    has_carb = any(res_hits[i] != '-' for i in carb_header_indices)
-
-    # Look for a hit in the 'Col' columns.
-    col_header_indices = [i for i, h in enumerate(res_headers)
-                          if h.lower() == 'col_acquired' or h.lower() == 'col_mutations']
-    has_col = any(res_hits[i] != '-' for i in col_header_indices)
-
-    if has_carb and has_col:
-        return 3
-    elif has_carb:
-        return 2
-    elif has_esbl:
-        return 1
-    else:
-        return 0
-
-
-def get_resistance_class_count(res_headers, res_hits):
-    """
-    Counts up all resistance gene classes, excluding the 'Bla_chr' class which is intrinsic.
-    """
-    if not res_headers:
-        return '-'
-    res_classes = [h for i, h in enumerate(res_headers) if
-                   res_hits[i] != '-' and
-                   (h.lower().endswith('_acquired') or h == 'Col_mutations' or
-                    h == 'Flq_mutations')]
-    res_classes = [c.replace('_acquired', '').replace('_mutations', '') for c in res_classes]
-    return len(set(res_classes))
-
-
-def get_resistance_gene_count(res_headers, res_hits):
-    """
-    Counts up all resistance genes, excluding the 'Bla' class which is intrinsic.
-    """
-    if not res_headers:
-        return '-'
-    res_indices = [i for i, h in enumerate(res_headers) if h.lower().endswith('_acquired')]
-    gene_list = []
-    for i in res_indices:
-        genes = res_hits[i].split(';')
-        genes = [g for g in genes if g != '-']
-        gene_list += genes
-    return len(gene_list)
-
-
-def get_data_path():
-    return resource_filename(__name__, 'data')
-
-
-def get_chromosome_mlst_header():
-    return ['gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB']
-
-
-def get_ybt_mlst_header():
-    return ['ybtS', 'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA']
-
-
-def get_clb_mlst_header():
-    return ['clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI', 'clbL', 'clbM',
-            'clbN', 'clbO', 'clbP', 'clbQ']
-
-
-def get_iuc_mlst_header():
-    return ['iucA', 'iucB', 'iucC', 'iucD', 'iutA']
-
-
-def get_iro_mlst_header():
-    return ['iroB', 'iroC', 'iroD', 'iroN']
-
-
-def get_rmp_mlst_header():
-    return ['rmpA', 'rmpD', 'rmpC']
-
-
-def gunzip_contigs_if_necessary(contigs, temp_dir):
-    if get_compression_type(contigs) == 'gz':
-        name = get_strain_name(contigs)
-        new_contigs = temp_dir + '/' + name + '.fasta'
-        decompress_file(contigs, new_contigs)
-        return new_contigs
-    else:
-        return contigs
-
-
-def decompress_file(in_file, out_file):
-    with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
-        s = i.read()
-        o.write(s)
-
-
-def get_chromosome_mlst_results(data_folder, contigs, kp_complex, args):
-    chromosome_mlst_header = get_chromosome_mlst_header()
-
-    if kp_complex:
-        seqs = data_folder + '/Klebsiella_pneumoniae.fasta'
-        database = data_folder + '/kpneumoniae.txt'
-        chr_st, chr_st_detail, _, _ = \
-            mlst_blast(seqs, database, 'no', [contigs], min_cov=args.min_coverage,
-                       min_ident=args.min_identity, max_missing=3, allow_multiple=False)
-        if chr_st != '0':
-            chr_st = 'ST' + chr_st
-        chr_st_with_subsp = get_kp_subspecies_based_on_st(chr_st)
-
-        assert len(chromosome_mlst_header) == len(chr_st_detail)
-
-        results = {'ST': chr_st_with_subsp,
-                   'Chr_ST': chr_st}
-
-    else:
-        results = {'ST': "NA",
-                   'Chr_ST': "NA"}
-        chr_st_detail = ['-'] * len(chromosome_mlst_header)
-
-    results.update(dict(zip(get_chromosome_mlst_header(), chr_st_detail)))
-    return results
-
-
-def get_kp_subspecies_based_on_st(chr_st):
-    ozaenae_sts = {'ST90', 'ST91', 'ST92', 'ST93', 'ST95', 'ST96', 'ST97', 'ST381', 'ST777',
-                   'ST3193', 'ST3766', 'ST3768', 'ST3771', 'ST3781', 'ST3782', 'ST3784', 'ST3802',
-                   'ST3803'}
-    rhinoscleromatis_sts = {'ST67', 'ST68', 'ST69', 'ST3772', 'ST3819'}
-    chr_st_minus_1lv = chr_st.replace('-1LV', '')  # 1LV still results in a subspecies call
-    if chr_st_minus_1lv in ozaenae_sts:
-        return chr_st + ' (subsp. ozaenae)'
-    if chr_st_minus_1lv in rhinoscleromatis_sts:
-        return chr_st + ' (subsp. rhinoscleromatis)'
-    return chr_st
-
-
-def get_virulence_cluster_results(data_folder, contigs, alleles_fasta, profiles_txt,
-                                  vir_name, vir_st_name, unknown_group_name, min_gene_count,
-                                  header_function, args):
-    seqs = data_folder + '/' + alleles_fasta
-    database = data_folder + '/' + profiles_txt
-    mlst_header = header_function()
-    max_missing = len(mlst_header) - min_gene_count
-
-    st, st_detail, group, spurious_hits = \
-        mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                   min_ident=args.min_identity, max_missing=max_missing, check_for_truncation=True,
-                   report_incomplete=True, allow_multiple=True,
-                   min_gene_count=min_gene_count, unknown_group_name=unknown_group_name,
-                   min_spurious_cov=args.min_spurious_coverage,
-                   min_spurious_ident=args.min_spurious_identity)
-
-    assert len(mlst_header) == len(st_detail)
-
-    results = {vir_name: group,
-               vir_st_name: st}
-    results.update(dict(zip(mlst_header, st_detail)))
-    results['spurious_virulence_hits'] = ';'.join(spurious_hits)
-    return results
-
-
-def get_all_virulence_results(data_folder, contigs, args):
-    virulence_results = [get_ybt_mlst_results(data_folder, contigs, args),
-                         get_clb_mlst_results(data_folder, contigs, args),
-                         get_iuc_mlst_results(data_folder, contigs, args),
-                         get_iro_mlst_results(data_folder, contigs, args),
-                         get_rmp_mlst_results(data_folder, contigs, args)]
-
-    # Merge the results from different loci together. All columns should be unique between them
-    # except for the 'spurious_virulence_hits' column which will be common to all of them.
-    results = {'spurious_virulence_hits': []}
-    for r in virulence_results:
-        for column, val in r.items():
-            if column not in results:
-                results[column] = val
-            elif column == 'spurious_virulence_hits':
-                if val != '':
-                    results['spurious_virulence_hits'].append(val)
+            # proceed through all other modules
+            if pass_check:
+                for module in module_run_order:
+                    if module not in preset_check_modules:
+                        module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
+                        results.update({f'{module}__{header}': result for header, result in module_results.items()})
             else:
-                assert False
+                # Populate results with "Not Tested" for modules that did not run
+                for module in module_run_order:
+                    if module not in preset_check_modules:
+                        module_headers = [header for header in full_headers if header.startswith(module)]
+                        for header in module_headers:
+                            results[header] = 'Not Tested'
 
-    if len(results['spurious_virulence_hits']) == 0:
-        results['spurious_virulence_hits'] = '-'
-    else:
-        results['spurious_virulence_hits'] = ';'.join(results['spurious_virulence_hits'])
-    return results
+            # Split the results based on species
+            if args.modules:
+                module_name = args.modules.split(',')[0] 
+                outfile_suffix = f'{module_name}_output.txt'
+            else:
+                # Determine the appropriate output file suffix based on species
+                species = results.get('enterobacterales__species__species', None)
+                if species and is_kp_complex({'species': species}):
+                    outfile_suffix = 'klebsiella_pneumo_complex_output.txt'
+                elif species and is_ko_complex({'species': species}):
+                    outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
+                elif species and is_escherichia({'species': species}):
+                    outfile_suffix = 'escherichia_output.txt'
+                else:
+                    print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
+                    continue
 
-
-def get_ybt_mlst_results(data_folder, contigs, args):
-    return get_virulence_cluster_results(data_folder, contigs, 'ybt_alleles.fasta',
-                                         'YbST_profiles.txt', 'Yersiniabactin', 'YbST',
-                                         'ybt unknown', 6, get_ybt_mlst_header, args)
-
-
-def get_clb_mlst_results(data_folder, contigs, args):
-    return get_virulence_cluster_results(data_folder, contigs, 'clb_alleles.fasta',
-                                         'CbST_profiles.txt', 'Colibactin', 'CbST',
-                                         'clb unknown', 8, get_clb_mlst_header, args)
-
-
-def get_iuc_mlst_results(data_folder, contigs, args):
-    return get_virulence_cluster_results(data_folder, contigs, 'iuc_alleles.fasta',
-                                         'AbST_profiles.txt', 'Aerobactin', 'AbST',
-                                         'iuc unknown', 3, get_iuc_mlst_header, args)
-
-
-def get_iro_mlst_results(data_folder, contigs, args):
-    return get_virulence_cluster_results(data_folder, contigs, 'iro_alleles.fasta',
-                                         'SmST_profiles.txt', 'Salmochelin', 'SmST',
-                                         'iro unknown', 2, get_iro_mlst_header, args)
+            # write results
+            output_file = os.path.join(args.outdir, outfile_suffix)
+            output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
 
 
-def get_rmp_mlst_results(data_folder, contigs, args):
-    return get_virulence_cluster_results(data_folder, contigs, 'rmp_alleles.fasta',
-                                         'RmST_profiles.txt', 'RmpADC', 'RmST',
-                                         'rmp unknown', 2, get_rmp_mlst_header, args)
+# def main(): 
+#     all_module_names, modules = import_modules()
+#     args = parse_arguments(sys.argv[1:], all_module_names, modules)
+#     print_modules(args, all_module_names, modules)
+    
+#     module_names, check_module_list, pass_modules = get_used_module_names(args, all_module_names, get_presets())  
+    
+#     # Define preset_check_modules 
+#     preset_check_modules = []
+#     if args.preset:
+#         presets = get_presets()
+#         preset_check_modules = [module for module, _ in presets[args.preset]['check']]
+
+#     module_names, module_run_order, external_programs = check_modules(args, modules, module_names, check_module_list, pass_modules)
+#     check_assemblies(args)
+
+#     full_headers, stdout_headers = get_headers(module_names, modules)  
+#     output_headers(full_headers, stdout_headers, args.outfile) 
+
+#     for assembly in args.assemblies:
+#         with tempfile.TemporaryDirectory() as temp_dir:
+#             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
+#             minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
+#             results = {'strain': get_strain_name(assembly)}
+
+#             pass_check = True  # default, assume no check and run all modules
+
+#             # if we have 'check' modules in the preset, run these
+#             if args.preset and len(check_module_list) > 0:
+#                 for module, check in presets[args.preset]['check']:
+#                     try:
+#                         module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
+
+#                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
+#                         check_function = globals()[check]
+
+#                         if not check_function(module_results):
+#                             pass_check = False
+#                             print(f"Assembly {assembly} failed in check {check}. Continuing with next assembly.")
+#                             break  # Exit the for loop since this assembly failed the check
+
+#                     except Exception as e:
+#                         print(f"Error encountered while processing {assembly} with {module}: {e}. Continuing with next assembly.")
+#                         pass_check = False
+#                         break  # Exit the for loop since an error occurred
+
+#             # proceed through all other modules
+#             if pass_check:
+#                 for module in module_run_order:
+#                     if module not in preset_check_modules:
+#                         module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
+
+#                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
+
+#             # write results
+#             output_results(full_headers, stdout_headers, args.outfile, results)
 
 
-def get_rmpa2_results(data_folder, contigs, args):
-    seqs = data_folder + '/rmpA2.fasta'
-    rmpa2_allele = rmpa2_blast(seqs, [contigs], args.min_coverage, args.min_identity)
-    return {'rmpA2': rmpa2_allele}
+
+def print_modules(args, all_module_names, modules):
+    if args.list_modules:
+        print()
+        print('Available modules for Kleborate')
+        print('-------------------------------')
+        terminal_width = shutil.get_terminal_size().columns
+        end_formatting, bold = '\033[0m', '\033[1m'
+        for m in all_module_names:
+            description = modules[m].description()
+            text = f'{bold}{m}{end_formatting}: {description}'
+            print('\n'.join(textwrap.wrap(text, width=terminal_width - 1)))
+            print()
+        sys.exit(0)
+    elif not args.assemblies:
+        sys.exit('Error: you must provide one or more assembly files using --assemblies')
 
 
-def get_wzi_and_k_locus_results(data_folder, contigs, args):
-    seqs = data_folder + '/wzi.fasta'
-    database = data_folder + '/wzi.txt'
-    bst, _, k_type, _ = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                                   min_ident=args.min_identity, max_missing=0, allow_multiple=False)
-    if bst == '0':
-        wzi_st = '-'
-    else:
-        wzi_st = 'wzi' + bst
-    if k_type == '':
-        k_type = '-'
-    return {'wzi': wzi_st,
-            'K_locus': k_type}
+
+def get_presets():
+    kpsc_modules = {
+        'check': [('enterobacterales__species', 'is_kp_complex')],
+        'pass': [
+            'general__contig_stats','klebsiella_pneumo_complex__mlst',
+            'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst', 'klebsiella_pneumo_complex__virulence_score',
+            'klebsiella__rmpa2','klebsiella_pneumo_complex__amr', 'klebsiella_pneumo_complex__resistance_score', 'klebsiella_pneumo_complex__resistance_class_count',
+            'klebsiella_pneumo_complex__resistance_gene_count', 'klebsiella_pneumo_complex__wzi','klebsiella_pneumo_complex__kaptive'
+        ]
+    }
+
+    kosc_modules = {
+        'check': [('enterobacterales__species', 'is_ko_complex')],
+        'pass': [
+            'general__contig_stats',
+            'klebsiella_oxytoca_complex__mlst', 'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst','klebsiella__rmpa2'
+        ]
+    }
+
+    escherichia_modules = {
+        'check': [('enterobacterales__species', 'is_escherichia')],
+        'pass': [
+            'general__contig_stats',
+            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur'
+        ]
+    }
+
+    return {
+        'kpsc': kpsc_modules,
+        'kosc': kosc_modules,
+        'escherichia': escherichia_modules
+    }
 
 
-def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
-    if not pathlib.Path(contigs).is_file():
-        raise OSError
-    if args.resistance:
-        gene_info, _, _ = read_class_file(data_folder + '/CARD_AMR_clustered.csv')
-
-        # Only do mutation/truncation tests for Kp complex species.
-        if kp_complex:
-            qrdr = data_folder + '/QRDR_120.fasta'
-            trunc = data_folder + '/MgrB_and_PmrB.fasta'
-            omp = data_folder + '/OmpK.fasta'
-        else:
-            qrdr, trunc, omp = None, None, None
-
-        seqs = data_folder + '/CARD_v3.1.13.fasta'
-        res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
-                                         args.min_coverage,  args.min_identity,
-                                         args.min_spurious_coverage, args.min_spurious_identity)
-
-        # Double check that there weren't any results without a corresponding output header.
-        for h in res_hits.keys():
-            if h not in res_headers:
-                sys.exit( f'Error: results contained a value ({h}) that is not covered by the '
-                          f'output headers')
-
-        return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-' for r in res_headers}
-    else:
-        return {}
+def add_module_cli_arguments(parser, args, all_module_names, modules):
+    """
+    This function add CLI argument for modules. Each modules that has options gets its own argument
+    group. These are only displayed in the help text if the user used --help_all, otherwise they
+    are hidden.
+    """
+    for m in all_module_names:
+        group = modules[m].add_cli_options(parser)
+        if '--help_all' not in args and group is not None:
+            for a in group._group_actions:
+                a.help = argparse.SUPPRESS
 
 
-def get_summary_results(results, res_headers, args):
-    summary = {'virulence_score': str(get_virulence_score(results['Yersiniabactin'],
-                                                          results['Colibactin'],
-                                                          results['Aerobactin']))}
-    if args.resistance:
-        res_hits = [results[x] for x in res_headers]
-        summary['resistance_score'] = str(get_resistance_score(res_headers, res_hits))
-        summary['num_resistance_classes'] = str(get_resistance_class_count(res_headers, res_hits))
-        summary['num_resistance_genes'] = str(get_resistance_gene_count(res_headers, res_hits))
-    return summary
+def get_used_module_names(args, all_module_names, presets): 
+    if args.preset is None and args.modules is None:
+        sys.exit('Error: either --preset or --modules is required')
+
+    # Initialize empty lists for module names, check modules, and pass modules
+    module_names = []
+    check_modules = []
+    pass_modules = []
+
+    if args.preset:
+        if args.preset not in presets:
+            sys.exit(f'Error: {args.preset} is not a valid preset')
+
+        # Assuming presets[args.preset] is a dictionary with 'check' and 'pass' keys
+        check_modules = [module[0] for module in presets[args.preset].get('check', [])]  # Extract module names from check modules
+        pass_modules = presets[args.preset].get('pass', [])  # Directly assign pass modules
+
+        module_names += check_modules + pass_modules  # Combine check and pass modules for the overall list
+
+    if args.modules:
+        for m in args.modules.split(','):
+            if m not in all_module_names:
+                sys.exit(f'Error: {m} is not a valid module name')
+            if m not in module_names:
+                module_names.append(m)
+
+    return module_names, check_modules, pass_modules
 
 
-def output_headers(stdout_header, full_header, outfile):
-    print('\t'.join(stdout_header))
-    with open(outfile, 'wt') as o:
-        o.write('\t'.join(full_header))
-        o.write('\n')
+def get_all_module_names():
+    """
+    Looks for all Kleborate modules and returns their names. To qualify as a module, it must be in
+    the 'modules' directory, in a subdirectory that matches the filename. For example:
+    * modules/contig_stats/contig_stats.py       <- is a module
+    * modules/kpsc_mlst/kpsc_mlst.py             <- is a module
+    * modules/contig_stats/test_contig_stats.py  <- not a module
 
-
-def output_results(stdout_header, full_header, outfile, results):
-    print('\t'.join([results[x] for x in stdout_header]))
-    with open(outfile, 'at') as o:
-        o.write('\t'.join([results[x] for x in full_header]))
-        o.write('\n')
-
-    # Double check that there weren't any results without a corresponding output header.
-    for h in results.keys():
-        if h not in full_header:
-            sys.exit(f'Error: results contained a value ({h}) that is not covered by the output '
-                     f'headers')
+    """
+    module_dir = pathlib.Path(__file__).parents[0] / 'modules'
+    module_names = []
+    for module_file in module_dir.glob('*/*.py'):
+        dir_name = module_file.parts[-2]
+        if module_file.parts[-1][:-3] == dir_name:
+            module_names.append(dir_name)
+    if 'template' in module_names:
+        module_names.remove('template')
+    return sorted(module_names)
 
 
 def get_strain_name(full_path):
@@ -624,12 +364,213 @@ def get_strain_name(full_path):
         filename = filename[:-3]
     return os.path.splitext(filename)[0]
 
+def import_modules():
+    """
+    This function imports all Kleborate modules (whether or not they are used in this run).
+    """
+    all_module_names = get_all_module_names()
+    modules = {}
+    for m in all_module_names:
+        modules[m] = importlib.import_module(f'..modules.{m}.{m}', __name__)
+    return all_module_names, modules
 
-def rebuild_blast_indices(data_dir):
-    for fasta in pathlib.Path(data_dir).glob('*.fasta'):
-        makeblastdb_cmd = ['makeblastdb', '-dbtype', 'nucl', '-in', str(fasta)]
-        with open(os.devnull, 'w') as devnull:
-            subprocess.check_call(makeblastdb_cmd, stdout=devnull)
+
+def check_modules(args, modules, module_names, preset_check_modules, preset_pass_modules):
+    """
+    This function checks the options, prerequisites external requirements of the used modules. If
+    any fail, the program will quit with an error. It returns:
+    * A list of all module names. Probably the same list as given, but if any prerequisite modules
+      were missing, they've been added to the end.
+    * A topologically sorted list of module names. This is the run order so each module will have
+      its prerequisites run first.
+    * A list of all external programs used.
+    """
+    all_external_programs = set()
+
+    for m in module_names:
+        modules[m].check_cli_options(args)
+        all_external_programs.update(modules[m].check_external_programs())
+
+    new_module_names = module_names.copy()
+    for m in module_names:
+        for prereq in modules[m].prerequisite_modules():
+            if prereq not in new_module_names:
+                new_module_names.append(prereq)
+    module_names = new_module_names
+
+    dependency_graph = {m: modules[m].prerequisite_modules() for m in module_names}
+    
+    return module_names, get_run_order(dependency_graph), sorted(all_external_programs)
+
+
+def get_run_order(dependency_graph):
+    try:
+        ts = graphlib.TopologicalSorter(dependency_graph)
+        return list(ts.static_order())
+    except graphlib.CycleError:
+        sys.exit('Error: module dependency graph contains a cycle')
+
+
+def check_assembly(assembly):
+    """
+    This function does a quick check to make sure that the input assembly looks good.
+    """
+    # for assembly in args.assemblies:
+    if os.path.isdir(assembly):
+        sys.exit('Error: ' + assembly + ' is a directory (please specify assembly files)')
+    if not os.path.isfile(assembly):
+        sys.exit('Error: could not find ' + assembly)
+    fasta = load_fasta(assembly)
+    if len(fasta) < 1:
+        sys.exit('Error: invalid FASTA file: ' + assembly)
+    for _, seq in fasta:
+        if len(seq) == 0:
+            sys.exit('Error: invalid FASTA file (contains a zero-length sequence): ' + assembly)
+
+
+def get_headers(module_names, modules):
+    """
+    This function returns three lists of headers:
+    * top_headers: for Kleborate's output file, shows module names
+    * full_headers: for Kleborate's output file, show column names
+    * stdout_headers: for Kleborate's stdout
+
+    Each used module contributes headers to these lists. To ensure that there aren't any duplicate
+    headers, the module name is added before each header in full_headers and stdout_header,
+    separated by a double-underscore.
+    """
+    _,full_headers, stdout_headers = [''], ['strain'], ['strain']
+    for module_name in module_names:
+        module_full, module_stdout = modules[module_name].get_headers()
+        #top_headers.append(module_name)
+        #top_headers += [''] * (len(module_full) - 1)
+        full_headers += [f'{module_name}__{h}' for h in module_full]
+        stdout_headers += [f'{module_name}__{h}' for h in module_stdout]
+    return full_headers, stdout_headers
+
+
+def gunzip_assembly_if_necessary(assembly, temp_dir):
+    if get_compression_type(assembly) == 'gz':
+        unzipped_assembly = pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.fasta')
+        decompress_file(assembly, unzipped_assembly)
+        return unzipped_assembly
+    else:
+        return assembly
+
+
+def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir):
+    """
+    A lot of the modules use minimap2 alignment, so pre-building the index for this assembly once
+    can save a bit of time.
+    """
+    if 'minimap2' not in external_programs:
+        return None
+    minimap2_index = (pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.mmi')).resolve()
+    command = ['minimap2', '-d', minimap2_index, unzipped_assembly]
+    p = subprocess.run(command, capture_output=True, text=True)
+    if p.returncode != 0:
+        sys.exit(f'\nError: minimap2 failed to index sample {assembly}:\n{p.stderr}')
+    return minimap2_index
+
+
+def decompress_file(in_file, out_file):
+    with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
+        s = i.read()
+        o.write(s)
+
+def output_headers(full_headers, stdout_headers, outfile):
+    """
+    This function prints headers to stdout and writes headers to the output file. Module names are
+    trimmed off to make the headers shorter and easier to read.
+    """
+    trimmed_stdout_headers = [h.split('__')[-1] for h in stdout_headers]
+    trimmed_full_headers = [h.split('__')[-1] for h in full_headers]
+    print('\t'.join(trimmed_stdout_headers))
+    with open(outfile, 'wt') as o:
+        o.write('\t'.join(trimmed_full_headers))
+
+
+def output_results(full_headers, stdout_headers, outfile, results, trim_headers=False):
+    """
+    This function writes the results to stdout and the output file.
+    Always prints stdout headers and writes full headers to the file if the file is new (empty).
+    """
+    # Print results to the terminal using stdout_headers
+    print('\t'.join([str(results.get(x, "-")).strip("[] ") for x in stdout_headers]))
+
+    # Determine headers based on trim_headers option
+    headers_to_write = full_headers
+    if trim_headers:
+        headers_to_write = [h.split('__')[-1] for h in full_headers]
+
+    # Write results to the output file
+    with open(outfile, 'at') as o:
+        if o.tell() == 0:  # Write headers if file is empty
+            o.write('\t'.join(headers_to_write) + '\n')
+        o.write('\t'.join([str(results.get(x, "-")).strip("[] ") for x in full_headers]) + '\n')
+
+    # Check for any headers in results that are not in full_headers
+    for h in results.keys():
+        if h not in full_headers:
+            sys.exit(f'Error: results contained a value ({h}) that is not covered by the output headers')
+
+
+# def output_results(full_headers, stdout_headers, outfile, results):
+#     """
+#     This function writes the results to stdout and the output file.
+#     """
+#     print('\t'.join([str(results.get(x, "-")).strip("[] ").replace("assembly", "strain") for x in stdout_headers]))
+#     with open(outfile, 'at') as o:
+#         if o.tell() > 0:  # Check if the file is not empty
+#             o.write('\n')
+#         o.write('\t'.join([str(results.get(x, "-")).strip("[] ").replace("assembly", "strain") for x in full_headers]))
+
+#     for h in results.keys():
+#         if h not in full_headers:
+#             sys.exit(f'Error: results contained a value ({h}) that is not covered by the output headers')
+
+
+def paper_refs():
+    """
+    This function prepares the references for the program's help text, with clean line wrapping.
+    """
+    terminal_width = shutil.get_terminal_size().columns
+    text = 'If you use Kleborate, please cite the paper:\n' \
+           'Lam MMC, et al. A genomic surveillance framework and genotyping tool for Klebsiella ' \
+           'pneumoniae and its related species complex. Nature Communications. 2021. ' \
+           'doi:10.1038/s41467-021-24448-3.\n\n' \
+           'If you turn on the Kaptive option for full K and O typing, please also cite:\n' \
+           'Wyres KL, et al. Identification of Klebsiella capsule synthesis loci from whole ' \
+           'genome data. Microbial Genomics. 2016. doi:10.1099/mgen.0.000102.'
+    wrapped_text = ''
+    for line in text.split('\n'):
+        wrapped_text += '\n'.join(textwrap.wrap(line, width=terminal_width - 1))
+        wrapped_text += '\n'
+    return 'R|' + wrapped_text
+
+
+def get_version():
+    """
+    This function returns the version of Kleborate as a string, without the leading 'v'.
+    """
+    # First try to get the version from the pyproject.toml file, in case this is being run directly
+    # from the repo using the kleborate-runner.py file.
+    pyproject = pathlib.Path(__file__).parents[1] / 'pyproject.toml'
+    if pyproject.is_file():
+        with open(pyproject, 'rt') as f:
+            pyproject_text = f.read()
+        if 'name = "kleborate"' in pyproject_text:  # make sure it's the right pyproject.toml
+            match = re.search(r'version = "(\d+\.\d+\.\d+)"', pyproject_text)
+            if match:
+                return match.group(1)
+
+    # If there wasn't a 'pyproject.toml' file, then Kleborate is probably installed, so use
+    # importlib to get the version of the installed package.
+    try:
+        from importlib import metadata
+    except ImportError:
+        import importlib_metadata as metadata
+    return metadata.version(__package__ or __name__)
 
 
 if __name__ == '__main__':

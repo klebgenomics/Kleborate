@@ -1,0 +1,1187 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Modules &#8212; KleborateModular 3.0.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=03ad91ce"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Creating-New-Modules" href="Creating-New-Modules.html" />
+    <link rel="prev" title="Usage" href="Usage.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="KleborateModular 3.0.0 documentation - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="KleborateModular 3.0.0 documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Introducing Kleborate v3
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Usage.html">Usage</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Creating-New-Modules.html">Creating-New-Modules</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/modules.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Modules</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-modules">General modules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#species-detection">Species detection</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#species-detection-outputs">Species detection outputs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contig-stats">Contig stats</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contig-stats-outputs">Contig stats outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klebsiella-pneumoniae-species-complex">Klebsiella pneumoniae species complex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-mlst">KpSC MLST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rhinoscleromatis-and-ozaenae">Rhinoscleromatis and Ozaenae</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-mlst-outputs">KpSC MLST outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-virulence-modules">KpSC virulence modules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-virulence-allele-reporting">Notes on virulence allele reporting:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-virulence-sequence-type-reporting">Notes on virulence sequence type reporting:</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#yersiniabactin-and-colibactin">Yersiniabactin and colibactin</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#ybst-outputs">ybst outputs</a></li>
+</ul>
+</li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#aerobactin-and-salmochelin">Aerobactin and salmochelin</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-iuca-sequence-update">Note on <em>iucA</em> sequence update:</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#abst-outputs">abst Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#hypermucoidy-loci">Hypermucoidy loci</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#note">Note:</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#rmst-outputs">rmst outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-amr">KpSC AMR</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#acquired-amr-genes">Acquired AMR genes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shv-beta-lactamases">SHV beta-lactamases</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-chromosomal-mutations-associated-with-amr">Additional chromosomal mutations associated with AMR</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-amr-outputs">KpSC AMR outputs</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-scores-and-counts">Resistance scores and counts</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-score">Resistance score</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-gene-counts-and-drug-class-counts">Resistance gene counts and drug class counts</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-scores-and-counts-outputs">Resistance scores and counts outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klebsiella-oxytoca-species-complex">Klebsiella oxytoca species complex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kosc-mlst">KoSC MLST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kosc-mlst-outputs">KoSC MLST outputs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kosc-virulence-typing">KoSC virulence typing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escherichia">Escherichia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-coli-mlst">E. coli MLST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-coli-mlst-outputs">E. coli MLST outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="modules">
+<h1>Modules<a class="headerlink" href="#modules" title="Permalink to this heading">#</a></h1>
+<p>Kleborate v3 includes a range of modules for typing bacterial genomes, most of which are specific to a particular species or complex (Klebsiella pneumoniae SC, Klebsiella oxytoca SC, Escherichia coli). We therefore recommend specifying a preset list of modules to run based on the organism, rather than specifying individual modules. This will run the species detection module first, and if the species matches that specified in –preset, the preset modules for that species will be run (if not, the species will be reported and the remaining fields will be blank).</p>
+<p>Details of the available modules, how they work, and how to interpret the outputs, are given below.</p>
+<section id="general-modules">
+<h2>General modules<a class="headerlink" href="#general-modules" title="Permalink to this heading">#</a></h2>
+<section id="species-detection">
+<h3>Species detection<a class="headerlink" href="#species-detection" title="Permalink to this heading">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">enterobacterales__species</span>
+</pre></div>
+</div>
+<p>This module will attempt to identify the species of each input assembly. It does this by comparing the assembly using <a class="reference external" href="https://mash.readthedocs.io/">Mash</a> to a curated set of <em>Klebsiella</em> and other Enterobacteriaceae assemblies from NCBI, and reporting the species of the closest match.</p>
+<section id="species-detection-outputs">
+<h4>Species detection outputs<a class="headerlink" href="#species-detection-outputs" title="Permalink to this heading">#</a></h4>
+<p>Output of the species typing module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>species</p></td>
+<td><p>Species name (scientific name)</p></td>
+</tr>
+<tr class="row-even"><td><p>species_match</p></td>
+<td><p>Strength of the species call indicated as <code class="docutils literal notranslate"><span class="pre">strong</span></code> (Mash distance ≤ 0.02) or <code class="docutils literal notranslate"><span class="pre">weak</span></code> (Mash distance of &gt; 0.02 and ≤ 0.04, may be novel or hybrid species)</p></td>
+</tr>
+</tbody>
+</table>
+<p>The quality and completeness of Kleborate results depends on the quality of the input genome assemblies. In general, you can expect good results from draft genomes assembled with tools like SPAdes from high-depth (&gt;50x) Illumina data, however it is always possible that key genes subject to genotyping may be split across contigs, which can create problems for detecting and typing them accurately.</p>
+</section>
+</section>
+<section id="contig-stats">
+<h3>Contig stats<a class="headerlink" href="#contig-stats" title="Permalink to this heading">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">general__contig_stats</span>
+</pre></div>
+</div>
+<p>This module generates some basic assembly statistics to help users understand their typing results in the context of assembly quality, although we recommend users conduct more comprehensive QC themselves before typing genomes (e.g. screen for contamination, etc).</p>
+<p>The module reports a standard set of assembly quality metrics (see Outputs below).</p>
+<p>It will also flag in the <code class="docutils literal notranslate"><span class="pre">QC_warnings</span></code> column if an assembly size falls outside those specified in the <code class="docutils literal notranslate"><span class="pre">species_specification.txt</span></code> in the module directory, or if N50 &lt;10 kbp or ambiguous bases (Ns) are detected in the sequence.</p>
+<section id="contig-stats-outputs">
+<h4>Contig stats outputs<a class="headerlink" href="#contig-stats-outputs" title="Permalink to this heading">#</a></h4>
+<p>Output of the contig stats module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>contig_count</p></td>
+<td><p>Number of contigs in the input assembly</p></td>
+</tr>
+<tr class="row-even"><td><p>N50</p></td>
+<td><p><a class="reference external" href="https://en.wikipedia.org/wiki/N50,_L50,_and_related_statistics">N50</a> calculated from the contig sizes</p></td>
+</tr>
+<tr class="row-odd"><td><p>largest_contig</p></td>
+<td><p>Size of largest contig (in bp)</p></td>
+</tr>
+<tr class="row-even"><td><p>total_size</p></td>
+<td><p>Total assembly size (in bp)</p></td>
+</tr>
+<tr class="row-odd"><td><p>ambiguous_bases</p></td>
+<td><p>Detection of ambiguous bases (yes or no). If yes, the number of ambiguous bases is also provided in brackets.</p></td>
+</tr>
+<tr class="row-even"><td><p>QC_warnings</p></td>
+<td><p>List of QC issues detected, including: <code class="docutils literal notranslate"><span class="pre">ambiguous_bases</span></code>(ambiguous bases detected) <code class="docutils literal notranslate"><span class="pre">N50</span></code>(N50 &lt; 10 kbp), <code class="docutils literal notranslate"><span class="pre">total_size</span></code> (genome size falls outside expected range).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="klebsiella-pneumoniae-species-complex">
+<h2>Klebsiella pneumoniae species complex<a class="headerlink" href="#klebsiella-pneumoniae-species-complex" title="Permalink to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">preset</span> <span class="n">kpsc</span>
+</pre></div>
+</div>
+<p>These modules will be run if the <code class="docutils literal notranslate"><span class="pre">enterobacterales__species</span></code>  module confirms the input assembly as a member of the <em>K. pneumoniae</em> species complex (KpSC) labelled in the tree below.</p>
+<p>We’ve included the phylogroup numbers in the table below for backwards compatibility with older literature, but these names are not used in the Kleborate output. See <a class="reference external" href="https://www.nature.com/articles/s41579-019-0315-1">this review</a> for an overview of the species complex.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://github.com/klebgenomics/KleborateModular/blob/bacterate_development/docs/source/kleborate_species_tree.png"><img alt="Klebsiella species tree" src="https://github.com/klebgenomics/KleborateModular/blob/bacterate_development/docs/source/kleborate_species_tree.png" style="width: 90%;" /></a>
+</figure>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Species</p></th>
+<th class="head"><p>Kp phylogroup<sup>a</sup></p></th>
+<th class="head"><p>Kp phylogroup (alternative)<sup>b</sup></p></th>
+<th class="head"><p>Reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>K. pneumoniae</em></p></td>
+<td><p>Kp1</p></td>
+<td><p>KpI</p></td>
+<td><p><a class="reference external" href="https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-29-1-38">Brenner, D.J. 1979 Int J Syst Evol Microbiol 29: 38-41</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><em>K. quasipneumoniae</em> subsp <em>quasipneumoniae</em></p></td>
+<td><p>Kp2</p></td>
+<td><p>KpIIa</p></td>
+<td><p><a class="reference external" href="https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2">Brisse et al., 2014 Int J Syst Evol Microbiol 64:3146-52</a></p></td>
+</tr>
+<tr class="row-even"><td><p><em>K. quasipneumoniae</em> subsp <em>similipneumoniae</em></p></td>
+<td><p>Kp4</p></td>
+<td><p>KpIIb</p></td>
+<td><p><a class="reference external" href="https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/ijs.0.062737-0#tab2">Brisse et al. 2014 Int J Syst Evol Microbiol 64:3146-52</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><em>K. variicola</em> subsp <em>variicola</em></p></td>
+<td><p>Kp3</p></td>
+<td><p>KpIII</p></td>
+<td><p><a class="reference external" href="https://www.sciencedirect.com/science/article/abs/pii/S0723202004702349?via%3Dihub">Rosenblueth et al. 2004 Syst Appl Microbiol 27:27-35</a></p></td>
+</tr>
+<tr class="row-even"><td><p><em>K. variicola</em> subsp <em>tropica</em></p></td>
+<td><p>Kp5</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub">Rodrigues et al., 2019 Res Microbiol ﻿S0923-2508:﻿30019-1</a> (described as subsp <em>tropicalensis</em> in paper)</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>K. quasivariicola</em></p></td>
+<td><p>Kp6</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p><a class="reference external" href="https://mra.asm.org/content/5/42/e01057-17">Long et al. 2017 Genome Announc 5: ﻿e01057-17</a></p></td>
+</tr>
+<tr class="row-even"><td><p><em>K. africana</em></p></td>
+<td><p>Kp7</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p><a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub">Rodrigues et al. 2019 Res Microbiol ﻿S0923-2508:﻿30019-1</a> (described as <em>africanensis</em> in this paper)</p></td>
+</tr>
+</tbody>
+</table>
+<p><sup>a</sup> Kp Kp phylogroup numbers as described in <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0923250819300191?via%3Dihub">Rodrigues et al. 2019</a></p>
+<p><sup>b</sup> alternative (older) Kp phylogroup numbers as described in <a class="reference external" href="https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-51-3-915#tab2">Brisse et al. 2001</a> and <a class="reference external" href="https://aac.asm.org/content/49/12/5149">Fevre et al. 2005</a> prior to the identification of <em>K. variicola</em> subsp <em>tropica</em>, <em>K. quasivariicola</em> and <em>K. africana</em>.</p>
+<section id="kpsc-mlst">
+<h3>KpSC MLST<a class="headerlink" href="#kpsc-mlst" title="Permalink to this heading">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella_pneumo_complex__mlst</span>
+</pre></div>
+</div>
+<p>Genomes identified by Kleborate as belonging to the <em>K. pneumoniae</em> species complex are subjected to MLST using the 7-locus scheme described at the  <em>K. pneumoniae</em> <a class="reference external" href="http://bigsdb.pasteur.fr/klebsiella/klebsiella.html">Bacteria Isolate Genome Sequence Database hosted at the Pasteur Institute</a>. Note that this scheme is not specific to <em>K. pneumoniae sensu stricto</em> but covers the whole species complex.</p>
+<p>A copy of the MLST alleles and ST definitions is stored in the /data directory of this module.</p>
+<section id="rhinoscleromatis-and-ozaenae">
+<h4>Rhinoscleromatis and Ozaenae<a class="headerlink" href="#rhinoscleromatis-and-ozaenae" title="Permalink to this heading">#</a></h4>
+<p>The <em>K. pneumoniae</em> clonal group CG67 is known as <em>K. pneumoniae</em> subsp. <em>rhinoscleromatis</em> because it causes rhinoscleroma (chronic granulomatous infection of the nose and upper airways), and clonal group CG91 is known as <em>K. pneumoniae</em> subsp. <em>ozaenae</em> as it can cause ozena (atrophic rhinitis). To alert users to this, when STs belonging to these clonal groups are detected by Kleborate this is flagged in the ST column, e.g. ‘ST67 (subsp. rhinoscleromatis)’ or ‘ST97 (subsp. ozaenae)’.</p>
+<p>The relevant STs are:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p><strong>Species column</strong></p></td>
+<td><p><strong>ST</strong></p></td>
+<td><p><strong>MLST column</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><em>K. pneumoniae</em></p></td>
+<td><p>67, 68, 69, 3772, 3819</p></td>
+<td><p>ST67 (subsp. rhinoscleromatis)</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>K. pneumoniae</em></p></td>
+<td><p>90, 91, 92, 93, 95, 96, 97, 381, 777, 3193
+3766, 3768, 3771, 3781, 3782, 3784, 3802, 3803</p></td>
+<td><p>ST91 (subsp. ozaenae)</p></td>
+</tr>
+</tbody>
+</table>
+<section id="kpsc-mlst-outputs">
+<h5>KpSC MLST outputs<a class="headerlink" href="#kpsc-mlst-outputs" title="Permalink to this heading">#</a></h5>
+<p>Output of the KpSC MLST module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>ST</p></td>
+<td><p>sequence type</p></td>
+</tr>
+<tr class="row-even"><td><p>gapA, infB, mdh, pgi, phoE, rpoB, tonB</p></td>
+<td><p>allele number</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Kleborate makes an effort to report the closest matching ST if a precise match is not found.</p></li>
+<li><p>Imprecise allele matches are indicated with a <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p></li>
+<li><p>Imprecise ST calls are indicated with <code class="docutils literal notranslate"><span class="pre">-nLV</span></code>, where n indicates the number of loci that disagree with the ST reported. So <code class="docutils literal notranslate"><span class="pre">258-1LV</span></code> indicates a single-locus variant (SLV) of ST258, i.e. 6/7 loci match ST258.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="kpsc-virulence-modules">
+<h3>KpSC virulence modules<a class="headerlink" href="#kpsc-virulence-modules" title="Permalink to this heading">#</a></h3>
+<p>Typing modules are available five key acquired virulence loci that are associated with invasive infections and are found at high prevalence among hypervirulent <em>K. pneumoniae</em> strains: the siderophores yersiniabactin (<em>ybt</em>), aerobactin (<em>iuc</em>) and salmochelin (<em>iro</em>), the genotoxin colibactin (<em>clb</em>), and the hypermucoidy locus <em>rmpADC</em>. Each of these loci comprises multiple genes and will only be reported if &gt;50% of the genes are detected.</p>
+<p>There is also a module to screen for the alternative hypermucoidy marker gene <em>rmpA2</em>.</p>
+<p>For each module, if the target locus is detected, the typer will:</p>
+<ul class="simple">
+<li><p>Call a sequence type using the same logic as for 7-gene MLST</p></li>
+<li><p>Report the phylogenetic lineage associated with each sequence type, as outlined below and detailed in the corresponding papers</p></li>
+<li><p>Report the structural variant of the mobile genetic element that is usually associated with that phylogenetic lineage (for <em>ybt</em> and <em>iuc</em> only)</p></li>
+</ul>
+<p>The <em>ybt</em>, <em>clb</em>, <em>iuc</em>, <em>iro</em> and <em>rmpADC</em> locus-specific ST schemes are defined in the <em>K. pneumoniae</em> ` &lt;<a class="reference external" href="http://bigsdb.pasteur.fr/klebsiella/klebsiella.html">http://bigsdb.pasteur.fr/klebsiella/klebsiella.html</a>&gt;`_.</p>
+<section id="notes-on-virulence-allele-reporting">
+<h4>Notes on virulence allele reporting:<a class="headerlink" href="#notes-on-virulence-allele-reporting" title="Permalink to this heading">#</a></h4>
+<p>Virulence alleles are treated in the same way as [MLST] alleles:</p>
+<ul class="simple">
+<li><p>In order to consider a Minimap2 hit, it must exceed both 80% identity and 40% coverage (adjustable via the –min_spurious_identity and –min_spurious_coverage options).</p></li>
+<li><p>Hits that fail to meet 90% identity and 80% coverage (adjustable via the <code class="docutils literal notranslate"><span class="pre">--min_identity</span></code> and <code class="docutils literal notranslate"><span class="pre">--min_coverage</span></code> options) are reported in the <code class="docutils literal notranslate"><span class="pre">spurious_virulence_hits</span></code> column but not used for sequence typing.</p></li>
+<li><p>Imperfect hits (either &lt;100% identity or &lt;100% coverage) are reported with a <code class="docutils literal notranslate"><span class="pre">*</span></code>. E.g. <code class="docutils literal notranslate"><span class="pre">15*</span></code> means that no perfect match was found but the closest match is allele 15.</p></li>
+<li><p>KleborateModular will next translate the hit into amino acid sequence and look for truncations (expressed as % amino acid length from the start codon). If the result is less than 90%, it is added to the result (e.g. <code class="docutils literal notranslate"><span class="pre">15*-42%</span></code>).</p></li>
+</ul>
+</section>
+<section id="notes-on-virulence-sequence-type-reporting">
+<h4>Notes on virulence sequence type reporting:<a class="headerlink" href="#notes-on-virulence-sequence-type-reporting" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Virulence locus STs are only reported if &gt;50% of the genes in a locus are detected (e.g. at least 6 of the 11 <em>ybt</em> locus genes are required to report a <em>ybt</em> ST).</p></li>
+<li><p>If &lt;50% of the genes in a locus are detected, KleborateModular reports the ST as <code class="docutils literal notranslate"><span class="pre">0</span></code> and the lineage as <code class="docutils literal notranslate"><span class="pre">-</span></code>.</p></li>
+<li><p>If &lt;100% but &gt;50% of the genes in a locus are detected, KleborateModular will report the locus as (incomplete), along with the closest matching ST and its corresponding phylogenetic lineage. E.g. if only 7 of the 11 <em>ybt</em> genes are detected, this will be reported as <code class="docutils literal notranslate"><span class="pre">ybtX;</span> <span class="pre">ICEKpX</span> <span class="pre">(incomplete)</span></code>.</p></li>
+<li><p>For genomes with multiple copies of a virulence locus (e.g. a strain that carries ICE <em>Kp1</em> and the KpVP-1 plasmid will have two copies of <em>iro</em> and <em>rmp</em>), KleborateModular will report and assign a ST or closest matching ST to each of these virulence loci provided that the locus is relatively intact in the genome (i.e. &gt;50% of the genes in a locus are present on a single contig) and according to the above criteria.</p></li>
+</ul>
+<section id="yersiniabactin-and-colibactin">
+<h5>Yersiniabactin and colibactin<a class="headerlink" href="#yersiniabactin-and-colibactin" title="Permalink to this heading">#</a></h5>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella_pneumo_complex__ybst</span><span class="p">,</span> <span class="n">klebsiella_pneumo_complex__cbst</span>
+</pre></div>
+</div>
+<p>We previously explored the diversity of the <em>K. pneumoniae</em> integrative conjugative element (ICE <em>Kp</em>), which mobilises the yersiniabactin locus <em>ybt</em>, using genomic analysis of a diverse set of 2498 <em>Klebsiella</em> (see <a class="reference external" href="http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196">this article</a>). Overall, we found <em>ybt</em> in about a third of all <em>K. pneumoniae</em> genomes (and <em>clb</em> in about 14%). We identified 17 distinct lineages of <em>ybt</em> (see figure) embedded within 14 structural variants of ICE <em>Kp</em> that can integrate at any of four tRNA-Asn sites in the chromosome. One type was found to be plasmid-borne. Based on this analysis, we developed a MLST-style approach for assigning yersiniabactin sequence types (YbST) and colibactin sequence types (CbST), which is implemented in KleborateModular.</p>
+<p>Note that while ICE <em>Kp1</em> is occasionally found in other species within the KpSC, and even in other genera of Enterobacteriaceae (see <a class="reference external" href="http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196">original paper</a>), most of the known variation included in the database is derived from <em>K. pneumoniae</em>.</p>
+<p>The allele databases and schemes were last updated in April 2024.</p>
+<section id="ybst-outputs">
+<h6>ybst outputs<a class="headerlink" href="#ybst-outputs" title="Permalink to this heading">#</a></h6>
+<p>Output of the ybst module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Yersiniabactin</p></td>
+<td><p>Lineage (ICEKp prediction)</p></td>
+</tr>
+<tr class="row-even"><td><p>YbST</p></td>
+<td><p>Yersiniabactin sequence type</p></td>
+</tr>
+<tr class="row-odd"><td><p>ybtS, ybtX, ybtQ, ybtP, ybtA, irp2, irp1, ybtU, ybtT, ybtE, fyuA</p></td>
+<td><p>allele number (ybt locus)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Output of the cbst module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Colibactin</p></td>
+<td><p>Lineage</p></td>
+</tr>
+<tr class="row-even"><td><p>CbST</p></td>
+<td><p>Colibactin sequence type</p></td>
+</tr>
+<tr class="row-odd"><td><p>clbA, clbB, clbC, clbD, clbE, clbF, clbG, clbH, clbI, clbL, clbM, clbN, clbO, clbP, clbQ</p></td>
+<td><p>allele number (clb / pks locus)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="aerobactin-and-salmochelin">
+<h5>Aerobactin and salmochelin<a class="headerlink" href="#aerobactin-and-salmochelin" title="Permalink to this heading">#</a></h5>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella_pneumo_complex__abst</span><span class="p">,</span> <span class="n">klebsiella_pneumo_complex__smst</span>
+</pre></div>
+</div>
+<p>We further explored the genetic diversity of the aerobactin (<em>iuc</em>) and salmochelin (<em>iro</em>) loci among a dataset of 2733 <em>Klebsiella</em> genomes (see <a class="reference external" href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5">this publication</a>). We identified five <em>iro</em> and six <em>iuc</em> lineages (see figure), each of which was associated with a specific location within <em>K. pneumoniae</em> genomes (primarily virulence plasmids). Based on this analysis, we developed a MLST-style approach for assigning aerobactin sequence types (AbST) and salmochelin sequence types (SmST) which is implemented in Kleborate.</p>
+<ul class="simple">
+<li><p>The most common lineages are <em>iuc1</em> and <em>iro1</em>, which are found together on the FIBk virulence plasmid KpVP-1 (typified by pK2044 or pLVPK common to the hypervirulent clones ST23, ST86, etc).</p></li>
+<li><p><em>iuc2</em> and <em>iro2</em> lineages were associated with the alternative FIBk virulence plasmid KpVP-2 (typified by Kp52.145 plasmid II from the K2 ST66 lab strain known as Kp52.145 or CIP 52.145 or B5055).</p></li>
+<li><p><em>iuc5</em> and <em>iro5</em> originate from <em>E. coli</em> and are carried (often together) on <em>E. coli</em> FII plasmids that can transfer to <em>K. pneumoniae</em>.</p></li>
+<li><p>The lineages <em>iuc2A</em>, <em>iuc3</em> and <em>iro4</em> were associated with other novel FIBk plasmids that had not been previously described in <em>K. pneumoniae</em>, but sequences for which are included in <a class="reference external" href="https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5">the paper</a>.</p></li>
+<li><p>The salmochelin locus present in ICE <em>Kp1</em> constitutes its own lineage <em>iro3</em>, and the aerobactin locus present in the chromosome of ST67 <em>K. pneumoniae</em> subsp <em>rhinoscleromatis</em> strains constitutes its own lineage <em>iuc4</em>.</p></li>
+</ul>
+</section>
+<section id="note-on-iuca-sequence-update">
+<h5>Note on <em>iucA</em> sequence update:<a class="headerlink" href="#note-on-iuca-sequence-update" title="Permalink to this heading">#</a></h5>
+<p>In Kleborate version 2.2.0 and earlier, the majority of <em>iucA</em> alleles had a sequence length of 1791 bp, with the exception being those associated with lineage <em>iuc 5</em> which have a length of 1725 bp. Related to this, <em>iucA</em> in genomes with <em>iuc 3</em> encoded a premature stop codon resulting in a significantly truncated and presumably non-functional IucA protein (i.e. at 2% length of the intact amino acid sequence), despite experimental evidence showing siderophore activity in <em>iuc 3</em>+ isolates. In light of this evidence, the sequences of <em>iucA</em> genes with the longer ~1791 bp length were updated to ~1725 bp by removing the first 66 bp. These changes are captured in Kleborate version 2.3.0 onwards, and address the truncation issue in <em>iuc 3</em>+ genomes. The following <em>iucA</em> alleles and AbST profiles have also been retired due to sequence redundancy following the update:</p>
+<ul class="simple">
+<li><p>alleles: _iucA<em>48</em>, _iucA<em>49</em>, _iucA<em>52</em></p></li>
+<li><p>profiles: AbST 70, 82, 83</p></li>
+</ul>
+<p>The allele databases and schemes were last updated in April 2024.</p>
+<section id="abst-outputs">
+<h6>abst Outputs<a class="headerlink" href="#abst-outputs" title="Permalink to this heading">#</a></h6>
+<p>Output of the abst module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Aerobactin</p></td>
+<td><p>Lineage (plasmid prediction)</p></td>
+</tr>
+<tr class="row-even"><td><p>AbST</p></td>
+<td><p>Sequence type</p></td>
+</tr>
+<tr class="row-odd"><td><p>iucA, iucB, iucC, iucD, iutA</p></td>
+<td><p>allele number (iuc locus)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Output of the smst module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Salmochelin</p></td>
+<td><p>Lineage (plasmid prediction)</p></td>
+</tr>
+<tr class="row-even"><td><p>SmST</p></td>
+<td><p>Sequence type</p></td>
+</tr>
+<tr class="row-odd"><td><p>iroB, iroC, iroD, iroN</p></td>
+<td><p>allele number (iro locus)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="hypermucoidy-loci">
+<h5>Hypermucoidy loci<a class="headerlink" href="#hypermucoidy-loci" title="Permalink to this heading">#</a></h5>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella__rmst</span>
+</pre></div>
+</div>
+<p>The <em>rmpA</em> locus is associated with the hypermucoidy phenotype that is a virulence feature that is often observed in hypervirulent <em>K. pneumoniae</em> strains. Recent work has revealed that <em>rmpA</em> serves as a transcriptional regulator for the <em>rmpD</em> and <em>rmpC</em> genes, and together these genes comprise the <em>rmpADC</em> (or <em>rmp</em>) locus. <em>rmpC</em> is involved in the upregulation of capsule expression while <em>rmpD</em> drives hypermucoviscosity (see the paper on <a class="reference external" href="https://mbio.asm.org/content/10/2/e00089-19">rmpC</a> and this one on <a class="reference external" href="https://mbio.asm.org/content/11/5/e01750-20">rmpD</a> for more information.)</p>
+<p>In light of this information, we screened and extracted the <em>rmpA</em>, <em>rmpD</em> and <em>rmpC</em> sequences from the 2733 genomes included in the aerobactin and salmochelin study, and generated a RmST typing scheme. We observed four distinct <em>rmp</em> lineages, which were associated with the KpVP-1 (<em>rmp 1</em>), KpVP-2 (<em>rmp 2</em>), <em>iuc2A</em> virulence plasmids (<em>rmp 2A</em>) and ICE <em>Kp1</em> (rmp 3). The details of this novel virulence typing scheme have not yet been published.</p>
+<p>The rmpA module screens for <em>rmpADC</em> and will report a sequence type, along with the associated lineage and mobile genetic element</p>
+</section>
+<section id="note">
+<h5>Note:<a class="headerlink" href="#note" title="Permalink to this heading">#</a></h5>
+<ul class="simple">
+<li><p>Alleles for each gene are sourced from the <a class="reference external" href="http://bigsdb.pasteur.fr/klebsiella/klebsiella.html">BIGSdb-pasteur</a>, while additional <em>rmpA</em> alleles have also been added to Kleborate.</p></li>
+<li><p>The <em>rmpA</em> and <em>rmpA2</em> genes share ~83% nucleotide identity so are easily distinguished.</p></li>
+<li><p>Unique (non-overlapping) nucleotide Minimap2 hits with &gt;95% identity and &gt;50% coverage are reported. Note multiple hits to the same gene are reported if found. E.g. the NTUH-K2044 genome carries <em>rmpA</em> in the virulence plasmid and also in ICE <em>Kp1</em> , which is reported in the <em>rmpA</em> column as <code class="docutils literal notranslate"><span class="pre">rmpA_11(ICEKp1),rmpA_2(KpVP-1)</span></code>.</p></li>
+<li><p>As with the other virulence genes, truncations in the <em>rmpA</em> and <em>rmpA2</em> genes are expressed as a percentage of the amino acid length from the start codon, e.g. <code class="docutils literal notranslate"><span class="pre">rmpA_5-54%</span></code> indicates the RmpA protein is truncated after 54% length of the intact amino acid sequence. These truncations appear to be common, due to insertions and deletions within a poly-G tract, and almost certainly result in loss of protein function.</p></li>
+</ul>
+<section id="rmst-outputs">
+<h6>rmst outputs<a class="headerlink" href="#rmst-outputs" title="Permalink to this heading">#</a></h6>
+<p>Output of the rmst module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>RmpADC</p></td>
+<td><p>Lineage</p></td>
+</tr>
+<tr class="row-even"><td><p>RmST</p></td>
+<td><p>Sequence type</p></td>
+</tr>
+<tr class="row-odd"><td><p>rmpA, rmpD, rmpC</p></td>
+<td><p>allele number (rmp locus)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+<section id="kpsc-amr">
+<h3>KpSC AMR<a class="headerlink" href="#kpsc-amr" title="Permalink to this heading">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella_pneumo_complex__amr</span>
+</pre></div>
+</div>
+<section id="acquired-amr-genes">
+<h4>Acquired AMR genes<a class="headerlink" href="#acquired-amr-genes" title="Permalink to this heading">#</a></h4>
+<p>This module screens input genomes against a curated version of the <a class="reference external" href="https://card.mcmaster.ca/">CARD database</a> of acquired resistance gene alleles (see the following <a class="reference external" href="https://figshare.com/articles/dataset/CARD_v3_0_8_AMR_database_curation_for_Kleborate/13256759">spreadsheet</a> for details on curation), and groups these by drug class for reporting purposes. The chromosomal <em>fosA</em> and <em>oqxAB</em> genes that are intrinsic to all KpSC are not reported and usually do not confer fosfomycin/fluoroquinolone resistance in these species.</p>
+<p>Kleborate has logic to choose the best allele hit, annotate that hit with extra information and place it in an approprirate column in the output.</p>
+<p>In brief:</p>
+<ul class="simple">
+<li><p>Exact nucleotide matches are preferred, followed by exact amino acid matches, followed by inexact nucleotide matches.</p></li>
+<li><p>Annotations indicate aspects of the hit: <code class="docutils literal notranslate"><span class="pre">^</span></code> (inexact nucleotide but exact amino acid match), <code class="docutils literal notranslate"><span class="pre">*</span></code> (inexact nucleotide and inexact amino acid match), <code class="docutils literal notranslate"><span class="pre">?</span></code> (incomplete match) and <code class="docutils literal notranslate"><span class="pre">-X%</span></code> (truncated amino acid sequence).</p></li>
+<li><p>The column indicates the confidence of the hit: strong hits go in the column for their drug class, truncated hits go in the <code class="docutils literal notranslate"><span class="pre">truncated_resistance_hits</span></code> column and low identity/coverage hits go in the <code class="docutils literal notranslate"><span class="pre">spurious_resistance_hits</span></code> column.</p></li>
+</ul>
+<p>And here is the logic in more detail:</p>
+<ul class="simple">
+<li><p>In order to consider a Minimap hit, it must exceed both 80% identity and 40% coverage (adjustable via the <code class="docutils literal notranslate"><span class="pre">--min_spurious_identity</span></code> and <code class="docutils literal notranslate"><span class="pre">--min_spurious_coverage</span></code> options).</p></li>
+<li><p>If the hit is 100% identity and 100% coverage, then it will be reported with no further annotation (e.g. <code class="docutils literal notranslate"><span class="pre">TEM-15</span></code>).</p></li>
+<li><p>If no exact nucleotide match is found, Kleborate searches for an exact amino acid match, and will report this with a <code class="docutils literal notranslate"><span class="pre">^</span></code> symbol. E.g. <code class="docutils literal notranslate"><span class="pre">TEM-15^</span></code> indicates an exact match to the TEM-15 protein sequence but with one or more nucleotide differences.</p></li>
+<li><p>If no exact amino acid match is found, the closest nucleotide match is reported with a <code class="docutils literal notranslate"><span class="pre">*</span></code> symbol. E.g. <code class="docutils literal notranslate"><span class="pre">TEM-15*</span></code> indicates no precise nucleotide or amino acid match is found, but the closest nucleotide match is to TEM-15.</p></li>
+<li><p>If the hit is less than 100% coverage, a <code class="docutils literal notranslate"><span class="pre">?</span></code> is added to the result E.g. <code class="docutils literal notranslate"><span class="pre">TEM-15?</span></code> indicates an incomplete match at 100% identity, and <code class="docutils literal notranslate"><span class="pre">TEM-15*?</span></code> indicates an incomplete match at &lt;100% identity.</p></li>
+<li><p>Kleborate will next translate the hit into amino acid sequence and look for truncations (expressed as % amino acid length from the start codon). If the result is less than 90%, it is added to the result (e.g. <code class="docutils literal notranslate"><span class="pre">TEM-15*-42%</span></code>) and the hit is reported in the <code class="docutils literal notranslate"><span class="pre">truncated_resistance_hits</span></code> column.</p></li>
+<li><p>If the hit is less than 90% identity or 80% nucleotide coverage (adjustable via the <code class="docutils literal notranslate"><span class="pre">--min_identity</span></code> and <code class="docutils literal notranslate"><span class="pre">--min_coverage</span></code> options), it is reported in the <code class="docutils literal notranslate"><span class="pre">spurious_resistance_hits</span></code> column. Otherwise, it is reported in the column for its drug class (e.g. <code class="docutils literal notranslate"><span class="pre">Bla_ESBL_acquired</span></code>).</p></li>
+</ul>
+<p>Note that Kleborate reports resistance results for all antimicrobial classes with confidently attributable resistance mechanisms in KpSC. Not all of these are actually used clinically for treatment of KpSC infections (e.g. MLS, Rif) but they are still reported as the presence of acquired resistance determinants to these classes is of interest to researchers for other reasons (e.g. these genes can be useful markers of MGEs and MGE spread; there is potential for use of these drugs against other organisms to select for KpSC in co-infected patients or in the environment). For an overview of antimicrobial resistance and consensus definitions of multidrug resistance (MDR), extensive drug resistance (XDR) and pan drug resistance in Enterobacteriaceae, see <a class="reference external" href="https://www.clinicalmicrobiologyandinfection.com/article/S1198-743X(1461632-3/fulltext)">Magiorakos 2012</a></p>
+</section>
+<section id="shv-beta-lactamases">
+<h4>SHV beta-lactamases<a class="headerlink" href="#shv-beta-lactamases" title="Permalink to this heading">#</a></h4>
+<p>All KpSC carry a core chromosomal beta-lactamase gene (SHV in <em>K. pneumoniae</em>, LEN in <em>K. variicola</em>, OKP in <em>K. quasipneumoniae</em>) that confers clinically significant resistance to ampicillin. Some KpSC also carry acquired mobile SHV alleles, which can confer additional inhibitor resistance and/or resistance to extended spectrum beta-lactams.</p>
+<p>Kleborate will report all of the SHV alleles it detects and separate them into columns based on the resistance phenotype they are predicted to encode:</p>
+<ul class="simple">
+<li><p>SHV alleles associated with ampicillin resistance only, will be reported in the <code class="docutils literal notranslate"><span class="pre">Bla_chr</span></code> column because they are assumed to represent the chromosomal allele. These genes are not included in the count of acquired resistance genes or drug classes.</p></li>
+<li><p>Other SHV alleles e.g. those predicted to encode ESBLs (extended-spectrum beta-lactamases) or beta-lactamases with inhibitor resistance will be reported in the relevant <code class="docutils literal notranslate"><span class="pre">Bla_ESBL_acquired</span></code> or <code class="docutils literal notranslate"><span class="pre">Bla_inhR_acquired</span></code> columns etc (see below), because these SHV alleles are almost always carried on plasmids. (However it is possible to have a mutation in a chromosomal SHV gene that gives a match to an ESBL allele, which would also be reported in the <code class="docutils literal notranslate"><span class="pre">Bla_ESBL_acquired</span></code> column and counted as an acquired gene because it is very hard to tell the difference without manual exploration of the genetic context.)</p></li>
+</ul>
+<p>The specific mutations, and assignment of alleles to class, is detailed in this preprint from KlebNET-GSP: <a class="reference external" href="https://doi.org/10.1101/2024.04.05.587953">Tsang et al, 2024 BioRxiv</a>.</p>
+</section>
+<section id="additional-chromosomal-mutations-associated-with-amr">
+<h4>Additional chromosomal mutations associated with AMR<a class="headerlink" href="#additional-chromosomal-mutations-associated-with-amr" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Fluoroquinolone resistance mutations: GyrA 83 &amp; 87 and ParC 80 &amp; 84. These appear in the <code class="docutils literal notranslate"><span class="pre">Flq_mutations</span></code> column.</p></li>
+<li><p>Colistin resistance due to truncation or loss of core genes MgrB or PmrB. If these genes are missing or truncated, this information will be reported in the ‘Col_mutations’ column (truncations are expressed as % amino acid length from the start codon). Note if MgrB and PmrB are present and not truncated then nothing about them will be reported in the ‘Col’ column.</p></li>
+<li><p>OmpK35 and OmpK36 truncations and point mutations shown to result in reduced susceptibility to beta-lactamases. This information will be reported in the <code class="docutils literal notranslate"><span class="pre">Omp_mutations</span></code> column (truncations are expressed as % amino acid length from the start codon). Note if these core genes are present and not truncated then nothing about them will be reported in the ‘Omp’ column. The specific effect of OmpK mutations on drug susceptibility depends on multiple factors including what combinations of OmpK35 and OmpK36 alleles are present and what beta-lactamase genes are present (this is why we report them in their own column separate to Bla genes). See e.g. <a class="reference external" href="https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218">paper</a> and <a class="reference external" href="https://www.nature.com/articles/s41467-019-11756-y">this one</a> for more information on OmpK genes and drug resistance.</p></li>
+</ul>
+<p>Note these do not count towards acquired resistance gene counts, but do count towards drug classes (with the exception of Omp mutations, whose spectrum of effects depends on the presence of acquired beta-lactamases and thus their impact on specific beta-lactam drug classes is hard to predict).</p>
+<section id="kpsc-amr-outputs">
+<h5>KpSC AMR outputs<a class="headerlink" href="#kpsc-amr-outputs" title="Permalink to this heading">#</a></h5>
+<p>Results of the KpSC AMR module are grouped by drug class (according to the <a class="reference external" href="https://www.ncbi.nlm.nih.gov/pubmed/24145532">ARG-Annot</a> DB), with beta-lactamases further broken down into Lahey classes (now maintained at <a class="reference external" href="http://www.bldb.eu/">BLDB</a>), as follows:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>AGly_acquired</p></td>
+<td><p>aminoglycoside resistance genes</p></td>
+</tr>
+<tr class="row-even"><td><p>Col_acquired</p></td>
+<td><p>colistin resistance genes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fcyn_acquired</p></td>
+<td><p>fosfomycin resistance genes</p></td>
+</tr>
+<tr class="row-even"><td><p>Flq_acquired</p></td>
+<td><p>fluoroquinolone resistance genes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gly_acquired</p></td>
+<td><p>glycopeptide resistance genes</p></td>
+</tr>
+<tr class="row-even"><td><p>MLS_acquired</p></td>
+<td><p>macrolide resistance genes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Phe_acquired</p></td>
+<td><p>phenicol resistance genes</p></td>
+</tr>
+<tr class="row-even"><td><p>Rif_acquired</p></td>
+<td><p>rifampin resistance genes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sul_acquired</p></td>
+<td><p>sulfonamide resistance genes</p></td>
+</tr>
+<tr class="row-even"><td><p>Tet_acquired</p></td>
+<td><p>tetracycline resistance genes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tgc_acquired</p></td>
+<td><p>tigecycline resistance genes</p></td>
+</tr>
+<tr class="row-even"><td><p>Tmt_acquired</p></td>
+<td><p>trimethoprim resistance genes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bla_acquired</p></td>
+<td><p>beta-lactamases (other than SHV) that have no known extended-spectrum, carbapenemase, or inhibitor-resistance activity</p></td>
+</tr>
+<tr class="row-even"><td><p>Bla_ESBL_acquired</p></td>
+<td><p>extended-spectrum beta-lactamases, including SHV alleles with known ESBL activity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bla_ESBL_inhR_acquired</p></td>
+<td><p>extended spectrum beta-lactamases with resistance to beta-lactamase inhibitors, including SHV alleles associated with these traits</p></td>
+</tr>
+<tr class="row-even"><td><p>Bla_Carb_acquired</p></td>
+<td><p>carbapenemases</p></td>
+</tr>
+<tr class="row-odd"><td><p>Bla_chr</p></td>
+<td><p>SHV alleles associated with ampicillin resistance only (assumed core chromosomal genes)</p></td>
+</tr>
+<tr class="row-even"><td><p>SHV_mutations</p></td>
+<td><p>mutations in the SHV beta-lactamase known to be associated with expansion of enzyme activity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Omp_mutations</p></td>
+<td><p>resistance-related mutations in the OmpK35 and OmpK36 osmoporins</p></td>
+</tr>
+<tr class="row-even"><td><p>Col_mutations</p></td>
+<td><p>reports if MgrB or PmrB genes are not intact</p></td>
+</tr>
+<tr class="row-odd"><td><p>Flq_mutations</p></td>
+<td><p>reports mutations found in the quinolone-resistance determining regions of GyrA and ParC</p></td>
+</tr>
+<tr class="row-even"><td><p>truncated_resistance_hits</p></td>
+<td><p>list of acquired resistance genes in which the encoded protein is predicted to be truncated (e.g. due to a stop codon or frameshift mutation within the open reading frame)</p></td>
+</tr>
+<tr class="row-odd"><td><p>spurious_resistance_hits</p></td>
+<td><p>list of acquired resistance genes detected below the identity or coverage thresholds (default &lt;90% identity or &lt;80% nucleotide coverage)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="resistance-scores-and-counts">
+<h4>Resistance scores and counts<a class="headerlink" href="#resistance-scores-and-counts" title="Permalink to this heading">#</a></h4>
+<p>Running the KpSC AMR module automatically runs additional modules for generating counts of resistance genes and drug classes, and calculating a resistance score. These modules can also be specified manually as follows:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella_pneumo_complex__resistance_score</span><span class="p">,</span> <span class="n">klebsiella_pneumo_complex__resistance_gene_count</span><span class="p">,</span> <span class="n">klebsiella_pneumo_complex__resistance_class_count</span>
+</pre></div>
+</div>
+<section id="resistance-score">
+<h5>Resistance score<a class="headerlink" href="#resistance-score" title="Permalink to this heading">#</a></h5>
+<p>This module calculates a resistance score, which ranges from 0 to 3 as follows</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>no ESBL, no carbapenemase (regardless of colistin resistance)</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>ESBL, no carbapenemase (regardless of colistin resistance)</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Carbapenemase without colistin resistance (regardless of ESBL genes or OmpK mutations)</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Carbapenemase with colistin resistance (regardless of ESBL genes or OmpK mutations)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="resistance-gene-counts-and-drug-class-counts">
+<h5>Resistance gene counts and drug class counts<a class="headerlink" href="#resistance-gene-counts-and-drug-class-counts" title="Permalink to this heading">#</a></h5>
+<p>This module quantifies how many acquired resistance genes are present and how many drug classes (in <em>addition</em> to ampicillin to which KpSC are intrinsically resistant) have at least one resistance determinant detected (i.e. ignoring genes recorded in the Bla_chr and Bla_acquired columns).</p>
+<p>A few things to note:</p>
+<ul class="simple">
+<li><p>The presence of resistance <em>mutations</em>, and non-ESBL forms of core genes SHV/LEN/OKP, do not contribute to the resistance <em>gene</em> count.</p></li>
+<li><p>Mutations do contribute to the drug class count, e.g. fluoroquinolone resistance will be counted if a GyrA mutation is encountered regardless of whether or not an acquired quinolone resistance (<em>qnr</em>) gene is also present. The exceptions are Omp mutations, which do not contribute to the drug class count as their effect depends on the strain background and the presence of acquired beta-lactamase enzymes; hence this information is provided in a separate column, and interpretation is left to the user (see the <a class="reference external" href="https://github.com/katholt/Kleborate/wiki/Antimicrobial-resistance">Antimicrobial Resistance</a> page).</p></li>
+<li><p>Genes reported in the <code class="docutils literal notranslate"><span class="pre">truncated_resistance_genes</span></code> and <code class="docutils literal notranslate"><span class="pre">spurious_resistance_genes</span></code> columns do not contribute to the counts.</p></li>
+<li><p>Note that since a drug class can have multiple resistance determinants, the gene count is typically higher than the class count.</p></li>
+</ul>
+<section id="resistance-scores-and-counts-outputs">
+<h6>Resistance scores and counts outputs<a class="headerlink" href="#resistance-scores-and-counts-outputs" title="Permalink to this heading">#</a></h6>
+<p>Resistance scores and counts are output in the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>resistance_score</p></td>
+<td><p>Score of 0-3, as defined above</p></td>
+</tr>
+<tr class="row-even"><td><p>num_resistance_genes</p></td>
+<td><p>Number of acquired resistance genes</p></td>
+</tr>
+<tr class="row-odd"><td><p>num_resistance_classes</p></td>
+<td><p>Number of drug classes to which resistance determinants have been acquired (in addition to intrinsic ampicillin)</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section id="klebsiella-oxytoca-species-complex">
+<h2>Klebsiella oxytoca species complex<a class="headerlink" href="#klebsiella-oxytoca-species-complex" title="Permalink to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">preset</span> <span class="n">kosc</span>
+</pre></div>
+</div>
+<p>These modules will be run if the <code class="docutils literal notranslate"><span class="pre">enterobacterales__species</span></code>  module confirms the input assembly as a member of the <em>K. oxytoca</em> species complex (KpSC) labelled in the tree above, and listed in the table below.</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Klebsiella oxytoca</p></td>
+</tr>
+<tr class="row-even"><td><p>Klebsiella grimontii</p></td>
+</tr>
+<tr class="row-odd"><td><p>Klebsiella michiganensis</p></td>
+</tr>
+<tr class="row-even"><td><p>Klebsiella pasteurii</p></td>
+</tr>
+<tr class="row-odd"><td><p>Klebsiella huaxiensis</p></td>
+</tr>
+<tr class="row-even"><td><p>Klebsiella spallanzanii</p></td>
+</tr>
+</tbody>
+</table>
+<section id="kosc-mlst">
+<h3>KoSC MLST<a class="headerlink" href="#kosc-mlst" title="Permalink to this heading">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella_oxytoca_complex__mlst</span>
+</pre></div>
+</div>
+<p>Genomes identified as belonging to the <em>K. oxytoca</em> species complex are subjected to MLST using the 7-locus scheme described at the  <em>K. oxytoca</em> <a class="reference external" href="https://pubmlst.org/organisms/klebsiella-oxytoca">at PubMLST</a>.</p>
+<p>A copy of the MLST alleles and ST definitions is stored in the /data directory of this module.</p>
+<section id="kosc-mlst-outputs">
+<h4>KoSC MLST outputs<a class="headerlink" href="#kosc-mlst-outputs" title="Permalink to this heading">#</a></h4>
+<p>Output of the KoSC MLST module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>ST</p></td>
+<td><p>sequence type</p></td>
+</tr>
+<tr class="row-even"><td><p>gapA, infB, mdh, pgi, phoE, rpoB, tonB</p></td>
+<td><p>allele number</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Kleborate makes an effort to report the closest matching ST if a precise match is not found.</p></li>
+<li><p>Imprecise allele matches are indicated with a <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p></li>
+<li><p>Imprecise ST calls are indicated with <code class="docutils literal notranslate"><span class="pre">-nLV</span></code>, where n indicates the number of loci that disagree with the ST reported. So <code class="docutils literal notranslate"><span class="pre">258-1LV</span></code> indicates a single-locus variant (SLV) of ST258, i.e. 6/7 loci match ST258.</p></li>
+</ul>
+</section>
+</section>
+<section id="kosc-virulence-typing">
+<h3>KoSC virulence typing<a class="headerlink" href="#kosc-virulence-typing" title="Permalink to this heading">#</a></h3>
+<p>Genomes identified as belonging to the <em>K. oxytoca</em> species complex are subjected to typing for yersiniabactin, colibactin, aerobactin, salmochelin and rmp loci, using the following modules:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">klebsiella__ybst</span><span class="p">,</span> <span class="n">klebsiella__cbst</span><span class="p">,</span> <span class="n">klebsiella__abst</span><span class="p">,</span> <span class="n">klebsiella__smst</span><span class="p">,</span> <span class="n">klebsiella__rmst</span>
+</pre></div>
+</div>
+<p>These modules were primarily designed for typing of <em>K. pneumoniae</em> species complex, and the databases are populated from variation detected in KpSC genomes. However they can appear in KoSC genomes and so typing is included in the KoSC preset.</p>
+</section>
+</section>
+<section id="escherichia">
+<h2>Escherichia<a class="headerlink" href="#escherichia" title="Permalink to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">preset</span> <span class="n">escherichia</span>
+</pre></div>
+</div>
+<p>These modules will be run if the <code class="docutils literal notranslate"><span class="pre">enterobacterales__species</span></code>  module confirms the input assembly as a member of the <em>Escherichia</em> genus.</p>
+<section id="e-coli-mlst">
+<h3>E. coli MLST<a class="headerlink" href="#e-coli-mlst" title="Permalink to this heading">#</a></h3>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">m</span> <span class="n">escherichia__mlst_achtman</span><span class="p">,</span> <span class="n">escherichia__mlst_pasteur</span>
+</pre></div>
+</div>
+<p>Genomes identified as belonging to the <em>Escherichia</em> genus are subjected to MLST using two 7-locus schemes.</p>
+<p>The Pasteur scheme is described at the <em>Escherichia coli</em> <a class="reference external" href="https://bigsdb.pasteur.fr/ecoli/">Database at Pasteur Institute</a>. Please see <a class="reference external" href="https://bigsdb.pasteur.fr/ecoli/references/">here</a> for more details.</p>
+<p>The Achtman scheme is hosted at <a class="reference external" href="https://enterobase.warwick.ac.uk/">Enterobase</a>.</p>
+<p>The genes included in each scheme are noted in the Outputs table below.</p>
+<p>A copy of the MLST alleles and ST definitions used in each module is stored in the /data directory of the module.</p>
+<section id="e-coli-mlst-outputs">
+<h4>E. coli MLST outputs<a class="headerlink" href="#e-coli-mlst-outputs" title="Permalink to this heading">#</a></h4>
+<p>Output of the Pasteur E. coli MLST module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>ST</p></td>
+<td><p>sequence type</p></td>
+</tr>
+<tr class="row-even"><td><p>dinB, icdA, pabB, polB, putP, trpA, trpB, uidA</p></td>
+<td><p>allele number</p></td>
+</tr>
+</tbody>
+</table>
+<p>Output of the Achtman E. coli MLST module is the following columns:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>ST</p></td>
+<td><p>sequence type</p></td>
+</tr>
+<tr class="row-even"><td><p>adk, fumC, gyrB, icd, mdh, purA, recA</p></td>
+<td><p>allele number</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>Kleborate makes an effort to report the closest matching ST if a precise match is not found.</p></li>
+<li><p>Imprecise allele matches are indicated with a <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p></li>
+<li><p>Imprecise ST calls are indicated with <code class="docutils literal notranslate"><span class="pre">-nLV</span></code>, where n indicates the number of loci that disagree with the ST reported. So <code class="docutils literal notranslate"><span class="pre">258-1LV</span></code> indicates a single-locus variant (SLV) of ST258, i.e. 6/7 loci match ST258.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Usage.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Usage</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Creating-New-Modules.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Creating-New-Modules</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general-modules">General modules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#species-detection">Species detection</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#species-detection-outputs">Species detection outputs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#contig-stats">Contig stats</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#contig-stats-outputs">Contig stats outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klebsiella-pneumoniae-species-complex">Klebsiella pneumoniae species complex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-mlst">KpSC MLST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#rhinoscleromatis-and-ozaenae">Rhinoscleromatis and Ozaenae</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-mlst-outputs">KpSC MLST outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-virulence-modules">KpSC virulence modules</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-virulence-allele-reporting">Notes on virulence allele reporting:</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#notes-on-virulence-sequence-type-reporting">Notes on virulence sequence type reporting:</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#yersiniabactin-and-colibactin">Yersiniabactin and colibactin</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#ybst-outputs">ybst outputs</a></li>
+</ul>
+</li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#aerobactin-and-salmochelin">Aerobactin and salmochelin</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-iuca-sequence-update">Note on <em>iucA</em> sequence update:</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#abst-outputs">abst Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#hypermucoidy-loci">Hypermucoidy loci</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#note">Note:</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#rmst-outputs">rmst outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-amr">KpSC AMR</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#acquired-amr-genes">Acquired AMR genes</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#shv-beta-lactamases">SHV beta-lactamases</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-chromosomal-mutations-associated-with-amr">Additional chromosomal mutations associated with AMR</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#kpsc-amr-outputs">KpSC AMR outputs</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-scores-and-counts">Resistance scores and counts</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-score">Resistance score</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-gene-counts-and-drug-class-counts">Resistance gene counts and drug class counts</a><ul class="nav section-nav flex-column">
+<li class="toc-h6 nav-item toc-entry"><a class="reference internal nav-link" href="#resistance-scores-and-counts-outputs">Resistance scores and counts outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#klebsiella-oxytoca-species-complex">Klebsiella oxytoca species complex</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kosc-mlst">KoSC MLST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kosc-mlst-outputs">KoSC MLST outputs</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kosc-virulence-typing">KoSC virulence typing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escherichia">Escherichia</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-coli-mlst">E. coli MLST</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-coli-mlst-outputs">E. coli MLST outputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Mary Maranga
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, Mary Maranga, Kathryn Holt, Ryan Wick.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

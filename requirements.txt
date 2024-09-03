@@ -1,2 +1,6 @@
-biopython
+python>=3.9
 setuptools
+numpy
+mash
+biopython>=1.83
+dna_features_viewer>=3.1.0

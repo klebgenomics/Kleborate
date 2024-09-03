@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kleborate"
+version = "3.0.7"
+description = "Kleborate: a tool for typing and screening pathogen genome assemblies"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Mary Maranga", email = "gathonimaranga@gmail.com"},
+    {name = "Ryan Wick", email = "rrwick@gmail.com"},
+    {name = "Kathryn Holt", email = "kat.holt@lshtm.ac.uk"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+    "Intended Audience :: Science/Research"
+]
+dependencies = ["biopython","numpy","dna_features_viewer","kaptive","mash"]
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-mock"]  # needed for running automated tests
+
+[project.urls]
+homepage = "https://github.com/klebgenomics/KleborateModular"
+documentation = "https://kleboratemodular.readthedocs.io/"
+repository = "https://github.com/klebgenomics/KleborateModular"
+
+[project.scripts]
+kleborate = "kleborate.__main__:main"  # create an executable file named "kleborate"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["kleborate", "kleborate.shared", "kleborate.modules", "kleborate.modules.*"]
+exclude = ["kleborate.modules.template"]
+
+[tool.setuptools.package-data]
+"*" = ["data/*"]  # many modules include data directories which need to be installed as well
