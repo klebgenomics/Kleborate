@@ -27,4 +27,4 @@ Kleborate v3 includes a rewrite of Kleborate v2. It aims to:
 * Module to call [Kaptive](https://github.com/klebgenomics/Kaptive) for K (capsule) and O antigen (LPS) serotype prediction
 
 
-**For information on how to install, and run Kleborate v3 please visit the [Docs](https://kleboratemodular.readthedocs.io/).**
+**For information on how to install, and run Kleborate v3 please visit the [Docs](https://kleborate.readthedocs.io/en/latest/).**
