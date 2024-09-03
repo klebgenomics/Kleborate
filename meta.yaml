@@ -43,13 +43,13 @@ test:
     - kleborate --help
 
 about:
-  home: "https://kleboratemodular.readthedocs.io/"
-  dev_url: "https://github.com/klebgenomics/KleborateModular"
+  home: "https://kleborate.readthedocs.io/"
+  dev_url: "https://github.com/klebgenomics/Kleborate"
   summary: "Kleborate: a tool for typing and screening pathogen genome assemblies"
   license: "GNU General Public License v3 (GPLv3)"
   license_family: GPL3
   license_file: LICENSE
-  doc_url: "https://kleboratemodular.readthedocs.io/"
+  doc_url: "https://kleborate.readthedocs.io/"
 
 
 extra:
