@@ -1,5 +1,5 @@
 {% set name = "kleborate" %}
-{% set version = "3.0.7" %}
+{% set version = "3.0.8" %}
 
 package:
   name: "{{ name|lower }}"
