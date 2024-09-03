@@ -2,8 +2,8 @@
 """
 Convenience wrapper for running Kleborate directly from source tree.
 
-Copyright 2020 Kat Holt
-Copyright 2020 Ryan Wick (rrwick@gmail.com)
+Copyright 2023 Kat Holt
+Copyright 2023 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -12,7 +12,7 @@ either version 3 of the License, or (at your option) any later version. Kleborat
 the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
 details. You should have received a copy of the GNU General Public License along with Kleborate. If
-not, see <http://www.gnu.org/licenses/>.
+not, see <https://www.gnu.org/licenses/>.
 """
 
 from kleborate.__main__ import main

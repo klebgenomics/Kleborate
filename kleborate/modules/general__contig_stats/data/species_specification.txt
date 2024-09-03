@@ -1,0 +1,9 @@
+
+{
+    'Klebsiella pneumoniae': {'min_genome_size': 5000000, 'max_genome_size': 6500000},
+    'Klebsiella quasipneumoniae': {'min_genome_size': 5000000, 'max_genome_size': 6500000},
+    'Klebsiella variicola': {'min_genome_size': 5000000, 'max_genome_size': 6500000},
+    'Klebsiella quasivariicola': {'min_genome_size': 5000000, 'max_genome_size': 6500000},
+    'Klebsiella africana': {'min_genome_size': 5000000, 'max_genome_size': 6500000},
+    'Escherichia coli': {'min_genome_size': 4500000, 'max_genome_size': 5500000}
+}
