@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kleborate"
-version = "3.0.7"
+version = "3.0.8"
 description = "Kleborate: a tool for typing and screening pathogen genome assemblies"
 readme = "README.md"
 requires-python = ">=3.9"
