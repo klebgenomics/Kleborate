@@ -35,7 +35,7 @@ For *K. pneumoniae* species complex, **Kleborate v3 can reproduce the outputs of
 
 .. code-block:: Python
 
-   kleborate -a *.fasta -o kleborate_results -p kpsc
+   kleborate -a *.fasta -o kleborate_results -p kpsc --trim_headers
 
 (Note the command has changed from Kleborate v2, the above is equivalent to running ``kleborate --all -o results.txt -a *.fasta``  with Kleborate v2 and includes all resistance and Kaptive-based typing)
 
