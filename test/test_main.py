@@ -48,13 +48,6 @@ def test_get_headers():
     assert stdout_headers[0] == 'strain'
     assert all(h in full_headers for h in stdout_headers)
 
-
-# def test_check_modules():
-#     _, modules = kleborate.__main__.import_modules()
-#     Args = collections.namedtuple('Args', ['assemblies'])
-#     kleborate.__main__.check_modules(Args(assemblies=['test/test_main/test.fasta']),
-#                                      modules, ['general__contig_stats'])
-
 def test_check_modules():
     _, modules = kleborate.__main__.import_modules()
     Args = collections.namedtuple('Args', ['assemblies'])
@@ -67,40 +60,35 @@ def test_check_modules():
     kleborate.__main__.check_modules(args, modules, ['general__contig_stats'], preset_check_modules, preset_pass_modules)
 
 
-
-def test_check_assemblies_1():
-    Args = collections.namedtuple('Args', ['assemblies'])
+# Test for directory error
+def test_check_assembly_1():
     with pytest.raises(SystemExit) as e:
-        kleborate.__main__.check_assemblies(Args(assemblies=['test/test_main']))
+        kleborate.__main__.check_assembly('test/test_main')  # Single path as string
     assert 'is a directory' in str(e.value)
 
-
-def test_check_assemblies_2():
-    Args = collections.namedtuple('Args', ['assemblies'])
+# Test for file not found error
+def test_check_assembly_2():
     with pytest.raises(SystemExit) as e:
-        kleborate.__main__.check_assemblies(Args(assemblies=['test/test_main/does_not_exist']))
+        kleborate.__main__.check_assembly('test/test_main/does_not_exist')  # Non-existing file path
     assert 'could not find' in str(e.value)
 
-
-def test_check_assemblies_3():
-    Args = collections.namedtuple('Args', ['assemblies'])
+# Test for invalid FASTA file format error
+def test_check_assembly_3():
     with pytest.raises(SystemExit) as e:
-        kleborate.__main__.check_assemblies(Args(assemblies=['test/test_main/bad_format.fasta']))
+        kleborate.__main__.check_assembly('test/test_main/bad_format.fasta')  # Bad format file
     assert 'invalid' in str(e.value)
 
-
-def test_check_assemblies_4():
-    Args = collections.namedtuple('Args', ['assemblies'])
+# Test for zero-length sequence error
+def test_check_assembly_4():
     with pytest.raises(SystemExit) as e:
-        kleborate.__main__.check_assemblies(Args(assemblies=['test/test_main/empty_seq.fasta']))
+        kleborate.__main__.check_assembly('test/test_main/empty_seq.fasta')  # File with zero-length sequence
     assert 'zero-length sequence' in str(e.value)
 
-
-def test_check_assemblies_5():
-    Args = collections.namedtuple('Args', ['assemblies'])
-    kleborate.__main__.check_assemblies(Args(assemblies=['test/test_main/test.fasta']))
-    kleborate.__main__.check_assemblies(Args(assemblies=['test/test_main/test.fasta.gz']))
-
+# Test for valid files (FASTA and compressed FASTA)
+def test_check_assembly_5():
+    # Test without expecting an error
+    kleborate.__main__.check_assembly('test/test_main/test.fasta')  # Valid FASTA file
+    kleborate.__main__.check_assembly('test/test_main/test.fasta.gz')  # Valid compressed FASTA file
 
 def test_decompress_file():
     with tempfile.TemporaryDirectory() as tmp_dir:
