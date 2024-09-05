@@ -696,6 +696,15 @@ Kaptive parameters
 
 Number of threads for alignment (default: 1)
 
+``--k-db, kpsc_k``
+
+Kaptive database for K-locus typing
+
+``--o-db, kpsc_o ``
+
+Kaptive database for o-locus typing
+
+
 
 Kaptive outputs
 +++++++++++++++++
