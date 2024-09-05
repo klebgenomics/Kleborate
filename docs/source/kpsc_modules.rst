@@ -188,7 +188,7 @@ Minimum alignment percent coverage for yersiniabactin MLST (default: 80.0)
 
 ``--klebsiella__ybst_required_exact_matches``
 
-At least this many exact matches are required to call an ST (default: 2)
+At least this many exact matches are required to call an ST (default: 6)
 
 
 ybst Outputs
