@@ -700,7 +700,7 @@ Number of threads for alignment (default: 1)
 
 Kaptive database for K-locus typing
 
-``--o-db, kpsc_o ``
+``--o-db, kpsc_o``
 
 Kaptive database for o-locus typing
 
