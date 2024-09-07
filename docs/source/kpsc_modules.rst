@@ -721,7 +721,7 @@ Kaptive results are output in the following columns:
    * - Best match type
      - The predicted serotype/phenotype of the assembly.
    * - Match confidence
-     - A categorical measure of locus call quality (see confidence score).
+     - Typeable or Untypeable.
    * - Problems
      - Characters indicating issues with the locus match (see problems).
    * - Identity
