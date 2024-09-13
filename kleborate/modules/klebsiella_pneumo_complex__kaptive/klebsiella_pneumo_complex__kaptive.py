@@ -51,7 +51,7 @@ def add_cli_options(parser):
                        help="Kaptive number of threads for alignment (default: %(default)s)")
     group.add_argument('--k-db', type=load_database, default=load_database('kpsc_k'), metavar='',
                        help="Kaptive database for K-locus typing (default: kpsc_k)")
-    group.add_argument('--o-db', type=load_database, default=load_database('kpsc_k'), metavar='',
+    group.add_argument('--o-db', type=load_database, default=load_database('kpsc_o'), metavar='',
                        help="Kaptive database for O-locus typing (default: kpsc_o)")
     return group
 
