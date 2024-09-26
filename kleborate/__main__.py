@@ -267,7 +267,7 @@ def get_presets():
             'general__contig_stats','klebsiella_pneumo_complex__mlst',
             'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst', 'klebsiella_pneumo_complex__virulence_score',
             'klebsiella__rmpa2','klebsiella_pneumo_complex__amr', 'klebsiella_pneumo_complex__resistance_score', 'klebsiella_pneumo_complex__resistance_class_count',
-            'klebsiella_pneumo_complex__resistance_gene_count', 'klebsiella_pneumo_complex__wzi','klebsiella_pneumo_complex__kaptive'
+            'klebsiella_pneumo_complex__resistance_gene_count', 'klebsiella_pneumo_complex__wzi','klebsiella_pneumo_complex__kaptive', 'klebsiella_pneumo_complex__cipro_prediction'
         ]
     }
 
