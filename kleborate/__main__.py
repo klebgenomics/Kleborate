@@ -75,70 +75,9 @@ def parse_arguments(args, all_module_names, modules):
     help_args.add_argument('--version', action='version', version=f'Kleborate v{get_version()}',
                            help="Show program's version number and exit")
 
-<<<<<<< HEAD
     if not args:
         parser.print_help(file=sys.stderr)
         sys.exit(1)
-=======
-def get_output_headers(args, data_folder):
-    """
-    There are two levels of output:
-      * stdout is simpler and displayed to the console
-      * full contains more and is saved to file
-    This function returns headers for both. It also returns the resistance headers in a separate
-    list, as they are used to total up some resistance summaries.
-    """
-    stdout_header = ['strain', 'species']
-    full_header = ['strain', 'species', 'species_match']
-    stdout_header += ['ST', 'virulence_score']
-    full_header += ['contig_count', 'N50', 'largest_contig', 'total_size', 'ambiguous_bases',
-                    'QC_warnings', 'ST', 'virulence_score']
-
-    if args.resistance:
-        stdout_header.append('resistance_score')
-        full_header.append('resistance_score')
-        full_header.append('num_resistance_classes')
-        full_header.append('num_resistance_genes')
-
-    other_columns = ['Yersiniabactin', 'YbST',
-                     'Colibactin', 'CbST',
-                     'Aerobactin', 'AbST',
-                     'Salmochelin', 'SmST',
-                     'RmpADC', 'RmST',
-                     'rmpA2',
-                     'wzi', 'K_locus']
-    stdout_header += other_columns
-    full_header += other_columns
-
-    if args.kaptive_k:
-        stdout_header.append('K_locus_confidence')
-        full_header.append('K_type')
-        full_header.append('K_locus_problems')
-        full_header.append('K_locus_confidence')
-        full_header.append('K_locus_identity')
-        full_header.append('K_locus_missing_genes')
-
-    if args.kaptive_o:
-        stdout_header.append('O_locus')
-        stdout_header.append('O_locus_confidence')
-        full_header.append('O_locus')
-        full_header.append('O_type')
-        full_header.append('O_locus_problems')
-        full_header.append('O_locus_confidence')
-        full_header.append('O_locus_identity')
-        full_header.append('O_locus_missing_genes')
-
-    if args.resistance:
-        gene_info, res_classes, bla_classes = \
-            read_class_file(data_folder + '/CARD_AMR_clustered.csv')
-        res_headers = get_res_headers(res_classes, bla_classes)
-        res_headers += ['truncated_resistance_hits', 'spurious_resistance_hits']
-        res_headers += ['Cipro_prediction','Cipro_prediction_support']
-        stdout_header += res_headers
-        full_header += res_headers
-    else:
-        res_headers = []
->>>>>>> 212fb361b4dc2dc6eda10c33582d38d9a6b132f5
 
     return parser.parse_args(args)
 
@@ -534,127 +473,10 @@ def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_di
     return minimap2_index
 
 
-<<<<<<< HEAD
 def decompress_file(in_file, out_file):
     with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
         s = i.read()
         o.write(s)
-=======
-def get_wzi_and_k_locus_results(data_folder, contigs, args):
-    seqs = data_folder + '/wzi.fasta'
-    database = data_folder + '/wzi.txt'
-    bst, _, k_type, _ = mlst_blast(seqs, database, 'yes', [contigs], min_cov=args.min_coverage,
-                                   min_ident=args.min_identity, max_missing=0, allow_multiple=False)
-    if bst == '0':
-        wzi_st = '-'
-    else:
-        wzi_st = 'wzi' + bst
-    if k_type == '':
-        k_type = '-'
-    return {'wzi': wzi_st,
-            'K_locus': k_type}
-
-
-def get_resistance_results(data_folder, contigs, args, res_headers, kp_complex):
-    if not pathlib.Path(contigs).is_file():
-        raise OSError
-    if args.resistance:
-        gene_info, _, _ = read_class_file(data_folder + '/CARD_AMR_clustered.csv')
-
-        # Only do mutation/truncation tests for Kp complex species.
-        if kp_complex:
-            qrdr = data_folder + '/QRDR_120.fasta'
-            trunc = data_folder + '/MgrB_and_PmrB.fasta'
-            omp = data_folder + '/OmpK.fasta'
-        else:
-            qrdr, trunc, omp = None, None, None
-
-        seqs = data_folder + '/CARD_v3.1.13.fasta'
-        res_hits = resblast_one_assembly(contigs, gene_info, qrdr, trunc, omp, seqs,
-                                         args.min_coverage,  args.min_identity,
-                                         args.min_spurious_coverage, args.min_spurious_identity)
-
-        # Double check that there weren't any results without a corresponding output header.
-        for h in res_hits.keys():
-            if h not in res_headers:
-                sys.exit( f'Error: results contained a value ({h}) that is not covered by the '
-                          f'output headers')
-
-        res_hits_dict=({r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-' for r in res_headers})
-
-        #Ciprofloxacin resistance prediction
-
-        #Adding aac(6')-Ib-cr to Flq_acquired column
-        if "aac(6')-Ib-cr.v1" in res_hits_dict["AGly_acquired"]:
-            if ("Flq_acquired", "-") in res_hits_dict.items():
-                res_hits_dict["Flq_acquired"]="aac(6')-Ib-cr.v1"
-            elif len([res_hits_dict["Flq_acquired"]]) == 1:
-                res_hits_dict["Flq_acquired"]=res_hits_dict["Flq_acquired"]+";aac(6')-Ib-cr.v1"
-            else:
-                res_hits_dict.setdefault("Flq_acquired",[]).append("aac(6')-Ib-cr.v1")
-        elif "aac(6')-Ib-cr.v2" in res_hits_dict["AGly_acquired"]:
-            if ("Flq_acquired", "-") in res_hits_dict.items():
-                res_hits_dict["Flq_acquired"]="aac(6')-Ib-cr.v2"
-            elif len([res_hits_dict["Flq_acquired"]]) == 1:
-                res_hits_dict["Flq_acquired"]=res_hits_dict["Flq_acquired"]+";aac(6')-Ib-cr.v2"
-            else:
-                res_hits_dict.setdefault("Flq_acquired",[]).append("aac(6')-Ib-cr.v2")
-
-        # 0 Flq_mutations, 0 Flq_acquired, 0 aac6
-            # test: KP_NORM_URN_105939
-        if ("Flq_mutations", "-") in res_hits_dict.items() and ("Flq_acquired", "-") in res_hits_dict.items() and "aac(6')-Ib-cr" not in res_hits_dict["AGly_acquired"]:
-            res_hits_dict["Cipro_prediction"]="S"
-            res_hits_dict["Cipro_prediction_support"]="95"
-
-        # 0 Flq_mutations, 0 Flq_acquired, 1 aac6
-            # test: ERR4635459
-        elif ("Flq_mutations", "-") in res_hits_dict.items() and ("Flq_acquired", "-") in res_hits_dict.items() and "aac(6')-Ib-cr" in res_hits_dict["AGly_acquired"]:
-            res_hits_dict["Cipro_prediction"]="S"
-            res_hits_dict["Cipro_prediction_support"]="81"
-
-        # 1 Flq_mutations, 0 Flq_acquired, >=0 aac6
-            # test: ERR4046108_NHP1975 (with aac), NK_H5_026 (no aac)
-        elif len(set(res_hits_dict["Flq_mutations"].split(";")))==1 and ("Flq_acquired", "-") in res_hits_dict.items():
-            res_hits_dict["Cipro_prediction"]="R"
-            res_hits_dict["Cipro_prediction_support"]="72"
-
-        # >=2 Flq_mutations, 0 Flq_acquired, >=0 aac6
-            # test: G20250619 (with aac), G20250926 (no aac)
-        elif len(set(res_hits_dict["Flq_mutations"].split(";")))>=2 and ("Flq_acquired", "-") in res_hits_dict.items():
-            res_hits_dict["Cipro_prediction"]="R"
-            res_hits_dict["Cipro_prediction_support"]="99"
-
-        # 0 Flq_mutations, 1 Flq_acquired, 0 aac6
-            # test: ERR486365
-        elif ("Flq_mutations", "-") in res_hits_dict.items() and len(set(res_hits_dict["Flq_acquired"].split(";")))==1  and "aac(6')-Ib-cr" not in res_hits_dict["AGly_acquired"]:
-            res_hits_dict["Cipro_prediction"]="R"
-            res_hits_dict["Cipro_prediction_support"]="70"
-
-        # 0 Flq_mutations, 1 Flq_acquired, 1 aac6
-            # test: HE205
-        elif ("Flq_mutations", "-") in res_hits_dict.items() and len(set(res_hits_dict["Flq_acquired"].split(";")))==1  and "aac(6')-Ib-cr" in res_hits_dict["AGly_acquired"]:
-            res_hits_dict["Cipro_prediction"]="R"
-            res_hits_dict["Cipro_prediction_support"]="93"
-
-        # 0 Flq_mutations, >=2 Flq_acquired, >=0 aac6
-            # test: ERR3480591 (with aac), ERR4635120 (no aac)
-        elif ("Flq_mutations", "-") in res_hits_dict.items() and len(set(res_hits_dict["Flq_acquired"].split(";")))>=2:
-            res_hits_dict["Cipro_prediction"]="R"
-            res_hits_dict["Cipro_prediction_support"]="97"
-
-        # >=1 Flq_mutations, >=1 Flq_acquired, >=0 aac6
-            # test: ERR3567346_NHP139 (with aac), ERR3585150_BMP790 (no aac)
-        elif len(set(res_hits_dict["Flq_mutations"].split(";")))>=1 and len(set(res_hits_dict["Flq_acquired"].split(";")))>=1:
-            res_hits_dict["Cipro_prediction"]="R"
-            res_hits_dict["Cipro_prediction_support"]="99"
-
-        #return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-' for r in res_headers}
-        return res_hits_dict
-        
-    else:
-        return {}
-
->>>>>>> 212fb361b4dc2dc6eda10c33582d38d9a6b132f5
 
 def output_headers(full_headers, stdout_headers, outfile):
     """
