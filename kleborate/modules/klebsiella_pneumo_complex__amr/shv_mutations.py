@@ -36,6 +36,9 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
 
     coding_dna = Seq(nucl_seq)
     translation = str(coding_dna.translate(table='Bacterial', to_stop=True))
+    
+    if not translation:
+        return bla_class, [], [], None
 
     shv_1_ref = 'MRYIRLCIISLLATLPLAVHASPQPLEQIKLSESQLSGRVGMIEMDLASGRTLTAWRADERFPMMSTFKVVLCGAVLAR' \
                 'VDAGDEQLERKIHYRQQDLVDYSPVSEKHLADGMTVGELCAAAITMSDNSAANLLLATVGGPAGLTAFLRQIGDNVTRL' \
