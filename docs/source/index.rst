@@ -80,7 +80,7 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Updated to use Kaptive v3, which has some changes to the names of output variables:
   * ``K_locus_missing_genes``  has been renamed ``K_Missing_expected_genes`` 
   * ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
-  * New columns are included in Kleborate v3: ``K_Coverage`` , ``O_Coverage``
+
 
 
 Tutorial
