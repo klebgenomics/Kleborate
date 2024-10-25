@@ -70,20 +70,20 @@ def get_results(assembly, minimap2_index, args, previous_results):
         #test genome: KP_NORM_BLD_112904 (GyrA-87H, no PMQR, no aac6)
         if flq_mutations != "-" and flq_mutations.count(";") == 0 and flq_acquired == "-" and agly_acquired == "-":
             cipro_prediction = "WT S"
-            cipro_prediction_support= "2.75% (N=156/5674)"
+            cipro_prediction_support= "2.52% (N=143/5680)"
             cipro_prediction_group= "0^ QRDR, 0 PMQR, 0 aac6"
     else: 
         #test genome: KP_NORM_URN_105939 (no QRDR, no PMQR, no aac6)
         if flq_mutations == "-" and flq_acquired == "-" and agly_acquired == "-":
             cipro_prediction = "WT S"
-            cipro_prediction_support= "2.75% (N=156/5674)"
+            cipro_prediction_support= "2.52% (N=143/5680)"
             cipro_prediction_group= "0^ QRDR, 0 PMQR, 0 aac6"
 
     #0 QRDR, 0 PMQR, 1 aac6
         #test genome: ERR4635459
     if flq_mutations == "-" and flq_acquired == "-" and agly_acquired != "-":
         cipro_prediction = "WT S"
-        cipro_prediction_support= "18.12% (N=29/160)"
+        cipro_prediction_support= "18.63% (N=30/161)"
         cipro_prediction_group= "0 QRDR, 0 PMQR, 1 aac6"      
 
     #0 QRDR, qnrB1, 0 aac6
@@ -113,7 +113,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
         #test genome: G20250619 (with aac6), G20250926 (no aac6)
     if flq_mutations.count(";") > 0 and flq_acquired == "-":
             cipro_prediction = "NWT R"
-            cipro_prediction_support= "98.94% (N=2145/2168)"
+            cipro_prediction_support= "99.22% (N=2150/2167)"
             cipro_prediction_group= ">1 QRDR, 0 PMQR, * aac6" 
     
     
@@ -121,28 +121,28 @@ def get_results(assembly, minimap2_index, args, previous_results):
         #test genome: 56CM1
     if flq_mutations == "-" and flq_acquired != '-' and "qnrB1." not in flq_acquired and flq_acquired.count(";") == 0 and agly_acquired == "-":
             cipro_prediction = "NWT R"
-            cipro_prediction_support= "77.61% (N=423/545)"
+            cipro_prediction_support= "77.47% (N=423/546)"
             cipro_prediction_group= "0 QRDR, 1^ PMQR, 0 aac6" 
 
     # 0 QRDR, 1 PMQR, 1 aac6 
         #test genome: HE205
     if flq_mutations == "-" and flq_acquired != '-' and flq_acquired.count(";") == 0 and agly_acquired != "-":
             cipro_prediction = "NWT R"
-            cipro_prediction_support= "93.16% (N=763/819)"
+            cipro_prediction_support= "94.63% (N=775/819)"
             cipro_prediction_group= "0 QRDR, 1 PMQR, 1 aac6" 
 
     # 0 QRDR, >1 PMQR, * aac6 (*aac6 presence is not considered)
         #test genome: ERR3480591 (with aac6), ERR4635120 (no aac6)
     if flq_mutations == "-" and flq_acquired.count(";") > 0:
             cipro_prediction = "NWT R"
-            cipro_prediction_support= "99.14% (N=2426/2447)"
+            cipro_prediction_support= "97.06% (N=66/68)"
             cipro_prediction_group= "0 QRDR, >1 PMQR, * aac6" 
 
     # >0 QRDR, >0 PMQR, * aac6 (*aac6 presence is not considered)
         #test genome: ERR3567346_NHP139 (with aac6), ERR3585150_BMP790 (no aac6)
     if flq_mutations != "-" and flq_acquired.count(";") >= 0 and flq_acquired != "-" and flq_acquired.count(";") >= 0:
             cipro_prediction = "NWT R"
-            cipro_prediction_support= "95.95% (N=5923/6173)"
+            cipro_prediction_support= "99.22% (N=2421/2440)"
             cipro_prediction_group= ">0 QRDR, >0 PMQR, * aac6" 
 
             
