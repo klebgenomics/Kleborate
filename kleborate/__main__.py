@@ -79,7 +79,12 @@ def parse_arguments(args, all_module_names, modules):
         parser.print_help(file=sys.stderr)
         sys.exit(1)
 
-    if '-o' not in args and '--outdir' not in args:
+    parsed_args = parser.parse_known_args(args)[0]
+
+    help_requested = any(
+        flag in args for flag in ('-h', '--help', '--help_all', '--version', '--list_modules')
+    )
+    if not help_requested and '-o' not in args and '--outdir' not in args:
         sys.exit('Error: The --outdir (-o) option is required. Please specify an output directory.')
 
     return parser.parse_args(args)
