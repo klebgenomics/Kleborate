@@ -21,7 +21,7 @@ import shutil
 import sys
 
 from kaptive.database import load_database
-from kaptive.misc import check_python_version, check_programs, get_logo, check_cpus, check_file
+from kaptive.utils import check_cpus
 from kaptive.assembly import typing_pipeline
 
 
