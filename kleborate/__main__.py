@@ -1,6 +1,6 @@
 """
 Copyright 2024 Mary Maranga, Kat Holt, Ryan Wick
-https://github.com/klebgenomics/KleborateModular/
+https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
@@ -78,6 +78,14 @@ def parse_arguments(args, all_module_names, modules):
     if not args:
         parser.print_help(file=sys.stderr)
         sys.exit(1)
+
+    parsed_args = parser.parse_known_args(args)[0]
+
+    help_requested = any(
+        flag in args for flag in ('-h', '--help', '--help_all', '--version', '--list_modules')
+    )
+    if not help_requested and '-o' not in args and '--outdir' not in args:
+        sys.exit('Error: The --outdir (-o) option is required. Please specify an output directory.')
 
     return parser.parse_args(args)
 
