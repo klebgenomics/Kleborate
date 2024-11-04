@@ -28,15 +28,15 @@ def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_cover
     - min_identity: Minimum identity percentage for alignment.
 
     Returns:
-    - List of alignment hits in PAF format.
+    - Pathovar
     """
 
     alignment_hits = align_query_to_ref(
         ref_file,
         assembly,
         ref_index=minimap2_index,
-        min_identity=None,
-        min_query_coverage=None
+        min_identity=min_identity,
+        min_query_coverage=min_coverage
     )
     alignment_hits = cull_redundant_hits(alignment_hits)
 
@@ -149,7 +149,7 @@ def classify_pathovar(virulence_factors):
     - virulence_factors (dict): Dictionary with detected virulence factors.
 
     Returns:
-    - Pathovar classification as a string.
+    - Pathovar classification.
     """
     pathovar = ''
 
