@@ -291,7 +291,7 @@ def get_presets():
         'check': [('enterobacterales__species', 'is_escherichia')],
         'pass': [
             'general__contig_stats',
-            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur'
+            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee'
         ]
     }
 
