@@ -86,16 +86,12 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 Tutorial
 --------
 
-A step-by-step tutorial for Kleborate v2 is available at `kleborate-workshop <https://docs.google.com/document/d/19iz_bLGBj2yE3xAOTp_VIlJu0jMlzlAJlPzyfLMDYGo/edit#heading=h.7e1hzu2asyop>`_, covering:
+A step-by-step tutorial for Kleborate v3 is available at `kleborate-workshop <https://docs.google.com/document/d/1R61bQbBngpiDB2Gl_eXigePBVakYZEjy/edit>`_, covering:
 
 
 * Kleborate's features and their scientific rationale
 * How to run Kleborate 
 * Examples, illustrating how to run and interpret results
-* How to visualise results using Kleborate-Viz
-* Performance of Kleborate on nanopore data
-
-This tutorial will be updated soon to Kleborate v3, however the functionality of Kleborate v3 remains the same if you add ``-preset kpsc`` to the run command.
 
 
 Public reports
