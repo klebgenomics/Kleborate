@@ -1,6 +1,6 @@
 python>=3.9
 setuptools
 numpy
-mash
+mash>=2.0 
 biopython>=1.83
 dna_features_viewer>=3.1.0
