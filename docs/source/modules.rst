@@ -24,7 +24,7 @@ Kleborate v3 includes a range of modules for typing bacterial genomes, most of w
 1. General Modules
 2. Modules for *Klebsiella pneumoniae* species complex
 3. Modules for *Klebsiella oxytoca* species complex
-4. Modules for *Escherichia* species complex
+4. Modules for *Escherichia* *coli* 
 
 
 Summary of availabe modules and their output columns
