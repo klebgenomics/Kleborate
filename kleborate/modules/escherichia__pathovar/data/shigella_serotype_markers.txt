@@ -1,0 +1,49 @@
+{
+    # Shigella dysenteriae serotypes
+    "Shigella dysenteriae serotype 1": ["Sd1_wzx", "Sd1_rfp"],
+    "Shigella dysenteriae serotype 1, rfp- (phenotypically negative)": ["Sd1_wzx"],  # If Sd1_rfp is absent
+    "Shigella dysenteriae serotype 8": ["Sd8_wzx"],
+    "Shigella dysenteriae Provisional serotype 96-265": ["SdProv_wzx"],
+    "Shigella dysenteriae Provisional serotype E670-74": ["SdProvE_wzx"],
+
+    # Shigella boydii serotypes
+    "Shigella boydii serotype 1": ["Sb1_wzx"],
+    "Shigella boydii serotype 6 or 10": ["Sb6_wzx", "wbaM"],  # Includes junction ratio check to distinguish
+    "Shigella boydii serotype 6": ["Sb6_wzx"],  # If junction ratio not calculated
+    "Shigella boydii serotype 10": ["Sb6_wzx", "wbaM"],  # Requires depth checks at wbaM junction
+    "Shigella boydii serotype 11": ["Sb11_wzx"],
+    "Shigella boydii serotype 13": ["Sb13_wzx", "ipaH_c"],
+    "Shigella boydii serotype 20": ["Sb1_wzx", "heparinase"],
+    "Shigella boydii Provisional serotype E1621-54": ["SbProv_wzx"],
+
+    # Shigella flexneri serotypes
+    "Shigella flexneri serotype 1a": ["Sf_wzx", "gtrI"],
+    "Shigella flexneri serotype 1b": ["Sf_wzx", "gtrI", "Oac1b"],
+    "Shigella flexneri serotype 1c (7a)": ["Sf_wzx", "gtrI", "gtrIC"],
+    "Shigella flexneri serotype 2a": ["Sf_wzx", "gtrII"],
+    "Shigella flexneri serotype 2av": ["Sf_wzx", "gtrII", "Xv"],
+    "Shigella flexneri serotype 2b": ["Sf_wzx", "gtrII", "gtrX"],
+    "Shigella flexneri serotype 3a": ["Sf_wzx", "gtrX", "Oac"],
+    "Shigella flexneri serotype 3b": ["Sf_wzx", "Oac"],
+    "Shigella flexneri serotype 4a": ["Sf_wzx", "gtrIV"],
+    "Shigella flexneri serotype 4av": ["Sf_wzx", "gtrIV", "Xv"],
+    "Shigella flexneri serotype 4b": ["Sf_wzx", "gtrIV", "Oac"],
+    "Shigella flexneri serotype 4bv": ["Sf_wzx", "gtrIV", "Oac", "Xv"],
+    "Shigella flexneri serotype 5a": ["Sf_wzx", "gtrV"],
+    "Shigella flexneri serotype 5b": ["Sf_wzx", "gtrV", "gtrX", "Oac"],
+    "Shigella flexneri serotype 6": ["Sf6_wzx"],
+    "Shigella flexneri serotype X": ["Sf_wzx", "gtrX"],
+    "Shigella flexneri serotype Xv (4c)": ["Sf_wzx", "gtrX", "Xv"],
+    "Shigella flexneri serotype Y": ["Sf_wzx"],  # When no additional markers are present
+    "Shigella flexneri Yv": ["Sf_wzx", "Xv"],
+    "Shigella flexneri serotype 7b": ["Sf_wzx", "gtrI", "gtrIC", "Oac1b"],
+
+    # Shigella sonnei serotypes
+    "Shigella sonnei form I": ["Ss_wzx", "Ss_methylase"],
+    "Shigella sonnei form II": ["Ss_methylase"],  # Only Ss_methylase, no Ss_wzx
+
+    # Notes for conditional checks (complex serotypes)
+    "Shigella flexneri, novel serotype": [
+        "Sf_wzx",  # If other expected markers are absent or an unexpected combination is present
+    ],
+}

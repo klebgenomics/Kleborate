@@ -28,8 +28,8 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['LEE_ST', 'lineage',
-                    'eae', 'tir', 'espA', 'espB', 'espD', 'espH', 'espZ']
+    full_headers = ['LEE_ST', 'LEE_lineage',
+                    'LEE_eae', 'LEE_tir', 'LEE_espA', 'LEE_espB', 'LEE_espD', 'LEE_espH', 'LEE_espZ']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -78,7 +78,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
              args.escherichia_mlst_LEE_min_identity, args.escherichia_mlst_LEE_min_coverage,
              args.escherichia_mlst_LEE_required_exact_matches)
 
-    return {'LEE_ST': st, 'lineage': lineage,
-            'eae': alleles['eae'], 'tir': alleles['tir'], 'espA': alleles['espA'],
-            'espB': alleles['espB'], 'espD': alleles['espD'], 'espH': alleles['espH'],
-            'espZ': alleles['espZ']}
+    return {'LEE_ST': st, 'LEE_lineage': lineage,
+            'LEE_eae': alleles['eae'], 'LEE_tir': alleles['tir'], 'LEE_espA': alleles['espA'],
+            'LEE_espB': alleles['espB'], 'LEE_espD': alleles['espD'], 'LEE_espH': alleles['espH'],
+            'LEE_espZ': alleles['espZ']}

@@ -14,11 +14,10 @@ not, see <https://www.gnu.org/licenses/>.
 from ...shared.alignment import align_query_to_ref, cull_redundant_hits
 
 
-# Main function that integrates alignment hits and classifies pathovar
 
 def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_coverage):
     """
-    Aligns the provided assembly to the reference file using specified alignment parameters.
+    Aligns assembled genomes to the virulence alleles and classifies the pathotype.
 
     Parameters:
     - assembly: Assembly in FASTA format.
@@ -28,7 +27,7 @@ def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_cover
     - min_identity: Minimum identity percentage for alignment.
 
     Returns:
-    - Pathovar
+    - pathotype and virulence markers.
     """
 
     alignment_hits = align_query_to_ref(
@@ -40,23 +39,23 @@ def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_cover
     )
     alignment_hits = cull_redundant_hits(alignment_hits)
 
-    # Load virulence factor headers
+    # Load virulence factors mapping file
     virulence_factors_map = load_virulence_factors(ref_file)
     
-    # Identify virulence factors
+    # Identify virulence factors from the genome
     virulence_factors, virulence_markers = identify_virulence_factors(
         alignment_hits, 
         virulence_factors_map
     )
     
-    # Classify the pathovar
+    # Classify the pathotype
     pathovar = classify_pathovar(virulence_factors)
 
     return pathovar, virulence_markers
 
 
 
-# Define the virulence factors map, initializing each factor with an empty list to store headers
+# Define the virulence factors map
 virulence_factors_map = {
     'ltcA': {'name': 'LT', 'headers': []},
     'sta1': {'name': 'ST', 'headers': []},
@@ -100,8 +99,6 @@ def load_virulence_factors(fasta_file_path):
 
 
 
-
-# Identify virulence factors in alignment hits
 def identify_virulence_factors(alignment_hits, virulence_factors_map):
     """
     Identifies presence of virulence factors based on alignment hits.
@@ -111,7 +108,7 @@ def identify_virulence_factors(alignment_hits, virulence_factors_map):
     - virulence_factors_map (dict): Dictionary with virulence factors mapped to headers.
 
     Returns:
-    - Updated virulence_factors dictionary with presence indicators.
+    - virulence_factors dictionary
     - Dictionary mapping detected markers to virulence factor names.
     """
     virulence_factors = {
@@ -138,18 +135,15 @@ def identify_virulence_factors(alignment_hits, virulence_factors_map):
     return virulence_factors, virulence_markers
 
 
-   
-
-# Classify the Pathovar based on virulence factors
 def classify_pathovar(virulence_factors):
     """
-    Classifies E. coli pathovar based on detected virulence factors.
+    Classifies E. coli pathotype based on detected virulence factors.
 
     Parameters:
     - virulence_factors (dict): Dictionary with detected virulence factors.
 
     Returns:
-    - Pathovar classification.
+    - Pathotype
     """
     pathovar = ''
 
@@ -169,37 +163,11 @@ def classify_pathovar(virulence_factors):
         pathovar = pathovar + ('/' if len(pathovar) else '') + 'EPEC'
 
     if len(pathovar):
-        pathovar = 'E. coli - ' + pathovar
+        pathovar = pathovar
     else:
-        # Place a dash to indicate basic E. coli
         pathovar = '-'
 
     return pathovar  
 
-    
 
-# # Classify the Pathovar
-# # Initialize pathovar as an empty string
-# pathovar = ''
-
-# # Apply the classification logic
-# if virulence_factors['ipaH'] == '+':
-#     pathovar = 'EIEC'
-# if virulence_factors['ST'] == '+' or virulence_factors['LT'] == '+':
-#     # ipaH should not be in combination with ST or LT
-#     pathovar = 'ERROR' if pathovar else 'ETEC'
-# if virulence_factors['Stx1'] == '+' or virulence_factors['Stx2'] == '+':
-#     # If Stx is present then it is STEC unless eae is also present in which case it is EHEC
-#     if virulence_factors['eae'] == '+':
-#         pathovar = pathovar + ('/' if len(pathovar) else '') + 'EHEC'
-#     else:
-#         pathovar = pathovar + ('/' if len(pathovar) else '') + 'STEC'
-# elif virulence_factors['eae'] == '+':
-#     # But eae without Stx is EPEC
-#     pathovar = pathovar + ('/' if len(pathovar) else '') + 'EPEC'
-# if len(pathovar):
-#     pathovar = 'E. coli - ' + pathovar
-# else:
-#     # Place a dash to indicate basic E. coli
-#     pathovar = '-'       
     

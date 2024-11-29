@@ -291,7 +291,7 @@ def get_presets():
         'check': [('enterobacterales__species', 'is_escherichia')],
         'pass': [
             'general__contig_stats',
-            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee','shigella__typing'
+            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee', 'escherichia__ezclermont', 'escherichia__ectyper'
         ]
     }
 
@@ -331,6 +331,9 @@ def get_used_module_names(args, all_module_names, presets):
         # Assuming presets[args.preset] is a dictionary with 'check' and 'pass' keys
         check_modules = [module[0] for module in presets[args.preset].get('check', [])]  # Extract module names from check modules
         pass_modules = presets[args.preset].get('pass', [])  # Directly assign pass modules
+
+        if args.preset == 'escherichia' and args.modules is None:
+            pass_modules = [module for module in pass_modules if module != 'escherichia__mlst_pasteur']
 
         module_names += check_modules + pass_modules  # Combine check and pass modules for the overall list
 
