@@ -1,7 +1,7 @@
 ST	eae	tir	espA	espB	espD	espH	espZ	lineage
 1	1	1	1	1	1	1	1	Lineage 1
-2	2	2	2	1	1	2	2	Lineage 1
-2	2	2	2	1	1	2	3	LIneage 1
+2a	2	2	2	1	1	2	2	Lineage 1
+2b	2	2	2	1	1	2	3	LIneage 1
 3	3	3	3	2	2	3	4	Lineage 2
 4	4	3	4	2	2	3	5	Lineage 2
 5	4	3	4	2	2	3	6	Lineage 2
@@ -10,8 +10,8 @@ ST	eae	tir	espA	espB	espD	espH	espZ	lineage
 8	5	4	3	2	2	3	7	Lineage 2
 9	6	5	5	3	3	4	8	Lineage 3
 10	7	5	5	3	3	5	8	Lineage 3
-11	8	6	6	4	4	6	9	Lineage 3
-11	8	6	6	4	4	6	10	Lineage 3
+11a	8	6	6	4	4	6	9	Lineage 3
+11b	8	6	6	4	4	6	10	Lineage 3
 12	8	6	6	4	4	6	11	Lineage 3
 13	9	5	7	5	5	4	11	Lineage 3
 14	9	5	7	5	5	4	12	Lineage 3
@@ -25,8 +25,8 @@ ST	eae	tir	espA	espB	espD	espH	espZ	lineage
 22	15	9	9	5	6	4	13	Lineage 3
 23	16	9	10	5	7	7	11	Lineage 3
 24	16	10	9	6	6	7	8	Lineage 3
-25	17	11	9	5	8	7	12	Lineage 3
-25	17	12	11	6	6	7	12	Lineage 3
+25a	17	11	9	5	8	7	12	Lineage 3
+25b	17	12	11	6	6	7	12	Lineage 3
 26	17	10	9	5	6	7	14	Lineage 3
 27	17	10	7	5	5	7	13	Lineage 3
 28	18	11	9	5	6	4	13	Lineage 3
