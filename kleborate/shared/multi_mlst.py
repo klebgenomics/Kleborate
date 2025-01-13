@@ -3,8 +3,7 @@ This file carries out multi-MLST functions: similar to the regular MLST (found i
 allowing for multiple STs per genome. This is useful for some virulence loci which can appear more
 than once per genome (e.g. on the chromosome and on a plasmid).
 
-Copyright 2023 Kat Holt
-Copyright 2023 Ryan Wick (rrwick@gmail.com)
+Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
