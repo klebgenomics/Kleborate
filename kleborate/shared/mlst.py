@@ -20,7 +20,8 @@ from .alignment import align_query_to_ref, truncation_check
 
 
 def mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
-         min_identity, min_coverage, required_exact_matches, check_for_truncation=False):
+         min_identity, min_coverage, required_exact_matches, check_for_truncation=False, 
+         unknown_group_name=None, min_gene_count=None):
     """
     This function takes:
     * assembly_path: a path for an assembly in FASTA format
@@ -33,6 +34,8 @@ def mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names,
     * min_coverage: hits with a lower percent coverage than this are discarded
     * required_exact_matches: at least this many alleles must be an exact match to assign an ST
     * check_for_truncation: if true, truncation strings will be added to the allele numbers
+    * unknown_group_name: (optional) name for unknown group (defaults to None)
+    * min_gene_count: minimum number of genes required to assign an ST, if None, this check is skipped
 
     This function returns:
     * the best matching ST profile (e.g. 'ST123', 'ST456-1LV' or 'NA')
@@ -44,11 +47,12 @@ def mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names,
                                            ref_index=minimap2_index, min_identity=min_identity,
                                            min_query_coverage=min_coverage) for g in gene_names}
     return run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
-                           check_for_truncation)
+                           check_for_truncation, unknown_group_name, min_gene_count)
 
 
 def run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
-                    check_for_truncation=False, report_incomplete=False):
+                    check_for_truncation=False, report_incomplete=False, 
+                    unknown_group_name=None, min_gene_count=None):
     """
     This function is factored out because it is also called by the multi_mlst.py file.
     """
@@ -81,6 +85,7 @@ def run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
         else:
             lv_count += 1
 
+    # Handling the missing ST logic
     if exact_matches < required_exact_matches:
         st, extra_info = 'NA', '-'
     elif lv_count == 0:
@@ -93,8 +98,16 @@ def run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
     if extra_info != '-' and any_truncations:
         extra_info += ' (truncated)'
 
-    return st, extra_info, allele_numbers
+    # Check for unknown group handling
+    if min_gene_count is not None and unknown_group_name is not None:
+        if extra_info == '-':
+            if sum(0 if x == '-' else 1 for x in allele_numbers.values()) >= min_gene_count:
+                extra_info = unknown_group_name
+                st = 'NA'
+            else:
+                extra_info = '-'
 
+    return st, extra_info, allele_numbers
 
 def load_st_profiles(database_path, gene_names, extra_info_name):
     """
