@@ -1,6 +1,5 @@
 """
-Copyright 2023 Kat Holt
-Copyright 2023 Ryan Wick (rrwick@gmail.com)
+Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -47,8 +46,10 @@ def add_cli_options(parser):
                        help='Minimum alignment percent identity for klebsiella__cbst spurious results')
     group.add_argument('--klebsiella__cbst_min_spurious_coverage', type=float, default=40.0,
                        help='Minimum alignment percent coverage for klebsiella__cbst spurious results')
-    group.add_argument('--klebsiella__cbst_required_exact_matches', type=int, default=8,
+    group.add_argument('--klebsiella__cbst_required_exact_matches', type=int, default=7,
                        help='At least this many exact matches are required to call an ST')
+    group.add_argument('--klebsiella__cbst_min_gene_count', type=int, default=8,
+                       help='At least this many exact alleles required to report an "unknown" group')
     return group
 
 
@@ -63,6 +64,8 @@ def check_cli_options(args):
         sys.exit('Error: --klebsiella__cbst_min_spurious_coverage must be between 30.0 and 100.0')
     if args.klebsiella__cbst_required_exact_matches < 0:
         sys.exit('Error: --cbst_required_exact_matches must be a positive integer')
+    if args.klebsiella__cbst_min_gene_count < 0:
+        sys.exit('Error: --klebsiella__rmst_min_gene_count must be a positive integer')
 
 
 def check_external_programs():
@@ -86,7 +89,9 @@ def get_results(assembly, minimap2_index, args, previous_results):
                                       args.klebsiella__cbst_min_coverage, args.klebsiella__cbst_required_exact_matches,
                                       check_for_truncation=True, report_incomplete=True,
                                       min_spurious_identity=args.klebsiella__cbst_min_spurious_identity,
-                                      min_spurious_coverage=args.klebsiella__cbst_min_spurious_coverage)
+                                      min_spurious_coverage=args.klebsiella__cbst_min_spurious_coverage,
+                                      unknown_group_name='clb unknown',
+                                      min_gene_count=args.klebsiella__cbst_min_gene_count)
     st, lineage, alleles = results
 
     if st == 'NA':
