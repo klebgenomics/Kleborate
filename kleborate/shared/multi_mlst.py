@@ -21,7 +21,8 @@ from .alignment import truncation_check
 
 def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
                min_identity, min_coverage, required_exact_matches, check_for_truncation=False,
-               report_incomplete=False, min_spurious_identity=None, min_spurious_coverage=None,):
+               report_incomplete=False, min_spurious_identity=None, min_spurious_coverage=None,
+               unknown_group_name=None, min_gene_count=None):
     """
     This function takes and returns the same things as the mlst function in mlst.py. However, it
     will look for cases where multiple contigs have hits for the full set of MLST genes, and in
@@ -35,7 +36,7 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
                                                min_query_coverage=min_spurious_coverage) for g in gene_names}
 
         spurious_hits = {g: [h for h in hits_per_gene[g] 
-                     if h.query_cov < min_coverage and h.percent_identity < min_identity] for g in gene_names}
+                             if h.query_cov < min_coverage and h.percent_identity < min_identity] for g in gene_names}
     else:
         hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
                                                ref_index=minimap2_index, min_identity=min_identity,
@@ -54,16 +55,18 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
     # case, i.e. the same as regular MLST.
 
     if len(full_set_contigs) < 2:
-        return run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
-                               check_for_truncation, report_incomplete), spurious_hits
+        # Apply the unknown group logic here for single-contig cases
+        return run_single_mlst(
+            profiles, hits_per_gene, gene_names, required_exact_matches, check_for_truncation, 
+            report_incomplete, unknown_group_name, min_gene_count), spurious_hits
 
     # If more than one contig has the full set of genes, then this is treated as a multi-MLST case,
     # where each full-set contig gets an MLST call.
     contig_results = {}
     for contig in full_set_contigs:
-        contig_results[contig] = run_single_mlst(profiles, hits_by_contig[contig], gene_names,
-                                                 required_exact_matches, check_for_truncation,
-                                                 report_incomplete)
+        contig_results[contig] = run_single_mlst(
+            profiles, hits_by_contig[contig], gene_names, required_exact_matches, check_for_truncation,
+            report_incomplete, unknown_group_name, min_gene_count)
          
     return combine_results(full_set_contigs, contig_results, gene_names), spurious_hits
 
