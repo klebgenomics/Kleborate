@@ -48,7 +48,7 @@ def add_cli_options(parser):
     group.add_argument('--klebsiella__smst_required_exact_matches', type=int, default=2,
                        help='At least this many exact matches are required to call an ST')
     group.add_argument('--klebsiella__smst_min_gene_count', type=int, default=2,
-                       help='At least this many exact alleles required to report an "unknown" group')
+                       help='At least this many exact alleles required to report a novel allele)
     return group
 
 
