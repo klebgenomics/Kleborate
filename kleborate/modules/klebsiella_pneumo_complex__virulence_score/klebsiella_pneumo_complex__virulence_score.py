@@ -61,8 +61,8 @@ def get_results(assembly, minimap2_index, args, previous_results):
 
     # virulence score
     has_ybt = (previous_results['klebsiella__ybst__Yersiniabactin'] != '-')
-    has_aero = (previous_results['klebsiella__abst__Colibactin'] != '-')
-    has_coli = (previous_results['klebsiella__cbst__Aerobactin'] != '-')
+    has_aero = (previous_results['klebsiella__cbst__Aerobactin'] != '-')
+    has_coli = (previous_results['klebsiella__abst__Colibactin'] != '-')
 
 
     # Calculate virulence score
