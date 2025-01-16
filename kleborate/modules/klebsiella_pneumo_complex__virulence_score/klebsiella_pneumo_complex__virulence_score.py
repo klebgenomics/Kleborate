@@ -1,6 +1,5 @@
 """
-Copyright 2023 Kat Holt
-Copyright 2023 Ryan Wick (rrwick@gmail.com)
+Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -61,9 +60,9 @@ def get_results(assembly, minimap2_index, args, previous_results):
         all_hits = ''.join(all_hits)
 
     # virulence score
-    has_ybt = (previous_results['klebsiella__ybst__YbST'] != 0)
-    has_aero = (previous_results['klebsiella__abst__AbST'] != 0)
-    has_coli = (previous_results['klebsiella__cbst__CbST'] != 0)
+    has_ybt = (previous_results['klebsiella__ybst__Yersiniabactin'] != '-')
+    has_aero = (previous_results['klebsiella__abst__Colibactin'] != '-')
+    has_coli = (previous_results['klebsiella__cbst__Aerobactin'] != '-')
 
 
     # Calculate virulence score
