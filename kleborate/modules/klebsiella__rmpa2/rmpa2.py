@@ -6,8 +6,8 @@ Reports best match
 If an annotation column is provided (such as clonal complex) in the final column of the profiles
 file, this annotation will be reported in column 2 of the output table
 
-Copyright 2023 Kat Holt, Ryan Wick (rrwick@gmail.com), Mary Maranga (gathonimaranga@gmail.com)
-https://github.com/klebgenomics/KleborateModular/
+Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,

@@ -1,5 +1,5 @@
 """
-Copyright 2023 Kat Holt, Ryan Wick (rrwick@gmail.com), Mary Maranga (gathonimaranga@gmail.com)
+Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick 
 https://github.com/klebgenomics/KleborateModular/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
