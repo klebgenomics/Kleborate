@@ -1448,7 +1448,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 117,OXA-649,Bla,OXA,OXA-649,2534,ARO_3005340,-,-,no,no,OXA-143 family carbapenem-hydrolyzing class D beta-lactamase OXA-649,Bla_Carb
 117,OXA-668,Bla,OXA,OXA-668,2535,ARO_3005158,-,-,no,no,OXA-274 family class D beta-lactamase OXA-668,Bla
 117,OXA-681,Bla,OXA,OXA-681,2536,ARO_3005319,-,-,no,no,OXA-2 family inhibitor-resistant class D extended-spectrum beta-lactamase OXA-681,Bla
-117,OXA-737,Bla,OXA,OXA-737,2537,ARO_3005320,-,-,no,no,OXA-2 family class D beta-lactamase OXA-737	,Bla
+117,OXA-737,Bla,OXA,OXA-737,2537,ARO_3005320,-,-,no,no,"OXA-2 family class D beta-lactamase OXA-737	",Bla
 117,OXA-779,Bla,OXA,OXA-779,2538,ARO_3005315,-,-,no,no,OXA-46 family oxacillin-hydrolyzing class D beta-lactamase OXA-779,Bla
 117,OXA-835,Bla,OXA,OXA-835,2539,ARO_3005322,-,-,no,no,OXA-46 family oxacillin-hydrolyzing class D beta-lactamase OXA-835,Bla
 117,OXA-837,Bla,OXA,OXA-837,2540,ARO_3005060,-,-,no,no,class D beta-lactamase OXA-837,Bla
@@ -2697,7 +2697,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 391,strA.v1,AGly,StrA,strA.v1,2409,ARG_AJ627643,-,-,no,no,NA,NA
 392,strB.v1,AGly,StrB,strB.v1,2410,ARG_KR091911,-,-,no,no,NA,NA
 393,SFO-1.v1,Bla,SFO-1,SFO-1.v1,2411,ARG_FJ848785,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL
-394,CatB4.v1,Phe,CatBx,CatB4.v1,2412,ARG_JX424423,-,-,no,no,NA,NA
 395,tmexC1,Tgc,tmexC,tmexC1,2413,-,-,-,no,no,NA,NA
 396,tmexD1,Tgc,tmexD,tmexD1,2414,-,-,-,no,no,NA,NA
 397,toprJ1,Tgc,toprJ,toprJ1,2415,-,-,-,no,no,NA,NA
