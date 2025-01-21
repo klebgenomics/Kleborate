@@ -2,10 +2,8 @@
 The version is stored here in a separate file so it can exist in only one place.
 http://stackoverflow.com/questions/458550
 
-Copyright 2024 Kat Holt
-Copyright 2024 Mary Maranga (gathonimaranga@gmail.com)
-Copyright 2020 Ryan Wick
-https://github.com/katholt/KleborateModular/
+Copyright 2025 Mary Maranga (gathonimaranga@gmail.com)
+https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
