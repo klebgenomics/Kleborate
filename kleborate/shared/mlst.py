@@ -98,7 +98,6 @@ def run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
     if extra_info != '-' and any_truncations:
         extra_info += ' (truncated)'
 
-    # Check for unknown group handling
     if min_gene_count is not None and unknown_group_name is not None:
         if extra_info == '-':
             if sum(0 if x == '-' else 1 for x in allele_numbers.values()) >= min_gene_count:
