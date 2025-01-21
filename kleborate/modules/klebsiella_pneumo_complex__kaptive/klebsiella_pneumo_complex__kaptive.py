@@ -2,8 +2,8 @@
 This module contains classes for interacting with bacterial genome assemblies and contigs and a pipeline
 to type them.
 
-Copyright 2024 Mary Maranga, Kat Holt, Tom Stanton, Ryan Wick
-https://github.com/klebgenomics/KleborateModular/
+Copyright 2025 Mary Maranga, Tom Stanton
+https://github.com/klebgenomics/Kleborate/
 https://github.com/klebgenomics/Kaptive
 
 This file is part of Kaptive. Kaptive is free software: you can redistribute it and/or modify

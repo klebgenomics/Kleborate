@@ -1,6 +1,6 @@
 """
-Copyright 2024 Mary Maranga, Kat Holt, Ryan Wick
-https://github.com/klebgenomics/KleborateModular/
+Copyright 2025 Mary Maranga, Kat Holt
+https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,

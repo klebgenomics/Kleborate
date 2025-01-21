@@ -1,7 +1,5 @@
 """
-Copyright 2024 Kat Holt
-Copyright 2024 Ryan Wick (rrwick@gmail.com)
-Copyright 2024 (gathonimaranga@gmail.com)
+Copyright 2025 Mary Maranga
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
