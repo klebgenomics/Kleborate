@@ -210,20 +210,18 @@ def get_results(assembly, index, previous_results, args):
 
 
 # def parse_amrfinder_results(output, assembly_name):
-#     full_headers, _ = get_headers()  # Assuming `get_headers()` works fine and returns a list of column names
+#     full_headers, _ = get_headers() 
 #     results = {}
 
 #     # Split output into lines
 #     lines = output.splitlines()
 
-#     # Clean lines (remove leading/trailing whitespace)
 #     lines = [line.strip() for line in lines if line.strip()]
 
 #     if not lines:
-#         print("AMRFinder output is empty or malformed.")
-#         return results  # Returning an empty dictionary if no valid lines are found
+#         print("AMRFinder output is empty")
+#         return results  
 
-#     # Initialize results with the assembly_name
 #     results[assembly_name] = {
 #         'Aminoglycoside': '-',
 #         'Carbapenemase': '-',
@@ -242,26 +240,21 @@ def get_results(assembly, index, previous_results, args):
 #         columns = line.strip().split("\t")
 #         result_dict = dict(zip(headers, columns))  # Map column values to headers
 
-#         # Ensure the 'Type' is 'AMR'
 #         if result_dict.get('Type') != 'AMR':
 #             continue
 
-#         # Get the relevant columns
 #         class_name = result_dict.get('Class', 'Other Classes')
 #         element_symbol = result_dict.get('Element symbol', '')
 
 #         # Categorize the class
 #         category = categorize_class(class_name)
 
-#         # Only update the category if element_symbol exists
 #         if element_symbol:
 #             if results[assembly_name].get(category) == '-':
 #                 results[assembly_name][category] = element_symbol
 #             else:
-#                 # Concatenate the element symbols without separators
 #                 results[assembly_name][category] += element_symbol
 
-#     # After collecting all the results, ensure proper formatting for all categories
 #     for category in results[assembly_name]:
 #         if results[assembly_name][category] != '-':
 #             # Remove any unwanted characters like semicolons or extra spaces
@@ -273,7 +266,7 @@ def get_results(assembly, index, previous_results, args):
 
 # def get_results(assembly, minimap2_index, previous_results, args):
 #     """
-#     Execute AMRFinderPlus for one assembly and return the results, aggregated to match other module results.
+#     Execute AMRFinderPlus
 #     """
 #     organism = "Escherichia"
     
@@ -290,7 +283,6 @@ def get_results(assembly, index, previous_results, args):
 #         # Prepare the final output format
 #         final_result = {assembly_name: {}}
         
-#         # Ensure that the assembly_name is in results before accessing
 #         if assembly_name in results and results[assembly_name]:
 #             for category in results[assembly_name]:
 #                 # Only add categories that have elements
@@ -300,8 +292,7 @@ def get_results(assembly, index, previous_results, args):
 #                     final_result[assembly_name][category] = '-'
 #         else:
 #             print(f"Error: {assembly_name} not found or empty in results")
-        
-#         # Debugging output to check results
+
 #         print(f"Final result for {assembly_name}: {final_result}")
         
 #         return final_result
