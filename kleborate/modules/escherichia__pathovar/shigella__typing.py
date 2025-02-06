@@ -66,7 +66,7 @@ def data_dir():
 
 def get_results(assembly, minimap2_index, args, previous_results):
 
-    ref_file = data_dir() / 'ShigellaRef5.fasta'
+    ShigellaRef = data_dir() / 'ShigellaRef5.fasta'
 
     # Load the shigella_serotype_markers dictionary from the file
     with open(data_dir() / 'shigella_serotype_markers.txt', 'r') as file:
@@ -77,7 +77,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     Serotype = classify_shigella(
         assembly,
         minimap2_index,
-        ref_file,
+        ShigellaRef,
         args.shigellatyping__min_identity,
         args.shigellatyping__min_coverage,
         shigella_serotype_markers

@@ -1,6 +1,6 @@
 """
 Copyright 2024 Mary Maranga, Kat Holt, Ryan Wick
-https://github.com/klebgenomics/Kleborate/
+https://github.com/klebgenomics/KleborateModular/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
@@ -78,14 +78,6 @@ def parse_arguments(args, all_module_names, modules):
     if not args:
         parser.print_help(file=sys.stderr)
         sys.exit(1)
-
-    parsed_args = parser.parse_known_args(args)[0]
-
-    help_requested = any(
-        flag in args for flag in ('-h', '--help', '--help_all', '--version', '--list_modules')
-    )
-    if not help_requested and '-o' not in args and '--outdir' not in args:
-        sys.exit('Error: The --outdir (-o) option is required. Please specify an output directory.')
 
     return parser.parse_args(args)
 
@@ -291,7 +283,7 @@ def get_presets():
         'check': [('enterobacterales__species', 'is_escherichia')],
         'pass': [
             'general__contig_stats',
-            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee', 'escherichia__ezclermont', 'escherichia__ectyper'
+            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee', 'escherichia__ezclermont', 'escherichia__ectyper', 'escherichia__amr'
         ]
     }
 

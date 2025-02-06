@@ -30,7 +30,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['Pathotype','Stx1', 'Stx2','ST', 'LT', 'eae', 'ipaH']
+    full_headers = ['Pathotype','Stx1', 'Stx2','Shiga toxin','ST', 'LT', 'eae', 'ipaH']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -64,7 +64,6 @@ def data_dir():
 
 
 def get_results(assembly, minimap2_index, args, previous_results):
-    
     full_headers, _ = get_headers()
     
     # Load the virulence factors database
@@ -85,13 +84,18 @@ def get_results(assembly, minimap2_index, args, previous_results):
         args.escherichia__pathovar_min_coverage
     )
 
+      # print(virulence_markers)
+
     # Initialize the result dictionary with headers as keys
     result_dict = {header: '-' for header in full_headers}
 
     # Set the virulence markers
     for marker, marker_hits in virulence_markers.items():
         if marker in result_dict:
-            result_dict[marker] = ";".join(marker_hits) if marker_hits else '-'
+            if isinstance(marker_hits, list):
+                result_dict[marker] = ";".join(marker_hits) if marker_hits else '-'
+            else:  # If it's a string (e.g., 'Shiga toxin')
+                result_dict[marker] = marker_hits
 
     # Call classify_shigella
     Serotype = classify_shigella(
@@ -115,6 +119,62 @@ def get_results(assembly, minimap2_index, args, previous_results):
 
     # Return the result dictionary
     return result_dict
+    
+
+# def get_results(assembly, minimap2_index, args, previous_results):
+    
+#     full_headers, _ = get_headers()
+    
+#     # Load the virulence factors database
+#     ref_file = data_dir() / 'virulence_ecoli.fsa'
+    
+#     # Load the Shigella reference file and serotype marker dictionary
+#     ShigellaRef = data_dir() / 'ShigellaRef5.fasta'
+#     with open(data_dir() / 'shigella_serotype_markers.txt', 'r') as file:
+#         file_content = file.read()
+#         shigella_serotype_markers = ast.literal_eval(file_content)
+
+#     # pathotyping
+#     pathovar, virulence_markers = minimap_pathovar(
+#         assembly,
+#         minimap2_index,
+#         ref_file,
+#         args.escherichia__pathovar_min_identity,
+#         args.escherichia__pathovar_min_coverage
+#     )
+
+#     print(virulence_markers)
+
+#     # Initialize the result dictionary with headers as keys
+#     result_dict = {header: '-' for header in full_headers}
+
+#     # Set the virulence markers
+#     for marker, marker_hits in virulence_markers.items():
+#         if marker in result_dict:
+#             result_dict[marker] = ";".join(marker_hits) if marker_hits else '-'
+
+#     # Call classify_shigella
+#     Serotype = classify_shigella(
+#         assembly,
+#         minimap2_index,
+#         ShigellaRef,
+#         args.escherichia__pathovar_min_identity,
+#         args.escherichia__pathovar_min_coverage,
+#         shigella_serotype_markers
+#     )
+
+#     # Combine the pathotype and Shigella Serotype results
+#     combined_pathovar = []
+#     if pathovar != '-':
+#         combined_pathovar.append(pathovar)
+#     if Serotype != '-':
+#         combined_pathovar.append(Serotype)
+
+#     # Set the combined Pathovar value in the result dictionary
+#     result_dict['Pathotype'] = ', '.join(combined_pathovar) if combined_pathovar else '-'
+
+#     # Return the result dictionary
+#     return result_dict
 
 
 # def get_results(assembly, minimap2_index, args, previous_results):

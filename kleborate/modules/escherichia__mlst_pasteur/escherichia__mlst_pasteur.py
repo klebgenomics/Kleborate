@@ -29,7 +29,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['ST',
+    full_headers = ['ST_Pasteur',
                     'dinB', 'icdA', 'pabB', 'polB', 'putP', 'trpA', 'trpB', 'uidA']
     stdout_headers = ['ST']
     return full_headers, stdout_headers
@@ -79,7 +79,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
              args.escherichia_mlst_pasteur_min_identity, args.escherichia_mlst_pasteur_min_coverage,
              args.escherichia_mlst_pasteur_required_exact_matches)
 
-    return {'ST': st,
+    return {'ST_Pasteur': st,
             'dinB': alleles['dinB'], 'icdA': alleles['icdA'], 'pabB': alleles['pabB'],
             'polB': alleles['polB'], 'putP': alleles['putP'], 'trpA': alleles['trpA'],
             'trpB': alleles['trpB'], 'uidA': alleles['uidA']}

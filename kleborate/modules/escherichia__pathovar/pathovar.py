@@ -1,5 +1,5 @@
 """
-Copyright 2024 Mary Maranga (gathonimaranga@gmailcom), Kat Holt
+Copyright 2025 Mary Maranga (gathonimaranga@gmailcom),ebenezer foster nyarko, Kat Holt
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -12,7 +12,6 @@ not, see <https://www.gnu.org/licenses/>.
 """
 
 from ...shared.alignment import align_query_to_ref, cull_redundant_hits
-
 
 
 def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_coverage):
@@ -98,6 +97,40 @@ def load_virulence_factors(fasta_file_path):
     return virulence_factors_map
 
 
+# def identify_virulence_factors(alignment_hits, virulence_factors_map):
+#     """
+#     Identifies presence of virulence factors based on alignment hits.
+
+#     Parameters:
+#     - alignment_hits (list): List of alignment hit objects with query_name attributes.
+#     - virulence_factors_map (dict): Dictionary with virulence factors mapped to headers.
+
+#     Returns:
+#     - virulence_factors dictionary
+#     - Dictionary mapping detected markers to virulence factor names.
+#     """
+#     virulence_factors = {
+#         'ipaH': '-',
+#         'ST': '-',
+#         'LT': '-',
+#         'Stx1': '-',
+#         'Stx2': '-',
+#         'eae': '-',
+#     }
+#     virulence_markers = {}
+
+#     for hit in alignment_hits:
+#         header = hit.query_name
+#         for key, value in virulence_factors_map.items():
+#             if key in header:
+#                 virulence_factors[value['name']] = '+'
+#                 split_header = ':'.join(header.split(':')[:2])
+#                 factor_name = value['name']
+#                 if factor_name not in virulence_markers:
+#                     virulence_markers[factor_name] = []
+#                 virulence_markers[factor_name].append(split_header)
+
+#     return virulence_factors, virulence_markers
 
 def identify_virulence_factors(alignment_hits, virulence_factors_map):
     """
@@ -120,6 +153,10 @@ def identify_virulence_factors(alignment_hits, virulence_factors_map):
         'eae': '-',
     }
     virulence_markers = {}
+    
+    # Store stx1 and stx2 results for annotation
+    stx1_variant = None
+    stx2_variant = None
 
     for hit in alignment_hits:
         header = hit.query_name
@@ -128,11 +165,40 @@ def identify_virulence_factors(alignment_hits, virulence_factors_map):
                 virulence_factors[value['name']] = '+'
                 split_header = ':'.join(header.split(':')[:2])
                 factor_name = value['name']
+                
+                
                 if factor_name not in virulence_markers:
                     virulence_markers[factor_name] = []
                 virulence_markers[factor_name].append(split_header)
 
+                # Handle stx1 and stx2 for variant annotation
+                if 'stx1' in key:
+                    # Extract subunit and variant for stx1
+                    if ':' in header:
+                        parts = header.split(':')
+                        toxin_subunit = parts[0] 
+                        subunit = toxin_subunit[4:] 
+                        variant = parts[-1] 
+                        stx1_variant = f"Shiga toxin 1, subunit {subunit}, variant {variant}"
+                elif 'stx2' in key:
+                    # Extract subunit and variant for stx2
+                    if ':' in header:
+                        parts = header.split(':')
+                        toxin_subunit = parts[0] 
+                        subunit = toxin_subunit[4:] 
+                        variant = parts[-1] 
+                        stx2_variant = f"Shiga toxin 2, subunit {subunit}, variant {variant}"
+
+    # Combine stx1 and stx2 variants in the marker annotation
+    if stx1_variant and stx2_variant:
+        virulence_markers['Shiga toxin'] = f"{stx1_variant}; {stx2_variant}"
+    elif stx1_variant:
+        virulence_markers['Shiga toxin'] = stx1_variant
+    elif stx2_variant:
+        virulence_markers['Shiga toxin'] = stx2_variant
+
     return virulence_factors, virulence_markers
+
 
 
 def classify_pathovar(virulence_factors):
