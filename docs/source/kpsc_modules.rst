@@ -617,6 +617,78 @@ Results of the KpSC AMR module are grouped by drug class (according to the `ARG-
      - list of acquired resistance genes detected below the identity or coverage thresholds (default <90% identity or <80% nucleotide coverage)
 
 
+Additionally, we provide a new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_. standard developed by the `Public Health Alliance for Genomic Epidemiology (PHA4GE) <https://www.biorxiv.org/content/10.1101/2024.03.07.583950v1>`, thus improving the interoperability of Kleborate AMR results. 
+
+hAMRonization report for Kleborate
+++++++++++++++++++++++++++++++++++++
+
+
+.. list-table::
+
+   * - Input_file_name
+     - The name of the file containing the sequence data to be analysed
+
+   * - Gene_symbol
+     - The short name of a gene
+     
+   * - Mutation
+     - The amino acid/nucleotide sequence change(s) detected in the sequence being analyzed compared to a reference
+     
+   * - Genetic_variation_type
+     - The class of genetic variation detected
+     
+   * - Drug_class
+     - Set of antibiotic molecule
+     
+   * - Input Sequence ID
+     - An identifier of molecular sequence(s) or entries from a molecular sequence database
+     
+   * - Input_gene_length
+     - The length (number of positions) of a target gene sequence submitted by a user
+     
+   * - Input_gene_start
+     - The position of the first nucleotide in a gene sequence being analyzed (input gene sequence)
+     
+   * - Input_gene_stop
+     - The position of the last nucleotide in a gene sequence being analyzed (input gene sequence)
+     
+   * - Reference_gene_length
+     - The length (number of positions) of a gene reference sequence retrieved from a database.
+     
+   * - Reference_gene_start
+     - The position of the first nucleotide in a reference gene sequence (sequence being used for comparison)
+     
+   * - Sequence_identity
+     - Sequence identity is the number (%) of matches (identical characters) in positions from an alignment of two molecular sequences.
+     
+   * - Coverage (percentage)
+     - The percentage of the reference sequence covered by the sequence of interest.
+
+   * - Reference_accession
+     - An identifier that specifies an individual sequence record in a public sequence repository.
+
+   * - Strand_orientation
+     - The orientation of a genomic element on the double-stranded molecule.
+     
+   * - Software_name
+     - A name of a computer package, application used for the analysis of data
+     
+   * - Software_version
+     - The version of software used to analyze data
+     
+   * - Reference_database_name
+     - An identifier of a biological or bioinformatics database
+     
+   * - Reference_database_version
+     - The version of the database containing the reference sequences used for analysis
+     
+   * - Input_protein_length
+     - The length (number of positions) of a protein target sequence submitted by a user
+     
+   * - Reference_protein_length
+     - The length (number of positions) of a protein reference sequence retrieved from a database
+
+
 .. _Resistance scores and counts:
 
 Resistance scores and counts
