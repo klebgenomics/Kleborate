@@ -80,6 +80,7 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Updated to use Kaptive v3, which has some changes to the names of output variables:
   * ``K_locus_missing_genes``  has been renamed ``K_Missing_expected_genes`` 
   * ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
+* Provided new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_. standard developed by the Public Health Alliance for Genomic Epidemiology (PHA4GE).
 
 
 
