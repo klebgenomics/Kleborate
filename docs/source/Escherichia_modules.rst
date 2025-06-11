@@ -106,7 +106,7 @@ Virulence markers of diarrheagenic *E. coli*
 .. list-table:: 
    :header-rows: 1
 
-   * - ** E. coli Pathotype**
+   * - **E. coli Pathotype**
      - **Defining marker**
      - **Virulence determinants**
      - **Location of determinants**
