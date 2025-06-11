@@ -96,7 +96,7 @@ Output of the Achtman *E. coli* MLST module is the following columns:
 
    -m escherichia__pathovar
 
-*Escherichia coli* is broadly split into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC) `see paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC5156508/>`_. Diarrheagenic *E. coli* (DEC) encompasses enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see <https://www.frontiersin.org/journals/cellular-and-infection-microbiology/articles/10.3389/fcimb.2016.00141/full/>`_. Additionally, *Shigella* is also regarded as a DEC pathotype as it closely resembles EIEC in terms of virulence attributes and pathogenecity
+*Escherichia coli* is broadly split into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC) `see paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC5156508/>`_. Diarrheagenic *E. coli* (DEC) encompasses enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see <https://pmc.ncbi.nlm.nih.gov/articles/PMC5114240/>`_. Additionally, *Shigella* is also regarded as a DEC pathotype as it closely resembles EIEC in terms of virulence attributes and pathogenecity
 
 The majority of DEC pathotypes are defined by the possession of one or more pathotype-specific virulence markers. However, in EAEC, DAEC and AIEC, the role of these markers in virulence is not proven. 
 
