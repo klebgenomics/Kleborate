@@ -506,7 +506,7 @@ Kleborate will report all of the SHV alleles it detects and separate them into c
 * SHV alleles associated with ampicillin resistance only, will be reported in the ``Bla_chr`` column because they are assumed to represent the chromosomal allele. These genes are not included in the count of acquired resistance genes or drug classes.
 * Other SHV alleles e.g. those predicted to encode ESBLs (extended-spectrum beta-lactamases) or beta-lactamases with inhibitor resistance will be reported in the relevant ``Bla_ESBL_acquired`` or ``Bla_inhR_acquired`` columns etc (see below), because these SHV alleles are almost always carried on plasmids. (However it is possible to have a mutation in a chromosomal SHV gene that gives a match to an ESBL allele, which would also be reported in the ``Bla_ESBL_acquired`` column and counted as an acquired gene because it is very hard to tell the difference without manual exploration of the genetic context.)
 
-The specific mutations, and assignment of alleles to class, is detailed in this preprint from KlebNET-GSP: `Tsang et al, 2024 BioRxiv <https://doi.org/10.1101/2024.04.05.587953>`_.
+The specific mutations, and assignment of alleles to class, is detailed in this preprint from KlebNET-GSP: `Tsang et al, 2024 Microbial genomics <https://doi.org/10.1099/mgen.0.001294>`_.
 
 
 Additional chromosomal mutations associated with AMR
@@ -750,6 +750,96 @@ Resistance scores and counts are output in the following columns:
 
    * - num_resistance_classes
      - Number of drug classes to which resistance determinants have been acquired (in addition to intrinsic ampicillin)
+
+
+.. _klebsiella_pneumo_complex__cipro_prediction:
+
+Ciprofloxacin resistance prediction
+-----------------------------------------
+
+.. code-block:: Python
+
+   -m klebsiella_pneumo_complex__cipro_prediction
+
+Ciprofloxacin resistance prediction is performed based on assigning the genome to one of ten genotype profiles, based on (i) number of mutations in the quinolone resistance determining region (QRDR) of GyrA and ParC; (ii) number of plasmid-mediated quinolone resistance (PMQR) genes (i.e., *qep* and *qnr* genes); and (iii) the presence or absence of *aac(6`)-Ib-cr*. 
+
+Each genotype profile is associated with a ciprofloxacin phenotype, in the form of a categorical assignment (wildtype S, nonwildtype I, nonwildtype R) and a minimum inhibitory concentration (MIC).
+
+The association of each genotype profile with a phenotype is based on analysis of ~13 thousand genomes, by the KlebNET Genotype-Phenotype Consortium, and the strength of the evidence from this data set is indicated in the **Positive predictive value** and **MIC** columns. The positive predictive value of the genotype profile is expressed as the raw number of genomes with that genotype, and the number of those which possess the associated phenotype. The **MIC** column indicates the median MIC value, and interquartile range of all MIC values, for isolates with this genotype profile.
+
+The development and validation of the ciprofloxacin resistance prediction classifier is detailed in this preprint: `preprint link here once available`. 
+
+.. list-table::
+   :header-rows: 0
+
+   * - **Genotype profile**
+     - **Phenotype prediction**
+     - **Positive predictive value**
+     - **MIC (mg/L), median [interquartile range]**
+   * - 0^ QRDR, 0 PMQR, 0 aac(6`)-Ib-cr
+     - wildtype S
+     - 90.99% S (N=5168/5680)
+     - 0.25 mg/L [0.25-0.25]
+   * - 0 QRDR, 0 PMQR, 1 aac(6`)-Ib-cr
+     - wildtype S
+     - 65.22% S (N=105/161)
+     - 0.25 mg/L [0.25-0.5]
+   * - 0 QRDR, qnrB1, 0 aac(6`)-Ib-cr
+     - nonwildtype I
+     - 81.25% I/R (n=130/160)
+     - 0.5 mg/L [0.5-1]
+   * - 1 QRDR, 0 PMQR, 0 aac(6`)-Ib-cr
+     - nonwildtype R
+     - 77.67% R (N=80/103)
+     - 1 mg/L [1-2]
+   * - 1 QRDR, 0 PMQR, 1 aac(6`)-Ib-cr
+     - nonwildtype R
+     - 86.96% R (N=20/23)
+     - 2 mg/L [1-2]
+   * - >1 QRDR, 0 PMQR, * aac(6`)-Ib-cr
+     - nonwildtype R
+     - 99.22% R (N=2150/2167)
+     - 2 mg/L [2-4]
+   * - 0 QRDR, 1^ PMQR, 0 aac(6`)-Ib-cr
+     - nonwildtype R
+     - 77.47% R (N=423/546)
+     - 1 mg/L [1-2]
+   * - 0 QRDR, 1 PMQR, 1 aac(6`)-Ib-cr
+     - nonwildtype R
+     - 94.63% R (N=775/819)
+     - 2 mg/L [1-2]
+   * - 0 QRDR, >1 PMQR, * aac(6`)-Ib-cr
+     - nonwildtype R
+     - 97.06% R (N=66/68)
+     - 2 mg/L [2-4]
+   * - >0 QRDR, >0 PMQR, * aac(6`)-Ib-cr
+     - nonwildtype R
+     - 99.22% R (N=2421/2440)
+     - 4 mg/L [4-4]
+
+* ^ GyrA-87G and GyrA-87H are not included in the QRDR count, and qnrB1 is excluded from the single-PMQR count.
+* * indicates the gene may be present or absent
+* Note that *aac(6`)-Ib-cr* is reported in the AGly_acquired and Flq_acquired columns. 
+
+Results of the ciprofloxacin resistance prediction are reported in Kleborate with four additional columns: 
+
+
+.. list-table::
+   :header-rows: 0
+
+   * - Ciprofloxacin_prediction
+     - Indicates the categorical phenotype prediction for this genome (wildtype S, nonwildtype I, nonwildtype R)
+
+   * - Ciprofloxacin_profile
+     - Indicates which of the ten genotype profiles (from the table above) this genome was assigned to
+     
+   * - Ciprofloxacin_profile_support
+     - Percentage indicating the positive predictive value of the genotype profile in **Ciprofloxacin_profile** for the S/I/R category indicated in **Ciprofloxacin_prediction**, based on evidence from the KlebNET Genotype-Phenotype Consortium. The fraction in brackets (N=n/x) indicates the total number of genomes with this genotype profile (n), and the number of those which possess the associated phenotype (x), which were used to calculate the percentage.
+     
+   * - Ciprofloxacin_MIC_prediction
+     - Indicates the MIC distribution observed for the genotype profile in **Ciprofloxacin_profile**, in the form of median value and interquartile range, based on the KlebNET Genotype-Phenotype Consortium data enumerated in the **Ciprofloxacin_profile_support** column.
+
+
 
 .. _klebsiella_pneumo_complex__kaptive:
 
