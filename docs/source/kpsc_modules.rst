@@ -618,7 +618,7 @@ Results of the KpSC AMR module are grouped by drug class (according to the `ARG-
 
 
 
-Additionally, we provide a new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_. standard developed by the `Public Health Alliance for Genomic Epidemiology (PHA4GE) <https://www.biorxiv.org/content/10.1101/2024.03.07.583950v1>`, thus improving the interoperability of Kleborate AMR results. 
+Additionally, we provide a new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_. standard developed by the `Public Health Alliance for Genomic Epidemiology (PHA4GE) <https://www.biorxiv.org/content/10.1101/2024.03.07.583950v1>`_, thus improving the interoperability of Kleborate AMR results. 
 
 
 hAMRonization report for Kleborate
