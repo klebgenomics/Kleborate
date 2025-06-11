@@ -96,7 +96,7 @@ Output of the Achtman *E. coli* MLST module is the following columns:
 
    -m escherichia__pathovar
 
-*Escherichia coli* is broadly split into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal E. coli (ExPEC) `see paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC5156508/>`_. Diarrheagenic Escherichia coli (DEC) encompasses enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see <https://doi.org/10.3389/fcimb.2016.00141/>`_. Additionally, *Shigella* is also regarded as a DEC pathotype as it closely resembles EIEC in terms of virulence attributes and pathogenecity
+*Escherichia coli* is broadly split into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC) `see paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC5156508/>`_. Diarrheagenic *E. coli* (DEC) encompasses enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see <https://www.frontiersin.org/journals/cellular-and-infection-microbiology/articles/10.3389/fcimb.2016.00141/full/>`_. Additionally, *Shigella* is also regarded as a DEC pathotype as it closely resembles EIEC in terms of virulence attributes and pathogenecity
 
 The majority of DEC pathotypes are defined by the possession of one or more pathotype-specific virulence markers. However, in EAEC, DAEC and AIEC, the role of these markers in virulence is not proven. 
 
@@ -164,7 +164,7 @@ Virulence markers of diarrheagenic *E. coli*
 
 
 
-This module classifies *E. coli* pathotypes based on the presence or absence of virulence marker genes using a curated database `VirulenceFinder <http://www.genomicepidemiology.org/>`_ gene database.  Input genomes are aligned to the database using Minimap2, Kleborate then applies `pathotype-calling logic described in EnteroBase <https://enterobase.readthedocs.io/en/latest/pipelines/backend-pipeline-phylotypes.html?highlight=pathovar/>`_ to classify pathotypes
+This module classifies *E. coli* pathotypes based on the presence or absence of virulence marker genes using a curated database `VirulenceFinder <http://www.genomicepidemiology.org/>`_ DB.  Input genomes are aligned to the database using Minimap2, Kleborate then   classifies pathotypes based on pathotype-calling logic described in `EnteroBase <https://enterobase.readthedocs.io/en/latest/pipelines/backend-pipeline-phylotypes.html?highlight=pathovar/>`_.
 
 Additionally, Kleborate distinguish *Shigella* species based on the serotype-specific O-antigen biosynthetic gene cluster. The module aligns *E. coli* genomes against a curated reference sequence derived from the *Shigella* serotyping pipeline, `shigatyper <https://github.com/CFSAN-Biostatistics/shigatyper>`_ using Minimap2.
 
@@ -188,7 +188,7 @@ Minimum alignment percent coverage for pathotype (default: 80.0)
 ++++++++++++++++++++++++++++
 
 .. list-table:: 
-   :header-rows: 1
+   :header-rows: 0
 
    * - Pathotype
      - Predicted pathotype
@@ -265,7 +265,7 @@ Stxtyper
 
    -m escherichia__stxtyper
 
-Shiga toxins (Stxs) are a key virulence factor of Stx-producing *Escherichia coli* (STEC). They are also found in *Shigella dysenteriae 1*. Stxs belong to the AB-type toxin family and are divided into two antigenically distinct groups, Stx1 and Stx2. Each group contains several variants/subtypes six Stx1 (a, b, c, d, e, f) and seven Stx2 (a, b, c, d, e, f, and g) `Yano et al., 2023 <https://www.nature.com/articles/s41598-023-32111-8>`_ and `Melton-Celsa 2014 <https://pmc.ncbi.nlm.nih.gov/articles/PMC4270005/>`_. These toxins are encoded by bacteriophages (lysogenic Stx phage) and STEC strains can produce either single Stx subtype or a combination Stx subtypes.
+Shiga toxins (Stxs) are a key virulence factor of Stx-producing *Escherichia coli* (STEC). They are also found in *Shigella dysenteriae 1*. Stxs belong to the AB-type toxin family and are divided into two antigenically distinct groups, Stx1 and Stx2. Each group contains several variants/subtypes six Stx1 (a, b, c, d, e, f) and seven Stx2 (a, b, c, d, e, f, and g) `Yano et al., 2023 <https://www.nature.com/articles/s41598-023-32111-8>`_ and `Melton-Celsa 2014 <https://pmc.ncbi.nlm.nih.gov/articles/PMC4270005/>`_. These toxins are encoded by bacteriophages (lysogenic Stx phage) and STEC strains can produce either single Stx subtype or a combination of Stx subtypes.
 
 This module will run StxTyper to determine the stx type. See the `StxTyper documentation <https://github.com/ncbi/stxtyper>`_ for more details of how it works.
 
@@ -406,19 +406,19 @@ Outputs
 +++++++
 
 .. list-table:: 
-   :header-rows: 1
+   :header-rows: 0
 
-   * - **Clermont_type**
-     - **Phylotype**
+   * - Clermont_type
+     - Phylotype
 
-   * - **Clermont_profile**
+   * - Clermont_profile
      - Presence or absence of the PCR product
 
 
 .. _Escherichia AMR:
 
 
-Escherichia AMR
+*Escherichia* AMR
 ------------------------
 
 .. code-block:: Python
