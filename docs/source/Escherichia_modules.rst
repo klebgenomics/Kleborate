@@ -21,11 +21,13 @@ These modules will be deployed if the ``enterobacterales__species``\   module co
 
    -m escherichia__mlst_achtman, escherichia__mlst_pasteur
 
-Genomes identified as belonging to the *Escherichia* genus are subjected to MLST using two 7-locus schemes.
-
-The Pasteur scheme is described in the *Escherichia coli* `Database maintained by the Pasteur Institute: `https://bigsdb.pasteur.fr/ecoli/ <https://bigsdb.pasteur.fr/ecoli/>`_. For more information and references, see: `https://bigsdb.pasteur.fr/ecoli/references/ <https://bigsdb.pasteur.fr/ecoli/references/>`_.
+Genomes identified as belonging to the *Escherichia* genus are subjected to MLST using Achtman 7-locus schemes.
 
 The Achtman scheme is hosted on EnteroBase: `https://enterobase.warwick.ac.uk/ <https://enterobase.warwick.ac.uk/>`_.
+
+We also provide an option for users to run MLST using Pasteur scheme by running ``-m escherichia__mlst_pasteur``
+
+The Pasteur scheme is described in the *Escherichia coli* `Database maintained by the Pasteur Institute: `https://bigsdb.pasteur.fr/ecoli/ <https://bigsdb.pasteur.fr/ecoli/>`_. For more information and references, see: `https://bigsdb.pasteur.fr/ecoli/references/ <https://bigsdb.pasteur.fr/ecoli/references/>`_.
 
 The genes included in each scheme are noted in the Outputs table below.
 
@@ -62,17 +64,6 @@ Minimum number of exact allele matches required to call an ST (default: 4).
 *E. coli* MLST outputs
 ++++++++++++++++++++++
 
-Output of the Pasteur *E. coli* MLST module includes the following columns:
-
-.. list-table::
-   :header-rows: 0
-
-   * - ``ST``
-     - Sequence type.
-
-   * - ``dinB``, ``icdA``, ``pabB``, ``polB``, ``putP``, ``trpA``, ``trpB``, ``uidA``
-     - Allele numbers for the Pasteur scheme loci.
-
 Output of the Achtman *E. coli* MLST module include the following columns:
 
 .. list-table::
@@ -83,6 +74,18 @@ Output of the Achtman *E. coli* MLST module include the following columns:
 
    * - ``adk``, ``fumC``, ``gyrB``, ``icd``, ``mdh``, ``purA``, ``recA``
      - Allele numbers for the Achtman scheme loci.
+
+
+Output of the Pasteur *E. coli* MLST module includes the following columns:
+
+.. list-table::
+   :header-rows: 0
+
+   * - ``ST``
+     - Sequence type.
+
+   * - ``dinB``, ``icdA``, ``pabB``, ``polB``, ``putP``, ``trpA``, ``trpB``, ``uidA``
+     - Allele numbers for the Pasteur scheme loci.
 
 Notes
 -----
@@ -101,7 +104,7 @@ Notes
 
    -m escherichia__pathovar
 
-*Escherichia coli* is broadly divided into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC) `see paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC5156508/>`_. DEC encompasses several clinically relevant pathotypes: enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see <https://pmc.ncbi.nlm.nih.gov/articles/PMC5114240/>`_. Additionally, *Shigella* is considered a DEC pathotype due to its genetic and pathogenetic similarity to EIEC.
+*Escherichia coli* is broadly divided into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC) `see paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC5156508/>`_. DEC encompasses several clinically relevant pathotypes: enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see <https://pmc.ncbi.nlm.nih.gov/articles/PMC5114240/>`_ paper. Additionally, *Shigella* is considered a DEC pathotype due to its genetic and pathogenetic similarity to EIEC.
 
 The majority of DEC pathotypes are defined by specific virulence markers. However, for EAEC, DAEC and AIEC, the pathogenic role of proposed markers is not well established. 
 
