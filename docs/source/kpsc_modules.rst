@@ -416,6 +416,7 @@ Output of the rmst module is the following columns:
      - best matching allele
 
 
+
 .. _klebsiella_pneumo_complex__virulence_score:
 
 Virulence score
@@ -721,6 +722,7 @@ This module calculates a resistance score, which ranges from 0 to 3 as follows
 
    * - 3
      - Carbapenemase with colistin resistance (regardless of ESBL genes or OmpK mutations)
+
 
 Resistance gene counts and drug class counts
 ''''''''''''''''''''''''''''''''''''''''''''''
