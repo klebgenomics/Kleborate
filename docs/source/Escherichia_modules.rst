@@ -37,11 +37,11 @@ A copy of the MLST alleles and ST definitions used in each module is stored in t
 
 ``--escherichia_mlst_achtman_min_identity`` 
 
-Minimum alignment percent identity for *Escherichia-Achtman* MLST (default: 90.0)
+Minimum alignment percent identity for *Escherichia-Achtman* MLST (default: 90.0).
 
 ``--escherichia_mlst_achtman_min_coverage`` 
 
-Minimum alignment percent coverage for Escherichia-Achtman MLST (default: 80.0)
+Minimum alignment percent coverage for Escherichia-Achtman MLST (default: 80.0).
 
 ``--escherichia_mlst_achtman_required_exact_matches`` 
 
@@ -53,7 +53,7 @@ Minimum alignment percent identity for Escherichia-Pasteur MLST (default: 90.0)
 
 ``--escherichia_mlst_pasteur_min_coverage`` 
 
-Minimum alignment percent coverage for Escherichia-Pasteur MLST (default: 80.0)
+Minimum alignment percent coverage for Escherichia-Pasteur MLST (default: 80.0).
 
 ``--escherichia_mlst_pasteur_required_exact_matches`` 
 
