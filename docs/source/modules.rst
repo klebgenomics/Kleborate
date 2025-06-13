@@ -65,6 +65,8 @@ Summary of availabe modules and their output columns
      - num_resistance_genes
    * - :ref:`klebsiella_pneumo_complex__resistance_class_count <Resistance scores and counts>`
      - num_resistance_classes
+   * - :ref:`klebsiella_pneumo_complex__cipro_prediction <klebsiella_pneumo_complex__cipro_prediction>`
+     - Ciprofloxacin_prediction, Ciprofloxacin_profile, Ciprofloxacin_profile_support, Ciprofloxacin_MIC_prediction
    * - :ref:`klebsiella_pneumo_complex__wzi <klebsiella_pneumo_complex__wzi>`
      - wzi allele
    * - :ref:`klebsiella_pneumo_complex__kaptive <klebsiella_pneumo_complex__kaptive>`
@@ -75,3 +77,26 @@ Summary of availabe modules and their output columns
      - ST, dinB, icdA, pabB, polB, putP, trpA, trpB, uidA
    * - :ref:`escherichia__mlst_achtman <escherichia__mlst_achtman>`
      - ST, adk, fumC, gyrB, icd, mdh, purA, recA
+   * - :ref:`escherichia__pathovar <escherichia__pathovar>`
+     - Pathotype, Stx1, Stx2, ST, LT, eae, ipaH
+   * - :ref:`escherichia__mlst_lee <escherichia__mlst_lee>`
+     - LEE_ST, LEE_lineage, LEE_eae, LEE_tir, LEE_espA, LEE_espB, LEE_espD, LEE_espH, LEE_espZ
+   * - :ref:`escherichia__stxtyper <escherichia__stxtyper>`
+     - Stx_type, operon, identity, target_start, target_stop, target_strand, A_reference 'A_identity, A_reference_subtype, A_coverage,B_reference, B_reference_subtype, B_identity, B_coverage
+   * - :ref:`escherichia__ectyper <escherichia__ectyper>`
+     - O-type, H-type, Serotype, QC, Evidence, GeneScores, AllelesKeys, GeneIdentities(%), GeneCoverages(%), GeneLengths, Warnings
+   * - :ref:`escherichia__ezclermont <escherichia__ezclermont>`
+     - Clermont_type, Clermont_profile
+   * - :ref:`escherichia__amr <escherichia__amr>`
+     - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin,    Methicillin, Other Classes
+
+
+
+
+
+
+
+
+
+
+
