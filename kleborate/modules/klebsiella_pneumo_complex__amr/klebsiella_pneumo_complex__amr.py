@@ -45,8 +45,7 @@ def get_headers():
                     'Reference_database_version', 'Reference_accession', 'Genetic_variation_type',
                     'Antimicrobial_agent', 'Coverage_depth', 'Coverage_ratio', 'Drug_class',
                     'Input_protein_length', 'Input_protein_start', 'Input_protein_stop',
-                    'Nucleotide_mutation', 'Nucleotide_mutation_interpretation', 'Predicted_phenotype',
-                    'predicted_phenotype_confidence_level', 'Amino_acid_mutation', 'Amino_acid_mutation_interpretation',
+                    'Predicted_phenotype','predicted_phenotype_confidence_level',
                     'Reference_protein_length', 'Reference_protein_start', 'Reference_protein_stop',
                     'Resistance_mechanism', 'Strand_orientation']
 

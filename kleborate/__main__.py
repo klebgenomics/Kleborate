@@ -90,7 +90,6 @@ def parse_arguments(args, all_module_names, modules):
     return parser.parse_args(args)
 
 
-
 def main():
     all_module_names, modules = import_modules()
     args = parse_arguments(sys.argv[1:], all_module_names, modules)
@@ -103,7 +102,9 @@ def main():
         presets = get_presets()
         preset_check_modules = [module for module, _ in presets[args.preset]['check']]
 
-    module_names, module_run_order, external_programs = check_modules(args, modules, module_names, check_module_list, pass_modules)
+    module_names, module_run_order, external_programs = check_modules(
+        args, modules, module_names, check_module_list, pass_modules
+    )
 
     full_headers, stdout_headers = get_headers(module_names, modules)
     print('\t'.join([h.split('__')[-1] for h in stdout_headers]))
@@ -111,7 +112,6 @@ def main():
     if not os.path.exists(args.outdir):
         os.makedirs(args.outdir)
 
-    # If the resume flag is not set, remove existing output files
     if args.modules:
         module_name = args.modules.split(',')[0]
         out_files_suffixes = [f'{module_name}_output.txt']
@@ -137,72 +137,75 @@ def main():
             results = {'strain': get_strain_name(assembly)}
 
             pass_check = True  # default, assume no check and run all modules
-            # if we have 'check' modules in the preset, run these
             if args.preset and len(check_module_list) > 0:
                 for module, check in presets[args.preset]['check']:
                     try:
-                        module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
-
+                        module_results = modules[module].get_results(
+                            unzipped_assembly, minimap2_index, args, results
+                        )
                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
                         check_function = globals()[check]
 
                         if not check_function(module_results):
                             pass_check = False
                             print(f"Assembly {assembly} failed in check {check}.")
-                            break # Exit the for loop since this assembly failed the check
+                            break
 
                     except Exception as e:
                         print(f"Error encountered while processing {assembly} with {module}: {e}.")
                         pass_check = False
                         break
 
-            # proceed through all other modules
             if pass_check:
                 for module in module_run_order:
                     if module not in preset_check_modules:
-                        module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
+                        module_results = modules[module].get_results(
+                            unzipped_assembly, minimap2_index, args, results
+                        )
                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
             else:
-                # Populate results with "Not Tested" for modules that did not run
                 for module in module_run_order:
                     if module not in preset_check_modules:
                         module_headers = [header for header in full_headers if header.startswith(module)]
                         for header in module_headers:
                             results[header] = 'Not Tested'
 
-            species = results.get('enterobacterales__species__species', None)
-            if species and is_kp_complex({'species': species}):
-                harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
-                klebsiella_pneumo_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_output.txt')
-
-                # Write all results for harmonization file with required processing
-                output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, harmonization_file, results, args.trim_headers)
-
-
-                # Select headers for klebsiella_pneumo_complex_output.txt
-                selective_headers = [
-                    header for header in full_headers 
-                    if not header.startswith('klebsiella_pneumo_complex__amr') or 
-                    header.split('__')[-1] in res_headers
-                ]
-
-                # Filter the results directly based on selective headers
-                filtered_results = {header: results.get(header, "-") for header in selective_headers}
-
-                # Output filtered results
-                output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
-
-            else:
-                if species and is_ko_complex({'species': species}):
-                    outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
-                elif species and is_escherichia({'species': species}):
-                    outfile_suffix = 'escherichia_output.txt'
-                else:
-                    print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
-                    continue
-
+            if args.modules:
+                module_name = args.modules.split(',')[0]
+                outfile_suffix = f'{module_name}_output.txt'
                 output_file = os.path.join(args.outdir, outfile_suffix)
-                output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
+                filtered_headers = [h for h in full_headers if h.split('__')[-1] not in annotation_fields]
+                filtered_results = {k: v for k, v in results.items() if k in filtered_headers}
+                output_results(filtered_headers, stdout_headers, output_file, filtered_results, args.trim_headers)
+            else:
+                species = results.get('enterobacterales__species__species', None)
+                if species and is_kp_complex({'species': species}):
+                    harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
+                    klebsiella_pneumo_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_output.txt')
+
+                    output_results_klebsiella_pneumo_complex_hAMRonization(
+                        full_headers, stdout_headers, harmonization_file, results, args.trim_headers
+                    )
+
+                    selective_headers = [
+                        header for header in full_headers
+                        if not header.startswith('klebsiella_pneumo_complex__amr') or
+                        header.split('__')[-1] in res_headers
+                    ]
+                    filtered_results = {header: results.get(header, "-") for header in selective_headers}
+                    output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
+
+                else:
+                    if species and is_ko_complex({'species': species}):
+                        outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
+                    elif species and is_escherichia({'species': species}):
+                        outfile_suffix = 'escherichia_output.txt'
+                    else:
+                        print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
+                        continue
+
+                    output_file = os.path.join(args.outdir, outfile_suffix)
+                    output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
 
 
 # def main():
@@ -212,7 +215,6 @@ def main():
 
 #     module_names, check_module_list, pass_modules = get_used_module_names(args, all_module_names, get_presets())
 
-#     # Define preset_check_modules
 #     preset_check_modules = []
 #     if args.preset:
 #         presets = get_presets()
@@ -223,26 +225,28 @@ def main():
 #     full_headers, stdout_headers = get_headers(module_names, modules)
 #     print('\t'.join([h.split('__')[-1] for h in stdout_headers]))
 
-#     # Ensure the output directory exists
 #     if not os.path.exists(args.outdir):
 #         os.makedirs(args.outdir)
 
 #     # If the resume flag is not set, remove existing output files
 #     if args.modules:
-#         module_name = args.modules.split(',')[0]  
+#         module_name = args.modules.split(',')[0]
 #         out_files_suffixes = [f'{module_name}_output.txt']
 #     else:
-#         out_files_suffixes = ['klebsiella_pneumo_complex_output.txt',
-#                               'klebsiella_oxytoca_complex_output.txt',
-#                               'escherichia_output.txt']
+#         out_files_suffixes = [
+#             'klebsiella_pneumo_complex_output.txt',
+#             'klebsiella_pneumo_complex_hAMRonization_output.txt',
+#             'klebsiella_oxytoca_complex_output.txt',
+#             'escherichia_output.txt'
+#         ]
+
 #     if not args.resume:
 #         for suffix in out_files_suffixes:
 #             for file in glob(f'{args.outdir}/*{suffix}'):
 #                 os.remove(file)
 
-
 #     for assembly in args.assemblies:
-#         check_assembly(assembly)  # Check assembly before processing
+#         check_assembly(assembly)
 
 #         with tempfile.TemporaryDirectory() as temp_dir:
 #             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
@@ -250,7 +254,6 @@ def main():
 #             results = {'strain': get_strain_name(assembly)}
 
 #             pass_check = True  # default, assume no check and run all modules
-
 #             # if we have 'check' modules in the preset, run these
 #             if args.preset and len(check_module_list) > 0:
 #                 for module, check in presets[args.preset]['check']:
@@ -263,12 +266,12 @@ def main():
 #                         if not check_function(module_results):
 #                             pass_check = False
 #                             print(f"Assembly {assembly} failed in check {check}.")
-#                             break  # Exit the for loop since this assembly failed the check
+#                             break # Exit the for loop since this assembly failed the check
 
 #                     except Exception as e:
 #                         print(f"Error encountered while processing {assembly} with {module}: {e}.")
 #                         pass_check = False
-#                         break  # Exit the for loop since an error occurred
+#                         break
 
 #             # proceed through all other modules
 #             if pass_check:
@@ -284,16 +287,30 @@ def main():
 #                         for header in module_headers:
 #                             results[header] = 'Not Tested'
 
-#             # Split the results based on species
-#             if args.modules:
-#                 module_name = args.modules.split(',')[0] 
-#                 outfile_suffix = f'{module_name}_output.txt'
+#             species = results.get('enterobacterales__species__species', None)
+#             if species and is_kp_complex({'species': species}):
+#                 harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
+#                 klebsiella_pneumo_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_output.txt')
+
+#                 # Write all results for harmonization file with required processing
+#                 output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, harmonization_file, results, args.trim_headers)
+
+
+#                 # Select headers for klebsiella_pneumo_complex_output.txt
+#                 selective_headers = [
+#                     header for header in full_headers 
+#                     if not header.startswith('klebsiella_pneumo_complex__amr') or 
+#                     header.split('__')[-1] in res_headers
+#                 ]
+
+#                 # Filter the results directly based on selective headers
+#                 filtered_results = {header: results.get(header, "-") for header in selective_headers}
+
+#                 # Output filtered results
+#                 output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
+
 #             else:
-#                 # Determine the appropriate output file suffix based on species
-#                 species = results.get('enterobacterales__species__species', None)
-#                 if species and is_kp_complex({'species': species}):
-#                     outfile_suffix = 'klebsiella_pneumo_complex_output.txt'
-#                 elif species and is_ko_complex({'species': species}):
+#                 if species and is_ko_complex({'species': species}):
 #                     outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
 #                 elif species and is_escherichia({'species': species}):
 #                     outfile_suffix = 'escherichia_output.txt'
@@ -301,9 +318,11 @@ def main():
 #                     print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
 #                     continue
 
-#             # write results
-#             output_file = os.path.join(args.outdir, outfile_suffix)
-#             output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
+#                 output_file = os.path.join(args.outdir, outfile_suffix)
+#                 output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
+
+
+
 
 
 
@@ -570,6 +589,15 @@ res_headers = [
 ]
 
 
+annotation_fields = [
+        'Genetic_variation_type','Drug_class','Input_sequence_ID','Input_gene_length', 'Input_gene_start', 'Input_gene_stop', 'Reference_gene_length',
+        'Reference_gene_start', 'Reference_gene_stop', 'Sequence_identity', 'Coverage','Reference_accession','Strand_orientation',
+        'Software_name', 'Software_version', 'Reference_database_name',
+        'Reference_database_version','Input_protein_length','Reference_protein_length','Input_protein_start', 'Input_protein_stop','Antimicrobial_agent', 
+        'Coverage_depth', 'Coverage_ratio','Predicted_phenotype','predicted_phenotype_confidence_level', 
+        'Reference_protein_start', 'Reference_protein_stop','Resistance_mechanism'
+]
+
 
 def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, outfile, results, trim_headers=False):
     # Rename strain to Input_file_name
@@ -585,15 +613,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
     mutation_variant_headers = [
         'SHV_mutations', 'Omp_mutations', 'Col_mutations', 'Flq_mutations'
-    ]
-
-    annotation_fields = [
-        'Genetic_variation_type','Drug_class','Input_sequence_ID','Input_gene_length', 'Input_gene_start', 'Input_gene_stop', 'Reference_gene_length',
-        'Reference_gene_start', 'Reference_gene_stop', 'Sequence_identity', 'Coverage','Reference_accession','Strand_orientation',
-        'Software_name', 'Software_version', 'Reference_database_name',
-        'Reference_database_version','Input_protein_length','Reference_protein_length','Input_protein_start', 'Input_protein_stop','Antimicrobial_agent', 
-        'Coverage_depth', 'Coverage_ratio','Predicted_phenotype','predicted_phenotype_confidence_level', 
-        'Reference_protein_start', 'Reference_protein_stop','Resistance_mechanism'
     ]
 
     prefix = 'klebsiella_pneumo_complex__amr__'

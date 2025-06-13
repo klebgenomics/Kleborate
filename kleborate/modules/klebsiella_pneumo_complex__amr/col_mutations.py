@@ -143,71 +143,42 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
 
 
 
-# working code without Fs or deletion logic
-
 # def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
 #     best_mgrb_cov, best_pmrb_cov = 0.0, 0.0
 #     mgrb_hit, pmrb_hit = None, None
-#     mgrb_hit_data, pmrb_hit_data = None, None
 #     start_codons = {'TTG', 'CTG', 'ATT', 'ATC', 'ATA', 'ATG', 'GTG'}
 
 #     alignment_hits = align_query_to_ref(trunc, assembly, None, min_identity=None)
 #     for hit in alignment_hits:
 #         assert hit.query_name == 'pmrB' or hit.query_name == 'mgrB'
 #         _, coverage, _ = truncation_check(hit)
-
-#         hit_data = {
-#             'Input_sequence_ID': hit.ref_name,
-#             'Input_gene_length': hit.ref_length,
-#             'Input_gene_start': hit.ref_start,
-#             'Input_gene_stop': hit.ref_end,
-#             'Reference_gene_length': hit.query_length,
-#             'Reference_gene_start': hit.query_start,
-#             'Reference_gene_stop': hit.query_end,
-#             'Sequence_identity': f"{hit.percent_identity:.2f}%",
-#             'Coverage': f"{hit.ref_cov:.2f}%",
-#             'Strand_orientation': hit.strand
-#         }
-
+        
 #         if hit.query_name == 'mgrB' and coverage > best_mgrb_cov:
 #             best_mgrb_cov = coverage
 #             mgrb_hit = hit.ref_seq
-#             mgrb_hit_data = hit_data
 #         elif hit.query_name == 'pmrB' and coverage > best_pmrb_cov:
 #             best_pmrb_cov = coverage
 #             pmrb_hit = hit.ref_seq
-#             pmrb_hit_data = hit_data
+            
 
 #     truncations = []
-#     truncation_data = []  
-
 #     if best_mgrb_cov < 90.0:
 #         truncations.append('MgrB-' + ('%.0f' % best_mgrb_cov) + '%')
-#         truncation_data.append(('MgrB-' + ('%.0f' % best_mgrb_cov) + '%', mgrb_hit_data))
 #     else:
+#         # Check if the first 3 bp of the hit is a known start codon for mgrB
 #         if mgrb_hit:
 #             hit_start_codon = mgrb_hit[:3].upper()
 #             if hit_start_codon not in start_codons:
 #                 truncations.append('mgrB$')
-#                 truncation_data.append(('mgrB$', mgrb_hit_data))
 
 #     if best_pmrb_cov < 90.0:
 #         truncations.append('PmrB-' + ('%.0f' % best_pmrb_cov) + '%')
-#         truncation_data.append(('PmrB-' + ('%.0f' % best_pmrb_cov) + '%', pmrb_hit_data))
 #     else:
+#         # Check if the first 3 bp of the hit is a known start codon for pmrB
 #         if pmrb_hit:
 #             hit_start_codon = pmrb_hit[:3].upper()
 #             if hit_start_codon not in start_codons:
 #                 truncations.append('pmrB$')
-#                 truncation_data.append(('pmrB$', pmrb_hit_data))
 
-#     if truncation_data:
-#         for trunc_name, hit_data in truncation_data:
-#             # Copy the dict to avoid mutating references
-#             data = dict(hit_data) if hit_data else {}
-#             data['Mutation_type'] = 'Inactivating mutation detected'
-#             hits_dict.setdefault('Col_mutations', []).append([trunc_name, data])
-
-
-
-
+#     if truncations:
+#         hits_dict['Col_mutations'] += truncations

@@ -26,8 +26,6 @@ from Bio.SeqRecord import SeqRecord
 
 from . import run
 
-# from .run import get_args, PcrHit, main
-
 
 def description():
     return ' Clermont PCR typing method for in silico analysis of E. coli whole genomes or assembled contigs'
