@@ -23,11 +23,11 @@ These modules will be deployed if the ``enterobacterales__species``\   module co
 
 Genomes identified as belonging to the *Escherichia* genus are subjected to MLST using Achtman 7-locus schemes.
 
-The Achtman scheme is hosted on EnteroBase: `https://enterobase.warwick.ac.uk/ <https://enterobase.warwick.ac.uk/>`_.
+The Achtman scheme is hosted on `EnteroBase <https://enterobase.warwick.ac.uk/ <https://enterobase.warwick.ac.uk/>`_.
 
 We also provide an option for users to run MLST using Pasteur scheme by running ``-m escherichia__mlst_pasteur``
 
-The Pasteur scheme is described in the *Escherichia coli* `Database maintained by the Pasteur Institute: `https://bigsdb.pasteur.fr/ecoli/ <https://bigsdb.pasteur.fr/ecoli/>`_. For more information and references, see: `https://bigsdb.pasteur.fr/ecoli/references/ <https://bigsdb.pasteur.fr/ecoli/references/>`_.
+The Pasteur scheme is described in the *Escherichia coli* Database maintained by the `Pasteur Institute <`https://bigsdb.pasteur.fr/ecoli/ <https://bigsdb.pasteur.fr/ecoli/>`_. For more information and references, `see <https://bigsdb.pasteur.fr/ecoli/references/ <https://bigsdb.pasteur.fr/ecoli/references/>`_.
 
 The genes included in each scheme are noted in the Outputs table below.
 
@@ -140,7 +140,7 @@ Virulence markers of diarrheagenic *E. coli*
      - ST or LT\nPlus colonisation factors
      - Plasmid; transposon
      - ``elt``, ``est``
-     - -
+     - `-`
 
    * - EHEC
      - Shiga toxin
@@ -154,21 +154,21 @@ Virulence markers of diarrheagenic *E. coli*
      - Not known
      - Plasmid
      - ``aggR``, ``aatA``, ``aaiC``
-     - -
+     - `-`
 
    * - DAEC
      - Afa/ Dr adhesins
      - Not known
      - Not known
      - ``afa/Dr`` adhesins
-     - -
+     - `-`
 
    * - AIEC
      - Adherent-invasive phenotype
      - Not known
      - Not known
      - none
-     - -
+     - `-`
 
 How it works
 +++++++++++++
@@ -487,7 +487,7 @@ Results of the *Escherichia* AMR module are grouped by drug class:
    * - ``Glycopeptide``
      - Glycopeptide resistance genes.
 
-   * - ``Colistin`
+   * - ``Colistin``
      - Colistin resistance genes.
 
    * - ``Phenicol``
@@ -499,7 +499,7 @@ Results of the *Escherichia* AMR module are grouped by drug class:
    * - ``Rifamycin``
      - Rifampin resistance genes.
 
-   * - ``Trimethoprim`
+   * - ``Trimethoprim``
      - Trimethoprim resistance genes.
 
    * - ``BetaLactam``
