@@ -3,7 +3,6 @@
 Copyright 2025 Mary Maranga
 https://github.com/katholt/Kleborate/
 
-
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
 either version 3 of the License, or (at your option) any later version. Kleborate is distributed in

@@ -16,6 +16,7 @@ from Bio import Align
 from Bio.Align import substitution_matrices
 from ...shared.misc import reverse_complement
 
+
 def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     
     # Don't do anything on non-SHV genes.
@@ -28,6 +29,20 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     ambiguous_bases = set(b for b in nucl_seq) - {'A', 'C', 'G', 'T'}
     if ambiguous_bases:
         return bla_class, [], [], None
+
+
+    hit_data = {
+                'Input_sequence_ID': hit.ref_name,
+                'Input_gene_length': hit.ref_length,
+                'Input_gene_start': hit.ref_start,
+                'Input_gene_stop': hit.ref_end,
+                'Reference_gene_length': hit.query_length,
+                'Reference_gene_start': hit.query_start,
+                'Reference_gene_stop': hit.query_end,
+                'Sequence_identity': f"{hit.percent_identity:.2f}%",
+                'Coverage': f"{hit.query_cov:.2f}%", # Dna hit coverage
+                'Strand_orientation':hit.strand
+            }
 
     # BioPython doesn't like it if the sequence isn't a multiple of 3.
     nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
@@ -65,10 +80,11 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     # If the identity of the alignment is too low, then it's not appropriate to look for SHV
     # mutations in this hit.
     identity = get_percent_identity(ref_aligned, hit_aligned)
+
+
     
     if identity < 0.9:
         return bla_class, [], [], None
-    
     
     # Mutations at these sites will lead to an ESBL class:
     pos_169_mut, pos_169_aa = get_mut(ref_aligned, hit_aligned, 164, 169, 'L')
@@ -130,7 +146,9 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
                      pos_175_mut, pos_176_mut, pos_177_mut, pos_178_mut, pos_179_mut, pos_234_mut,
                      pos_235_mut, pos_238_mut, pos_240_mut]
                      
-    shv_mutations = [m for m in shv_mutations if m]
+    # shv_mutations = [m for m in shv_mutations if m]
+
+    shv_mutations = [[m, hit_data] for m in shv_mutations if m]
 
     if exact_match:
         new_bla_class = bla_class
@@ -142,6 +160,51 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     return new_bla_class, shv_mutations, class_changing_mutations, omega_loop_seq
 
 
+def get_mut(ref_aligned, hit_aligned, ref_pos, ambler_pos, ref_aa):
+    """
+    Identifies and formats a mutation at a given position in the alignment.
+
+    Parameters:
+        ref_pos (int): 0-based index into the ungapped reference sequence.
+        ambler_pos (int): 1-based Ambler position for human-readable reporting.
+        ref_aa (str): Expected amino acid in the reference at this position.
+
+    Returns:
+        tuple: (mutation_str, hit_aa)
+            - mutation_str: e.g., "SHV:p.Ser35Gln" or "" if no mutation
+            - hit_aa: the amino acid from the aligned hit
+    """
+    gene_name = "SHV"  # Hardcoded gene name for mutation reporting
+
+    aa_map = {
+        'A': 'Ala', 'C': 'Cys', 'D': 'Asp', 'E': 'Glu', 'F': 'Phe', 'G': 'Gly',
+        'H': 'His', 'I': 'Ile', 'K': 'Lys', 'L': 'Leu', 'M': 'Met', 'N': 'Asn',
+        'P': 'Pro', 'Q': 'Gln', 'R': 'Arg', 'S': 'Ser', 'T': 'Thr', 'V': 'Val',
+        'W': 'Trp', 'Y': 'Tyr'
+    }
+
+    ref_no_gaps, hit_no_gaps = [], []
+    for a, b in zip(ref_aligned, hit_aligned):
+        if a != '-':
+            ref_no_gaps.append(a)
+            hit_no_gaps.append(b)
+
+    assert len(ref_no_gaps) == 286
+    assert ref_no_gaps[ref_pos] == ref_aa
+
+    hit_aa = hit_no_gaps[ref_pos]
+
+    if ref_aa != hit_aa and hit_aa != '-':
+        ref_aa_3 = aa_map.get(ref_aa, ref_aa)
+        hit_aa_3 = aa_map.get(hit_aa, hit_aa)
+        mutation_notation = f'{gene_name}:p.{ref_aa_3}{ambler_pos}{hit_aa_3}'
+    else:
+        mutation_notation = ''
+
+    return mutation_notation, hit_aa
+
+
+
 def get_percent_identity(ref_aligned, hit_aligned):
     matches = 0
     for i, a in enumerate(ref_aligned):
@@ -150,28 +213,6 @@ def get_percent_identity(ref_aligned, hit_aligned):
             matches += 1
     return matches / len(ref_aligned)
 
-
-
-def get_mut(ref_aligned, hit_aligned, ref_pos, ambler_pos, ref_aa):
-    """
-    ref_pos:    the index of the AA in SHV-1 (0-based because we're looking it up in Python)
-    ambler_pos: the index of the AA in the Ambler alignment (1-based because it's just for the name)
-    ref_aa:     the AA in the SHV-1 sequence
-    """
-    ref_no_gaps, hit_no_gaps = [], []
-    for i, a in enumerate(ref_aligned):
-        b = hit_aligned[i]
-        if a != '-':
-            ref_no_gaps.append(a)
-            hit_no_gaps.append(b)
-    assert len(ref_no_gaps) == 286
-    assert ref_no_gaps[ref_pos] == ref_aa
-    hit_aa = hit_no_gaps[ref_pos]
-    if ref_aa != hit_aa and hit_aa != '-':
-        mutation_notation = f'{ambler_pos}{hit_aa}'
-    else:
-        mutation_notation = ''
-    return mutation_notation, hit_aa
 
 
 def get_new_bla_class(esbl, inhr):
@@ -196,3 +237,4 @@ def get_class_changing_mutations(bla_class, new_bla_class, esbl_mutations, inhr_
             ('inhR' not in bla_class and 'inhR' in new_bla_class):
         class_changing_mutations += inhr_mutations
     return [m for m in class_changing_mutations if m]
+
