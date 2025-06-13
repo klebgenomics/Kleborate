@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick 
+Copyright 2025 Mary Maranga (gathonimaranga@gmail.com) Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -328,3 +328,27 @@ def get_bases_per_ref_pos(alignment):
         bases_per_ref_pos[ref_pos] = assembly_b
         ref_pos += 1
     return bases_per_ref_pos
+
+
+def get_last_base_aa_before_gap(alignment):
+    aligned_seq1, aligned_seq2 = alignment[0], alignment[1]
+    bases_per_ref_pos = {}
+    ref_pos = 1
+    last_base_pos = None
+    last_base = None
+
+    for i, ref_b in enumerate(aligned_seq1):
+        if ref_b == '-' or ref_b == '.':
+            continue
+        assembly_b = aligned_seq2[i]
+        bases_per_ref_pos[ref_pos] = assembly_b
+        if assembly_b != '-':
+            last_base_pos = ref_pos
+            last_base = assembly_b
+        else:
+            # First occurrence of a gap at this position
+            break
+        ref_pos += 1
+
+    return last_base_pos, last_base
+

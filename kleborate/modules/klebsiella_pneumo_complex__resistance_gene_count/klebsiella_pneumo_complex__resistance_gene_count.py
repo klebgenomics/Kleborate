@@ -47,33 +47,63 @@ def data_dir():
     return pathlib.Path(__file__).parents[1] / 'klebsiella_pneumo_complex__amr' / 'data'
 
 
-
 def get_results(assembly, minimap2_index, args, previous_results):
-
     """
     Counts up all resistance genes, excluding the 'Bla' class which is intrinsic.
     """
-    #print(previous_results)
+    # Read classification data
     _, res_classes, bla_classes = read_class_file(data_dir() / 'CARD_AMR_clustered.csv')
     res_headers = get_res_headers(res_classes, bla_classes)
 
+
+    # Extract relevant resistance gene hits
     res_hits = {key.split('__')[2]: value for key, value in previous_results.items() if key.startswith('klebsiella_pneumo_complex__amr__')}
 
-
-    #res_hits = {key.split('__')[1]: value for key, value in previous_results.items() if key.startswith('klebsiella_pneumo_complex__amr__')}
-
-
+    # print(previous_results)
     if not res_headers:
         return '-'
+    
+    # Find indices of relevant resistance headers
     res_indices = [i for i, h in enumerate(res_headers) if h.lower().endswith('_acquired')]
     gene_list = []
+    
     for i in res_indices:
-        # Check if the value is not a dash before splitting
         if res_hits[res_headers[i]] != '-':
-            genes = res_hits[res_headers[i]].split(';')
+            # Ensure we handle lists correctly before splitting
+            genes = [gene for entry in res_hits[res_headers[i]] for gene in entry.split(';')]
             gene_list.extend(genes)
 
     return {'num_resistance_genes': len(gene_list)}
+
+
+# def get_results(assembly, minimap2_index, args, previous_results):
+
+#     """
+#     Counts up all resistance genes, excluding the 'Bla' class which is intrinsic.
+#     """
+#     #print(previous_results)
+#     _, res_classes, bla_classes = read_class_file(data_dir() / 'CARD_AMR_clustered.csv')
+#     res_headers = get_res_headers(res_classes, bla_classes)
+
+#     print(res_headers)
+
+#     res_hits = {key.split('__')[2]: value for key, value in previous_results.items() if key.startswith('klebsiella_pneumo_complex__amr__')}
+
+
+#     #res_hits = {key.split('__')[1]: value for key, value in previous_results.items() if key.startswith('klebsiella_pneumo_complex__amr__')}
+
+
+#     if not res_headers:
+#         return '-'
+#     res_indices = [i for i, h in enumerate(res_headers) if h.lower().endswith('_acquired')]
+#     gene_list = []
+#     for i in res_indices:
+#         # Check if the value is not a dash before splitting
+#         if res_hits[res_headers[i]] != '-':
+#             genes = res_hits[res_headers[i]].split(';')
+#             gene_list.extend(genes)
+
+#     return {'num_resistance_genes': len(gene_list)}
 
 
 
