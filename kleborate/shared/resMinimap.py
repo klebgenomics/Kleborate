@@ -1,8 +1,8 @@
 """
 Search for resistance genes, summarise by class (one class per column)
 
-Copyright 2025 Mary Maranga (gathonimaranga@gmail.com)
-https://github.com/klebgenomics/Kleborate/
+Copyright 2025 Mary Maranga
+https://github.com/klebgenomics/Kleborate
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
@@ -139,31 +139,30 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
             else:
                 aa_result = None
                 exact_match = True
-                
 
             hit_allele, hit_class, hit_bla_class = gene_info[hit.query_name]
             
-
             hit_bla_class, shv_muts, class_changing_muts, omega_loop_seq = \
                     check_for_shv_mutations(hit, hit_allele, hit_bla_class, exact_match)
             
-            # checks if the variable hit_class contains the string value 'Bla'
-            # If it does, then the value of hit_class is replaced with the value of hit_bla_class.
             if hit_class == 'Bla':
                 hit_class = hit_bla_class
 
-            # append the list shv_muts to hits_dict['SHV_mutations']
-            hits_dict['SHV_mutations'] += shv_muts
-            if omega_loop_seq is not None:
-                hits_dict['SHV_mutations'].append(f'omega-loop={omega_loop_seq}')
+            # Handle SHV mutations
 
-            # checks if the list associated with the 'SHV_mutations' key in the hits_dict dictionary is empty
-            # If it is, the key 'SHV_mutations' and its associated value are deleted from the dictionary.
+            for mut in shv_muts:
+                mut_str, mut_metadata = mut
+                mut_metadata['Genetic_variation_type'] = 'Protein variant detected'
+                hits_dict['SHV_mutations'].append([mut_str, mut_metadata])
+
+            # for mut in shv_muts:
+            #     hits_dict['SHV_mutations'].append([mut, {'Mutation_type': 'Protein variant detected'}])
+            if omega_loop_seq is not None:
+                hits_dict['SHV_mutations'].append([f'omega-loop={omega_loop_seq}', {'Genetic_variation_type': 'Protein variant detected'}])
+
             if not hits_dict['SHV_mutations']:
                 del hits_dict['SHV_mutations']
 
-            # checks if the value in hit_class does not end with the strings '_chr' or '_mutations'.
-            # append '_acquired'  to hit_class
             if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
                 hit_class += '_acquired'
 
@@ -181,21 +180,38 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
                 
             if class_changing_muts:
                 hit_allele += ' +' + ' +'.join(class_changing_muts)
-            
-            
+
+            # Constructing hit_data dictionary for extra information
+            hit_data = {
+                'Input_sequence_ID': hit.ref_name,
+                'Input_gene_length': hit.ref_length,
+                'Input_gene_start': hit.ref_start,
+                'Input_gene_stop': hit.ref_end,
+                'Reference_gene_length': hit.query_length,
+                'Reference_gene_start': hit.query_start,
+                'Reference_gene_stop': hit.query_end,
+                'Sequence_identity': f"{hit.percent_identity:.2f}%",
+                'Coverage': f"{coverage:.2f}%",
+                'Strand_orientation':hit.strand
+            }
+
             # If the hit is decent (above the min coverage and identity thresholds), it goes in the
             # column for the class.
             if coverage >= min_coverage and hit.percent_identity >= min_identity and trunc_cov >= 90.0:
-                hits_dict[hit_class].append(hit_allele)
+                if hit_class.endswith('_acquired') or hit_class.endswith('_chr'):
+                    hit_data['Genetic_variation_type'] = 'Gene presence detected'
+                hits_dict[hit_class].append([hit_allele, hit_data])
                 
             # If the hit is decent but the gene is truncated, it goes in the
             # truncated_resistance_hits column.
             elif coverage >= min_coverage and hit.percent_identity >= min_identity and trunc_cov < 90.0:
-                hits_dict['truncated_resistance_hits'].append(hit_allele)
+                hit_data['Genetic_variation_type'] = 'Gene presence detected'
+                hits_dict['truncated_resistance_hits'].append([hit_allele, hit_data])
                 
             # If the hit is bad (below the min coverage and identity thresholds but above the
             # thresholds for spurious hits) then it goes in the spurious hit column.
             else:
-                hits_dict['spurious_resistance_hits'].append(hit_allele)
+                hit_data['Genetic_variation_type'] = 'Gene presence detected'
+                hits_dict['spurious_resistance_hits'].append([hit_allele, hit_data])
     
     return hits_dict
