@@ -29,7 +29,9 @@ Activate the conda environment and install kleborate using pip::
    
    pip install kleborate
 
+
 Download the AMRFinder database::
+
    amrfinder -u
 
 Installation from Bioconda:
