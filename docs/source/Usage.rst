@@ -39,14 +39,14 @@ Run with preset modules for *K. oxytoca* species complex
 
 .. code-block:: Python
 
-   kleborate -a *.fasta -o kleborate_results -p kosc
+   kleborate -a *.fasta -o kleborate_results -p kosc --trim_headers
 
 
 Run with preset modules for *E. coli* or other *Escherichia*, on gzipped assemblies:
 
 .. code-block:: Python
 
-   kleborate  -a *.fasta.gz -o kleborate_results -p escherichia
+   kleborate  -a *.fasta.gz -o kleborate_results -p escherichia --trim_headers
 
 
 Check available modules, check version, print help:
