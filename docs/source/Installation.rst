@@ -20,7 +20,7 @@ Install Kleborate
 
 Create a conda environment and install minimap2 and mash::
 
-   conda create -n klebsiella_analysis -c bioconda python=3.9 minimap2 mash -y
+   conda create -n klebsiella_analysis -c bioconda python=3.9 minimap2 mash ectyper stxtyper ncbi-amrfinderplus -y
    
 
 Activate the conda environment and install kleborate using pip::
@@ -29,6 +29,8 @@ Activate the conda environment and install kleborate using pip::
    
    pip install kleborate
 
+Download the AMRFinder database::
+   amrfinder -u
 
 Installation from Bioconda:
 
