@@ -23,11 +23,12 @@ These modules will be deployed if the ``enterobacterales__species``\   module co
 
 Genomes identified as belonging to the *Escherichia* genus are subjected to MLST using Achtman 7-locus schemes.
 
-The Achtman scheme is hosted on `EnteroBase <https://enterobase.warwick.ac.uk/ <https://enterobase.warwick.ac.uk/>`_.
+The Achtman scheme is hosted on `EnteroBase <https://enterobase.warwick.ac.uk/>`_.
 
-We also provide an option for users to run MLST using Pasteur scheme by running ``-m escherichia__mlst_pasteur``
+We also provide an option for users to run MLST using Pasteur scheme by running:
+``-m escherichia__mlst_pasteur``
 
-The Pasteur scheme is described in the *Escherichia coli* Database maintained by the `Pasteur Institute <`https://bigsdb.pasteur.fr/ecoli/ <https://bigsdb.pasteur.fr/ecoli/>`_. For more information and references, `see <https://bigsdb.pasteur.fr/ecoli/references/ <https://bigsdb.pasteur.fr/ecoli/references/>`_.
+The Pasteur scheme is described in the *Escherichia coli* Database maintained by the `Pasteur Institute <https://bigsdb.pasteur.fr/ecoli/>`_. For more information and references, `see BIGSdb <https://bigsdb.pasteur.fr/ecoli/references/>`_.
 
 The genes included in each scheme are noted in the Outputs table below.
 
