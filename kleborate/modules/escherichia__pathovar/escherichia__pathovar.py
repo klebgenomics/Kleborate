@@ -85,7 +85,6 @@ def get_results(assembly, minimap2_index, args, previous_results):
         args.escherichia__pathovar_min_coverage
     )
 
-    # Initialize the result dictionary with headers as keys
     result_dict = {header: '-' for header in full_headers}
 
     # Set the virulence markers
@@ -103,7 +102,6 @@ def get_results(assembly, minimap2_index, args, previous_results):
         shigella_serotype_markers
     )
 
-    # Set Pathotype with the new logic
     if pathovar != '-':
         result_dict['Pathotype'] = pathovar
     elif Serotype != '-':
