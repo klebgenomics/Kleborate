@@ -617,13 +617,9 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
     prefix = 'klebsiella_pneumo_complex__amr__'
 
-    # def clean(val):
-    #     return val.translate(str.maketrans('', '', '^*?')).strip()
-
     def clean(val):
     # strip any “-digits%” suffix
         val = re.sub(r'-\d+%$', '', val)
-        # then remove your other markers
         return val.translate(str.maketrans('', '', '^*?')).strip()
 
     # Parse: build a dict of {field: [list of entries]}
@@ -640,7 +636,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
     rows = []
 
-    # Software/database info for defaults
     software_name = results.get('Software_name', ['Kleborate'])[0]
     software_version = results.get('Software_version', ['3.1.3'])[0]
     db_name = results.get('Reference_database_name', ['CARD'])[0]
@@ -664,7 +659,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                 'Reference_database_version': db_version
             }
 
-            # For each annotation, find value for this gene
+            # set annottaion field for each variant
             for field in annotation_fields:
                 ann_key = prefix + field
                 ann_values = parsed.get(ann_key, [])
@@ -688,7 +683,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                         break
                 row[field] = matched_val
 
-            # Override Drug_class for fluoroquinolone-acquired genes
             if header == 'Flq_acquired':
                 row['Drug_class'] = 'Fluoroquinolone antibiotic'
 
@@ -722,7 +716,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                 'Reference_database_version': db_version
             }
 
-            # For each annotation, find value for this variant
+            # add annotation field for each variant
             for field in annotation_fields:
                 ann_key = prefix + field
                 ann_values = parsed.get(ann_key, [])
@@ -746,7 +740,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                 row[field] = matched_val
             rows.append(row)
 
-    # Ensure software and database information for every entry
+    # set software and database information for every entry
     for row in rows:
         if row['Software_name'] in ['-', ''] or row['Software_version'] in ['-', ''] \
            or row['Reference_database_name'] in ['-', ''] or row['Reference_database_version'] in ['-', '']:
@@ -755,7 +749,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
             row['Reference_database_name'] = db_name
             row['Reference_database_version'] = db_version
 
-    # Prepare headers for output (rename strain to Input_file_name)
     headers = ['Input_file_name', 'Gene_symbol', 'Mutation'] + annotation_fields
 
     with open(outfile, 'a') as f:
