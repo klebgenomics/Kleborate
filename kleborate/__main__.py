@@ -641,7 +641,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
     db_name = results.get('Reference_database_name', ['CARD'])[0]
     db_version = results.get('Reference_database_version', ['3.2.9'])[0]
 
-    # ----- ACQUIRED VARIANTS -----
+    # ----- ACQUIRED GENES -----
     for header in res_headers:
         key = prefix + header
         variants = parsed.get(key, [])
@@ -688,7 +688,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
             rows.append(row)
 
-    # ----- MUTATION VARIANTS -----
+    # ----- MUTATIONS-----
     for header in mutation_variant_headers:
         key = prefix + header
         variants = parsed.get(key, [])
@@ -740,7 +740,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                 row[field] = matched_val
             rows.append(row)
 
-    # set software and database information for every entry
+    # set software and database information
     for row in rows:
         if row['Software_name'] in ['-', ''] or row['Software_version'] in ['-', ''] \
            or row['Reference_database_name'] in ['-', ''] or row['Reference_database_version'] in ['-', '']:
