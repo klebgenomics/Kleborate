@@ -29,8 +29,7 @@ Activate the conda environment and install kleborate using pip::
    
    pip install kleborate
 
-
-Installation from Bioconda:
+Or Bioconda:
 
    conda install -c bioconda kleborate
 
