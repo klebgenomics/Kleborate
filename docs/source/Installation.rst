@@ -18,7 +18,7 @@ Kleborate requires the following software and libraries to be installed and avai
 Install Kleborate 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create a conda environment and install minimap2 and mash::
+Create a conda environment and install Kleborate dependancies::
 
    conda create -n klebsiella_analysis -c bioconda python=3.9 minimap2 mash ectyper stxtyper ncbi-amrfinderplus -y
    
@@ -30,13 +30,14 @@ Activate the conda environment and install kleborate using pip::
    pip install kleborate
 
 
-Download the AMRFinder database::
-
-   amrfinder -u
-
 Installation from Bioconda:
 
    conda install -c bioconda kleborate
+
+
+Download the AMRFinder database::
+
+   amrfinder -u
 
 
 Test installation::
