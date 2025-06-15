@@ -244,7 +244,7 @@ Minimum number of exact allele matches required to assign an ST. *Default:* ``3`
 *E. coli*  LEE MLST outputs
 ++++++++++++++++++++++++++++
 
-Theutput of the *E. coli* LEE MLST module includes the following columns:
+The output of the *E. coli* LEE MLST module includes the following columns:
 
 
 .. list-table::
@@ -257,7 +257,7 @@ Theutput of the *E. coli* LEE MLST module includes the following columns:
 
    * - ``LEE_eae``, ``LEE_tir``, ``LEE_espA``, ``LEE_espB``, ``LEE_espD``, ``LEE_espH``, ``LEE_espZ``
 
-     - Allele numbers fpr each LEE locus.
+     - Allele numbers for each LEE locus.
 
 Additional Notes
 ----------------
@@ -398,7 +398,7 @@ Outputs of the ECTyper module is the following columns:
      - Additional messages related to QC status or other issues affecting serotype prediction.
 
 
-.. _ClermonTyping:
+.. _escherichia__ezclermont:
 
 
 ClermonTyping
@@ -434,9 +434,8 @@ Outputs
    * - ``Clermont_profile``
      - Presence or absence pattern of PCR products.
 
-----
 
-.. _Escherichia AMR:
+.. _escherichia__amr:
 
 
 *Escherichia* AMR
