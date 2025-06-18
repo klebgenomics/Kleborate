@@ -164,10 +164,8 @@ def parse_amrfinder_results(output, split_map):
         'Carbapenem': '-',  
         'Cephalosporin': '-',
         'Methicillin': '-',
-        'Other Classes': []   # Change from '-' to an empty list
+        'Other Classes': []
     }
-
-    genes_to_remove = ['blaEC-5', 'pmrB', 'glpT', 'mdf(A)']
     lines = [line.strip() for line in output.splitlines() if line.strip()]
     if not lines:
         print("AMRFinder output is empty")
@@ -184,12 +182,18 @@ def parse_amrfinder_results(output, split_map):
         class_name = result_dict.get('Class', 'Other Classes')
         subclass_name = result_dict.get('Subclass', '')
         element_symbol = result_dict.get('Element symbol', '')
-
-        if element_symbol in genes_to_remove:
-            continue
-
+        
         if class_name == 'BETA-LACTAM':
-            category = 'Betalactam'
+            subclass_upper = subclass_name.strip().upper()
+            subclass_map = {
+                'CARBAPENEM': 'Carbapenem',
+                'CEPHALOSPORIN': 'Cephalosporin',
+                'METHICILLIN': 'Methicillin'
+            }
+            if subclass_upper in subclass_map:
+                category = subclass_map[subclass_upper]
+            else:
+                category = 'Betalactam'
         else:
             category = categorize_class(class_name)
 
@@ -200,7 +204,6 @@ def parse_amrfinder_results(output, split_map):
                 else:
                     results[cat] += ',' + element_symbol
         elif category == 'Other Classes':
-            # Store (class_name, element_symbol) pairs for later formatting
             results['Other Classes'].append((class_name.title(), element_symbol))
         else:
             if category not in results:
@@ -214,7 +217,6 @@ def parse_amrfinder_results(output, split_map):
     for category, value in results.items():
         if category == 'Other Classes':
             if value:
-                # Format as Class:gene;Class:gene
                 results[category] = ";".join(f"{cls}:{gene}" for cls, gene in value)
             else:
                 results[category] = '-'
@@ -224,6 +226,87 @@ def parse_amrfinder_results(output, split_map):
             results[category] = value
 
     return results
+    
+# def parse_amrfinder_results(output, split_map):
+#     full_headers, _ = get_headers()
+
+#     results = {
+#         'Aminoglycoside': '-',
+#         'Fluoroquinolone': '-',
+#         'Fosfomycin': '-',
+#         'Sulfonamide': '-',
+#         'Tetracycline': '-',
+#         'Glycopeptide': '-',
+#         'Colistin': '-',
+#         'Phenicol': '-',
+#         'Macrolide': '-',
+#         # 'Tigecycline': '-',
+#         'Rifamycin': '-',
+#         'Trimethoprim': '-',
+#         'Betalactam': '-',  
+#         'Carbapenem': '-',  
+#         'Cephalosporin': '-',
+#         'Methicillin': '-',
+#         'Other Classes': []   # Change from '-' to an empty list
+#     }
+
+#     genes_to_remove = ['blaEC-5', 'pmrB', 'glpT', 'mdf(A)']
+#     lines = [line.strip() for line in output.splitlines() if line.strip()]
+#     if not lines:
+#         print("AMRFinder output is empty")
+#         return results
+
+#     headers = lines[0].split("\t")
+
+#     for line in lines[1:]:
+#         columns = line.strip().split("\t")
+#         result_dict = dict(zip(headers, columns))
+#         if result_dict.get('Type') != 'AMR':
+#             continue
+
+#         class_name = result_dict.get('Class', 'Other Classes')
+#         subclass_name = result_dict.get('Subclass', '')
+#         element_symbol = result_dict.get('Element symbol', '')
+
+#         if element_symbol in genes_to_remove:
+#             continue
+
+#         if class_name == 'BETA-LACTAM':
+#             category = 'Betalactam'
+#         else:
+#             category = categorize_class(class_name)
+
+#         if category in split_map:
+#             for cat in split_map[category]:
+#                 if results[cat] == '-':
+#                     results[cat] = element_symbol
+#                 else:
+#                     results[cat] += ',' + element_symbol
+#         elif category == 'Other Classes':
+#             # Store (class_name, element_symbol) pairs for later formatting
+#             results['Other Classes'].append((class_name.title(), element_symbol))
+#         else:
+#             if category not in results:
+#                 continue  
+#             if results[category] == '-':
+#                 results[category] = element_symbol
+#             else:
+#                 results[category] += ',' + element_symbol
+
+#     # Normalise the output
+#     for category, value in results.items():
+#         if category == 'Other Classes':
+#             if value:
+#                 # Format as Class:gene;Class:gene
+#                 results[category] = ";".join(f"{cls}:{gene}" for cls, gene in value)
+#             else:
+#                 results[category] = '-'
+#         else:
+#             if value != '-':
+#                 value = value.replace(" ", "").replace(";", "").replace(",", ";")
+#             results[category] = value
+
+#     return results
 
 
 
