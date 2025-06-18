@@ -47,7 +47,7 @@ def add_cli_options(parser):
     group = parser.add_argument_group(f'{module_name} module')
     group.add_argument('--escherichia__serotyping_cores', type=int, default=4,
                        help='Number of CPU cores to use for ectyper (default: 4)')
-    return
+    return group
 
 
     
