@@ -13,10 +13,10 @@ Kleborate requires the following software and libraries to be installed and avai
 * `Minimap2 <https://github.com/lh3/minimap2>`_ 
 * `Kaptive <https://github.com/klebgenomics/Kaptive>`_ 
 * `DNA Features Viewer <https://edinburgh-genome-foundry.github.io/DnaFeaturesViewer/>`_
-* ectyper <https://github.com/phac-nml/ecoli_serotyping>`_ 
-* stxtyper <https://github.com/ncbi/stxtyper>`_
-* ncbi-amrfinderplus <https://github.com/ncbi/amr>`_
-* EzClermont <https://github.com/nickp60/EzClermont>`_
+* `ectyper <https://github.com/phac-nml/ecoli_serotyping>`_ 
+* `stxtyper <https://github.com/ncbi/stxtyper>`_
+* `ncbi-amrfinderplus <https://github.com/ncbi/amr>`_
+* `EzClermont <https://github.com/nickp60/EzClermont>`_
 
 
 Install Kleborate 
