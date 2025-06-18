@@ -105,36 +105,34 @@ all_headers = [
     ]
 
 
+
 def parse_stxtyper_output(output, headers, all_headers):
     """
     Parse STXTyper output and concatenate values for each selected column.
-    Returns a dict mapping each header to a semicolon-separated string.
+    Returns a dict mapping each header to a semicolon-separated string, replacing empty fields with '-'.
     """
     lines = [line.strip() for line in output.strip().split('\n') if line.strip() and not line.startswith('#')]
     if not lines:
-        return {header: '' for header in headers}
+        return {header: '-' for header in headers}
 
-    # Split each line into columns
     rows = [line.split('\t') for line in lines]
 
-    # Ensure that all rows have the correct number of columns
     expected_col_count = len(all_headers)
     filtered_rows = [row for row in rows if len(row) >= expected_col_count]
     if not filtered_rows:
-        return {header: '' for header in headers}
+        return {header: '-' for header in headers}
 
-    # Create a mapping of header to column index
     header_to_index = {header: idx for idx, header in enumerate(all_headers)}
 
     result_dict = {}
     for header in headers:
         idx = header_to_index.get(header)
         if idx is not None:
-            # Collect the relevant column from each row, join with ;
-            values = [row[idx] for row in filtered_rows]
-            result_dict[header] = ';'.join(values)
+            # Replace empty fields with '-'
+            values = [row[idx] if row[idx] != '' else '-' for row in filtered_rows]
+            result_dict[header] = ';'.join(values) if values else '-'
         else:
-            result_dict[header] = ''
+            result_dict[header] = '-'
     return result_dict
 
 
@@ -156,6 +154,6 @@ def get_results(assembly, index, previous_results, args):
         results = parse_stxtyper_output(raw_output, full_headers, all_headers)
         return results
 
-    return {header: '' for header in full_headers}
 
+    return {header: '-' for header in full_headers}
 

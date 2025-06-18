@@ -42,7 +42,7 @@ def add_cli_options(parser):
                        help='Minimum alignment percent identity for detecting virulence factors')
     group.add_argument('--escherichia__pathovar_min_coverage', type=float, default=80.0,
                        help='Minimum alignment percent coverage for detecting virulence factors')
-    return 
+    return group
 
 
 def check_cli_options(args):
