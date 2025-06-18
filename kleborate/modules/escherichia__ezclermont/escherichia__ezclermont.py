@@ -23,8 +23,10 @@ import itertools
 from Bio.Seq import Seq
 from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
+import subprocess
+import re
 
-from . import run
+# from . import run
 
 
 def description():
@@ -41,52 +43,79 @@ def get_headers():
     return full_headers, stdout_headers
 
 
-
 def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
-    group.add_argument('--escherichia__ezclermont_min_length', type=float, default=500.0,
-                       help='Minimum contig length to consider in the analysis')
-
-    return
-
+    group.add_argument('--escherichia__ezclermont_min_length', type=int, default=500,
+                       help='Minimum contig length to consider in the analysis (integer, 400–500)')
+    return group
 
 def check_cli_options(args):
-    if args.escherichia__ezclermont_min_length <= 400.0:
-        sys.exit('Error: --escherichia__ezclermont_min_length must be between 400.0 and 500.0')
-   
+    if not (400 <= args.escherichia__ezclermont_min_length <= 500):
+        sys.exit('Error: --escherichia__ezclermont_min_length must be between 400 and 500')
+
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    if not shutil.which('ezclermont'):
+        sys.exit('Error: could not find ezclermont')
+    return ['ezclermont']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
+def run_ezclermont(input_fasta, min_length):
+    """
+    Run ezClermont.
+
+    Parameters:
+        input_fasta (str): Path to the input FASTA file.
+        min_length (int): Minimum contig length.
+
+    Returns:
+        str: Output from ezClermont.
+    """
+    command = [
+        "ezclermont",
+        "-m", str(min_length),
+        input_fasta
+    ]
+    
+    try:
+        result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, text=True)
+        output = result.stdout or result.stderr
+        return output
+    except subprocess.CalledProcessError as e:
+        output = e.stderr
+        if "Clermont type:" in output or "Results" in output:
+            return output
+        print(f"Error occurred: {e}")
+        return None
+
+
+
 def get_results(assembly, minimap2_index, args, previous_results):
+    min_length = args.escherichia__ezclermont_min_length
+    output = run_ezclermont(assembly, min_length)
+    if not output:
+        return {"Clermont_type": '', "Clermont_profile": ''}
 
-    args.contigs = assembly
-    args.min_length = args.escherichia__ezclermont_min_length if hasattr(args, 'min_length') else 500
+    # Extract Clermont type
+    type_match = re.search(r'Clermont type:\s*([A-Za-z0-9]+)', output)
+    clermont_type = type_match.group(1) if type_match else ''
 
-    for attr, default in [('logfile', None), ('no_partial', False), ('experiment_name', None)]:
-        setattr(args, attr, getattr(args, attr, default))
+    # Extract Clermont profile
+    markers = ['TspE4', 'arpA', 'chu', 'yjaA']
+    profile_lines = []
+    for marker in markers:
+        m = re.search(rf'{marker}:\s*[+-]', output)
+        if m:
+            profile_lines.append(m.group(0))
+    clermont_profile = '; '.join(profile_lines)
 
-
-    # Run the PCR analysis from the imported `run` module
-    f_stdout = io.StringIO()
-    f_stderr = io.StringIO()
-    with redirect_stdout(f_stdout), redirect_stderr(f_stderr):
-        clermont_type, profile = run.main(args)
-
-    profile = profile.replace('\n', '; ').strip('; ')
-
-    # Create a results dictionary
     results = {
         "Clermont_type": clermont_type,
-        "Clermont_profile": profile
+        "Clermont_profile": clermont_profile
     }
-
     return results
