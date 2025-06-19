@@ -82,7 +82,7 @@ def categorize_class(class_name):
 
     class_map = {
         'AMINOGLYCOSIDE': 'Aminoglycoside',
-        'AMINOGLYCOSIDE/QUINOLONE' : 'Aminoglycoside/Fluoroquinolone' 
+        'AMINOGLYCOSIDE/QUINOLONE' : 'Aminoglycoside/Fluoroquinolone',
         'BETA-LACTAM': 'Betalactam', 
         'CARBAPENEM': 'Carbapenem',
         'CEPHALOSPORIN': 'Cephalosporin',
