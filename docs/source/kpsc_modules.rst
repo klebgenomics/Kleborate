@@ -522,7 +522,7 @@ Note these do not count towards acquired resistance gene counts, but do count to
 
 
 AMR parameters
-^^^^^^^^^^^^^^
+++++++++++++++++++++++++++++++++++++++
 
 ``--klebsiella_pneumo_complex__amr_min_identity`` 
 
@@ -541,7 +541,7 @@ Minimum alignment percent identity for klebsiella_pneumo_complex Amr spurious re
 Minimum alignment percent coverage for klebsiella_pneumo_complex Amr spurious results (default: 40.0)
 
 AMR outputs
-^^^^^^^^^^^^^^
+++++++++++++++++++++++++++++++++++++++
 
 Results of the KpSC AMR module are grouped by drug class (according to the `ARG-Annot <https://www.ncbi.nlm.nih.gov/pubmed/24145532>`_ DB), with beta-lactamases further broken down into Lahey classes (now maintained at `BLDB <http://www.bldb.eu/>`_\ ), as follows:
 
@@ -623,7 +623,7 @@ Additionally, we provide a new AMR genotyping report compatible with the `hAMRon
 
 
 hAMRonization report for Kleborate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+++++++++++++++++++++++++++++++++++++++
 
 
 .. list-table::
