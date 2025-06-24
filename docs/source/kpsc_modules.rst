@@ -705,7 +705,7 @@ Running the KpSC AMR module automatically runs additional modules for generating
 
 
 Resistance score
-""""""""""""""""
+++++++++++++++++++++++
 
 This module calculates a resistance score, which ranges from 0 to 3 as follows
 
@@ -725,7 +725,7 @@ This module calculates a resistance score, which ranges from 0 to 3 as follows
 
 
 Resistance gene counts and drug class counts
-""""""""""""""""""""""""""""""""""""""""""""""""
++++++++++++++++++++++++++++++++++++++++++++++
 
 This module quantifies how many acquired resistance genes are present and how many drug classes (in *addition* to ampicillin to which KpSC are intrinsically resistant) have at least one resistance determinant detected (i.e. ignoring genes recorded in the Bla_chr and Bla_acquired columns). 
 
@@ -738,7 +738,7 @@ A few things to note:
 
 
 Resistance scores and counts outputs
-""""""""""""""""""""""""""""""""""""""""""""""""
+++++++++++++++++++++++++++++++++++++++
 
 Resistance scores and counts are output in the following columns:
 
