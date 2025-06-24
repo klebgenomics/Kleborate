@@ -758,7 +758,7 @@ Resistance scores and counts are output in the following columns:
 
 
 Ciprofloxacin resistance prediction
-----------------------------------------
+++++++++++++++++++++++++++++++++++++++
 
 
 .. code-block:: Python
