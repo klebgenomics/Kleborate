@@ -756,8 +756,10 @@ Resistance scores and counts are output in the following columns:
 
 .. _klebsiella_pneumo_complex__cipro_prediction:
 
+
 Ciprofloxacin resistance prediction
 -----------------------------------------
+
 
 .. code-block:: Python
 
