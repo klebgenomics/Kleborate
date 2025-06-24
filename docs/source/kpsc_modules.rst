@@ -522,7 +522,7 @@ Note these do not count towards acquired resistance gene counts, but do count to
 
 
 AMR parameters
---------------
+^^^^^^^^^^^^^^
 
 ``--klebsiella_pneumo_complex__amr_min_identity`` 
 
@@ -541,7 +541,7 @@ Minimum alignment percent identity for klebsiella_pneumo_complex Amr spurious re
 Minimum alignment percent coverage for klebsiella_pneumo_complex Amr spurious results (default: 40.0)
 
 AMR outputs
------------
+^^^^^^^^^^^^^^
 
 Results of the KpSC AMR module are grouped by drug class (according to the `ARG-Annot <https://www.ncbi.nlm.nih.gov/pubmed/24145532>`_ DB), with beta-lactamases further broken down into Lahey classes (now maintained at `BLDB <http://www.bldb.eu/>`_\ ), as follows:
 
@@ -623,7 +623,7 @@ Additionally, we provide a new AMR genotyping report compatible with the `hAMRon
 
 
 hAMRonization report for Kleborate
-----------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
 .. list-table::
@@ -695,7 +695,7 @@ hAMRonization report for Kleborate
 .. _Resistance scores and counts:
 
 Resistance scores and counts
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Running the KpSC AMR module automatically runs additional modules for generating counts of resistance genes and drug classes, and calculating a resistance score. These modules take  ``klebsiella_pneumo_complex__amr`` as a prerequisite and can be specified manually as follows:
 
@@ -705,7 +705,7 @@ Running the KpSC AMR module automatically runs additional modules for generating
 
 
 Resistance score
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""
 
 This module calculates a resistance score, which ranges from 0 to 3 as follows
 
@@ -725,7 +725,7 @@ This module calculates a resistance score, which ranges from 0 to 3 as follows
 
 
 Resistance gene counts and drug class counts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 This module quantifies how many acquired resistance genes are present and how many drug classes (in *addition* to ampicillin to which KpSC are intrinsically resistant) have at least one resistance determinant detected (i.e. ignoring genes recorded in the Bla_chr and Bla_acquired columns). 
 
@@ -738,7 +738,7 @@ A few things to note:
 
 
 Resistance scores and counts outputs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+""""""""""""""""""""""""""""""""""""""""""""""""
 
 Resistance scores and counts are output in the following columns:
 
