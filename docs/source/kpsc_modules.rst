@@ -767,9 +767,9 @@ Ciprofloxacin resistance prediction
 
 Ciprofloxacin resistance prediction is performed based on assigning the genome to one of ten genotype profiles, based on:
 
-#. Number of mutations in the quinolone resistance determining region (QRDR) of GyrA and ParC
-#. Number of plasmid-mediated quinolone resistance (PMQR) genes (i.e., *qep* and *qnr* genes)
-#. The presence or absence of *aac(6`)-Ib-cr*
+(i) number of mutations in the quinolone resistance determining region (QRDR) of GyrA and ParC; 
+(ii) number of plasmid-mediated quinolone resistance (PMQR) genes (i.e., *qep* and *qnr* genes); and 
+(iii) the presence or absence of *aac(6`)-Ib-cr*. 
  
 
 Each genotype profile is associated with a ciprofloxacin phenotype, in the form of a categorical assignment (wildtype S, nonwildtype I, nonwildtype R) and a minimum inhibitory concentration (MIC).
