@@ -758,7 +758,7 @@ Resistance scores and counts are output in the following columns:
 
 
 Ciprofloxacin resistance prediction
------------------------------------------
+++++++++++++++++++++++++++++++++++++
 
 
 .. code-block:: Python
@@ -827,7 +827,9 @@ The development and validation of the ciprofloxacin resistance prediction classi
 
 * ^ GyrA-87G and GyrA-87H are not included in the QRDR count, and qnrB1 is excluded from the single-PMQR count.
 * \* indicates the gene may be present or absent
-* Note that *aac(6`)-Ib-cr* is reported in the AGly_acquired and Flq_acquired columns. 
+* Note that *aac(6`)-Ib-cr* is reported in the AGly_acquired and Flq_acquired columns.
+
+
 
 Results of the ciprofloxacin resistance prediction are reported in Kleborate with four additional columns: 
 
