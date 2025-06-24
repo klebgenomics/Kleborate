@@ -763,16 +763,19 @@ Ciprofloxacin resistance prediction
 
    -m klebsiella_pneumo_complex__cipro_prediction
 
-Ciprofloxacin resistance prediction is performed based on assigning the genome to one of ten genotype profiles, based on (i) number of mutations in the quinolone resistance determining region (QRDR) of GyrA and ParC; (ii) number of plasmid-mediated quinolone resistance (PMQR) genes (i.e., *qep* and *qnr* genes); and (iii) the presence or absence of *aac(6`)-Ib-cr*. 
+Ciprofloxacin resistance prediction is performed based on assigning the genome to one of ten genotype profiles, based on:
+
+(i) number of mutations in the quinolone resistance determining region (QRDR) of GyrA and ParC; 
+(ii) number of plasmid-mediated quinolone resistance (PMQR) genes (i.e., *qep* and *qnr* genes); and 
+(iii) the presence or absence of *aac(6`)-Ib-cr*. 
 
 Each genotype profile is associated with a ciprofloxacin phenotype, in the form of a categorical assignment (wildtype S, nonwildtype I, nonwildtype R) and a minimum inhibitory concentration (MIC).
 
-The association of each genotype profile with a phenotype is based on analysis of ~13 thousand genomes, by the KlebNET Genotype-Phenotype Consortium, and the strength of the evidence from this data set is indicated in the **Positive predictive value** and **MIC** columns. The positive predictive value of the genotype profile is expressed as the raw number of genomes with that genotype, and the number of those which possess the associated phenotype. The **MIC** column indicates the median MIC value, and interquartile range of all MIC values, for isolates with this genotype profile.
+The association of each genotype profile with a phenotype is based on analysis of ~13 thousand genomes, by the `KlebNET-GSP AMR Genotype-Phenotype Group <https://klebnet.org/amrgenopheno/>`_, and the strength of the evidence from this data set is indicated in the **Positive predictive value** and **MIC** columns. The positive predictive value of the genotype profile is expressed as the raw number of genomes with that genotype, and the number of those which possess the associated phenotype. The **MIC** column indicates the median MIC value, and interquartile range of all MIC values, for isolates with this genotype profile.
 
 The development and validation of the ciprofloxacin resistance prediction classifier is detailed in this preprint: `preprint link here once available`. 
 
 .. list-table::
-   :header-rows: 0
 
    * - **Genotype profile**
      - **Phenotype prediction**
@@ -820,14 +823,13 @@ The development and validation of the ciprofloxacin resistance prediction classi
      - 4 mg/L [4-4]
 
 * ^ GyrA-87G and GyrA-87H are not included in the QRDR count, and qnrB1 is excluded from the single-PMQR count.
-* * indicates the gene may be present or absent
+* \* indicates the gene may be present or absent
 * Note that *aac(6`)-Ib-cr* is reported in the AGly_acquired and Flq_acquired columns. 
 
 Results of the ciprofloxacin resistance prediction are reported in Kleborate with four additional columns: 
 
 
 .. list-table::
-   :header-rows: 0
 
    * - Ciprofloxacin_prediction
      - Indicates the categorical phenotype prediction for this genome (wildtype S, nonwildtype I, nonwildtype R)
@@ -836,11 +838,10 @@ Results of the ciprofloxacin resistance prediction are reported in Kleborate wit
      - Indicates which of the ten genotype profiles (from the table above) this genome was assigned to
      
    * - Ciprofloxacin_profile_support
-     - Percentage indicating the positive predictive value of the genotype profile in **Ciprofloxacin_profile** for the S/I/R category indicated in **Ciprofloxacin_prediction**, based on evidence from the KlebNET Genotype-Phenotype Consortium. The fraction in brackets (N=n/x) indicates the total number of genomes with this genotype profile (n), and the number of those which possess the associated phenotype (x), which were used to calculate the percentage.
+     - Percentage indicating the positive predictive value of the genotype profile in **Ciprofloxacin_profile** for the S/I/R category indicated in **Ciprofloxacin_prediction**, based on evidence from the KlebNET-GSP AMR Genotype-Phenotype Group. The fraction in brackets (N=n/x) indicates the total number of genomes with this genotype profile (n), and the number of those which possess the associated phenotype (x), which were used to calculate the percentage.
      
    * - Ciprofloxacin_MIC_prediction
-     - Indicates the MIC distribution observed for the genotype profile in **Ciprofloxacin_profile**, in the form of median value and interquartile range, based on the KlebNET Genotype-Phenotype Consortium data enumerated in the **Ciprofloxacin_profile_support** column.
-
+     - Indicates the MIC distribution observed for the genotype profile in **Ciprofloxacin_profile**, in the form of median value and interquartile range, based on the KlebNET-GSP AMR Genotype-Phenotype Group data enumerated in the **Ciprofloxacin_profile_support** column.
 
 
 .. _klebsiella_pneumo_complex__kaptive:
