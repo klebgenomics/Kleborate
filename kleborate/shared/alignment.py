@@ -350,5 +350,32 @@ def get_last_base_aa_before_gap(alignment):
             break
         ref_pos += 1
 
+
+    # Handle frameshift where the alignment starts with gaps in the query.
+    if last_base_pos is None: return (1, next((res for res in aligned_seq2 if res != '-'), None))
+
     return last_base_pos, last_base
+    
+
+# def get_last_base_aa_before_gap(alignment):
+#     aligned_seq1, aligned_seq2 = alignment[0], alignment[1]
+#     bases_per_ref_pos = {}
+#     ref_pos = 1
+#     last_base_pos = None
+#     last_base = None
+
+#     for i, ref_b in enumerate(aligned_seq1):
+#         if ref_b == '-' or ref_b == '.':
+#             continue
+#         assembly_b = aligned_seq2[i]
+#         bases_per_ref_pos[ref_pos] = assembly_b
+#         if assembly_b != '-':
+#             last_base_pos = ref_pos
+#             last_base = assembly_b
+#         else:
+#             # First occurrence of a gap at this position
+#             break
+#         ref_pos += 1
+
+#     return last_base_pos, last_base
 
