@@ -20,6 +20,7 @@ from pathlib import Path
 import csv
 import re
 
+from kleborate.__main__ import get_version
 from ...shared.resMinimap import read_class_file, get_res_headers, resminimap_assembly
 
 
@@ -181,7 +182,8 @@ def get_results(assembly, minimap2_index, args, previous_results):
     )
 
     # --- report in aac(6`)-Ib-cr* allele in both AGly_acquired and Flq_acquired---
-    aac6_pattern = re.compile(r"aac\(6[’']\)-Ib-cr", re.IGNORECASE)
+    aac6_pattern = re.compile(r"aac\(6[’']\)-Ib-cr[\w\.]*", re.IGNORECASE)
+    # aac6_pattern = re.compile(r"aac\(6[’']\)-Ib-cr", re.IGNORECASE)
     agly_hits = res_hits.get('AGly_acquired', [])
     flq_hits = res_hits['Flq_acquired']
 
@@ -197,7 +199,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
 
     # --- software and database metadata ---
     res_hits['Software_name'] = 'Kleborate'
-    res_hits['Software_version'] = '3.1.3'
+    res_hits['Software_version'] = get_version()
     res_hits['Reference_database_name'] = 'CARD'
     res_hits['Reference_database_version'] = '3.2.9'
 
