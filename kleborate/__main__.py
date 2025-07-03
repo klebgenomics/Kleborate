@@ -603,17 +603,11 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
     # Rename strain to Input_file_name
     input_file_name = results['strain']
 
-    res_headers = [
-        'AGly_acquired', 'Col_acquired', 'Fcyn_acquired', 'Flq_acquired', 'Gly_acquired',
-        'MLS_acquired', 'Phe_acquired', 'Rif_acquired', 'Sul_acquired', 'Tet_acquired',
-        'Tgc_acquired', 'Tmt_acquired', 'Bla_acquired', 'Bla_inhR_acquired',
-        'Bla_ESBL_acquired', 'Bla_ESBL_inhR_acquired', 'Bla_Carb_acquired', 'Bla_chr', 'truncated_resistance_hits',
-        'spurious_resistance_hits'
-    ]
-
     mutation_variant_headers = [
         'SHV_mutations', 'Omp_mutations', 'Col_mutations', 'Flq_mutations'
     ]
+
+    acquired_res_headers = [h for h in res_headers if h not in mutation_variant_headers]
 
     prefix = 'klebsiella_pneumo_complex__amr__'
 
@@ -636,13 +630,14 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
     rows = []
 
-    software_name = results.get('Software_name', ['Kleborate'])[0]
-    software_version = results.get('Software_version', ['3.1.3'])[0]
-    db_name = results.get('Reference_database_name', ['CARD'])[0]
-    db_version = results.get('Reference_database_version', ['3.2.9'])[0]
+    software_name = results['klebsiella_pneumo_complex__amr__Software_name']
+    software_version = results['klebsiella_pneumo_complex__amr__Software_version']
+    db_name = results['klebsiella_pneumo_complex__amr__Reference_database_name']
+    db_version = results['klebsiella_pneumo_complex__amr__Reference_database_version']
+
 
     # ----- ACQUIRED GENES -----
-    for header in res_headers:
+    for header in acquired_res_headers:
         key = prefix + header
         variants = parsed.get(key, [])
         for variant in variants:
@@ -756,7 +751,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
         if f.tell() == 0:
             f.write('\t'.join(headers) + '\n')
         for row in rows:
-            f.write('\t'.join([str(row.get(h, '-')) for h in headers]) + '\n')
+            f.write('\t'.join([str(row.get(h, '-')).strip("[]").replace("'", "") for h in headers]) + '\n')
 
 
 def output_results(full_headers, stdout_headers, outfile, results, trim_headers=False):
@@ -766,7 +761,8 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
     """
     # Print results to the terminal using stdout_headers
     print('\t'.join([
-        str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
+        str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
+        # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
         else ";".join(map(str, results.get(x, "-")))
         for x in stdout_headers
     ]))
@@ -781,7 +777,8 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
         if o.tell() == 0:  # Write headers if file is empty
             o.write('\t'.join(headers_to_write) + '\n')
         o.write('\t'.join([
-            str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
+            str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
+            # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
             else ";".join(map(str, results.get(x, "-")))
             for x in full_headers
         ]) + '\n')
