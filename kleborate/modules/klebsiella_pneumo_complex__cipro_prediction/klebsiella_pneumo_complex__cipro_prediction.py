@@ -102,7 +102,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
         #test genome: ERR4635459
     if flq_mutations == "-" and flq_acquired == "-" and aac6 == 1:
         Ciprofloxacin_prediction = "wildtype S"
-        Ciprofloxacin_profile_support= "65.22% S (N=105/161)"
+        Ciprofloxacin_profile_support= "65.63% S (N=105/160)"
         Ciprofloxacin_profile= "0 QRDR, 0 PMQR, 1 aac(6`)-Ib-cr" 
         Ciprofloxacin_MIC_prediction="0.25 mg/L [0.25-0.5]"  
 
@@ -134,7 +134,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
         #test genome: G20250619 (with aac(6`)-Ib-cr), G20250926 (no aac(6`)-Ib-cr)
     if flq_mutations.count(";") > 0 and flq_acquired == "-":
             Ciprofloxacin_prediction = "nonwildtype R"
-            Ciprofloxacin_profile_support= "99.22% R (N=2150/2167)"
+            Ciprofloxacin_profile_support= "99.21% R (N=2147/2167)"
             Ciprofloxacin_profile= ">1 QRDR, 0 PMQR, * aac(6`)-Ib-cr" 
             Ciprofloxacin_MIC_prediction="2 mg/L [2-4]"
     
@@ -151,7 +151,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
         #test genome: HE205
     if flq_mutations == "-" and flq_acquired != '-' and flq_acquired.count(";") == 0 and aac6 == 1:
             Ciprofloxacin_prediction = "nonwildtype R"
-            Ciprofloxacin_profile_support= "94.63% R (N=775/819)"
+            Ciprofloxacin_profile_support= "94.63% R (N=776/820)"
             Ciprofloxacin_profile= "0 QRDR, 1 PMQR, 1 aac(6`)-Ib-cr"
             Ciprofloxacin_MIC_prediction="2 mg/L [1-2]"
 
@@ -167,7 +167,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
         #test genome: ERR3567346_NHP139 (with aac(6`)-Ib-cr), ERR3585150_BMP790 (no aac(6`)-Ib-cr)
     if flq_mutations != "-" and flq_mutations.count(";") >= 0 and flq_acquired != "-" and flq_acquired.count(";") >= 0:
             Ciprofloxacin_prediction = "nonwildtype R"
-            Ciprofloxacin_profile_support= "99.22% R (N=2421/2440)"
+            Ciprofloxacin_profile_support= "99.22% R (N=2424/2443)"
             Ciprofloxacin_profile= ">0 QRDR, >0 PMQR, * aac(6`)-Ib-cr" 
             Ciprofloxacin_MIC_prediction="4 mg/L [4-4]"
             
