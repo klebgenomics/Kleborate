@@ -41,4 +41,4 @@ include = ["kleborate", "kleborate.shared", "kleborate.modules", "kleborate.modu
 exclude = ["kleborate.modules.template"]
 
 [tool.setuptools.package-data]
-"*" = ["data/*"]  # many modules include data directories which need to be installed as well
+"*" = ["data/*"]  # modules include data directories which need to be installed as well
