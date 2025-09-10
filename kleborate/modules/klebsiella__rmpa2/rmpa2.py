@@ -6,7 +6,7 @@ Reports best match
 If an annotation column is provided (such as clonal complex) in the final column of the profiles
 file, this annotation will be reported in column 2 of the output table
 
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2025 Mary Maranga
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -28,7 +28,7 @@ def rmpa2_minimap(ref_file, assembly, minimap2_index, min_coverage, min_identity
     # Get rid of hits that start with 'delete_'
     hits = [h for h in hits if not h.query_name.startswith('delete_')]
     for hit in hits:
-        alignment_length = hit.ref_end - hit.ref_start
+        alignment_length = hit.query_end - hit.query_start
         if alignment_length > hit.query_length / 2:
             gene_id = hit.query_name
             if hit.percent_identity < 100.00 or alignment_length < hit.query_length:
