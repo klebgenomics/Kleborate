@@ -776,7 +776,7 @@ Each genotype profile is associated with a ciprofloxacin phenotype, in the form 
 
 The association of each genotype profile with a phenotype is based on analysis of ~13 thousand genomes, by the `KlebNET-GSP AMR Genotype-Phenotype Group <https://klebnet.org/amrgenopheno/>`_, and the strength of the evidence from this data set is indicated in the **Positive predictive value** and **MIC** columns. The positive predictive value of the genotype profile is expressed as the raw number of genomes with that genotype, and the number of those which possess the associated phenotype. The **MIC** column indicates the median MIC value, and interquartile range of all MIC values, for isolates with this genotype profile.
 
-The development and validation of the ciprofloxacin resistance prediction classifier is detailed in this preprint: `preprint link here once available`. 
+The development and validation of the ciprofloxacin resistance prediction classifier is detailed in this `preprint <https://www.biorxiv.org/content/10.1101/2025.09.24.678318v1/>`. 
 
 .. list-table::
 
