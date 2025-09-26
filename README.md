@@ -7,6 +7,7 @@ Kleborate was primarily developed to screen genome assemblies of _Klebsiella pne
 * ICEKp associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_), salmochelin (_iro_), hypermucoidy (_rmp_)
 * Virulence plasmid associated loci: salmochelin (_iro_), aerobactin (_iuc_), hypermucoidy (_rmp_, _rmpA2_)
 * Antimicrobial resistance determinants: acquired genes, SNPs, gene truncations and intrinsic β-lactamases
+* Prediction of phenotypic resistance to ciprofloxacin
 * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/klebgenomics/Kaptive)
 
 Kleborate v3 includes a rewrite of the code to (i) replace the use of BLAST with [minimap2](https://lh3.github.io/minimap2/minimap2.html) (faster and less buggy); and (ii) introduce a modular structure making it easy to add new typing modules, including for other species. Currently, functionality for other species is limited to MLST for _Klebsiella oxytoca_ species complex and _Escherichia coli_ but more is in development.
