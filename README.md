@@ -20,7 +20,7 @@ For information on how to install and run Kleborate v3, please visit the [Docs](
 
 **Citation**
 
-If you use Kleborate, please cite the paper: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for _Klebsiella pneumoniae_ and its related species complex, Nature Communications (2021). [https://www.nature.com/articles/s41467-021-24448-3](https://www.nature.com/articles/s41467-021-24448-3)
+If you use Kleborate, please cite the paper: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for _Klebsiella pneumoniae_ and its related species complex, Nature Communications (2021). [https://doi.org/10.1038/s41467-021-24448-3](https://doi.org/10.1038/s41467-021-24448-3)
 
 If you use the Kaptive calls for K and O locus typing please also cite: Wyres, KL. et al. Identification of _Klebsiella_ capsule synthesis loci from whole genome data. Microbial Genomics (2016). [http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
 
