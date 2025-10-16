@@ -1,0 +1,1151 @@
+{
+  "allele_id_regex": "_(\\d+)$",
+  "alleles": {
+    "1": {
+      "idx": 0,
+      "length": 300
+    },
+    "2": {
+      "idx": 1,
+      "length": 300
+    },
+    "3": {
+      "idx": 2,
+      "length": 300
+    },
+    "4": {
+      "idx": 3,
+      "length": 300
+    },
+    "5": {
+      "idx": 4,
+      "length": 300
+    },
+    "6": {
+      "idx": 5,
+      "length": 300
+    },
+    "7": {
+      "idx": 6,
+      "length": 300
+    },
+    "8": {
+      "idx": 7,
+      "length": 300
+    },
+    "9": {
+      "idx": 8,
+      "length": 300
+    },
+    "10": {
+      "idx": 9,
+      "length": 300
+    },
+    "11": {
+      "idx": 10,
+      "length": 300
+    },
+    "12": {
+      "idx": 11,
+      "length": 300
+    },
+    "13": {
+      "idx": 12,
+      "length": 300
+    },
+    "14": {
+      "idx": 13,
+      "length": 300
+    },
+    "15": {
+      "idx": 14,
+      "length": 300
+    },
+    "16": {
+      "idx": 15,
+      "length": 300
+    },
+    "17": {
+      "idx": 16,
+      "length": 300
+    },
+    "18": {
+      "idx": 17,
+      "length": 300
+    },
+    "19": {
+      "idx": 18,
+      "length": 300
+    },
+    "20": {
+      "idx": 19,
+      "length": 300
+    },
+    "21": {
+      "idx": 20,
+      "length": 300
+    },
+    "22": {
+      "idx": 21,
+      "length": 300
+    },
+    "23": {
+      "idx": 22,
+      "length": 300
+    },
+    "24": {
+      "idx": 23,
+      "length": 300
+    },
+    "25": {
+      "idx": 24,
+      "length": 300
+    },
+    "26": {
+      "idx": 25,
+      "length": 300
+    },
+    "27": {
+      "idx": 26,
+      "length": 300
+    },
+    "28": {
+      "idx": 27,
+      "length": 300
+    },
+    "29": {
+      "idx": 28,
+      "length": 300
+    },
+    "30": {
+      "idx": 29,
+      "length": 300
+    },
+    "31": {
+      "idx": 30,
+      "length": 300
+    },
+    "32": {
+      "idx": 31,
+      "length": 300
+    },
+    "33": {
+      "idx": 32,
+      "length": 300
+    },
+    "34": {
+      "idx": 33,
+      "length": 300
+    },
+    "35": {
+      "idx": 34,
+      "length": 300
+    },
+    "36": {
+      "idx": 35,
+      "length": 300
+    },
+    "37": {
+      "idx": 36,
+      "length": 300
+    },
+    "38": {
+      "idx": 37,
+      "length": 300
+    },
+    "39": {
+      "idx": 38,
+      "length": 300
+    },
+    "40": {
+      "idx": 39,
+      "length": 300
+    },
+    "41": {
+      "idx": 40,
+      "length": 300
+    },
+    "42": {
+      "idx": 41,
+      "length": 297
+    },
+    "43": {
+      "idx": 42,
+      "length": 300
+    },
+    "44": {
+      "idx": 43,
+      "length": 300
+    },
+    "45": {
+      "idx": 44,
+      "length": 300
+    },
+    "46": {
+      "idx": 45,
+      "length": 300
+    },
+    "47": {
+      "idx": 46,
+      "length": 300
+    },
+    "48": {
+      "idx": 47,
+      "length": 300
+    },
+    "49": {
+      "idx": 48,
+      "length": 300
+    },
+    "50": {
+      "idx": 49,
+      "length": 300
+    },
+    "51": {
+      "idx": 50,
+      "length": 300
+    },
+    "52": {
+      "idx": 51,
+      "length": 300
+    },
+    "53": {
+      "idx": 52,
+      "length": 300
+    },
+    "54": {
+      "idx": 53,
+      "length": 300
+    },
+    "55": {
+      "idx": 54,
+      "length": 300
+    },
+    "56": {
+      "idx": 55,
+      "length": 300
+    },
+    "57": {
+      "idx": 56,
+      "length": 300
+    },
+    "58": {
+      "idx": 57,
+      "length": 300
+    },
+    "59": {
+      "idx": 58,
+      "length": 300
+    },
+    "60": {
+      "idx": 59,
+      "length": 300
+    },
+    "61": {
+      "idx": 60,
+      "length": 300
+    },
+    "62": {
+      "idx": 61,
+      "length": 300
+    },
+    "63": {
+      "idx": 62,
+      "length": 300
+    },
+    "64": {
+      "idx": 63,
+      "length": 300
+    },
+    "65": {
+      "idx": 64,
+      "length": 300
+    },
+    "66": {
+      "idx": 65,
+      "length": 300
+    },
+    "67": {
+      "idx": 66,
+      "length": 300
+    },
+    "68": {
+      "idx": 67,
+      "length": 300
+    },
+    "69": {
+      "idx": 68,
+      "length": 300
+    },
+    "70": {
+      "idx": 69,
+      "length": 300
+    },
+    "71": {
+      "idx": 70,
+      "length": 300
+    },
+    "72": {
+      "idx": 71,
+      "length": 300
+    },
+    "73": {
+      "idx": 72,
+      "length": 300
+    },
+    "74": {
+      "idx": 73,
+      "length": 300
+    },
+    "75": {
+      "idx": 74,
+      "length": 300
+    },
+    "76": {
+      "idx": 75,
+      "length": 300
+    },
+    "77": {
+      "idx": 76,
+      "length": 300
+    },
+    "78": {
+      "idx": 77,
+      "length": 300
+    },
+    "79": {
+      "idx": 78,
+      "length": 300
+    },
+    "80": {
+      "idx": 79,
+      "length": 300
+    },
+    "81": {
+      "idx": 80,
+      "length": 300
+    },
+    "82": {
+      "idx": 81,
+      "length": 300
+    },
+    "83": {
+      "idx": 82,
+      "length": 300
+    },
+    "84": {
+      "idx": 83,
+      "length": 300
+    },
+    "85": {
+      "idx": 84,
+      "length": 300
+    },
+    "86": {
+      "idx": 85,
+      "length": 300
+    },
+    "87": {
+      "idx": 86,
+      "length": 300
+    },
+    "88": {
+      "idx": 87,
+      "length": 300
+    },
+    "89": {
+      "idx": 88,
+      "length": 300
+    },
+    "90": {
+      "idx": 89,
+      "length": 300
+    },
+    "91": {
+      "idx": 90,
+      "length": 300
+    },
+    "92": {
+      "idx": 91,
+      "length": 300
+    },
+    "93": {
+      "idx": 92,
+      "length": 300
+    },
+    "94": {
+      "idx": 93,
+      "length": 300
+    },
+    "95": {
+      "idx": 94,
+      "length": 300
+    },
+    "96": {
+      "idx": 95,
+      "length": 300
+    },
+    "97": {
+      "idx": 96,
+      "length": 300
+    },
+    "98": {
+      "idx": 97,
+      "length": 300
+    },
+    "99": {
+      "idx": 98,
+      "length": 300
+    },
+    "100": {
+      "idx": 99,
+      "length": 300
+    },
+    "101": {
+      "idx": 100,
+      "length": 300
+    },
+    "102": {
+      "idx": 101,
+      "length": 300
+    },
+    "103": {
+      "idx": 102,
+      "length": 300
+    },
+    "104": {
+      "idx": 103,
+      "length": 300
+    },
+    "105": {
+      "idx": 104,
+      "length": 300
+    },
+    "106": {
+      "idx": 105,
+      "length": 300
+    },
+    "107": {
+      "idx": 106,
+      "length": 300
+    },
+    "108": {
+      "idx": 107,
+      "length": 300
+    },
+    "109": {
+      "idx": 108,
+      "length": 300
+    },
+    "110": {
+      "idx": 109,
+      "length": 300
+    },
+    "111": {
+      "idx": 110,
+      "length": 300
+    },
+    "112": {
+      "idx": 111,
+      "length": 300
+    },
+    "113": {
+      "idx": 112,
+      "length": 300
+    },
+    "114": {
+      "idx": 113,
+      "length": 300
+    },
+    "115": {
+      "idx": 114,
+      "length": 300
+    },
+    "116": {
+      "idx": 115,
+      "length": 300
+    },
+    "117": {
+      "idx": 116,
+      "length": 300
+    },
+    "118": {
+      "idx": 117,
+      "length": 300
+    },
+    "119": {
+      "idx": 118,
+      "length": 300
+    },
+    "120": {
+      "idx": 119,
+      "length": 300
+    },
+    "121": {
+      "idx": 120,
+      "length": 300
+    },
+    "122": {
+      "idx": 121,
+      "length": 300
+    },
+    "123": {
+      "idx": 122,
+      "length": 300
+    },
+    "124": {
+      "idx": 123,
+      "length": 300
+    },
+    "125": {
+      "idx": 124,
+      "length": 300
+    }
+  },
+  "clusters": {
+    "tatA_S_1": {
+      "name": "Cluster_0",
+      "id": 0,
+      "members": [
+        {
+          "seq_id": "tatA_S_1",
+          "ori": null
+        },
+        {
+          "seq_id": "tatA_S_2",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_3",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_4",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_5",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_6",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_7",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_8",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_9",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_10",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_11",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_12",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_13",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_14",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_15",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_16",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_17",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_18",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_19",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_20",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_21",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_22",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_23",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_24",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_25",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_26",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_27",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_28",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_29",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_30",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_31",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_32",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_33",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_34",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_35",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_36",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_37",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_38",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_39",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_40",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_41",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_43",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_44",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_45",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_46",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_47",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_48",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_49",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_50",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_51",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_52",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_53",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_54",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_55",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_56",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_57",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_58",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_59",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_60",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_61",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_62",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_63",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_64",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_65",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_66",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_67",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_68",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_69",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_70",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_71",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_72",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_73",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_74",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_75",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_76",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_77",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_78",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_79",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_80",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_81",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_82",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_83",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_84",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_85",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_86",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_87",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_88",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_89",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_90",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_91",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_92",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_93",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_94",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_95",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_96",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_97",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_98",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_99",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_100",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_101",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_102",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_103",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_104",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_105",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_106",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_107",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_108",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_109",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_110",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_111",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_112",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_113",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_114",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_115",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_116",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_117",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_118",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_119",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_120",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_121",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_122",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_123",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_124",
+          "ori": "+"
+        },
+        {
+          "seq_id": "tatA_S_125",
+          "ori": "+"
+        }
+      ]
+    },
+    "tatA_S_42": {
+      "name": "Cluster_1",
+      "id": 1,
+      "members": [
+        {
+          "seq_id": "tatA_S_42",
+          "ori": null
+        }
+      ]
+    }
+  },
+  "cutoff": 95,
+  "fasta_clustered": "tatA_S-clustered.fasta",
+  "fasta_full": "tatA_S.fasta",
+  "name": "tatA_S",
+  "hashes": {
+    "19d91ef97958ea3ee880970ec8d3ab0a12f8771b": "1",
+    "da31706ef05d5cf505b5c944c042cd62a4ee78d2": "2",
+    "18394566c6db78fb572a0052f5c8dbedf6cb195b": "3",
+    "aac4831faae51c21e79b48f19597d9fe642cfc75": "4",
+    "cc66d51fbcf7b153fac1dc31c9e45855c3b94902": "5",
+    "3ba60459764ed218f112215680e24c5d5d36a2a8": "6",
+    "46dabfeffda439f40289d4cbff91dc653480e634": "7",
+    "67800f47c9a4b83f972d6cf206ff0b9f2ef03f6d": "8",
+    "6b28a80517eeb8ff8eb974a6ea99ab0750ddafd9": "9",
+    "f43326bb6d82ab3bade3c243eeeaac6bbbfcf6b6": "10",
+    "81e6cea613c5901ca3d2ca01832089bf1c3d6a0b": "11",
+    "9e3f7aff688ef505c3a84dc3664e989ead093d9d": "12",
+    "d3f15e7f82c3187cea431dd1791aaac39b1152ce": "13",
+    "6e00d2f28ecc1b6d962e9bba14f75af18d1d76f9": "14",
+    "f3a223974c23e1c253c8dad98fc2ddb892e893b2": "15",
+    "0637a603418b36bd4c48d6de8c674c653dcbb69f": "16",
+    "610ab2004fcf348478fd53d88b043ec988303cbb": "17",
+    "bcbe6c6a91671a43a6ff13ebd46ba5f47fcc81b5": "18",
+    "f4459f22c6404224c5ae8ad7ae8ea2551ca6b6db": "19",
+    "100329eefcdf8d2872ff94ba8623571451bf7381": "20",
+    "7ea55014e848584f618f77cdff8814af09043f73": "21",
+    "22c47383f881a88e2ac1f43dddca3d1781d99355": "22",
+    "6b14e7d5b9ed43249a605e509732982811289f0b": "23",
+    "a496ed6612c2a5f648c6f6b8c0ee496c7fd45559": "24",
+    "9c3d4bacb01dbe02e8cd34b20f5d3a515a91010a": "25",
+    "ea26e74fc652e2e7069b36a640dd149be30756ff": "26",
+    "861bd8df71831e818162f13089c820fff5a915d8": "27",
+    "41bee9425605f9dc898c49908e5748979e119a8c": "28",
+    "451b5eebf22e9fc6df1d0fc8f30d5c2d43c11087": "29",
+    "edfc23706345264fb4ea150d0cc960511d46a665": "30",
+    "a448117b09304896f38e41a70acac69bafd15cc5": "31",
+    "57a2c6729d0f0ce76b86c437c23049e3882b783d": "32",
+    "02681db5539880a798af1638cea8d9a3ede60318": "33",
+    "83484714246708b8e101adca903da5da48e2e5dd": "34",
+    "f449589c0af328097d39bd1555447ee76643d7a4": "35",
+    "8a8affeaa4932f1e04cd213b5fac2e927b570407": "36",
+    "7c9944a95eed4e92ab0b21def994cc05750ee940": "37",
+    "546b644b949da27fb4ab3c72a55396504d5f6376": "38",
+    "25cf06d8a7d6164764ae822b94bf682a950f2572": "39",
+    "9deacc0b53e8345485be23a88cf5c1a774a1fb81": "40",
+    "5de9e8c832e9dcd0da438b8eff503a1692c7a3c2": "41",
+    "486cbfdfa7ccec6d67d9b52f813554e307f577d7": "42",
+    "0a5c56017242e29097668d4a41d5ca91352f83f1": "43",
+    "0bc2866019ae552df863985a3c89b9fb8e13b6f7": "44",
+    "dbdc8d82124a5e0aed22d81a9078b6c69da91ce2": "45",
+    "4d3a1603a67d2b1de0a6c767493881f0cad066f9": "46",
+    "c3f28db5760e3d737a4d2f1c9e3ffc69dc0ba2d6": "47",
+    "4a6d7f62183e0febdc5ce96c73c3c713b92109a0": "48",
+    "dc5e476e2993f5a192565020cf7ed6b69af303a3": "49",
+    "706627265e8938320eb4cdef13d71d72d9ab4346": "50",
+    "e971bda1b5447f3ec1fadf64bc3860df2f992d6c": "51",
+    "89d7e5039ed363c58a087289e60953787c756db3": "52",
+    "11e39d1094939ef62542f349e73041e2197cdb38": "53",
+    "856b630fbf71bb912fc4caba04b82aa5bc2597e6": "54",
+    "9e6eaa6e64b982db764cc4a342b5176e2533a046": "55",
+    "02bec8b6be0f504040ec713822023749667e4db3": "56",
+    "68e2cc67be64d85ce9f0e02d5b0e43d423cfa1fc": "57",
+    "f8ed07c6b305833e2a3be71efcbecd53982488bc": "58",
+    "a2437756c1ba691ce76fcd8e2606707ca866f3a5": "59",
+    "e3bfd60baf97771c95cb6ac8abe1f10904fd40c5": "60",
+    "585190fc20c7b118ab1c9e9e7325ea534c7ca628": "61",
+    "a26039b938caec37540de6c1ecc341f0ffc84636": "62",
+    "2b70ea8a0fece7d9e814e928b88e9b1e277cc3b4": "63",
+    "45628422b4ced4bfd78c70d1eda761d7454d15fd": "64",
+    "6444df452dd0149c2c448fc6531f7f85773abd15": "65",
+    "c6019941601f83b6bab4f6cad5434db7f6e8fcc8": "66",
+    "ce522cedb86ce84189b96f3585d35f81292a86cb": "67",
+    "86be966f2e68f50e03e8ad3cc3de0551e93e3171": "68",
+    "3675aa0aebc33d311cb06f9893e41c0084b545bd": "69",
+    "d9cc9e5d5ccbfbd34b4c2728d8c3529d2e9d0680": "70",
+    "9828816f47fe74e79e9d99d32aab9f453bd5d0c1": "71",
+    "86599fc7fd4509ff53d25e43fa1fcbd5b726165e": "72",
+    "0cb42cd621c57b002cf64776276e67c51a51758a": "73",
+    "efeeaae7cef6e50721688baf9eec811156c32e32": "74",
+    "465f09338ad3cc98613f3e1b0f34ee414cd9ed30": "75",
+    "38fe433d1703dbfd3d646c5f29b466de66b3f1ce": "76",
+    "65b531a4509b2f34b47d084d7ccb26b6cca1cfb6": "77",
+    "7b13adf1d28b33469b669010050ac5a192862541": "78",
+    "4be9e6bf772e1fc6bd215bd15ab9eb7233afad5e": "79",
+    "a8e2ff99891e9774a4c783521a94524143931b91": "80",
+    "b8d29ff1abdb210d13339922bba72f2dac62ff42": "81",
+    "fa15c6082444ddbb3eb9e6a17c0c468796318fc2": "82",
+    "95f15a5efd81136cdbf9176933a9a4a49df338e5": "83",
+    "1d2ecb78ce2b14b390cb880b3d7e62d1767c68a1": "84",
+    "0750579d13ee5044abce6779332ee4b723c46dd1": "85",
+    "7ac86b973cc2cbe30cd4a2ee5ab33e1b97355631": "86",
+    "e6fc9dd19f30e5d1925751f1bacd2bb33df29c98": "87",
+    "e1f6086ca3d825d0fdc7b2de8b9985640f848109": "88",
+    "3a219e5dbac765370329139277a4a4af2a59c5a1": "89",
+    "2ca97544f0c24b67471db79d5294f93ec3fa4564": "90",
+    "f164020814f26ea24216543a35f1b3bedc6c02ff": "91",
+    "d295f1b7f5cf71212a1c8e931daec592ad14ac22": "92",
+    "441bfa3bb10dcf72ca631342b33623ab680594d5": "93",
+    "ca718d0a272355f32a4f22e4fb61fdb9ec4849d8": "94",
+    "ed8663920fb8b9eee382a97ddf75349d968bf619": "95",
+    "37432f66a988b8aadc03ee6a4a48f607b946f904": "96",
+    "2f29bda7ac721686ba6896468b4b3038c2ffc30d": "97",
+    "ac7357168e7ac7f9d4fb8e712283ec5d3b52d834": "98",
+    "d2561c074a28fd2329ea3eba3dbfa21b0bcf97a8": "99",
+    "5c4fa8c6bcc1c8ad966adac2e0412d94ca29c3f9": "100",
+    "33c0ec5e62dd34b8abd3b2d73a8a4a6ff01983c7": "101",
+    "6f435a98ad54a91ba735f9a59cd06fb894844a86": "102",
+    "e8ebc6fbec13daa872d04d2c194dcdb6cb1fa797": "103",
+    "21e428ef33697f9d36a00a3112cb3c193c05602d": "104",
+    "e2cb0e839afcf4c1ab0ce093d93b2d96b8e19b92": "105",
+    "9703381c98a870aa6bca346d3348cb357f2dd7f8": "106",
+    "4f56f3f1a50740e007990f66a430f7a054ad125b": "107",
+    "35e6dc3e03ea95ae5532a13b4f4977276b7a7376": "108",
+    "8c594553cb43df0388744b39f5275ad04852778f": "109",
+    "a60295d0079948de9572777729ce90560700dfd7": "110",
+    "e53a543a6dee42721d30cce2b785cbec607fb636": "111",
+    "fd91ce2ee54cd258c47fa64211f242cd447f9ab4": "112",
+    "d40a71b9f82a338f70606e8c42abd32848b0b8c4": "113",
+    "e930020143708e66fcfaccdace1745b9d68cec8e": "114",
+    "841970415d874a735e5208f6dc3c3c66f8771ce0": "115",
+    "239b7534ea60d32414a22a62aecce3fb6fb425d3": "116",
+    "f20cc72a163a67c0f0283c20071a21cb054418dd": "117",
+    "39ca085c7ebdc10facf1ccf003600dc6b1c481f4": "118",
+    "fcd436c9de944d16fd1e7718a34be7665dfb7bcf": "119",
+    "6959b233cd50bde73ec5de475dd942dee43deb6d": "120",
+    "1f9055e976c4ddc948ea10b541b3116a8f31341b": "121",
+    "7d79d62d49dc47f642a0cb49801df0e3a995bdc3": "122",
+    "f17edf1d855681d647b719960cc77755157124f1": "123",
+    "f9737c2d3042fa849928032e84ea2aeabf1a9015": "124",
+    "16f7d560416a4a26cdeeeb97b16782c326d5149b": "125"
+  },
+  "nb_seqs": 125
+}

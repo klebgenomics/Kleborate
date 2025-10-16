@@ -54,6 +54,7 @@ def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_cover
 
 
 
+
 # Define the virulence factors map
 virulence_factors_map = {
     'ltcA': {'name': 'LT', 'headers': []},
@@ -63,6 +64,7 @@ virulence_factors_map = {
     'stx2A': {'name': 'Stx2', 'headers': []},
     'stx2B': {'name': 'Stx2', 'headers': []},
     'eae': {'name': 'eae', 'headers': []},
+    'bfpA': {'name': 'bfpA', 'headers': []},
     'ipaH': {'name': 'ipaH', 'headers': []},
  }
 
@@ -113,6 +115,7 @@ def identify_virulence_factors(alignment_hits, virulence_factors_map):
         'Stx1': '-',
         'Stx2': '-',
         'eae': '-',
+        'bfpA': '-'
     }
     virulence_markers = {}
 
@@ -167,8 +170,10 @@ def classify_pathovar(virulence_factors):
             pathovar = pathovar + ('/' if len(pathovar) else '') + 'STEC'
     elif virulence_factors['eae'] == '+':
         # eae without Stx is classified as EPEC
-        pathovar = pathovar + ('/' if len(pathovar) else '') + 'EPEC'
-
+        if virulence_factors.get('bfpA') == '+':
+            pathovar += ('/' if pathovar else '') + 'EPEC'
+        else:
+            pathovar += ('/' if pathovar else '') + 'aEPEC'
     if len(pathovar):
         pathovar = pathovar
     else:

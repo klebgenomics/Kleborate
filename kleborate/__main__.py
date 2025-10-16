@@ -26,6 +26,9 @@ import tempfile
 import textwrap
 import uuid
 from glob import glob
+from typing import Any
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import partial
 
 from .shared.help_formatter import MyParser, MyHelpFormatter
 from .shared.misc import get_compression_type, load_fasta,reverse_complement
@@ -47,15 +50,23 @@ def parse_arguments(args, all_module_names, modules):
     io_args = parser.add_argument_group('Input/output')
     io_args.add_argument('-a', '--assemblies', nargs='+', type=str,
                          help='FASTA file(s) for assemblies')
-
     io_args.add_argument('-o', '--outdir', type=str,
                          help='Directory for storing output files')
-
     io_args.add_argument('-r', '--resume', action='store_true',
                          help='append the output files')
-
     io_args.add_argument('--trim_headers', action='store_true',
                          help='Trim headers in the output files')
+
+    # parallelism
+    perf_args = parser.add_argument_group('Performance')
+    
+    perf_args.add_argument('-t', '--threads', type=check_cpus,
+                           default=check_cpus(),
+                           help='Number of alignment threads or 0 for all available (default: 0)')
+
+    # perf_args.add_argument('-t', '--threads', type=int,
+    #                        default=(os.cpu_count() or 1),
+    #                        help='Number of parallel threads (default: number of available CPU cores')
 
     module_args = parser.add_argument_group('Modules')
     module_args.add_argument('--list_modules', action='store_true',
@@ -88,6 +99,64 @@ def parse_arguments(args, all_module_names, modules):
         sys.exit('Error: The --outdir (-o) option is required. Please specify an output directory.')
 
     return parser.parse_args(args)
+
+
+# def parse_arguments(args, all_module_names, modules):
+#     """
+#     This function does the CLI argument parsing for Kleborate. Module-specific arguments are added
+#     by each module's add_cli_options function.
+#     """
+#     parser = MyParser(description='Kleborate: a tool for characterising virulence and resistance '
+#                                   'in pathogen assemblies',
+#                       formatter_class=MyHelpFormatter, add_help=False, epilog=paper_refs())
+
+#     if '--helpall' in args or '--allhelp' in args or '--all_help' in args:
+#         args.append('--help_all')
+
+#     io_args = parser.add_argument_group('Input/output')
+#     io_args.add_argument('-a', '--assemblies', nargs='+', type=str,
+#                          help='FASTA file(s) for assemblies')
+
+#     io_args.add_argument('-o', '--outdir', type=str,
+#                          help='Directory for storing output files')
+
+#     io_args.add_argument('-r', '--resume', action='store_true',
+#                          help='append the output files')
+
+#     io_args.add_argument('--trim_headers', action='store_true',
+#                          help='Trim headers in the output files')
+
+#     module_args = parser.add_argument_group('Modules')
+#     module_args.add_argument('--list_modules', action='store_true',
+#                              help='Print a list of all available modules and then quit')
+#     module_args.add_argument('-p', '--preset', type=str,
+#                              help=f'Module presets, choose from: ' + ', '.join(get_presets()))
+#     module_args.add_argument('-m', '--modules', type=str,
+#                              help='Comma-delimited list of Kleborate modules to use')
+
+#     add_module_cli_arguments(parser, args, all_module_names, modules)
+
+#     help_args = parser.add_argument_group('Help')
+#     help_args.add_argument('-h', '--help', action='help', default=argparse.SUPPRESS,
+#                            help='Show this help message and exit')
+#     help_args.add_argument('--help_all', action='help',
+#                            help='Show a help message with all module options')
+#     help_args.add_argument('--version', action='version', version=f'Kleborate v{get_version()}',
+#                            help="Show program's version number and exit")
+
+#     if not args:
+#         parser.print_help(file=sys.stderr)
+#         sys.exit(1)
+
+#     parsed_args = parser.parse_known_args(args)[0]
+
+#     help_requested = any(
+#         flag in args for flag in ('-h', '--help', '--help_all', '--version', '--list_modules')
+#     )
+#     if not help_requested and '-o' not in args and '--outdir' not in args:
+#         sys.exit('Error: The --outdir (-o) option is required. Please specify an output directory.')
+
+#     return parser.parse_args(args)
 
 
 def main():
@@ -130,13 +199,15 @@ def main():
 
     for assembly in args.assemblies:
         check_assembly(assembly)
-
+    
+    # The multithreading implementation
+    def process_assembly(assembly):
         with tempfile.TemporaryDirectory() as temp_dir:
             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
             minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
             results = {'strain': get_strain_name(assembly)}
 
-            pass_check = True  # default, assume no check and run all modules
+            pass_check = True # default, assume no check and run all modules
             if args.preset and len(check_module_list) > 0:
                 for module, check in presets[args.preset]['check']:
                     try:
@@ -150,12 +221,11 @@ def main():
                             pass_check = False
                             print(f"Assembly {assembly} failed in check {check}.")
                             break
-
                     except Exception as e:
                         print(f"Error encountered while processing {assembly} with {module}: {e}.")
                         pass_check = False
                         break
-
+            
             if pass_check:
                 for module in module_run_order:
                     if module not in preset_check_modules:
@@ -194,7 +264,6 @@ def main():
                     ]
                     filtered_results = {header: results.get(header, "-") for header in selective_headers}
                     output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
-
                 else:
                     if species and is_ko_complex({'species': species}):
                         outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
@@ -202,12 +271,160 @@ def main():
                         outfile_suffix = 'escherichia_output.txt'
                     else:
                         print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
-                        continue
+                        return
 
                     output_file = os.path.join(args.outdir, outfile_suffix)
                     output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
 
+    # ThreadPoolExecutor to process assemblies in parallel
+    executor = None
+    try:
+        executor = ThreadPoolExecutor(max_workers=args.threads)
+        futures = [executor.submit(process_assembly, assembly) for assembly in args.assemblies]
+        for future in as_completed(futures):
+            try:
+                future.result()
+            except Exception as e:
+                print(f"An exception occurred during processing: {e}", flush=True)
+    except KeyboardInterrupt:
+        try:
+            if executor is not None:
+                executor.shutdown(wait=False, cancel_futures=True)
+        finally:
+            os._exit(130)
+    else:
+        executor.shutdown(wait=True)
 
+    # #ThreadPoolExecutor to process assemblies in parallel
+    # with ThreadPoolExecutor(max_workers=args.threads) as executor:
+    #     futures = [executor.submit(process_assembly, assembly) for assembly in args.assemblies]
+    #     for future in as_completed(futures):
+    #         try:
+    #             future.result()
+    #         except Exception as e:
+    #             print(f"An exception occurred during processing: {e}")
+
+
+### main function in github
+# def main():
+#     all_module_names, modules = import_modules()
+#     args = parse_arguments(sys.argv[1:], all_module_names, modules)
+#     print_modules(args, all_module_names, modules)
+
+#     module_names, check_module_list, pass_modules = get_used_module_names(args, all_module_names, get_presets())
+
+#     preset_check_modules = []
+#     if args.preset:
+#         presets = get_presets()
+#         preset_check_modules = [module for module, _ in presets[args.preset]['check']]
+
+#     module_names, module_run_order, external_programs = check_modules(
+#         args, modules, module_names, check_module_list, pass_modules
+#     )
+
+#     full_headers, stdout_headers = get_headers(module_names, modules)
+#     print('\t'.join([h.split('__')[-1] for h in stdout_headers]))
+
+#     if not os.path.exists(args.outdir):
+#         os.makedirs(args.outdir)
+
+#     if args.modules:
+#         module_name = args.modules.split(',')[0]
+#         out_files_suffixes = [f'{module_name}_output.txt']
+#     else:
+#         out_files_suffixes = [
+#             'klebsiella_pneumo_complex_output.txt',
+#             'klebsiella_pneumo_complex_hAMRonization_output.txt',
+#             'klebsiella_oxytoca_complex_output.txt',
+#             'escherichia_output.txt'
+#         ]
+
+#     if not args.resume:
+#         for suffix in out_files_suffixes:
+#             for file in glob(f'{args.outdir}/*{suffix}'):
+#                 os.remove(file)
+
+#     for assembly in args.assemblies:
+#         check_assembly(assembly)
+
+#         with tempfile.TemporaryDirectory() as temp_dir:
+#             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
+#             minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
+#             results = {'strain': get_strain_name(assembly)}
+
+#             pass_check = True  # default, assume no check and run all modules
+#             if args.preset and len(check_module_list) > 0:
+#                 for module, check in presets[args.preset]['check']:
+#                     try:
+#                         module_results = modules[module].get_results(
+#                             unzipped_assembly, minimap2_index, args, results
+#                         )
+#                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
+#                         check_function = globals()[check]
+
+#                         if not check_function(module_results):
+#                             pass_check = False
+#                             print(f"Assembly {assembly} failed in check {check}.")
+#                             break
+
+#                     except Exception as e:
+#                         print(f"Error encountered while processing {assembly} with {module}: {e}.")
+#                         pass_check = False
+#                         break
+
+#             if pass_check:
+#                 for module in module_run_order:
+#                     if module not in preset_check_modules:
+#                         module_results = modules[module].get_results(
+#                             unzipped_assembly, minimap2_index, args, results
+#                         )
+#                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
+#             else:
+#                 for module in module_run_order:
+#                     if module not in preset_check_modules:
+#                         module_headers = [header for header in full_headers if header.startswith(module)]
+#                         for header in module_headers:
+#                             results[header] = 'Not Tested'
+
+#             if args.modules:
+#                 module_name = args.modules.split(',')[0]
+#                 outfile_suffix = f'{module_name}_output.txt'
+#                 output_file = os.path.join(args.outdir, outfile_suffix)
+#                 filtered_headers = [h for h in full_headers if h.split('__')[-1] not in annotation_fields]
+#                 filtered_results = {k: v for k, v in results.items() if k in filtered_headers}
+#                 output_results(filtered_headers, stdout_headers, output_file, filtered_results, args.trim_headers)
+#             else:
+#                 species = results.get('enterobacterales__species__species', None)
+#                 if species and is_kp_complex({'species': species}):
+#                     harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
+#                     klebsiella_pneumo_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_output.txt')
+
+#                     output_results_klebsiella_pneumo_complex_hAMRonization(
+#                         full_headers, stdout_headers, harmonization_file, results, args.trim_headers
+#                     )
+
+#                     selective_headers = [
+#                         header for header in full_headers
+#                         if not header.startswith('klebsiella_pneumo_complex__amr') or
+#                         header.split('__')[-1] in res_headers
+#                     ]
+#                     filtered_results = {header: results.get(header, "-") for header in selective_headers}
+#                     output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
+
+#                 else:
+#                     if species and is_ko_complex({'species': species}):
+#                         outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
+#                     elif species and is_escherichia({'species': species}):
+#                         outfile_suffix = 'escherichia_output.txt'
+#                     else:
+#                         print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
+#                         continue
+
+#                     output_file = os.path.join(args.outdir, outfile_suffix)
+#                     output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
+
+
+### old main function
 # def main():
 #     all_module_names, modules = import_modules()
 #     args = parse_arguments(sys.argv[1:], all_module_names, modules)
@@ -350,8 +567,8 @@ def get_presets():
         'pass': [
             'general__contig_stats','klebsiella_pneumo_complex__mlst',
             'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst', 'klebsiella_pneumo_complex__virulence_score',
-            'klebsiella__rmpa2','klebsiella_pneumo_complex__amr', 'klebsiella_pneumo_complex__resistance_score', 'klebsiella_pneumo_complex__resistance_class_count',
-            'klebsiella_pneumo_complex__resistance_gene_count', 'klebsiella_pneumo_complex__cipro_prediction', 'klebsiella_pneumo_complex__wzi','klebsiella_pneumo_complex__kaptive'
+            'klebsiella__rmpa2','klebsiella__peg-344','klebsiella_pneumo_complex__amr', 'klebsiella_pneumo_complex__resistance_score', 'klebsiella_pneumo_complex__resistance_class_count',
+            'klebsiella_pneumo_complex__resistance_gene_count', 'klebsiella_pneumo_complex__cipro_prediction', 'klebsiella_pneumo_complex__wzi','klebsiella_pneumo_complex__kaptive', 'klebsiella__lincodes'
         ]
     }
 
@@ -367,7 +584,8 @@ def get_presets():
         'check': [('enterobacterales__species', 'is_escherichia')],
         'pass': [
             'general__contig_stats',
-            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee', 'escherichia__ezclermont','escherichia__stxtyper', 'escherichia__ectyper', 'escherichia__amr'
+            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee', 'escherichia__ezclermont','escherichia__stxtyper', 'escherichia__pks','escherichia__ectyper', 'escherichia__amr',
+            'escherichia__kaptive'
         ]
     }
 
@@ -565,6 +783,31 @@ def decompress_file(in_file, out_file):
     with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
         s = i.read()
         o.write(s)
+
+
+MAX_CPUS = 32
+def check_cpus(cpus: Any = None, max_cpus: int = MAX_CPUS, verbose: bool = False) -> int:
+    avail_cpus = os.cpu_count() or max_cpus
+
+    if isinstance(cpus, str):
+        cpus = int(cpus.strip()) if cpus.strip().isdigit() else 0
+    elif isinstance(cpus, (int, float)):
+        cpus = int(cpus)
+    elif cpus is None:
+        cpus = 0
+    else:
+        cpus = 0
+
+    if cpus <= 0:
+        cpus = avail_cpus
+
+    cpus = max(1, min(cpus, avail_cpus, max_cpus))
+
+    if verbose:
+        print(f"Using cpus={cpus}")
+
+    return cpus
+
 
 
 def output_headers(full_headers, stdout_headers, outfile):
