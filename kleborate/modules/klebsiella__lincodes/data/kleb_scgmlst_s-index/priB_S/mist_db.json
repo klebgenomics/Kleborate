@@ -1,0 +1,797 @@
+{
+  "allele_id_regex": "_(\\d+)$",
+  "alleles": {
+    "1": {
+      "idx": 0,
+      "length": 168
+    },
+    "2": {
+      "idx": 1,
+      "length": 168
+    },
+    "3": {
+      "idx": 2,
+      "length": 168
+    },
+    "4": {
+      "idx": 3,
+      "length": 168
+    },
+    "5": {
+      "idx": 4,
+      "length": 168
+    },
+    "6": {
+      "idx": 5,
+      "length": 168
+    },
+    "7": {
+      "idx": 6,
+      "length": 168
+    },
+    "8": {
+      "idx": 7,
+      "length": 168
+    },
+    "9": {
+      "idx": 8,
+      "length": 168
+    },
+    "10": {
+      "idx": 9,
+      "length": 168
+    },
+    "11": {
+      "idx": 10,
+      "length": 168
+    },
+    "12": {
+      "idx": 11,
+      "length": 168
+    },
+    "13": {
+      "idx": 12,
+      "length": 168
+    },
+    "14": {
+      "idx": 13,
+      "length": 168
+    },
+    "15": {
+      "idx": 14,
+      "length": 168
+    },
+    "16": {
+      "idx": 15,
+      "length": 168
+    },
+    "17": {
+      "idx": 16,
+      "length": 168
+    },
+    "18": {
+      "idx": 17,
+      "length": 168
+    },
+    "19": {
+      "idx": 18,
+      "length": 168
+    },
+    "20": {
+      "idx": 19,
+      "length": 168
+    },
+    "21": {
+      "idx": 20,
+      "length": 168
+    },
+    "22": {
+      "idx": 21,
+      "length": 168
+    },
+    "23": {
+      "idx": 22,
+      "length": 168
+    },
+    "24": {
+      "idx": 23,
+      "length": 168
+    },
+    "25": {
+      "idx": 24,
+      "length": 168
+    },
+    "26": {
+      "idx": 25,
+      "length": 168
+    },
+    "27": {
+      "idx": 26,
+      "length": 168
+    },
+    "28": {
+      "idx": 27,
+      "length": 168
+    },
+    "29": {
+      "idx": 28,
+      "length": 168
+    },
+    "30": {
+      "idx": 29,
+      "length": 168
+    },
+    "31": {
+      "idx": 30,
+      "length": 168
+    },
+    "32": {
+      "idx": 31,
+      "length": 168
+    },
+    "33": {
+      "idx": 32,
+      "length": 168
+    },
+    "34": {
+      "idx": 33,
+      "length": 168
+    },
+    "35": {
+      "idx": 34,
+      "length": 168
+    },
+    "36": {
+      "idx": 35,
+      "length": 168
+    },
+    "37": {
+      "idx": 36,
+      "length": 168
+    },
+    "38": {
+      "idx": 37,
+      "length": 168
+    },
+    "39": {
+      "idx": 38,
+      "length": 168
+    },
+    "40": {
+      "idx": 39,
+      "length": 168
+    },
+    "41": {
+      "idx": 40,
+      "length": 168
+    },
+    "42": {
+      "idx": 41,
+      "length": 168
+    },
+    "43": {
+      "idx": 42,
+      "length": 168
+    },
+    "44": {
+      "idx": 43,
+      "length": 168
+    },
+    "45": {
+      "idx": 44,
+      "length": 168
+    },
+    "46": {
+      "idx": 45,
+      "length": 168
+    },
+    "47": {
+      "idx": 46,
+      "length": 168
+    },
+    "48": {
+      "idx": 47,
+      "length": 168
+    },
+    "49": {
+      "idx": 48,
+      "length": 168
+    },
+    "50": {
+      "idx": 49,
+      "length": 168
+    },
+    "51": {
+      "idx": 50,
+      "length": 168
+    },
+    "52": {
+      "idx": 51,
+      "length": 168
+    },
+    "53": {
+      "idx": 52,
+      "length": 168
+    },
+    "54": {
+      "idx": 53,
+      "length": 168
+    },
+    "55": {
+      "idx": 54,
+      "length": 168
+    },
+    "56": {
+      "idx": 55,
+      "length": 168
+    },
+    "57": {
+      "idx": 56,
+      "length": 168
+    },
+    "58": {
+      "idx": 57,
+      "length": 168
+    },
+    "59": {
+      "idx": 58,
+      "length": 168
+    },
+    "60": {
+      "idx": 59,
+      "length": 168
+    },
+    "61": {
+      "idx": 60,
+      "length": 168
+    },
+    "62": {
+      "idx": 61,
+      "length": 168
+    },
+    "63": {
+      "idx": 62,
+      "length": 168
+    },
+    "64": {
+      "idx": 63,
+      "length": 168
+    },
+    "65": {
+      "idx": 64,
+      "length": 168
+    },
+    "66": {
+      "idx": 65,
+      "length": 168
+    },
+    "67": {
+      "idx": 66,
+      "length": 168
+    },
+    "68": {
+      "idx": 67,
+      "length": 168
+    },
+    "69": {
+      "idx": 68,
+      "length": 168
+    },
+    "70": {
+      "idx": 69,
+      "length": 168
+    },
+    "71": {
+      "idx": 70,
+      "length": 168
+    },
+    "72": {
+      "idx": 71,
+      "length": 168
+    },
+    "73": {
+      "idx": 72,
+      "length": 168
+    },
+    "74": {
+      "idx": 73,
+      "length": 168
+    },
+    "75": {
+      "idx": 74,
+      "length": 168
+    },
+    "76": {
+      "idx": 75,
+      "length": 168
+    },
+    "77": {
+      "idx": 76,
+      "length": 168
+    },
+    "78": {
+      "idx": 77,
+      "length": 168
+    },
+    "79": {
+      "idx": 78,
+      "length": 168
+    },
+    "80": {
+      "idx": 79,
+      "length": 168
+    },
+    "81": {
+      "idx": 80,
+      "length": 168
+    },
+    "82": {
+      "idx": 81,
+      "length": 168
+    },
+    "83": {
+      "idx": 82,
+      "length": 168
+    },
+    "84": {
+      "idx": 83,
+      "length": 168
+    },
+    "85": {
+      "idx": 84,
+      "length": 168
+    }
+  },
+  "clusters": {
+    "priB_S_1": {
+      "name": "Cluster_0",
+      "id": 0,
+      "members": [
+        {
+          "seq_id": "priB_S_1",
+          "ori": null
+        },
+        {
+          "seq_id": "priB_S_2",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_3",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_4",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_5",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_6",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_7",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_8",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_9",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_10",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_11",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_12",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_13",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_14",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_15",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_16",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_17",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_18",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_19",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_20",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_21",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_22",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_23",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_24",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_25",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_26",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_27",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_28",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_29",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_30",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_31",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_32",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_33",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_34",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_35",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_36",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_37",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_38",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_39",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_40",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_41",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_42",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_43",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_44",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_45",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_46",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_47",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_48",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_49",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_50",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_51",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_52",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_53",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_54",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_55",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_56",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_57",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_58",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_59",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_60",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_61",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_62",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_64",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_65",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_66",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_67",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_70",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_71",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_72",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_73",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_74",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_75",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_76",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_77",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_78",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_79",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_80",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_81",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_82",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_83",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_84",
+          "ori": "+"
+        },
+        {
+          "seq_id": "priB_S_85",
+          "ori": "+"
+        }
+      ]
+    },
+    "priB_S_63": {
+      "name": "Cluster_1",
+      "id": 1,
+      "members": [
+        {
+          "seq_id": "priB_S_63",
+          "ori": null
+        }
+      ]
+    },
+    "priB_S_68": {
+      "name": "Cluster_2",
+      "id": 2,
+      "members": [
+        {
+          "seq_id": "priB_S_68",
+          "ori": null
+        },
+        {
+          "seq_id": "priB_S_69",
+          "ori": "+"
+        }
+      ]
+    }
+  },
+  "cutoff": 95,
+  "fasta_clustered": "priB_S-clustered.fasta",
+  "fasta_full": "priB_S.fasta",
+  "name": "priB_S",
+  "hashes": {
+    "7ef87ad261aed7cd023b6ba859743a585a15283c": "1",
+    "360452498a30692438b2e177adb45bf05338bbba": "2",
+    "d7ddcb0ad2629f8a8f0c724bf020f84cc6f41d16": "3",
+    "de64bb1ac48bf50e21d9d1b2f376f8132cb640b7": "4",
+    "5e56e50954809411a25e91a7aff31248af293069": "5",
+    "d590fe80a7c66f4e763a4b51c62996b457b6bf29": "6",
+    "2d877fdb4c5af2dbe80ad65950dc2cc0e0e3fc11": "7",
+    "696a33acaa8ace517236fff5d19a422f3294d506": "8",
+    "d5863aa8e7159e179c40a129d475249d87b2dbf6": "9",
+    "d6f5dc4ddc79170c95d9eafb1c9806d1e03c4ae6": "10",
+    "4cf41f5522cdcf8ec78a89e3b3d15dda1054ffc0": "11",
+    "db68b7168227652d23be83ffcce033bffc346ca9": "12",
+    "236eb550d3cfcf4e673bd98ea8b166ebcb798e78": "13",
+    "afb61987d4f2a99854e99325a4cff322e34386c6": "14",
+    "fc49ac7f84e91324a170f98959369cabeeda4232": "15",
+    "452e675ed41882656062ea261df89efcdaf8c0da": "16",
+    "26cce2aac405cc08f839d353df0d3a72c992a580": "17",
+    "d3857fbbabc44893e20a2a4d0e0c06a9a488b120": "18",
+    "8280e47b4a24b57cf24ec799d481049aea4d241b": "19",
+    "5f85ec90fb33d924d08e6fe157e23abfc312b98a": "20",
+    "ede415c31c4bb59310fc2fe68e8564716f3720e4": "21",
+    "73d5aa636236a468751369e6869568852417daf0": "22",
+    "68ead3795b0d4fef57e19109e880a839e0f819b6": "23",
+    "e604e29f453eae77b33e0a6b51b465a82121f765": "24",
+    "7c3ca645c6fac5d4139e3c46aa28dd34e9f64ab4": "25",
+    "53ff903f32bd23b113442f72e0a49eafe6d46a76": "26",
+    "d6b56425a3bc2b5fecc0dd8ad20e2205d12ab1dc": "27",
+    "840bed6b00755a046bb979397a61977f641146bd": "28",
+    "56182d8a3f70006cef5cbca22431cb3ac450a57d": "29",
+    "278174a36fc55fbc4565b7a76935140dc938990b": "30",
+    "90b32c4b078c6f18e28901b368c10ca61c9faaa8": "31",
+    "145042672fa035a2558bba9b6bdfb560ba9a95bb": "32",
+    "d8c957f88f0d586156bae51fc177374e02a78d08": "33",
+    "ae7c26c2ffb6259d58d461c14ca0adfd7e1a37b6": "34",
+    "bea61950bafb2e2ca83740769a0c99c50c2d98fe": "35",
+    "e419d2185f022b1a68c2616f3930cb0dd9fdd7ea": "36",
+    "773d0ee71a17bb899f97c8f2a7ed57f724dbbde8": "37",
+    "904b06a30968c55b32a4a5876802e14570239fb5": "38",
+    "45a4ce300fc1373f3562230c369f8297d2cf8f2f": "39",
+    "3a538c83179ed576071f14f18a64facc36233a1e": "40",
+    "ec3e8d2845302a1cb089c6ecb8cf742105015e5e": "41",
+    "09dcc329b7acff93264bca4df0c6f598b2448885": "42",
+    "61101eb6d5b3bf8ace5812255b6c44b079d1c31a": "43",
+    "2a09c5e38e0b46834198a296774661f8f311728a": "44",
+    "96db26bb9d31dd7d40f1886754e923bf7ff0bce1": "45",
+    "7c46f11e467350918f71abf44889d5102409b834": "46",
+    "41df245b89ec41bbb03d01e444d7398055900f1a": "47",
+    "b38c4b5b18343f812ee70e619d0959e8fdfdf660": "48",
+    "dade310ea0351dcfaba330cf7778db521ec68025": "49",
+    "67178616635f14851d10e8388c1a96650a6c4f36": "50",
+    "9ae3ecb9a6e7d717c9ab2f8dfaad50fd566c5cc4": "51",
+    "1d220ac56d59d5d16cb3d5214a8a162cbfe11fe1": "52",
+    "c3eee624636cc59004b0770101b614e5365e0206": "53",
+    "ebd0cbdea7f166ba92dae3ebf34b091cadbfc346": "54",
+    "179edaf53324cbf10cc0776c26c0d0865975e58e": "55",
+    "6e49cf6f4dc7aed6e961c04e43703aa4baea9a6a": "56",
+    "bf18aaeb5bbdc7aaae4bd6a2e648915b5b512017": "57",
+    "6e66a0d82c1bf9b9323dcdbe859c42797b476bfe": "58",
+    "3b9828ba2934494f52ca23c2a0c14676ee9b989d": "59",
+    "2f03a579caf941a77165b296b17e7db3435f503e": "60",
+    "87672352e892904b36be6876cfb2e45e1b2fd8de": "61",
+    "d31dad23ff2fbf238f2ab1ba979c85a76a997d7a": "62",
+    "b2ea0f68fa4fd0dd75249375d4beb9db5f388bd2": "63",
+    "ff9015c5e02b93431ccd7dafb7bbab8698734932": "64",
+    "764b68f76132beff5035e8182f5758077980af64": "65",
+    "3defe8aa4291a26e37cb1e226326c838b36ced62": "66",
+    "66debad04c37ebeda85d70d72da9d0a5fc27e77f": "67",
+    "016b4982ce3dc9990e5c615e690cfd23f7e5942f": "68",
+    "b13361f3db8a1c7c03d6e8404d16a9c80bb49c74": "69",
+    "413c0d5c1090e18479594465459a52a77f00d17d": "70",
+    "df2349c923409fb123567abe36df6e776ac1b368": "71",
+    "6b9dc10b134de012069938e59f10e9528a29daf0": "72",
+    "3452c4486ff12205d9cc149629db910b5254e1ca": "73",
+    "84b19c56660137b5e562cacd11f8636dfa94501a": "74",
+    "5eeb67f6764ea80c6d85c833920e6debaab98ebd": "75",
+    "9be9a3a3ccce927edae3610f5ab659e1bd016420": "76",
+    "0a0fb1bb3f72ffc37ef71f4fd46b6e2b89cbb9a9": "77",
+    "b47dd3c0a2bd2fe71ec83b15f3e5be7d2d3b739f": "78",
+    "43daded155a28bec1618bf723b044d87834b2e5f": "79",
+    "ec97863d2cd5a1d63b0f3565e9feeff21ace4f28": "80",
+    "447e5bee32c51044d19b990ea3ab12599e1b8c77": "81",
+    "1086b53b12eb11e7903f9bf43ea742bbf6161bd5": "82",
+    "c381f641af2ab026d13d7c65fd0a156993b41ec3": "83",
+    "98920255bfc76a93069e10c721a75ab2f11d486b": "84",
+    "204f64d92acdef74d6039098385cc2ea574984d7": "85"
+  },
+  "nb_seqs": 85
+}

@@ -14,10 +14,15 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
 details. You should have received a copy of the GNU General Public License along with Kleborate. If
 not, see <https://www.gnu.org/licenses/>.
 """
-
+import ast
+import re
 from .alignment import align_query_to_ref
 from .mlst import load_st_profiles, run_single_mlst
-from .alignment import truncation_check
+from .alignment import truncation_check, cull_redundant_hits
+from Bio.Seq import Seq
+from Bio.Data.CodonTable import TranslationError
+from .misc import load_fasta, reverse_complement
+
 
 def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
                min_identity, min_coverage, required_exact_matches, check_for_truncation=False,
@@ -58,7 +63,7 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
         # Apply the unknown group logic here for single-contig cases
         return run_single_mlst(
             profiles, hits_per_gene, gene_names, required_exact_matches, check_for_truncation, 
-            report_incomplete, unknown_group_name, min_gene_count), spurious_hits
+            report_incomplete, unknown_group_name, min_gene_count), spurious_hits, hits_per_gene
 
     # If more than one contig has the full set of genes, then this is treated as a multi-MLST case,
     # where each full-set contig gets an MLST call.
@@ -68,7 +73,7 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
             profiles, hits_by_contig[contig], gene_names, required_exact_matches, check_for_truncation,
             report_incomplete, unknown_group_name, min_gene_count)
          
-    return combine_results(full_set_contigs, contig_results, gene_names), spurious_hits
+    return combine_results(full_set_contigs, contig_results, gene_names), spurious_hits, hits_per_gene
 
 
 # def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
@@ -167,6 +172,7 @@ def get_allele_and_locus(hit):
         locus = hit.query_name.split('_')[0]
     return allele, locus
 
+
 def process_spurious_hits(hits):
     hit_strings = []
     for hit in hits:
@@ -177,3 +183,234 @@ def process_spurious_hits(hits):
         allele += truncation_check(hit)[0]
         hit_strings.append(allele)
     return hit_strings
+
+
+
+def check_polyT_tract(hits_per_gene, assembly):
+    """
+    For rmpA hit, extracts the upstream sequence and
+    checks for poly-T tract (G(T+)A).
+    """
+    poly_t_status_map = {
+        8: "OFF",
+        9: "OFF",
+        10: "OFF",
+        11: "ON",
+        12: "ON",
+        13: "ON",
+        14: "ON"
+    }
+    
+    assembly_seqs = dict(load_fasta(assembly))
+    upstream_length = 80
+    gene_prefix = "rmpA"
+    results = []
+    
+    poly_t_pattern = re.compile(r"G(T+)A", re.IGNORECASE)
+
+    for gene in hits_per_gene:
+        hits_per_gene[gene] = cull_redundant_hits(hits_per_gene[gene])
+        hits = hits_per_gene[gene]
+
+        if gene.startswith(gene_prefix):
+            
+            for hit in hits:
+                contig_start, contig_end = hit.ref_start, hit.ref_end
+                full_contig_seq = assembly_seqs[hit.ref_name]
+
+                # Extract 80bp upstream sequence ---
+                if hit.strand == '+':
+                    upstream_start = max(0, contig_start - upstream_length)
+                    upstream_seq = full_contig_seq[upstream_start:contig_start]
+                elif hit.strand == '-':
+                    upstream_start = contig_end
+                    upstream_end = contig_end + upstream_length
+                    upstream_seq = reverse_complement(full_contig_seq[upstream_start:upstream_end])
+                else:
+                    continue
+                
+                # Search for G(T+)A and check length
+                match = poly_t_pattern.search(upstream_seq)
+
+                if match:
+                    poly_t_string = match.group(1)
+                    poly_t_length = len(poly_t_string)
+
+                    # Determine ON/OFF status
+                    if poly_t_length in poly_t_status_map:
+                        predicted_status = poly_t_status_map[poly_t_length]
+                    elif poly_t_length < 11:
+                        predicted_status = "OFF"
+                    else:
+                        predicted_status = "ON"
+                    
+                    status_results = f"{poly_t_length}T ({predicted_status})"
+                    results.append(status_results)
+        
+    if results:
+        return results[0]
+    else:
+        return ''
+
+
+
+def check_argR_status(hits_per_gene, assembly, argR_ref, min_identity, min_coverage):
+    """
+    Checks for rmpA hits, searches for the argR gene in the assembly,
+    and checks for ArgR gene or truncation of the encoded ArgR protein.
+
+    Returns:
+        list: argR_status 
+    """
+
+    gene_prefix = "rmpA"
+    argR_status = []
+
+    for gene in hits_per_gene:
+        hits_per_gene[gene] = cull_redundant_hits(hits_per_gene[gene])
+    
+    # Check for rmpA hit
+    rmpA_hit = any(
+        gene.startswith('rmpA') and hits_per_gene[gene] 
+        for gene in hits_per_gene
+    )
+    if not rmpA_hit:
+        argR_status.append('-')
+        return argR_status
+    
+    # Search for the argR gene in the assembly (only if rmpA hit)
+    argR_aln = align_query_to_ref(
+        argR_ref, 
+        assembly, 
+        min_query_coverage=min_coverage,
+        min_identity=min_identity
+    )
+
+    if not argR_aln:
+        argR_status.append('-')
+    else:
+        hit = argR_aln[0]
+        _, coverage, _ = truncation_check(hit)
+        if coverage >= 100.0:
+            argR_status.append('present')
+        else:
+            argR_status.append('argR-' + ('%.0f' % coverage) + '%')
+    return argR_status
+
+
+def check_argR_box(hits_per_gene, assembly):
+
+    """
+    Checks for presence of the ARG-box upstream of each rmpA gene.
+    """
+    assembly_seqs = dict(load_fasta(assembly))
+    upstream_length = 150
+    gene_prefix = "rmpA"
+    # ARG_box = 'ACTTTTTATTGTTATTGATTGAATTTTTATTCATTAAAAATTGTAACAAACGACGTTC'
+    ARG_box = 'ATTGAATTTTTATTCATT'
+    results = [] 
+    for gene in hits_per_gene:
+        hits_per_gene[gene] = cull_redundant_hits(hits_per_gene[gene])
+        hits = hits_per_gene[gene]
+        if gene.startswith(gene_prefix):
+            found = False
+            for hit in hits:
+                hit_seq = hit.ref_seq
+                contig_start, contig_end = hit.ref_start, hit.ref_end
+                contig_length = len(assembly_seqs[hit.ref_name])
+                gene_nucl_seq = assembly_seqs[hit.ref_name][contig_start:contig_end]
+
+                if hit.strand == '-':
+                    gene_nucl_seq = reverse_complement(gene_nucl_seq)
+                assert hit_seq == gene_nucl_seq
+
+                full_contig_seq = assembly_seqs[hit.ref_name]
+
+                if hit.strand == '+':
+                    upstream_start = max(0, contig_start - upstream_length)
+                    upstream_end = contig_start
+                    upstream_seq = full_contig_seq[upstream_start:upstream_end]
+                elif hit.strand == '-':
+                    upstream_start = contig_end
+                    upstream_end = min(contig_end + upstream_length, contig_length)
+                    upstream_seq = reverse_complement(full_contig_seq[upstream_start:upstream_end])
+
+                if ARG_box in upstream_seq:
+                    break
+            else:
+                results.append('ARG-box loss')
+    if results:
+        return results[0]
+    else:
+        return ''
+
+
+def poly_G_variation(hits_per_gene):
+    
+    loci_status = []
+    COVERAGE_THRESHOLD = 95.0
+    window_start_idx = 276 - 1
+    window_end_idx = 285
+
+    for gene, hits in hits_per_gene.items():
+        hits = cull_redundant_hits(hits)
+        if gene.startswith("rmpA"):
+            for hit in hits:
+                seq = hit.ref_seq
+                query_aa_length = (hit.query_length - 3) // 3
+                window_seq = seq[window_start_idx:window_end_idx]
+
+                for match in re.finditer(r"(G{5,})", window_seq):
+                    abs_start = window_start_idx + match.start()
+                    abs_end = window_start_idx + match.end()
+                    original_length = match.end() - match.start()
+
+                    for n in (-2, -1, 1, 2):
+                        new_length = original_length + n
+                        if new_length < 0:
+                            continue
+                        ext_seq = seq[:abs_start] + ("G" * new_length) + seq[abs_end:]
+                        translation = translate_nucl_to_prot(ext_seq)
+                        coverage = 100.0 * len(translation) / query_aa_length
+
+                        if coverage >= COVERAGE_THRESHOLD:
+                            status = "ON (phase variable)"
+                        else:
+                            status = "OFF (phase variable)"
+
+                        # status = (
+                        #     rmpA_dict[allele_key][0]
+                        #     if coverage >= COVERAGE_THRESHOLD
+                        #     else "truncated"
+                        # )
+                        loci_status.append(status)
+
+    if not loci_status:
+        return "-"
+    else:
+        return loci_status[0]
+
+
+def translate_nucl_to_prot(nucl_seq):
+    try:
+        return str(Seq(nucl_seq).translate(table='Bacterial', to_stop=True, cds=True)) 
+    except TranslationError:
+        pass
+
+    # If that failed, translate in a more relaxed way using a nucleotide sequence truncated
+    # to a multiple-of-three length.
+    truncated_nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
+    return str(Seq(truncated_nucl_seq).translate(table='Bacterial', to_stop=True, cds=False))
+
+
+def allele_type(allele_value):
+    if '%' in allele_value: 
+        return "truncated" 
+    # Check for Inexact 
+    elif '*' in allele_value: 
+        return "inexact"
+    else:
+        return "exact"
+
+
+

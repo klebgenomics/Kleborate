@@ -94,16 +94,15 @@ def run_ezclermont(input_fasta, min_length):
         return None
 
 
-
 def get_results(assembly, minimap2_index, args, previous_results):
     min_length = args.escherichia__ezclermont_min_length
     output = run_ezclermont(assembly, min_length)
     if not output:
         return {"Clermont_type": '', "Clermont_profile": ''}
 
-    # Extract Clermont type
-    type_match = re.search(r'Clermont type:\s*([A-Za-z0-9]+)', output)
-    clermont_type = type_match.group(1) if type_match else ''
+    # Extract Clermont type (handles types like U/cryptic)
+    type_match = re.search(r'Clermont type:\s*([^\n\r]+)', output)
+    clermont_type = type_match.group(1).strip() if type_match else ''
 
     # Extract Clermont profile
     markers = ['TspE4', 'arpA', 'chu', 'yjaA']
@@ -114,8 +113,32 @@ def get_results(assembly, minimap2_index, args, previous_results):
             profile_lines.append(m.group(0))
     clermont_profile = '; '.join(profile_lines)
 
-    results = {
+    return {
         "Clermont_type": clermont_type,
         "Clermont_profile": clermont_profile
     }
-    return results
+
+# def get_results(assembly, minimap2_index, args, previous_results):
+#     min_length = args.escherichia__ezclermont_min_length
+#     output = run_ezclermont(assembly, min_length)
+#     if not output:
+#         return {"Clermont_type": '', "Clermont_profile": ''}
+
+#     # Extract Clermont type
+#     type_match = re.search(r'Clermont type:\s*([A-Za-z0-9]+)', output)
+#     clermont_type = type_match.group(1) if type_match else ''
+
+#     # Extract Clermont profile
+#     markers = ['TspE4', 'arpA', 'chu', 'yjaA']
+#     profile_lines = []
+#     for marker in markers:
+#         m = re.search(rf'{marker}:\s*[+-]', output)
+#         if m:
+#             profile_lines.append(m.group(0))
+#     clermont_profile = '; '.join(profile_lines)
+
+#     results = {
+#         "Clermont_type": clermont_type,
+#         "Clermont_profile": clermont_profile
+#     }
+#     return results
