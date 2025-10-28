@@ -88,7 +88,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 3,aac(6')-Ix,AGly,AAC(6'),aac(6')-Ix,85,ARO_3002568,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Iy,AGly,AAC(6'),aac(6')-Iy,86,ARO_3002569,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Iz,AGly,AAC(6'),aac(6')-Iz,87,ARO_3002570,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac6-Id.v1,AGly,AAC(6'),aac6-Id.v1,88,ARG_X12618,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aacA43,AGly,AAC(6'),aacA43,89,ARO_3004641,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,ant(3'')-Ii-aac(6')-Iid,AGly,AAC(6');ANT(3''),ant(3'')-Ii-aac(6')-Iid,90,ARO_3002598,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ie-aph(2'')-Ia,AGly,AAC(6');APH(2''),aac(6')-Ie-aph(2'')-Ia,91,ARO_3002597,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -155,7 +154,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 10,aph(3'')-Ia,AGly,APH(3''),aph(3'')-Ia,145,ARO_3002638,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 10,aph(3'')-Ib,AGly,APH(3''),aph(3'')-Ib,146,ARO_3002639,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 10,aph(3'')-Ic,AGly,APH(3''),aph(3'')-Ic,147,ARO_3002640,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-11,aph(3')-Ia,AGly,APH(3'),aph(3')-Ia,148,ARO_3002641,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aph(3')-Ia.v2,AGly,APH(3'),aph(3')-Ia.v2,148,ARO_3002641,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 11,aph(3')-Ib,AGly,APH(3'),aph(3')-Ib,149,ARO_3002642,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 11,aph(3')-IIa,AGly,APH(3'),aph(3')-IIa,150,ARO_3002644,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 11,aph(3')-IIb,AGly,APH(3'),aph(3')-IIb,151,ARO_3002645,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -172,7 +171,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 11,aph(3')-VIIIa,AGly,APH(3'),aph(3')-VIIIa,162,ARO_3004680,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 11,aph(3')-VIIIb,AGly,APH(3'),aph(3')-VIIIb,163,ARO_3004086,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 11,aphA15,AGly,APH(3'),aphA15,164,ARO_3004675,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-11,aph3-Ia.v1,AGly,APH(3'),aph3-Ia.v1,165,ARG_HQ840942,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aph(3')-Ia.v1,AGly,APH(3'),aph(3')-Ia.v1,165,ARG_HQ840942,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 11,aph(3')-VIb,AGly,APH(3'),aph(3')-VIb,2445,ARO_3002653,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 12,aph(4)-Ia,AGly,APH(4),aph(4)-Ia,166,ARO_3002655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 12,aph(4)-Ib,AGly,APH(4),aph(4)-Ib,167,ARO_3002656,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -948,7 +947,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 110,MIR-2,Bla,MIR,MIR-2,852,ARO_3002168,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 110,MIR-23,Bla,MIR,MIR-23,853,ARO_3004745,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 110,MIR-3,Bla,MIR,MIR-3,854,ARO_3002169,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
-110,MIR-4.v2,Bla,MIR,MIR-4.v2,855,ARO_3002167,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+110,MIR-4,Bla,MIR,MIR-4,855,ARO_3002167,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 110,MIR-5,Bla,MIR,MIR-5,856,ARO_3002170,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 110,MIR-6,Bla,MIR,MIR-6,857,ARO_3002171,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 110,MIR-9,Bla,MIR,MIR-9,858,ARO_3002174,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
@@ -1448,7 +1447,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 117,OXA-649,Bla,OXA,OXA-649,2534,ARO_3005340,-,-,no,no,OXA-143 family carbapenem-hydrolyzing class D beta-lactamase OXA-649,Bla_Carb,carbapenem,ARO:0000020
 117,OXA-668,Bla,OXA,OXA-668,2535,ARO_3005158,-,-,no,no,OXA-274 family class D beta-lactamase OXA-668,Bla,penicillin beta-lactam,ARO:3000008
 117,OXA-681,Bla,OXA,OXA-681,2536,ARO_3005319,-,-,no,no,OXA-2 family inhibitor-resistant class D extended-spectrum beta-lactamase OXA-681,Bla,penicillin beta-lactam,ARO:3000008
-117,OXA-737,Bla,OXA,OXA-737,2537,ARO_3005320,-,-,no,no,OXA-2 family class D beta-lactamase OXA-737	,Bla,penicillin beta-lactam,ARO:3000008
+117,OXA-737,Bla,OXA,OXA-737,2537,ARO_3005320,-,-,no,no,"OXA-2 family class D beta-lactamase OXA-737	",Bla,penicillin beta-lactam,ARO:3000008
 117,OXA-779,Bla,OXA,OXA-779,2538,ARO_3005315,-,-,no,no,OXA-46 family oxacillin-hydrolyzing class D beta-lactamase OXA-779,Bla,penicillin beta-lactam,ARO:3000008
 117,OXA-835,Bla,OXA,OXA-835,2539,ARO_3005322,-,-,no,no,OXA-46 family oxacillin-hydrolyzing class D beta-lactamase OXA-835,Bla,penicillin beta-lactam,ARO:3000008
 117,OXA-837,Bla,OXA,OXA-837,2540,ARO_3005060,-,-,no,no,class D beta-lactamase OXA-837,Bla,penicillin beta-lactam,ARO:3000008
@@ -1956,9 +1955,9 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 143,TEM-82,Bla,TEM,TEM-82,1703,ARO_3000949,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR,penicillin beta-lactam + beta-lactamase inhibitor,ARO:3000008;ARO:3000042
 143,TEM-83,Bla,TEM,TEM-83,1704,ARO_3000950,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR,penicillin beta-lactam + beta-lactamase inhibitor,ARO:3000008;ARO:3000042
 143,TEM-84,Bla,TEM,TEM-84,1705,ARO_3000951,-,-,no,no,inhibitor-resistant class A broad-spectrum beta-lactamase,Bla_inhR,penicillin beta-lactam + beta-lactamase inhibitor,ARO:3000008;ARO:3000042
-143,TEM-10.v2,Bla,TEM,TEM-10.v2,1706,ARO_3000882,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+143,TEM-10,Bla,TEM,TEM-10,1706,ARO_3000882,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 143,TEM-101,Bla,TEM,TEM-101,1707,ARO_3000964,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
-143,TEM-102.v2,Bla,TEM,TEM-102.v2,1708,ARO_3000965,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+143,TEM-102,Bla,TEM,TEM-102,1708,ARO_3000965,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 143,TEM-106,Bla,TEM,TEM-106,1709,ARO_3000969,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 143,TEM-107,Bla,TEM,TEM-107,1710,ARO_3000970,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 143,TEM-11,Bla,TEM,TEM-11,1711,ARO_3000883,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
@@ -2133,7 +2132,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 151,VIM-9,Bla,VIM,VIM-9,1857,ARO_3002279,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 151,VIM-10,Bla,VIM,VIM-10,1858,ARO_3002280,-,-,no,no,carbapenem-hydrolyzing subclass B1 beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 151,VIM-14.v1,Bla,VIM,VIM-14.v1,1859,ARG_EF055455,-,-,no,no,carbapenem-hydrolyzing subclass B1 beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
-152,ICR-Mo,Col,ICR-Mo,ICR-Mo,1860,ARO_3004569,-,-,no,no,,,peptide antibiotic,ARO:3000053
+152,icr-Mo,Col,ICR-Mo,icr-Mo,1860,ARO_3004569,-,-,no,no,,,peptide antibiotic,ARO:3000053
 153,mcr-1.1,Col,Mcr1,mcr-1.1,1861,ARO_3003689,-,-,no,no,,,peptide antibiotic,ARO:3000053
 153,mcr-1.10,Col,Mcr1,mcr-1.10,1862,ARO_3004506,-,-,no,no,,,peptide antibiotic,ARO:3000053
 153,mcr-1.11,Col,Mcr1,mcr-1.11,1863,ARO_3004688,-,-,no,no,,,peptide antibiotic,ARO:3000053
@@ -2489,7 +2488,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 313,vatE,MLS,VatE,vatE,2211,ARO_3002844,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 314,vatF,MLS,VatF,vatF,2212,ARO_3003744,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 315,vatH,MLS,VatH,vatH,2213,ARO_3002845,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-316,VatI,MLS,VatI,VatI,2214,ARO_3003987,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+316,vatI,MLS,VatI,vatI,2214,ARO_3003987,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 317,vgaA,MLS,VgaA,vgaA,2215,ARO_3002829,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 317,vgaALC,MLS,VgaA,vgaALC,2216,ARO_3002830,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 318,vgaB,MLS,VgaB,vgaB,2217,ARO_3000118,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
@@ -2630,8 +2629,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 385,tetX,Tet,TetX,tetX,2352,ARO_3000205,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 386,tet(Y),Tet,TetY,tet(Y),2353,ARO_3000182,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 387,tet(Z),Tet,TetZ,tet(Z),2354,ARO_3000183,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
-388,Tet(X3),Tgc,TetX,Tet(X3),2355,ARO_3004719,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
-389,Tet(X4),Tgc,TetX,Tet(X4),2356,ARO_3004720,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+388,tet(X3),Tgc,TetX,tet(X3),2355,ARO_3004719,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+389,tet(X4),Tgc,TetX,tet(X4),2356,ARO_3004720,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 390,dfrA1.v1,Tmt,Dfr,dfrA1.v1,2357,ARG_NC_010410,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA1.v2,Tmt,Dfr,dfrA1.v2,2358,ARO_3002854,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA10,Tmt,Dfr,dfrA10,2359,ARO_3003011,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
@@ -3027,7 +3026,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 122,PER-15,Bla,PER,PER-15,3034,ARO_3006136,-,-,no,no,class A extended-spectrum beta-lactamase ,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 122,PER-8,Bla,PER,PER-8,3035,ARO_3003184,-,-,no,no,class A extended-spectrum beta-lactamase ,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 122,PER-9,Bla,PER,PER-9,3036,ARO_3006138,-,-,no,no,class A extended-spectrum beta-lactamase ,Bla_ESBL,third-generation cephalosporin,ARO:3009107
-393,SFO-1,Bla,SFO-1,SFO-1,3037,ARO_3006986,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+393,SFO-1.v2,Bla,SFO-1,SFO-1.v2,3037,ARO_3006986,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 136,SIM-2,Bla,SIM,SIM-2,3038,ARO_3005494,-,-,no,no,subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 143,TEM-103,Bla,TEM,TEM-103,3039,ARO_3000966,-,-,no,no,TEM family class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-244,Bla,TEM,TEM-244,3040,ARO_3007453,-,-,no,no,TEM family class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
@@ -3086,50 +3085,50 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 151,VIM-72,Bla,VIM,VIM-72,3093,ARO_3005520,-,-,no,no,subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 151,VIM-73,Bla,VIM,VIM-73,3094,ARO_3005521,-,-,no,no,subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 409,mcr-10.1,Col,Mcr10,mcr-10.1,3095,ARO_3007137,-,-,no,no,,,peptide antibiotic,ARO:3000053
-409,MCR-10.2,Col,Mcr10,MCR-10.2,3096,ARO_3007277,-,-,no,no,,,peptide antibiotic,ARO:3000053
-409,MCR-10.3,Col,Mcr10,MCR-10.3,3097,ARO_3007275,-,-,no,no,,,peptide antibiotic,ARO:3000053
-409,MCR-10.4,Col,Mcr10,MCR-10.4,3098,ARO_3007276,-,-,no,no,,,peptide antibiotic,ARO:3000053
-409,MCR-10.5,Col,Mcr10,MCR-10.5,3099,ARO_3007274,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.14,Col,Mcr1,MCR-1.14,3100,ARO_3007246,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.15,Col,Mcr1,MCR-1.15,3101,ARO_3007279,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.16,Col,Mcr1,MCR-1.16,3102,ARO_3007238,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.17,Col,Mcr1,MCR-1.17,3103,ARO_3007244,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.18,Col,Mcr1,MCR-1.18,3104,ARO_3007233,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.19,Col,Mcr1,MCR-1.19,3105,ARO_3007240,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.20,Col,Mcr1,MCR-1.20,3106,ARO_3007235,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.21,Col,Mcr1,MCR-1.21,3107,ARO_3007237,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.22,Col,Mcr1,MCR-1.22,3108,ARO_3007239,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.23,Col,Mcr1,MCR-1.23,3109,ARO_3007234,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.24,Col,Mcr1,MCR-1.24,3110,ARO_3007243,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.25,Col,Mcr1,MCR-1.25,3111,ARO_3007247,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.26,Col,Mcr1,MCR-1.26,3112,ARO_3007280,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.27,Col,Mcr1,MCR-1.27,3113,ARO_3007232,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.28,Col,Mcr1,MCR-1.28,3114,ARO_3007236,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.29,Col,Mcr1,MCR-1.29,3115,ARO_3007241,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.30,Col,Mcr1,MCR-1.30,3116,ARO_3007242,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.31,Col,Mcr1,MCR-1.31,3117,ARO_3007245,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.32,Col,Mcr1,MCR-1.32,3118,ARO_3007289,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.33,Col,Mcr1,MCR-1.33,3119,ARO_3007070,-,-,no,no,,,peptide antibiotic,ARO:3000053
-153,MCR-1.34,Col,Mcr1,MCR-1.34,3120,ARO_3007230,-,-,no,no,,,peptide antibiotic,ARO:3000053
-154,MCR-2.3,Col,Mcr2,MCR-2.3,3121,ARO_3007284,-,-,no,no,,,peptide antibiotic,ARO:3000053
-154,MCR-2.4,Col,Mcr2,MCR-2.4,3122,ARO_3007283,-,-,no,no,,,peptide antibiotic,ARO:3000053
-163,FosA8,Fcyn,FosA,FosA8,3123,ARO_3007371,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
-155,MCR-3.19,Col,Mcr3,MCR-3.19,3124,ARO_3007273,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.20,Col,Mcr3,MCR-3.20,3125,ARO_3007266,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.21,Col,Mcr3,MCR-3.21,3126,ARO_3007262,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.22,Col,Mcr3,MCR-3.22,3127,ARO_3007259,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.23,Col,Mcr3,MCR-3.23,3128,ARO_3007256,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.24,Col,Mcr3,MCR-3.24,3129,ARO_3007265,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.26,Col,Mcr3,MCR-3.26,3130,ARO_3007261,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.28,Col,Mcr3,MCR-3.28,3131,ARO_3007270,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.29,Col,Mcr3,MCR-3.29,3132,ARO_3007272,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.39,Col,Mcr3,MCR-3.39,3133,ARO_3007271,-,-,no,no,,,peptide antibiotic,ARO:3000053
-155,MCR-3.40,Col,Mcr3,MCR-3.40,3134,ARO_3007264,-,-,no,no,,,peptide antibiotic,ARO:3000053
-160,MCR-8.2,Col,Mcr8,MCR-8.2,3135,ARO_3007229,-,-,no,no,,,peptide antibiotic,ARO:3000053
-160,MCR-8.3,Col,Mcr8,MCR-8.3,3136,ARO_3007227,-,-,no,no,,,peptide antibiotic,ARO:3000053
-160,MCR-8.4,Col,Mcr8,MCR-8.4,3137,ARO_3007228,-,-,no,no,,,peptide antibiotic,ARO:3000053
-410,Mrx,MLS,Mrx,Mrx,3138,ARO_3003839,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-174,QnrB75,Flq,QnrB,QnrB75,3139,ARO_3003187,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
-174,QnrB76,Flq,QnrB,QnrB76,3140,ARO_3003188,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
-174,QnrB77,Flq,QnrB,QnrB77,3141,ARO_3003189,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
-174,QnrB78,Flq,QnrB,QnrB78,3142,ARO_3003190,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+409,mcr-10.2,Col,Mcr10,mcr-10.2,3096,ARO_3007277,-,-,no,no,,,peptide antibiotic,ARO:3000053
+409,mcr-10.3,Col,Mcr10,mcr-10.3,3097,ARO_3007275,-,-,no,no,,,peptide antibiotic,ARO:3000053
+409,mcr-10.4,Col,Mcr10,mcr-10.4,3098,ARO_3007276,-,-,no,no,,,peptide antibiotic,ARO:3000053
+409,mcr-10.5,Col,Mcr10,mcr-10.5,3099,ARO_3007274,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.14,Col,Mcr1,mcr-1.14,3100,ARO_3007246,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.15,Col,Mcr1,mcr-1.15,3101,ARO_3007279,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.16,Col,Mcr1,mcr-1.16,3102,ARO_3007238,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.17,Col,Mcr1,mcr-1.17,3103,ARO_3007244,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.18,Col,Mcr1,mcr-1.18,3104,ARO_3007233,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.19,Col,Mcr1,mcr-1.19,3105,ARO_3007240,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.20,Col,Mcr1,mcr-1.20,3106,ARO_3007235,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.21,Col,Mcr1,mcr-1.21,3107,ARO_3007237,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.22,Col,Mcr1,mcr-1.22,3108,ARO_3007239,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.23,Col,Mcr1,mcr-1.23,3109,ARO_3007234,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.24,Col,Mcr1,mc-1.24,3110,ARO_3007243,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.25,Col,Mcr1,mcr-1.25,3111,ARO_3007247,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.26,Col,Mcr1,mcr-1.26,3112,ARO_3007280,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.27,Col,Mcr1,mcr-1.27,3113,ARO_3007232,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.28,Col,Mcr1,mcr-1.28,3114,ARO_3007236,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.29,Col,Mcr1,mcr-1.29,3115,ARO_3007241,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.30,Col,Mcr1,mcr-1.30,3116,ARO_3007242,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.31,Col,Mcr1,mcr-1.31,3117,ARO_3007245,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.32,Col,Mcr1,mcr-1.32,3118,ARO_3007289,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.33,Col,Mcr1,mcr-1.33,3119,ARO_3007070,-,-,no,no,,,peptide antibiotic,ARO:3000053
+153,mcr-1.34,Col,Mcr1,mcr-1.34,3120,ARO_3007230,-,-,no,no,,,peptide antibiotic,ARO:3000053
+154,mcr-2.3,Col,Mcr2,mcr-2.3,3121,ARO_3007284,-,-,no,no,,,peptide antibiotic,ARO:3000053
+154,mcr-2.4,Col,Mcr2,mcr-2.4,3122,ARO_3007283,-,-,no,no,,,peptide antibiotic,ARO:3000053
+163,fosA8,Fcyn,FosA,fosA8,3123,ARO_3007371,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+155,mcr-3.19,Col,Mcr3,mcr-3.19,3124,ARO_3007273,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.20,Col,Mcr3,mcr-3.20,3125,ARO_3007266,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.21,Col,Mcr3,mcr-3.21,3126,ARO_3007262,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.22,Col,Mcr3,mcr-3.22,3127,ARO_3007259,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.23,Col,Mcr3,mcr-3.23,3128,ARO_3007256,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.24,Col,Mcr3,mcr-3.24,3129,ARO_3007265,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.26,Col,Mcr3,mcr-3.26,3130,ARO_3007261,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.28,Col,Mcr3,mcr-3.28,3131,ARO_3007270,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.29,Col,Mcr3,mcr-3.29,3132,ARO_3007272,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.39,Col,Mcr3,mcr-3.39,3133,ARO_3007271,-,-,no,no,,,peptide antibiotic,ARO:3000053
+155,mcr-3.40,Col,Mcr3,mcr-3.40,3134,ARO_3007264,-,-,no,no,,,peptide antibiotic,ARO:3000053
+160,mcr-8.2,Col,Mcr8,mcr-8.2,3135,ARO_3007229,-,-,no,no,,,peptide antibiotic,ARO:3000053
+160,mcr-8.3,Col,Mcr8,mcr-8.3,3136,ARO_3007227,-,-,no,no,,,peptide antibiotic,ARO:3000053
+160,mcr-8.4,Col,Mcr8,mcr-8.4,3137,ARO_3007228,-,-,no,no,,,peptide antibiotic,ARO:3000053
+410,mrx,MLS,Mrx,mrx,3138,ARO_3003839,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+174,qnrB75,Flq,QnrB,qnrB75,3139,ARO_3003187,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB76,Flq,QnrB,qnrB76,3140,ARO_3003188,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB77,Flq,QnrB,qnrB77,3141,ARO_3003189,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB78,Flq,QnrB,qnrB78,3142,ARO_3003190,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
