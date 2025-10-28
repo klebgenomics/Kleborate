@@ -799,7 +799,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 99,IMI-4,Bla,IMI,IMI-4,735,ARO_3001861,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 99,IMI-7,Bla,IMI,IMI-7,736,ARO_3003177,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 99,IMI-8,Bla,IMI,IMI-8,737,ARO_3003142,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
-99,NmcA,Bla,IMI,NmcA,738,ARO_3003589,-,-,no,no,IMI family carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+99,NmcA,Bla,IMI,nmcA,738,ARO_3003589,-,-,no,no,IMI family carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 100,IMP-1,Bla,IMP,IMP-1,739,ARO_3002192,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 100,IMP-10,Bla,IMP,IMP-10,740,ARO_3002201,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 100,IMP-11,Bla,IMP,IMP-11,741,ARO_3002202,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
