@@ -1679,7 +1679,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,LEN-10,Bla,SHV-OKP-LEN,LEN-10,1482,ARO_3002460,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-12,Bla,SHV-OKP-LEN,LEN-12,1483,ARO_3002462,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-15,Bla,SHV-OKP-LEN,LEN-15,1484,ARO_3002478,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
-135,LEN-16,Bla,SHV-OKP-LEN,LEN-16,1485,ARO_3002464,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-16,Bla,SHV-OKP-LEN,LEN-16,1485,RefSeq_NG_049270,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-18,Bla,SHV-OKP-LEN,LEN-18,1486,ARO_3002465,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-19,Bla,SHV-OKP-LEN,LEN-19,1487,ARO_3002466,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-2,Bla,SHV-OKP-LEN,LEN-2,1488,ARO_3002455,-,-,no,no,class A broad spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
