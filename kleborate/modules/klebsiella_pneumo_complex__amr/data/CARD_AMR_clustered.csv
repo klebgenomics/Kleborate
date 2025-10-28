@@ -3132,3 +3132,345 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 174,qnrB76,Flq,QnrB,qnrB76,3140,ARO_3003188,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
 174,qnrB77,Flq,QnrB,qnrB77,3141,ARO_3003189,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
 174,qnrB78,Flq,QnrB,qnrB78,3142,ARO_3003190,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+135,LEN-94,Bla,SHV-OKP-LEN,LEN-94,3143,RefSeq_NG_244802,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-95,Bla,SHV-OKP-LEN,LEN-95,3144,RefSeq_NG_244803,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-96,Bla,SHV-OKP-LEN,LEN-96,3145,RefSeq_NG_244804,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-97,Bla,SHV-OKP-LEN,LEN-97,3146,RefSeq_NG_244805,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-98,Bla,SHV-OKP-LEN,LEN-98,3147,RefSeq_NG_244806,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-99,Bla,SHV-OKP-LEN,LEN-99,3148,RefSeq_NG_244807,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-100,Bla,SHV-OKP-LEN,LEN-100,3149,RefSeq_NG_244695,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-101,Bla,SHV-OKP-LEN,LEN-101,3150,RefSeq_NG_244696,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-102,Bla,SHV-OKP-LEN,LEN-102,3151,RefSeq_NG_244697,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-103,Bla,SHV-OKP-LEN,LEN-103,3152,RefSeq_NG_244698,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-104,Bla,SHV-OKP-LEN,LEN-104,3153,RefSeq_NG_244699,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-105,Bla,SHV-OKP-LEN,LEN-105,3154,RefSeq_NG_244700,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-106,Bla,SHV-OKP-LEN,LEN-106,3155,RefSeq_NG_244701,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-107,Bla,SHV-OKP-LEN,LEN-107,3156,RefSeq_NG_244702,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-108,Bla,SHV-OKP-LEN,LEN-108,3157,RefSeq_NG_244703,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-109,Bla,SHV-OKP-LEN,LEN-109,3158,RefSeq_NG_244704,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-110,Bla,SHV-OKP-LEN,LEN-110,3159,RefSeq_NG_244705,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-111,Bla,SHV-OKP-LEN,LEN-111,3160,RefSeq_NG_244706,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-112,Bla,SHV-OKP-LEN,LEN-112,3161,RefSeq_NG_244707,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-113,Bla,SHV-OKP-LEN,LEN-113,3162,RefSeq_NG_244708,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-114,Bla,SHV-OKP-LEN,LEN-114,3163,RefSeq_NG_244709,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-115,Bla,SHV-OKP-LEN,LEN-115,3164,RefSeq_NG_244710,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-116,Bla,SHV-OKP-LEN,LEN-116,3165,RefSeq_NG_244711,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-117,Bla,SHV-OKP-LEN,LEN-117,3166,RefSeq_NG_244712,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-118,Bla,SHV-OKP-LEN,LEN-118,3167,RefSeq_NG_244713,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-119,Bla,SHV-OKP-LEN,LEN-119,3168,RefSeq_NG_244714,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-120,Bla,SHV-OKP-LEN,LEN-120,3169,RefSeq_NG_244715,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-121,Bla,SHV-OKP-LEN,LEN-121,3170,RefSeq_NG_245133,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-122,Bla,SHV-OKP-LEN,LEN-122,3171,RefSeq_NG_244716,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-123,Bla,SHV-OKP-LEN,LEN-123,3172,RefSeq_NG_244717,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-124,Bla,SHV-OKP-LEN,LEN-124,3173,RefSeq_NG_244718,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-125,Bla,SHV-OKP-LEN,LEN-125,3174,RefSeq_NG_244719,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-126,Bla,SHV-OKP-LEN,LEN-126,3175,RefSeq_NG_244720,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-127,Bla,SHV-OKP-LEN,LEN-127,3176,RefSeq_NG_244721,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-128,Bla,SHV-OKP-LEN,LEN-128,3177,RefSeq_NG_244722,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-129,Bla,SHV-OKP-LEN,LEN-129,3178,RefSeq_NG_244723,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-130,Bla,SHV-OKP-LEN,LEN-130,3179,RefSeq_NG_244724,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-131,Bla,SHV-OKP-LEN,LEN-131,3180,RefSeq_NG_245134,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-132,Bla,SHV-OKP-LEN,LEN-132,3181,RefSeq_NG_244725,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-133,Bla,SHV-OKP-LEN,LEN-133,3182,RefSeq_NG_244726,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-134,Bla,SHV-OKP-LEN,LEN-134,3183,RefSeq_NG_244727,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-135,Bla,SHV-OKP-LEN,LEN-135,3184,RefSeq_NG_244728,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-136,Bla,SHV-OKP-LEN,LEN-136,3185,RefSeq_NG_244729,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-137,Bla,SHV-OKP-LEN,LEN-137,3186,RefSeq_NG_244730,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-138,Bla,SHV-OKP-LEN,LEN-138,3187,RefSeq_NG_244731,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-139,Bla,SHV-OKP-LEN,LEN-139,3188,RefSeq_NG_244732,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-140,Bla,SHV-OKP-LEN,LEN-140,3189,RefSeq_NG_244733,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-141,Bla,SHV-OKP-LEN,LEN-141,3190,RefSeq_NG_244734,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-142,Bla,SHV-OKP-LEN,LEN-142,3191,RefSeq_NG_244735,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-143,Bla,SHV-OKP-LEN,LEN-143,3192,RefSeq_NG_244736,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-144,Bla,SHV-OKP-LEN,LEN-144,3193,RefSeq_NG_244737,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-145,Bla,SHV-OKP-LEN,LEN-145,3194,RefSeq_NG_244738,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-146,Bla,SHV-OKP-LEN,LEN-146,3195,RefSeq_NG_244739,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-147,Bla,SHV-OKP-LEN,LEN-147,3196,RefSeq_NG_244740,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-148,Bla,SHV-OKP-LEN,LEN-148,3197,RefSeq_NG_244741,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-149,Bla,SHV-OKP-LEN,LEN-149,3198,RefSeq_NG_244742,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-150,Bla,SHV-OKP-LEN,LEN-150,3199,RefSeq_NG_244743,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-151,Bla,SHV-OKP-LEN,LEN-151,3200,RefSeq_NG_244744,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-152,Bla,SHV-OKP-LEN,LEN-152,3201,RefSeq_NG_244745,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-153,Bla,SHV-OKP-LEN,LEN-153,3202,RefSeq_NG_244746,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-154,Bla,SHV-OKP-LEN,LEN-154,3203,RefSeq_NG_244747,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-155,Bla,SHV-OKP-LEN,LEN-155,3204,RefSeq_NG_244748,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-156,Bla,SHV-OKP-LEN,LEN-156,3205,RefSeq_NG_245146,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-157,Bla,SHV-OKP-LEN,LEN-157,3206,RefSeq_NG_244749,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-158,Bla,SHV-OKP-LEN,LEN-158,3207,RefSeq_NG_244750,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-159,Bla,SHV-OKP-LEN,LEN-159,3208,RefSeq_NG_244751,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-160,Bla,SHV-OKP-LEN,LEN-160,3209,RefSeq_NG_244752,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-161,Bla,SHV-OKP-LEN,LEN-161,3210,RefSeq_NG_244753,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-162,Bla,SHV-OKP-LEN,LEN-162,3211,RefSeq_NG_245135,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-163,Bla,SHV-OKP-LEN,LEN-163,3212,RefSeq_NG_244754,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-164,Bla,SHV-OKP-LEN,LEN-164,3213,RefSeq_NG_244755,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-165,Bla,SHV-OKP-LEN,LEN-165,3214,RefSeq_NG_244756,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-166,Bla,SHV-OKP-LEN,LEN-166,3215,RefSeq_NG_244757,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-167,Bla,SHV-OKP-LEN,LEN-167,3216,RefSeq_NG_244758,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-168,Bla,SHV-OKP-LEN,LEN-168,3217,RefSeq_NG_244759,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-169,Bla,SHV-OKP-LEN,LEN-169,3218,RefSeq_NG_244760,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-170,Bla,SHV-OKP-LEN,LEN-170,3219,RefSeq_NG_244761,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-171,Bla,SHV-OKP-LEN,LEN-171,3220,RefSeq_NG_244762,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-172,Bla,SHV-OKP-LEN,LEN-172,3221,RefSeq_NG_244763,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-173,Bla,SHV-OKP-LEN,LEN-173,3222,RefSeq_NG_244764,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-174,Bla,SHV-OKP-LEN,LEN-174,3223,RefSeq_NG_244765,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-175,Bla,SHV-OKP-LEN,LEN-175,3224,RefSeq_NG_244766,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-176,Bla,SHV-OKP-LEN,LEN-176,3225,RefSeq_NG_244767,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-177,Bla,SHV-OKP-LEN,LEN-177,3226,RefSeq_NG_244768,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-178,Bla,SHV-OKP-LEN,LEN-178,3227,RefSeq_NG_244769,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-179,Bla,SHV-OKP-LEN,LEN-179,3228,RefSeq_NG_244770,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-180,Bla,SHV-OKP-LEN,LEN-180,3229,RefSeq_NG_244771,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-181,Bla,SHV-OKP-LEN,LEN-181,3230,RefSeq_NG_244772,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-182,Bla,SHV-OKP-LEN,LEN-182,3231,RefSeq_NG_244773,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-183,Bla,SHV-OKP-LEN,LEN-183,3232,RefSeq_NG_245136,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-184,Bla,SHV-OKP-LEN,LEN-184,3233,RefSeq_NG_244774,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-185,Bla,SHV-OKP-LEN,LEN-185,3234,RefSeq_NG_244775,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-186,Bla,SHV-OKP-LEN,LEN-186,3235,RefSeq_NG_244776,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-187,Bla,SHV-OKP-LEN,LEN-187,3236,RefSeq_NG_244777,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-188,Bla,SHV-OKP-LEN,LEN-188,3237,RefSeq_NG_244778,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-189,Bla,SHV-OKP-LEN,LEN-189,3238,RefSeq_NG_244779,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-190,Bla,SHV-OKP-LEN,LEN-190,3239,RefSeq_NG_244780,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-191,Bla,SHV-OKP-LEN,LEN-191,3240,RefSeq_NG_244781,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-192,Bla,SHV-OKP-LEN,LEN-192,3241,RefSeq_NG_244782,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-193,Bla,SHV-OKP-LEN,LEN-193,3242,RefSeq_NG_244783,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-194,Bla,SHV-OKP-LEN,LEN-194,3243,RefSeq_NG_244784,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-195,Bla,SHV-OKP-LEN,LEN-195,3244,RefSeq_NG_244785,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-196,Bla,SHV-OKP-LEN,LEN-196,3245,RefSeq_NG_244786,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-197,Bla,SHV-OKP-LEN,LEN-197,3246,RefSeq_NG_244787,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-198,Bla,SHV-OKP-LEN,LEN-198,3247,RefSeq_NG_244788,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-199,Bla,SHV-OKP-LEN,LEN-199,3248,RefSeq_NG_244789,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-200,Bla,SHV-OKP-LEN,LEN-200,3249,RefSeq_NG_244790,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-201,Bla,SHV-OKP-LEN,LEN-201,3250,RefSeq_NG_244791,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-202,Bla,SHV-OKP-LEN,LEN-202,3251,RefSeq_NG_244792,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-203,Bla,SHV-OKP-LEN,LEN-203,3252,RefSeq_NG_245137,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-204,Bla,SHV-OKP-LEN,LEN-204,3253,RefSeq_NG_244793,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-205,Bla,SHV-OKP-LEN,LEN-205,3254,RefSeq_NG_244794,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-206,Bla,SHV-OKP-LEN,LEN-206,3255,RefSeq_NG_244795,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-207,Bla,SHV-OKP-LEN,LEN-207,3256,RefSeq_NG_244796,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-208,Bla,SHV-OKP-LEN,LEN-208,3257,RefSeq_NG_244797,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-209,Bla,SHV-OKP-LEN,LEN-209,3258,RefSeq_NG_244798,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-210,Bla,SHV-OKP-LEN,LEN-210,3259,RefSeq_NG_244799,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-211,Bla,SHV-OKP-LEN,LEN-211,3260,RefSeq_NG_244800,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-39,Bla,SHV-OKP-LEN,OKP-A-39,3261,RefSeq_NG_244832,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-40,Bla,SHV-OKP-LEN,OKP-A-40,3262,RefSeq_NG_244833,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-41,Bla,SHV-OKP-LEN,OKP-A-41,3263,RefSeq_NG_244834,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-42,Bla,SHV-OKP-LEN,OKP-A-42,3264,RefSeq_NG_244835,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-43,Bla,SHV-OKP-LEN,OKP-A-43,3265,RefSeq_NG_244836,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-44,Bla,SHV-OKP-LEN,OKP-A-44,3266,RefSeq_NG_244837,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-45,Bla,SHV-OKP-LEN,OKP-A-45,3267,RefSeq_NG_244838,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-46,Bla,SHV-OKP-LEN,OKP-A-46,3268,RefSeq_NG_244839,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-47,Bla,SHV-OKP-LEN,OKP-A-47,3269,RefSeq_NG_244840,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-48,Bla,SHV-OKP-LEN,OKP-A-48,3270,RefSeq_NG_244841,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-49,Bla,SHV-OKP-LEN,OKP-A-49,3271,RefSeq_NG_244842,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-50,Bla,SHV-OKP-LEN,OKP-A-50,3272,RefSeq_NG_244843,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-51,Bla,SHV-OKP-LEN,OKP-A-51,3273,RefSeq_NG_244844,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-52,Bla,SHV-OKP-LEN,OKP-A-52,3274,RefSeq_NG_244845,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-53,Bla,SHV-OKP-LEN,OKP-A-53,3275,RefSeq_NG_244846,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-54,Bla,SHV-OKP-LEN,OKP-A-54,3276,RefSeq_NG_244847,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-55,Bla,SHV-OKP-LEN,OKP-A-55,3277,RefSeq_NG_244848,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-56,Bla,SHV-OKP-LEN,OKP-A-56,3278,RefSeq_NG_244849,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-57,Bla,SHV-OKP-LEN,OKP-A-57,3279,RefSeq_NG_244850,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-58,Bla,SHV-OKP-LEN,OKP-A-58,3280,RefSeq_NG_244851,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-59,Bla,SHV-OKP-LEN,OKP-A-59,3281,RefSeq_NG_244852,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-60,Bla,SHV-OKP-LEN,OKP-A-60,3282,RefSeq_NG_244853,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-62,Bla,SHV-OKP-LEN,OKP-A-62,3283,RefSeq_NG_244854,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-63,Bla,SHV-OKP-LEN,OKP-A-63,3284,RefSeq_NG_244855,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-64,Bla,SHV-OKP-LEN,OKP-A-64,3285,RefSeq_NG_244856,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-65,Bla,SHV-OKP-LEN,OKP-A-65,3286,RefSeq_NG_244857,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-66,Bla,SHV-OKP-LEN,OKP-A-66,3287,RefSeq_NG_244858,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-67,Bla,SHV-OKP-LEN,OKP-A-67,3288,RefSeq_NG_244859,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-68,Bla,SHV-OKP-LEN,OKP-A-68,3289,RefSeq_NG_244860,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-69,Bla,SHV-OKP-LEN,OKP-A-69,3290,RefSeq_NG_244861,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-70,Bla,SHV-OKP-LEN,OKP-A-70,3291,RefSeq_NG_244862,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-71,Bla,SHV-OKP-LEN,OKP-A-71,3292,RefSeq_NG_244863,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-72,Bla,SHV-OKP-LEN,OKP-A-72,3293,RefSeq_NG_244864,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-73,Bla,SHV-OKP-LEN,OKP-A-73,3294,RefSeq_NG_244865,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-74,Bla,SHV-OKP-LEN,OKP-A-74,3295,RefSeq_NG_244866,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-75,Bla,SHV-OKP-LEN,OKP-A-75,3296,RefSeq_NG_244867,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-76,Bla,SHV-OKP-LEN,OKP-A-76,3297,RefSeq_NG_244868,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-77,Bla,SHV-OKP-LEN,OKP-A-77,3298,RefSeq_NG_244869,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-78,Bla,SHV-OKP-LEN,OKP-A-78,3299,RefSeq_NG_244870,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-79,Bla,SHV-OKP-LEN,OKP-A-79,3300,RefSeq_NG_244871,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-80,Bla,SHV-OKP-LEN,OKP-A-80,3301,RefSeq_NG_244872,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-81,Bla,SHV-OKP-LEN,OKP-A-81,3302,RefSeq_NG_244873,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-82,Bla,SHV-OKP-LEN,OKP-A-82,3303,RefSeq_NG_244874,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-83,Bla,SHV-OKP-LEN,OKP-A-83,3304,RefSeq_NG_244875,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-84,Bla,SHV-OKP-LEN,OKP-A-84,3305,RefSeq_NG_244876,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-85,Bla,SHV-OKP-LEN,OKP-A-85,3306,RefSeq_NG_244877,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-86,Bla,SHV-OKP-LEN,OKP-A-86,3307,RefSeq_NG_244878,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-87,Bla,SHV-OKP-LEN,OKP-A-87,3308,RefSeq_NG_244879,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-88,Bla,SHV-OKP-LEN,OKP-A-88,3309,RefSeq_NG_244880,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-89,Bla,SHV-OKP-LEN,OKP-A-89,3310,RefSeq_NG_244881,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-90,Bla,SHV-OKP-LEN,OKP-A-90,3311,RefSeq_NG_244882,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-92,Bla,SHV-OKP-LEN,OKP-A-92,3312,RefSeq_NG_244883,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-93,Bla,SHV-OKP-LEN,OKP-A-93,3313,RefSeq_NG_244884,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-94,Bla,SHV-OKP-LEN,OKP-A-94,3314,RefSeq_NG_244885,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-95,Bla,SHV-OKP-LEN,OKP-A-95,3315,RefSeq_NG_244886,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-96,Bla,SHV-OKP-LEN,OKP-A-96,3316,RefSeq_NG_244887,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-97,Bla,SHV-OKP-LEN,OKP-A-97,3317,RefSeq_NG_244888,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-98,Bla,SHV-OKP-LEN,OKP-A-98,3318,RefSeq_NG_244889,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-99,Bla,SHV-OKP-LEN,OKP-A-99,3319,RefSeq_NG_244890,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-100,Bla,SHV-OKP-LEN,OKP-A-100,3320,RefSeq_NG_244814,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-101,Bla,SHV-OKP-LEN,OKP-A-101,3321,RefSeq_NG_244815,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-102,Bla,SHV-OKP-LEN,OKP-A-102,3322,RefSeq_NG_244816,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-103,Bla,SHV-OKP-LEN,OKP-A-103,3323,RefSeq_NG_244817,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-104,Bla,SHV-OKP-LEN,OKP-A-104,3324,RefSeq_NG_244818,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-105,Bla,SHV-OKP-LEN,OKP-A-105,3325,RefSeq_NG_244819,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-106,Bla,SHV-OKP-LEN,OKP-A-106,3326,RefSeq_NG_244820,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-107,Bla,SHV-OKP-LEN,OKP-A-107,3327,RefSeq_NG_244821,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-108,Bla,SHV-OKP-LEN,OKP-A-108,3328,RefSeq_NG_244822,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-109,Bla,SHV-OKP-LEN,OKP-A-109,3329,RefSeq_NG_244823,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-110,Bla,SHV-OKP-LEN,OKP-A-110,3330,RefSeq_NG_244824,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-111,Bla,SHV-OKP-LEN,OKP-A-111,3331,RefSeq_NG_244825,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-112,Bla,SHV-OKP-LEN,OKP-A-112,3332,RefSeq_NG_244826,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-113,Bla,SHV-OKP-LEN,OKP-A-113,3333,RefSeq_NG_244827,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-114,Bla,SHV-OKP-LEN,OKP-A-114,3334,RefSeq_NG_244828,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-115,Bla,SHV-OKP-LEN,OKP-A-115,3335,RefSeq_NG_244829,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-116,Bla,SHV-OKP-LEN,OKP-A-116,3336,RefSeq_NG_244830,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-A-117,Bla,SHV-OKP-LEN,OKP-A-117,3337,RefSeq_NG_244831,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-61,Bla,SHV-OKP-LEN,OKP-B-61,3338,RefSeq_NG_244990,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-62,Bla,SHV-OKP-LEN,OKP-B-62,3339,RefSeq_NG_244991,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-63,Bla,SHV-OKP-LEN,OKP-B-63,3340,RefSeq_NG_244992,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-64,Bla,SHV-OKP-LEN,OKP-B-64,3341,RefSeq_NG_244993,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-65,Bla,SHV-OKP-LEN,OKP-B-65,3342,RefSeq_NG_244994,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-66,Bla,SHV-OKP-LEN,OKP-B-66,3343,RefSeq_NG_244995,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-67,Bla,SHV-OKP-LEN,OKP-B-67,3344,RefSeq_NG_244996,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-68,Bla,SHV-OKP-LEN,OKP-B-68,3345,RefSeq_NG_244997,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-69,Bla,SHV-OKP-LEN,OKP-B-69,3346,RefSeq_NG_244998,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-70,Bla,SHV-OKP-LEN,OKP-B-70,3347,RefSeq_NG_244999,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-71,Bla,SHV-OKP-LEN,OKP-B-71,3348,RefSeq_NG_245000,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-72,Bla,SHV-OKP-LEN,OKP-B-72,3349,RefSeq_NG_245001,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-73,Bla,SHV-OKP-LEN,OKP-B-73,3350,RefSeq_NG_245002,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-74,Bla,SHV-OKP-LEN,OKP-B-74,3351,RefSeq_NG_245003,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-75,Bla,SHV-OKP-LEN,OKP-B-75,3352,RefSeq_NG_245004,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-76,Bla,SHV-OKP-LEN,OKP-B-76,3353,RefSeq_NG_245005,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-77,Bla,SHV-OKP-LEN,OKP-B-77,3354,RefSeq_NG_245006,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-78,Bla,SHV-OKP-LEN,OKP-B-78,3355,RefSeq_NG_245007,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-79,Bla,SHV-OKP-LEN,OKP-B-79,3356,RefSeq_NG_245008,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-80,Bla,SHV-OKP-LEN,OKP-B-80,3357,RefSeq_NG_245009,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-81,Bla,SHV-OKP-LEN,OKP-B-81,3358,RefSeq_NG_245010,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-82,Bla,SHV-OKP-LEN,OKP-B-82,3359,RefSeq_NG_245011,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-83,Bla,SHV-OKP-LEN,OKP-B-83,3360,RefSeq_NG_245012,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-84,Bla,SHV-OKP-LEN,OKP-B-84,3361,RefSeq_NG_245013,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-85,Bla,SHV-OKP-LEN,OKP-B-85,3362,RefSeq_NG_245014,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-86,Bla,SHV-OKP-LEN,OKP-B-86,3363,RefSeq_NG_245015,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-87,Bla,SHV-OKP-LEN,OKP-B-87,3364,RefSeq_NG_245016,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-88,Bla,SHV-OKP-LEN,OKP-B-88,3365,RefSeq_NG_245017,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-89,Bla,SHV-OKP-LEN,OKP-B-89,3366,RefSeq_NG_245018,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-90,Bla,SHV-OKP-LEN,OKP-B-90,3367,RefSeq_NG_245019,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-91,Bla,SHV-OKP-LEN,OKP-B-91,3368,RefSeq_NG_245020,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-92,Bla,SHV-OKP-LEN,OKP-B-92,3369,RefSeq_NG_245021,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-93,Bla,SHV-OKP-LEN,OKP-B-93,3370,RefSeq_NG_245022,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-94,Bla,SHV-OKP-LEN,OKP-B-94,3371,RefSeq_NG_245023,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-95,Bla,SHV-OKP-LEN,OKP-B-95,3372,RefSeq_NG_245024,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-96,Bla,SHV-OKP-LEN,OKP-B-96,3373,RefSeq_NG_245025,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-97,Bla,SHV-OKP-LEN,OKP-B-97,3374,RefSeq_NG_245026,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-98,Bla,SHV-OKP-LEN,OKP-B-98,3375,RefSeq_NG_245027,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-99,Bla,SHV-OKP-LEN,OKP-B-99,3376,RefSeq_NG_245028,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-100,Bla,SHV-OKP-LEN,OKP-B-100,3377,RefSeq_NG_244891,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-101,Bla,SHV-OKP-LEN,OKP-B-101,3378,RefSeq_NG_244892,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-102,Bla,SHV-OKP-LEN,OKP-B-102,3379,RefSeq_NG_244893,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-103,Bla,SHV-OKP-LEN,OKP-B-103,3380,RefSeq_NG_244894,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-104,Bla,SHV-OKP-LEN,OKP-B-104,3381,RefSeq_NG_244895,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-105,Bla,SHV-OKP-LEN,OKP-B-105,3382,RefSeq_NG_244896,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-106,Bla,SHV-OKP-LEN,OKP-B-106,3383,RefSeq_NG_244897,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-107,Bla,SHV-OKP-LEN,OKP-B-107,3384,RefSeq_NG_244898,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-108,Bla,SHV-OKP-LEN,OKP-B-108,3385,RefSeq_NG_244899,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-109,Bla,SHV-OKP-LEN,OKP-B-109,3386,RefSeq_NG_244900,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-110,Bla,SHV-OKP-LEN,OKP-B-110,3387,RefSeq_NG_244901,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-111,Bla,SHV-OKP-LEN,OKP-B-111,3388,RefSeq_NG_244902,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-112,Bla,SHV-OKP-LEN,OKP-B-112,3389,RefSeq_NG_244903,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-113,Bla,SHV-OKP-LEN,OKP-B-113,3390,RefSeq_NG_244904,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-114,Bla,SHV-OKP-LEN,OKP-B-114,3391,RefSeq_NG_244905,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-115,Bla,SHV-OKP-LEN,OKP-B-115,3392,RefSeq_NG_047528,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-116,Bla,SHV-OKP-LEN,OKP-B-116,3393,RefSeq_NG_244906,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-117,Bla,SHV-OKP-LEN,OKP-B-117,3394,RefSeq_NG_244907,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-118,Bla,SHV-OKP-LEN,OKP-B-118,3395,RefSeq_NG_244908,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-119,Bla,SHV-OKP-LEN,OKP-B-119,3396,RefSeq_NG_244909,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-120,Bla,SHV-OKP-LEN,OKP-B-120,3397,RefSeq_NG_244910,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-121,Bla,SHV-OKP-LEN,OKP-B-121,3398,RefSeq_NG_244911,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-122,Bla,SHV-OKP-LEN,OKP-B-122,3399,RefSeq_NG_244912,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-123,Bla,SHV-OKP-LEN,OKP-B-123,3400,RefSeq_NG_244913,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-124,Bla,SHV-OKP-LEN,OKP-B-124,3401,RefSeq_NG_244914,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-125,Bla,SHV-OKP-LEN,OKP-B-125,3402,RefSeq_NG_244915,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-126,Bla,SHV-OKP-LEN,OKP-B-126,3403,RefSeq_NG_244916,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-127,Bla,SHV-OKP-LEN,OKP-B-127,3404,RefSeq_NG_244917,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-128,Bla,SHV-OKP-LEN,OKP-B-128,3405,RefSeq_NG_244918,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-129,Bla,SHV-OKP-LEN,OKP-B-129,3406,RefSeq_NG_244919,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-130,Bla,SHV-OKP-LEN,OKP-B-130,3407,RefSeq_NG_244920,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-131,Bla,SHV-OKP-LEN,OKP-B-131,3408,RefSeq_NG_244921,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-132,Bla,SHV-OKP-LEN,OKP-B-132,3409,RefSeq_NG_244922,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-133,Bla,SHV-OKP-LEN,OKP-B-133,3410,RefSeq_NG_244923,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-134,Bla,SHV-OKP-LEN,OKP-B-134,3411,RefSeq_NG_244924,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-135,Bla,SHV-OKP-LEN,OKP-B-135,3412,RefSeq_NG_244925,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-136,Bla,SHV-OKP-LEN,OKP-B-136,3413,RefSeq_NG_244926,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-137,Bla,SHV-OKP-LEN,OKP-B-137,3414,RefSeq_NG_244927,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-138,Bla,SHV-OKP-LEN,OKP-B-138,3415,RefSeq_NG_244928,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-139,Bla,SHV-OKP-LEN,OKP-B-139,3416,RefSeq_NG_244929,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-140,Bla,SHV-OKP-LEN,OKP-B-140,3417,RefSeq_NG_244930,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-141,Bla,SHV-OKP-LEN,OKP-B-141,3418,RefSeq_NG_244931,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-142,Bla,SHV-OKP-LEN,OKP-B-142,3419,RefSeq_NG_244932,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-143,Bla,SHV-OKP-LEN,OKP-B-143,3420,RefSeq_NG_244933,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-144,Bla,SHV-OKP-LEN,OKP-B-144,3421,RefSeq_NG_244934,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-145,Bla,SHV-OKP-LEN,OKP-B-145,3422,RefSeq_NG_244935,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-146,Bla,SHV-OKP-LEN,OKP-B-146,3423,RefSeq_NG_244936,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-147,Bla,SHV-OKP-LEN,OKP-B-147,3424,RefSeq_NG_244937,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-148,Bla,SHV-OKP-LEN,OKP-B-148,3425,RefSeq_NG_244938,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-149,Bla,SHV-OKP-LEN,OKP-B-149,3426,RefSeq_NG_244939,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-150,Bla,SHV-OKP-LEN,OKP-B-150,3427,RefSeq_NG_244940,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-151,Bla,SHV-OKP-LEN,OKP-B-151,3428,RefSeq_NG_244941,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-152,Bla,SHV-OKP-LEN,OKP-B-152,3429,RefSeq_NG_244942,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-153,Bla,SHV-OKP-LEN,OKP-B-153,3430,RefSeq_NG_244943,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-154,Bla,SHV-OKP-LEN,OKP-B-154,3431,RefSeq_NG_244944,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-155,Bla,SHV-OKP-LEN,OKP-B-155,3432,RefSeq_NG_244945,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-156,Bla,SHV-OKP-LEN,OKP-B-156,3433,RefSeq_NG_244946,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-157,Bla,SHV-OKP-LEN,OKP-B-157,3434,RefSeq_NG_244947,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-159,Bla,SHV-OKP-LEN,OKP-B-159,3435,RefSeq_NG_244948,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-160,Bla,SHV-OKP-LEN,OKP-B-160,3436,RefSeq_NG_244949,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-161,Bla,SHV-OKP-LEN,OKP-B-161,3437,RefSeq_NG_244950,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-162,Bla,SHV-OKP-LEN,OKP-B-162,3438,RefSeq_NG_244951,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-163,Bla,SHV-OKP-LEN,OKP-B-163,3439,RefSeq_NG_244952,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-164,Bla,SHV-OKP-LEN,OKP-B-164,3440,RefSeq_NG_244953,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-165,Bla,SHV-OKP-LEN,OKP-B-165,3441,RefSeq_NG_244954,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-166,Bla,SHV-OKP-LEN,OKP-B-166,3442,RefSeq_NG_244955,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-167,Bla,SHV-OKP-LEN,OKP-B-167,3443,RefSeq_NG_244956,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-168,Bla,SHV-OKP-LEN,OKP-B-168,3444,RefSeq_NG_244957,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-169,Bla,SHV-OKP-LEN,OKP-B-169,3445,RefSeq_NG_244958,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-170,Bla,SHV-OKP-LEN,OKP-B-170,3446,RefSeq_NG_244959,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-171,Bla,SHV-OKP-LEN,OKP-B-171,3447,RefSeq_NG_244960,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-172,Bla,SHV-OKP-LEN,OKP-B-172,3448,RefSeq_NG_244961,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-173,Bla,SHV-OKP-LEN,OKP-B-173,3449,RefSeq_NG_244962,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-174,Bla,SHV-OKP-LEN,OKP-B-174,3450,RefSeq_NG_244963,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-175,Bla,SHV-OKP-LEN,OKP-B-175,3451,RefSeq_NG_245138,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-176,Bla,SHV-OKP-LEN,OKP-B-176,3452,RefSeq_NG_244964,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-177,Bla,SHV-OKP-LEN,OKP-B-177,3453,RefSeq_NG_244965,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-178,Bla,SHV-OKP-LEN,OKP-B-178,3454,RefSeq_NG_244966,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-179,Bla,SHV-OKP-LEN,OKP-B-179,3455,RefSeq_NG_244967,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-180,Bla,SHV-OKP-LEN,OKP-B-180,3456,RefSeq_NG_244968,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-181,Bla,SHV-OKP-LEN,OKP-B-181,3457,RefSeq_NG_244969,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-182,Bla,SHV-OKP-LEN,OKP-B-182,3458,RefSeq_NG_244970,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-183,Bla,SHV-OKP-LEN,OKP-B-183,3459,RefSeq_NG_244971,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-184,Bla,SHV-OKP-LEN,OKP-B-184,3460,RefSeq_NG_244972,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-185,Bla,SHV-OKP-LEN,OKP-B-185,3461,RefSeq_NG_244973,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-186,Bla,SHV-OKP-LEN,OKP-B-186,3462,RefSeq_NG_244974,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-187,Bla,SHV-OKP-LEN,OKP-B-187,3463,RefSeq_NG_244975,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-188,Bla,SHV-OKP-LEN,OKP-B-188,3464,RefSeq_NG_244976,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-189,Bla,SHV-OKP-LEN,OKP-B-189,3465,RefSeq_NG_244977,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-190,Bla,SHV-OKP-LEN,OKP-B-190,3466,RefSeq_NG_244978,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-191,Bla,SHV-OKP-LEN,OKP-B-191,3467,RefSeq_NG_244979,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-192,Bla,SHV-OKP-LEN,OKP-B-192,3468,RefSeq_NG_244980,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-193,Bla,SHV-OKP-LEN,OKP-B-193,3469,RefSeq_NG_244981,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-194,Bla,SHV-OKP-LEN,OKP-B-194,3470,RefSeq_NG_244982,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-195,Bla,SHV-OKP-LEN,OKP-B-195,3471,RefSeq_NG_244983,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-196,Bla,SHV-OKP-LEN,OKP-B-196,3472,RefSeq_NG_244984,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-197,Bla,SHV-OKP-LEN,OKP-B-197,3473,RefSeq_NG_244985,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-198,Bla,SHV-OKP-LEN,OKP-B-198,3474,RefSeq_NG_244986,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-199,Bla,SHV-OKP-LEN,OKP-B-199,3475,RefSeq_NG_244987,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-200,Bla,SHV-OKP-LEN,OKP-B-200,3476,RefSeq_NG_244988,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-B-201,Bla,SHV-OKP-LEN,OKP-B-201,3477,RefSeq_NG_244989,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-D-2,Bla,SHV-OKP-LEN,OKP-D-2,3478,RefSeq_NG_245029,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-D-3,Bla,SHV-OKP-LEN,OKP-D-3,3479,RefSeq_NG_245030,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-D-4,Bla,SHV-OKP-LEN,OKP-D-4,3480,RefSeq_NG_245031,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-D-5,Bla,SHV-OKP-LEN,OKP-D-5,3481,RefSeq_NG_245032,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-D-6,Bla,SHV-OKP-LEN,OKP-D-6,3482,RefSeq_NG_245033,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-D-7,Bla,SHV-OKP-LEN,OKP-D-7,3483,RefSeq_NG_245034,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,OKP-D-8,Bla,SHV-OKP-LEN,OKP-D-8,3484,RefSeq_NG_245035,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
