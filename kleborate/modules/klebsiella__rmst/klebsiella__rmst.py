@@ -129,14 +129,6 @@ def get_results(assembly, minimap2_index, args, previous_results):
         promoter_argR = "-"
         rmpA_promoter = "-"
 
-    # promoter_polyT = check_polyT_tract(hits_per_gene, assembly)
-    # promoter_argR = check_argR_box(hits_per_gene, assembly)
-    # if promoter_argR:
-    #     rmpA_promoter = f"{promoter_polyT}, {promoter_argR}"
-    # else:
-    #     rmpA_promoter = f"{promoter_polyT}"
-
-
     # rmpA_status logic
     allele_value = alleles['rmpA']
     allele_key = re.sub(r'^rmpA_', '', allele_value).rstrip('*')
@@ -176,17 +168,6 @@ def get_results(assembly, minimap2_index, args, previous_results):
     if promoter_argR and "ARG box lost" in promoter_argR:
         RmpADC_status = append_status_annotation(RmpADC_status, "ARG box lost")
 
-
-    # if inexact_truncated_allele(allele_value):
-    #     # RmpA allele is inexact match ('*'). Check poly-G variation
-    #     RmpADC_status = poly_G_variation(hits_per_gene, allele_key, rmpA_dict)
-    # else:
-    #     # RmpA allele is complete, Map to the pre-calculated dict.
-    #     allele_key = allele_value
-    #     RmpADC_status = rmpA_dict[allele_key][0]
-
-
-    
     argR_status = check_argR_status(hits_per_gene, assembly, argR_ref, args.klebsiella__rmst_min_identity,args.klebsiella__rmst_min_coverage)                           
                           
     return {'RmST': st, 
