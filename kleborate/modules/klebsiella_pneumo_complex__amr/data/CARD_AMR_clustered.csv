@@ -2382,10 +2382,10 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 261,clbC,MLS,clbC,clbC,2105,ARO_3002816,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 262,clcD,MLS,clcD,clcD,2106,ARO_3004599,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 263,emtA,MLS,Emt,emtA,2107,ARO_3004669,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-264,ereA,MLS,EreA,ereA,2108,ARO_3000361,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-264,ereA2,MLS,EreA,ereA2,2109,ARO_3002826,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-265,ereB,MLS,EreB,ereB,2110,ARO_3000363,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-266,ereD,MLS,EreD,ereD,2111,ARO_3004608,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+264,ere(A),MLS,EreA,ere(A),2108,ARO_3000361,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+264,ere(A2),MLS,EreA,ere(A2),2109,ARO_3002826,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+265,ere(B),MLS,EreB,ere(B),2110,ARO_3000363,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+266,ere(D),MLS,EreD,ere(D),2111,ARO_3004608,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 267,erm(30),MLS,Erm,erm(30),2112,ARO_3001265,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 267,erm(31),MLS,Erm,erm(31),2113,ARO_3000598,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 267,erm(32),MLS,Erm,erm(32),2114,ARO_3004592,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
@@ -3579,3 +3579,53 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-248,Bla,SHV-OKP-LEN,SHV-248,3587,RefSeq_NG_244643,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-253,Bla,SHV-OKP-LEN,SHV-253,3588,RefSeq_NG_245189,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-254,Bla,SHV-OKP-LEN,SHV-254,3589,RefSeq_NG_245190,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+143,TEM-213,Bla,TEM,TEM-213,3590,RefSeq_NG_051939,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+143,TEM-237,Bla,TEM,TEM-237,3591,ARO_3005268,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+143,TEM-256,Bla,TEM,TEM-256,3592,ARO_3009075,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+143,TEM-259,Bla,TEM,TEM-259,3593,RefSeq_NG_244651,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+143,TEM-31,Bla,TEM,TEM-31,3594,ARO_3000901,-,-,no,no,inhibitor-resistant broad-spectrum class A beta-lactamase,Bla_inhR,penicillin beta-lactam + beta-lactamase inhibitor,ARO:3000008;ARO:3000042
+143,TEM-32,Bla,TEM,TEM-32,3595,ARO_3000902,-,-,no,no,inhibitor-resistant broad-spectrum class A beta-lactamase,Bla_inhR,penicillin beta-lactam + beta-lactamase inhibitor,ARO:3000008;ARO:3000042
+143,TEM-5,Bla,TEM,TEM-5,3596,ARO_3000877,-,-,no,no,extended-spectrum class A beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+326,catA1.v1,Phe,Cat,catA1.v1,3597,RefSeq_NG_047586,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catA13.v1,Phe,Cat,catA13.v1,3598,RefSeq_NG_055993,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catA2,Phe,Cat,catA2,3599,RefSeq_NG_047596,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catA2.v1,Phe,Cat,catA2.v1,3600,RefSeq_NG_047594,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catA3,Phe,Cat,catA3,3601,RefSeq_NG_052661,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catB,Phe,Cat,catB,3602,RefSeq_NG_047599,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catB8.v1,Phe,Cat,catB8.v1,3603,RefSeq_NG_060511,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catB8.v2,Phe,Cat,catB8.v2,3604,RefSeq_NG_047615,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+327,cmlA1.v1,Phe,CmlA,cmlA1.v1,3605,RefSeq_NG_047648,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+327,cmlA1,Phe,CmlA,cmlA1.v2,3606,RefSeq_NG_047647,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+327,cmlA10,Phe,CmlA,cmlA10,3607,RefSeq_NG_047649,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+327,cmlA4.v1,Phe,CmlA,cmlA4.v1,3608,RefSeq_NG_047652,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+327,cmlA5.v1,Phe,CmlA,cmlA5.v1,3609,RefSeq_NG_051436,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+390,dfrA1.v3,Tmt,Dfr,dfrA1.v3,3610,RefSeq_NG_047676,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA1.v4,Tmt,Dfr,dfrA1.v4,3611,RefSeq_NG_047678,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA1.v5,Tmt,Dfr,dfrA1.v5,3612,RefSeq_NG_052353,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA12.v1,Tmt,Dfr,dfrA12.v1,3613,RefSeq_NG_047690,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA14.v3,Tmt,Dfr,dfrA14.v3,3614,RefSeq_NG_047696,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA15.v3,Tmt,Dfr,dfrA15.v3,3615,RefSeq_NG_047701,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA17.v1,Tmt,Dfr,dfrA17.v1,3616,RefSeq_NG_047709,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA19.v1,Tmt,Dfr,dfrA19.v1,3617,RefSeq_NG_050403,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA25.v1,Tmt,Dfr,dfrA25.v1,3618,RefSeq_NG_047721,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA33,Tmt,Dfr,dfrA33,3619,RefSeq_NG_052264,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA4,Tmt,Dfr,dfrA4,3620,RefSeq_NG_073445,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA42,Tmt,Dfr,dfrA42,3621,RefSeq_NG_071176,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA50,Tmt,Dfr,dfrA50,3622,RefSeq_NG_242637,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA51,Tmt,Dfr,dfrA51,3623,RefSeq_NG_242639,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+264,ere(A).v1,MLS,EreA,ere(A).v1,3624,RefSeq_NG_047770,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+264,ere(A).v2,MLS,EreA,ere(A).v2,3625,RefSeq_NG_047767,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+264,ere(A).v3,MLS,EreA,ere(A).v3,3626,RefSeq_NG_052426,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+267,erm(42).v1,MLS,Erm,erm(42).v1,3627,RefSeq_NG_047784,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+267,erm(52),MLS,Erm,erm(52),3628,ARO_3007041,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+267,ermB.v3,MLS,Erm,ermB.v3,3629,RefSeq_NG_047794,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+267,ermC.v3,MLS,Erm,ermC.v3,3630,RefSeq_NG_047806,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+267,ermX.v1,MLS,Erm,ermX.v1,3631,RefSeq_NG_047853,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+333,floR.v3,Phe,FloR,floR.v3,3632,RefSeq_NG_047869,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+333,floR.v4,Phe,FloR,floR.v4,3633,RefSeq_NG_047877,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+333,floR.v5,Phe,FloR,floR.v5,3634,RefSeq_NG_047863,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+333,floR.v6,Phe,FloR,floR.v6,3635,RefSeq_NG_047861,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+333,floR.v7,Phe,FloR,floR.v7,3636,RefSeq_NG_047876,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+333,floR.v8,Phe,FloR,floR.v8,3637,RefSeq_NG_047865,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+333,floR.v9,Phe,FloR,floR.v9,3638,RefSeq_NG_047866,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+333,floR2,Phe,FloR,floR2,3639,RefSeq_NG_047875,-,-,no,no,,,phenicol antibiotic,ARO:3000387
