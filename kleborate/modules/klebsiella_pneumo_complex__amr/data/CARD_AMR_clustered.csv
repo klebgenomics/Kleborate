@@ -3475,7 +3475,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,OKP-D-7,Bla,SHV-OKP-LEN,OKP-D-7,3483,RefSeq_NG_245034,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,OKP-D-8,Bla,SHV-OKP-LEN,OKP-D-8,3484,RefSeq_NG_245035,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 2,aac(3)-I,AGly,AAC(3),aac(3)-I,3485,RefSeq_NG_047237,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-2,aac(3)-Iva,AGly,AAC(3),aac(3)-Iva,3486,ARO_3002539,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-Ia.v1,AGly,AAC(3),aac(3)-Ia.v1,3487,RefSeq_NG_047234,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-Ia.v2,AGly,AAC(3),aac(3)-Ia.v2,3488,RefSeq_NG_047232,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-Ib.v1,AGly,AAC(3),aac(3)-Ib.v1,3489,RefSeq_NG_047257,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -3498,7 +3497,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 3,aac(6')-Ib-G,AGly,AAC(6'),aac(6')-Ib-G,3506,RefSeq_NG_051697,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-G.v1,AGly,AAC(6'),aac(6')-Ib-G.v1,3507,RefSeq_NG_047288,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-G.v2,AGly,AAC(6'),aac(6')-Ib-G.v2,3508,RefSeq_NG_052535,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib-G.v3,AGly,AAC(6'),aac(6')-Ib-G.v3,3509,RefSeq_NG_047291,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-G.v4,AGly,AAC(6'),aac(6')-Ib-G.v4,3510,RefSeq_NG_067956,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-G.v5,AGly,AAC(6'),aac(6')-Ib-G.v5,3511,RefSeq_NG_067963,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-W104R,AGly,AAC(6'),aac(6')-Ib-W104R,3512,RefSeq_NG_067951,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -3574,7 +3572,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 117,OXA-395,Bla,OXA,OXA-395,3582,ARO_3001581,-,-,no,no,OXA-50 family oxacillin-hydrolyzing class D beta-lactamase OXA-846,Bla,penicillin beta-lactam,ARO:3000008
 117,OXA-932,Bla,OXA,OXA-932,3583,ARO_3006115,-,-,no,no,OXA-10 family class D beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 413,PLA-4,Bla,PLA,PLA-4,3584,ARO_3009030,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
-135,SHV-202,Bla,SHV-OKP-LEN,SHV-202,3586,ARO_3005253,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-248,Bla,SHV-OKP-LEN,SHV-248,3587,RefSeq_NG_244643,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-253,Bla,SHV-OKP-LEN,SHV-253,3588,RefSeq_NG_245189,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-254,Bla,SHV-OKP-LEN,SHV-254,3589,RefSeq_NG_245190,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
@@ -3597,8 +3594,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 327,cmlA1,Phe,CmlA,cmlA1.v2,3606,RefSeq_NG_047647,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 327,cmlA10,Phe,CmlA,cmlA10,3607,RefSeq_NG_047649,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 327,cmlA4.v1,Phe,CmlA,cmlA4.v1,3608,RefSeq_NG_047652,-,-,no,no,,,phenicol antibiotic,ARO:3000387
-327,cmlA5.v1,Phe,CmlA,cmlA5.v1,3609,RefSeq_NG_051436,-,-,no,no,,,phenicol antibiotic,ARO:3000387
-390,dfrA1.v3,Tmt,Dfr,dfrA1.v3,3610,RefSeq_NG_047676,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA1.v4,Tmt,Dfr,dfrA1.v4,3611,RefSeq_NG_047678,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA1.v5,Tmt,Dfr,dfrA1.v5,3612,RefSeq_NG_052353,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA12.v1,Tmt,Dfr,dfrA12.v1,3613,RefSeq_NG_047690,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
