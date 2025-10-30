@@ -3574,7 +3574,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 117,OXA-395,Bla,OXA,OXA-395,3582,ARO_3001581,-,-,no,no,OXA-50 family oxacillin-hydrolyzing class D beta-lactamase OXA-846,Bla,penicillin beta-lactam,ARO:3000008
 117,OXA-932,Bla,OXA,OXA-932,3583,ARO_3006115,-,-,no,no,OXA-10 family class D beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 413,PLA-4,Bla,PLA,PLA-4,3584,ARO_3009030,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
-135,SHV-187,Bla,SHV-OKP-LEN,SHV-187,3585,ARO_3003154,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 135,SHV-202,Bla,SHV-OKP-LEN,SHV-202,3586,ARO_3005253,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-248,Bla,SHV-OKP-LEN,SHV-248,3587,RefSeq_NG_244643,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-253,Bla,SHV-OKP-LEN,SHV-253,3588,RefSeq_NG_245189,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
