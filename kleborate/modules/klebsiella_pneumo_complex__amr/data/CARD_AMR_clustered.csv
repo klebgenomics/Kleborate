@@ -3629,3 +3629,46 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 333,floR.v8,Phe,FloR,floR.v8,3637,RefSeq_NG_047865,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 333,floR.v9,Phe,FloR,floR.v9,3638,RefSeq_NG_047866,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 333,floR2,Phe,FloR,floR2,3639,RefSeq_NG_047875,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+414,fosLL,Fcyn,FosLL,fosLL,3640,RefSeq_NG_231529,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+163,fosA5,Fcyn,FosA,fosA5,3641,RefSeq_NG_047881,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+163,fosA5.v1,Fcyn,FosA,fosA5.v1,3642,RefSeq_NG_047882,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+163,fosA_PA1129,Fcyn,FosA,fosA_PA1129,3643,RefSeq_NG_047883,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+163,fosA10,Fcyn,FosA,fosA10,3644,RefSeq_NG_047884,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+163,fosA5.v2,Fcyn,FosA,fosA5.v2,3645,ARO_3003209,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+163,fosA9,Fcyn,FosA,fosA9,3646,RefSeq_NG_076845,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+415,fosE,Fcyn,FosE,fosE,3647,RefSeq_NG_047893,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+416,fosI,Fcyn,FosI,fosI,3648,"ARO_3007370	",-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+270,lnuA.v1,MLS,LnuA,lnuA.v1,3649,RefSeq_NG_047915,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+155,mcr-3.20.v1,Col,Mcr3,mcr-3.20.v1,3650,RefSeq_NG_055493,-,-,no,no,,,peptide antibiotic,ARO:3000053
+171,qepA1,Flq,QepA,qepA1,3651,RefSeq_NG_050459,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+171,qepA4,Flq,QepA,qepA4,3652,ARO_3004379,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+171,qepA8,Flq,QepA,qepA8,3653,RefSeq_NG_062251,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB10.v1,Flq,QnrB,qnrB10.v1,3654,RefSeq_NG_050470,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB17.v1,Flq,QnrB,qnrB17.v1,3655,RefSeq_NG_050477,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB91,Flq,QnrB,qnrB91,3656,RefSeq_NG_057450,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB95,Flq,QnrB,qnrB95,3657,RefSeq_NG_059332,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB98,Flq,QnrB,qnrB98,3658,RefSeq_NG_242326,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+178,qnrS13,Flq,QnrS,qnrS13,3659,RefSeq_NG_059275,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+21,rmtB4,AGly,RmtB,rmtB4,3660,RefSeq_NG_051536,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+26,rmtF2,AGly,RmtF,rmtF2,3661,RefSeq_NG_051537,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+338,sul1.v1,Sul,Sul,sul1.v1,3662,RefSeq_NG_048102,-,-,no,no,,,sulfonamide antibiotic,ARO:3000282
+338,sul1.v2,Sul,Sul,sul1.v2,3663,RefSeq_NG_048081,-,-,no,no,,,sulfonamide antibiotic,ARO:3000282
+338,sul1.v3,Sul,Sul,sul1.v3,3664,RefSeq_NG_048083,-,-,no,no,,,sulfonamide antibiotic,ARO:3000282
+338,sul2.v1,Sul,Sul,sul2.v1,3665,RefSeq_NG_048118,-,-,no,no,,,sulfonamide antibiotic,ARO:3000282
+368,tet(A).v3,Tet,TetA,tet(A).v3,3666,RefSeq_NG_048156,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+368,tet(A).v4,Tet,TetA,tet(A).v4,3667,RefSeq_NG_048159,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+368,tet(A).v5,Tet,TetA,tet(A).v5,3668,RefSeq_NG_048157,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+368,tet(A).v6,Tet,TetA,tet(A).v6,3669,RefSeq_NG_048155,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+369,tet(B).v3,Tet,TetB,tet(B).v3,3670,RefSeq_NG_048173,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+369,tet(B).v4,Tet,TetB,tet(B).v4,3671,RefSeq_NG_048173,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+369,tet(B).v5,Tet,TetB,tet(B).v5,3672,RefSeq_NG_048173,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+370,tet(C).v1,Tet,TetC,tet(C).v1,3673,RefSeq_NG_048181,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+375,tet(J).v1,Tet,TetJ,tet(J).v1,3674,RefSeq_NG_048199,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+378,tetM.v3,Tet,TetM,tetM.v3,3675,RefSeq_NG_048250,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+395,tmexC2,Tgc,tmexC,tmexC2,3676,RefSeq_NG_076647,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+395,tmexC3,Tgc,tmexC,tmexC3,3677,RefSeq_NG_076635,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+396,tmexD2,Tgc,tmexD,tmexD2,3678,RefSeq_NG_076648,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+396,tmexD3,Tgc,tmexD,tmexD3,3679,RefSeq_NG_076636,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+397,toprJ2,Tgc,toprJ,toprJ2,3680,RefSeq_NG_076649,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+317,vgaA.v1,MLS,VgaA,vgaA.v1,3681,RefSeq_NG_048557,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+161,mcr-9.2,Col,Mcr9,mcr-9.2,3682,GenBank_JAGFWX010000027,-,-,no,no,,,peptide antibiotic,ARO:3000053
