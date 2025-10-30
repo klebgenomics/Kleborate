@@ -3474,3 +3474,108 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,OKP-D-6,Bla,SHV-OKP-LEN,OKP-D-6,3482,RefSeq_NG_245033,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,OKP-D-7,Bla,SHV-OKP-LEN,OKP-D-7,3483,RefSeq_NG_245034,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,OKP-D-8,Bla,SHV-OKP-LEN,OKP-D-8,3484,RefSeq_NG_245035,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+2,aac(3)-I,AGly,AAC(3),aac(3)-I,3485,RefSeq_NG_047237,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+2,aac(3)-Iva,AGly,AAC(3),aac(3)-Iva,3486,ARO_3002539,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+2,aac(3)-Ia.v1,AGly,AAC(3),aac(3)-Ia.v1,3487,RefSeq_NG_047234,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+2,aac(3)-Ia.v2,AGly,AAC(3),aac(3)-Ia.v2,3488,RefSeq_NG_047232,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+2,aac(3)-Ib.v1,AGly,AAC(3),aac(3)-Ib.v1,3489,RefSeq_NG_047257,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+2,aac(3)-Via.v1,AGly,AAC(3),aac(3)-Via.v1,3490,RefSeq_NG_052583,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-set_A,AGly,AAC(6'),aac(6')-set_A,3491,RefSeq_NG_052254,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-29,AGly,AAC(6'),aac(6')-29,3492,RefSeq_NG_052220,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-31.v1,AGly,AAC(6'),aac(6')-31.v1,3493,RefSeq_NG_047265,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')_E963,AGly,AAC(6'),aac(6')_E963,3494,RefSeq_NG_242170,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-F309,AGly,AAC(6'),aac(6')-F309,3495,RefSeq_NG_242171,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ia.v1,AGly,AAC(6'),aac(6')-Ia.v1,3496,RefSeq_NG_052217,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-AGKT,AGly,AAC(6'),aac(6')-Ib-AGKT,3497,RefSeq_NG_052219,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-AKT,AGly,AAC(6'),aac(6')-Ib-AKT,3498,RefSeq_NG_056043,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-AKT.v1,AGly,AAC(6'),aac(6')-Ib-AKT.v1,3499,RefSeq_NG_052057,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-AKT.v2,AGly,AAC(6'),aac(6')-Ib-AKT.v2,3500,RefSeq_NG_052262,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-AKT.v3,AGly,AAC(6'),aac(6')-Ib-AKT.v3,3501,RefSeq_NG_052418,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-AKT.v4,AGly,AAC(6'),aac(6')-Ib-AKT.v4,3502,RefSeq_NG_067950,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-AKT.v5,AGly,AAC(6'),aac(6')-Ib-AKT.v5,3503,RefSeq_NG_067957,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-D181Y,AGly,AAC(6'),aac(6')-Ib-D181Y,3504,RefSeq_NG_067946,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-D181Y.v1,AGly,AAC(6'),aac(6')-Ib-D181Y.v1,3505,RefSeq_NG_067953,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-G,AGly,AAC(6'),aac(6')-Ib-G,3506,RefSeq_NG_051697,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-G.v1,AGly,AAC(6'),aac(6')-Ib-G.v1,3507,RefSeq_NG_047288,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-G.v2,AGly,AAC(6'),aac(6')-Ib-G.v2,3508,RefSeq_NG_052535,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-G.v3,AGly,AAC(6'),aac(6')-Ib-G.v3,3509,RefSeq_NG_047291,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-G.v4,AGly,AAC(6'),aac(6')-Ib-G.v4,3510,RefSeq_NG_067956,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-G.v5,AGly,AAC(6'),aac(6')-Ib-G.v5,3511,RefSeq_NG_067963,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-W104R,AGly,AAC(6'),aac(6')-Ib-W104R,3512,RefSeq_NG_067951,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-W104R.v1,AGly,AAC(6'),aac(6')-Ib-W104R.v1,3513,RefSeq_NG_067954,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib-cr11,AGly,AAC(6'),aac(6')-Ib-cr11,3514,RefSeq_NG_067969,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ib11.v1,AGly,AAC(6'),aac(6')-Ib11.v1,3515,RefSeq_NG_052506,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aacA16,AGly,AAC(6'),aacA16,3516,RefSeq_NG_052380,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aacA34,AGly,AAC(6'),aacA34,3517,RefSeq_NG_047319,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aacA43.v1,AGly,AAC(6'),aacA43.v1,3518,RefSeq_NG_052508,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aacA56,AGly,AAC(6'),aacA56,3519,RefSeq_NG_051492,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aacA8,AGly,AAC(6'),aacA8,3520,RefSeq_NG_052107,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+8,aad9,AGly,ANT(9),aad9,3521,RefSeq_NG_047322,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA1.v2,AGly,ANT(3''),aadA1.v2,3522,RefSeq_NG_047327,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA1.v3,AGly,ANT(3''),aadA1.v3,3523,RefSeq_NG_047325,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA1.v4,AGly,ANT(3''),aadA1.v4,3524,RefSeq_NG_052146,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA1.v5,AGly,ANT(3''),aadA1.v5,3525,RefSeq_NG_052536,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA1.v6,AGly,ANT(3''),aadA1.v6,3526,RefSeq_NG_052266,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA16.v1,AGly,ANT(3''),aadA16.v1,3527,RefSeq_NG_047339,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v1,AGly,ANT(3''),aadA2.v1,3528,RefSeq_NG_047343,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v2,AGly,ANT(3''),aadA2.v2,3529,RefSeq_NG_051846,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v3,AGly,ANT(3''),aadA2.v3,3530,RefSeq_NG_064655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v4,AGly,ANT(3''),aadA2.v4,3531,RefSeq_NG_052041,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v5,AGly,ANT(3''),aadA2.v5,3532,RefSeq_NG_052228,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA22.v1,AGly,ANT(3''),aadA22.v1,3533,RefSeq_NG_047348,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA25.v1,AGly,ANT(3''),aadA25.v1,3534,RefSeq_NG_052538,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA4.v3,AGly,ANT(3''),aadA4.v3,3535,RefSeq_NG_052359,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA5.v1,AGly,ANT(3''),aadA5.v1,3536,RefSeq_NG_047358,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA5.v2,AGly,ANT(3''),aadA5.v2,3537,RefSeq_NG_052436,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA6.v1,AGly,ANT(3''),aadA6.v1,3538,RefSeq_NG_052539,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+4,ant(2'')-Ia.v1,AGly,ANT(2''),ant(2'')-Ia.v1,3539,RefSeq_NG_052432,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+4,ant(2'')-Ia.v2,AGly,ANT(2''),ant(2'')-Ia.v2,3540,RefSeq_NG_052363,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+4,ant(2'')-Ia.v3,AGly,ANT(2''),ant(2'')-Ia.v3,3541,RefSeq_NG_064657,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+4,ant(2'')-Ia.v4,AGly,ANT(2''),ant(2'')-Ia.v4,3542,RefSeq_NG_052540,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+10,aph(3'')-Ib.v1,AGly,APH(3''),aph(3'')-Ib.v1,3543,RefSeq_NG_047413,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aph(3')-Ia.v3,AGly,APH(3'),aph(3')-Ia.v3,3544,RefSeq_NG_056047,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aph(3')-Ia.v4,AGly,APH(3'),aph(3')-Ia.v4,3545,RefSeq_NG_047441,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aph(3')-Ia.v5,AGly,APH(3'),aph(3')-Ia.v5,3546,RefSeq_NG_047440,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aph(3')-Ib.v1,AGly,APH(3'),aph(3')-Ib.v1,3547,RefSeq_NG_059324,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aph(3')-XV,AGly,APH(3'),aph(3')-XV,3548,RefSeq_NG_052270,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+13,aph(6)-Id.v3,AGly,APH(6),aph(6)-Id.v3,3549,RefSeq_NG_047466,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+11,aphA16,AGly,APH(3'),aphA16,3550,RefSeq_NG_047232,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+335,arr-2b,Rif,Arr,arr-2b,3551,RefSeq_NG_047480,-,-,no,no,,,Rifamycin antibiotic,ARO:3000157
+411,bla-A,Bla,bla-A,bla-A,3552,RefSeq_NG_047483,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+32,ACC-1.v1,Bla,ACC,ACC-1.v1,3553,RefSeq_NG_048588,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+32,ACC-4.v1,Bla,ACC,ACC-4.v1,3554,RefSeq_NG_048594,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+35,ADC-198,Bla,ADC,ADC-198,3555,ARO_3006367,-,-,no,no,class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+35,ADC-203,Bla,ADC,ADC-203,3556,ARO_3006372,-,-,no,no,class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+79,CTX-M-248,Bla,CTX-M,CTX-M-248,3557,ARO_3008138,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+79,CTX-M-249,Bla,CTX-M,CTX-M-249,3558,ARO_3008139,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+90,FOX-14,Bla,FOX,FOX-14,3559,ARO_3006472,-,-,no,no,class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+94,GES-48,Bla,GES,GES-48,3560,ARO_3002342,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+412,KLUC-2,Bla,KLUC,KLUC-2,3561,ARO_3006928,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+104,KPC-110,Bla,KPC,KPC-110,3562,ARO_3008240,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-118,Bla,KPC,KPC-118,3563,ARO_3008248,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-157,Bla,KPC,KPC-157,3564,ARO_3008283,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-166,Bla,KPC,KPC-166,3565,ARO_3008292,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-170,Bla,KPC,KPC-170,3566,ARO_3008296,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-181,Bla,KPC,KPC-181,3567,ARO_3008307,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-183,Bla,KPC,KPC-183,3568,ARO_3008309,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-184,Bla,KPC,KPC-184,3569,ARO_3008310,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-53,Bla,KPC,KPC-53,3570,ARO_3008361,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-67,Bla,KPC,KPC-67,3571,ARO_3008362,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-68,Bla,KPC,KPC-68,3572,ARO_3008363,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-69,Bla,KPC,KPC-69,3573,ARO_3008364,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-70,Bla,KPC,KPC-70,3574,ARO_3008365,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-85,Bla,KPC,KPC-85,3575,ARO_3008367,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-92,Bla,KPC,KPC-92,3576,ARO_3008371,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+114,NDM-50,Bla,NDM,NDM-50,3577,ARO_3008398,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+117,OXA-1083,Bla,OXA,OXA-1083,3578,ARO_3008501,-,-,no,no,OXA-2 family class D beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+117,OXA-1146,Bla,OXA,OXA-1146,3579,ARO_3008564,-,-,no,no,OXA-48 family carbapenem-hydrolyzing class D beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+117,OXA-1211,Bla,OXA,OXA-1211,3580,ARO_3008621,-,-,no,no,OXA-48 family class D beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+117,OXA-1212,Bla,OXA,OXA-1212,3581,ARO_3008622,-,-,no,no,OXA-48 family class D beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+117,OXA-395,Bla,OXA,OXA-395,3582,ARO_3001581,-,-,no,no,OXA-50 family oxacillin-hydrolyzing class D beta-lactamase OXA-846,Bla,penicillin beta-lactam,ARO:3000008
+117,OXA-932,Bla,OXA,OXA-932,3583,ARO_3006115,-,-,no,no,OXA-10 family class D beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+413,PLA-4,Bla,PLA,PLA-4,3584,ARO_3009030,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+135,SHV-187,Bla,SHV-OKP-LEN,SHV-187,3585,ARO_3003154,-,-,no,no,class A broad-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
+135,SHV-202,Bla,SHV-OKP-LEN,SHV-202,3586,ARO_3005253,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,SHV-248,Bla,SHV-OKP-LEN,SHV-248,3587,RefSeq_NG_244643,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,SHV-253,Bla,SHV-OKP-LEN,SHV-253,3588,RefSeq_NG_245189,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,SHV-254,Bla,SHV-OKP-LEN,SHV-254,3589,RefSeq_NG_245190,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
