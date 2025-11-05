@@ -568,7 +568,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 79,CTX-M-129,Bla,CTX-M,CTX-M-129,515,ARO_3001988,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 79,CTX-M-13,Bla,CTX-M,CTX-M-13,516,ARO_3001876,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 79,CTX-M-130,Bla,CTX-M,CTX-M-130,517,ARO_3001989,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
-79,CTX-M-131.v1,Bla,CTX-M,CTX-M-131.v1,518,ARG_JN969893,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 79,CTX-M-131.v2,Bla,CTX-M,CTX-M-131.v2,519,ARO_3001990,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 79,CTX-M-132,Bla,CTX-M,CTX-M-132,520,ARO_3001991,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 79,CTX-M-134,Bla,CTX-M,CTX-M-134,521,ARO_3001992,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
@@ -2693,7 +2692,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 390,dfrA39,Tmt,Dfr,dfrA39,2423,ARO_3005351,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrB9,Tmt,Dfr,dfrB9,2424,ARO_3005350,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA43,Tmt,Dfr,dfrA43,2425,ARO_3005345,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
-391,strA.v1,AGly,StrA,strA.v1,2409,ARG_AJ627643,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 392,strB.v1,AGly,StrB,strB.v1,2410,ARG_KR091911,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 393,SFO-1.v1,Bla,SFO-1,SFO-1.v1,2411,ARG_FJ848785,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 395,tmexC1,Tgc,tmexC,tmexC1,2413,-,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
@@ -3587,11 +3585,11 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 326,catA2,Phe,Cat,catA2,3599,RefSeq_NG_047596,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 326,catA2.v1,Phe,Cat,catA2.v1,3600,RefSeq_NG_047594,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 326,catA3,Phe,Cat,catA3,3601,RefSeq_NG_052661,-,-,no,no,,,phenicol antibiotic,ARO:3000387
-326,catB,Phe,Cat,catB,3602,RefSeq_NG_047599,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+326,catB.v1,Phe,Cat,catB.v1,3602,RefSeq_NG_047599,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 326,catB8.v1,Phe,Cat,catB8.v1,3603,RefSeq_NG_060511,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 326,catB8.v2,Phe,Cat,catB8.v2,3604,RefSeq_NG_047615,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 327,cmlA1.v1,Phe,CmlA,cmlA1.v1,3605,RefSeq_NG_047648,-,-,no,no,,,phenicol antibiotic,ARO:3000387
-327,cmlA1,Phe,CmlA,cmlA1.v2,3606,RefSeq_NG_047647,-,-,no,no,,,phenicol antibiotic,ARO:3000387
+327,cmlA1.v2,Phe,CmlA,cmlA1.v2,3606,RefSeq_NG_047647,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 327,cmlA10,Phe,CmlA,cmlA10,3607,RefSeq_NG_047649,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 327,cmlA4.v1,Phe,CmlA,cmlA4.v1,3608,RefSeq_NG_047652,-,-,no,no,,,phenicol antibiotic,ARO:3000387
 390,dfrA1.v4,Tmt,Dfr,dfrA1.v4,3611,RefSeq_NG_047678,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
