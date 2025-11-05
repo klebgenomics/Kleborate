@@ -3476,7 +3476,7 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 338,sul2.v1,Sul,Sul,sul2.v1,3665,RefSeq_NG_048118,NG_048118.1,-,-,no,no,,,sulfonamide antibiotic,ARO:3000282
 339,otr(A),Tet,OtrA,otr(A),2287,ARO_3002891,NG_048026.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 340,otr(B),Tet,OtrB,otr(B),2288,ARO_3002892,NG_048029.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
-341,otrC,Tet,OtrC,otrC,2289,ARO_3002894,AY509111.1:324-1379,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+341,otr(C),Tet,OtrC,otr(C),2289,ARO_3002894,AY509111.1:324-1379,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 342,tcr3,Tet,Tcr3,tcr3,2290,ARO_3002893,NG_055981.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 343,tet(30),Tet,Tet-30,tet(30),2291,ARO_3000561,NG_048122.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 344,tet(31),Tet,Tet-31,tet(31),2292,ARO_3000476,NG_048123.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
