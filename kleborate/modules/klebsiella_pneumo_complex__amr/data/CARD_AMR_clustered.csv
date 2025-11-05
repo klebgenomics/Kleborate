@@ -3376,14 +3376,14 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 314,vatF,MLS,VatF,vatF,2212,ARO_3003744,NG_048550.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 315,vatH,MLS,VatH,vatH,2213,ARO_3002845,NG_048551.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 316,vatI,MLS,VatI,vatI,2214,ARO_3003987,NG_055656.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-317,vgaA,MLS,VgaA,vgaA,2215,ARO_3002829,NG_048552.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-317,vgaALC,MLS,VgaA,vgaALC,2216,ARO_3002830,NG_047097.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-317,vgaA.v1,MLS,VgaA,vgaA.v1,3681,RefSeq_NG_048557,NG_048557.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-318,vgaB,MLS,VgaB,vgaB,2217,ARO_3000118,NG_048558.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-319,vgaC,MLS,VgaC,vgaC,2218,ARO_3002831,NG_048559.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-320,vgaD,MLS,VgaD,vgaD,2219,ARO_3002832,NG_048560.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-321,vga(E) ,MLS,VgaE,vga(E) ,2220,ARO_3004715,NG_065854.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
-321,vgaE,MLS,VgaE,vgaE,2221,ARO_3002833,NG_048561.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+317,vga(A),MLS,Vga(A),vga(A),2215,ARO_3002829,NG_048552.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+317,vga(A)-LC,MLS,Vga(A),vga(A)-LC,2216,ARO_3002830,NG_047097.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+317,vga(A).v1,MLS,Vga(A),vga(A).v1,3681,RefSeq_NG_048557,NG_048557.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+318,vga(B),MLS,Vga(B),vga(B),2217,ARO_3000118,NG_048558.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+319,vga(C),MLS,Vga(C),vga(C),2218,ARO_3002831,NG_048559.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+320,vga(D),MLS,Vga(D),vga(D),2219,ARO_3002832,NG_048560.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+321,vga(E) ,MLS,Vga(E),vga(E) ,2220,ARO_3004715,NG_065854.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
+321,vga(E).v1,MLS,Vga(E),vga(E).v1,2221,ARO_3002833,NG_048561.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 322,vgbA,MLS,VgbA,vgbA,2222,ARO_3001307,NG_048563.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 323,vgbB,MLS,VgbB,vgbB,2223,ARO_3001308,NG_048564.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
 324,vgbC,MLS,VgbC,vgbC,2224,ARO_3003990,NG_056050.1,-,-,no,no,,,Macrolide antibiotic,ARO:0000000
