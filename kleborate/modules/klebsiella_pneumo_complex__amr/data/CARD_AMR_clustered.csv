@@ -2672,7 +2672,7 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 143,TEM-220,Bla,TEM,TEM-220,1664,ARO_3003158,NG_050253.1,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-70,Bla,TEM,TEM-70,1665,ARO_3000936,NG_050282.1,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-96,Bla,TEM,TEM-96,1666,ARO_3000963,NG_050305.1,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
-143,TEM-1,Bla,TEM,TEM-1,1667,ARO_3000873,CP092807.1:41739-42599,-,-,no,no,class A broad-spectrum beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+143,TEM-1,Bla,TEM,TEM-1,1667,ARO_3000873,AY263331.1,-,-,no,no,class A broad-spectrum beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-110,Bla,TEM,TEM-110,1668,ARO_3000973,NG_050156.1,-,-,no,no,class A broad-spectrum beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-127,Bla,TEM,TEM-127,1669,ARO_3000989,NG_050171.1,-,-,no,no,class A broad-spectrum beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-128.v1,Bla,TEM,TEM-128.v1,1670,ARG_AY359287,AY359287.1:186-1046,-,-,no,no,class A broad-spectrum beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
@@ -2804,7 +2804,6 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 143,TEM-158,Bla,TEM,TEM-158,1796,ARO_3001024,NG_050202.1,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR,third-generation cephalosporin + beta-lactamase inhibitor,ARO:3009107;ARO:3000042
 143,TEM-178,Bla,TEM,TEM-178,1797,ARO_3001043,NG_050217.1,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR,third-generation cephalosporin + beta-lactamase inhibitor,ARO:3009107;ARO:3000042
 143,TEM-68,Bla,TEM,TEM-68,1798,ARO_3000935,NG_050281.1,-,-,no,no,inhibitor-resistant class A extended-spectrum beta-lactamase,Bla_ESBL_inhR,third-generation cephalosporin + beta-lactamase inhibitor,ARO:3009107;ARO:3000042
-143,TEM-1D.v1,Bla,TEM,TEM-1D.v1,1799,ARG_AF188200,CP169870.1:1096875-1097735,-,-,no,no,,,penicillin beta-lactam,ARO:3000008
 143,TEM-210,Bla,TEM,TEM-210,2666,ARO_3001387,NG_050243.1,-,-,no,no,class A beta-lactamase TEM-210,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-212,Bla,TEM,TEM-212,2667,ARO_3001389,NG_050245.1,-,-,no,no,class A beta-lactamase TEM-212,Bla,penicillin beta-lactam,ARO:3000008
 143,TEM-224,Bla,TEM,TEM-224,2668,ARO_3005255,NG_050254.1,-,-,no,no,class A beta-lactamase TEM-224,Bla,penicillin beta-lactam,ARO:3000008
