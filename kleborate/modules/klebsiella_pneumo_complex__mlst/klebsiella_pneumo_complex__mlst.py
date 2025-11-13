@@ -15,6 +15,7 @@ import os
 import pathlib
 import shutil
 import sys
+import re
 
 from ...shared.mlst import mlst
 
@@ -64,6 +65,20 @@ def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
+def get_kp_subspecies_based_on_st(st):
+    ozaenae_sts = {'ST90', 'ST91', 'ST92', 'ST93', 'ST95', 'ST96', 'ST97', 'ST381', 'ST777',
+                   'ST3193', 'ST3766', 'ST3768', 'ST3771', 'ST3781', 'ST3782', 'ST3784', 'ST3802',
+                   'ST3803'}
+    rhinoscleromatis_sts = {'ST67', 'ST68', 'ST69', 'ST3772', 'ST3819'}
+    # st_minus_lv  = re.sub(r'-\dLV$', '', st)
+    # # st_minus_lv = st.replace('-1LV', '')  
+    if st in ozaenae_sts:
+        return st + ' (subsp. ozaenae)'
+    if st in rhinoscleromatis_sts:
+        return st + ' (subsp. rhinoscleromatis)'
+    return st
+
+
 def get_results(assembly, minimap2_index, args, previous_results):
     genes = ['gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB']
     profiles = data_dir() / 'profiles.tsv'
@@ -74,7 +89,9 @@ def get_results(assembly, minimap2_index, args, previous_results):
                           args.klebsiella_pneumo_complex__mlst_min_identity, args.klebsiella_pneumo_complex__mlst_min_coverage,
                           args.klebsiella_pneumo_complex__mlst_required_exact_matches)
 
-    return {'ST': st,
+    st_annotation= get_kp_subspecies_based_on_st(st)
+
+    return {'ST': st_annotation,
             'gapA': alleles['gapA'], 'infB': alleles['infB'], 'mdh': alleles['mdh'],
             'pgi': alleles['pgi'], 'phoE': alleles['phoE'], 'rpoB': alleles['rpoB'],
             'tonB': alleles['tonB']}

@@ -19,7 +19,7 @@ import ast
 import re
 
 
-from ...shared.multi_mlst import multi_mlst, poly_G_variation, check_argR_box, check_argR_status,check_polyT_tract, translate_nucl_to_prot, allele_type
+from ...shared.multi_mlst import multi_mlst, poly_G_variation, poly_G_rmpC_variation, poly_A_variation, check_argR_box, check_argR_status,check_polyT_tract, translate_nucl_to_prot, allele_type, process_status_dict, get_gene_status
 from ...shared.alignment import truncation_check
 from ...shared.misc import load_fasta, reverse_complement
 
@@ -83,15 +83,14 @@ def get_results(assembly, minimap2_index, args, previous_results):
     genes = ['rmpA', 'rmpC', 'rmpD']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
-    rmpA_status_dict = data_dir()/'rampA_polyG_status.txt'
+    rmpA_status_dict = data_dir()/'rmpA_polyG_status.txt'
+    rmpC_status_dict = data_dir()/'rmpC_polyG_status.txt' 
+    rmpD_status_dict = data_dir()/'rmpD_polyA_status.txt'
 
+    rmpA_dict = process_status_dict(rmpA_status_dict, 'rmpA')
+    rmpC_dict = process_status_dict(rmpC_status_dict, 'rmpC')
+    rmpD_dict = process_status_dict(rmpD_status_dict, 'rmpD')
 
-    with open(rmpA_status_dict) as f:
-        rmpA_dict_raw = ast.literal_eval(f.read())
-    rmpA_dict = {
-        re.sub(r'^rmpA_', '', k).rstrip('*'): v
-        for k, v in rmpA_dict_raw.items()
-    }
 
     results, spurious_hits, hits_per_gene  = multi_mlst(assembly, minimap2_index, profiles, alleles, genes,
                                       'rmp_lineage', args.klebsiella__rmst_min_identity,
@@ -129,66 +128,39 @@ def get_results(assembly, minimap2_index, args, previous_results):
         promoter_argR = "-"
         rmpA_promoter = "-"
 
-    # promoter_polyT = check_polyT_tract(hits_per_gene, assembly)
-    # promoter_argR = check_argR_box(hits_per_gene, assembly)
-    # if promoter_argR:
-    #     rmpA_promoter = f"{promoter_polyT}, {promoter_argR}"
-    # else:
-    #     rmpA_promoter = f"{promoter_polyT}"
+    argR_status = check_argR_status( 
+        assembly, 
+        argR_ref, 
+        args.klebsiella__rmst_min_identity,
+        args.klebsiella__rmst_min_coverage
+    ) 
 
+    rmpA_status = get_gene_status(alleles['rmpA'], rmpA_dict, hits_per_gene, poly_G_variation)
+    rmpD_status = get_gene_status(alleles['rmpD'], rmpD_dict, hits_per_gene, poly_A_variation)
+    rmpC_status = get_gene_status(alleles['rmpC'], rmpC_dict, hits_per_gene, poly_G_rmpC_variation)
+    rmpA_promoter_status = "OFF" if (rmpA_promoter == "-" or "OFF" in rmpA_promoter) else "ON"
 
-    # rmpA_status logic
-    allele_value = alleles['rmpA']
-    allele_key = re.sub(r'^rmpA_', '', allele_value).rstrip('*')
+    combined_status = [rmpA_status, rmpD_status, rmpC_status, rmpA_promoter_status]
 
-    if allele_key == '-' or allele_value == '-':
+    if isinstance(lineage, str) and ("truncated" in lineage or "incomplete" in lineage):
+        lineage = lineage.replace(" (truncated)", "").replace(" (incomplete)", "")
+        lineage = f"{lineage} (partial)"
         RmpADC_status = "-"
     else:
-        match_allele_type = allele_type(allele_value)
-        if match_allele_type == "truncated":
-            RmpADC_status = "truncated"
-        elif match_allele_type == "inexact":
-            RmpADC_status = poly_G_variation(hits_per_gene)
-        elif match_allele_type == "exact":
-            RmpADC_status = rmpA_dict[allele_value][0]
+        if any(status == "OFF" for status in combined_status):
+            RmpADC_status = "OFF"
         else:
-            RmpADC_status = "-"
+            RmpADC_status = "ON"
 
-    # add rmpA_promoter
-    def append_status_annotation(status, annotation):
-        status = status.strip()
-        annotation = annotation.strip()
-        if not annotation:
-            return status
-        # Find existing parenthetical annotation
-        if status.endswith(")"):
-            # Insert new annotation inside the existing parentheses
-            return status[:-1] + ", " + annotation + ")"
-        else:
-            # Add a new parenthetical annotation
-            return f"{status} ({annotation})"
-
-    # Add (promoter 10T) if polyT is 10T (OFF)
-    if str(promoter_polyT).strip() == "10T (OFF)":
-        RmpADC_status = append_status_annotation(RmpADC_status, "promoter 10T")
-
-    # Add (ARG box lost) if reported in promoter_argR
-    if promoter_argR and "ARG box lost" in promoter_argR:
-        RmpADC_status = append_status_annotation(RmpADC_status, "ARG box lost")
-
-
-    # if inexact_truncated_allele(allele_value):
-    #     # RmpA allele is inexact match ('*'). Check poly-G variation
-    #     RmpADC_status = poly_G_variation(hits_per_gene, allele_key, rmpA_dict)
-    # else:
-    #     # RmpA allele is complete, Map to the pre-calculated dict.
-    #     allele_key = allele_value
-    #     RmpADC_status = rmpA_dict[allele_key][0]
-
-
-    
-    argR_status = check_argR_status(hits_per_gene, assembly, argR_ref, args.klebsiella__rmst_min_identity,args.klebsiella__rmst_min_coverage)                           
-                          
+    if RmpADC_status != "-":
+        ann = []
+        if promoter_argR and "ARG-box lost" in promoter_argR:
+            ann.append("(ARG box lost)")
+        if "-" in argR_status:
+            ann.append("(argR missing)")
+        if ann:
+            RmpADC_status = f"{RmpADC_status} {' '.join(ann)}"
+                 
     return {'RmST': st, 
             'RmpADC': lineage,
             'rmpA': alleles['rmpA'], 'rmpD': alleles['rmpD'], 'rmpC': alleles['rmpC'],
