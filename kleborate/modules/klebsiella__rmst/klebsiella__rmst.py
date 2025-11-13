@@ -19,7 +19,7 @@ import ast
 import re
 
 
-from ...shared.multi_mlst import multi_mlst, poly_G_variation, check_argR_box, check_argR_status,check_polyT_tract, translate_nucl_to_prot, allele_type
+from ...shared.multi_mlst import multi_mlst, poly_G_variation, poly_G_rmpC_variation, poly_A_variation, check_argR_box, check_argR_status,check_polyT_tract, translate_nucl_to_prot, allele_type, process_status_dict, get_gene_status
 from ...shared.alignment import truncation_check
 from ...shared.misc import load_fasta, reverse_complement
 
