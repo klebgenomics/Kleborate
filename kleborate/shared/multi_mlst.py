@@ -188,8 +188,7 @@ def process_spurious_hits(hits):
 
 def check_polyT_tract(hits_per_gene, assembly):
     """
-    For rmpA hit, extracts the upstream sequence and
-    checks for poly-T tract (G(T+)A).
+    checks for poly-T tract mutation
     """
     poly_t_status_map = {
         8: "OFF",
@@ -218,7 +217,7 @@ def check_polyT_tract(hits_per_gene, assembly):
                 contig_start, contig_end = hit.ref_start, hit.ref_end
                 full_contig_seq = assembly_seqs[hit.ref_name]
 
-                # Extract 80bp upstream sequence ---
+                # Extract 80bp upstream sequence
                 if hit.strand == '+':
                     upstream_start = max(0, contig_start - upstream_length)
                     upstream_seq = full_contig_seq[upstream_start:contig_start]
@@ -238,47 +237,27 @@ def check_polyT_tract(hits_per_gene, assembly):
 
                     # Determine ON/OFF status
                     if poly_t_length in poly_t_status_map:
-                        predicted_status = poly_t_status_map[poly_t_length]
-                    elif poly_t_length < 11:
-                        predicted_status = "OFF"
-                    else:
-                        predicted_status = "ON"
-                    
-                    status_results = f"{poly_t_length}T ({predicted_status})"
-                    results.append(status_results)
-        
+                        status_results = f"{poly_t_length}T ({poly_t_status_map[poly_t_length]})"
+                        if poly_t_length >= 11 and poly_t_status_map[poly_t_length] == "ON":
+                            status_results = f"{poly_t_length}T"
+                        results.append(status_results)
+                        
     if results:
         return results[0]
     else:
         return ''
 
 
-
-def check_argR_status(hits_per_gene, assembly, argR_ref, min_identity, min_coverage):
+def check_argR_status(assembly, argR_ref, min_identity, min_coverage):
     """
-    Checks for rmpA hits, searches for the argR gene in the assembly,
+    searches for the argR gene in the assembly,
     and checks for ArgR gene or truncation of the encoded ArgR protein.
-
     Returns:
         list: argR_status 
     """
-
-    gene_prefix = "rmpA"
     argR_status = []
-
-    for gene in hits_per_gene:
-        hits_per_gene[gene] = cull_redundant_hits(hits_per_gene[gene])
     
-    # Check for rmpA hit
-    rmpA_hit = any(
-        gene.startswith('rmpA') and hits_per_gene[gene] 
-        for gene in hits_per_gene
-    )
-    if not rmpA_hit:
-        argR_status.append('-')
-        return argR_status
-    
-    # Search for the argR gene in the assembly (only if rmpA hit)
+    # Search for the argR gene in the assembly 
     argR_aln = align_query_to_ref(
         argR_ref, 
         assembly, 
@@ -288,9 +267,11 @@ def check_argR_status(hits_per_gene, assembly, argR_ref, min_identity, min_cover
 
     if not argR_aln:
         argR_status.append('-')
+        # argR_status.append('argR missing')
     else:
         hit = argR_aln[0]
         _, coverage, _ = truncation_check(hit)
+        # print(coverage)
         if coverage >= 100.0:
             argR_status.append('present')
         else:
@@ -338,7 +319,7 @@ def check_argR_box(hits_per_gene, assembly):
                 if ARG_box in upstream_seq:
                     break
             else:
-                results.append('ARG-box loss')
+                results.append('ARG-box lost')
     if results:
         return results[0]
     else:
@@ -349,41 +330,147 @@ def poly_G_variation(hits_per_gene):
     
     loci_status = []
     COVERAGE_THRESHOLD = 95.0
-    window_start_idx = 276 - 1
-    window_end_idx = 285
+    window_start_idx = 276 - 1  
+    window_end_idx = 285        
 
     for gene, hits in hits_per_gene.items():
         hits = cull_redundant_hits(hits)
         if gene.startswith("rmpA"):
             for hit in hits:
                 seq = hit.ref_seq
-                query_aa_length = (hit.query_length - 3) // 3
+                org_aa_length = len(translate_nucl_to_prot(seq))
                 window_seq = seq[window_start_idx:window_end_idx]
 
                 for match in re.finditer(r"(G{5,})", window_seq):
                     abs_start = window_start_idx + match.start()
                     abs_end = window_start_idx + match.end()
-                    original_length = match.end() - match.start()
+                    length = match.end() - match.start()  
 
-                    for n in (-2, -1, 1, 2):
-                        new_length = original_length + n
-                        if new_length < 0:
-                            continue
-                        ext_seq = seq[:abs_start] + ("G" * new_length) + seq[abs_end:]
-                        translation = translate_nucl_to_prot(ext_seq)
-                        coverage = 100.0 * len(translation) / query_aa_length
+                    # Build extended sequences
+                    ext_seq_plus1 = seq[:abs_start] + ("G" * (length + 1)) + seq[abs_end:]
+                    ext_seq_plus2 = seq[:abs_start] + ("G" * (length + 2)) + seq[abs_end:]
 
-                        if coverage >= COVERAGE_THRESHOLD:
-                            status = "ON (phase variable)"
-                        else:
-                            status = "OFF (phase variable)"
+                    # Translate
+                    translation_plus1 = translate_nucl_to_prot(ext_seq_plus1)
+                    translation_plus2 = translate_nucl_to_prot(ext_seq_plus2)
 
-                        # status = (
-                        #     rmpA_dict[allele_key][0]
-                        #     if coverage >= COVERAGE_THRESHOLD
-                        #     else "truncated"
-                        # )
-                        loci_status.append(status)
+                    # Coverage percentages relative to query AA length
+                    pcov_plus1 = 100.0 * (len(translation_plus1) / org_aa_length)
+                    pcov_plus2 = 100.0 * (len(translation_plus2) / org_aa_length)
+
+                    #  try +1 G
+                    if pcov_plus1 >= COVERAGE_THRESHOLD:
+                        reannotated_status = "ON"
+                    # try +2 G
+                    elif pcov_plus2 >= COVERAGE_THRESHOLD:
+                        reannotated_status = "ON"
+                    else:
+                        # remains OFF; record unchanged
+                        reannotated_status = "OFF"
+                    loci_status.append(reannotated_status)
+                    return loci_status # check if loci status has multiple values
+
+    if not loci_status:
+        return "-"
+    else:
+        return loci_status
+
+
+
+def poly_A_variation(hits_per_gene):
+
+    loci_status = []
+    COVERAGE_THRESHOLD = 95.0
+    window_start_idx = 136 - 1  
+    window_end_idx = 144        
+
+    for gene, hits in hits_per_gene.items():
+        hits = cull_redundant_hits(hits)
+        if gene.startswith("rmpD"):
+            for hit in hits:
+                seq = hit.ref_seq 
+                org_aa_length = len(translate_nucl_to_prot(seq))
+                window_seq = seq[window_start_idx:window_end_idx]
+
+                for match in re.finditer(r"(A{4,})", window_seq):
+                    abs_start = window_start_idx + match.start()
+                    abs_end = window_start_idx + match.end()
+                    length = match.end() - match.start()  
+                  
+                    # Build extended sequences
+                    ext_seq_plus1 = seq[:abs_start] + ("A" * (length + 1)) + seq[abs_end:]
+                    ext_seq_plus2 = seq[:abs_start] + ("A" * (length + 2)) + seq[abs_end:]
+
+                    # Translate extended sequence
+                    translation_plus1 = translate_nucl_to_prot(ext_seq_plus1)
+                    translation_plus2 = translate_nucl_to_prot(ext_seq_plus2)
+
+                    # Coverage percentages relative to original gene AA length
+                    pcov_plus1 = 100.0 * (len(translation_plus1) / org_aa_length)
+                    pcov_plus2 = 100.0 * (len(translation_plus2) / org_aa_length)
+
+                    #  try +1 A
+                    if pcov_plus1 >= COVERAGE_THRESHOLD:
+                        reannotated_status = "ON"
+                    # try +2 A
+                    elif pcov_plus2 >= COVERAGE_THRESHOLD:
+                        reannotated_status = "ON"
+                    else:
+                        # remains OFF; record unchanged
+                        reannotated_status = "OFF"
+                    loci_status.append(reannotated_status)
+                    return loci_status
+
+    if not loci_status:
+        return "-"
+    else:
+        return loci_status
+
+
+
+def poly_G_rmpC_variation(hits_per_gene):
+  
+    loci_status = []
+    COVERAGE_THRESHOLD = 95.0
+    window_start_idx = 175 - 1  
+    window_end_idx = 183        
+    for gene, hits in hits_per_gene.items():
+        hits = cull_redundant_hits(hits)
+        if gene.startswith("rmpC"):
+            for hit in hits:
+                seq = hit.ref_seq
+                org_aa_length = len(translate_nucl_to_prot(seq))
+                # print(query_aa_length)
+                window_seq = seq[window_start_idx:window_end_idx]
+
+                for match in re.finditer(r"(G{5,})", window_seq):
+                    abs_start = window_start_idx + match.start()
+                    abs_end = window_start_idx + match.end()
+                    length = match.end() - match.start()  
+
+                    # Build extended sequences
+                    ext_seq_plus1 = seq[:abs_start] + ("G" * (length + 1)) + seq[abs_end:]
+                    ext_seq_plus2 = seq[:abs_start] + ("G" * (length + 2)) + seq[abs_end:]
+
+                    # Translate
+                    translation_plus1 = translate_nucl_to_prot(ext_seq_plus1)
+                    translation_plus2 = translate_nucl_to_prot(ext_seq_plus2)
+
+                    # Coverage percentages relative to query AA length
+                    pcov_plus1 = 100.0 * (len(translation_plus1) / org_aa_length)
+                    pcov_plus2 = 100.0 * (len(translation_plus2) / org_aa_length)
+
+                    # try +1 G
+                    if pcov_plus1 >= COVERAGE_THRESHOLD:
+                        reannotated_status = "ON"
+                    #  try +2 G
+                    elif pcov_plus2 >= COVERAGE_THRESHOLD:
+                        reannotated_status = "ON"
+                    else:
+                        # remains OFF; record unchanged
+                        reannotated_status = "OFF"
+                    loci_status.append(reannotated_status)
+                    return loci_status
 
     if not loci_status:
         return "-"
@@ -392,15 +479,12 @@ def poly_G_variation(hits_per_gene):
 
 
 def translate_nucl_to_prot(nucl_seq):
-    try:
-        return str(Seq(nucl_seq).translate(table='Bacterial', to_stop=True, cds=True)) 
-    except TranslationError:
-        pass
-
-    # If that failed, translate in a more relaxed way using a nucleotide sequence truncated
-    # to a multiple-of-three length.
-    truncated_nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
-    return str(Seq(truncated_nucl_seq).translate(table='Bacterial', to_stop=True, cds=False))
+    ambiguous_bases = set(b for b in nucl_seq) - {'A', 'C', 'G', 'T'}
+    for b in ambiguous_bases:
+        nucl_seq = nucl_seq.split(b)[0]
+    nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
+    coding_dna = Seq(nucl_seq)
+    return str(coding_dna.translate(table='Bacterial', to_stop=True))
 
 
 def allele_type(allele_value):
@@ -413,4 +497,23 @@ def allele_type(allele_value):
         return "exact"
 
 
+def process_status_dict(filepath, prefix):
+    with open(filepath) as f:
+        raw_dict = ast.literal_eval(f.read())
+        status_dict = {
+            re.sub(rf'^{prefix}_', '', k): v[0]
+            for k, v in raw_dict.items()
+        }
+    return status_dict
 
+def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_func):
+    if allele_value == '-' or allele_value is None:
+        return "-"
+    allele_type_result = allele_type(allele_value)
+    if allele_type_result == "truncated":
+        return "-"
+    elif allele_type_result == "inexact":
+        return poly_variation_func(hits_per_gene)
+    elif allele_type_result == "exact":
+        return allele_dict.get(allele_value)
+    
