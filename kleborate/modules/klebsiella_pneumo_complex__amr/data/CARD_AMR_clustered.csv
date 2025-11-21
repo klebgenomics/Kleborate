@@ -14,7 +14,7 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 2,aac(3)-IIa.v2,AGly,AAC(3),aac(3)-IIa.v2,13,ARO_3002533,NG_047245.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-IIb,AGly,AAC(3),aac(3)-IIb,14,ARO_3002534,NG_047249.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-IIc,AGly,AAC(3),aac(3)-IIc,15,ARO_3002535,NG_047250.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-2,aac(3)-IId,AGly,AAC(3),aac(3)-IId,16,ARO_3004623,NG_047251.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+2,aac(3)-IId,AGly,AAC(3),aac(3)-IId,16,ARO_3004623,EU022314.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-IIe,AGly,AAC(3),aac(3)-IIe,17,ARO_3004621,NG_047252.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-IIIa,AGly,AAC(3),aac(3)-IIIa,18,ARO_3002536,NG_047241.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-IIIb,AGly,AAC(3),aac(3)-IIIb,19,ARO_3002537,NG_051746.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -3624,7 +3624,7 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 390,dfrA7,Tmt,Dfr,dfrA7,2390,ARO_3002862,NG_047737.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA8,Tmt,Dfr,dfrA8,2391,ARO_3002863,NG_047741.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA9,Tmt,Dfr,dfrA9,2392,ARO_3004548,NG_047742.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
-390,dfrB1,Tmt,Dfr,dfrB1,2393,ARO_3002864,LC846633.1:37891-38184,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrB1,Tmt,Dfr,dfrB1,2393,ARO_3002864,NG_047743.1:101-337,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrB2,Tmt,Dfr,dfrB2,2394,ARO_3003021,NG_051851.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrB3,Tmt,Dfr,dfrB3,2395,ARO_3003022,NG_047747.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrB4,Tmt,Dfr,dfrB4,2396,ARO_3004498,NG_047749.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
