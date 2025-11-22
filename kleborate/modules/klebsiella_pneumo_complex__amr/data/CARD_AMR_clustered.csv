@@ -183,7 +183,7 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 5,aadA15,AGly,ANT(3''),aadA15,101,ARO_3002615,NG_047338.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA16,AGly,ANT(3''),aadA16,102,ARO_3002616,NG_047340.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA17,AGly,ANT(3''),aadA17,103,ARO_3002617,NG_047341.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-5,aadA2,AGly,ANT(3''),aadA2,104,ARO_3002602,AP026458.1:3509-4288,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2,AGly,ANT(3''),aadA2,104,ARO_3002602,NG_051846.1:101-892,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA21,AGly,ANT(3''),aadA21,105,ARO_3002618,NG_047344.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA22,AGly,ANT(3''),aadA22,106,ARO_3002619,NG_047346.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA23,AGly,ANT(3''),aadA23,107,ARO_3002620,NZ_UJAI01000072.1:146-925,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
