@@ -3612,7 +3612,7 @@ clusterid,queryID,class,gene,allele,seqID,aro_accession,ncbi_accession,positions
 390,dfrA26,Tmt,Dfr,dfrA26,2378,ARO_3002857,NG_047722.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA27,Tmt,Dfr,dfrA27,2379,ARO_3004550,NG_047723.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA28,Tmt,Dfr,dfrA28,2380,ARO_3004551,NG_047724.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
-390,dfrA29.v1,Tmt,Dfr,dfrA29.v1,2381,ARG_AM237806,NG_047674.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfrA29.v1,Tmt,Dfr,dfrA29.v1,2381,ARG_AM237806,NG_047674.1:31-504,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA29.v2,Tmt,Dfr,dfrA29.v2,2382,ARO_3004554,NG_065841.2,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA3,Tmt,Dfr,dfrA3,2383,ARO_3003105,NG_047726.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA30,Tmt,Dfr,dfrA30,2384,ARO_3004552,NG_047727.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
