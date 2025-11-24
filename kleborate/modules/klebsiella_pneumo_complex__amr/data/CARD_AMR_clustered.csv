@@ -54,16 +54,12 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 3,aac(6')-Ib-G.v3,AGly,AAC(6'),aac(6')-Ib-G.v3,46,NG_047291.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-cr,AGly,AAC(6'),aac(6')-Ib-cr,47,NG_052213.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-Hangzhou,AGly,AAC(6'),aac(6')-Ib-Hangzhou,49,FJ503047.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib-SK,AGly,AAC(6'),aac(6')-Ib-SK,50,NG_052084.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-SK,AGly,AAC(6'),aac(6')-SK,50,NG_052084.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-Suzhou,AGly,AAC(6'),aac(6')-Ib-Suzhou,51,EF210035.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib',AGly,AAC(6'),aac(6')-Ib',53,NG_051695.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib10,AGly,AAC(6'),aac(6')-Ib10,54,U59183.1:248- 859,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib11,AGly,AAC(6'),aac(6')-Ib11,55,NG_048578.1:101-670,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib3,AGly,AAC(6'),aac(6')-Ib3,56,NG_051438.1:20-574,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib4,AGly,AAC(6'),aac(6')-Ib4,57,NG_051844.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib7,AGly,AAC(6'),aac(6')-Ib7,58,KU530222.1:7413-8198,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib8,AGly,AAC(6'),aac(6')-Ib8,59,CP163010.1:428-1105,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib9,AGly,AAC(6'),aac(6')-Ib9,60,AF043381.1:252-863,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ic,AGly,AAC(6'),aac(6')-Ic,61,NG_047294.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-If,AGly,AAC(6'),aac(6')-If,62,NG_047295.2,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ig,AGly,AAC(6'),aac(6')-Ig,63,NG_047296.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
