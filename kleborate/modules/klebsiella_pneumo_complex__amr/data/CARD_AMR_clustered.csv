@@ -36,12 +36,12 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 3,aac(6')-29a,AGly,AAC(6'),aac(6')-29a,28,NG_048575.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-29b,AGly,AAC(6'),aac(6')-29b,29,NG_048576.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-30/aac(6')-Ib',AGly,AAC(6'),aac(6')-30/aac(6')-Ib',30,NG_047213.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-31,AGly,AAC(6'),aac(6')-31,31,CP022987.1:2415882-2416400,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-31,AGly,AAC(6'),aac(6')-31,31,NG_047265.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-32,AGly,AAC(6'),aac(6')-32,32,NG_047266.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-33,AGly,AAC(6'),aac(6')-33,33,NG_047267.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-34,AGly,AAC(6'),aac(6')-34,34,KX531053.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-I30,AGly,AAC(6'),aac(6')-I30,35,NG_047268.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ia,AGly,AAC(6'),aac(6')-Ia,36,M18967.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-Ia,AGly,AAC(6'),aac(6')-Ia,36,NG_051679.1:101-658,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Iaa,AGly,AAC(6'),aac(6')-Iaa,37,CP065639.1:2906281-2906718,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Iad,AGly,AAC(6'),aac(6')-Iad,38,NG_047276.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Iae,AGly,AAC(6'),aac(6')-Iae,39,NG_047277.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -53,20 +53,18 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 3,aac(6')-Ian,AGly,AAC(6'),aac(6')-Ian,45,NG_047282.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-G.v3,AGly,AAC(6'),aac(6')-Ib-G.v3,46,NG_047291.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib-cr,AGly,AAC(6'),aac(6')-Ib-cr,47,NG_052213.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib-Hangzhou,AGly,AAC(6'),aac(6')-Ib-Hangzhou,49,FJ503047.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-SK,AGly,AAC(6'),aac(6')-SK,50,NG_052084.1:101-574,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-Ib-Suzhou,AGly,AAC(6'),aac(6')-Ib-Suzhou,51,EF210035.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib',AGly,AAC(6'),aac(6')-Ib',53,NG_051695.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib11,AGly,AAC(6'),aac(6')-Ib11,55,NG_048578.1:101-670,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib3,AGly,AAC(6'),aac(6')-Ib3,56,NG_051438.1:20-574,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ib4,AGly,AAC(6'),aac(6')-Ib4,57,NG_051844.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ic,AGly,AAC(6'),aac(6')-Ic,61,NG_047294.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-If,AGly,AAC(6'),aac(6')-If,62,NG_047295.2,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-If,AGly,AAC(6'),aac(6')-If,62,NG_047295.2:101-550,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ig,AGly,AAC(6'),aac(6')-Ig,63,NG_047296.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ih,AGly,AAC(6'),aac(6')-Ih,64,NG_047297.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ii,AGly,AAC(6'),aac(6')-Ii,65,NG_047298.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-IIa.v1,AGly,AAC(6'),aac(6')-IIa.v1,66,NG_047270.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-IIa.v2,AGly,AAC(6'),aac(6')-IIa.v2,67,NZ_CP163261.1:123434 -123988,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+3,aac(6')-IIa.v2,AGly,AAC(6'),aac(6')-IIa.v2,67,NG_052505.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-IIb,AGly,AAC(6'),aac(6')-IIb,68,NG_047272.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-IIc,AGly,AAC(6'),aac(6')-IIc,69,NG_047273.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Iid,AGly,AAC(6'),aac(6')-Iid,70,NG_047299.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
