@@ -226,7 +226,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 7,aadS,AGly,ANT(6),aadS,133,NG_047380.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 7,ant(6)-Ia,AGly,ANT(6),ant(6)-Ia,134,NG_050582.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 7,ant(6)-Ib,AGly,ANT(6),ant(6)-Ib,135,NG_047396.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-7,ant6-Ia.v1,AGly,ANT(6),ant6-Ia.v1,136,NG_047393.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+7,ant(6)-Ia.v1,AGly,ANT(6),ant(6)-Ia.v1,136,NG_047393.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 8,ant(9)-Ia,AGly,ANT(9),ant(9)-Ia,137,NG_047398.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 8,spd,AGly,ANT(9),spd,138,NG_048074.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 8,aad9,AGly,ANT(9),aad9,3521,NG_047322.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
