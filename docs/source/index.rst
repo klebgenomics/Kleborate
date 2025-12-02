@@ -7,6 +7,7 @@
    :maxdepth: 1
    :hidden:
 
+   index_FrenchSB
    Installation
    Usage
    modules
