@@ -47,8 +47,8 @@ def get_headers():
 def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
-    group.add_argument('-t', '--threads', type=check_cpus, default=8, metavar='',
-                       help="Kaptive number of threads for alignment (default: %(default)s)")
+    # group.add_argument('-t', '--threads', type=check_cpus, default=8, metavar='',
+    #                    help="Kaptive number of threads for alignment (default: %(default)s)")
     group.add_argument('--k-db', type=load_database, default=load_database('kpsc_k'), metavar='',
                        help="Kaptive database for K-locus typing (default: kpsc_k)")
     group.add_argument('--o-db', type=load_database, default=load_database('kpsc_o'), metavar='',
