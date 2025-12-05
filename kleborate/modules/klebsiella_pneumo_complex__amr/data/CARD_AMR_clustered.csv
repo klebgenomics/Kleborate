@@ -33,6 +33,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 2,aac(3)-Ia.v2,AGly,AAC(3),aac(3)-Ia.v2,3488,NG_047232.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-Ib.v1,AGly,AAC(3),aac(3)-Ib.v1,3489,NG_047257.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 2,aac(3)-Via.v1,AGly,AAC(3),aac(3)-Via.v1,3490,NG_052583.3,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+2,aac(3)-C1264,AGly,AAC(3),aac(3)-C1264,3722,NG_242158.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-29a,AGly,AAC(6'),aac(6')-29a,28,NG_048575.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-29b,AGly,AAC(6'),aac(6')-29b,29,NG_048576.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-30/aac(6')-Ib',AGly,AAC(6'),aac(6')-30/aac(6')-Ib',30,NG_047213.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -218,6 +219,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 5,aadA5.v1,AGly,ANT(3''),aadA5.v1,3536,NG_047358.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA5.v2,AGly,ANT(3''),aadA5.v2,3537,NG_052436.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA6.v1,AGly,ANT(3''),aadA6.v1,3538,NG_052539.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,ant(3'')-IId,AGly,ANT(3''),ant(3'')-IId,3723,NG_245776.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 6,ant(4')-Ia,AGly,ANT(4'),ant(4')-Ia,127,NG_047392.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 6,ant(4')-Ib,AGly,ANT(4'),ant(4')-Ib,128,NG_047373.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 6,ant(4')-IIa,AGly,ANT(4'),ant(4')-IIa,129,NG_047390.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -1259,6 +1261,11 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 104,KPC-70,Bla,KPC,KPC-70,3574,NG_074719.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 104,KPC-85,Bla,KPC,KPC-85,3575,NG_074721.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 104,KPC-92,Bla,KPC,KPC-92,3576,NG_079233.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-20,Bla,KPC,KPC-20,3725,NG_245797.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-210,Bla,KPC,KPC-210,3726,NG_245798.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-282,Bla,KPC,KPC-282,3727,NG_245799.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-283,Bla,KPC,KPC-283,3728,NG_245800.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+104,KPC-284,Bla,KPC,KPC-284,3729,NG_245801.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 105,L1,Bla,L1,L1,825,NG_047504.1,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 106,LAP-2,Bla,LAP,LAP-2,826,NG_049264.1,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 106,LAP-1,Bla,LAP,LAP-1,827,NG_049263.1,-,-,no,no,class A broad spectrum beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
@@ -1362,6 +1369,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 114,NDM-46,Bla,NDM,NDM-46,2976,NG_148637.1,-,-,no,no,subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 114,NDM-47,Bla,NDM,NDM-47,2977,NG_148638.1,-,-,no,no,subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 114,NDM-50,Bla,NDM,NDM-50,3577,NG_149664.1,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+114,NDM-92,Bla,NDM,NDM-92,3730,NG_245808.1,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
+114,NDM-93,Bla,NDM,NDM-93,3731,NG_245809.1,-,-,no,no,carbapenem-hydrolyzing subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 115,NPS-1,Bla,NPS,NPS-1,899,NG_049343.1,-,-,no,no,oxacillin-hydrolyzing class D beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 116,OCH-1,Bla,OCH,OCH-1,900,NG_049344.1,-,-,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 116,OCH-2,Bla,OCH,OCH-2,901,NG_049345.1,-,-,no,no,class C extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
@@ -2385,8 +2394,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,LEN-168,Bla,SHV-OKP-LEN,LEN-168,3217,NG_244759.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-169,Bla,SHV-OKP-LEN,LEN-169,3218,NG_244760.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-170,Bla,SHV-OKP-LEN,LEN-170,3219,NG_244761.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
-135,LEN-171,Bla,SHV-OKP-LEN,LEN-171,3220,NG_244762.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
-135,LEN-172,Bla,SHV-OKP-LEN,LEN-172,3221,NG_244763.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-173,Bla,SHV-OKP-LEN,LEN-173,3222,NG_244764.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-174,Bla,SHV-OKP-LEN,LEN-174,3223,NG_244765.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-175,Bla,SHV-OKP-LEN,LEN-175,3224,NG_244766.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
@@ -3691,3 +3698,4 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 414,fosLL,Fcyn,FosLL,fosLL,3640,NG_231529.1,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
 415,fosE,Fcyn,FosE,fosE,3647,NG_047893.1,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
 416,fosI,Fcyn,FosI,fosI,3648,NG_047897.1,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
+417,fosS,Fcyn,FosS,fosS,3724,NG_245787.1,-,-,no,no,,,phosphonic acid antibiotic,ARO:3007149
