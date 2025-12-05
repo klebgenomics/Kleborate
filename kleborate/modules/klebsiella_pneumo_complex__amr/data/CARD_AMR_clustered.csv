@@ -295,9 +295,9 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 26,rmtF2,AGly,RmtF,rmtF2,3661,NG_051537.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 27,rmtG,AGly,RmtG,rmtG,191,NG_048064.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 28,rmtH,AGly,RmtH,rmtH,192,NG_048065.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-29,sat-2,AGly,SAT,sat-2,193,NG_052372.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-29,sat-3,AGly,SAT,sat-3,194,NG_048069.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-29,sat-4,AGly,SAT,sat-4,195,NG_048070.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+29,sat2,AGly,SAT,sat2,193,NG_051940.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+29,sat3,AGly,SAT,sat3,194,NG_048069.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+29,sat4,AGly,SAT,sat4,195,NG_048070.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 30,sgm,AGly,Sgm,sgm,196,NG_050600.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 31,sta,AGly,Sta,sta,197,NG_048077.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 32,ACC-1,Bla,ACC,ACC-1,198,CP067381.1:82914-84074,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
@@ -307,7 +307,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 32,ACC-1a,Bla,ACC,ACC-1a,2722,NG_048589.1,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 32,ACC-1b,Bla,ACC,ACC-1b,2723,NG_048590.1,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 32,ACC-1c,Bla,ACC,ACC-1c,2724,NG_048591.1,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
-32,ACC-8,Bla,ACC,ACC-8,2725,NG_070728.1,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 32,ACC-1.v1,Bla,ACC,ACC-1.v1,3553,NG_048588.1,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 32,ACC-4.v1,Bla,ACC,ACC-4.v1,3554,NG_048594.1,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 33,ACI-1,Bla,ACI,ACI-1,202,NG_048596.1,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
@@ -467,7 +466,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 50,BIL-1,Bla,BIL,BIL-1,306,NG_054644.1,-,-,no,no,CMY-2 family class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 51,BJP-1,Bla,BJP,BJP-1,307,NG_048709.1,-,-,no,no,subclass B3 metallo-beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 52,BKC-1,Bla,BKC,BKC-1,308,NG_048710.1,-,-,no,no,carbapenem-hydrolyzing class A beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
-53,bla1,Bla,Bla1,bla1,309,NG_055637.1,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
+53,bla1,Bla,Bla1,bla1,309,NG_055637.2,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 54,bla2,Bla,Bla2,bla2,310,NG_047221.1,-,-,no,no,subclass B1 metallo beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 55,blaA,Bla,blaA,blaA,311,NG_047490.1,-,-,no,no,class A beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 56,blaB21,Bla,blaB21,blaB21,312,NG_067210.1,-,-,no,no,subclass B1 metallo beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
