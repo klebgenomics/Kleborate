@@ -300,6 +300,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 29,sat2,AGly,SAT,sat2,193,NG_051940.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 29,sat3,AGly,SAT,sat3,194,NG_048069.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 29,sat4,AGly,SAT,sat4,195,NG_048070.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+29,sat2.v1,AGly,SAT,sat2.v1,3732,NG_048068.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 30,sgm,AGly,Sgm,sgm,196,NG_050600.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 31,sta,AGly,Sta,sta,197,NG_048077.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 32,ACC-1,Bla,ACC,ACC-1,198,CP067381.1:82914-84074,-,-,no,no,cephalosporin-hydrolyzing class C beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
@@ -3187,6 +3188,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 174,qnrB91,Flq,QnrB,qnrB91,3656,NG_057450.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
 174,qnrB95,Flq,QnrB,qnrB95,3657,NG_059332.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
 174,qnrB98,Flq,QnrB,qnrB98,3658,NG_242326.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB6.v1,Flq,QnrB,qnrB6.v1,3733,NG_050523.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
+174,qnrB4.v1,Flq,QnrB,qnrB4.v1,3734,NG_050502.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
 175,qnrC,Flq,QnrC,qnrC,2001,NG_048054.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
 176,qnrD1,Flq,QnrD,qnrD1,2002,NG_050541.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
 176,qnrD2,Flq,QnrD,qnrD2,2003,NG_050542.1,-,-,no,no,,,fluoroquinolone antibiotic,ARO:0000001
@@ -3538,8 +3541,8 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 365,tet(55),Tet,Tet-55,tet(55),2314,NG_065850.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 366,tet(56),Tet,Tet-56,tet(56),2315,NG_065851.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 367,tet(59),Tet,Tet-59,tet(59),2316,NG_056044.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
-368,tet(A).v1,Tet,TetA,tet(A).v1,2317,NG_048154.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
-368,tet(A).v2,Tet,TetA,tet(A).v2,2318,NG_048153.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+368,tet(A).v1,Tet,TetA,tet(A).v1,2317,NG_048154.1:101-1300,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
+368,tet(A).v2,Tet,TetA,tet(A).v2,2318,NG_048153.1:101-1300,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 368,tetA,Tet,TetA,tetA,2319,NG_051437.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 368,tetA(46),Tet,TetA,tetA(46),2320,NG_048312.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
 368,tetA(58),Tet,TetA,tetA(58),2321,NG_056048.1,-,-,no,no,,,Tetracycline antibiotic,ARO:3000050
@@ -3663,6 +3666,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 390,dfrA50,Tmt,Dfr,dfrA50,3622,NG_242637.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfrA51,Tmt,Dfr,dfrA51,3623,NG_242639.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 390,dfr22,Tmt,Dfr,dfr22,3683,NG_047716.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
+390,dfr29.v3,Tmt,Dfr,dfr29.v3,3735,NG_047674.1,-,-,no,no,,,Diaminopyrimidine antibiotic,ARO:3000171
 392,strB.v1,AGly,StrB,strB.v1,2410,NG_047464.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 393,SFO-1.v1,Bla,SFO-1,SFO-1.v1,2411,AP025167.1:152824-153699,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
 393,SFO-1.v2,Bla,SFO-1,SFO-1.v2,3037,NG_049982.1,-,-,no,no,class A extended-spectrum beta-lactamase,Bla_ESBL,third-generation cephalosporin,ARO:3009107
