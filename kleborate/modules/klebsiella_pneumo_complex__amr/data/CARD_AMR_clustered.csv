@@ -98,7 +98,6 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 3,aac(6')-Ib-cr9,AGly,AAC(6'),aac(6')-Ib-cr9,2443,NG_067971.1:101-655,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-set_A,AGly,AAC(6'),aac(6')-set_A,3491,NG_052254.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-29,AGly,AAC(6'),aac(6')-29,3492,NG_052220.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-3,aac(6')-31.v1,AGly,AAC(6'),aac(6')-31.v1,3493,NG_047265.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-E963,AGly,AAC(6'),aac(6')-E963,3494,NG_242170.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-F309,AGly,AAC(6'),aac(6')-F309,3495,NG_242171.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 3,aac(6')-Ia.v1,AGly,AAC(6'),aac(6')-Ia.v1,3496,NG_052217.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
@@ -209,10 +208,9 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 5,aadA1.v6,AGly,ANT(3''),aadA1.v6,3526,NG_052266.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA16.v1,AGly,ANT(3''),aadA16.v1,3527,NG_047339.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA2.v1,AGly,ANT(3''),aadA2.v1,3528,NG_047343.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-5,aadA2.v2,AGly,ANT(3''),aadA2.v2,3529,NG_051846.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-5,aadA2.v3,AGly,ANT(3''),aadA2.v3,3530,NG_064655.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-5,aadA2.v4,AGly,ANT(3''),aadA2.v4,3531,NG_052041.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
-5,aadA2.v5,AGly,ANT(3''),aadA2.v5,3532,NG_052228.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v2,AGly,ANT(3''),aadA2.v2,3530,NG_064655.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v3,AGly,ANT(3''),aadA2.v3,3531,NG_052041.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
+5,aadA2.v4,AGly,ANT(3''),aadA2.v4,3532,NG_052228.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA22.v1,AGly,ANT(3''),aadA22.v1,3533,NG_047348.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA25.v1,AGly,ANT(3''),aadA25.v1,3534,NG_052538.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
 5,aadA4.v3,AGly,ANT(3''),aadA4.v3,3535,NG_052359.1,-,-,no,no,,,aminoglycoside antibiotic,ARO:0000016
