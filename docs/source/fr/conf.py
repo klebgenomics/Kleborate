@@ -12,6 +12,9 @@ author = 'Mary Maranga'
 release = '3.0.0'
 version = '3.0.0'
 
+# Set language to French
+language = 'fr'
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
@@ -28,4 +31,4 @@ html_theme_options = {
 }
 
 html_static_path = ['_static']
-html_logo = '_static/logo.png'
+html_logo = '../_static/logo.png'
