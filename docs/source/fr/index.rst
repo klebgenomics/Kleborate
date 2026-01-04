@@ -1,13 +1,11 @@
-
 .. toctree::
    :maxdepth: 1
    :hidden:
 
-Installation
-Utilisation
-modules
-Création de nouveaux modèles
-
+   Installation
+   Usage
+   modules
+   Creating-New-Modules
 
 ########################
 Présentation de Kleborate v3
