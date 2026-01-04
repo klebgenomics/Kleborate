@@ -1,0 +1,28 @@
+<div class="kb-lang-switch" aria-label="Language switcher">
+  <a id="kb-lang-en" class="kb-lang-btn" href="#" title="English">
+    <img src="{{ pathto('_static/UK.png', 1) }}" alt="English" />
+  </a>
+
+  <a id="kb-lang-fr" class="kb-lang-btn" href="#" title="Français">
+    <img src="{{ pathto('_static/fr.png', 1) }}" alt="Français" />
+  </a>
+</div>
+
+<script>
+(function () {
+  const path = window.location.pathname;
+
+  function toLang(lang) {
+    if (/^\/(en|fr)\//.test(path)) {
+      return path.replace(/^\/(en|fr)\//, "/" + lang + "/");
+    }
+    return "/" + lang + "/latest/";
+  }
+
+  document.getElementById("kb-lang-en").href = toLang("en");
+  document.getElementById("kb-lang-fr").href = toLang("fr");
+
+  const active = /^\/fr\//.test(path) ? "fr" : "en";
+  document.getElementById("kb-lang-" + active).classList.add("active");
+})();
+</script>
