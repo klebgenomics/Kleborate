@@ -32,3 +32,4 @@ html_theme_options = {
 
 html_static_path = html_static_path = ['../_static']
 html_logo = '../_static/logo.png'
+html_title = "Kleborate (FR)"
