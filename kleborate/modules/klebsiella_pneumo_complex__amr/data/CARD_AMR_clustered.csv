@@ -2034,7 +2034,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 133,SFB-1,Bla,SFB,SFB-1,1406,NG_047544.1,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 134,SFH-1,Bla,SFH,SFH-1,1407,NG_052115.1,-,-,no,no,carbapenem-hydrolyzing subclass B2 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 135,LEN-11,Bla,SHV-OKP-LEN,LEN-11,1408,NG_050776.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
-135,LEN-17,Bla,SHV-OKP-LEN,LEN-17,1409,NG_049271.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-33,Bla,SHV-OKP-LEN,LEN-33,1409,NG_049271.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-30,Bla,SHV-OKP-LEN,LEN-30,1410,NG_066698.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-38,Bla,SHV-OKP-LEN,LEN-38,1411,NG_066701.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,LEN-39,Bla,SHV-OKP-LEN,LEN-39,1412,NG_066702.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
@@ -2659,6 +2659,51 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 135,SHV-248,Bla,SHV-OKP-LEN,SHV-248,3587,NG_244643.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-253,Bla,SHV-OKP-LEN,SHV-253,3588,NG_245189.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 135,SHV-254,Bla,SHV-OKP-LEN,SHV-254,3589,NG_245190.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-29,Bla,SHV-OKP-LEN,LEN-29,3736,PX641425.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-44,Bla,SHV-OKP-LEN,LEN-44,3737,DAGAQL010000006.1:159664-160524,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-45,Bla,SHV-OKP-LEN,LEN-45,3738,NZ_UNYJ01000001.1:455462-454602,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-46,Bla,SHV-OKP-LEN,LEN-46,3739,NZ_JAXQFD010000001.1:646992-647852,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-47,Bla,SHV-OKP-LEN,LEN-47,3740,PX641426.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-48,Bla,SHV-OKP-LEN,LEN-48,3741,CP048379.1:2918091-2918951,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-49,Bla,SHV-OKP-LEN,LEN-49,3742,PX641427.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-50,Bla,SHV-OKP-LEN,LEN-50,3743,NZ_CP152571.1:2698134-2698994,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-56,Bla,SHV-OKP-LEN,LEN-56,3744,PX641428.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-57,Bla,SHV-OKP-LEN,LEN-57,3745,NZ_JBPNWY010000001.1:1054666-1055526,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-59,Bla,SHV-OKP-LEN,LEN-59,3746,PX641429.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-60,Bla,SHV-OKP-LEN,LEN-60,3747,NZ_JAEEFB010000006.1:179392-180252,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-61,Bla,SHV-OKP-LEN,LEN-61,3748,QIWZ01000024.1:65715-66575,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-62,Bla,SHV-OKP-LEN,LEN-62,3749,QIXJ01000009.1:30127-30987,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-63,Bla,SHV-OKP-LEN,LEN-63,3750,UJZC01000016.1:108744-109604,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-64,Bla,SHV-OKP-LEN,LEN-64,3751,NZ_CP154196.1:2731366-2732225,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-65,Bla,SHV-OKP-LEN,LEN-65,3752,PX641433.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-66,Bla,SHV-OKP-LEN,LEN-66,3753,NZ_CP153119.1:2880832-2881692,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-67,Bla,SHV-OKP-LEN,LEN-67,3754,NZ_CP153969.1:2830067-2830927,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-68,Bla,SHV-OKP-LEN,LEN-68,3755,NZ_CP153984.1:2858725-2859585,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-69,Bla,SHV-OKP-LEN,LEN-69,3756,QIYE01000001.1:245750-246610,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-70,Bla,SHV-OKP-LEN,LEN-70,3757,NZ_JAXQFK010000001.1:986532-987392,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-71,Bla,SHV-OKP-LEN,LEN-71,3758,QIYK01000001.1:551357-552217,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-72,Bla,SHV-OKP-LEN,LEN-72,3759,PX641434.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-73,Bla,SHV-OKP-LEN,LEN-73,3760,PX641435.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-74,Bla,SHV-OKP-LEN,LEN-74,3761,NZ_JBEAKQ010000001.1:406652-407512,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-75,Bla,SHV-OKP-LEN,LEN-75,3762,PX641436.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-76,Bla,SHV-OKP-LEN,LEN-76,3763,NZ_CP153962.1:2817657-2818517,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-77,Bla,SHV-OKP-LEN,LEN-77,3764,QIXH01000023.1:30180-31040,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-78,Bla,SHV-OKP-LEN,LEN-78,3765,NZ_JBJJWD010000025.1:14803-15663,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-79,Bla,SHV-OKP-LEN,LEN-79,3766,NGSO01000001.1:520471-521331,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-80,Bla,SHV-OKP-LEN,LEN-80,3767,PX641437.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-81,Bla,SHV-OKP-LEN,LEN-81,3768,DAHOYB010000001.1:400110-400970,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-82,Bla,SHV-OKP-LEN,LEN-82,3769,PX641438.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-83,Bla,SHV-OKP-LEN,LEN-83,3770,FLDI01000002.1:466499-467359,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-84,Bla,SHV-OKP-LEN,LEN-84,3771,NZ_CP152713.1:2793702-2794562,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-85,Bla,SHV-OKP-LEN,LEN-85,3772,DAGPYY010000068.1:11684-12544,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-86,Bla,SHV-OKP-LEN,LEN-86,3773,NZ_CP056145.1:2804186-2805046,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-87,Bla,SHV-OKP-LEN,LEN-87,3774,NZ_CP152988.1:2788039-2788899,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-88,Bla,SHV-OKP-LEN,LEN-88,3775,NZ_CP153131.1:2761276-2762136,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-89,Bla,SHV-OKP-LEN,LEN-89,3776,PX641430.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-90,Bla,SHV-OKP-LEN,LEN-90,3777,PX641431.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-91,Bla,SHV-OKP-LEN,LEN-91,3778,PX641432.1,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-92,Bla,SHV-OKP-LEN,LEN-92,3779,NZ_JACHYL010000003.1:213024-213884,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
+135,LEN-93,Bla,SHV-OKP-LEN,LEN-93,3780,NZ_JAQOKS010000001.1:235066-235926,-,-,no,no,class A beta-lactamase,Bla_chr,penicillin beta-lactam,ARO:3000008
 136,SIM-1,Bla,SIM,SIM-1,1621,NG_050131.1,-,-,no,no,subclass B1 broad-spectrum metallo-beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
 136,SIM-2,Bla,SIM,SIM-2,3038,NG_050132.1,-,-,no,no,subclass B1 metallo-beta-lactamase,Bla_Carb,carbapenem,ARO:0000020
 137,SLB-1,Bla,SLB,SLB-1,1622,NG_047545.1,-,-,no,no,SHW family subclass B1 metallo-beta-lactamase,Bla,penicillin beta-lactam,ARO:3000008
