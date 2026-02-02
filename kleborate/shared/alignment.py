@@ -303,19 +303,19 @@ def is_exact_aa_match(gene_nucl_seq_1, ref_nucl_seq):
     return (ref_prot in gene_prot_1) or (ref_prot in gene_prot_2) or (ref_prot in gene_prot_3)
 
 
-def translate_nucl_to_prot(nucl_seq):
-    # First try to translate as a complete coding sequence. This will allow for alternative start
-    # codons (e.g. GTG -> M) if it works. We have to manually add the stop codon (*) here because
-    # using cds=True turns that off.
-    try:
-        return str(Seq(nucl_seq).translate(table='Bacterial', to_stop=False, cds=True)) + '*'
-    except TranslationError:
-        pass
+# def translate_nucl_to_prot(nucl_seq):
+#     # First try to translate as a complete coding sequence. This will allow for alternative start
+#     # codons (e.g. GTG -> M) if it works. We have to manually add the stop codon (*) here because
+#     # using cds=True turns that off.
+#     try:
+#         return str(Seq(nucl_seq).translate(table='Bacterial', to_stop=False, cds=True)) + '*'
+#     except TranslationError:
+#         pass
 
-    # If that failed, we will translate in a more relaxed way using a nucleotide sequence truncated
-    # to a multiple-of-three length.
-    truncated_nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
-    return str(Seq(truncated_nucl_seq).translate(table='Bacterial', to_stop=False, cds=False))
+#     # If that failed, we will translate in a more relaxed way using a nucleotide sequence truncated
+#     # to a multiple-of-three length.
+#     truncated_nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
+#     return str(Seq(truncated_nucl_seq).translate(table='Bacterial', to_stop=False, cds=False))
 
 def get_bases_per_ref_pos(alignment):
     aligned_seq1, aligned_seq2 = alignment[0], alignment[1]
@@ -330,31 +330,175 @@ def get_bases_per_ref_pos(alignment):
     return bases_per_ref_pos
 
 
-def get_last_base_aa_before_gap(alignment):
-    aligned_seq1, aligned_seq2 = alignment[0], alignment[1]
-    bases_per_ref_pos = {}
-    ref_pos = 1
-    last_base_pos = None
-    last_base = None
+def get_frameshift_info(alignment):
+    """
+    Detects frameshift mutations in a protein alignment and reports
+    premature stop codons.
+    """
+    reference_protein = alignment[0]
+    query_protein = alignment[1]
 
-    for i, ref_b in enumerate(aligned_seq1):
-        if ref_b == '-' or ref_b == '.':
-            continue
-        assembly_b = aligned_seq2[i]
-        bases_per_ref_pos[ref_pos] = assembly_b
-        if assembly_b != '-':
-            last_base_pos = ref_pos
-            last_base = assembly_b
+    ref_aa_position = 0
+    seq_len = len(reference_protein)
+
+    SCAN_WINDOW = 20
+    ANCHOR_LENGTH = 3
+
+    for i in range(seq_len):
+        ref_aa = reference_protein[i]
+        query_aa = query_protein[i]
+
+        if ref_aa != '-':
+            ref_aa_position += 1
+
+        # Detect (mismatch or indel)
+        if ref_aa != query_aa:
+
+            is_frameshift = True
+
+            # stop codon in query
+            if query_aa == '*':
+                is_frameshift = True
+            else:
+                search_end = min(seq_len, i + SCAN_WINDOW)
+                for k in range(i + 1, search_end):
+                    if k + ANCHOR_LENGTH > seq_len:
+                        break
+
+                    ref_fragment = reference_protein[k:k + ANCHOR_LENGTH]
+                    query_fragment = query_protein[k:k + ANCHOR_LENGTH]
+
+                    if ref_fragment == query_fragment and '-' not in ref_fragment:
+                        is_frameshift = False
+                        break
+
+            if not is_frameshift:
+                continue
+
+            # Determine true frameshift position and amino acid
+            frameshift_ref_pos = ref_aa_position
+            frameshift_ref_aa = ref_aa
+
+            ref_remaining = reference_protein[i:].replace('-', '').replace('.', '')
+            query_remaining = query_protein[i:].replace('-', '').replace('.', '')
+
+            if ref_aa == '-':
+                frameshift_ref_aa = ref_remaining[0] if ref_remaining else '-'
+                frameshift_ref_pos = ref_aa_position + 1
+
+            frameshift_query_aa = query_remaining[0] if query_remaining else '*'
+
+            ref_idx = 0
+            query_idx = 0
+
+            while (
+                frameshift_ref_aa == frameshift_query_aa
+                and frameshift_ref_aa not in ('-', '*')
+            ):
+                ref_idx += 1
+                if ref_idx < len(ref_remaining):
+                    frameshift_ref_aa = ref_remaining[ref_idx]
+                    frameshift_ref_pos += 1
+                else:
+                    frameshift_ref_aa = '-'
+
+                query_idx += 1
+                if query_idx < len(query_remaining):
+                    frameshift_query_aa = query_remaining[query_idx]
+                else:
+                    frameshift_query_aa = '*'
+
+            # Determine length of frameshift until stop codon
+            query_after_frameshift = query_remaining[query_idx:]
+
+            if '*' in query_after_frameshift:
+                frameshift_length = query_after_frameshift.index('*')
+            else:
+                frameshift_length = len(query_after_frameshift)
+
+            return (
+                frameshift_ref_pos,
+                frameshift_ref_aa,
+                frameshift_query_aa,
+                frameshift_length
+            )
+
+    return None
+
+
+def deletion_checks(alignment, ref_seq):
+    """
+    Identifies deletion.
+    Returns: (position, deleted_base).
+    """
+    aligned_ref, aligned_query = alignment[0], alignment[1]
+
+    deletions = [] 
+    ref_pos = 0
+    deletion_len = 0
+    deletion_start = None
+
+    # Scan alignment for deletions
+    for ref_aln, query_aln in zip(aligned_ref, aligned_query):
+        if ref_aln != '-':
+            ref_pos += 1
+
+        if query_aln == '-' and ref_aln != '-':
+            if deletion_len == 0:
+                deletion_start = ref_pos
+            deletion_len += 1
         else:
-            # First occurrence of a gap at this position
-            break
-        ref_pos += 1
+            if deletion_len > 0:
+                deletions.append((deletion_start, deletion_len))
+                deletion_len = 0
+                deletion_start = None
+
+    
+    if deletion_len > 0:
+        deletions.append((deletion_start, deletion_len))
+
+    if ref_pos < len(ref_seq):
+        trunc_start = ref_pos + 1
+        trunc_len = len(ref_seq) - ref_pos
+        deletions.append((trunc_start, trunc_len))
+
+    if not deletions:
+        return None
+
+    best_start, best_len = max(deletions, key=lambda x: x[1])
+
+    deleted_base = ref_seq[best_start - 1]
+
+    return best_start, deleted_base
 
 
-    # Handle frameshift where the alignment starts with gaps in the query.
-    if last_base_pos is None: return (1, next((res for res in aligned_seq2 if res != '-'), None))
+def translate_nucl_to_prot(nucl_seq):
+    ambiguous_bases = set(b for b in nucl_seq) - {'A', 'C', 'G', 'T'}
+    for b in ambiguous_bases:
+        nucl_seq = nucl_seq.split(b)[0]
+    nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
+    coding_dna = Seq(nucl_seq)
+    return str(coding_dna.translate(table='Bacterial', to_stop=True))+ '*'
 
-    return last_base_pos, last_base
+
+def find_start_deletion_in_alignment(alignment):
+    """
+    Finds deletion if the hit does not start at the first base of the gene
+    """
+    # retrieves the alignment coordinates for the Reference sequence
+    ref_alignment= alignment.aligned[0]
+
+    # Get the start index of the first aligned block (0-based index)
+    match_index = ref_alignment[0][0]
+
+    # Convert 0-based Python index to 1-based
+    start_del = 1
+    end_del = match_index
+
+    if start_del == end_del:
+        return f"c.({start_del})del"
+    else:
+        return f"c.({start_del}_{end_del})del"
     
 
 # def get_last_base_aa_before_gap(alignment):
