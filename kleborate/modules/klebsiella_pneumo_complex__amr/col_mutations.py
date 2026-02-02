@@ -14,7 +14,7 @@ not, see <http://www.gnu.org/licenses/>.
 from Bio.Seq import Seq
 from Bio import Align
 from Bio.Align import substitution_matrices
-from ...shared.alignment import align_query_to_ref, truncation_check, translate_nucl_to_prot, get_last_base_aa_before_gap
+from ...shared.alignment import align_query_to_ref, truncation_check, translate_nucl_to_prot, find_start_deletion_in_alignment, deletion_checks, get_frameshift_info
 
 
 def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
