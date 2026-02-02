@@ -21,24 +21,36 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
     """
     Checks for OmpK35 and OmpK36 mutations.
     """
-
     best_ompk35_cov, best_ompk36_cov = 0.0, 0.0
     ompk35_hit_data, ompk36_hit_data = None, None
     ompk35_frameshift, ompk35_deletion = None, None
     ompk36_frameshift, ompk36_deletion = None, None
 
     ompk36_loci = {'OmpK36': [(25, 'C')]}
+    ref_seqs = dict(load_fasta(omp))
 
-    aa_map = {
-        'A': 'Ala', 'C': 'Cys', 'D': 'Asp', 'E': 'Glu', 'F': 'Phe', 'G': 'Gly',
-        'H': 'His', 'I': 'Ile', 'K': 'Lys', 'L': 'Leu', 'M': 'Met', 'N': 'Asn',
-        'P': 'Pro', 'Q': 'Gln', 'R': 'Arg', 'S': 'Ser', 'T': 'Thr', 'V': 'Val',
-        'W': 'Trp', 'Y': 'Tyr'
-    }
+    # aa_map = {
+    #     'A': 'Ala', 'C': 'Cys', 'D': 'Asp', 'E': 'Glu', 'F': 'Phe', 'G': 'Gly',
+    #     'H': 'His', 'I': 'Ile', 'K': 'Lys', 'L': 'Leu', 'M': 'Met', 'N': 'Asn',
+    #     'P': 'Pro', 'Q': 'Gln', 'R': 'Arg', 'S': 'Ser', 'T': 'Thr', 'V': 'Val',
+    #     'W': 'Trp', 'Y': 'Tyr', '*': 'Ter'
+    # }
 
-    # define the aligner
-    aligner = Align.PairwiseAligner(mode='global', match_score=5, mismatch_score=-4,
-                                    open_gap_score=-10, extend_gap_score=-0.5)
+    # Protein aligner
+    aligner = Align.PairwiseAligner()
+    aligner.substitution_matrix = substitution_matrices.load("BLOSUM62")
+    aligner.mode = 'global'
+    aligner.open_gap_score = -10
+    aligner.extend_gap_score = -0.5
+
+    # DNA aligner
+    dna_aligner = Align.PairwiseAligner(
+        mode='global',
+        match_score=5,
+        mismatch_score=-10,
+        open_gap_score=-10,
+        extend_gap_score=-0.5
+    )
 
     alignment_hits = align_query_to_ref(omp, assembly, min_query_coverage=None, min_identity=None)
 
@@ -58,65 +70,118 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
             'Reference_gene_start': hit.query_start,
             'Reference_gene_stop': hit.query_end,
             'Sequence_identity': f"{hit.percent_identity:.2f}%",
-            'Coverage': f"{coverage:.2f}%",  # uses protein level coverage
+            'Coverage': f"{coverage:.2f}%",
             'Strand_orientation': hit.strand
         }
 
+        # --- Frameshift and Deletion checks in OmpK35---
         if hit.query_name == 'OmpK35':
+            ompk35_ref_seq = ref_seqs['OmpK35']
+            ompk35_query_seq = hit.ref_seq
+            ompk35_hit_data = hit_data
+
+            # sometimes the hit does not start at the first base of the gene( gene is considered 0% cov)
+            # check for deletion at the start of the alignment 
+            if coverage == 0.0:
+                aln = dna_aligner.align(ompk35_ref_seq, ompk35_query_seq)[0]
+                deleted_base_pos = find_start_deletion_in_alignment(aln)
+                deletion_report = f"OmpK35_{deleted_base_pos}"
+
+                ompk35_deletion = (
+                    deletion_report,
+                    {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                )
+                continue  
 
             if coverage > best_ompk35_cov:
                 best_ompk35_cov = coverage
-                ompk35_hit_data = hit_data
                 ompk35_dna_cov = dna_hit_cov
-                ompk35_ref_seq = hit.query_seq
 
-                # ---- Frameshift/Deletion Logic for OmpK35 ----
-                if best_ompk35_cov < 99.0 and ompk35_dna_cov > 99.0:
-                    # checks for Frameshift
+                # check for frameshift mutation
+                if best_ompk35_cov < 90.0 and ompk35_dna_cov > 90.0:
                     if translation:
                         ompk35_ref_trans = translate_nucl_to_prot(ompk35_ref_seq)
-                        ompk35_prot_align = aligner.align(ompk35_ref_trans, translation)
-                        aa_pos, aa_code = get_last_base_aa_before_gap(ompk35_prot_align[0])
-                        fs_report = f"OmpK35:p.{aa_map[aa_code]}{aa_pos}fs"
-                        ompk35_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                        ompk35_query_trans = translate_nucl_to_prot(ompk35_query_seq)
+                        ompk35_prot_align = aligner.align(ompk35_ref_trans, ompk35_query_trans)
 
-                elif best_ompk35_cov < 99.0 and ompk35_dna_cov < 99.0:
-                    # checks for Deletion
-                    ompk35_assembly_seq = hit.ref_seq
-                    ompk35_dna_alignments = aligner.align(ompk35_ref_seq, ompk35_assembly_seq)
-                    pos, base = get_last_base_aa_before_gap(ompk35_dna_alignments[0])
-                    del_report = f"OmpK35:c.{base}{pos}del"
-                    ompk35_deletion = (del_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                        fs_info = get_frameshift_info(ompk35_prot_align[0])
+                        if fs_info is not None:
+                            aa_pos, ref_aa, alt_aa, fs_len = fs_info
+                            fs_report = (
+                                f"OmpK35_{ref_aa}{aa_pos}{alt_aa}fsTer{fs_len}"
+                            )
+                            # fs_report = (
+                            #     f"OmpK35_{aa_map.get(ref_aa, ref_aa)}{aa_pos}"
+                            #     f"{aa_map.get(alt_aa, alt_aa)}fsTer{fs_len}"
+                            # )
+                            ompk35_frameshift = (
+                                fs_report,
+                                {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                            )
+                # check for deletion
+                elif best_ompk35_cov < 90.0 and ompk35_dna_cov < 90.0:
+                    ompk35_dna_alignments = dna_aligner.align(ompk35_ref_seq, ompk35_query_seq)
+                    del_info = deletion_checks(ompk35_dna_alignments[0], ompk35_ref_seq)
+                    if del_info is not None:
+                        pos, base = del_info
+                        del_report = f"OmpK35:c.{base}{pos}del"
+                        ompk35_deletion = (
+                            del_report,
+                            {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        )
 
+        # --- Frameshift and Deletion checks in OmpK35 ---
         elif hit.query_name == 'OmpK36':
+            ompk36_ref_seq = ref_seqs['OmpK36']
+            ompk36_query_seq = hit.ref_seq
+            ompk36_hit_data = hit_data
+            # check for deletion at the start of the alignment
+            if coverage == 0.0:
+                aln = dna_aligner.align(ompk36_ref_seq, ompk36_query_seq)[0]
+                deleted_base_pos = find_start_deletion_in_alignment(aln)
+                deletion_report = f"OmpK36_{deleted_base_pos}"
+
+                ompk36_deletion = (
+                    deletion_report,
+                    {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                )
+                continue 
+
             if coverage > best_ompk36_cov:
                 best_ompk36_cov = coverage
-                ompk36_hit_data = hit_data
                 ompk36_dna_cov = dna_hit_cov
-
-                ompk36_ref_seq = hit.query_seq
-                ompk36_assembly_seq = hit.ref_seq
-                ompk36_dna_alignments = aligner.align(ompk36_ref_seq, ompk36_assembly_seq)
-
-                # ---- Frameshift/Deletion Logic for OmpK36 ----
-                if best_ompk36_cov < 99.0 and ompk36_dna_cov > 99.0:
-                    # checks for Frameshift
+                ompk36_dna_alignments = dna_aligner.align(ompk36_ref_seq, ompk36_query_seq)
+                # check for frameshift mutation
+                if best_ompk36_cov < 90.0 and ompk36_dna_cov > 90.0:
                     if translation:
                         ompk36_ref_trans = translate_nucl_to_prot(ompk36_ref_seq)
-                        ompk36_prot_align = aligner.align(ompk36_ref_trans, translation)
-                        aa_pos, aa_code = get_last_base_aa_before_gap(ompk36_prot_align[0])
-                        fs_report = f"OmpK36:p.{aa_map[aa_code]}{aa_pos}fs"
-                        ompk36_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                        ompk36_query_trans = translate_nucl_to_prot(ompk36_query_seq)
+                        ompk36_prot_align = aligner.align(ompk36_ref_trans, ompk36_query_trans)
 
-                elif best_ompk36_cov < 99.0 and ompk36_dna_cov < 99.0:
-                    # checks for Deletion
-                    pos, base = get_last_base_aa_before_gap(ompk36_dna_alignments[0])
-                    del_report = f"OmpK36:c.{base}{pos}del"
-                    ompk36_deletion = (del_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                        fs_info = get_frameshift_info(ompk36_prot_align[0])
+                        if fs_info is not None:
+                            aa_pos, ref_aa, alt_aa, fs_len = fs_info
+                            fs_report = (
+                                f"OmpK36_{ref_aa}{aa_pos}{alt_aa}fsTer{fs_len}"
+                            )
+                            ompk36_frameshift = (
+                                fs_report,
+                                {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                            )
+                # check for deletion
+                elif best_ompk36_cov < 90.0 and ompk36_dna_cov < 90.0:
+                    del_info = deletion_checks(ompk36_dna_alignments[0], ompk36_ref_seq)
+                    if del_info is not None:
+                        pos, base = del_info
+                        del_report = f"OmpK36:c.{base}{pos}del"
+                        ompk36_deletion = (
+                            del_report,
+                            {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        )
 
-                # ----- NUCLEOTIDE VARIANT -----
+                # ----- OmpK 36 Nucleotide variant -----
                 bases_per_ref_pos = get_bases_per_ref_pos(ompk36_dna_alignments[0])
-                loci = ompk36_loci[hit.query_name]
+                loci = ompk36_loci.get(hit.query_name, [])
                 for pos, wt_base in loci:
                     assembly_base = bases_per_ref_pos[pos]
                     ref_base = ompk36_ref_seq[pos - 1]
@@ -126,14 +191,15 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                             {'Genetic_variation_type': 'Nucleotide variant detected', **hit_data}
                         ])
 
-                # ----- PROTEIN VARIANT -----
-                if coverage >= min_coverage:
+                # L3 insertion checks (GD / TD / D)
+                if coverage >= min_coverage and translation:
+                    l3_insertion, insertion_type = None, None
                     if 'GDGDTY' in translation:
                         l3_insertion, insertion_type = 'GDGDTY', 'GD'
                     elif 'GDTDTY' in translation:
                         l3_insertion, insertion_type = 'GDTDTY', 'TD'
-                    else:
-                        l3_insertion, insertion_type = None, None
+                    elif 'GDDTY' in translation:
+                        l3_insertion, insertion_type = 'GDDTY', 'D'
 
                     if l3_insertion:
                         motif_start_index = translation.index(l3_insertion)
@@ -142,17 +208,18 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                         insertion_start_aa = motif_start_index + insertion_relative_index + 1
                         insertion_end_aa = insertion_start_aa + 1
 
-                        inserted_residues = f"{aa_map[insertion_type[0]]}{aa_map[insertion_type[1]]}"
-                        insertion_annotation = f"OmpK36:p.{insertion_start_aa}_{insertion_end_aa}ins{inserted_residues}"
-
+                        inserted_residues = insertion_type
+                        insertion_annotation = (
+                            f"OmpK36:p.{insertion_start_aa}_{insertion_end_aa}ins{inserted_residues}"
+                        )
                         hits_dict['Omp_mutations'].append([
                             insertion_annotation,
                             {'Genetic_variation_type': 'Protein variant detected', **hit_data}
                         ])
-        else:
-            assert False
 
-    # reporting truncations
+        else:
+            continue
+
     truncations = []
     if ompk35_frameshift:
         truncations.append(ompk35_frameshift)
@@ -164,9 +231,10 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
     elif ompk36_deletion:
         truncations.append(ompk36_deletion)
 
-    for trunc_name, hit_data in truncations:
-        data = dict(hit_data) if hit_data else {}
+    for trunc_name, t_hit_data in truncations:
+        data = dict(t_hit_data) if t_hit_data else {}
         hits_dict['Omp_mutations'].append([trunc_name, data])
+
 
 
 
