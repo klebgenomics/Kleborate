@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'KleborateModular'
-copyright = '2024, Mary Maranga, Kathryn Holt, Ryan Wick'
-author = 'Mary Maranga'
+copyright = '2026, Sylvain Brisse, Mary Maranga, Kathryn Holt'
+author = 'Sylvain Brisse (sylvain.brisse@pasteur.fr)'
 release = '3.0.0'
 version = '3.0.0'
 
