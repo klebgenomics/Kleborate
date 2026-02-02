@@ -43,9 +43,9 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    if not shutil.which('mist'):
+        sys.exit('Error: could not find mist')
+    return ['mist']
 
 
 def data_dir():
@@ -54,42 +54,48 @@ def data_dir():
 
 def extract_lincode_from_stdout(stdout):
     """
-    Extracts scgST and full LINcode from the stdout of mist_to_partial_lincode.py.
-
-    Args:
-        stdout (str): The standard output from the python script execution.
-
-    Returns:
-        dict: Contains 'cgST' (int) and 'LINcodes' (str).
+    Extracts scgST and full or partial LINcode from mist_to_partial_lincode.py
     """
     results = {}
+
     st_match = re.search(r'Best matching: (scgST-\d+)', stdout)
-    lin_match = re.search(r'LINcode for scgMST-\d+: ([\d_]+)', stdout)
+    lin_match = re.search(r'LINcode for scgMST-\d+: ([\d_]+|-|n/a)', stdout, re.IGNORECASE)
+    partial_lin_match = re.search(
+        r'Partial LINcode for input strain: ([\d_*]+)',
+        stdout
+    )
+
+    # Extract scgST
     if st_match:
         try:
             st_value = st_match.group(1).split('-')[1]
             results['cgST'] = int(st_value)
         except (IndexError, ValueError):
-            raise ValueError(f"Could not parse valid integer from scgST match: {st_match.group(1)}")
-    else:
-        raise ValueError("Best matching scgST number not found in output.")
+            pass
+
+    # Extract LINcode
     if lin_match:
-        results['LINcodes'] = lin_match.group(1)
+        lin_value = lin_match.group(1)
+
+        # If full LINcode is missing or invalid, fall back to partial
+        if lin_value.lower() in {'n/a', '-'}:
+            if partial_lin_match:
+                results['LINcodes'] = partial_lin_match.group(1)
+        else:
+            results['LINcodes'] = lin_value
+
     else:
-        raise ValueError("LINcode not found in output.")
+        # No full LINcode try partial
+        if partial_lin_match:
+            results['LINcodes'] = partial_lin_match.group(1)
+
     return results
+    
 
 def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
     """
-    Runs MiST and mist_to_partial_lincode.py for an assembly, extracts the cgST number and full Lincode.
+    Runs MiST and mist_to_partial_lincode.py to extract LINcodes for an assembly, extracts the cgST and Lincode.
 
-    Args:
-        assembly (pathlib.Path): Path to the input FASTA assembly file.
-        db_path (pathlib.Path): Path to the MiST database directory (including the DB name).
-        mist_script_path (pathlib.Path): Path to the mist_to_partial_lincode.py script.
-
-    Returns:
-        dict: Contains 'cgST' (int) and 'LINcodes' (str).
     """
     assembly_id = assembly.stem
     with tempfile.TemporaryDirectory() as tempdir:
@@ -128,10 +134,11 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
             )
         results = extract_lincode_from_stdout(completed.stdout)
         return results
-
+        
+        
 def get_results(assembly, minimap2_index, args, previous_results):
     """
-    Returns a dictionary with keys:
+    Returns:
         - "cgST": best matching scgST
         - "LINcodes": full LINcode string
     """
