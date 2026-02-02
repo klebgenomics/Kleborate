@@ -14,7 +14,7 @@ not, see <http://www.gnu.org/licenses/>.
 from Bio.Seq import Seq
 from Bio import Align
 from Bio.Align import substitution_matrices
-from ...shared.alignment import align_query_to_ref, truncation_check, translate_nucl_to_prot, translate_nucl_to_prot, get_bases_per_ref_pos, get_last_base_aa_before_gap
+from ...shared.alignment import align_query_to_ref, truncation_check, translate_nucl_to_prot, translate_nucl_to_prot, get_bases_per_ref_pos, find_start_deletion_in_alignment, deletion_checks, get_frameshift_info
 
 
 def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
