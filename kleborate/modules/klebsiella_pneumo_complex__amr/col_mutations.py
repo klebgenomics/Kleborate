@@ -23,20 +23,33 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
     mgrb_hit_data, pmrb_hit_data = None, None
     mgrb_frameshift, mgrb_deletion = None, None
     pmrb_frameshift, pmrb_deletion = None, None
-    mgrb_hit, pmrb_hit = None, None  
+    mgrb_query_seq, pmrb_query_seq = None, None  
 
     start_codons = {'TTG', 'CTG', 'ATT', 'ATC', 'ATA', 'ATG', 'GTG'}
+    ref_seqs = dict(load_fasta(trunc))
 
-    aa_map = {
-        'A': 'Ala', 'C': 'Cys', 'D': 'Asp', 'E': 'Glu', 'F': 'Phe', 'G': 'Gly',
-        'H': 'His', 'I': 'Ile', 'K': 'Lys', 'L': 'Leu', 'M': 'Met', 'N': 'Asn',
-        'P': 'Pro', 'Q': 'Gln', 'R': 'Arg', 'S': 'Ser', 'T': 'Thr', 'V': 'Val',
-        'W': 'Trp', 'Y': 'Tyr'
-    }
+    # aa_map = {
+    #     'A': 'Ala', 'C': 'Cys', 'D': 'Asp', 'E': 'Glu', 'F': 'Phe', 'G': 'Gly',
+    #     'H': 'His', 'I': 'Ile', 'K': 'Lys', 'L': 'Leu', 'M': 'Met', 'N': 'Asn',
+    #     'P': 'Pro', 'Q': 'Gln', 'R': 'Arg', 'S': 'Ser', 'T': 'Thr', 'V': 'Val',
+    #     'W': 'Trp', 'Y': 'Tyr'
+    # }
 
-    # define the aligner
-    aligner = Align.PairwiseAligner(mode='global', match_score=5, mismatch_score=-4,
-                                    open_gap_score=-10, extend_gap_score=-0.5)
+    # Protein aligner
+    aligner = Align.PairwiseAligner()
+    aligner.substitution_matrix = substitution_matrices.load("BLOSUM62")
+    aligner.mode = 'global'
+    aligner.open_gap_score = -10
+    aligner.extend_gap_score = -0.5
+
+    # DNA aligner
+    dna_aligner = Align.PairwiseAligner(
+        mode='global',
+        match_score=5,
+        mismatch_score=-10,
+        open_gap_score=-10,
+        extend_gap_score=-0.5
+    )
 
     alignment_hits = align_query_to_ref(trunc, assembly, None, min_identity=None)
 
@@ -61,55 +74,107 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
             'Strand_orientation': hit.strand
         }
 
+        # --- Frameshift and Deletion checks in mgrB---
         if hit.query_name == 'mgrB':
+            mgrb_ref_seq = ref_seqs['mgrB']
+            mgrb_query_seq = hit.ref_seq
+            mgrb_hit_data = hit_data
+
+            # sometimes the hit does not start at the first base of the gene( gene is considered 0% cov)
+            # check for deletion at the start of the alignment 
+            if coverage == 0.0:
+                aln = dna_aligner.align(mgrb_ref_seq, mgrb_query_seq)[0]
+                deleted_base_pos = find_start_deletion_in_alignment(aln)
+                deletion_report = f"mgrB_{deleted_base_pos}"
+
+                mgrB_deletion = (
+                    deletion_report,
+                    {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                )
+                continue
+
+
             if coverage > best_mgrb_cov:
                 best_mgrb_cov = coverage
-                mgrb_hit_data = hit_data
                 mgrb_dna_cov = dna_hit_cov
-                mgrb_hit = hit.ref_seq
-                mgrb_ref_seq = hit.query_seq
-
+                
                 # ---- FRAMESHIFT/DELETION LOGIC for mgrB ----
-                if best_mgrb_cov < 99.0 and mgrb_dna_cov > 99.0:
+                if best_mgrb_cov < 90.0 and mgrb_dna_cov > 90.0:
                     # checks for Frameshift
                     if translation:
                         mgrb_ref_trans = translate_nucl_to_prot(mgrb_ref_seq)
-                        mgrb_prot_align= aligner.align(mgrb_ref_trans, translation)
-                        aa_pos, aa_code = get_last_base_aa_before_gap(mgrb_prot_align[0])
-                        fs_report = f"mgrb:p.{aa_map[aa_code]}{aa_pos}fs"
-                        mgrb_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
-
-                elif best_mgrb_cov < 99.0 and mgrb_dna_cov < 99.0:
-                    # checks for Deletion
-                    mgrb_dna_alignments = aligner.align(mgrb_ref_seq, mgrb_hit)
-                    pos, base = get_last_base_aa_before_gap(mgrb_dna_alignments[0])
-                    del_report = f"mgrb:c.{base}{pos}del"
-                    mgrb_deletion = (del_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                        mgrb_query_trans = translate_nucl_to_prot(ompk35_query_seq)
+                        mgrb_prot_align= aligner.align(mgrb_ref_trans, mgrb_query_trans)
+                        fs_info = get_frameshift_info(mgrb_prot_align[0])
+                        if fs_info is not None:
+                            aa_pos, ref_aa, alt_aa, fs_len = fs_info
+                            fs_report = (
+                                f"mgrb_{ref_aa}{aa_pos}{alt_aa}fsTer{fs_len}"
+                            )
+                            mgrb_frameshift = (
+                                fs_report,
+                                {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                            )
+                # check for deletion
+                elif best_mgrb_cov < 90.0 and mgrb_dna_cov < 90.0:
+                    mgrb_dna_alignments = aligner.align(mgrb_ref_seq, mgrb_query_seq )
+                    del_info = deletion_checks(mgrb_dna_alignments[0], mgrb_ref_seq)
+                    if del_info is not None:
+                        pos, base = del_info
+                        del_report = f"mgrb:c.{base}{pos}del"
+                        mgrb_deletion = (
+                            del_report,
+                            {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        )
 
         elif hit.query_name == 'pmrB':
+            pmrb_ref_seq = ref_seqs['pmrB']
+            pmrb_query_seq = hit.ref_seq
+            pmrb_hit_data = hit_data
+
+            # check for deletion at the start of the alignment
+            if coverage == 0.0:
+                aln = dna_aligner.align(pmrb_ref_seq, pmrb_query_seq)[0]
+                deleted_base_pos = find_start_deletion_in_alignment(aln)
+                deletion_report = f"pmrb_{deleted_base_pos}"
+
+                pmrb_deletion = (
+                    deletion_report,
+                    {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                )
+                continue 
+
             if coverage > best_pmrb_cov:
                 best_pmrb_cov = coverage
-                pmrb_hit_data = hit_data
                 pmrb_dna_cov = dna_hit_cov 
-                pmrb_hit = hit.ref_seq 
-                pmrb_ref_seq = hit.query_seq
 
                 # ---- FRAMESHIFT/DELETION LOGIC for pmrB ----
-                if best_pmrb_cov < 99.0 and pmrb_dna_cov > 99.0:
+                if best_pmrb_cov < 90.0 and pmrb_dna_cov > 90.0:
                     if translation:
                         pmrb_ref_trans = translate_nucl_to_prot(pmrb_ref_seq)
-                        pmrb_prot_align= aligner.align(pmrb_ref_trans, translation)
-                        aa_pos, aa_code = get_last_base_aa_before_gap(pmrb_prot_align[0])
-
-                        fs_report = f"pmrb:p.{aa_map[aa_code]}{aa_pos}fs"
-                        pmrb_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
-
-                elif best_pmrb_cov < 99.0 and pmrb_dna_cov < 99.0:
+                        pmrb_query_trans = translate_nucl_to_prot(pmrb_query_seq)
+                        pmrb_prot_align= aligner.align(pmrb_ref_trans, pmrb_query_trans)
+                        fs_info = get_frameshift_info(pmrb_prot_align[0])
+                        if fs_info is not None:
+                            aa_pos, ref_aa, alt_aa, fs_len = fs_info
+                            fs_report = (
+                                f"pmrb_{ref_aa}{aa_pos}{alt_aa}fsTer{fs_len}"
+                            )
+                            pmrb_frameshift = (
+                                fs_report,
+                                {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                            )
+                elif best_pmrb_cov < 90.0 and pmrb_dna_cov < 90.0:
                     # DELETION
                     pmrb_dna_alignments = aligner.align(pmrb_ref_seq, pmrb_hit)
-                    pos, base = get_last_base_aa_before_gap(pmrb_dna_alignments[0])
-                    del_report = f"pmrb:c.{base}{pos}del"
-                    pmrb_deletion = (del_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                    del_info = deletion_checks(pmrb_dna_alignments[0], pmrb_ref_seq)
+                    if del_info is not None:
+                        pos, base = del_info
+                        del_report = f"pmrb:c.{base}{pos}del"
+                        pmrb_deletion = (
+                            del_report,
+                            {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        )
         else:
             assert False
 
@@ -121,8 +186,8 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
         truncations.append(mgrb_deletion)
     else:
         # Check if the first 3 bp of the hit is a known start codon for mgrB
-        if mgrb_hit:
-            mgrb_start_codon = mgrb_hit[:3].upper()
+        if mgrb_query_seq:
+            mgrb_start_codon = mgrb_query_seq[:3].upper()
             if mgrb_start_codon not in start_codons:
                 truncations.append(('mgrB$', {**mgrb_hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}))
 
@@ -132,14 +197,15 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
         truncations.append(pmrb_deletion)
     else:
         # Check if the first 3 bp of the hit is a known start codon for pmrB
-        if pmrb_hit:
-            pmrb_start_codon = pmrb_hit[:3].upper()
+        if pmrb_query_seq:
+            pmrb_start_codon = pmrb_query_seq[:3].upper()
             if pmrb_start_codon not in start_codons:
                 truncations.append(('pmrB$', {**pmrb_hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}))
 
     for trunc_name, hit_data in truncations:
         data = dict(hit_data) if hit_data else {}
         hits_dict['Col_mutations'].append([trunc_name, data])
+
 
 
 
