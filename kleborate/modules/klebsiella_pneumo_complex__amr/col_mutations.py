@@ -103,7 +103,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
                     # checks for Frameshift
                     if translation:
                         mgrb_ref_trans = translate_nucl_to_prot(mgrb_ref_seq)
-                        mgrb_query_trans = translate_nucl_to_prot(ompk35_query_seq)
+                        mgrb_query_trans = translate_nucl_to_prot(mgrb_query_seq)
                         mgrb_prot_align= aligner.align(mgrb_ref_trans, mgrb_query_trans)
                         fs_info = get_frameshift_info(mgrb_prot_align[0])
                         if fs_info is not None:
