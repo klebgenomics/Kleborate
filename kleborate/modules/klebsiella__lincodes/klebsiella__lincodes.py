@@ -135,7 +135,7 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
         results = extract_lincode_from_stdout(completed.stdout)
         return results
         
-        
+
 def get_results(assembly, minimap2_index, args, previous_results):
     """
     Returns:
@@ -144,21 +144,58 @@ def get_results(assembly, minimap2_index, args, previous_results):
     """
     if isinstance(assembly, str):
         assembly = pathlib.Path(assembly)
-    db_path = data_dir() / "kleb_scgmlst_s-index"
+
+    #  Retrieve the DB path from the CLI arguments
+    if not args.kpsc_cgmlst_db:
+        print("Error: --kpsc_cgmlst_db path is required for kpsc__cgmlst module", file=sys.stderr)
+        return {"cgST": "-", "LINcodes": "-"}
+
+    db_path = pathlib.Path(args.kpsc_cgmlst_db)
     mist_script_path = data_dir() / "mist_to_partial_lincode.py"
     if not db_path.exists():
-        pass
+        print(f"Error: The provided database path does not exist: {db_path}", file=sys.stderr)
+        return {"cgST": "-", "LINcodes": "-"}
+
     if not mist_script_path.exists():
-        pass
+        print(f"Error: Helper script not found at {mist_script_path}", file=sys.stderr)
+        return {"cgST": "-", "LINcodes": "-"}
+
     try:
         extracted_data = run_mist_and_extract_lincode(assembly, db_path, mist_script_path)
+        
         return {
-            "cgST": extracted_data['cgST'],
-            "LINcodes": extracted_data['LINcodes']
+            "cgST": extracted_data.get('cgST', '-'),
+            "LINcodes": extracted_data.get('LINcodes', '-')
         }
     except Exception:
         return {
             "cgST": "-",
             "LINcodes": "-"
         }
+
+# def get_results(assembly, minimap2_index, args, previous_results):
+#     """
+#     Returns:
+#         - "cgST": best matching scgST
+#         - "LINcodes": full LINcode string
+#     """
+#     if isinstance(assembly, str):
+#         assembly = pathlib.Path(assembly)
+#     db_path = data_dir() / "kleb_scgmlst_s-index"
+#     mist_script_path = data_dir() / "mist_to_partial_lincode.py"
+#     if not db_path.exists():
+#         pass
+#     if not mist_script_path.exists():
+#         pass
+#     try:
+#         extracted_data = run_mist_and_extract_lincode(assembly, db_path, mist_script_path)
+#         return {
+#             "cgST": extracted_data['cgST'],
+#             "LINcodes": extracted_data['LINcodes']
+#         }
+#     except Exception:
+#         return {
+#             "cgST": "-",
+#             "LINcodes": "-"
+#         }
 
