@@ -82,7 +82,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
     
-    results, spurious_hits  = multi_mlst(assembly, minimap2_index, profiles, alleles, genes,
+    results, spurious_hits,_  = multi_mlst(assembly, minimap2_index, profiles, alleles, genes,
                                       'iuc_lineage', args.klebsiella__abst_min_identity,
                                       args.klebsiella__abst_min_coverage, args.klebsiella__abst_required_exact_matches,
                                       check_for_truncation=True, report_incomplete=True, 

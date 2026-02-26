@@ -5,8 +5,8 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2023 Kat Holt, Ryan Wick (rrwick@gmail.com), Mary Maranga (gathonimaranga@gmail.com)
-https://github.com/katholt/KleborateModular/
+Copyright 2025 Mary Maranga (gathonimaranga@gmail.com)
+https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
@@ -41,7 +41,7 @@ def test_check_cli_options_1():
                                            'klebsiella__rmst_required_exact_matches'])
     check_cli_options(Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=90.0,
                            klebsiella__rmst_min_spurious_identity=85.0, klebsiella__rmst_min_spurious_coverage=50.0,
-                           klebsiella__rmst_required_exact_matches=3))
+                           klebsiella__rmst_required_exact_matches=2))
 
 
 def test_check_cli_options_2():
@@ -49,7 +49,7 @@ def test_check_cli_options_2():
                                            'klebsiella__rmst_required_exact_matches'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__rmst_min_identity=0.90, klebsiella__rmst_min_coverage=90.0,
-                               klebsiella__rmst_required_exact_matches=3))
+                               klebsiella__rmst_required_exact_matches=2))
 
 
 def test_check_cli_options_3():
@@ -57,7 +57,7 @@ def test_check_cli_options_3():
                                            'klebsiella__rmst_required_exact_matches'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__rmst_min_identity=-90.0, klebsiella__rmst_min_coverage=0.90,
-                               klebsiella__rmst_required_exact_matches=3))
+                               klebsiella__rmst_required_exact_matches=2))
 
 
 def test_check_cli_options_4():
@@ -65,7 +65,7 @@ def test_check_cli_options_4():
                                            'klebsiella__rmst_required_exact_matches'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__rmst_min_identity=-10.0, klebsiella__rmst_min_coverage=90.0,
-                               klebsiella__rmst_required_exact_matches=3))
+                               klebsiella__rmst_required_exact_matches=2))
 
 
 def test_check_cli_options_5():
@@ -73,7 +73,7 @@ def test_check_cli_options_5():
                                            'klebsiella__rmst_required_exact_matches'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=120.0,
-                               klebsiella__rmst_required_exact_matches=3))
+                               klebsiella__rmst_required_exact_matches=2))
 
 
 def test_check_cli_options_6():
@@ -83,7 +83,7 @@ def test_check_cli_options_6():
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=90.0,
                                klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=50.0,
-                               klebsiella__rmst_required_exact_matches=-2))
+                               klebsiella__rmst_required_exact_matches=2))
 
 
 
@@ -113,13 +113,16 @@ def test_get_results_1():
     results = get_results(get_test_genome_dir() / 'GCF_000968155.1.fna.gz', None,
                           Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
                                klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
-                               klebsiella__rmst_required_exact_matches=3), {})
+                               klebsiella__rmst_required_exact_matches=2), {})
 
     assert results['RmST'] == '2'
     assert results['RmpADC'] == 'rmp 2; KpVP-2'
+    assert results['RmpADC_status'] == 'Phase OFF (reduced expression)'
     assert results['rmpA'] == '9'
     assert results['rmpD'] == '32'
-    assert results['rmpC'] == '5'
+    assert results['rmpC'] == '5 (OFF)'
+    assert results['rmpA_promoter'] == '10T (reduced expression)'
+    assert results['argR'] == 'present'
 
 
 def test_get_results_2():
@@ -129,12 +132,15 @@ def test_get_results_2():
     results = get_results(get_test_genome_dir() / 'GCF_001068035.1.fna.gz', None,
                           Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
                                klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
-                               klebsiella__rmst_required_exact_matches=3), {})
+                               klebsiella__rmst_required_exact_matches=2), {})
     assert results['RmST'] == '26'
     assert results['RmpADC'] == 'rmp 1; KpVP-1'
+    assert results['RmpADC_status'] == 'Phase ON'
     assert results['rmpD'] == '2'
     assert results['rmpA'] == '2'
     assert results['rmpC'] == '2'
+    assert results['rmpA_promoter'] == '11T'
+    assert results['argR'] == 'present'
 
 
 def test_get_results_3():
@@ -145,7 +151,7 @@ def test_get_results_3():
     results = get_results(get_test_genome_dir() / 'GCF_000008865.2.fna.gz', None,
                           Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
                                klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
-                               klebsiella__rmst_required_exact_matches=3), {})
+                               klebsiella__rmst_required_exact_matches=2), {})
     assert results['RmST'] == 0
     assert results['RmpADC'] == '-'
 
@@ -157,12 +163,15 @@ def test_gcf_000968155():
     results = get_results(get_test_file_dir() / 'GCF_000968155.1_rmp_locus.fasta', None,
                           Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
                                klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
-                               klebsiella__rmst_required_exact_matches=3), {})
+                               klebsiella__rmst_required_exact_matches=2), {})
     assert results['RmST'] == '2'
     assert results['RmpADC'] == 'rmp 2; KpVP-2'
+    assert results['RmpADC_status'] == 'Phase OFF (reduced expression), (argR missing)'
     assert results['rmpA'] == '9'
     assert results['rmpD'] == '32'
-    assert results['rmpC'] == '5'
+    assert results['rmpC'] == '5 (OFF)'
+    assert results['rmpA_promoter'] == '10T (reduced expression)'
+    assert results['argR'] == '-'
 
 
 def test_gcf_000968155_incomplete():
@@ -172,12 +181,15 @@ def test_gcf_000968155_incomplete():
     results = get_results(get_test_file_dir() / 'GCF_000968155.1_rmp_locus_incomplete.fasta', None,
                           Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
                                klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
-                               klebsiella__rmst_required_exact_matches=3), {})
-    assert results['RmST'] == 0
-    assert results['RmpADC'] == '-'
+                               klebsiella__rmst_required_exact_matches=2), {})
+    assert results['RmST'] == '2-1LV'
+    assert results['RmpADC'] == 'rmp 2; KpVP-2 (partial)'
+    assert results['RmpADC_status'] == '-'
     assert results['rmpA'] == '9'
     assert results['rmpD'] == '32'
     assert results['rmpC'] == '-'
+    assert results['rmpA_promoter'] == '10T (reduced expression)'
+    assert results['argR'] == '-'
 
 
 def test_gcf_000968155_truncated():
@@ -187,9 +199,91 @@ def test_gcf_000968155_truncated():
     results = get_results(get_test_file_dir() / 'GCF_000968155.1_rmp_locus_truncated.fasta', None,
                           Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
                                klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
-                               klebsiella__rmst_required_exact_matches=3), {})
-    assert results['RmST'] == 0
-    assert results['RmpADC'] == '-'
+                               klebsiella__rmst_required_exact_matches=2), {})
+    
+    assert results['RmST'] == '2-1LV'
+    assert results['RmpADC'] == 'rmp 2; KpVP-2'
+    assert results['RmpADC_status'] == 'Phase OFF (reduced expression), (argR missing)'
     assert results['rmpA'] == '9'
     assert results['rmpD'] == '32'
-    assert results['rmpC'] == '5*-28%'
+    assert results['rmpC'] == '5 (OFF)'
+    assert results['rmpA_promoter'] == '10T (reduced expression)'
+    assert results['argR'] == '-'
+
+
+def test_get_results_KP01():
+    # Test for strain KP01
+    Args = collections.namedtuple('Args', ['klebsiella__rmst_min_identity', 'klebsiella__rmst_min_coverage',
+                                           'klebsiella__rmst_min_spurious_identity', 'klebsiella__rmst_min_spurious_coverage',
+                                           'klebsiella__rmst_required_exact_matches'])
+    results = get_results(get_test_genome_dir() / 'KP01.fasta', None,
+                          Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
+                               klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
+                               klebsiella__rmst_required_exact_matches=2), {})
+
+    assert results['RmST'] == '40'
+    assert results['RmpADC'] == 'rmp 1; KpVP-1'
+    assert results['RmpADC_status'] == 'Phase ON'
+    assert results['rmpA'] == '2'
+    assert results['rmpD'] == '3'
+    assert results['rmpC'] == '2'
+    assert results['rmpA_promoter'] == '11T'
+    assert results['argR'] == 'present'
+
+
+def test_get_results_KP02():
+    # Test for strain KP02
+    Args = collections.namedtuple('Args', ['klebsiella__rmst_min_identity', 'klebsiella__rmst_min_coverage',
+                                           'klebsiella__rmst_min_spurious_identity', 'klebsiella__rmst_min_spurious_coverage',
+                                           'klebsiella__rmst_required_exact_matches'])
+    results = get_results(get_test_genome_dir() / 'KP02.fasta', None,
+                          Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
+                               klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
+                               klebsiella__rmst_required_exact_matches=2), {})
+
+    assert results['RmST'] == '40'
+    assert results['RmpADC'] == 'rmp 1; KpVP-1'
+    assert results['RmpADC_status'] == 'Phase ON (reduced expression)'
+    assert results['rmpA'] == '2'
+    assert results['rmpD'] == '3'
+    assert results['rmpC'] == '2'
+    assert results['rmpA_promoter'] == '10T (reduced expression)'
+    assert results['argR'] == 'present'
+
+
+def test_get_results_DRR389032_argR_box():
+    Args = collections.namedtuple('Args', ['klebsiella__rmst_min_identity', 'klebsiella__rmst_min_coverage',
+                                           'klebsiella__rmst_min_spurious_identity', 'klebsiella__rmst_min_spurious_coverage',
+                                           'klebsiella__rmst_required_exact_matches'])
+    results = get_results(get_test_genome_dir() / 'DRR389032.fasta', None,
+                          Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
+                               klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
+                               klebsiella__rmst_required_exact_matches=2), {})
+
+    assert results['RmST'] == '26'
+    assert results['RmpADC'] == 'rmp 1; KpVP-1'
+    assert results['RmpADC_status'] == 'Phase ON (ARG box lost)'
+    assert results['rmpA'] == '2'
+    assert results['rmpD'] == '2'
+    assert results['rmpC'] == '2'
+    assert results['rmpA_promoter'] == '12T, ARG-box lost'
+    assert results['argR'] == 'present'
+
+
+def test_get_results_NK_H1_084_argR_box():
+    Args = collections.namedtuple('Args', ['klebsiella__rmst_min_identity', 'klebsiella__rmst_min_coverage',
+                                           'klebsiella__rmst_min_spurious_identity', 'klebsiella__rmst_min_spurious_coverage',
+                                           'klebsiella__rmst_required_exact_matches'])
+    results = get_results(get_test_genome_dir() / 'NK_H1_084.fasta', None,
+                          Args(klebsiella__rmst_min_identity=90.0, klebsiella__rmst_min_coverage=80.0,
+                               klebsiella__rmst_min_spurious_identity=80.0, klebsiella__rmst_min_spurious_coverage=40.0,
+                               klebsiella__rmst_required_exact_matches=2), {})
+
+    assert results['RmST'] == '40'
+    assert results['RmpADC'] == 'rmp 1; KpVP-1'
+    assert results['RmpADC_status'] == 'Phase ON (ARG box lost)'
+    assert results['rmpA'] == '2'
+    assert results['rmpD'] == '3'
+    assert results['rmpC'] == '2'
+    assert results['rmpA_promoter'] == '11T, ARG-box lost'
+    assert results['argR'] == 'present'

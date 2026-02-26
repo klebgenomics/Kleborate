@@ -1,7 +1,4 @@
 """
-This module contains classes for interacting with bacterial genome assemblies and contigs and a pipeline
-to type them.
-
 Copyright 2025 Mary Maranga
 https://github.com/klebgenomics/Kleborate/
 https://github.com/klebgenomics/Kaptive
@@ -16,6 +13,7 @@ If not, see <https://www.gnu.org/licenses/>.
 """
 
 import os
+import pathlib
 from pathlib import Path
 import shutil
 import sys
@@ -58,7 +56,9 @@ def check_external_programs():
     return ['minimap2']
 
 
-# define all headers
+def data_dir():
+    return pathlib.Path(__file__).parents[0] / 'data'
+
 
 all_headers = [
     'Assembly', 'locus', 'type', 'locus confidence',

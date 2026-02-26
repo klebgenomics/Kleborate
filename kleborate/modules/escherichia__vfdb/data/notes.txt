@@ -1,0 +1,503 @@
+K88ab:  K88/F4 protein subunit:
+astA:  Heat-stable enterotoxin 1:
+bfpA:  Major subunit of bundle-forming pili:
+cba:  Colicin B:
+ccI:  Cloacin:
+cdtB:  Cytolethal distending toxin B:
+celb:  Endonuclease colicin E2:
+cfa_c:  Colonisation factor antigen I:
+cma:  Colicin M:
+cnf1:  Cytotoxic necrotizing factor:
+cofA:  Longus type IV pilus subunit:
+eae:  Intimin:
+espB:  Secreted protein B:
+ehxA: Enterohaemolysin:
+f17-A:  Subunit A of F17 fimbrial protein:
+f17-G:  Adhesin subunit of F17 fimbriae:
+fanA:  Involved in biogenesis of K99/F5 fimbriae:
+fasA:  Fimbriae 987P/F6 subunit:
+fedA:  Fimbrial protein F107 subunit A:
+fedF:  Fimbrial adhesin AC precursor:
+fim41a:  Mature Fim41a/F41 protein:
+gad:  Glutamate decarboxylase:
+hlyA:  Haemolysin A:
+hlyE:  Avian E.coli haemolysin:
+ipaD:  Invasion protein Shigella flexneri:
+ipaH9.8:  Invasion plasmid antigen:
+ireA:  Siderophore receptor:
+iroN:  Enterobactin siderophore receptor protein:
+iss:  Increased serum survival:
+lngA:  Longus type IV pilus:
+ltcA:  Heat-labile enterotoxin A subunit:
+mchB:  Microcin H47 part of colicin H:
+mchC:  MchC protein:
+mchF:  ABC transporter protein MchF:
+mcmA:  Microcin M part of colicin H:
+nfaE:  Diffuse adherence fibrillar adhesin gene:
+perA:  EPEC adherence factor:
+pet:  Autotransporter enterotoxin:
+senB:  Plasmid-encoded enterotoxin:
+sfaS:  S-fimbriae minor subunit:
+sta1:  Heat-stabile enterotoxin ST-Ia:
+stb:  Heat-stabile enterotoxin II:
+virF:  VirF transcriptional activator:
+cif:  Type III secreted effector:
+eatA:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+efa1:  EHEC factor for adherence:
+epeA:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+espA:  Type III secretions system:
+espC:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+espF:  Type III secretion system:
+espI:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+espJ:  Prophage-encoded type III secretion system effector:
+espP:  Putative exoprotein precursor:
+etpD:  Type II secretion protein:
+iha:  Adherence protein:
+katP:  Plasmid-encoded catalase peroxidase:
+lpfA:  Long polar fimbriae:
+nleA:  Non-LEE encoded effector A:
+nleB:  Non-LEE encoded effector B:
+nleC:  Non-LEE encoded effector C:
+pic:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+rpeA:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+saa:  Auto agglutinating adhesin:
+sat:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+sepA:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+sigA:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+subA:  Subtilase toxin subunit:
+tccP:  Tir-cytoskeleton coupling protein:
+tir:  Translocated intimin receptor protein:
+toxB:  Toxin B:
+tsh:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+vat:  serine protease autotransporters of Enterobacteriaceae (SPATE):
+stx1Aa:  Shiga toxin 1, subunit A, variant a:
+stx1Ab:  Shiga toxin 1, subunit A, variant b:
+stx1Ac:  Shiga toxin 1, subunit A, variant c:
+stx1Ad:  Shiga toxin 1, subunit A, variant d:
+stx1Ae:  Shiga toxin 1, subunit A, variant e:
+stx1Af:  Shiga toxin 1, subunit A, variant f:
+stx1Ba:  Shiga toxin 1, subunit B, variant a:
+stx1Bb:  Shiga toxin 1, subunit B, variant b:
+stx1Bc:  Shiga toxin 1, subunit B, variant c:
+stx1Bd:  Shiga toxin 1, subunit B, variant d:
+stx1Be:  Shiga toxin 1, subunit B, variant e:
+stx1Bf:  Shiga toxin 1, subunit B, variant f:
+stx2Aa:  Shiga toxin 2, subunit A, variant a:
+stx2Ab:  Shiga toxin 2, subunit A, variant b:
+stx2Ac:  Shiga toxin 2, subunit A, variant c:
+stx2Ad:  Shiga toxin 2, subunit A, variant d:
+stx2Ae:  Shiga toxin 2, subunit A, variant e:
+stx2Af:  Shiga toxin 2, subunit A, variant f:
+stx2Ag:  Shiga toxin 2, subunit A, variant g:
+stx2Ba:  Shiga toxin 2, subunit B, variant a:
+stx2Bb:  Shiga toxin 2, subunit B, variant b:
+stx2Bc:  Shiga toxin 2, subunit B, variant c:
+stx2Bd:  Shiga toxin 2, subunit B, variant d:
+stx2Be:  Shiga toxin 2, subunit B, variant e:
+stx2Bf:  Shiga toxin 2, subunit B, variant f:
+stx2Bg:  Shiga toxin 2, subunit B, variant g:
+stx1A: Shiga toxin 1, subunit A:
+stx1B: Shiga toxin 1, subunit B:
+stx2A: Shiga toxin 2, subunit A:
+stx2B: Shiga toxin 2, subunit B:
+ElrA::
+SrtA::
+ace:collagen adhesin precursor:
+acm::
+agg:aggregation substance:
+cCF10::
+cOB1::
+cad::
+camE:sex pheromone cAM373 precursor:
+cylA::
+cylB::
+cylL::
+cylM::
+ebpA::
+ebpB::
+ebpC::
+efaAfm::
+efaAfs::
+espfm::
+espfs::
+fsrB:biofilm formation:
+gelE::
+hylA::
+hylB::
+hylEfm::
+tpx::
+atl:bifunctional autolysin Atl::
+cap5A:capsular polysaccharide biosynthesis protein cap5A:
+cap5B:capsular polysaccharide biosynthesis protein cap5B:
+cap5C:capsular polysaccharide biosynthesis protein cap5C:
+cap5D:capsular polysaccharide biosynthesis protein cap5D:
+cap5E:capsular polysaccharide biosynthesis protein cap5E:
+cap5F:capsular polysaccharide biosynthesis protein cap5F:
+cap5G:capsular polysaccharide biosynthesis protein cap5G:
+cap5H:capsular polysaccharide biosynthesis protein cap5H:
+cap5I:capsular polysaccharide biosynthesis protein cap5I:
+cap5J:capsular polysaccharide biosynthesis protein cap5J:
+cap5K:capsular polysaccharide biosynthesis protein cap5K:
+cap5L:capsular polysaccharide biosynthesis protein cap5L:
+cap5M:capsular polysaccharide biosynthesis protein cap5M:
+cap5N:capsular polysaccharide biosynthesis protein cap5N:
+cap5O:capsular polysaccharide biosynthesis protein cap5O:
+cap5P:capsular polysaccharide biosynthesis protein cap5P:
+capA:capsular polysaccharide biosynthesis protein capA:
+capB:capsular polysaccharide biosynthesis protein capB:
+capC:capsular polysaccharide synthesis protein capC:
+capD:polysaccharide biosynthesis protein capD:
+capE:capsular polysaccharide synthesis enzyme capE:
+capF:capsular polysaccharide synthesis enzyme capF:
+capG:capsular polysaccharide synthesis enzyme capG:
+capH:capsular polysaccharide synthesis enzyme capH:
+capI:capsular polysaccharide synthesis enzyme capI:
+capJ:capsular polysaccharide synthesis enzyme capJ:
+capK:capsular polysaccharide synthesis enzyme capK:
+capL:capsular polysaccharide synthesis enzyme capL:
+capM:capsular polysaccharide synthesis enzyme capM:
+capN:capsular polysaccharide synthesis enzyme capN:
+capO:capsular polysaccharide synthesis enzyme capO:
+capP:capsular polysaccharide synthesis enzyme capP:
+cap8A:truncated capsular polysaccharide synthesis enzyme cap5A:
+cap8B:capsular polysaccharide synthesis enzyme cap8B:
+cap8C:capsular polysaccharide synthesis enzyme cap8C:
+cap8D:capsular polysaccharide synthesis enzyme cap8D:
+cap8E:capsular polysaccharide synthesis enzyme cap8E:
+cap8F:capsular polysaccharide synthesis enzyme cap8F:
+cap8G:capsular polysaccharide synthesis enzyme cap8G:
+cap8H:capsular polysaccharide synthesis enzyme cap8H:
+cap8I:capsular polysaccharide synthesis enzyme cap8I:
+cap8J:capsular polysaccharide synthesis enzyme cap8J:
+cap8K:capsular polysaccharide synthesis enzyme cap8K:
+cap8L:capsular polysaccharide synthesis enzyme cap8L:
+cap8M:capsular polysaccharide synthesis enzyme cap8M:
+cap8O:capsular polysaccharide synthesis enzyme cap8O:
+cap8P:capsular polysaccharide synthesis enzyme cap8P:
+cap1A:capsular polysaccharide biosynthesis protein cap1A:
+cap1B:capsular polysaccharide biosynthesis protein cap1B:
+cap1C:capsular polysaccharide biosynthesis protein cap1C:
+clfA:fibrinogen-binding protein A, clumping factor:
+clfB:clumping factor ClfB, fibrinogen binding protein:
+cna:collagen adhesin precursor:
+coa:staphylocoagulase precursor:
+eap:extracellular adherence protein:
+eap/map:extracellular adherence protein:
+ebh:cell wall associated fibronectin-binding protein:
+ebpS:cell surface elastin binding protein:
+efb:extracelular fibrinogen-binding protein:
+fib:fibrinogen-binding protein:
+SEntA:putative enterotoxin type A:
+SEntB:enterotoxin B:
+SEntC:enterotoxin type C precursor:
+SEntG:extracellular enterotoxin type G precursor:
+SEntH:enterotoxin H:
+SEntI:extracellular enterotoxin type I precursor:
+SEntK:enterotoxin K:
+SEntL:extracellular enterotoxin L:
+SEntM:extracellular enterotoxin type I:
+SEntN:enterotoxin N:
+SEntO:enterotoxin O:
+SEntP:enterotoxin P:
+SEntQ:enterotoxin Q:
+SEnt:enterotoxin:
+SEnt-protiein:enterotoxin protein:
+SEnt-like:enterotoxin-like toxin:
+SEntyent1:enterotoxin yent1:
+SEntyent2:enterotoxin yent2:
+eta:exfoliative toxin A:
+etd:exfoliative toxin A:
+set1:superantigen-like protein:
+set2:superantigen-like protein:
+set3:superantigen-like protein:
+set4:superantigen-like protein:
+set5:superantigen-like protein 5:
+set6:superantigen-like protein:
+set7:superantigen-like protein:
+set8:superantigen-like protein:
+set9:superantigen-like protein:
+set10:superantigen-like protein:
+set11:superantigen-like protein:
+set12:superantigen-like protein:
+set13:superantigen-like protein:
+set14:superantigen-like protein:
+set15:superantigen-like protein:
+set16:exotoxin homolog:
+set17:exotoxin homolog:
+set18:superantigen-like protein:
+set19:superantigen-like protein:
+set20:superantigen-like protein 5:
+set21:superantigen-like protein:
+set22:superantigen-like protein 7:
+set23:superantigen-like protein:
+set24:superantigen-like protein:
+set25:superantigen-like protein:
+set26:exotoxin homolog:
+set30:superanitgne-like protein:
+sal:superantigen-like protein:
+SExo:exotoxin:
+fnbA:fibronectin-binding protein A:
+fnbB:fibronectin-binding protein B:
+geh:glycerol ester hydrolase:
+hla:alpha-hemolysin precursor:
+hlb:beta-hemolysin:
+hld:delta-hemolysin:
+hlgA:gamma-hemolysin chain II precursor:
+hlgB:gamma-hemolysin component B precursor:
+hlgC:gamma-hemolysin component C:
+hysA:hyaluronate lyase:
+icaA:intercellular adhesion protein A:
+icaR:intercellular adhesion regulator:
+icaD:intercellular adhesion protein D:
+icaB:intercellular adhesion protein B:
+icaC:intercellular adhesion protein C:
+lip:triacylglycerol lipase:
+lukF-PV:Panton Valentine leukocidin F component:
+lukS-PV:Panton Valentine leukocidin S component:
+lukM:LukM precursor:
+lukD:leukocidin D component:
+lukE:leukocidin E component:
+nuc:thermonuclease:
+sak:staphylokinase:
+isb:IgG-binding protein SBI:
+scn:staphylococcal complement inhibitor:
+sdrC:Ser-Asp rich fibrinogen-binding protein C:
+sdrD:Ser-Asp rich fibrinogen-binding protein D:
+sdrE:Ser-Asp rich fibrinogen-binding protein E:
+sdrH:Ser-Asp rich fibrinogen-binding portein H:
+splA:serine protease splA:
+splB:serine protease splB:
+splC:serine protease splC:
+splD:serine protease splD:
+splE:serine protease splE:
+splF:serine protease splF:
+sspA:serine V8 protease:
+spa:spa immunoglobulin G binding protein A:
+sspB:cysteine protease:
+sspB2:cysteine protease SspB:
+sspC:cysteine protease:
+tsst:toxic shock syndrome toxin-1:
+esxA:ESAT-6/WXG100 family secreted protein EsxA/YukE:
+esaA:type VII secretion protein EsaA:
+essA:protein secretion system EssA:
+esaB:Putative secretion accessory protein EsaB/YukD:
+essB:putative secretion system component EssB:
+essC:type VII secretion protein EssC:
+esaC:EsaC protein within ESAT-6 gene cluster:
+esxB:virulence factor EsxB family protein:
+vwb:von Willebrand factor-binding protein:
+stx11:S.dysenteriae 60R
+stx12:ONTNA, variant a
+stx13:S.dysenteriae 3818T
+stx14:O111 PH, variant a
+stx15:O111 CB168, variant a
+stx16:O157 AI2001 52, variant a
+stx17:O157 GPU96MM, variant a
+stx18:O111 04-06263, variant a
+stx19:O111 3385-00, variant a
+stx110:S.sonnei CB7888
+stx111:O48 94C, variant a
+stx112:O157 FLY16, variant a
+stx113:O157 EDL933, variant a
+stx114:O165 HI-2, variant a
+stx115:ONT HI-A, variant a
+stx116:Out HI-N, variant c
+stx117:ONT HI-B, variant c
+stx118:ONT HI-C, variant c
+stx119:ONT BCN26, variant c
+stx120:O174 DG131-3, variant c
+stx121:ONT 92-1251, variant d
+stx122:ONT 92-1252, variant d
+stx123:ONT AB8SF, variant d
+stx124:ONT MHI813, variant d
+stx21:O113 TS17-08, variant a
+stx22:O22 EBC217, variant a
+stx23:ONT 23765, variant a
+stx24:O113 TS18-08, variant a
+stx25:O88 N2688, variant a
+stx26:ONT N5578, variant a
+stx27:O153 TS20-08, variant a
+stx28:O130 TS07-07, variant a
+stx29: 178 TS02-07, variant a
+stx210:O48 94C, variant a
+stx211:OR TS05-07, variant a
+stx212:E.cloacae 95MV2, variant a
+stx213:O101 EBC201, variant a
+stx214:O26 126814, variant a
+stx215:O157 SF-258-98, variant a
+stx216:O178 TS22-08, variant a
+stx217:O178 TS24-08, variant a
+stx218:O104 G5506, variant a
+stx219:O8 VTB178, variant a
+stx220:O83 N1135, variant a
+stx221:ONT EK9900, variant a
+stx222:ONT EBC210, variant a
+stx223:O26 FD930, variant a
+stx224:O157 SF-3573-98, variant a
+stx225:O157 A397, variant a
+stx226:O157 I6581, variant a
+stx227:O136 VTB60, variant a
+stx228:A.haemolyticus, variant a
+stx229:O111 928-91, variant a
+stx230:O157 93-111, variant a
+stx231:O157 EDL933, variant a
+stx232:O113 CL-3, variant a
+stx233:O157 G5101, variant c
+stx234:ONT pVTEC9, variant c
+stx235:O174 031, variant c
+stx236:O157 E32511, variant c
+stx237:O177 CB7126, variant c
+stx238:O174 EC1720a, variant d
+stx239:ONT EBC219, variant c
+stx240:O177 06-5121, variant c
+stx241:O157 CB8028, variant c
+stx242:O157 A580, variant c
+stx243:O157 469, variant c
+stx244:O157 A75, variant c
+stx245:O157 310, variant c
+stx246:O177 VTB323, variant c
+stx247:O157 020324, variant c
+stx248:O157 C394-03, variant c
+stx249:O157 V20, variant c
+stx250:O157 CS1718, variant c
+stx251:O157 Y350 , variant c
+stx252:O157 FLY16, variant c
+stx253:O171 EBC287, variant c
+stx254:O171 VTB46, variant c
+stx255:ONT EBC289, variant c
+stx256:OR TS27-08, variant c
+stx257:ONT EBC275, variant d
+stx258:O91 B2F1, variant d1
+stx259:O83 N15432, variant d
+stx260:O113 VTB75, variant d
+stx261:O77 VTB91, variant d
+stx262:O103 pVTEC7, variant d
+stx263:OR TS06-08, variant d
+stx264:ONT EC1871a, variant d
+stx265:O15 88 1509, variant d
+stx266:O113 TS03-07, variant d
+stx267:O174 EC173b, variant d
+stx268:O8 C466-01B, variant d
+stx269:O91 B2F1, variant d2
+stx270:C.freundii LM76, variant d
+stx271:O103 CVM9322, variant d
+stx272:O157 7279, variant d
+stx273:O55 5905, variant d
+stx274:O55 06-5231, variant d
+stx275:O6 NV206, variant d
+stx276:O2 EC604a, variant d
+stx277:O28 MT71, variant d
+stx278:O73 C165-02, variant d
+stx279:O22 KY-O19, variant d
+stx280:O113 TS28-08, variant d
+stx281:O113 TS21-08, variant d
+stx282:Out S-4, variant b
+stx283:O8 S-9, variant b
+stx284:Out HI-N, variant b
+stx285:O93 S-5, variant b
+stx286:O111 S-3, variant b
+stx287:O96 S-10, variant b
+stx288:O111 S-1, variant b
+stx289:O96 S-7, variant b
+stx290:O96 S-6, variant b
+stx291:O22 3143-97, variant b
+stx292:O118 EH250, variant b
+stx293:O40 5293-98, variant b
+stx294:ONT I7606, variant b
+stx295:O128 24196-97, variant b
+stx296:O111 PH, variant b
+stx297:O174 031, variant b
+stx298:O8 FHI-1106-1092, variant e
+stx299:Out S-8, variant g
+stx2100:O2 7v, variant g
+stx2101:O2 HI-11, variant g
+stx2102:O2 S86, variant g
+stx2103:O115 F08-101-31, variant f
+stx2104:O128 T4-97, variant f
+stx2105:O89 HI8, variant f
+stx2106:O101 E-D42, variant e
+stx2107:O22 3615-99, variant e
+stx2108:OR TS09-07, variant e
+stx2109:O26 R107, variant e
+stx2110:O139 S1191, variant e
+stx2111:O101 E-D43, variant e
+stx2112:O101 E-D68, variant e
+stx2113:O101 E-D53, variant e
+stx2114:ONT TS29-08, variant e
+stx2115:ONT TS03-08, variant e
+stx2116:O138 NN, variant e
+stx2117:O101 CB10394, variant e
+stx2118:O100 TS01-07, variant e
+stx2119:O121 NP9621, variant e
+stx2120:ONT 26725-97, variant e
+stx2121:ONT 2771, variant e
+astA: EAST-1 heat-stable toxin 
+pet: Plasmid-encoded toxin 
+sigA: Shigella IgA-like protease homologue
+Pic: Protease involved in intestinal colonization
+sepA: Shigella extracellular protein A 
+tsh: Temperature-sensitive hemagglutinin
+sat: Secreted autotransporter toxin 
+espC: EPEC secreted protein C
+espP: Extracellular serine protease plasmid-encoded
+pssA: Protease secreted by Shiga toxin-producing E. coli (STEC)
+picU: Pic from uropathogenic E. coli (UPEC)
+vat: Vacuolating autotransporter toxin
+vat-EXPEC: Vacuolating autotransporter toxin from extra-intestinal pathogenic E. coli(EXPEC)
+eatA: enterotoxigenic E. coli (ETEC) autotransporter A
+epeA: enterohemorrhagic E. coli EHEC plasmid-encoded autotransporter
+boa: Protease from Salmonella bongori
+ORF3: Isoprenoid Biosynthesis 
+ORF4: Putative isopentenyl-diphosphate delta-isomerase
+aap: Dispersin, antiaggregation protein= 
+aaiC: Type VI secretion protein 
+aggR: AraC transcriptional activator 
+aatA: Dispersin transporter protein 
+agg4A: AAF/IV major fimbrial subunit 
+aggA: AAF/I major fimbrial subunit 
+aafA: AAF/II major fimbrial subunit 
+agg3A: AAF/III major fimbrial subunit 
+agg3C: Usher, AAF/III assembly unit
+agg3D: Chaperone, AAF/III assembly unit
+agg3B: AAF/III minor adhesin. Enterobacteria AfaD invasin protein
+aafC: Usher, AAF/II assembly unit 
+aafD: Chaperone, AAF/II assembly unit
+aafB: AAF/II minor adhesin. Enterobacteria AfaD invasin protein
+agg4C: Usher, AAF/IV assembly unit
+agg4D: Chaperone, AAF/IV assembly unit
+agg4B: AAF/IV minor adhesin. Enterobacteria AfaD invasin protein
+aggC: Usher, AAF/I assembly unit
+aggD: Chaperone, AAF/I assembly unit
+aggB: AAF/I minor adhesin. Enterobacteria AfaD invasin protein
+aar: AggR-activated regulator
+anr: AraC negative regulator
+eilA: Salmonella HilA homolog 
+capU: Hexosyltransferase homolog 
+air: Enteroaggregative immunoglobulin repeat protein
+clpK:
+mrk:
+ClpK:
+tst: toxic shock syndrome toxin-1:
+ACME:arginine catabolic mobile element:
+aur:aureolysin:
+edinA:epidermal cell differentiation inhibitor A:
+edinB:epidermal cell differentiation inhibitor B:
+edinC:epidermal cell differentiation inhibitor C:
+seb:enterotoxin B:
+sea:enterotoxin A/P:
+sec:enterotoxin C:
+sed:enterotoxin D:
+see:enterotoxin E:
+seg:enterotoxin G:
+seh:enterotoxin H:
+sei:enterotoxin I:
+sej:enterotoxin J:
+sek:enterotoxin K:
+sel:enterotoxin L:
+sem:enterotoxin M:
+sen:enterotoxin N:
+seo:enterotoxin O:
+sep:enterotoxin P:
+seq:enterotoxin Q:
+ser:enterotoxin R:
+seu:enterotoxin U:

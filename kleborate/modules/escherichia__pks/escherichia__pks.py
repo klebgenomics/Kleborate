@@ -15,7 +15,7 @@ import pathlib
 import shutil
 import sys
 
-from ...shared.alignment import align_query_to_ref
+from ...shared.alignment import align_query_to_ref,truncation_check
 
 
 def description():
@@ -69,31 +69,20 @@ def pks_minimap(assembly, minimap2_index, ref_file, min_identity, min_coverage):
         min_query_coverage=min_coverage
     )
 
+    if not alignment_hits:
+        return '-'
+    
     if alignment_hits:
         for hit in alignment_hits:
             alignment_length = hit.query_end - hit.query_start
             coverage = (alignment_length / hit.query_length) * 100
             allele = hit.query_name
             if coverage < 100.0 or hit.percent_identity < 100.0:
-                return f"{allele}?"
+                return f"{allele}*"
             else:
                 return allele
     else:
         return ''
-
-# def pks_minimap(assembly, minimap2_index, ref_file, min_identity, min_coverage):
-#     alignment_hits = align_query_to_ref(
-#         ref_file,
-#         assembly,
-#         ref_index=minimap2_index,
-#         min_identity=min_identity,
-#         min_query_coverage=min_coverage
-#     )
-#     if alignment_hits:
-#         allele = alignment_hits[0].query_name
-#         return allele
-#     else:
-#         return ''
 
 
 

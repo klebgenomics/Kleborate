@@ -85,3 +85,90 @@ def complement_base(base):
 
 def reverse_complement(seq):
     return ''.join([complement_base(x) for x in seq][::-1])
+
+
+res_headers = [
+    'AGly_acquired', 'Col_acquired', 'Fcyn_acquired', 'Flq_acquired', 'Gly_acquired', 
+    'MLS_acquired', 'Phe_acquired', 'Rif_acquired', 'Sul_acquired', 'Tet_acquired', 
+    'Tgc_acquired', 'Tmt_acquired', 'Bla_acquired', 'Bla_inhR_acquired', 'Bla_ESBL_acquired', 
+    'Bla_ESBL_inhR_acquired', 'Bla_Carb_acquired', 'Bla_chr', 'SHV_mutations', 
+    'Omp_mutations', 'Col_mutations', 'Flq_mutations', 'truncated_resistance_hits', 
+    'spurious_resistance_hits'
+]
+
+
+annotation_fields = [
+        'Genetic_variation_type','Drug_class','Input_sequence_ID','Input_gene_length', 'Input_gene_start', 'Input_gene_stop', 'Reference_gene_length',
+        'Reference_gene_start', 'Reference_gene_stop', 'Sequence_identity', 'Coverage','Reference_accession','Strand_orientation',
+        'Software_name', 'Software_version', 'Reference_database_name',
+        'Reference_database_version','Input_protein_length','Reference_protein_length','Input_protein_start', 'Input_protein_stop','Antimicrobial_agent', 
+        'Coverage_depth', 'Coverage_ratio','Predicted_phenotype','predicted_phenotype_confidence_level', 
+        'Reference_protein_start', 'Reference_protein_stop','Resistance_mechanism'
+]
+
+
+KLEBSIELLA_TYPING_SPEC = {
+    "species": {
+        "genotyping_method": "In silico species detection",
+        "genotyping_schema_taxon": "Enterobacterales",
+        "genotyping_database_name": "kleborate_enterobacterales__species", # UPDATED
+        "genotyping_database_version": "3.2.4",
+        "genotyping_schema_name": "enterobacterales__species",
+        "genotyping_software_name": "Kleborate",
+        "genotyping_software_version": "3.2.4"
+    },  
+
+    "ST": {
+        "genotyping_method": "MLST",
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+        "genotyping_database_version": "2024-12-31", # UPDATED
+        "genotyping_schema_name": "MLST",
+        "genotyping_software_name": "Kleborate",
+        "genotyping_software_version": "3.2.4"
+    },
+
+    "K_locus": {
+        "genotyping_method": "in silico serotyping",
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+        "genotyping_database_name": "kaptive_Klebsiella_k_locus_primary_reference", # UPDATED
+        "genotyping_database_version": "3.1.0",
+        "genotyping_schema_name": "Klebsiella_k_locus_primary_reference",
+        "genotyping_software_name": "Kaptive",
+        "genotyping_software_version": "3.1.0",
+        "predicted_phenotype": "K_type"
+    },
+
+    "O_locus": {
+        "genotyping_method": "in silico serotyping",
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+        "genotyping_database_name": "kaptive_Klebsiella_o_locus_primary_reference", # UPDATED
+        "genotyping_database_version": "3.1.0",
+        "genotyping_schema_name": "Klebsiella_o_locus_primary_reference",
+        "genotyping_software_name": "Kaptive",
+        "genotyping_software_version": "3.1.0",
+        "predicted_phenotype": "O_type"
+        
+    },
+
+    "cgST": {
+        "genotyping_method": "cgMLST",
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+        "genotyping_database_version": "1.1.0",
+        "genotyping_schema_name": "scgMLST629_S",
+        "genotyping_software_name": "MiST",
+        "genotyping_software_version": "1.1.0"
+    },
+
+    "LINcodes": {
+        "genotyping_method": "LINcode",
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+        "genotyping_database_version": "1.1.0",
+        "genotyping_schema_name": "scgMLST629_S",
+        "genotyping_software_name": "MiST",
+        "genotyping_software_version": "1.1.0"
+    }
+}
+
