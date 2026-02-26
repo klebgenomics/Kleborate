@@ -34,7 +34,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    _, res_classes, bla_classes = read_class_file(data_dir() / 'CARD_AMR_clustered.csv')
+    _, res_classes, bla_classes = read_class_file(data_dir() / 'KleborateAMRdb_v3.3.csv')
     bla_classes = [c for c in bla_classes if c]
     res_headers = get_res_headers(res_classes, bla_classes)
     res_headers += ['truncated_resistance_hits', 'spurious_resistance_hits']
@@ -193,7 +193,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     allele_to_drug_class = {}
     drug_class_to_accession = {}
 
-    with open(data_dir() / 'CARD_AMR_clustered.csv', newline='', encoding='utf-8') as csvfile:
+    with open(data_dir() / 'KleborateAMRdb_v3.3.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=',', skipinitialspace=True)
         for row in reader:
             allele = row['allele'].strip()

@@ -30,7 +30,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['contig_count', 'N50', 'largest_contig', 'total_size', 'ambiguous_bases',
+    full_headers = ['contig_count', 'N50', 'largest_contig', 'total_size', 'GC_content','ambiguous_bases',
                     'QC_warnings']
     stdout_headers = ['N50']
     return full_headers, stdout_headers
@@ -56,32 +56,44 @@ def get_results(assembly, minimap2_index, args, previous_results):
     species_specification_dict = load_species_specifications(species_file)
     species=previous_results['enterobacterales__species__species']
     
-    contig_count, N50, longest_contig, total_size, ambiguous_bases = get_contig_stats(assembly)
+    contig_count, N50, longest_contig, total_size, ambiguous_bases, gc_content = get_contig_stats(assembly)
     QC_warnings = get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specification_dict)
     return {'contig_count': str(contig_count),
             'N50': str(N50),
             'largest_contig': str(longest_contig),
             'total_size': str(total_size),
+            'GC_content': str(gc_content),
             'ambiguous_bases': ambiguous_bases,
             'QC_warnings': QC_warnings}
-
 
 def get_contig_stats(assembly):
     fasta = load_fasta(assembly)
 
     base_counts = collections.defaultdict(int)
+    total_gc = 0
+    total_acgt = 0
+
     for _, seq in fasta:
-        for b in seq:
+        for b in seq.upper():
             base_counts[b] += 1
+            if b in ("A", "C", "G", "T"):
+                total_acgt += 1
+                if b in ("G", "C"):
+                    total_gc += 1
+
+    # ambiguous bases = anything not A/C/G/T
     base_counts.pop('A', None)
     base_counts.pop('C', None)
     base_counts.pop('G', None)
     base_counts.pop('T', None)
     ambiguous_base_count = sum(base_counts.values())
+
     if ambiguous_base_count:
-        ambiguous_bases = 'yes (' + str(ambiguous_base_count) + ')'
+        ambiguous_bases = f"yes ({ambiguous_base_count})"
     else:
-        ambiguous_bases = 'no'
+        ambiguous_bases = "no"
+
+    contig_lengths = sorted(len(seq) for _, seq in fasta)
 
     contig_lengths = sorted([len(x[1]) for x in fasta])
     if not contig_lengths:
@@ -89,6 +101,8 @@ def get_contig_stats(assembly):
     longest = contig_lengths[-1]
 
     total_size = sum(contig_lengths)
+
+    # N50
     half_total_length = total_size / 2
     total_so_far = 0
     segment_lengths = contig_lengths[::-1]
@@ -99,7 +113,16 @@ def get_contig_stats(assembly):
             N50 = length
             break
 
-    return len(contig_lengths), N50, longest, total_size, ambiguous_bases
+
+    # GC content as percentage of A/C/G/T bases
+    if total_acgt > 0:
+        gc_content = round((total_gc / total_acgt) * 100.0, 2)
+        # gc_content = (total_gc / total_acgt) * 100.0
+    else:
+        gc_content = 0.0
+
+    # number_of_contigs, N50, longest, total_size, ambiguous_bases, GC_Content
+    return len(contig_lengths), N50, longest, total_size, ambiguous_bases, gc_content
 
 
 def load_species_specifications(file_path):
@@ -115,16 +138,42 @@ def get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specifica
     warnings = []
     if species in species_specification_dict:
         species_spec = species_specification_dict[species]
+
+        # genome size
         min_size, max_size = species_spec['min_genome_size'], species_spec['max_genome_size']
         if total_size < min_size:
             warnings.append('total_size')
         elif total_size > max_size:
             warnings.append('total_size')
-    else:
-        return '-'  # Skip QC for species not in the dictionary
 
-    if N50 < 10000:
-        warnings.append('N50')
+        # N50
+        min_N50= species_spec['min_N50']
+        if N50 < min_N50:
+            warnings.append('N50')
+
+    else:
+        return '-'  # species not in dictionary
+
     if 'yes' in ambiguous_bases:
         warnings.append('ambiguous_bases')
+
     return ','.join(warnings) if warnings else '-'
+
+
+# def get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specification_dict):
+#     warnings = []
+#     if species in species_specification_dict:
+#         species_spec = species_specification_dict[species]
+#         min_size, max_size = species_spec['min_genome_size'], species_spec['max_genome_size']
+#         if total_size < min_size:
+#             warnings.append('total_size')
+#         elif total_size > max_size:
+#             warnings.append('total_size')
+#     else:
+#         return '-'  # Skip QC for species not in the dictionary
+
+#     if N50 < 10000:
+#         warnings.append('N50')
+#     if 'yes' in ambiguous_bases:
+#         warnings.append('ambiguous_bases')
+#     return ','.join(warnings) if warnings else '-'
