@@ -82,18 +82,15 @@ def get_results(assembly, minimap2_index, args, previous_results):
     argR_ref = data_dir() / 'argR.fasta'
     genes = ['rmpA', 'rmpC', 'rmpD']
     profiles = data_dir() / 'profiles.tsv'
-    alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
+    alleles_files = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
     
-    rmpA_status_dict = data_dir()/'rmpA_polyG_status.txt'
-    rmpC_status_dict = data_dir()/'rmpC_polyG_status.txt' 
-    rmpD_status_dict = data_dir()/'rmpD_polyA_status.txt'
-
-    rmpA_dict = process_status_dict(rmpA_status_dict, 'rmpA')
-    rmpC_dict = process_status_dict(rmpC_status_dict, 'rmpC')
-    rmpD_dict = process_status_dict(rmpD_status_dict, 'rmpD')
+    # Load status dictionaries
+    rmpA_dict = process_status_dict(data_dir()/'rmpA_polyG_status.txt', 'rmpA')
+    rmpC_dict = process_status_dict(data_dir()/'rmpC_polyG_status.txt', 'rmpC')
+    rmpD_dict = process_status_dict(data_dir()/'rmpD_polyA_status.txt', 'rmpD')
 
     results, spurious_hits, hits_per_gene = multi_mlst(
-        assembly, minimap2_index, profiles, alleles, genes,
+        assembly, minimap2_index, profiles, alleles_files, genes,
         'rmp_lineage', 
         args.klebsiella__rmst_min_identity,
         args.klebsiella__rmst_min_coverage, 
@@ -107,121 +104,259 @@ def get_results(assembly, minimap2_index, args, previous_results):
     )
     
     st, lineage, alleles = results
-    # print(alleles)
+    if st == 'NA': st = 0
+    else: st = st[2:]
 
-    if st == 'NA':
-        st = 0
-    else:
-        st = st[2:]
+    spurious_hits_list = [item for h in spurious_hits.values() for item in h]
+    spurious_virulence_hits = ';'.join(spurious_hits_list) if spurious_hits_list else '-'
 
-    spurious_hits = [item for h in spurious_hits.values() for item in h]
-    spurious_virulence_hits = ';'.join(spurious_hits) if spurious_hits else '-'
-
-    # Promoter Checks (PolyT and ArgR box)
-    # checks if the rmpA gene is found
+    # Promoter Checks
     rmpA_allele = alleles.get('rmpA', None)
     has_rmpA = rmpA_allele and rmpA_allele != '-' and rmpA_allele.strip() != ''
 
     rmpA_promoter = "-"
     promoter_argR = "-" 
+    promoter_polyT = "-"
 
     if has_rmpA:
         promoter_polyT = check_polyT_tract(hits_per_gene, assembly)
         promoter_argR = check_argR_box(hits_per_gene, assembly)
         
-        promoter_string = [x for x in [promoter_polyT, promoter_argR] if x != "-"]
-        if promoter_string:
-            rmpA_promoter = ", ".join(promoter_string)
+        if promoter_polyT != "-" and promoter_argR != "-":
+            rmpA_promoter = f"{promoter_polyT} ({promoter_argR})"
+        elif promoter_polyT != "-":
+            rmpA_promoter = promoter_polyT
+        elif promoter_argR != "-":
+            rmpA_promoter = promoter_argR
         else:
             rmpA_promoter = "-"
+    # if has_rmpA:
+    #     promoter_polyT = check_polyT_tract(hits_per_gene, assembly)
+    #     promoter_argR = check_argR_box(hits_per_gene, assembly)
+    #     promoter_string = [x for x in [promoter_polyT, promoter_argR] if x != "-"]
+    #     rmpA_promoter = ", ".join(promoter_string) if promoter_string else "-"
 
-    # Check argR gene status
-    argR_status = check_argR_status( 
-        assembly, 
-        argR_ref, 
-        args.klebsiella__rmst_min_identity,
-        args.klebsiella__rmst_min_coverage
-    ) 
+    argR_status = check_argR_status(assembly, argR_ref, args.klebsiella__rmst_min_identity, args.klebsiella__rmst_min_coverage) 
 
-    rmpA_status = get_gene_status(alleles['rmpA'], rmpA_dict, hits_per_gene, poly_G_variation)
-    rmpD_status = get_gene_status(alleles['rmpD'], rmpD_dict, hits_per_gene, poly_A_variation)
-    rmpC_status = get_gene_status(alleles['rmpC'], rmpC_dict, hits_per_gene, poly_G_rmpC_variation)
+    # 1. Get detailed statuses
+    rmpA_status = get_gene_status(alleles.get('rmpA'), rmpA_dict, hits_per_gene, poly_G_variation)
+    rmpD_status = get_gene_status(alleles.get('rmpD'), rmpD_dict, hits_per_gene, poly_A_variation)
+    rmpC_status = get_gene_status(alleles.get('rmpC'), rmpC_dict, hits_per_gene, poly_G_rmpC_variation)
     
-    if "OFF" in str(rmpA_status):
-        alleles['rmpA'] = str(rmpA_status)
+    # 2. Update alleles dict to capture "OFF" from dict or poly-tract
+    current_statuses = {'rmpA': rmpA_status, 'rmpD': rmpD_status, 'rmpC': rmpC_status}
+    for gene in genes:
+        status_str = str(current_statuses[gene])
+        if "OFF" in status_str:
+            alleles[gene] = status_str
+
+    combined_status_strings = [str(rmpA_status), str(rmpD_status), str(rmpC_status)]
     
-    if "OFF" in str(rmpD_status):
-        alleles['rmpD'] = str(rmpD_status)
+    # 3. Determine overall Phase Status
+    has_reversible_off = any("OFF" in s for s in combined_status_strings)
+    has_true_truncation = any(("%" in s and "OFF" not in s) for s in combined_status_strings)
 
-    if "OFF" in str(rmpC_status):
-        alleles['rmpC'] = str(rmpC_status)
-
-    # print(rmpC_status)
-
-    combined_status = [rmpA_status, rmpD_status, rmpC_status]
-    
-    has_reversible_off = any("OFF" in str(s) for s in combined_status)
-    has_true_truncation = any("%" in str(s) for s in combined_status)
-
-    if has_reversible_off and not has_true_truncation:
-        if isinstance(lineage, str):
-            lineage = lineage.replace(" (truncated)", "").replace(" (incomplete)", "").replace(" (unknown)", "")
-
-    if isinstance(lineage, str) and ("truncated" in lineage or "incomplete" in lineage or "unknown" in lineage):
+    if isinstance(lineage, str):
         lineage = lineage.replace(" (truncated)", "").replace(" (incomplete)", "").replace(" (unknown)", "")
+
+    if has_true_truncation:
+        RmpADC_status = "-"
         lineage = f"{lineage} (partial)"
+    elif has_reversible_off:
+        RmpADC_status = "Phase OFF"
+    elif any(s == "-" for s in combined_status_strings):
         RmpADC_status = "-"
     else:
-        # Determine Phase Status
-        if any("OFF" in str(status) for status in combined_status):
-            RmpADC_status = "Phase OFF"
-        elif any(str(status) == "-" for status in combined_status):
-            RmpADC_status = "-"
-        else:
-            RmpADC_status = "Phase ON"
+        RmpADC_status = "Phase ON"
     
-    # RmpADC_status annotation logic
+    # 4. Final Annotations with comma separator
     if RmpADC_status != "-":
         annotation_groups = []
         
-        # Promoter Annotations
+        # Promoter Group
         promoter_anns = []
         if promoter_polyT:
-            if "reduced expression" in promoter_polyT:
-                promoter_anns.append("reduced expression")
-            elif "untypable" in promoter_polyT:
-                promoter_anns.append("untypable")
-
+            if "reduced expression" in promoter_polyT: promoter_anns.append("reduced expression")
+            elif "untypable" in promoter_polyT: promoter_anns.append("untypable")
         if promoter_argR and "ARG-box lost" in promoter_argR:
             promoter_anns.append("ARG box lost")
-            
+        
         if promoter_anns:
             annotation_groups.append(f"({', '.join(promoter_anns)})")
 
-        #argR Annotations
+        # argR Group
         argR_str = str(argR_status)
         argR_ann = ""
-        
         if "truncated" in argR_str:
-            clean_status = argR_status if isinstance(argR_status, str) else "".join(argR_status)
-            argR_ann = f"argR {clean_status}"
+            clean_argR = argR_status if isinstance(argR_status, str) else "".join(argR_status)
+            argR_ann = f"argR {clean_argR}"
         elif "-" in argR_str and "truncated" not in argR_str:
             argR_ann = "argR missing"
-            
+        
         if argR_ann:
             annotation_groups.append(f"({argR_ann})")
             
+        # Join groups with a comma and a space
         if annotation_groups:
+            # Resulting format: "Phase ON (reduced expression), (argR truncated-69%)"
             RmpADC_status = f"{RmpADC_status} {', '.join(annotation_groups)}"
             
-    return {'RmST': st, 
-            'RmpADC': lineage,
-            'rmpA': alleles['rmpA'], 
-            'rmpD': alleles['rmpD'], 
-            'rmpC': alleles['rmpC'],
-            'RmpADC_status': RmpADC_status,
-            'rmpA_promoter': rmpA_promoter,
-            'argR': argR_status,
-            'spurious_rmst_hits': spurious_virulence_hits}
+    return {
+        'RmST': st, 
+        'RmpADC': lineage,
+        'rmpA': alleles.get('rmpA'), 
+        'rmpD': alleles.get('rmpD'), 
+        'rmpC': alleles.get('rmpC'),
+        'RmpADC_status': RmpADC_status,
+        'rmpA_promoter': rmpA_promoter,
+        'argR': argR_status,
+        'spurious_rmst_hits': spurious_virulence_hits
+    }
+
+# def get_results(assembly, minimap2_index, args, previous_results):
+#     argR_ref = data_dir() / 'argR.fasta'
+#     genes = ['rmpA', 'rmpC', 'rmpD']
+#     profiles = data_dir() / 'profiles.tsv'
+#     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
+    
+#     rmpA_status_dict = data_dir()/'rmpA_polyG_status.txt'
+#     rmpC_status_dict = data_dir()/'rmpC_polyG_status.txt' 
+#     rmpD_status_dict = data_dir()/'rmpD_polyA_status.txt'
+
+#     rmpA_dict = process_status_dict(rmpA_status_dict, 'rmpA')
+#     rmpC_dict = process_status_dict(rmpC_status_dict, 'rmpC')
+#     rmpD_dict = process_status_dict(rmpD_status_dict, 'rmpD')
+
+#     results, spurious_hits, hits_per_gene = multi_mlst(
+#         assembly, minimap2_index, profiles, alleles, genes,
+#         'rmp_lineage', 
+#         args.klebsiella__rmst_min_identity,
+#         args.klebsiella__rmst_min_coverage, 
+#         args.klebsiella__rmst_required_exact_matches,
+#         check_for_truncation=True, 
+#         report_incomplete=True,
+#         min_spurious_identity=args.klebsiella__rmst_min_spurious_identity,
+#         min_spurious_coverage=args.klebsiella__rmst_min_spurious_coverage,
+#         unknown_group_name='rmp unknown',
+#         min_gene_count=args.klebsiella__rmst_min_gene_count
+#     )
+    
+#     st, lineage, alleles = results
+#     # print(alleles)
+
+#     if st == 'NA':
+#         st = 0
+#     else:
+#         st = st[2:]
+
+#     spurious_hits = [item for h in spurious_hits.values() for item in h]
+#     spurious_virulence_hits = ';'.join(spurious_hits) if spurious_hits else '-'
+
+#     # Promoter Checks (PolyT and ArgR box)
+#     # checks if the rmpA gene is found
+#     rmpA_allele = alleles.get('rmpA', None)
+#     has_rmpA = rmpA_allele and rmpA_allele != '-' and rmpA_allele.strip() != ''
+
+#     rmpA_promoter = "-"
+#     promoter_argR = "-" 
+
+#     if has_rmpA:
+#         promoter_polyT = check_polyT_tract(hits_per_gene, assembly)
+#         promoter_argR = check_argR_box(hits_per_gene, assembly)
+        
+#         promoter_string = [x for x in [promoter_polyT, promoter_argR] if x != "-"]
+#         if promoter_string:
+#             rmpA_promoter = ", ".join(promoter_string)
+#         else:
+#             rmpA_promoter = "-"
+
+#     # Check argR gene status
+#     argR_status = check_argR_status( 
+#         assembly, 
+#         argR_ref, 
+#         args.klebsiella__rmst_min_identity,
+#         args.klebsiella__rmst_min_coverage
+#     ) 
+
+#     rmpA_status = get_gene_status(alleles['rmpA'], rmpA_dict, hits_per_gene, poly_G_variation)
+#     rmpD_status = get_gene_status(alleles['rmpD'], rmpD_dict, hits_per_gene, poly_A_variation)
+#     rmpC_status = get_gene_status(alleles['rmpC'], rmpC_dict, hits_per_gene, poly_G_rmpC_variation)
+    
+#     if "OFF" in str(rmpA_status):
+#         alleles['rmpA'] = str(rmpA_status)
+    
+#     if "OFF" in str(rmpD_status):
+#         alleles['rmpD'] = str(rmpD_status)
+
+#     if "OFF" in str(rmpC_status):
+#         alleles['rmpC'] = str(rmpC_status)
+
+#     # print(rmpC_status)
+
+#     combined_status = [rmpA_status, rmpD_status, rmpC_status]
+    
+#     has_reversible_off = any("OFF" in str(s) for s in combined_status)
+#     has_true_truncation = any("%" in str(s) for s in combined_status)
+
+#     if has_reversible_off and not has_true_truncation:
+#         if isinstance(lineage, str):
+#             lineage = lineage.replace(" (truncated)", "").replace(" (incomplete)", "").replace(" (unknown)", "")
+
+#     if isinstance(lineage, str) and ("truncated" in lineage or "incomplete" in lineage or "unknown" in lineage):
+#         lineage = lineage.replace(" (truncated)", "").replace(" (incomplete)", "").replace(" (unknown)", "")
+#         lineage = f"{lineage} (partial)"
+#         RmpADC_status = "-"
+#     else:
+#         # Determine Phase Status
+#         if any("OFF" in str(status) for status in combined_status):
+#             RmpADC_status = "Phase OFF"
+#         elif any(str(status) == "-" for status in combined_status):
+#             RmpADC_status = "-"
+#         else:
+#             RmpADC_status = "Phase ON"
+    
+#     # RmpADC_status annotation logic
+#     if RmpADC_status != "-":
+#         annotation_groups = []
+        
+#         # Promoter Annotations
+#         promoter_anns = []
+#         if promoter_polyT:
+#             if "reduced expression" in promoter_polyT:
+#                 promoter_anns.append("reduced expression")
+#             elif "untypable" in promoter_polyT:
+#                 promoter_anns.append("untypable")
+
+#         if promoter_argR and "ARG-box lost" in promoter_argR:
+#             promoter_anns.append("ARG box lost")
+            
+#         if promoter_anns:
+#             annotation_groups.append(f"({', '.join(promoter_anns)})")
+
+#         #argR Annotations
+#         argR_str = str(argR_status)
+#         argR_ann = ""
+        
+#         if "truncated" in argR_str:
+#             clean_status = argR_status if isinstance(argR_status, str) else "".join(argR_status)
+#             argR_ann = f"argR {clean_status}"
+#         elif "-" in argR_str and "truncated" not in argR_str:
+#             argR_ann = "argR missing"
+            
+#         if argR_ann:
+#             annotation_groups.append(f"({argR_ann})")
+            
+#         if annotation_groups:
+#             RmpADC_status = f"{RmpADC_status} {', '.join(annotation_groups)}"
+            
+#     return {'RmST': st, 
+#             'RmpADC': lineage,
+#             'rmpA': alleles['rmpA'], 
+#             'rmpD': alleles['rmpD'], 
+#             'rmpC': alleles['rmpC'],
+#             'RmpADC_status': RmpADC_status,
+#             'rmpA_promoter': rmpA_promoter,
+#             'argR': argR_status,
+#             'spurious_rmst_hits': spurious_virulence_hits}
 
 

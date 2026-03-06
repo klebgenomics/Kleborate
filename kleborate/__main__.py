@@ -13,6 +13,7 @@ not, see <https://www.gnu.org/licenses/>.
 
 import argparse
 import graphlib
+import threading
 import gzip
 import importlib
 import importlib.metadata
@@ -32,6 +33,7 @@ from functools import partial
 from .shared.help_formatter import MyParser, MyHelpFormatter
 from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, KLEBSIELLA_TYPING_SPEC
 from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
+
 
 
 def parse_arguments(args, all_module_names, modules):
@@ -56,7 +58,6 @@ def parse_arguments(args, all_module_names, modules):
     io_args.add_argument('--trim_headers', action='store_true',
                          help='Trim headers in the output files')
 
-    # parallelism
     perf_args = parser.add_argument_group('Performance')
     
     perf_args.add_argument('-t', '--threads', type=check_cpus,
@@ -71,9 +72,9 @@ def parse_arguments(args, all_module_names, modules):
     module_args.add_argument('-m', '--modules', type=str,
                              help='Comma-delimited list of Kleborate modules to use')
     
-    # arg for cgmlst DB
-    module_args.add_argument('--kpsc_cgmlst_db', type=str,
-                             help='Path to the database for kpsc__cgmlst module')
+    # # arg for cgmlst DB
+    # module_args.add_argument('--kpsc_cgmlst_db', type=str,
+    #                          help='Path to the database for kpsc__cgmlst module')
 
     add_module_cli_arguments(parser, args, all_module_names, modules)
 
@@ -100,6 +101,7 @@ def parse_arguments(args, all_module_names, modules):
     return parser.parse_args(args)
 
 
+
 def main():
     all_module_names, modules = import_modules()
     args = parse_arguments(sys.argv[1:], all_module_names, modules)
@@ -124,13 +126,14 @@ def main():
 
     if args.modules:
         module_name = args.modules.split(',')[0]
-        out_files_suffixes = [f'{module_name}_output.txt']
+        out_files_suffixes = [f'{module_name}_output.txt','kpsc_cgmlst_genotype_spec.txt']
     else:
         out_files_suffixes = [
             'klebsiella_pneumo_complex_output.txt',
             'klebsiella_pneumo_complex_hAMRonization_output.txt',
             'klebsiella_oxytoca_complex_output.txt',
-            'escherichia_output.txt'
+            'escherichia_output.txt',
+            'klebsiella_pneumo_complex_genotype_spec.txt'
         ]
 
     if not args.resume:
@@ -141,7 +144,6 @@ def main():
     for assembly in args.assemblies:
         check_assembly(assembly)
     
-    # The multithreading implementation
     def process_assembly(assembly):
         with tempfile.TemporaryDirectory() as temp_dir:
             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
@@ -224,7 +226,7 @@ def main():
                     output_file = os.path.join(args.outdir, outfile_suffix)
                     output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
 
-    # ThreadPoolExecutor to process assemblies in parallel
+    
     executor = None
     try:
         executor = ThreadPoolExecutor(max_workers=args.threads)
@@ -244,6 +246,7 @@ def main():
             os._exit(130)
     else:
         executor.shutdown(wait=True)
+
 
 
 def print_modules(args, all_module_names, modules):
@@ -299,6 +302,7 @@ def get_presets():
     }
 
 
+
 def add_module_cli_arguments(parser, args, all_module_names, modules):
     """
     This function add CLI argument for modules. Each modules that has options gets its own argument
@@ -310,6 +314,7 @@ def add_module_cli_arguments(parser, args, all_module_names, modules):
         if '--help_all' not in args and group is not None:
             for a in group._group_actions:
                 a.help = argparse.SUPPRESS
+
 
 
 def get_used_module_names(args, all_module_names, presets): 
@@ -325,9 +330,8 @@ def get_used_module_names(args, all_module_names, presets):
         if args.preset not in presets:
             sys.exit(f'Error: {args.preset} is not a valid preset')
 
-        # Assuming presets[args.preset] is a dictionary with 'check' and 'pass' keys
         check_modules = [module[0] for module in presets[args.preset].get('check', [])]  # Extract module names from check modules
-        pass_modules = presets[args.preset].get('pass', [])  # Directly assign pass modules
+        pass_modules = presets[args.preset].get('pass', []) 
 
         if args.preset == 'escherichia' and args.modules is None:
             pass_modules = [module for module in pass_modules if module != 'escherichia__mlst_pasteur']
@@ -345,6 +349,7 @@ def get_used_module_names(args, all_module_names, presets):
                 module_names.append(m)
 
     return module_names, check_modules, pass_modules
+
 
 
 def get_all_module_names():
@@ -367,6 +372,7 @@ def get_all_module_names():
     return sorted(module_names)
 
 
+
 def get_strain_name(full_path):
     filename = os.path.split(full_path)[1]
     if filename.endswith('_temp_decompress.fasta'):
@@ -374,7 +380,8 @@ def get_strain_name(full_path):
     if filename.endswith('.gz'):
         filename = filename[:-3]
     return os.path.splitext(filename)[0]
-    
+   
+
 
 def import_modules():
     """
@@ -385,6 +392,7 @@ def import_modules():
     for m in all_module_names:
         modules[m] = importlib.import_module(f'..modules.{m}.{m}', __name__)
     return all_module_names, modules
+
 
 
 def check_modules(args, modules, module_names, preset_check_modules, preset_pass_modules):
@@ -415,12 +423,14 @@ def check_modules(args, modules, module_names, preset_check_modules, preset_pass
     return module_names, get_run_order(dependency_graph), sorted(all_external_programs)
 
 
+
 def get_run_order(dependency_graph):
     try:
         ts = graphlib.TopologicalSorter(dependency_graph)
         return list(ts.static_order())
     except graphlib.CycleError:
         sys.exit('Error: module dependency graph contains a cycle')
+
 
 
 def check_assembly(assembly):
@@ -438,6 +448,7 @@ def check_assembly(assembly):
     for _, seq in fasta:
         if len(seq) == 0:
             sys.exit('Error: invalid FASTA file (contains a zero-length sequence): ' + assembly)
+
 
 
 def get_headers(module_names, modules):
@@ -461,6 +472,7 @@ def get_headers(module_names, modules):
     return full_headers, stdout_headers
 
 
+
 def gunzip_assembly_if_necessary(assembly, temp_dir):
     if get_compression_type(assembly) == 'gz':
         unzipped_assembly = pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.fasta')
@@ -468,6 +480,7 @@ def gunzip_assembly_if_necessary(assembly, temp_dir):
         return unzipped_assembly
     else:
         return assembly
+
 
 
 def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir):
@@ -485,10 +498,12 @@ def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_di
     return minimap2_index
 
 
+
 def decompress_file(in_file, out_file):
     with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
         s = i.read()
         o.write(s)
+
 
 
 MAX_CPUS = 32
@@ -516,6 +531,7 @@ def check_cpus(cpus: Any = None, max_cpus: int = MAX_CPUS, verbose: bool = False
 
 
 
+
 def output_headers(full_headers, stdout_headers, outfile):
     """
     This function prints headers to stdout and writes headers to the output file. Module names are
@@ -529,8 +545,8 @@ def output_headers(full_headers, stdout_headers, outfile):
 
 
 
+
 def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, outfile, results, trim_headers=False):
-    # Rename strain to Input_file_name
     input_file_name = results['strain']
 
     mutation_variant_headers = [
@@ -546,7 +562,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
         val = re.sub(r'-\d+%$', '', val)
         return val.translate(str.maketrans('', '', '^*?')).strip()
 
-    # Parse: build a dict of {field: [list of entries]}
     parsed = {}
     for k, v in results.items():
         if isinstance(v, list) and v:
@@ -677,13 +692,14 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
     headers = ['Input_file_name', 'Gene_symbol', 'Mutation'] + annotation_fields
 
     with open(outfile, 'a') as f:
-        # Only write headers if the file is empty
         if f.tell() == 0:
             f.write('\t'.join(headers) + '\n')
         for row in rows:
             f.write('\t'.join([str(row.get(h, '-')).strip("[]").replace("'", "") for h in headers]) + '\n')
 
 
+
+file_lock = threading.Lock()
 def output_results(full_headers, stdout_headers, outfile, results, trim_headers=False):
     """
     This function writes the results to stdout and the output file.
@@ -703,15 +719,17 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
         headers_to_write = [h.split('__')[-1] for h in full_headers]
 
     # Write results to the output file
-    with open(outfile, 'at') as o:
-        if o.tell() == 0:  # Write headers if file is empty
-            o.write('\t'.join(headers_to_write) + '\n')
-        o.write('\t'.join([
-            str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
-            # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
-            else ";".join(map(str, results.get(x, "-")))
-            for x in full_headers
-        ]) + '\n')
+    # file_lock ensures only one thread checks o.tell() and writes at a time
+    with file_lock:
+        with open(outfile, 'at') as o:
+            if o.tell() == 0:  
+                o.write('\t'.join(headers_to_write) + '\n')
+            o.write('\t'.join([
+                str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
+                # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
+                else ";".join(map(str, results.get(x, "-")))
+                for x in full_headers
+            ]) + '\n')
 
     # Check for any headers in results that are not in full_headers
     for h in results.keys():
@@ -724,37 +742,34 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
     if typing_spec is None:
         typing_spec = KLEBSIELLA_TYPING_SPEC
 
-    sample = results.get("strain", "-")
+    sample = results.get("strain", "")
     
-    # Confidence mapping: which genotype field has a corresponding confidence field?
+    # link genotype to Kaptive confidence results
     confidence_map = {
         "K_locus": "K_locus_confidence",
         "O_locus": "O_locus_confidence"
     }
 
-    # Define the base headers
     header = [
         "sample", "genotyping_method", "genotyping_schema_taxon",
         "genotyping_database_name", "genotyping_database_version",
         "genotyping_schema_name", "genotyping_software_name",
-        "genotyping_software_version", "genotype", "genotype_confidence_value","predicted_phenotype"
+        "genotyping_software_version", "genotype", "genotype_confidence_value", "genotype_predicted_phenotype"
     ]
 
     rows = []
     for genotype_field, meta in typing_spec.items():
-        # Initialize values to "-"
         genotype_value = "-"
         confidence_value = "-"
         phenotype_value = "-"  
         
-        target_phenotype_header = meta.get("predicted_phenotype")
+        target_phenotype_header = meta.get("genotype_predicted_phenotype")
 
         for res_key, res_val in results.items():
             trimmed_key = res_key.split('__')[-1]
             
             if trimmed_key == genotype_field:
                 genotype_value = res_val
-            
 
             if genotype_field in confidence_map and trimmed_key == confidence_map[genotype_field]:
                 confidence_value = res_val
@@ -762,26 +777,30 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
             if target_phenotype_header and trimmed_key == target_phenotype_header:
                 phenotype_value = res_val
 
-        row = {
-            "sample": sample,
-            "genotyping_method": meta.get("genotyping_method", "-"),
-            "genotyping_schema_taxon": meta.get("genotyping_schema_taxon", "-"),
-            "genotyping_database_name": meta.get("genotyping_database_name", "-"),
-            "genotyping_database_version": meta.get("genotyping_database_version", "-"),
-            "genotyping_schema_name": meta.get("genotyping_schema_name", "-"),
-            "genotyping_software_name": meta.get("genotyping_software_name", "-"),
-            "genotyping_software_version": meta.get("genotyping_software_version", "-"),
-            "predicted_phenotype": phenotype_value,
-            "genotype": genotype_value,
-            "genotype_confidence_value": confidence_value
-        }
-        rows.append(row)
+        if genotype_value != "-" and genotype_value is not None:
+            row = {
+                "sample": sample,
+                "genotyping_method": meta.get("genotyping_method", "-"),
+                "genotyping_schema_taxon": meta.get("genotyping_schema_taxon", "-"),
+                "genotyping_database_name": meta.get("genotyping_database_name", "-"),
+                "genotyping_database_version": meta.get("genotyping_database_version", "-"),
+                "genotyping_schema_name": meta.get("genotyping_schema_name", "-"),
+                "genotyping_software_name": meta.get("genotyping_software_name", "-"),
+                "genotyping_software_version": meta.get("genotyping_software_version", "-"),
+                "genotype_predicted_phenotype": phenotype_value,
+                "genotype": genotype_value,
+                "genotype_confidence_value": confidence_value
+            }
+            rows.append(row)
 
-    # Write/Append to file
-    with open(outfile, "wt") as o:
-        o.write("\t".join(header) + "\n")
-        for row in rows:
-            o.write("\t".join(str(row[col]) for col in header) + "\n")
+    if rows:
+        write_header = not os.path.exists(outfile) or os.path.getsize(outfile) == 0
+        
+        with open(outfile, "at") as o:
+            if write_header:
+                o.write("\t".join(header) + "\n")
+            for row in rows:
+                o.write("\t".join(str(row[col]) for col in header) + "\n")
 
 
 
@@ -802,6 +821,7 @@ def paper_refs():
         wrapped_text += '\n'.join(textwrap.wrap(line, width=terminal_width - 1))
         wrapped_text += '\n'
     return 'R|' + wrapped_text
+
 
 
 def get_version():

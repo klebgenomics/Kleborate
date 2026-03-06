@@ -533,7 +533,6 @@ def process_status_dict(filepath, prefix):
 
 
 def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_func):
-    
     if allele_value in ('-', None):
         return "-"
 
@@ -541,54 +540,57 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
     if not allele or allele == "-":
         return "-"
 
-    # Extract the allele call
+    # Extract the allele call (e.g., "2" from "2*-76%")
     allele_id = re.split(r"[\*\-]", allele, maxsplit=1)[0].strip()
 
-    # truncation
+    # Determine truncation percentage
     truncation_matches = re.findall(r"(\d+(?:\.\d+)?)\s*%", allele)
     truncation_pct = f"{truncation_matches[-1]}%" if truncation_matches else None
 
     is_inexact_call = "*" in allele
     is_truncated_call = "%" in allele
 
+    # --- 1. Handle Poly-Tract Variation (Reversible Status) ---
     if is_inexact_call or is_truncated_call:
         poly_tract_variation = poly_variation_func(hits_per_gene)
-        poly_tract_variation_status = (
-            poly_tract_variation[0] if isinstance(poly_tract_variation, list) and poly_tract_variation else
-            poly_tract_variation if poly_tract_variation is not None else
-            "-"
-        )
+        
+        # Normalize the status from the function
+        poly_status = "-"
+        if isinstance(poly_tract_variation, list) and poly_tract_variation:
+            poly_status = str(poly_tract_variation[0])
+        elif poly_tract_variation is not None:
+            poly_status = str(poly_tract_variation)
 
-        # If the allele is reversibly off
-        if poly_tract_variation_status != "-" and "OFF" in str(poly_tract_variation_status):
-            return f"{allele_id} (OFF)"
+        if "OFF" in poly_status:
+            # Construct the string with original markers + (OFF)
+            if is_truncated_call:
+                return f"{allele_id}*-{truncation_pct} (OFF)"
+            return f"{allele_id}* (OFF)"
 
-        # If the tract is non-reversible
+        # If not reversible/OFF, return the original formatted markers
         if is_truncated_call:
             return f"{allele_id}*-{truncation_pct}"
-
         if is_inexact_call:
             return f"{allele_id}*"
 
+    # --- 2. Handle Exact Matches (Already in allele_dict) ---
     exact_status = allele_dict.get(allele, "-")
-
     if isinstance(exact_status, list):
         exact_status = exact_status[0] if exact_status else "-"
 
-    if exact_status is None:
+    if exact_status is None or str(exact_status).strip() == "-":
         return "-"
 
     exact_status_str = str(exact_status).strip()
 
-    if exact_status_str == "-":
-        return "-"
-
+    # If already OFF in the dictionary, maintain that status
     if "OFF" in exact_status_str:
         if allele_id and allele_id not in exact_status_str:
             return f"{allele_id} (OFF)"
         return exact_status_str
 
     return exact_status_str
+
 
 
 # def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_func):
@@ -619,7 +621,7 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
 #         )
 
 #         # If the allele is reversibly off
-#         if poly_tract_variation_status!= "-" and "OFF" in str(poly_tract_variation_status):
+#         if poly_tract_variation_status != "-" and "OFF" in str(poly_tract_variation_status):
 #             return f"{allele_id} (OFF)"
 
 #         # If the tract is non-reversible
@@ -629,7 +631,27 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
 #         if is_inexact_call:
 #             return f"{allele_id}*"
 
-#     return allele_dict.get(allele, "-")
+#     exact_status = allele_dict.get(allele, "-")
+
+#     if isinstance(exact_status, list):
+#         exact_status = exact_status[0] if exact_status else "-"
+
+#     if exact_status is None:
+#         return "-"
+
+#     exact_status_str = str(exact_status).strip()
+
+#     if exact_status_str == "-":
+#         return "-"
+
+#     if "OFF" in exact_status_str:
+#         if allele_id and allele_id not in exact_status_str:
+#             return f"{allele_id} (OFF)"
+#         return exact_status_str
+
+#     return exact_status_str
+
+
 
 
 def translate_nucl_to_prot(nucl_seq):

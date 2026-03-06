@@ -178,6 +178,7 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
                 # Inexact Match
                 else:
                     aac_muts = check_for_aac_mutations(hit)
+                    # print(aac_muts)
                     has_cr_muts = any("Trp102Arg" in m for m in aac_muts) and \
                                   any("Asp179Tyr" in m for m in aac_muts)
                     
@@ -234,7 +235,7 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
 
 
 def check_for_aac_mutations(hit):
-    # Loci now represents the position relative to the START of the query sequence
+    
     loci = [(102, 'W'), (179, 'D')]
 
     aa_map = {
@@ -244,8 +245,8 @@ def check_for_aac_mutations(hit):
         'W': 'Trp', 'Y': 'Tyr'
     }
 
-    # AAL93141.1 Reference sequence
-    aac_ref = 'MSIQHFQTKLGITKYSIVTNSNDSVTLRLMTEHDLAMLYEWLNRSHIVEWWGGEEARPTL' \
+    # AAL93141.1 (aac(6’)-Ib ) Reference sequence
+    aac_ref = 'VTNSNDSVTLRLMTEHDLAMLYEWLNRSHIVEWWGGEEARPTL' \
               'ADVQEQYLPSVLAQESVTPYIAMLNGEPIGYAQSYVALGSGDGWWEEETDPGVRGIDQLL' \
               'ANASQLGKGLGTKLVRALVELLFNDPEVTKIQTDPSPSNLRAIRCYEKAGFERQGTVTTP' \
               'DGPAVYMVQTRQAFERTRSVA'
@@ -261,9 +262,9 @@ def check_for_aac_mutations(hit):
     if not query_translation:
         return []
 
-    # Perform alignment
     alignments = protein_aligner.align(aac_ref, query_translation)
     prt_alignment = alignments[0]
+    # print(prt_alignment)
 
     mapping = get_mapping_by_query_pos(prt_alignment)
 
@@ -283,22 +284,43 @@ def check_for_aac_mutations(hit):
 
 def get_mapping_by_query_pos(alignment):
     """
+    Maps alignment indices to query positions, starting at 16.
     """
     aligned_target = alignment[0]
     aligned_query = alignment[1]
     
     query_pos_map = {}
-    query_counter = 0
+    query_counter = 15 
     
     for i in range(len(aligned_query)):
         t_base = aligned_target[i]
         q_base = aligned_query[i]
         
+        # only increment and map if it's not a gap in the query
         if q_base != '-':
             query_counter += 1
             query_pos_map[query_counter] = (t_base, q_base)
             
     return query_pos_map
+    
+# def get_mapping_by_query_pos(alignment):
+#     """
+#     """
+#     aligned_target = alignment[0]
+#     aligned_query = alignment[1]
+    
+#     query_pos_map = {}
+#     query_counter = 0
+    
+#     for i in range(len(aligned_query)):
+#         t_base = aligned_target[i]
+#         q_base = aligned_query[i]
+        
+#         if q_base != '-':
+#             query_counter += 1
+#             query_pos_map[query_counter] = (t_base, q_base)
+            
+#     return query_pos_map
 
 
 
