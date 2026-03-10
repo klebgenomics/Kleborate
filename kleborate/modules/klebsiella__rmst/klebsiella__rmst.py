@@ -196,10 +196,11 @@ def get_results(assembly, minimap2_index, args, previous_results):
         if argR_ann:
             annotation_groups.append(f"({argR_ann})")
             
-        # Join groups with a comma and a space
         if annotation_groups:
-            # Resulting format: "Phase ON (reduced expression), (argR truncated-69%)"
             RmpADC_status = f"{RmpADC_status} {', '.join(annotation_groups)}"
+        
+    if isinstance(lineage, str):
+        lineage = lineage.lstrip('- ').strip('()')
             
     return {
         'RmST': st, 

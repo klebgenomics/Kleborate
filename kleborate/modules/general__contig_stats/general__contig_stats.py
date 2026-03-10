@@ -20,7 +20,6 @@ import ast
 from ...shared.misc import load_fasta
 
 
-
 def description():
     return 'basic stats on the assembly\'s contigs'
 
@@ -54,17 +53,32 @@ def data_dir():
 def get_results(assembly, minimap2_index, args, previous_results):
     species_file = data_dir() / 'species_specification.txt'
     species_specification_dict = load_species_specifications(species_file)
-    species=previous_results['enterobacterales__species__species']
+    species = previous_results['enterobacterales__species__species']
     
-    contig_count, N50, longest_contig, total_size, ambiguous_bases, gc_content = get_contig_stats(assembly)
-    QC_warnings = get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specification_dict)
-    return {'contig_count': str(contig_count),
-            'N50': str(N50),
-            'largest_contig': str(longest_contig),
-            'total_size': str(total_size),
-            'GC_content': str(gc_content),
-            'ambiguous_bases': ambiguous_bases,
-            'QC_warnings': QC_warnings}
+    # Calculate stats
+    contig_count, n50, longest_contig, total_size, ambig, gc = get_contig_stats(assembly)
+    
+    QC_warnings = get_qc_warnings(
+        total_size, 
+        n50, 
+        contig_count, 
+        gc, 
+        ambig, 
+        species, 
+        species_specification_dict
+    )
+    
+    return {
+        'contig_count': str(contig_count),
+        'N50': str(n50),
+        'largest_contig': str(longest_contig),
+        'total_size': str(total_size),
+        'GC_content': str(gc),
+        'ambiguous_bases': ambig,
+        'QC_warnings': QC_warnings
+    }
+
+
 
 def get_contig_stats(assembly):
     fasta = load_fasta(assembly)
@@ -117,7 +131,6 @@ def get_contig_stats(assembly):
     # GC content as percentage of A/C/G/T bases
     if total_acgt > 0:
         gc_content = round((total_gc / total_acgt) * 100.0, 2)
-        # gc_content = (total_gc / total_acgt) * 100.0
     else:
         gc_content = 0.0
 
@@ -126,39 +139,59 @@ def get_contig_stats(assembly):
 
 
 def load_species_specifications(file_path):
+    """Loads the species thresholds from a JSON-formatted text file."""
     with open(file_path, 'r') as file:
-        # Read the entire file content into a single string
-        file_content = file.read()
-        species_specifications = ast.literal_eval(file_content)
-    
-    return species_specifications
+        return json.load(file)
 
 
-def get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specification_dict):
+
+def get_qc_warnings(total_size, N50, contig_count, gc_content, ambiguous_bases, species, species_spec_dict):
     warnings = []
-    if species in species_specification_dict:
-        species_spec = species_specification_dict[species]
+    
+    # Logic to handle subspecies/versions using startswith
+    spec = None
+    for ref_species, ref_data in species_spec_dict.items():
+        if species.startswith(ref_species):
+            spec = ref_data
+            break
+    
+    if spec is None:
+        return '-' # No matching species found in dictionary
 
-        # genome size
-        min_size, max_size = species_spec['min_genome_size'], species_spec['max_genome_size']
-        if total_size < min_size:
-            warnings.append('total_size')
-        elif total_size > max_size:
-            warnings.append('total_size')
+    # Genome Size Check (Min and Max)
+    min_size = spec.get('min_genome_size')
+    max_size = spec.get('max_genome_size')
+    if min_size is not None and total_size < min_size:
+        warnings.append('total_size')
+    if max_size is not None and total_size > max_size:
+        warnings.append('total_size')
 
-        # N50
-        min_N50= species_spec['min_N50']
-        if N50 < min_N50:
-            warnings.append('N50')
+    # N50 Check (Min only)
+    min_n50 = spec.get('min_N50')
+    if min_n50 is not None and N50 < min_n50:
+        warnings.append('N50')
 
-    else:
-        return '-'  # species not in dictionary
+    # Contig Count Check (Min and Max)
+    min_contigs = spec.get('min_no_of_contigs')
+    max_contigs = spec.get('max_no_of_contigs')
+    if min_contigs is not None and contig_count < min_contigs:
+        warnings.append('contig_count')
+    if max_contigs is not None and contig_count > max_contigs:
+        warnings.append('contig_count')
 
+    # GC Content Check (Min and Max)
+    min_gc = spec.get('min_GC_Content')
+    max_gc = spec.get('max_GC_Content')
+    if min_gc is not None and gc_content < min_gc:
+        warnings.append('GC_content')
+    if max_gc is not None and gc_content > max_gc:
+        warnings.append('GC_content')
+
+    # Ambiguous Bases Check
     if 'yes' in ambiguous_bases:
         warnings.append('ambiguous_bases')
 
     return ','.join(warnings) if warnings else '-'
-
 
 # def get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specification_dict):
 #     warnings = []

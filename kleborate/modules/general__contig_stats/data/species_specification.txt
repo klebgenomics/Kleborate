@@ -1,1 +1,3142 @@
-{'Achromobacter xylosoxidans': {'min_genome_size': 6251810, 'max_genome_size': 7359146, 'min_N50': 33327, 'max_N50': 982625, 'min_no_of_contigs': 21, 'max_no_of_contigs': 447, 'min_GC_Content': 65.78, 'max_GC_Content': 68.27}, 'Acinetobacter baumannii': {'min_genome_size': 3638126, 'max_genome_size': 4566577, 'min_N50': 17468, 'max_N50': 466321, 'min_no_of_contigs': 34, 'max_no_of_contigs': 482, 'min_GC_Content': 38.69, 'max_GC_Content': 39.75}, 'Acinetobacter baylyi': {'min_genome_size': 3273778, 'max_genome_size': 3869569, 'min_N50': 28250, 'max_N50': 792700, 'min_no_of_contigs': 23, 'max_no_of_contigs': 279, 'min_GC_Content': 40.14, 'max_GC_Content': 40.58}, 'Acinetobacter johnsonii': {'min_genome_size': 3308619, 'max_genome_size': 4135620, 'min_N50': 30264, 'max_N50': 383592, 'min_no_of_contigs': 24, 'max_no_of_contigs': 487, 'min_GC_Content': 40.93, 'max_GC_Content': 41.68}, 'Acinetobacter nosocomialis': {'min_genome_size': 3755974, 'max_genome_size': 4344035, 'min_N50': 19898, 'max_N50': 800793, 'min_no_of_contigs': 30, 'max_no_of_contigs': 433, 'min_GC_Content': 38.47, 'max_GC_Content': 39.06}, 'Acinetobacter pittii': {'min_genome_size': 3688740, 'max_genome_size': 4499353, 'min_N50': 26359, 'max_N50': 983974, 'min_no_of_contigs': 23, 'max_no_of_contigs': 352, 'min_GC_Content': 38.48, 'max_GC_Content': 39.18}, 'Acinetobacter ursingii': {'min_genome_size': 3251927, 'max_genome_size': 4185992, 'min_N50': 33434, 'max_N50': 281706, 'min_no_of_contigs': 51, 'max_no_of_contigs': 252, 'min_GC_Content': 39.72, 'max_GC_Content': 40.25}, 'Actinobacillus lignieresii': {'min_genome_size': 2191713, 'max_genome_size': 2377048, 'min_N50': 31780, 'max_N50': 182093, 'min_no_of_contigs': 44, 'max_no_of_contigs': 164, 'min_GC_Content': 41.02, 'max_GC_Content': 41.24}, 'Aerococcus urinae': {'min_genome_size': 1900215, 'max_genome_size': 2143378, 'min_N50': 59406, 'max_N50': 553859, 'min_no_of_contigs': 19, 'max_no_of_contigs': 110, 'min_GC_Content': 41.71, 'max_GC_Content': 42.6}, 'Aeromonas caviae': {'min_genome_size': 4251238, 'max_genome_size': 5317260, 'min_N50': 23454, 'max_N50': 479461, 'min_no_of_contigs': 47, 'max_no_of_contigs': 664, 'min_GC_Content': 60.37, 'max_GC_Content': 62.05}, 'Aeromonas dhakensis': {'min_genome_size': 4628465, 'max_genome_size': 5043286, 'min_N50': 61754, 'max_N50': 917070, 'min_no_of_contigs': 39, 'max_no_of_contigs': 175, 'min_GC_Content': 60.97, 'max_GC_Content': 61.97}, 'Aeromonas hydrophila': {'min_genome_size': 4650966, 'max_genome_size': 5633455, 'min_N50': 27747, 'max_N50': 762715, 'min_no_of_contigs': 40, 'max_no_of_contigs': 495, 'min_GC_Content': 60.3, 'max_GC_Content': 61.71}, 'Aeromonas salmonicida': {'min_genome_size': 4395926, 'max_genome_size': 5191207, 'min_N50': 25805, 'max_N50': 214793, 'min_no_of_contigs': 78, 'max_no_of_contigs': 487, 'min_GC_Content': 58.14, 'max_GC_Content': 59.03}, 'Aeromonas veronii': {'min_genome_size': 4306261, 'max_genome_size': 5198147, 'min_N50': 32483, 'max_N50': 755722, 'min_no_of_contigs': 38, 'max_no_of_contigs': 533, 'min_GC_Content': 58.05, 'max_GC_Content': 61.0}, 'Agrobacterium fabacearum': {'min_genome_size': 4675914, 'max_genome_size': 6469646, 'min_N50': 274854, 'max_N50': 1088501, 'min_no_of_contigs': 23, 'max_no_of_contigs': 109, 'min_GC_Content': 57.17, 'max_GC_Content': 60.03}, 'Agrobacterium pusense': {'min_genome_size': 4957912, 'max_genome_size': 6388230, 'min_N50': 177807, 'max_N50': 1030346, 'min_no_of_contigs': 26, 'max_no_of_contigs': 227, 'min_GC_Content': 59.09, 'max_GC_Content': 59.31}, 'Agrobacterium tumefaciens': {'min_genome_size': 4675914, 'max_genome_size': 6469646, 'min_N50': 161222, 'max_N50': 1106685, 'min_no_of_contigs': 18, 'max_no_of_contigs': 120, 'min_GC_Content': 57.17, 'max_GC_Content': 60.03}, 'Aliarcobacter butzleri': {'min_genome_size': 2032911, 'max_genome_size': 2513129, 'min_N50': 27685, 'max_N50': 293292, 'min_no_of_contigs': 18, 'max_no_of_contigs': 191, 'min_GC_Content': 26.73, 'max_GC_Content': 27.23}, 'Aliivibrio fischeri': {'min_genome_size': 4071769, 'max_genome_size': 4523734, 'min_N50': 8902, 'max_N50': 550120, 'min_no_of_contigs': 55, 'max_no_of_contigs': 797, 'min_GC_Content': 38.09, 'max_GC_Content': 38.59}, 'Alistipes onderdonkii': {'min_genome_size': 3312673, 'max_genome_size': 3981512, 'min_N50': 82066, 'max_N50': 494014, 'min_no_of_contigs': 30, 'max_no_of_contigs': 234, 'min_GC_Content': 57.46, 'max_GC_Content': 58.53}, 'Bacillus altitudinis': {'min_genome_size': 3639950, 'max_genome_size': 3955013, 'min_N50': 153327, 'max_N50': 979907, 'min_no_of_contigs': 18, 'max_no_of_contigs': 78, 'min_GC_Content': 40.95, 'max_GC_Content': 41.54}, 'Bacillus anthracis': {'min_genome_size': 5132405, 'max_genome_size': 5820350, 'min_N50': 14105, 'max_N50': 1198333, 'min_no_of_contigs': 31, 'max_no_of_contigs': 748, 'min_GC_Content': 35.01, 'max_GC_Content': 35.48}, 'Bacillus bombysepticus': {'min_genome_size': 5225569, 'max_genome_size': 6815419, 'min_N50': 16022, 'max_N50': 684166, 'min_no_of_contigs': 48, 'max_no_of_contigs': 2346, 'min_GC_Content': 34.68, 'max_GC_Content': 35.43}, 'Bacillus cereus': {'min_genome_size': 4980500, 'max_genome_size': 6736796, 'min_N50': 10146, 'max_N50': 752342, 'min_no_of_contigs': 39, 'max_no_of_contigs': 1131, 'min_GC_Content': 34.69, 'max_GC_Content': 35.63}, 'Bacillus licheniformis': {'min_genome_size': 4087480, 'max_genome_size': 4824459, 'min_N50': 84422, 'max_N50': 2162779, 'min_no_of_contigs': 20, 'max_no_of_contigs': 167, 'min_GC_Content': 45.57, 'max_GC_Content': 46.35}, 'Bacillus mobilis': {'min_genome_size': 5285748, 'max_genome_size': 6018778, 'min_N50': 17820, 'max_N50': 275465, 'min_no_of_contigs': 76, 'max_no_of_contigs': 786, 'min_GC_Content': 35.0, 'max_GC_Content': 36.0}, 'Bacillus mycoides': {'min_genome_size': 5215615, 'max_genome_size': 6558090, 'min_N50': 7989, 'max_N50': 453879, 'min_no_of_contigs': 53, 'max_no_of_contigs': 1177, 'min_GC_Content': 35.07, 'max_GC_Content': 35.74}, 'Bacillus paralicheniformis': {'min_genome_size': 4261319, 'max_genome_size': 4617079, 'min_N50': 130391, 'max_N50': 1099388, 'min_no_of_contigs': 20, 'max_no_of_contigs': 147, 'min_GC_Content': 45.5, 'max_GC_Content': 46.11}, 'Bacillus paranthracis': {'min_genome_size': 5149464, 'max_genome_size': 6055697, 'min_N50': 14905, 'max_N50': 483083, 'min_no_of_contigs': 54, 'max_no_of_contigs': 786, 'min_GC_Content': 35.06, 'max_GC_Content': 35.6}, 'Bacillus safensis': {'min_genome_size': 3615194, 'max_genome_size': 4151325, 'min_N50': 175800, 'max_N50': 1895003, 'min_no_of_contigs': 18, 'max_no_of_contigs': 97, 'min_GC_Content': 41.31, 'max_GC_Content': 41.77}, 'Bacillus spizizenii': {'min_genome_size': 3952729, 'max_genome_size': 4222511, 'min_N50': 145590, 'max_N50': 740380, 'min_no_of_contigs': 28, 'max_no_of_contigs': 91, 'min_GC_Content': 43.5, 'max_GC_Content': 43.97}, 'Bacillus subtilis': {'min_genome_size': 3684279, 'max_genome_size': 4586412, 'min_N50': 23728, 'max_N50': 2231991, 'min_no_of_contigs': 18, 'max_no_of_contigs': 460, 'min_GC_Content': 42.88, 'max_GC_Content': 44.1}, 'Bacillus thuringiensis': {'min_genome_size': 5095864, 'max_genome_size': 6870591, 'min_N50': 18788, 'max_N50': 592602, 'min_no_of_contigs': 53, 'max_no_of_contigs': 906, 'min_GC_Content': 34.57, 'max_GC_Content': 35.52}, 'Bacillus toyonensis': {'min_genome_size': 5025419, 'max_genome_size': 6436423, 'min_N50': 19205, 'max_N50': 580282, 'min_no_of_contigs': 49, 'max_no_of_contigs': 717, 'min_GC_Content': 34.85, 'max_GC_Content': 35.56}, 'Bacillus velezensis': {'min_genome_size': 3713516, 'max_genome_size': 4385679, 'min_N50': 145226, 'max_N50': 2150255, 'min_no_of_contigs': 19, 'max_no_of_contigs': 115, 'min_GC_Content': 45.21, 'max_GC_Content': 46.98}, 'Bacillus wiedmannii': {'min_genome_size': 5261518, 'max_genome_size': 6211130, 'min_N50': 29399, 'max_N50': 571969, 'min_no_of_contigs': 47, 'max_no_of_contigs': 502, 'min_GC_Content': 34.91, 'max_GC_Content': 35.47}, 'Bacteroides caccae': {'min_genome_size': 4570799, 'max_genome_size': 5746071, 'min_N50': 67441, 'max_N50': 614993, 'min_no_of_contigs': 33, 'max_no_of_contigs': 374, 'min_GC_Content': 41.88, 'max_GC_Content': 42.95}, 'Bacteroides cellulosilyticus': {'min_genome_size': 6593691, 'max_genome_size': 7611020, 'min_N50': 50135, 'max_N50': 678982, 'min_no_of_contigs': 36, 'max_no_of_contigs': 497, 'min_GC_Content': 42.44, 'max_GC_Content': 43.28}, 'Bacteroides fragilis': {'min_genome_size': 4863832, 'max_genome_size': 5734009, 'min_N50': 22989, 'max_N50': 904694, 'min_no_of_contigs': 26, 'max_no_of_contigs': 497, 'min_GC_Content': 43.05, 'max_GC_Content': 43.85}, 'Bacteroides ovatus': {'min_genome_size': 6215550, 'max_genome_size': 7689367, 'min_N50': 26897, 'max_N50': 553584, 'min_no_of_contigs': 60, 'max_no_of_contigs': 553, 'min_GC_Content': 41.49, 'max_GC_Content': 42.44}, 'Bacteroides stercoris': {'min_genome_size': 3474256, 'max_genome_size': 4734765, 'min_N50': 24126, 'max_N50': 447311, 'min_no_of_contigs': 46, 'max_no_of_contigs': 353, 'min_GC_Content': 45.54, 'max_GC_Content': 46.4}, 'Bacteroides thetaiotaomicron': {'min_genome_size': 5830764, 'max_genome_size': 7105177, 'min_N50': 16744, 'max_N50': 629307, 'min_no_of_contigs': 45, 'max_no_of_contigs': 928, 'min_GC_Content': 42.51, 'max_GC_Content': 43.32}, 'Bacteroides uniformis': {'min_genome_size': 4270102, 'max_genome_size': 5471617, 'min_N50': 25082, 'max_N50': 683941, 'min_no_of_contigs': 29, 'max_no_of_contigs': 464, 'min_GC_Content': 45.95, 'max_GC_Content': 46.78}, 'Bacteroides xylanisolvens': {'min_genome_size': 5682891, 'max_genome_size': 6943808, 'min_N50': 16156, 'max_N50': 219120, 'min_no_of_contigs': 88, 'max_no_of_contigs': 975, 'min_GC_Content': 41.51, 'max_GC_Content': 42.69}, 'Bartonella krasnovii': {'min_genome_size': 2047560, 'max_genome_size': 2210336, 'min_N50': 60566, 'max_N50': 150819, 'min_no_of_contigs': 120, 'max_no_of_contigs': 283, 'min_GC_Content': 37.86, 'max_GC_Content': 38.23}, 'Bifidobacterium adolescentis': {'min_genome_size': 2040211, 'max_genome_size': 2436009, 'min_N50': 62569, 'max_N50': 1390410, 'min_no_of_contigs': 11, 'max_no_of_contigs': 82, 'min_GC_Content': 58.9, 'max_GC_Content': 60.11}, 'Bifidobacterium animalis': {'min_genome_size': 1915352, 'max_genome_size': 2027369, 'min_N50': 77427, 'max_N50': 1022904, 'min_no_of_contigs': 13, 'max_no_of_contigs': 47, 'min_GC_Content': 60.21, 'max_GC_Content': 60.64}, 'Bifidobacterium bifidum': {'min_genome_size': 2123327, 'max_genome_size': 2503841, 'min_N50': 66462, 'max_N50': 604523, 'min_no_of_contigs': 7, 'max_no_of_contigs': 67, 'min_GC_Content': 62.41, 'max_GC_Content': 62.9}, 'Bifidobacterium breve': {'min_genome_size': 2201032, 'max_genome_size': 2589602, 'min_N50': 11869, 'max_N50': 662397, 'min_no_of_contigs': 7, 'max_no_of_contigs': 403, 'min_GC_Content': 58.52, 'max_GC_Content': 59.38}, 'Bifidobacterium dentium': {'min_genome_size': 2416608, 'max_genome_size': 2758140, 'min_N50': 101722, 'max_N50': 435732, 'min_no_of_contigs': 11, 'max_no_of_contigs': 61, 'min_GC_Content': 58.17, 'max_GC_Content': 58.88}, 'Bifidobacterium longum': {'min_genome_size': 2202002, 'max_genome_size': 2832850, 'min_N50': 50207, 'max_N50': 478409, 'min_no_of_contigs': 17, 'max_no_of_contigs': 161, 'min_GC_Content': 59.13, 'max_GC_Content': 60.41}, 'Bifidobacterium pseudocatenulatum': {'min_genome_size': 2104197, 'max_genome_size': 2556908, 'min_N50': 58669, 'max_N50': 1510127, 'min_no_of_contigs': 12, 'max_no_of_contigs': 85, 'min_GC_Content': 56.1, 'max_GC_Content': 56.88}, 'Bordetella pertussis': {'min_genome_size': 3775414, 'max_genome_size': 4386396, 'min_N50': 11752, 'max_N50': 23245, 'min_no_of_contigs': 269, 'max_no_of_contigs': 544, 'min_GC_Content': 67.61, 'max_GC_Content': 67.93}, 'Borreliella afzelii': {'min_genome_size': 918834, 'max_genome_size': 1441197, 'min_N50': 12952, 'max_N50': 436251, 'min_no_of_contigs': 114, 'max_no_of_contigs': 423, 'min_GC_Content': 27.6, 'max_GC_Content': 28.29}, 'Borreliella burgdorferi': {'min_genome_size': 906733, 'max_genome_size': 1687185, 'min_N50': 2767, 'max_N50': 909868, 'min_no_of_contigs': 76, 'max_no_of_contigs': 1022, 'min_GC_Content': 27.94, 'max_GC_Content': 32.46}, 'Borreliella garinii': {'min_genome_size': 852383, 'max_genome_size': 1462439, 'min_N50': 12341, 'max_N50': 692791, 'min_no_of_contigs': 22, 'max_no_of_contigs': 445, 'min_GC_Content': 27.58, 'max_GC_Content': 28.81}, 'Brachyspira hyodysenteriae': {'min_genome_size': 2988879, 'max_genome_size': 3277544, 'min_N50': 11271, 'max_N50': 558085, 'min_no_of_contigs': 27, 'max_no_of_contigs': 454, 'min_GC_Content': 26.98, 'max_GC_Content': 27.4}, 'Bradyrhizobium diazoefficiens': {'min_genome_size': 7134259, 'max_genome_size': 9535585, 'min_N50': 55671, 'max_N50': 524908, 'min_no_of_contigs': 77, 'max_no_of_contigs': 360, 'min_GC_Content': 63.36, 'max_GC_Content': 64.16}, 'Brucella melitensis': {'min_genome_size': 3245723, 'max_genome_size': 3313492, 'min_N50': 81954, 'max_N50': 531416, 'min_no_of_contigs': 21, 'max_no_of_contigs': 83, 'min_GC_Content': 57.21, 'max_GC_Content': 57.28}, 'Burkholderia cenocepacia': {'min_genome_size': 6747376, 'max_genome_size': 8731481, 'min_N50': 23146, 'max_N50': 423289, 'min_no_of_contigs': 69, 'max_no_of_contigs': 726, 'min_GC_Content': 66.37, 'max_GC_Content': 67.54}, 'Burkholderia cepacia': {'min_genome_size': 6467321, 'max_genome_size': 9452114, 'min_N50': 79025, 'max_N50': 664591, 'min_no_of_contigs': 51, 'max_no_of_contigs': 352, 'min_GC_Content': 65.85, 'max_GC_Content': 67.03}, 'Burkholderia contaminans': {'min_genome_size': 6227236, 'max_genome_size': 10048221, 'min_N50': 21739, 'max_N50': 634029, 'min_no_of_contigs': 51, 'max_no_of_contigs': 1134, 'min_GC_Content': 65.72, 'max_GC_Content': 72.16}, 'Burkholderia dolosa': {'min_genome_size': 6195642, 'max_genome_size': 6506221, 'min_N50': 19457, 'max_N50': 225676, 'min_no_of_contigs': 78, 'max_no_of_contigs': 726, 'min_GC_Content': 66.93, 'max_GC_Content': 67.11}, 'Burkholderia gladioli': {'min_genome_size': 7699784, 'max_genome_size': 9052299, 'min_N50': 60008, 'max_N50': 449616, 'min_no_of_contigs': 64, 'max_no_of_contigs': 341, 'min_GC_Content': 67.4, 'max_GC_Content': 68.31}, 'Burkholderia mallei': {'min_genome_size': 5232401, 'max_genome_size': 7423265, 'min_N50': 24618, 'max_N50': 253026, 'min_no_of_contigs': 123, 'max_no_of_contigs': 682, 'min_GC_Content': 67.87, 'max_GC_Content': 68.51}, 'Burkholderia multivorans': {'min_genome_size': 6062466, 'max_genome_size': 7281867, 'min_N50': 22976, 'max_N50': 637149, 'min_no_of_contigs': 42, 'max_no_of_contigs': 703, 'min_GC_Content': 66.6, 'max_GC_Content': 67.47}, 'Burkholderia orbicola': {'min_genome_size': 6428368, 'max_genome_size': 8076212, 'min_N50': 8124, 'max_N50': 1040227, 'min_no_of_contigs': 18, 'max_no_of_contigs': 1833, 'min_GC_Content': 66.48, 'max_GC_Content': 67.18}, 'Burkholderia stagnalis': {'min_genome_size': 7451221, 'max_genome_size': 8179586, 'min_N50': 129111, 'max_N50': 356799, 'min_no_of_contigs': 88, 'max_no_of_contigs': 231, 'min_GC_Content': 67.22, 'max_GC_Content': 67.76}, 'Burkholderia ubonensis': {'min_genome_size': 6384247, 'max_genome_size': 8218963, 'min_N50': 97462, 'max_N50': 382841, 'min_no_of_contigs': 67, 'max_no_of_contigs': 327, 'min_GC_Content': 66.78, 'max_GC_Content': 67.55}, 'Burkholderia vietnamiensis': {'min_genome_size': 6145780, 'max_genome_size': 7658205, 'min_N50': 37629, 'max_N50': 291900, 'min_no_of_contigs': 83, 'max_no_of_contigs': 397, 'min_GC_Content': 66.29, 'max_GC_Content': 67.44}, 'Campylobacter coli': {'min_genome_size': 1634809, 'max_genome_size': 2127266, 'min_N50': 25127, 'max_N50': 284735, 'min_no_of_contigs': 14, 'max_no_of_contigs': 173, 'min_GC_Content': 30.67, 'max_GC_Content': 31.5}, 'Campylobacter fetus': {'min_genome_size': 1724608, 'max_genome_size': 2188312, 'min_N50': 67441, 'max_N50': 319095, 'min_no_of_contigs': 26, 'max_no_of_contigs': 115, 'min_GC_Content': 33.0, 'max_GC_Content': 33.46}, 'Campylobacter hyointestinalis': {'min_genome_size': 1688798, 'max_genome_size': 1907712, 'min_N50': 49155, 'max_N50': 553976, 'min_no_of_contigs': 10, 'max_no_of_contigs': 88, 'min_GC_Content': 33.32, 'max_GC_Content': 34.44}, 'Campylobacter jejuni': {'min_genome_size': 1567232, 'max_genome_size': 1943896, 'min_N50': 22860, 'max_N50': 334623, 'min_no_of_contigs': 13, 'max_no_of_contigs': 158, 'min_GC_Content': 30.06, 'max_GC_Content': 30.85}, 'Campylobacter lari': {'min_genome_size': 1435379, 'max_genome_size': 1791508, 'min_N50': 32830, 'max_N50': 281319, 'min_no_of_contigs': 15, 'max_no_of_contigs': 127, 'min_GC_Content': 29.26, 'max_GC_Content': 30.01}, 'Campylobacter upsaliensis': {'min_genome_size': 1561732, 'max_genome_size': 1817981, 'min_N50': 27366, 'max_N50': 193339, 'min_no_of_contigs': 32, 'max_no_of_contigs': 165, 'min_GC_Content': 34.24, 'max_GC_Content': 35.11}, 'Caulobacter vibrioides': {'min_genome_size': 3848628, 'max_genome_size': 4144051, 'min_N50': 4992, 'max_N50': 308472, 'min_no_of_contigs': 43, 'max_no_of_contigs': 1308, 'min_GC_Content': 66.97, 'max_GC_Content': 67.23}, 'Chlamydia trachomatis': {'min_genome_size': 910370, 'max_genome_size': 1274317, 'min_N50': 2263, 'max_N50': 1048728, 'min_no_of_contigs': 2, 'max_no_of_contigs': 707, 'min_GC_Content': 41.12, 'max_GC_Content': 42.14}, 'Chlamydophila pecorum': {'min_genome_size': 1099418, 'max_genome_size': 5268094, 'min_N50': 351, 'max_N50': 765468, 'min_no_of_contigs': 4, 'max_no_of_contigs': 12561, 'min_GC_Content': 40.98, 'max_GC_Content': 46.53}, 'Citrobacter amalonaticus': {'min_genome_size': 4686338, 'max_genome_size': 5875351, 'min_N50': 46036, 'max_N50': 874116, 'min_no_of_contigs': 27, 'max_no_of_contigs': 266, 'min_GC_Content': 52.9, 'max_GC_Content': 53.88}, 'Citrobacter braakii': {'min_genome_size': 4773195, 'max_genome_size': 6171839, 'min_N50': 77052, 'max_N50': 985054, 'min_no_of_contigs': 26, 'max_no_of_contigs': 272, 'min_GC_Content': 51.14, 'max_GC_Content': 52.25}, 'Citrobacter farmeri': {'min_genome_size': 4928830, 'max_genome_size': 5952118, 'min_N50': 54013, 'max_N50': 909898, 'min_no_of_contigs': 25, 'max_no_of_contigs': 286, 'min_GC_Content': 52.5, 'max_GC_Content': 53.4}, 'Citrobacter freundii': {'min_genome_size': 4692130, 'max_genome_size': 6062955, 'min_N50': 58759, 'max_N50': 703369, 'min_no_of_contigs': 36, 'max_no_of_contigs': 319, 'min_GC_Content': 51.27, 'max_GC_Content': 52.72}, 'Citrobacter koseri': {'min_genome_size': 4538101, 'max_genome_size': 5270494, 'min_N50': 80892, 'max_N50': 2510800, 'min_no_of_contigs': 23, 'max_no_of_contigs': 173, 'min_GC_Content': 53.24, 'max_GC_Content': 53.97}, 'Citrobacter portucalensis': {'min_genome_size': 4694654, 'max_genome_size': 5779133, 'min_N50': 47318, 'max_N50': 1023872, 'min_no_of_contigs': 28, 'max_no_of_contigs': 355, 'min_GC_Content': 51.35, 'max_GC_Content': 52.12}, 'Citrobacter rodentium': {'min_genome_size': 162339, 'max_genome_size': 5444283, 'min_N50': 1413, 'max_N50': 95042, 'min_no_of_contigs': 117, 'max_no_of_contigs': 309, 'min_GC_Content': 51.16, 'max_GC_Content': 54.72}, 'Citrobacter sedlakii': {'min_genome_size': 4501994, 'max_genome_size': 5159943, 'min_N50': 196643, 'max_N50': 1037992, 'min_no_of_contigs': 29, 'max_no_of_contigs': 148, 'min_GC_Content': 54.18, 'max_GC_Content': 54.85}, 'Citrobacter werkmanii': {'min_genome_size': 4780223, 'max_genome_size': 5947324, 'min_N50': 51253, 'max_N50': 2712586, 'min_no_of_contigs': 25, 'max_no_of_contigs': 294, 'min_GC_Content': 51.71, 'max_GC_Content': 52.53}, 'Citrobacter youngae': {'min_genome_size': 4608361, 'max_genome_size': 6000265, 'min_N50': 121276, 'max_N50': 1115083, 'min_no_of_contigs': 31, 'max_no_of_contigs': 220, 'min_GC_Content': 51.16, 'max_GC_Content': 51.96}, 'Clostridium beijerinckii': {'min_genome_size': 5552291, 'max_genome_size': 6485394, 'min_N50': 89352, 'max_N50': 219644, 'min_no_of_contigs': 114, 'max_no_of_contigs': 280, 'min_GC_Content': 29.6, 'max_GC_Content': 30.0}, 'Clostridium botulinum': {'min_genome_size': 2702994, 'max_genome_size': 4432564, 'min_N50': 12215, 'max_N50': 956674, 'min_no_of_contigs': 33, 'max_no_of_contigs': 570, 'min_GC_Content': 27.0, 'max_GC_Content': 28.34}, 'Clostridium cagae': {'min_genome_size': 3688086, 'max_genome_size': 4048570, 'min_N50': 26483, 'max_N50': 869080, 'min_no_of_contigs': 31, 'max_no_of_contigs': 299, 'min_GC_Content': 27.0, 'max_GC_Content': 27.0}, 'Clostridium difficile': {'min_genome_size': 3865992, 'max_genome_size': 4509705, 'min_N50': 8833, 'max_N50': 645841, 'min_no_of_contigs': 49, 'max_no_of_contigs': 794, 'min_GC_Content': 28.16, 'max_GC_Content': 29.6}, 'Clostridium tetani': {'min_genome_size': 2738177, 'max_genome_size': 3070777, 'min_N50': 95470, 'max_N50': 557251, 'min_no_of_contigs': 28, 'max_no_of_contigs': 103, 'min_GC_Content': 28.46, 'max_GC_Content': 28.79}, 'Corynebacterium diphtheriae': {'min_genome_size': 2335870, 'max_genome_size': 2571897, 'min_N50': 62264, 'max_N50': 403088, 'min_no_of_contigs': 26, 'max_no_of_contigs': 101, 'min_GC_Content': 53.32, 'max_GC_Content': 53.75}, 'Corynebacterium glutamicum': {'min_genome_size': 2843369, 'max_genome_size': 3428365, 'min_N50': 102770, 'max_N50': 285134, 'min_no_of_contigs': 45, 'max_no_of_contigs': 98, 'min_GC_Content': 53.78, 'max_GC_Content': 54.29}, 'Corynebacterium jeikeium': {'min_genome_size': 2235697, 'max_genome_size': 2524840, 'min_N50': 77231, 'max_N50': 310878, 'min_no_of_contigs': 26, 'max_no_of_contigs': 122, 'min_GC_Content': 61.35, 'max_GC_Content': 62.62}, 'Corynebacterium pseudodiphtheriticum': {'min_genome_size': 2260395, 'max_genome_size': 2457958, 'min_N50': 105987, 'max_N50': 571545, 'min_no_of_contigs': 13, 'max_no_of_contigs': 74, 'min_GC_Content': 55.13, 'max_GC_Content': 55.42}, 'Corynebacterium striatum': {'min_genome_size': 2665682, 'max_genome_size': 3076865, 'min_N50': 51037, 'max_N50': 191204, 'min_no_of_contigs': 90, 'max_no_of_contigs': 288, 'min_GC_Content': 58.98, 'max_GC_Content': 59.45}, 'Corynebacterium ulcerans': {'min_genome_size': 2422104, 'max_genome_size': 2640733, 'min_N50': 139325, 'max_N50': 578405, 'min_no_of_contigs': 9, 'max_no_of_contigs': 40, 'min_GC_Content': 53.2, 'max_GC_Content': 53.46}, 'Cronobacter sakazakii': {'min_genome_size': 4268675, 'max_genome_size': 4908057, 'min_N50': 92869, 'max_N50': 1054426, 'min_no_of_contigs': 25, 'max_no_of_contigs': 134, 'min_GC_Content': 56.3, 'max_GC_Content': 57.12}, 'Cronobacter turicensis': {'min_genome_size': 4392205, 'max_genome_size': 4808085, 'min_N50': 194054, 'max_N50': 1126185, 'min_no_of_contigs': 19, 'max_no_of_contigs': 102, 'min_GC_Content': 56.96, 'max_GC_Content': 57.66}, 'Curtobacterium flaccumfaciens': {'min_genome_size': 3602651, 'max_genome_size': 3970624, 'min_N50': 38501, 'max_N50': 479035, 'min_no_of_contigs': 20, 'max_no_of_contigs': 202, 'min_GC_Content': 70.37, 'max_GC_Content': 71.16}, 'Cutibacterium acnes': {'min_genome_size': 2454011, 'max_genome_size': 2661992, 'min_N50': 21437, 'max_N50': 893449, 'min_no_of_contigs': 8, 'max_no_of_contigs': 222, 'min_GC_Content': 59.96, 'max_GC_Content': 60.24}, 'Deinococcus radiodurans': {'min_genome_size': 3193850, 'max_genome_size': 3344765, 'min_N50': 14400, 'max_N50': 155709, 'min_no_of_contigs': 61, 'max_no_of_contigs': 465, 'min_GC_Content': 66.48, 'max_GC_Content': 66.89}, 'Dichelobacter nodosus': {'min_genome_size': 1296774, 'max_genome_size': 1458286, 'min_N50': 61388, 'max_N50': 381368, 'min_no_of_contigs': 10, 'max_no_of_contigs': 94, 'min_GC_Content': 43.83, 'max_GC_Content': 44.41}, 'Elizabethkingia anophelis': {'min_genome_size': 3810509, 'max_genome_size': 4369828, 'min_N50': 116730, 'max_N50': 1035131, 'min_no_of_contigs': 9, 'max_no_of_contigs': 103, 'min_GC_Content': 35.36, 'max_GC_Content': 35.97}, 'Enterobacter asburiae': {'min_genome_size': 4462999, 'max_genome_size': 5615356, 'min_N50': 29468, 'max_N50': 921199, 'min_no_of_contigs': 29, 'max_no_of_contigs': 467, 'min_GC_Content': 54.92, 'max_GC_Content': 56.21}, 'Enterobacter bugandensis': {'min_genome_size': 4573893, 'max_genome_size': 5348661, 'min_N50': 87201, 'max_N50': 1097233, 'min_no_of_contigs': 29, 'max_no_of_contigs': 177, 'min_GC_Content': 55.27, 'max_GC_Content': 56.22}, 'Enterobacter cloacae': {'min_genome_size': 4661475, 'max_genome_size': 5786228, 'min_N50': 41879, 'max_N50': 867550, 'min_no_of_contigs': 32, 'max_no_of_contigs': 414, 'min_GC_Content': 52.93, 'max_GC_Content': 56.11}, 'Enterobacter hormaechei': {'min_genome_size': 4514131, 'max_genome_size': 5668552, 'min_N50': 63384, 'max_N50': 810073, 'min_no_of_contigs': 35, 'max_no_of_contigs': 268, 'min_GC_Content': 54.29, 'max_GC_Content': 55.77}, 'Enterobacter kobei': {'min_genome_size': 4613286, 'max_genome_size': 5769554, 'min_N50': 60678, 'max_N50': 696323, 'min_no_of_contigs': 34, 'max_no_of_contigs': 328, 'min_GC_Content': 54.04, 'max_GC_Content': 55.44}, 'Enterobacter ludwigii': {'min_genome_size': 4607171, 'max_genome_size': 5711988, 'min_N50': 80645, 'max_N50': 1034793, 'min_no_of_contigs': 22, 'max_no_of_contigs': 195, 'min_GC_Content': 53.8, 'max_GC_Content': 54.79}, 'Enterobacter roggenkampii': {'min_genome_size': 4578847, 'max_genome_size': 5689850, 'min_N50': 46556, 'max_N50': 896984, 'min_no_of_contigs': 34, 'max_no_of_contigs': 589, 'min_GC_Content': 55.07, 'max_GC_Content': 56.23}, 'Enterococcus avium': {'min_genome_size': 3723378, 'max_genome_size': 4882096, 'min_N50': 24812, 'max_N50': 115100, 'min_no_of_contigs': 112, 'max_no_of_contigs': 384, 'min_GC_Content': 38.53, 'max_GC_Content': 39.26}, 'Enterococcus casseliflavus': {'min_genome_size': 3319918, 'max_genome_size': 3864311, 'min_N50': 82900, 'max_N50': 560527, 'min_no_of_contigs': 26, 'max_no_of_contigs': 142, 'min_GC_Content': 41.98, 'max_GC_Content': 42.92}, 'Enterococcus cecorum': {'min_genome_size': 2040077, 'max_genome_size': 2799887, 'min_N50': 49287, 'max_N50': 193543, 'min_no_of_contigs': 39, 'max_no_of_contigs': 202, 'min_GC_Content': 36.04, 'max_GC_Content': 36.76}, 'Enterococcus durans': {'min_genome_size': 2761297, 'max_genome_size': 3213124, 'min_N50': 34940, 'max_N50': 238142, 'min_no_of_contigs': 40, 'max_no_of_contigs': 223, 'min_GC_Content': 37.3, 'max_GC_Content': 38.04}, 'Enterococcus faecalis': {'min_genome_size': 2642626, 'max_genome_size': 3505610, 'min_N50': 46742, 'max_N50': 647749, 'min_no_of_contigs': 17, 'max_no_of_contigs': 222, 'min_GC_Content': 36.89, 'max_GC_Content': 37.8}, 'Enterococcus faecium': {'min_genome_size': 2432228, 'max_genome_size': 3440588, 'min_N50': 16650, 'max_N50': 80106, 'min_no_of_contigs': 130, 'max_no_of_contigs': 558, 'min_GC_Content': 37.39, 'max_GC_Content': 38.55}, 'Enterococcus gallinarum': {'min_genome_size': 3119722, 'max_genome_size': 3792603, 'min_N50': 76605, 'max_N50': 350344, 'min_no_of_contigs': 31, 'max_no_of_contigs': 174, 'min_GC_Content': 39.87, 'max_GC_Content': 40.84}, 'Enterococcus hirae': {'min_genome_size': 2669709, 'max_genome_size': 3233855, 'min_N50': 38236, 'max_N50': 327594, 'min_no_of_contigs': 28, 'max_no_of_contigs': 207, 'min_GC_Content': 36.38, 'max_GC_Content': 37.16}, 'Enterococcus lactis': {'min_genome_size': 2529543, 'max_genome_size': 3073413, 'min_N50': 36093, 'max_N50': 295591, 'min_no_of_contigs': 27, 'max_no_of_contigs': 225, 'min_GC_Content': 37.9, 'max_GC_Content': 38.47}, 'Erwinia amylovora': {'min_genome_size': 3717225, 'max_genome_size': 3905604, 'min_N50': 45695, 'max_N50': 435582, 'min_no_of_contigs': 51, 'max_no_of_contigs': 192, 'min_GC_Content': 53.34, 'max_GC_Content': 53.73}, 'Erysipelothrix rhusiopathiae': {'min_genome_size': 1705754, 'max_genome_size': 1945689, 'min_N50': 22372, 'max_N50': 312344, 'min_no_of_contigs': 19, 'max_no_of_contigs': 139, 'min_GC_Content': 36.15, 'max_GC_Content': 36.64}, 'Escherichia albertii': {'min_genome_size': 4398962, 'max_genome_size': 5366623, 'min_N50': 27735, 'max_N50': 434168, 'min_no_of_contigs': 54, 'max_no_of_contigs': 467, 'min_GC_Content': 49.31, 'max_GC_Content': 50.17}, 'Escherichia coli': {'min_genome_size': 4165587, 'max_genome_size': 6244159, 'min_N50': 20142, 'max_N50': 382278, 'min_no_of_contigs': 65, 'max_no_of_contigs': 694, 'min_GC_Content': 50.09, 'max_GC_Content': 51.12}, 'Escherichia fergusonii': {'min_genome_size': 4373190, 'max_genome_size': 5228048, 'min_N50': 70615, 'max_N50': 1107180, 'min_no_of_contigs': 27, 'max_no_of_contigs': 209, 'min_GC_Content': 49.5, 'max_GC_Content': 50.12}, 'Escherichia marmotae': {'min_genome_size': 4417982, 'max_genome_size': 5271280, 'min_N50': 54658, 'max_N50': 275414, 'min_no_of_contigs': 59, 'max_no_of_contigs': 457, 'min_GC_Content': 50.17, 'max_GC_Content': 50.58}, 'Escherichia ruysiae': {'min_genome_size': 4356180, 'max_genome_size': 5006054, 'min_N50': 60378, 'max_N50': 899627, 'min_no_of_contigs': 34, 'max_no_of_contigs': 237, 'min_GC_Content': 50.37, 'max_GC_Content': 50.85}, 'Flavobacterium psychrophilum': {'min_genome_size': 2663284, 'max_genome_size': 3208574, 'min_N50': 44032, 'max_N50': 191717, 'min_no_of_contigs': 84, 'max_no_of_contigs': 463, 'min_GC_Content': 32.32, 'max_GC_Content': 32.71}, 'Francisella tularensis': {'min_genome_size': 1764801, 'max_genome_size': 2047033, 'min_N50': 19828, 'max_N50': 38285, 'min_no_of_contigs': 69, 'max_no_of_contigs': 174, 'min_GC_Content': 32.15, 'max_GC_Content': 32.54}, 'Fusobacterium necrophorum': {'min_genome_size': 1977765, 'max_genome_size': 2392857, 'min_N50': 38849, 'max_N50': 303661, 'min_no_of_contigs': 34, 'max_no_of_contigs': 146, 'min_GC_Content': 34.52, 'max_GC_Content': 35.52}, 'Glaesserella parasuis': {'min_genome_size': 2142506, 'max_genome_size': 2570730, 'min_N50': 16776, 'max_N50': 94769, 'min_no_of_contigs': 136, 'max_no_of_contigs': 332, 'min_GC_Content': 39.5, 'max_GC_Content': 40.11}, 'Haemophilus haemolyticus': {'min_genome_size': 1804755, 'max_genome_size': 2048873, 'min_N50': 46476, 'max_N50': 377348, 'min_no_of_contigs': 19, 'max_no_of_contigs': 100, 'min_GC_Content': 38.29, 'max_GC_Content': 38.73}, 'Haemophilus influenzae': {'min_genome_size': 1753596, 'max_genome_size': 2102125, 'min_N50': 28978, 'max_N50': 1150463, 'min_no_of_contigs': 15, 'max_no_of_contigs': 135, 'min_GC_Content': 37.77, 'max_GC_Content': 38.46}, 'Haemophilus parainfluenzae': {'min_genome_size': 1855648, 'max_genome_size': 2228071, 'min_N50': 11078, 'max_N50': 441357, 'min_no_of_contigs': 19, 'max_no_of_contigs': 323, 'min_GC_Content': 39.11, 'max_GC_Content': 39.82}, 'Hafnia paralvei': {'min_genome_size': 4470800, 'max_genome_size': 5057348, 'min_N50': 79748, 'max_N50': 946699, 'min_no_of_contigs': 37, 'max_no_of_contigs': 171, 'min_GC_Content': 47.88, 'max_GC_Content': 48.36}, 'Helicobacter pylori': {'min_genome_size': 1507930, 'max_genome_size': 1745797, 'min_N50': 32064, 'max_N50': 191816, 'min_no_of_contigs': 22, 'max_no_of_contigs': 129, 'min_GC_Content': 38.42, 'max_GC_Content': 39.3}, 'Hungateiclostridium thermocellum': {'min_genome_size': 3465451, 'max_genome_size': 3971483, 'min_N50': 77897, 'max_N50': 127100, 'min_no_of_contigs': 117, 'max_no_of_contigs': 208, 'min_GC_Content': 38.9, 'max_GC_Content': 39.17}, 'Janthinobacterium lividum': {'min_genome_size': 6042277, 'max_genome_size': 6762807, 'min_N50': 14631, 'max_N50': 808658, 'min_no_of_contigs': 52, 'max_no_of_contigs': 850, 'min_GC_Content': 62.36, 'max_GC_Content': 62.84}, 'Klebsiella aerogenes': {'min_genome_size': 4959692, 'max_genome_size': 5977734, 'min_N50': 75807, 'max_N50': 1121152, 'min_no_of_contigs': 32, 'max_no_of_contigs': 193, 'min_GC_Content': 54.24, 'max_GC_Content': 55.25}, 'Klebsiella grimontii': {'min_genome_size': 5615528, 'max_genome_size': 6778239, 'min_N50': 93143, 'max_N50': 939543, 'min_no_of_contigs': 39, 'max_no_of_contigs': 312, 'min_GC_Content': 54.77, 'max_GC_Content': 56.11}, 'Klebsiella michiganensis': {'min_genome_size': 5760427, 'max_genome_size': 6977354, 'min_N50': 55640, 'max_N50': 437723, 'min_no_of_contigs': 61, 'max_no_of_contigs': 380, 'min_GC_Content': 55.04, 'max_GC_Content': 56.18}, 'Klebsiella ornithinolytica': {'min_genome_size': 5337988, 'max_genome_size': 6535821, 'min_N50': 83479, 'max_N50': 871877, 'min_no_of_contigs': 42, 'max_no_of_contigs': 342, 'min_GC_Content': 54.68, 'max_GC_Content': 57.47}, 'Klebsiella oxytoca': {'min_genome_size': 5394761, 'max_genome_size': 6736859, 'min_N50': 68938, 'max_N50': 615483, 'min_no_of_contigs': 54, 'max_no_of_contigs': 346, 'min_GC_Content': 54.12, 'max_GC_Content': 55.33}, 'Klebsiella planticola': {'min_genome_size': 5229639, 'max_genome_size': 6745406, 'min_N50': 77026, 'max_N50': 578420, 'min_no_of_contigs': 48, 'max_no_of_contigs': 388, 'min_GC_Content': 54.78, 'max_GC_Content': 55.93}, 'Klebsiella pneumoniae': {'min_genome_size': 4996433, 'max_genome_size': 6374553, 'min_N50': 54993, 'max_N50': 587005, 'min_no_of_contigs': 53, 'max_no_of_contigs': 389, 'min_GC_Content': 56.1, 'max_GC_Content': 58.02}, 'Klebsiella quasipneumoniae': {'min_genome_size': 4579303, 'max_genome_size': 6212153, 'min_N50': 48875, 'max_N50': 1236900, 'min_no_of_contigs': 35, 'max_no_of_contigs': 398, 'min_GC_Content': 56.5, 'max_GC_Content': 58.63}, 'Klebsiella variicola': {'min_genome_size': 5279245, 'max_genome_size': 6498364, 'min_N50': 67201, 'max_N50': 816088, 'min_no_of_contigs': 39, 'max_no_of_contigs': 349, 'min_GC_Content': 56.26, 'max_GC_Content': 57.67}, 'Lacticaseibacillus paracasei': {'min_genome_size': 2651787, 'max_genome_size': 3434047, 'min_N50': 29074, 'max_N50': 266150, 'min_no_of_contigs': 49, 'max_no_of_contigs': 314, 'min_GC_Content': 46.06, 'max_GC_Content': 46.64}, 'Lacticaseibacillus rhamnosus': {'min_genome_size': 2822344, 'max_genome_size': 3251532, 'min_N50': 50957, 'max_N50': 722224, 'min_no_of_contigs': 19, 'max_no_of_contigs': 186, 'min_GC_Content': 46.52, 'max_GC_Content': 46.89}, 'Lactiplantibacillus plantarum': {'min_genome_size': 2839103, 'max_genome_size': 3697306, 'min_N50': 53901, 'max_N50': 549233, 'min_no_of_contigs': 23, 'max_no_of_contigs': 261, 'min_GC_Content': 44.03, 'max_GC_Content': 45.16}, 'Lactobacillus acidophilus': {'min_genome_size': 1954687, 'max_genome_size': 2092540, 'min_N50': 115478, 'max_N50': 237694, 'min_no_of_contigs': 20, 'max_no_of_contigs': 56, 'min_GC_Content': 34.57, 'max_GC_Content': 34.76}, 'Lactobacillus crispatus': {'min_genome_size': 1918464, 'max_genome_size': 2818964, 'min_N50': 10161, 'max_N50': 127137, 'min_no_of_contigs': 51, 'max_no_of_contigs': 442, 'min_GC_Content': 36.37, 'max_GC_Content': 37.33}, 'Lactobacillus gasseri': {'min_genome_size': 1790681, 'max_genome_size': 2176460, 'min_N50': 44615, 'max_N50': 1035068, 'min_no_of_contigs': 13, 'max_no_of_contigs': 141, 'min_GC_Content': 34.66, 'max_GC_Content': 35.33}, 'Lactobacillus johnsonii': {'min_genome_size': 1715385, 'max_genome_size': 2215438, 'min_N50': 31977, 'max_N50': 133633, 'min_no_of_contigs': 38, 'max_no_of_contigs': 158, 'min_GC_Content': 34.29, 'max_GC_Content': 35.17}, 'Lactobacillus paragasseri': {'min_genome_size': 1862133, 'max_genome_size': 2130661, 'min_N50': 41666, 'max_N50': 1131704, 'min_no_of_contigs': 11, 'max_no_of_contigs': 152, 'min_GC_Content': 34.56, 'max_GC_Content': 35.06}, 'Lactococcus lactis': {'min_genome_size': 2208218, 'max_genome_size': 2987858, 'min_N50': 15208, 'max_N50': 432517, 'min_no_of_contigs': 22, 'max_no_of_contigs': 274, 'min_GC_Content': 34.67, 'max_GC_Content': 35.48}, 'Legionella longbeachae': {'min_genome_size': 3977100, 'max_genome_size': 4349858, 'min_N50': 32482, 'max_N50': 263288, 'min_no_of_contigs': 47, 'max_no_of_contigs': 253, 'min_GC_Content': 37.04, 'max_GC_Content': 37.2}, 'Legionella pneumophila': {'min_genome_size': 3226278, 'max_genome_size': 3776490, 'min_N50': 48079, 'max_N50': 638021, 'min_no_of_contigs': 20, 'max_no_of_contigs': 227, 'min_GC_Content': 38.12, 'max_GC_Content': 38.48}, 'Leptospira borgpetersenii': {'min_genome_size': 3700183, 'max_genome_size': 4063410, 'min_N50': 32383, 'max_N50': 184020, 'min_no_of_contigs': 99, 'max_no_of_contigs': 394, 'min_GC_Content': 40.01, 'max_GC_Content': 40.31}, 'Leptospira interrogans': {'min_genome_size': 4376216, 'max_genome_size': 5521455, 'min_N50': 11072, 'max_N50': 202494, 'min_no_of_contigs': 108, 'max_no_of_contigs': 844, 'min_GC_Content': 34.91, 'max_GC_Content': 35.6}, 'Ligilactobacillus salivarius': {'min_genome_size': 1806913, 'max_genome_size': 2320461, 'min_N50': 16761, 'max_N50': 343344, 'min_no_of_contigs': 32, 'max_no_of_contigs': 252, 'min_GC_Content': 32.46, 'max_GC_Content': 33.21}, 'Limosilactobacillus fermentum': {'min_genome_size': 1882337, 'max_genome_size': 2330492, 'min_N50': 25935, 'max_N50': 76056, 'min_no_of_contigs': 113, 'max_no_of_contigs': 354, 'min_GC_Content': 50.49, 'max_GC_Content': 52.34}, 'Limosilactobacillus mucosae': {'min_genome_size': 1883073, 'max_genome_size': 2434610, 'min_N50': 70878, 'max_N50': 299167, 'min_no_of_contigs': 33, 'max_no_of_contigs': 106, 'min_GC_Content': 46.1, 'max_GC_Content': 46.91}, 'Limosilactobacillus reuteri': {'min_genome_size': 1816609, 'max_genome_size': 2695904, 'min_N50': 15954, 'max_N50': 121411, 'min_no_of_contigs': 55, 'max_no_of_contigs': 374, 'min_GC_Content': 38.28, 'max_GC_Content': 39.43}, 'Listeria grayi': {'min_genome_size': 2577124, 'max_genome_size': 2860271, 'min_N50': 144956, 'max_N50': 683667, 'min_no_of_contigs': 22, 'max_no_of_contigs': 89, 'min_GC_Content': 41.22, 'max_GC_Content': 41.68}, 'Listeria innocua': {'min_genome_size': 2763298, 'max_genome_size': 3093113, 'min_N50': 48990, 'max_N50': 1502044, 'min_no_of_contigs': 12, 'max_no_of_contigs': 179, 'min_GC_Content': 37.2, 'max_GC_Content': 37.56}, 'Listeria monocytogenes': {'min_genome_size': 2815543, 'max_genome_size': 3243301, 'min_N50': 66708, 'max_N50': 1502497, 'min_no_of_contigs': 14, 'max_no_of_contigs': 111, 'min_GC_Content': 37.71, 'max_GC_Content': 38.29}, 'Listeria seeligeri': {'min_genome_size': 2766272, 'max_genome_size': 3031776, 'min_N50': 91164, 'max_N50': 567246, 'min_no_of_contigs': 20, 'max_no_of_contigs': 96, 'min_GC_Content': 37.12, 'max_GC_Content': 37.46}, 'Listeria welshimeri': {'min_genome_size': 2692469, 'max_genome_size': 2953272, 'min_N50': 79094, 'max_N50': 1520615, 'min_no_of_contigs': 16, 'max_no_of_contigs': 108, 'min_GC_Content': 36.07, 'max_GC_Content': 36.38}, 'Mammaliicoccus sciuri': {'min_genome_size': 2571994, 'max_genome_size': 3108824, 'min_N50': 52189, 'max_N50': 675429, 'min_no_of_contigs': 21, 'max_no_of_contigs': 320, 'min_GC_Content': 32.28, 'max_GC_Content': 32.82}, 'Mannheimia haemolytica': {'min_genome_size': 2335738, 'max_genome_size': 2829372, 'min_N50': 26385, 'max_N50': 134276, 'min_no_of_contigs': 80, 'max_no_of_contigs': 224, 'min_GC_Content': 40.91, 'max_GC_Content': 41.34}, 'Mesomycoplasma hyopneumoniae': {'min_genome_size': 869792, 'max_genome_size': 960532, 'min_N50': 40416, 'max_N50': 218354, 'min_no_of_contigs': 19, 'max_no_of_contigs': 91, 'min_GC_Content': 28.36, 'max_GC_Content': 28.68}, 'Micrococcus luteus': {'min_genome_size': 2382742, 'max_genome_size': 2750189, 'min_N50': 9357, 'max_N50': 250342, 'min_no_of_contigs': 49, 'max_no_of_contigs': 521, 'min_GC_Content': 72.51, 'max_GC_Content': 73.32}, 'Moraxella bovoculi': {'min_genome_size': 1998152, 'max_genome_size': 2400952, 'min_N50': 55292, 'max_N50': 535492, 'min_no_of_contigs': 13, 'max_no_of_contigs': 108, 'min_GC_Content': 45.11, 'max_GC_Content': 45.73}, 'Moraxella catarrhalis': {'min_genome_size': 1820408, 'max_genome_size': 2067071, 'min_N50': 134538, 'max_N50': 478767, 'min_no_of_contigs': 8, 'max_no_of_contigs': 66, 'min_GC_Content': 41.23, 'max_GC_Content': 41.75}, 'Morganella morganii': {'min_genome_size': 3687104, 'max_genome_size': 4450705, 'min_N50': 44380, 'max_N50': 1210981, 'min_no_of_contigs': 25, 'max_no_of_contigs': 238, 'min_GC_Content': 50.1, 'max_GC_Content': 51.37}, 'Mycobacterium abscessus': {'min_genome_size': 4687873, 'max_genome_size': 5597820, 'min_N50': 74487, 'max_N50': 2574473, 'min_no_of_contigs': 7, 'max_no_of_contigs': 174, 'min_GC_Content': 63.91, 'max_GC_Content': 64.32}, 'Mycobacterium avium': {'min_genome_size': 4734387, 'max_genome_size': 5899412, 'min_N50': 14771, 'max_N50': 269647, 'min_no_of_contigs': 73, 'max_no_of_contigs': 616, 'min_GC_Content': 68.55, 'max_GC_Content': 69.4}, 'Mycobacterium chelonae': {'min_genome_size': 4922096, 'max_genome_size': 5800642, 'min_N50': 80844, 'max_N50': 1246669, 'min_no_of_contigs': 13, 'max_no_of_contigs': 171, 'min_GC_Content': 63.71, 'max_GC_Content': 64.19}, 'Mycobacterium intracellulare': {'min_genome_size': 5257760, 'max_genome_size': 7229138, 'min_N50': 35282, 'max_N50': 612048, 'min_no_of_contigs': 33, 'max_no_of_contigs': 422, 'min_GC_Content': 67.14, 'max_GC_Content': 68.22}, 'Mycobacterium kansasii': {'min_genome_size': 6322177, 'max_genome_size': 6828911, 'min_N50': 29616, 'max_N50': 250476, 'min_no_of_contigs': 142, 'max_no_of_contigs': 485, 'min_GC_Content': 65.95, 'max_GC_Content': 66.24}, 'Mycobacterium marinum': {'min_genome_size': 5255952, 'max_genome_size': 6660144, 'min_N50': 22764, 'max_N50': 76970, 'min_no_of_contigs': 275, 'max_no_of_contigs': 620, 'min_GC_Content': 65.49, 'max_GC_Content': 65.8}, 'Mycobacterium smegmatis': {'min_genome_size': 6828351, 'max_genome_size': 7119169, 'min_N50': 61810, 'max_N50': 184050, 'min_no_of_contigs': 112, 'max_no_of_contigs': 284, 'min_GC_Content': 67.28, 'max_GC_Content': 67.46}, 'Mycobacterium tuberculosis': {'min_genome_size': 4274216, 'max_genome_size': 4516435, 'min_N50': 34260, 'max_N50': 179520, 'min_no_of_contigs': 81, 'max_no_of_contigs': 314, 'min_GC_Content': 65.22, 'max_GC_Content': 65.66}, 'Mycoplasmoides pneumoniae': {'min_genome_size': 769994, 'max_genome_size': 857799, 'min_N50': 30999, 'max_N50': 466259, 'min_no_of_contigs': 11, 'max_no_of_contigs': 91, 'min_GC_Content': 39.62, 'max_GC_Content': 40.55}, 'Mycoplasmopsis bovis': {'min_genome_size': 895313, 'max_genome_size': 1143450, 'min_N50': 8652, 'max_N50': 36799, 'min_no_of_contigs': 102, 'max_no_of_contigs': 270, 'min_GC_Content': 29.0, 'max_GC_Content': 29.63}, 'Neisseria bergeri': {'min_genome_size': 1998512, 'max_genome_size': 2241653, 'min_N50': 97519, 'max_N50': 526587, 'min_no_of_contigs': 11, 'max_no_of_contigs': 91, 'min_GC_Content': 52.0, 'max_GC_Content': 52.0}, 'Neisseria flavescens': {'min_genome_size': 2151222, 'max_genome_size': 2416432, 'min_N50': 48346, 'max_N50': 337619, 'min_no_of_contigs': 25, 'max_no_of_contigs': 123, 'min_GC_Content': 48.8, 'max_GC_Content': 49.43}, 'Neisseria gonorrhoeae': {'min_genome_size': 2078441, 'max_genome_size': 2308468, 'min_N50': 28251, 'max_N50': 88816, 'min_no_of_contigs': 100, 'max_no_of_contigs': 224, 'min_GC_Content': 52.06, 'max_GC_Content': 52.74}, 'Neisseria lactamica': {'min_genome_size': 2094635, 'max_genome_size': 2273431, 'min_N50': 59613, 'max_N50': 328893, 'min_no_of_contigs': 30, 'max_no_of_contigs': 114, 'min_GC_Content': 51.94, 'max_GC_Content': 52.63}, 'Neisseria meningitidis': {'min_genome_size': 2033459, 'max_genome_size': 2397461, 'min_N50': 18778, 'max_N50': 78040, 'min_no_of_contigs': 101, 'max_no_of_contigs': 306, 'min_GC_Content': 51.05, 'max_GC_Content': 52.14}, 'Neisseria perflava': {'min_genome_size': 2153110, 'max_genome_size': 2427741, 'min_N50': 137838, 'max_N50': 546829, 'min_no_of_contigs': 16, 'max_no_of_contigs': 69, 'min_GC_Content': 48.72, 'max_GC_Content': 49.31}, 'Neisseria polysaccharea': {'min_genome_size': 1977390, 'max_genome_size': 2183716, 'min_N50': 76959, 'max_N50': 306142, 'min_no_of_contigs': 20, 'max_no_of_contigs': 75, 'min_GC_Content': 51.52, 'max_GC_Content': 52.35}, 'Oenococcus oeni': {'min_genome_size': 1740924, 'max_genome_size': 1989703, 'min_N50': 86449, 'max_N50': 241947, 'min_no_of_contigs': 23, 'max_no_of_contigs': 60, 'min_GC_Content': 37.71, 'max_GC_Content': 38.07}, 'Orientia tsutsugamushi': {'min_genome_size': 138385, 'max_genome_size': 2595981, 'min_N50': 616, 'max_N50': 18813, 'min_no_of_contigs': 213, 'max_no_of_contigs': 3331, 'min_GC_Content': 29.78, 'max_GC_Content': 44.28}, 'Ornithobacterium rhinotracheale': {'min_genome_size': 2253590, 'max_genome_size': 2422140, 'min_N50': 29598, 'max_N50': 151867, 'min_no_of_contigs': 62, 'max_no_of_contigs': 205, 'min_GC_Content': 37.22, 'max_GC_Content': 38.68}, 'Paenibacillus larvae': {'min_genome_size': 3681624, 'max_genome_size': 4794868, 'min_N50': 21844, 'max_N50': 84597, 'min_no_of_contigs': 179, 'max_no_of_contigs': 796, 'min_GC_Content': 43.78, 'max_GC_Content': 45.01}, 'Parabacteroides distasonis': {'min_genome_size': 4736473, 'max_genome_size': 5602424, 'min_N50': 28266, 'max_N50': 617720, 'min_no_of_contigs': 35, 'max_no_of_contigs': 408, 'min_GC_Content': 44.77, 'max_GC_Content': 45.58}, 'Parabacteroides goldsteinii': {'min_genome_size': 6364511, 'max_genome_size': 7541106, 'min_N50': 35913, 'max_N50': 378466, 'min_no_of_contigs': 61, 'max_no_of_contigs': 605, 'min_GC_Content': 43.19, 'max_GC_Content': 43.79}, 'Parabacteroides merdae': {'min_genome_size': 4267790, 'max_genome_size': 5295682, 'min_N50': 42904, 'max_N50': 576946, 'min_no_of_contigs': 25, 'max_no_of_contigs': 312, 'min_GC_Content': 44.92, 'max_GC_Content': 45.8}, 'Pasteurella multocida': {'min_genome_size': 2126408, 'max_genome_size': 2783224, 'min_N50': 26027, 'max_N50': 574699, 'min_no_of_contigs': 16, 'max_no_of_contigs': 172, 'min_GC_Content': 40.09, 'max_GC_Content': 40.87}, 'Pectobacterium brasiliense': {'min_genome_size': 4646903, 'max_genome_size': 5137126, 'min_N50': 131383, 'max_N50': 1055265, 'min_no_of_contigs': 32, 'max_no_of_contigs': 128, 'min_GC_Content': 51.14, 'max_GC_Content': 52.24}, 'Pediococcus acidilactici': {'min_genome_size': 1779925, 'max_genome_size': 2228155, 'min_N50': 125967, 'max_N50': 496610, 'min_no_of_contigs': 11, 'max_no_of_contigs': 58, 'min_GC_Content': 41.76, 'max_GC_Content': 42.6}, 'Pediococcus pentosaceus': {'min_genome_size': 1699331, 'max_genome_size': 2059009, 'min_N50': 209986, 'max_N50': 468256, 'min_no_of_contigs': 11, 'max_no_of_contigs': 48, 'min_GC_Content': 37.0, 'max_GC_Content': 37.53}, 'Phocaeicola dorei': {'min_genome_size': 4908082, 'max_genome_size': 6009755, 'min_N50': 30026, 'max_N50': 458662, 'min_no_of_contigs': 40, 'max_no_of_contigs': 506, 'min_GC_Content': 41.43, 'max_GC_Content': 42.35}, 'Phocaeicola vulgatus': {'min_genome_size': 4570739, 'max_genome_size': 5779187, 'min_N50': 30886, 'max_N50': 222973, 'min_no_of_contigs': 78, 'max_no_of_contigs': 581, 'min_GC_Content': 41.81, 'max_GC_Content': 42.86}, 'Priestia megaterium': {'min_genome_size': 5036631, 'max_genome_size': 6872701, 'min_N50': 182791, 'max_N50': 2127715, 'min_no_of_contigs': 33, 'max_no_of_contigs': 198, 'min_GC_Content': 36.87, 'max_GC_Content': 38.33}, 'Proteus mirabilis': {'min_genome_size': 3729326, 'max_genome_size': 4587183, 'min_N50': 27843, 'max_N50': 520075, 'min_no_of_contigs': 40, 'max_no_of_contigs': 323, 'min_GC_Content': 38.38, 'max_GC_Content': 39.73}, 'Providencia rettgeri': {'min_genome_size': 4023756, 'max_genome_size': 5088433, 'min_N50': 14871, 'max_N50': 732549, 'min_no_of_contigs': 37, 'max_no_of_contigs': 599, 'min_GC_Content': 40.0, 'max_GC_Content': 43.11}, 'Providencia stuartii': {'min_genome_size': 4148829, 'max_genome_size': 4860614, 'min_N50': 21814, 'max_N50': 533148, 'min_no_of_contigs': 55, 'max_no_of_contigs': 452, 'min_GC_Content': 41.17, 'max_GC_Content': 41.98}, 'Pseudoalteromonas nigrifaciens': {'min_genome_size': 3872287, 'max_genome_size': 4274777, 'min_N50': 413477, 'max_N50': 616042, 'min_no_of_contigs': 36, 'max_no_of_contigs': 65, 'min_GC_Content': 39.97, 'max_GC_Content': 40.17}, 'Pseudomonas aeruginosa': {'min_genome_size': 6052044, 'max_genome_size': 7708846, 'min_N50': 34504, 'max_N50': 771178, 'min_no_of_contigs': 43, 'max_no_of_contigs': 494, 'min_GC_Content': 65.16, 'max_GC_Content': 66.68}, 'Pseudomonas alloputida': {'min_genome_size': 5699045, 'max_genome_size': 6784073, 'min_N50': 52427, 'max_N50': 314560, 'min_no_of_contigs': 101, 'max_no_of_contigs': 329, 'min_GC_Content': 61.1, 'max_GC_Content': 62.01}, 'Pseudomonas asiatica': {'min_genome_size': 5581518, 'max_genome_size': 6697239, 'min_N50': 37571, 'max_N50': 429286, 'min_no_of_contigs': 70, 'max_no_of_contigs': 349, 'min_GC_Content': 61.88, 'max_GC_Content': 63.34}, 'Pseudomonas avellanae': {'min_genome_size': 5741036, 'max_genome_size': 6576340, 'min_N50': 27331, 'max_N50': 187757, 'min_no_of_contigs': 169, 'max_no_of_contigs': 516, 'min_GC_Content': 58.25, 'max_GC_Content': 58.89}, 'Pseudomonas fluorescens': {'min_genome_size': 5502517, 'max_genome_size': 7478726, 'min_N50': 44052, 'max_N50': 548626, 'min_no_of_contigs': 48, 'max_no_of_contigs': 322, 'min_GC_Content': 58.8, 'max_GC_Content': 63.46}, 'Pseudomonas fulva': {'min_genome_size': 4714069, 'max_genome_size': 5757765, 'min_N50': 122023, 'max_N50': 395106, 'min_no_of_contigs': 53, 'max_no_of_contigs': 201, 'min_GC_Content': 60.65, 'max_GC_Content': 64.04}, 'Pseudomonas glycinae': {'min_genome_size': 6393890, 'max_genome_size': 6422281, 'min_N50': 133754, 'max_N50': 543970, 'min_no_of_contigs': 53, 'max_no_of_contigs': 152, 'min_GC_Content': 60.48, 'max_GC_Content': 60.58}, 'Pseudomonas juntendi': {'min_genome_size': 5318923, 'max_genome_size': 6183320, 'min_N50': 45433, 'max_N50': 164030, 'min_no_of_contigs': 133, 'max_no_of_contigs': 352, 'min_GC_Content': 61.84, 'max_GC_Content': 62.64}, 'Pseudomonas marginalis': {'min_genome_size': 6665209, 'max_genome_size': 7581541, 'min_N50': 34594, 'max_N50': 386844, 'min_no_of_contigs': 52, 'max_no_of_contigs': 346, 'min_GC_Content': 59.85, 'max_GC_Content': 61.0}, 'Pseudomonas monteilii': {'min_genome_size': 5587078, 'max_genome_size': 6834208, 'min_N50': 42650, 'max_N50': 515129, 'min_no_of_contigs': 66, 'max_no_of_contigs': 356, 'min_GC_Content': 61.31, 'max_GC_Content': 62.49}, 'Pseudomonas paracarnis': {'min_genome_size': 5877883, 'max_genome_size': 6595781, 'min_N50': 54631, 'max_N50': 369139, 'min_no_of_contigs': 57, 'max_no_of_contigs': 258, 'min_GC_Content': 59.66, 'max_GC_Content': 60.28}, 'Pseudomonas protegens': {'min_genome_size': 6563070, 'max_genome_size': 7356575, 'min_N50': 54415, 'max_N50': 1234532, 'min_no_of_contigs': 19, 'max_no_of_contigs': 335, 'min_GC_Content': 61.99, 'max_GC_Content': 63.53}, 'Pseudomonas putida': {'min_genome_size': 5157521, 'max_genome_size': 7467685, 'min_N50': 32589, 'max_N50': 601169, 'min_no_of_contigs': 29, 'max_no_of_contigs': 462, 'min_GC_Content': 59.23, 'max_GC_Content': 63.48}, 'Pseudomonas syringae': {'min_genome_size': 5602590, 'max_genome_size': 6747342, 'min_N50': 5009, 'max_N50': 406520, 'min_no_of_contigs': 49, 'max_no_of_contigs': 2176, 'min_GC_Content': 58.02, 'max_GC_Content': 61.06}, 'Ralstonia pseudosolanacearum': {'min_genome_size': 5382473, 'max_genome_size': 6170299, 'min_N50': 34517, 'max_N50': 158232, 'min_no_of_contigs': 116, 'max_no_of_contigs': 448, 'min_GC_Content': 66.44, 'max_GC_Content': 67.15}, 'Ralstonia solanacearum': {'min_genome_size': 5020235, 'max_genome_size': 5872605, 'min_N50': 36956, 'max_N50': 199887, 'min_no_of_contigs': 96, 'max_no_of_contigs': 373, 'min_GC_Content': 66.32, 'max_GC_Content': 66.8}, 'Rhizobium leguminosarum': {'min_genome_size': 6739448, 'max_genome_size': 8799320, 'min_N50': 170918, 'max_N50': 534093, 'min_no_of_contigs': 57, 'max_no_of_contigs': 245, 'min_GC_Content': 60.47, 'max_GC_Content': 61.18}, 'Salmonella arizonae': {'min_genome_size': 4413020, 'max_genome_size': 5542871, 'min_N50': 69058, 'max_N50': 415219, 'min_no_of_contigs': 61, 'max_no_of_contigs': 201, 'min_GC_Content': 51.16, 'max_GC_Content': 51.56}, 'Salmonella bongori': {'min_genome_size': 4304811, 'max_genome_size': 4861501, 'min_N50': 33371, 'max_N50': 519529, 'min_no_of_contigs': 49, 'max_no_of_contigs': 264, 'min_GC_Content': 51.04, 'max_GC_Content': 51.47}, 'Salmonella enterica': {'min_genome_size': 4484627, 'max_genome_size': 5868736, 'min_N50': 62109, 'max_N50': 746185, 'min_no_of_contigs': 31, 'max_no_of_contigs': 191, 'min_GC_Content': 51.12, 'max_GC_Content': 52.38}, 'Serratia bockelmannii': {'min_genome_size': 4996233, 'max_genome_size': 5515077, 'min_N50': 48732, 'max_N50': 1425356, 'min_no_of_contigs': 24, 'max_no_of_contigs': 293, 'min_GC_Content': 59.0, 'max_GC_Content': 60.0}, 'Serratia liquefaciens': {'min_genome_size': 5113961, 'max_genome_size': 5991142, 'min_N50': 59370, 'max_N50': 1229681, 'min_no_of_contigs': 28, 'max_no_of_contigs': 302, 'min_GC_Content': 54.94, 'max_GC_Content': 55.69}, 'Serratia marcescens': {'min_genome_size': 4889673, 'max_genome_size': 5896859, 'min_N50': 55891, 'max_N50': 3079612, 'min_no_of_contigs': 23, 'max_no_of_contigs': 229, 'min_GC_Content': 58.47, 'max_GC_Content': 60.22}, 'Serratia nematodiphila': {'min_genome_size': 4955458, 'max_genome_size': 5372772, 'min_N50': 20049, 'max_N50': 1287443, 'min_no_of_contigs': 27, 'max_no_of_contigs': 575, 'min_GC_Content': 59.23, 'max_GC_Content': 59.83}, 'Serratia nevei': {'min_genome_size': 4932183, 'max_genome_size': 5988265, 'min_N50': 48460, 'max_N50': 683928, 'min_no_of_contigs': 35, 'max_no_of_contigs': 419, 'min_GC_Content': 58.24, 'max_GC_Content': 60.1}, 'Serratia ureilytica': {'min_genome_size': 4602415, 'max_genome_size': 5444664, 'min_N50': 59731, 'max_N50': 3155572, 'min_no_of_contigs': 22, 'max_no_of_contigs': 182, 'min_GC_Content': 59.15, 'max_GC_Content': 59.79}, 'Sinorhizobium medicae': {'min_genome_size': 6425204, 'max_genome_size': 7768883, 'min_N50': 31581, 'max_N50': 251992, 'min_no_of_contigs': 91, 'max_no_of_contigs': 484, 'min_GC_Content': 60.95, 'max_GC_Content': 61.27}, 'Sinorhizobium meliloti': {'min_genome_size': 6140999, 'max_genome_size': 7692912, 'min_N50': 34104, 'max_N50': 288888, 'min_no_of_contigs': 82, 'max_no_of_contigs': 508, 'min_GC_Content': 61.77, 'max_GC_Content': 62.4}, 'Staphylococcus argenteus': {'min_genome_size': 2656647, 'max_genome_size': 2872664, 'min_N50': 31531, 'max_N50': 1067561, 'min_no_of_contigs': 16, 'max_no_of_contigs': 240, 'min_GC_Content': 32.18, 'max_GC_Content': 32.49}, 'Staphylococcus aureus': {'min_genome_size': 2661494, 'max_genome_size': 3218685, 'min_N50': 26379, 'max_N50': 752548, 'min_no_of_contigs': 23, 'max_no_of_contigs': 272, 'min_GC_Content': 32.58, 'max_GC_Content': 33.09}, 'Staphylococcus capitis': {'min_genome_size': 2363587, 'max_genome_size': 2701315, 'min_N50': 39561, 'max_N50': 850616, 'min_no_of_contigs': 25, 'max_no_of_contigs': 145, 'min_GC_Content': 32.67, 'max_GC_Content': 33.05}, 'Staphylococcus chromogenes': {'min_genome_size': 2222330, 'max_genome_size': 2478658, 'min_N50': 76880, 'max_N50': 1261817, 'min_no_of_contigs': 16, 'max_no_of_contigs': 103, 'min_GC_Content': 36.42, 'max_GC_Content': 36.9}, 'Staphylococcus coagulans': {'min_genome_size': 2200251, 'max_genome_size': 2536387, 'min_N50': 71874, 'max_N50': 470854, 'min_no_of_contigs': 19, 'max_no_of_contigs': 116, 'min_GC_Content': 36.0, 'max_GC_Content': 36.0}, 'Staphylococcus epidermidis': {'min_genome_size': 2323375, 'max_genome_size': 2854742, 'min_N50': 11529, 'max_N50': 299959, 'min_no_of_contigs': 41, 'max_no_of_contigs': 437, 'min_GC_Content': 31.75, 'max_GC_Content': 32.42}, 'Staphylococcus equorum': {'min_genome_size': 2674851, 'max_genome_size': 2992544, 'min_N50': 244491, 'max_N50': 817977, 'min_no_of_contigs': 19, 'max_no_of_contigs': 55, 'min_GC_Content': 32.83, 'max_GC_Content': 33.23}, 'Staphylococcus haemolyticus': {'min_genome_size': 2322835, 'max_genome_size': 2699292, 'min_N50': 19869, 'max_N50': 137618, 'min_no_of_contigs': 62, 'max_no_of_contigs': 311, 'min_GC_Content': 32.51, 'max_GC_Content': 33.06}, 'Staphylococcus hominis': {'min_genome_size': 2090238, 'max_genome_size': 2532283, 'min_N50': 5570, 'max_N50': 800376, 'min_no_of_contigs': 26, 'max_no_of_contigs': 1498, 'min_GC_Content': 31.19, 'max_GC_Content': 33.44}, 'Staphylococcus lugdunensis': {'min_genome_size': 2492530, 'max_genome_size': 2813336, 'min_N50': 83790, 'max_N50': 776338, 'min_no_of_contigs': 21, 'max_no_of_contigs': 79, 'min_GC_Content': 33.59, 'max_GC_Content': 33.95}, 'Staphylococcus pseudintermedius': {'min_genome_size': 2440099, 'max_genome_size': 2895060, 'min_N50': 32142, 'max_N50': 364121, 'min_no_of_contigs': 37, 'max_no_of_contigs': 214, 'min_GC_Content': 37.19, 'max_GC_Content': 37.8}, 'Staphylococcus saprophyticus': {'min_genome_size': 2488173, 'max_genome_size': 2768078, 'min_N50': 67972, 'max_N50': 1370498, 'min_no_of_contigs': 20, 'max_no_of_contigs': 115, 'min_GC_Content': 32.83, 'max_GC_Content': 33.25}, 'Staphylococcus simulans': {'min_genome_size': 2533811, 'max_genome_size': 2871975, 'min_N50': 17392, 'max_N50': 648970, 'min_no_of_contigs': 22, 'max_no_of_contigs': 340, 'min_GC_Content': 35.67, 'max_GC_Content': 36.51}, 'Staphylococcus warneri': {'min_genome_size': 2333396, 'max_genome_size': 2780266, 'min_N50': 25902, 'max_N50': 1277193, 'min_no_of_contigs': 21, 'max_no_of_contigs': 199, 'min_GC_Content': 32.43, 'max_GC_Content': 32.84}, 'Staphylococcus xylosus': {'min_genome_size': 2731052, 'max_genome_size': 2983492, 'min_N50': 31450, 'max_N50': 637086, 'min_no_of_contigs': 19, 'max_no_of_contigs': 221, 'min_GC_Content': 32.4, 'max_GC_Content': 32.97}, 'Stenotrophomonas geniculata': {'min_genome_size': 4430698, 'max_genome_size': 5291737, 'min_N50': 31607, 'max_N50': 1168706, 'min_no_of_contigs': 17, 'max_no_of_contigs': 256, 'min_GC_Content': 65.7, 'max_GC_Content': 66.68}, 'Stenotrophomonas maltophilia': {'min_genome_size': 4120518, 'max_genome_size': 5205440, 'min_N50': 23562, 'max_N50': 611571, 'min_no_of_contigs': 26, 'max_no_of_contigs': 405, 'min_GC_Content': 65.63, 'max_GC_Content': 67.38}, 'Stenotrophomonas pavanii': {'min_genome_size': 4303805, 'max_genome_size': 4868502, 'min_N50': 36516, 'max_N50': 495784, 'min_no_of_contigs': 32, 'max_no_of_contigs': 242, 'min_GC_Content': 66.78, 'max_GC_Content': 67.5}, 'Stenotrophomonas sepilia': {'min_genome_size': 4261093, 'max_genome_size': 4744181, 'min_N50': 45183, 'max_N50': 386384, 'min_no_of_contigs': 35, 'max_no_of_contigs': 195, 'min_GC_Content': 66.0, 'max_GC_Content': 67.0}, 'Streptococcus agalactiae': {'min_genome_size': 1951859, 'max_genome_size': 2378065, 'min_N50': 36105, 'max_N50': 609839, 'min_no_of_contigs': 17, 'max_no_of_contigs': 134, 'min_GC_Content': 35.06, 'max_GC_Content': 36.02}, 'Streptococcus anginosus': {'min_genome_size': 1820579, 'max_genome_size': 2284041, 'min_N50': 70495, 'max_N50': 536512, 'min_no_of_contigs': 13, 'max_no_of_contigs': 105, 'min_GC_Content': 38.04, 'max_GC_Content': 39.21}, 'Streptococcus canis': {'min_genome_size': 1874633, 'max_genome_size': 2265274, 'min_N50': 45211, 'max_N50': 230759, 'min_no_of_contigs': 42, 'max_no_of_contigs': 144, 'min_GC_Content': 39.44, 'max_GC_Content': 39.86}, 'Streptococcus dysgalactiae': {'min_genome_size': 1961974, 'max_genome_size': 2338211, 'min_N50': 34397, 'max_N50': 122697, 'min_no_of_contigs': 66, 'max_no_of_contigs': 184, 'min_GC_Content': 39.0, 'max_GC_Content': 39.92}, 'Streptococcus equi': {'min_genome_size': 1980300, 'max_genome_size': 2284597, 'min_N50': 24312, 'max_N50': 124201, 'min_no_of_contigs': 47, 'max_no_of_contigs': 205, 'min_GC_Content': 40.95, 'max_GC_Content': 41.86}, 'Streptococcus gordonii': {'min_genome_size': 2106326, 'max_genome_size': 2322065, 'min_N50': 104257, 'max_N50': 687818, 'min_no_of_contigs': 12, 'max_no_of_contigs': 60, 'min_GC_Content': 40.18, 'max_GC_Content': 40.68}, 'Streptococcus mitis': {'min_genome_size': 1818020, 'max_genome_size': 2259249, 'min_N50': 41746, 'max_N50': 552481, 'min_no_of_contigs': 14, 'max_no_of_contigs': 166, 'min_GC_Content': 39.27, 'max_GC_Content': 41.18}, 'Streptococcus mutans': {'min_genome_size': 1929584, 'max_genome_size': 2115009, 'min_N50': 74690, 'max_N50': 676727, 'min_no_of_contigs': 13, 'max_no_of_contigs': 73, 'min_GC_Content': 36.57, 'max_GC_Content': 37.05}, 'Streptococcus oralis': {'min_genome_size': 1788944, 'max_genome_size': 2191631, 'min_N50': 54532, 'max_N50': 1386506, 'min_no_of_contigs': 8, 'max_no_of_contigs': 122, 'min_GC_Content': 39.39, 'max_GC_Content': 41.51}, 'Streptococcus parasanguinis': {'min_genome_size': 2009054, 'max_genome_size': 2286952, 'min_N50': 59675, 'max_N50': 634473, 'min_no_of_contigs': 12, 'max_no_of_contigs': 83, 'min_GC_Content': 41.3, 'max_GC_Content': 42.17}, 'Streptococcus pneumoniae': {'min_genome_size': 1966485, 'max_genome_size': 2310574, 'min_N50': 24564, 'max_N50': 269433, 'min_no_of_contigs': 28, 'max_no_of_contigs': 215, 'min_GC_Content': 39.37, 'max_GC_Content': 39.94}, 'Streptococcus pseudopneumoniae': {'min_genome_size': 1934223, 'max_genome_size': 2335726, 'min_N50': 28398, 'max_N50': 137035, 'min_no_of_contigs': 59, 'max_no_of_contigs': 258, 'min_GC_Content': 39.52, 'max_GC_Content': 39.97}, 'Streptococcus pyogenes': {'min_genome_size': 1685316, 'max_genome_size': 2067793, 'min_N50': 60758, 'max_N50': 284357, 'min_no_of_contigs': 18, 'max_no_of_contigs': 89, 'min_GC_Content': 38.08, 'max_GC_Content': 38.69}, 'Streptococcus salivarius': {'min_genome_size': 1999501, 'max_genome_size': 2442990, 'min_N50': 55166, 'max_N50': 326360, 'min_no_of_contigs': 27, 'max_no_of_contigs': 109, 'min_GC_Content': 39.31, 'max_GC_Content': 40.24}, 'Streptococcus suis': {'min_genome_size': 1896993, 'max_genome_size': 2626999, 'min_N50': 20375, 'max_N50': 222848, 'min_no_of_contigs': 30, 'max_no_of_contigs': 281, 'min_GC_Content': 39.3, 'max_GC_Content': 43.68}, 'Streptococcus uberis': {'min_genome_size': 1797581, 'max_genome_size': 2115327, 'min_N50': 40418, 'max_N50': 1092883, 'min_no_of_contigs': 11, 'max_no_of_contigs': 119, 'min_GC_Content': 36.09, 'max_GC_Content': 36.68}, 'Streptomyces albidoflavus': {'min_genome_size': 6341040, 'max_genome_size': 7738860, 'min_N50': 6719, 'max_N50': 641697, 'min_no_of_contigs': 46, 'max_no_of_contigs': 1543, 'min_GC_Content': 72.92, 'max_GC_Content': 73.55}, 'Streptomyces anthocyanicus': {'min_genome_size': 8144842, 'max_genome_size': 9076858, 'min_N50': 32859, 'max_N50': 406809, 'min_no_of_contigs': 95, 'max_no_of_contigs': 565, 'min_GC_Content': 71.95, 'max_GC_Content': 72.27}, 'Stutzerimonas stutzeri': {'min_genome_size': 4205356, 'max_genome_size': 5102876, 'min_N50': 63428, 'max_N50': 677178, 'min_no_of_contigs': 23, 'max_no_of_contigs': 610, 'min_GC_Content': 59.67, 'max_GC_Content': 64.33}, 'Taylorella equigenitalis': {'min_genome_size': 1615015, 'max_genome_size': 1739054, 'min_N50': 143341, 'max_N50': 439476, 'min_no_of_contigs': 13, 'max_no_of_contigs': 47, 'min_GC_Content': 37.29, 'max_GC_Content': 37.59}, 'Treponema pallidum': {'min_genome_size': 948626, 'max_genome_size': 1481030, 'min_N50': 3978, 'max_N50': 599000, 'min_no_of_contigs': 22, 'max_no_of_contigs': 680, 'min_GC_Content': 51.28, 'max_GC_Content': 52.9}, 'Turicibacter sanguinis': {'min_genome_size': 2890510, 'max_genome_size': 3214367, 'min_N50': 11942, 'max_N50': 150577, 'min_no_of_contigs': 69, 'max_no_of_contigs': 557, 'min_GC_Content': 34.04, 'max_GC_Content': 34.37}, 'Vibrio alginolyticus': {'min_genome_size': 4895483, 'max_genome_size': 5724939, 'min_N50': 68540, 'max_N50': 815732, 'min_no_of_contigs': 68, 'max_no_of_contigs': 220, 'min_GC_Content': 44.3, 'max_GC_Content': 44.83}, 'Vibrio anguillarum': {'min_genome_size': 3815754, 'max_genome_size': 4897690, 'min_N50': 33630, 'max_N50': 408958, 'min_no_of_contigs': 85, 'max_no_of_contigs': 340, 'min_GC_Content': 44.18, 'max_GC_Content': 44.72}, 'Vibrio cholerae': {'min_genome_size': 3848515, 'max_genome_size': 4476429, 'min_N50': 77755, 'max_N50': 555248, 'min_no_of_contigs': 62, 'max_no_of_contigs': 226, 'min_GC_Content': 47.09, 'max_GC_Content': 47.81}, 'Vibrio diabolicus': {'min_genome_size': 4984144, 'max_genome_size': 5502567, 'min_N50': 104967, 'max_N50': 883790, 'min_no_of_contigs': 47, 'max_no_of_contigs': 146, 'min_GC_Content': 44.53, 'max_GC_Content': 44.94}, 'Vibrio fluvialis': {'min_genome_size': 4439503, 'max_genome_size': 5386988, 'min_N50': 108179, 'max_N50': 791152, 'min_no_of_contigs': 36, 'max_no_of_contigs': 146, 'min_GC_Content': 49.35, 'max_GC_Content': 50.32}, 'Vibrio mediterranei': {'min_genome_size': 5708284, 'max_genome_size': 5976027, 'min_N50': 412645, 'max_N50': 548654, 'min_no_of_contigs': 49, 'max_no_of_contigs': 132, 'min_GC_Content': 43.99, 'max_GC_Content': 44.16}, 'Vibrio metschnikovii': {'min_genome_size': 3620999, 'max_genome_size': 4073105, 'min_N50': 74990, 'max_N50': 507944, 'min_no_of_contigs': 100, 'max_no_of_contigs': 458, 'min_GC_Content': 43.94, 'max_GC_Content': 44.44}, 'Vibrio parahaemolyticus': {'min_genome_size': 4942000, 'max_genome_size': 6093178, 'min_N50': 93485, 'max_N50': 908595, 'min_no_of_contigs': 47, 'max_no_of_contigs': 173, 'min_GC_Content': 44.07, 'max_GC_Content': 45.54}, 'Vibrio vulnificus': {'min_genome_size': 4754786, 'max_genome_size': 6067960, 'min_N50': 64040, 'max_N50': 621075, 'min_no_of_contigs': 70, 'max_no_of_contigs': 303, 'min_GC_Content': 45.35, 'max_GC_Content': 46.94}, 'Wolbachia pipientis': {'min_genome_size': 1121812, 'max_genome_size': 1713404, 'min_N50': 13743, 'max_N50': 33917, 'min_no_of_contigs': 100, 'max_no_of_contigs': 223, 'min_GC_Content': 33.67, 'max_GC_Content': 35.76}, 'Xanthomonas arboricola': {'min_genome_size': 4723539, 'max_genome_size': 5321042, 'min_N50': 53687, 'max_N50': 2886223, 'min_no_of_contigs': 7, 'max_no_of_contigs': 224, 'min_GC_Content': 65.19, 'max_GC_Content': 65.96}, 'Xanthomonas campestris': {'min_genome_size': 4815442, 'max_genome_size': 5289785, 'min_N50': 59658, 'max_N50': 401652, 'min_no_of_contigs': 40, 'max_no_of_contigs': 213, 'min_GC_Content': 64.85, 'max_GC_Content': 65.68}, 'Xanthomonas cissicola': {'min_genome_size': 5018629, 'max_genome_size': 5441902, 'min_N50': 57352, 'max_N50': 425167, 'min_no_of_contigs': 69, 'max_no_of_contigs': 291, 'min_GC_Content': 65.0, 'max_GC_Content': 65.0}, 'Xanthomonas euvesicatoria': {'min_genome_size': 4930726, 'max_genome_size': 5500184, 'min_N50': 52145, 'max_N50': 513159, 'min_no_of_contigs': 35, 'max_no_of_contigs': 267, 'min_GC_Content': 64.44, 'max_GC_Content': 65.04}, 'Xanthomonas hortorum': {'min_genome_size': 5066787, 'max_genome_size': 5974827, 'min_N50': 16687, 'max_N50': 143439, 'min_no_of_contigs': 121, 'max_no_of_contigs': 796, 'min_GC_Content': 63.23, 'max_GC_Content': 63.85}, 'Xanthomonas oryzae': {'min_genome_size': 4003608, 'max_genome_size': 5238555, 'min_N50': 4332, 'max_N50': 30525, 'min_no_of_contigs': 478, 'max_no_of_contigs': 1625, 'min_GC_Content': 63.12, 'max_GC_Content': 64.26}, 'Xylella fastidiosa': {'min_genome_size': 2407488, 'max_genome_size': 2896312, 'min_N50': 42939, 'max_N50': 259583, 'min_no_of_contigs': 71, 'max_no_of_contigs': 324, 'min_GC_Content': 51.46, 'max_GC_Content': 52.81}, 'Yersinia enterocolitica': {'min_genome_size': 4392258, 'max_genome_size': 5149746, 'min_N50': 34638, 'max_N50': 639450, 'min_no_of_contigs': 31, 'max_no_of_contigs': 330, 'min_GC_Content': 46.74, 'max_GC_Content': 47.45}, 'Yersinia intermedia': {'min_genome_size': 4674537, 'max_genome_size': 5378350, 'min_N50': 52366, 'max_N50': 418641, 'min_no_of_contigs': 46, 'max_no_of_contigs': 308, 'min_GC_Content': 47.31, 'max_GC_Content': 47.96}, 'Yersinia pestis': {'min_genome_size': 4402470, 'max_genome_size': 4930959, 'min_N50': 17757, 'max_N50': 151058, 'min_no_of_contigs': 115, 'max_no_of_contigs': 535, 'min_GC_Content': 47.31, 'max_GC_Content': 47.77}, 'Yersinia ruckeri': {'min_genome_size': 3585796, 'max_genome_size': 4006131, 'min_N50': 112685, 'max_N50': 322209, 'min_no_of_contigs': 36, 'max_no_of_contigs': 125, 'min_GC_Content': 47.37, 'max_GC_Content': 47.72}}
+{
+    "Achromobacter xylosoxidans": {
+        "min_genome_size": 5940074,
+        "max_genome_size": 6968810,
+        "min_N50": 24803,
+        "max_N50": 1345221,
+        "min_no_of_contigs": 13,
+        "max_no_of_contigs": 422,
+        "min_GC_Content": 67.0,
+        "max_GC_Content": 68.0
+    },
+    "Acinetobacter baumannii": {
+        "min_genome_size": 3668576,
+        "max_genome_size": 4337223,
+        "min_N50": 17467,
+        "max_N50": 466321,
+        "min_no_of_contigs": 34,
+        "max_no_of_contigs": 482,
+        "min_GC_Content": 38.76,
+        "max_GC_Content": 39.34
+    },
+    "Acinetobacter baylyi": {
+        "min_genome_size": 3273777,
+        "max_genome_size": 3869568,
+        "min_N50": 28249,
+        "max_N50": 792700,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 278,
+        "min_GC_Content": 40.14,
+        "max_GC_Content": 40.58
+    },
+    "Acinetobacter johnsonii": {
+        "min_genome_size": 3308618,
+        "max_genome_size": 3976453,
+        "min_N50": 30263,
+        "max_N50": 383592,
+        "min_no_of_contigs": 24,
+        "max_no_of_contigs": 487,
+        "min_GC_Content": 40.93,
+        "max_GC_Content": 41.57
+    },
+    "Acinetobacter nosocomialis": {
+        "min_genome_size": 3755974,
+        "max_genome_size": 4326383,
+        "min_N50": 19897,
+        "max_N50": 800793,
+        "min_no_of_contigs": 29,
+        "max_no_of_contigs": 433,
+        "min_GC_Content": 38.47,
+        "max_GC_Content": 39.06
+    },
+    "Acinetobacter pittii": {
+        "min_genome_size": 3701225,
+        "max_genome_size": 4404644,
+        "min_N50": 26358,
+        "max_N50": 983974,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 352,
+        "min_GC_Content": 38.48,
+        "max_GC_Content": 39.02
+    },
+    "Acinetobacter ursingii": {
+        "min_genome_size": 3251927,
+        "max_genome_size": 4024415,
+        "min_N50": 33433,
+        "max_N50": 281706,
+        "min_no_of_contigs": 50,
+        "max_no_of_contigs": 252,
+        "min_GC_Content": 39.72,
+        "max_GC_Content": 40.2
+    },
+    "Actinobacillus lignieresii": {
+        "min_genome_size": 2191713,
+        "max_genome_size": 2341701,
+        "min_N50": 31780,
+        "max_N50": 182092,
+        "min_no_of_contigs": 44,
+        "max_no_of_contigs": 163,
+        "min_GC_Content": 41.02,
+        "max_GC_Content": 41.24
+    },
+    "Aerococcus urinae": {
+        "min_genome_size": 1900214,
+        "max_genome_size": 2143377,
+        "min_N50": 59405,
+        "max_N50": 553859,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 109,
+        "min_GC_Content": 41.71,
+        "max_GC_Content": 42.59
+    },
+    "Aeromonas caviae": {
+        "min_genome_size": 4251238,
+        "max_genome_size": 5073768,
+        "min_N50": 23453,
+        "max_N50": 479460,
+        "min_no_of_contigs": 46,
+        "max_no_of_contigs": 664,
+        "min_GC_Content": 60.63,
+        "max_GC_Content": 62.05
+    },
+    "Aeromonas dhakensis": {
+        "min_genome_size": 4630925,
+        "max_genome_size": 4992010,
+        "min_N50": 61753,
+        "max_N50": 917070,
+        "min_no_of_contigs": 38,
+        "max_no_of_contigs": 174,
+        "min_GC_Content": 61.15,
+        "max_GC_Content": 61.97
+    },
+    "Aeromonas hydrophila": {
+        "min_genome_size": 4650965,
+        "max_genome_size": 5385745,
+        "min_N50": 27747,
+        "max_N50": 762714,
+        "min_no_of_contigs": 39,
+        "max_no_of_contigs": 494,
+        "min_GC_Content": 60.65,
+        "max_GC_Content": 61.71
+    },
+    "Aeromonas salmonicida": {
+        "min_genome_size": 4395925,
+        "max_genome_size": 5147549,
+        "min_N50": 25805,
+        "max_N50": 214792,
+        "min_no_of_contigs": 77,
+        "max_no_of_contigs": 487,
+        "min_GC_Content": 58.17,
+        "max_GC_Content": 58.9
+    },
+    "Aeromonas veronii": {
+        "min_genome_size": 4306261,
+        "max_genome_size": 5076311,
+        "min_N50": 32483,
+        "max_N50": 755722,
+        "min_no_of_contigs": 38,
+        "max_no_of_contigs": 532,
+        "min_GC_Content": 58.05,
+        "max_GC_Content": 59.08
+    },
+    "Agrobacterium fabacearum": {
+        "min_genome_size": 5409170,
+        "max_genome_size": 6446688,
+        "min_N50": 274854,
+        "max_N50": 1088500,
+        "min_no_of_contigs": 22,
+        "max_no_of_contigs": 109,
+        "min_GC_Content": 58.26,
+        "max_GC_Content": 58.63
+    },
+    "Agrobacterium pusense": {
+        "min_genome_size": 5185082,
+        "max_genome_size": 6388230,
+        "min_N50": 177806,
+        "max_N50": 1030346,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 227,
+        "min_GC_Content": 59.1,
+        "max_GC_Content": 59.3
+    },
+    "Agrobacterium tumefaciens": {
+        "min_genome_size": 4916598,
+        "max_genome_size": 6193163,
+        "min_N50": 161222,
+        "max_N50": 1106685,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 120,
+        "min_GC_Content": 59.08,
+        "max_GC_Content": 59.71
+    },
+    "Aliarcobacter butzleri": {
+        "min_genome_size": 2032910,
+        "max_genome_size": 2513129,
+        "min_N50": 27684,
+        "max_N50": 293291,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 190,
+        "min_GC_Content": 26.73,
+        "max_GC_Content": 27.23
+    },
+    "Aliivibrio fischeri": {
+        "min_genome_size": 4071768,
+        "max_genome_size": 4523733,
+        "min_N50": 8901,
+        "max_N50": 550120,
+        "min_no_of_contigs": 54,
+        "max_no_of_contigs": 797,
+        "min_GC_Content": 38.09,
+        "max_GC_Content": 38.59
+    },
+    "Alistipes onderdonkii": {
+        "min_genome_size": 3400028,
+        "max_genome_size": 3981512,
+        "min_N50": 82065,
+        "max_N50": 494013,
+        "min_no_of_contigs": 30,
+        "max_no_of_contigs": 234,
+        "min_GC_Content": 57.46,
+        "max_GC_Content": 58.53
+    },
+    "Bacillus altitudinis": {
+        "min_genome_size": 3639950,
+        "max_genome_size": 3878867,
+        "min_N50": 153327,
+        "max_N50": 979907,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 77,
+        "min_GC_Content": 41.13,
+        "max_GC_Content": 41.4
+    },
+    "Bacillus anthracis": {
+        "min_genome_size": 5132404,
+        "max_genome_size": 5820350,
+        "min_N50": 14105,
+        "max_N50": 1198333,
+        "min_no_of_contigs": 30,
+        "max_no_of_contigs": 748,
+        "min_GC_Content": 35.01,
+        "max_GC_Content": 35.38
+    },
+    "Bacillus bombysepticus": {
+        "min_genome_size": 5225569,
+        "max_genome_size": 6815419,
+        "min_N50": 16021,
+        "max_N50": 684165,
+        "min_no_of_contigs": 47,
+        "max_no_of_contigs": 2345,
+        "min_GC_Content": 34.68,
+        "max_GC_Content": 35.43
+    },
+    "Bacillus cereus": {
+        "min_genome_size": 4980500,
+        "max_genome_size": 6736795,
+        "min_N50": 10146,
+        "max_N50": 752341,
+        "min_no_of_contigs": 39,
+        "max_no_of_contigs": 1130,
+        "min_GC_Content": 34.69,
+        "max_GC_Content": 35.49
+    },
+    "Bacillus licheniformis": {
+        "min_genome_size": 4087480,
+        "max_genome_size": 4575366,
+        "min_N50": 84422,
+        "max_N50": 2162779,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 166,
+        "min_GC_Content": 45.58,
+        "max_GC_Content": 46.25
+    },
+    "Bacillus mobilis": {
+        "min_genome_size": 5285748,
+        "max_genome_size": 6018778,
+        "min_N50": 17819,
+        "max_N50": 275465,
+        "min_no_of_contigs": 75,
+        "max_no_of_contigs": 786,
+        "min_GC_Content": 35.16,
+        "max_GC_Content": 35.54
+    },
+    "Bacillus mycoides": {
+        "min_genome_size": 5215615,
+        "max_genome_size": 6231447,
+        "min_N50": 7988,
+        "max_N50": 453879,
+        "min_no_of_contigs": 53,
+        "max_no_of_contigs": 1177,
+        "min_GC_Content": 35.07,
+        "max_GC_Content": 35.74
+    },
+    "Bacillus paralicheniformis": {
+        "min_genome_size": 4261318,
+        "max_genome_size": 4542706,
+        "min_N50": 130390,
+        "max_N50": 1099388,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 146,
+        "min_GC_Content": 45.57,
+        "max_GC_Content": 45.96
+    },
+    "Bacillus paranthracis": {
+        "min_genome_size": 5165583,
+        "max_genome_size": 5956269,
+        "min_N50": 14904,
+        "max_N50": 483082,
+        "min_no_of_contigs": 53,
+        "max_no_of_contigs": 785,
+        "min_GC_Content": 35.06,
+        "max_GC_Content": 35.48
+    },
+    "Bacillus safensis": {
+        "min_genome_size": 3615194,
+        "max_genome_size": 3900033,
+        "min_N50": 175800,
+        "max_N50": 1895003,
+        "min_no_of_contigs": 17,
+        "max_no_of_contigs": 97,
+        "min_GC_Content": 41.31,
+        "max_GC_Content": 41.69
+    },
+    "Bacillus spizizenii": {
+        "min_genome_size": 3952729,
+        "max_genome_size": 4175672,
+        "min_N50": 145590,
+        "max_N50": 740380,
+        "min_no_of_contigs": 28,
+        "max_no_of_contigs": 91,
+        "min_GC_Content": 43.5,
+        "max_GC_Content": 43.89
+    },
+    "Bacillus subtilis": {
+        "min_genome_size": 3831245,
+        "max_genome_size": 4326288,
+        "min_N50": 23727,
+        "max_N50": 2231991,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 460,
+        "min_GC_Content": 43.06,
+        "max_GC_Content": 43.85
+    },
+    "Bacillus thuringiensis": {
+        "min_genome_size": 5095864,
+        "max_genome_size": 6858130,
+        "min_N50": 18788,
+        "max_N50": 592602,
+        "min_no_of_contigs": 52,
+        "max_no_of_contigs": 905,
+        "min_GC_Content": 34.57,
+        "max_GC_Content": 35.39
+    },
+    "Bacillus toyonensis": {
+        "min_genome_size": 5328416,
+        "max_genome_size": 6436422,
+        "min_N50": 19205,
+        "max_N50": 580282,
+        "min_no_of_contigs": 49,
+        "max_no_of_contigs": 717,
+        "min_GC_Content": 34.85,
+        "max_GC_Content": 35.29
+    },
+    "Bacillus velezensis": {
+        "min_genome_size": 3828109,
+        "max_genome_size": 4372452,
+        "min_N50": 145225,
+        "max_N50": 2150254,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 114,
+        "min_GC_Content": 45.64,
+        "max_GC_Content": 46.65
+    },
+    "Bacillus wiedmannii": {
+        "min_genome_size": 5261517,
+        "max_genome_size": 6120161,
+        "min_N50": 29399,
+        "max_N50": 571968,
+        "min_no_of_contigs": 46,
+        "max_no_of_contigs": 502,
+        "min_GC_Content": 34.91,
+        "max_GC_Content": 35.38
+    },
+    "Bacteroides caccae": {
+        "min_genome_size": 4589979,
+        "max_genome_size": 5746070,
+        "min_N50": 67440,
+        "max_N50": 614993,
+        "min_no_of_contigs": 32,
+        "max_no_of_contigs": 374,
+        "min_GC_Content": 41.88,
+        "max_GC_Content": 42.95
+    },
+    "Bacteroides cellulosilyticus": {
+        "min_genome_size": 6593690,
+        "max_genome_size": 7611019,
+        "min_N50": 50135,
+        "max_N50": 678982,
+        "min_no_of_contigs": 36,
+        "max_no_of_contigs": 496,
+        "min_GC_Content": 42.44,
+        "max_GC_Content": 43.28
+    },
+    "Bacteroides fragilis": {
+        "min_genome_size": 4863831,
+        "max_genome_size": 5659816,
+        "min_N50": 22988,
+        "max_N50": 904694,
+        "min_no_of_contigs": 26,
+        "max_no_of_contigs": 497,
+        "min_GC_Content": 43.05,
+        "max_GC_Content": 43.82
+    },
+    "Bacteroides ovatus": {
+        "min_genome_size": 6215549,
+        "max_genome_size": 7689366,
+        "min_N50": 26897,
+        "max_N50": 553583,
+        "min_no_of_contigs": 60,
+        "max_no_of_contigs": 553,
+        "min_GC_Content": 41.49,
+        "max_GC_Content": 42.44
+    },
+    "Bacteroides stercoris": {
+        "min_genome_size": 3474255,
+        "max_genome_size": 4477804,
+        "min_N50": 24125,
+        "max_N50": 447311,
+        "min_no_of_contigs": 45,
+        "max_no_of_contigs": 352,
+        "min_GC_Content": 45.54,
+        "max_GC_Content": 46.4
+    },
+    "Bacteroides thetaiotaomicron": {
+        "min_genome_size": 5897229,
+        "max_genome_size": 7105177,
+        "min_N50": 16744,
+        "max_N50": 629307,
+        "min_no_of_contigs": 45,
+        "max_no_of_contigs": 928,
+        "min_GC_Content": 42.51,
+        "max_GC_Content": 43.32
+    },
+    "Bacteroides uniformis": {
+        "min_genome_size": 4270102,
+        "max_genome_size": 5386162,
+        "min_N50": 25082,
+        "max_N50": 683941,
+        "min_no_of_contigs": 29,
+        "max_no_of_contigs": 463,
+        "min_GC_Content": 45.95,
+        "max_GC_Content": 46.78
+    },
+    "Bacteroides xylanisolvens": {
+        "min_genome_size": 5682890,
+        "max_genome_size": 6943807,
+        "min_N50": 16156,
+        "max_N50": 219119,
+        "min_no_of_contigs": 87,
+        "max_no_of_contigs": 975,
+        "min_GC_Content": 41.51,
+        "max_GC_Content": 42.69
+    },
+    "Bartonella krasnovii": {
+        "min_genome_size": 2113783,
+        "max_genome_size": 2204165,
+        "min_N50": 60566,
+        "max_N50": 150818,
+        "min_no_of_contigs": 120,
+        "max_no_of_contigs": 283,
+        "min_GC_Content": 38.03,
+        "max_GC_Content": 38.14
+    },
+    "Bifidobacterium adolescentis": {
+        "min_genome_size": 2055223,
+        "max_genome_size": 2436009,
+        "min_N50": 62568,
+        "max_N50": 1390410,
+        "min_no_of_contigs": 11,
+        "max_no_of_contigs": 82,
+        "min_GC_Content": 58.9,
+        "max_GC_Content": 60.11
+    },
+    "Bifidobacterium animalis": {
+        "min_genome_size": 1915351,
+        "max_genome_size": 1925681,
+        "min_N50": 77426,
+        "max_N50": 1022904,
+        "min_no_of_contigs": 12,
+        "max_no_of_contigs": 47,
+        "min_GC_Content": 60.43,
+        "max_GC_Content": 60.49
+    },
+    "Bifidobacterium bifidum": {
+        "min_genome_size": 2123327,
+        "max_genome_size": 2452480,
+        "min_N50": 66462,
+        "max_N50": 604522,
+        "min_no_of_contigs": 7,
+        "max_no_of_contigs": 66,
+        "min_GC_Content": 62.41,
+        "max_GC_Content": 62.9
+    },
+    "Bifidobacterium breve": {
+        "min_genome_size": 2201031,
+        "max_genome_size": 2567893,
+        "min_N50": 11869,
+        "max_N50": 662397,
+        "min_no_of_contigs": 7,
+        "max_no_of_contigs": 403,
+        "min_GC_Content": 58.52,
+        "max_GC_Content": 59.04
+    },
+    "Bifidobacterium dentium": {
+        "min_genome_size": 2416608,
+        "max_genome_size": 2752847,
+        "min_N50": 101721,
+        "max_N50": 435731,
+        "min_no_of_contigs": 11,
+        "max_no_of_contigs": 60,
+        "min_GC_Content": 58.17,
+        "max_GC_Content": 58.79
+    },
+    "Bifidobacterium longum": {
+        "min_genome_size": 2202002,
+        "max_genome_size": 2683288,
+        "min_N50": 50207,
+        "max_N50": 478409,
+        "min_no_of_contigs": 17,
+        "max_no_of_contigs": 161,
+        "min_GC_Content": 59.53,
+        "max_GC_Content": 60.41
+    },
+    "Bifidobacterium pseudocatenulatum": {
+        "min_genome_size": 2104196,
+        "max_genome_size": 2478286,
+        "min_N50": 58668,
+        "max_N50": 1510127,
+        "min_no_of_contigs": 12,
+        "max_no_of_contigs": 85,
+        "min_GC_Content": 56.1,
+        "max_GC_Content": 56.88
+    },
+    "Bordetella pertussis": {
+        "min_genome_size": 3775413,
+        "max_genome_size": 3909192,
+        "min_N50": 11752,
+        "max_N50": 23245,
+        "min_no_of_contigs": 269,
+        "max_no_of_contigs": 544,
+        "min_GC_Content": 67.61,
+        "max_GC_Content": 67.93
+    },
+    "Borreliella afzelii": {
+        "min_genome_size": 1229127,
+        "max_genome_size": 1441197,
+        "min_N50": 12951,
+        "max_N50": 436250,
+        "min_no_of_contigs": 113,
+        "max_no_of_contigs": 422,
+        "min_GC_Content": 27.6,
+        "max_GC_Content": 28.16
+    },
+    "Borreliella burgdorferi": {
+        "min_genome_size": 1073962,
+        "max_genome_size": 1687185,
+        "min_N50": 2766,
+        "max_N50": 909868,
+        "min_no_of_contigs": 76,
+        "max_no_of_contigs": 1021,
+        "min_GC_Content": 27.94,
+        "max_GC_Content": 32.46
+    },
+    "Borreliella garinii": {
+        "min_genome_size": 1082343,
+        "max_genome_size": 1462438,
+        "min_N50": 12341,
+        "max_N50": 692791,
+        "min_no_of_contigs": 21,
+        "max_no_of_contigs": 445,
+        "min_GC_Content": 27.58,
+        "max_GC_Content": 28.55
+    },
+    "Brachyspira hyodysenteriae": {
+        "min_genome_size": 2988879,
+        "max_genome_size": 3166779,
+        "min_N50": 11271,
+        "max_N50": 558084,
+        "min_no_of_contigs": 27,
+        "max_no_of_contigs": 454,
+        "min_GC_Content": 26.98,
+        "max_GC_Content": 27.4
+    },
+    "Bradyrhizobium diazoefficiens": {
+        "min_genome_size": 7134258,
+        "max_genome_size": 9371680,
+        "min_N50": 55670,
+        "max_N50": 524908,
+        "min_no_of_contigs": 77,
+        "max_no_of_contigs": 360,
+        "min_GC_Content": 63.87,
+        "max_GC_Content": 64.16
+    },
+    "Brucella melitensis": {
+        "min_genome_size": 3245723,
+        "max_genome_size": 3307079,
+        "min_N50": 81954,
+        "max_N50": 531416,
+        "min_no_of_contigs": 21,
+        "max_no_of_contigs": 82,
+        "min_GC_Content": 57.21,
+        "max_GC_Content": 57.28
+    },
+    "Burkholderia cenocepacia": {
+        "min_genome_size": 6747375,
+        "max_genome_size": 8700706,
+        "min_N50": 23145,
+        "max_N50": 423288,
+        "min_no_of_contigs": 68,
+        "max_no_of_contigs": 726,
+        "min_GC_Content": 66.37,
+        "max_GC_Content": 67.54
+    },
+    "Burkholderia cepacia": {
+        "min_genome_size": 7096207,
+        "max_genome_size": 9452113,
+        "min_N50": 79025,
+        "max_N50": 664591,
+        "min_no_of_contigs": 51,
+        "max_no_of_contigs": 352,
+        "min_GC_Content": 65.85,
+        "max_GC_Content": 67.03
+    },
+    "Burkholderia contaminans": {
+        "min_genome_size": 6227235,
+        "max_genome_size": 10048221,
+        "min_N50": 21739,
+        "max_N50": 634028,
+        "min_no_of_contigs": 51,
+        "max_no_of_contigs": 1134,
+        "min_GC_Content": 65.72,
+        "max_GC_Content": 72.16
+    },
+    "Burkholderia dolosa": {
+        "min_genome_size": 6261372,
+        "max_genome_size": 6360166,
+        "min_N50": 19457,
+        "max_N50": 225676,
+        "min_no_of_contigs": 77,
+        "max_no_of_contigs": 725,
+        "min_GC_Content": 67.0,
+        "max_GC_Content": 67.11
+    },
+    "Burkholderia gladioli": {
+        "min_genome_size": 7699784,
+        "max_genome_size": 8850157,
+        "min_N50": 60007,
+        "max_N50": 449616,
+        "min_no_of_contigs": 64,
+        "max_no_of_contigs": 340,
+        "min_GC_Content": 67.69,
+        "max_GC_Content": 68.31
+    },
+    "Burkholderia mallei": {
+        "min_genome_size": 6926513,
+        "max_genome_size": 7423264,
+        "min_N50": 24618,
+        "max_N50": 253025,
+        "min_no_of_contigs": 123,
+        "max_no_of_contigs": 681,
+        "min_GC_Content": 67.87,
+        "max_GC_Content": 68.33
+    },
+    "Burkholderia multivorans": {
+        "min_genome_size": 6062466,
+        "max_genome_size": 6977953,
+        "min_N50": 22976,
+        "max_N50": 637148,
+        "min_no_of_contigs": 42,
+        "max_no_of_contigs": 703,
+        "min_GC_Content": 66.66,
+        "max_GC_Content": 67.47
+    },
+    "Burkholderia orbicola": {
+        "min_genome_size": 6428367,
+        "max_genome_size": 8076212,
+        "min_N50": 8123,
+        "max_N50": 1040227,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 1833,
+        "min_GC_Content": 66.48,
+        "max_GC_Content": 67.18
+    },
+    "Burkholderia seminalis": {
+        "min_genome_size": 7248384,
+        "max_genome_size": 8350677,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 66.81,
+        "max_GC_Content": 67.62
+    },
+    "Burkholderia stagnalis": {
+        "min_genome_size": 7451221,
+        "max_genome_size": 8179586,
+        "min_N50": 129110,
+        "max_N50": 356798,
+        "min_no_of_contigs": 87,
+        "max_no_of_contigs": 231,
+        "min_GC_Content": 67.22,
+        "max_GC_Content": 67.76
+    },
+    "Burkholderia ubonensis": {
+        "min_genome_size": 6384246,
+        "max_genome_size": 8218962,
+        "min_N50": 97462,
+        "max_N50": 382841,
+        "min_no_of_contigs": 67,
+        "max_no_of_contigs": 326,
+        "min_GC_Content": 66.78,
+        "max_GC_Content": 67.55
+    },
+    "Burkholderia vietnamiensis": {
+        "min_genome_size": 6145780,
+        "max_genome_size": 7658204,
+        "min_N50": 37628,
+        "max_N50": 291900,
+        "min_no_of_contigs": 82,
+        "max_no_of_contigs": 397,
+        "min_GC_Content": 66.29,
+        "max_GC_Content": 67.44
+    },
+    "Campylobacter coli": {
+        "min_genome_size": 1634809,
+        "max_genome_size": 1929905,
+        "min_N50": 25126,
+        "max_N50": 284734,
+        "min_no_of_contigs": 14,
+        "max_no_of_contigs": 173,
+        "min_GC_Content": 30.9,
+        "max_GC_Content": 31.48
+    },
+    "Campylobacter fetus": {
+        "min_genome_size": 1724608,
+        "max_genome_size": 1977362,
+        "min_N50": 67441,
+        "max_N50": 319095,
+        "min_no_of_contigs": 26,
+        "max_no_of_contigs": 115,
+        "min_GC_Content": 33.0,
+        "max_GC_Content": 33.28
+    },
+    "Campylobacter hyointestinalis": {
+        "min_genome_size": 1688797,
+        "max_genome_size": 1907711,
+        "min_N50": 49154,
+        "max_N50": 553976,
+        "min_no_of_contigs": 10,
+        "max_no_of_contigs": 88,
+        "min_GC_Content": 33.78,
+        "max_GC_Content": 34.44
+    },
+    "Campylobacter jejuni": {
+        "min_genome_size": 1586586,
+        "max_genome_size": 1860443,
+        "min_N50": 22860,
+        "max_N50": 334623,
+        "min_no_of_contigs": 13,
+        "max_no_of_contigs": 158,
+        "min_GC_Content": 30.06,
+        "max_GC_Content": 30.58
+    },
+    "Campylobacter lari": {
+        "min_genome_size": 1435378,
+        "max_genome_size": 1670449,
+        "min_N50": 32829,
+        "max_N50": 281319,
+        "min_no_of_contigs": 15,
+        "max_no_of_contigs": 127,
+        "min_GC_Content": 29.26,
+        "max_GC_Content": 29.91
+    },
+    "Campylobacter upsaliensis": {
+        "min_genome_size": 1561731,
+        "max_genome_size": 1817981,
+        "min_N50": 27365,
+        "max_N50": 193339,
+        "min_no_of_contigs": 32,
+        "max_no_of_contigs": 165,
+        "min_GC_Content": 34.24,
+        "max_GC_Content": 35.1
+    },
+    "Candida auris": {
+        "min_genome_size": 12235627,
+        "max_genome_size": 12351525,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 45.1,
+        "max_GC_Content": 45.3
+    },
+    "Caulobacter vibrioides": {
+        "min_genome_size": 3848628,
+        "max_genome_size": 4037364,
+        "min_N50": 4992,
+        "max_N50": 308472,
+        "min_no_of_contigs": 43,
+        "max_no_of_contigs": 1307,
+        "min_GC_Content": 66.97,
+        "max_GC_Content": 67.23
+    },
+    "Chlamydia trachomatis": {
+        "min_genome_size": 910369,
+        "max_genome_size": 1274317,
+        "min_N50": 2262,
+        "max_N50": 1048728,
+        "min_no_of_contigs": 2,
+        "max_no_of_contigs": 706,
+        "min_GC_Content": 41.12,
+        "max_GC_Content": 42.14
+    },
+    "Chlamydophila pecorum": {
+        "min_genome_size": 1099417,
+        "max_genome_size": 5268094,
+        "min_N50": 350,
+        "max_N50": 765468,
+        "min_no_of_contigs": 4,
+        "max_no_of_contigs": 12561,
+        "min_GC_Content": 40.98,
+        "max_GC_Content": 46.53
+    },
+    "Citrobacter amalonaticus": {
+        "min_genome_size": 4686337,
+        "max_genome_size": 5587159,
+        "min_N50": 46036,
+        "max_N50": 874115,
+        "min_no_of_contigs": 27,
+        "max_no_of_contigs": 266,
+        "min_GC_Content": 52.9,
+        "max_GC_Content": 53.88
+    },
+    "Citrobacter braakii": {
+        "min_genome_size": 4773195,
+        "max_genome_size": 5835378,
+        "min_N50": 77051,
+        "max_N50": 985053,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 271,
+        "min_GC_Content": 51.63,
+        "max_GC_Content": 52.25
+    },
+    "Citrobacter farmeri": {
+        "min_genome_size": 4928830,
+        "max_genome_size": 5952117,
+        "min_N50": 54012,
+        "max_N50": 909898,
+        "min_no_of_contigs": 24,
+        "max_no_of_contigs": 285,
+        "min_GC_Content": 52.5,
+        "max_GC_Content": 53.4
+    },
+    "Citrobacter freundii": {
+        "min_genome_size": 4837824,
+        "max_genome_size": 5879248,
+        "min_N50": 58759,
+        "max_N50": 703368,
+        "min_no_of_contigs": 36,
+        "max_no_of_contigs": 318,
+        "min_GC_Content": 51.31,
+        "max_GC_Content": 52.05
+    },
+    "Citrobacter koseri": {
+        "min_genome_size": 4538100,
+        "max_genome_size": 5082715,
+        "min_N50": 80892,
+        "max_N50": 2510799,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 172,
+        "min_GC_Content": 53.4,
+        "max_GC_Content": 53.97
+    },
+    "Citrobacter portucalensis": {
+        "min_genome_size": 4728905,
+        "max_genome_size": 5731006,
+        "min_N50": 47318,
+        "max_N50": 1023872,
+        "min_no_of_contigs": 28,
+        "max_no_of_contigs": 354,
+        "min_GC_Content": 51.46,
+        "max_GC_Content": 52.12
+    },
+    "Citrobacter rodentium": {
+        "min_genome_size": 162339,
+        "max_genome_size": 5288689,
+        "min_N50": 1413,
+        "max_N50": 95041,
+        "min_no_of_contigs": 117,
+        "max_no_of_contigs": 308,
+        "min_GC_Content": 51.16,
+        "max_GC_Content": 54.69
+    },
+    "Citrobacter sedlakii": {
+        "min_genome_size": 4501994,
+        "max_genome_size": 5159942,
+        "min_N50": 196643,
+        "max_N50": 1037991,
+        "min_no_of_contigs": 29,
+        "max_no_of_contigs": 148,
+        "min_GC_Content": 54.18,
+        "max_GC_Content": 54.85
+    },
+    "Citrobacter werkmanii": {
+        "min_genome_size": 4780223,
+        "max_genome_size": 5947324,
+        "min_N50": 51252,
+        "max_N50": 2712586,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 293,
+        "min_GC_Content": 51.71,
+        "max_GC_Content": 52.29
+    },
+    "Citrobacter youngae": {
+        "min_genome_size": 4608361,
+        "max_genome_size": 5642118,
+        "min_N50": 121275,
+        "max_N50": 1115083,
+        "min_no_of_contigs": 30,
+        "max_no_of_contigs": 220,
+        "min_GC_Content": 51.39,
+        "max_GC_Content": 51.96
+    },
+    "Clostridium beijerinckii": {
+        "min_genome_size": 5646981,
+        "max_genome_size": 6233549,
+        "min_N50": 89352,
+        "max_N50": 219643,
+        "min_no_of_contigs": 114,
+        "max_no_of_contigs": 279,
+        "min_GC_Content": 29.6,
+        "max_GC_Content": 29.76
+    },
+    "Clostridium botulinum": {
+        "min_genome_size": 3117188,
+        "max_genome_size": 4342791,
+        "min_N50": 12214,
+        "max_N50": 956674,
+        "min_no_of_contigs": 32,
+        "max_no_of_contigs": 569,
+        "min_GC_Content": 27.0,
+        "max_GC_Content": 28.26
+    },
+    "Clostridium cagae": {
+        "min_genome_size": 3688085,
+        "max_genome_size": 4048570,
+        "min_N50": 26482,
+        "max_N50": 869079,
+        "min_no_of_contigs": 30,
+        "max_no_of_contigs": 299,
+        "min_GC_Content": 27.11,
+        "max_GC_Content": 27.34
+    },
+    "Clostridium difficile": {
+        "min_genome_size": 3865992,
+        "max_genome_size": 4509705,
+        "min_N50": 8833,
+        "max_N50": 645841,
+        "min_no_of_contigs": 49,
+        "max_no_of_contigs": 794,
+        "min_GC_Content": 28.16,
+        "max_GC_Content": 29.24
+    },
+    "Clostridium tetani": {
+        "min_genome_size": 2738177,
+        "max_genome_size": 2923260,
+        "min_N50": 95470,
+        "max_N50": 557250,
+        "min_no_of_contigs": 28,
+        "max_no_of_contigs": 103,
+        "min_GC_Content": 28.46,
+        "max_GC_Content": 28.61
+    },
+    "Corynebacterium diphtheriae": {
+        "min_genome_size": 2335870,
+        "max_genome_size": 2571896,
+        "min_N50": 62263,
+        "max_N50": 403087,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 101,
+        "min_GC_Content": 53.36,
+        "max_GC_Content": 53.75
+    },
+    "Corynebacterium glutamicum": {
+        "min_genome_size": 3232218,
+        "max_genome_size": 3324646,
+        "min_N50": 102770,
+        "max_N50": 285134,
+        "min_no_of_contigs": 45,
+        "max_no_of_contigs": 98,
+        "min_GC_Content": 53.78,
+        "max_GC_Content": 53.93
+    },
+    "Corynebacterium jeikeium": {
+        "min_genome_size": 2235697,
+        "max_genome_size": 2454600,
+        "min_N50": 77230,
+        "max_N50": 310877,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 121,
+        "min_GC_Content": 61.52,
+        "max_GC_Content": 62.62
+    },
+    "Corynebacterium pseudodiphtheriticum": {
+        "min_genome_size": 2260395,
+        "max_genome_size": 2457958,
+        "min_N50": 105987,
+        "max_N50": 571545,
+        "min_no_of_contigs": 13,
+        "max_no_of_contigs": 74,
+        "min_GC_Content": 55.13,
+        "max_GC_Content": 55.42
+    },
+    "Corynebacterium striatum": {
+        "min_genome_size": 2692769,
+        "max_genome_size": 3076865,
+        "min_N50": 51037,
+        "max_N50": 191204,
+        "min_no_of_contigs": 89,
+        "max_no_of_contigs": 288,
+        "min_GC_Content": 58.98,
+        "max_GC_Content": 59.4
+    },
+    "Corynebacterium ulcerans": {
+        "min_genome_size": 2422103,
+        "max_genome_size": 2640733,
+        "min_N50": 139324,
+        "max_N50": 578404,
+        "min_no_of_contigs": 8,
+        "max_no_of_contigs": 39,
+        "min_GC_Content": 53.23,
+        "max_GC_Content": 53.46
+    },
+    "Cronobacter sakazakii": {
+        "min_genome_size": 4316152,
+        "max_genome_size": 4774702,
+        "min_N50": 92869,
+        "max_N50": 1054426,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 134,
+        "min_GC_Content": 56.46,
+        "max_GC_Content": 57.12
+    },
+    "Cronobacter turicensis": {
+        "min_genome_size": 4392205,
+        "max_genome_size": 4808084,
+        "min_N50": 194054,
+        "max_N50": 1126184,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 102,
+        "min_GC_Content": 56.96,
+        "max_GC_Content": 57.66
+    },
+    "Curtobacterium flaccumfaciens": {
+        "min_genome_size": 3602651,
+        "max_genome_size": 3914587,
+        "min_N50": 38500,
+        "max_N50": 479035,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 202,
+        "min_GC_Content": 70.8,
+        "max_GC_Content": 71.16
+    },
+    "Cutibacterium acnes": {
+        "min_genome_size": 2454010,
+        "max_genome_size": 2661991,
+        "min_N50": 21437,
+        "max_N50": 893449,
+        "min_no_of_contigs": 8,
+        "max_no_of_contigs": 221,
+        "min_GC_Content": 59.96,
+        "max_GC_Content": 60.24
+    },
+    "Deinococcus radiodurans": {
+        "min_genome_size": 3201471,
+        "max_genome_size": 3266530,
+        "min_N50": 14399,
+        "max_N50": 155709,
+        "min_no_of_contigs": 61,
+        "max_no_of_contigs": 465,
+        "min_GC_Content": 66.48,
+        "max_GC_Content": 66.89
+    },
+    "Dichelobacter nodosus": {
+        "min_genome_size": 1296774,
+        "max_genome_size": 1458286,
+        "min_N50": 61387,
+        "max_N50": 381367,
+        "min_no_of_contigs": 9,
+        "max_no_of_contigs": 94,
+        "min_GC_Content": 43.83,
+        "max_GC_Content": 44.41
+    },
+    "Elizabethkingia anophelis": {
+        "min_genome_size": 3810508,
+        "max_genome_size": 4337048,
+        "min_N50": 116729,
+        "max_N50": 1035131,
+        "min_no_of_contigs": 9,
+        "max_no_of_contigs": 103,
+        "min_GC_Content": 35.36,
+        "max_GC_Content": 35.8
+    },
+    "Enterobacter asburiae": {
+        "min_genome_size": 4462998,
+        "max_genome_size": 5492938,
+        "min_N50": 29468,
+        "max_N50": 921198,
+        "min_no_of_contigs": 29,
+        "max_no_of_contigs": 467,
+        "min_GC_Content": 54.92,
+        "max_GC_Content": 56.21
+    },
+    "Enterobacter bugandensis": {
+        "min_genome_size": 4573892,
+        "max_genome_size": 5283799,
+        "min_N50": 87201,
+        "max_N50": 1097233,
+        "min_no_of_contigs": 29,
+        "max_no_of_contigs": 177,
+        "min_GC_Content": 55.27,
+        "max_GC_Content": 56.22
+    },
+    "Enterobacter cloacae": {
+        "min_genome_size": 4661475,
+        "max_genome_size": 5656737,
+        "min_N50": 41879,
+        "max_N50": 867550,
+        "min_no_of_contigs": 32,
+        "max_no_of_contigs": 413,
+        "min_GC_Content": 52.93,
+        "max_GC_Content": 56.11
+    },
+    "Enterobacter hormaechei": {
+        "min_genome_size": 4514585,
+        "max_genome_size": 5408157,
+        "min_N50": 63383,
+        "max_N50": 810072,
+        "min_no_of_contigs": 35,
+        "max_no_of_contigs": 268,
+        "min_GC_Content": 54.49,
+        "max_GC_Content": 55.73
+    },
+    "Enterobacter kobei": {
+        "min_genome_size": 4613286,
+        "max_genome_size": 5629980,
+        "min_N50": 60678,
+        "max_N50": 696323,
+        "min_no_of_contigs": 33,
+        "max_no_of_contigs": 328,
+        "min_GC_Content": 54.19,
+        "max_GC_Content": 55.17
+    },
+    "Enterobacter ludwigii": {
+        "min_genome_size": 4607170,
+        "max_genome_size": 5630562,
+        "min_N50": 80645,
+        "max_N50": 1034793,
+        "min_no_of_contigs": 22,
+        "max_no_of_contigs": 195,
+        "min_GC_Content": 53.92,
+        "max_GC_Content": 54.79
+    },
+    "Enterobacter roggenkampii": {
+        "min_genome_size": 4578846,
+        "max_genome_size": 5622800,
+        "min_N50": 46556,
+        "max_N50": 896984,
+        "min_no_of_contigs": 33,
+        "max_no_of_contigs": 589,
+        "min_GC_Content": 55.07,
+        "max_GC_Content": 56.23
+    },
+    "Enterococcus avium": {
+        "min_genome_size": 4124917,
+        "max_genome_size": 4610300,
+        "min_N50": 24812,
+        "max_N50": 115100,
+        "min_no_of_contigs": 111,
+        "max_no_of_contigs": 384,
+        "min_GC_Content": 38.79,
+        "max_GC_Content": 39.26
+    },
+    "Enterococcus casseliflavus": {
+        "min_genome_size": 3319918,
+        "max_genome_size": 3864310,
+        "min_N50": 82899,
+        "max_N50": 560527,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 142,
+        "min_GC_Content": 42.06,
+        "max_GC_Content": 42.92
+    },
+    "Enterococcus cecorum": {
+        "min_genome_size": 2040076,
+        "max_genome_size": 2698504,
+        "min_N50": 49287,
+        "max_N50": 193542,
+        "min_no_of_contigs": 38,
+        "max_no_of_contigs": 201,
+        "min_GC_Content": 36.04,
+        "max_GC_Content": 36.76
+    },
+    "Enterococcus durans": {
+        "min_genome_size": 2761296,
+        "max_genome_size": 3213123,
+        "min_N50": 34940,
+        "max_N50": 238141,
+        "min_no_of_contigs": 40,
+        "max_no_of_contigs": 222,
+        "min_GC_Content": 37.3,
+        "max_GC_Content": 37.94
+    },
+    "Enterococcus faecalis": {
+        "min_genome_size": 2665754,
+        "max_genome_size": 3397997,
+        "min_N50": 46741,
+        "max_N50": 647748,
+        "min_no_of_contigs": 17,
+        "max_no_of_contigs": 222,
+        "min_GC_Content": 36.89,
+        "max_GC_Content": 37.72
+    },
+    "Enterococcus faecium": {
+        "min_genome_size": 2623374,
+        "max_genome_size": 3240994,
+        "min_N50": 16650,
+        "max_N50": 80105,
+        "min_no_of_contigs": 130,
+        "max_no_of_contigs": 558,
+        "min_GC_Content": 37.39,
+        "max_GC_Content": 38.1
+    },
+    "Enterococcus gallinarum": {
+        "min_genome_size": 3119722,
+        "max_genome_size": 3672084,
+        "min_N50": 76605,
+        "max_N50": 350344,
+        "min_no_of_contigs": 30,
+        "max_no_of_contigs": 174,
+        "min_GC_Content": 40.12,
+        "max_GC_Content": 40.7
+    },
+    "Enterococcus hirae": {
+        "min_genome_size": 2669709,
+        "max_genome_size": 3208400,
+        "min_N50": 38235,
+        "max_N50": 327593,
+        "min_no_of_contigs": 28,
+        "max_no_of_contigs": 206,
+        "min_GC_Content": 36.38,
+        "max_GC_Content": 37.01
+    },
+    "Enterococcus lactis": {
+        "min_genome_size": 2529543,
+        "max_genome_size": 2995674,
+        "min_N50": 36092,
+        "max_N50": 295591,
+        "min_no_of_contigs": 27,
+        "max_no_of_contigs": 225,
+        "min_GC_Content": 37.9,
+        "max_GC_Content": 38.41
+    },
+    "Erwinia amylovora": {
+        "min_genome_size": 3717225,
+        "max_genome_size": 3898380,
+        "min_N50": 45694,
+        "max_N50": 435581,
+        "min_no_of_contigs": 51,
+        "max_no_of_contigs": 191,
+        "min_GC_Content": 53.34,
+        "max_GC_Content": 53.62
+    },
+    "Erysipelothrix rhusiopathiae": {
+        "min_genome_size": 1705754,
+        "max_genome_size": 1890246,
+        "min_N50": 22371,
+        "max_N50": 312343,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 138,
+        "min_GC_Content": 36.15,
+        "max_GC_Content": 36.5
+    },
+    "Escherichia albertii": {
+        "min_genome_size": 4398962,
+        "max_genome_size": 5366622,
+        "min_N50": 27734,
+        "max_N50": 434168,
+        "min_no_of_contigs": 53,
+        "max_no_of_contigs": 466,
+        "min_GC_Content": 49.31,
+        "max_GC_Content": 49.96
+    },
+    "Escherichia coli": {
+        "min_genome_size": 4336718,
+        "max_genome_size": 5763951,
+        "min_N50": 20142,
+        "max_N50": 382277,
+        "min_no_of_contigs": 65,
+        "max_no_of_contigs": 694,
+        "min_GC_Content": 50.19,
+        "max_GC_Content": 50.96
+    },
+    "Escherichia fergusonii": {
+        "min_genome_size": 4373190,
+        "max_genome_size": 5166035,
+        "min_N50": 70614,
+        "max_N50": 1107179,
+        "min_no_of_contigs": 27,
+        "max_no_of_contigs": 209,
+        "min_GC_Content": 49.5,
+        "max_GC_Content": 50.09
+    },
+    "Escherichia marmotae": {
+        "min_genome_size": 4417982,
+        "max_genome_size": 5271279,
+        "min_N50": 54658,
+        "max_N50": 275413,
+        "min_no_of_contigs": 59,
+        "max_no_of_contigs": 457,
+        "min_GC_Content": 50.18,
+        "max_GC_Content": 50.56
+    },
+    "Escherichia ruysiae": {
+        "min_genome_size": 4356180,
+        "max_genome_size": 5006054,
+        "min_N50": 60377,
+        "max_N50": 899627,
+        "min_no_of_contigs": 33,
+        "max_no_of_contigs": 236,
+        "min_GC_Content": 50.37,
+        "max_GC_Content": 50.85
+    },
+    "Flavobacterium psychrophilum": {
+        "min_genome_size": 2663284,
+        "max_genome_size": 3035978,
+        "min_N50": 44031,
+        "max_N50": 191717,
+        "min_no_of_contigs": 83,
+        "max_no_of_contigs": 463,
+        "min_GC_Content": 32.32,
+        "max_GC_Content": 32.58
+    },
+    "Francisella tularensis": {
+        "min_genome_size": 1764800,
+        "max_genome_size": 1813799,
+        "min_N50": 19827,
+        "max_N50": 38285,
+        "min_no_of_contigs": 69,
+        "max_no_of_contigs": 173,
+        "min_GC_Content": 32.16,
+        "max_GC_Content": 32.35
+    },
+    "Fusobacterium necrophorum": {
+        "min_genome_size": 1977765,
+        "max_genome_size": 2392857,
+        "min_N50": 38849,
+        "max_N50": 303660,
+        "min_no_of_contigs": 34,
+        "max_no_of_contigs": 146,
+        "min_GC_Content": 34.52,
+        "max_GC_Content": 35.46
+    },
+    "Glaesserella parasuis": {
+        "min_genome_size": 2142506,
+        "max_genome_size": 2423096,
+        "min_N50": 16775,
+        "max_N50": 94769,
+        "min_no_of_contigs": 136,
+        "max_no_of_contigs": 332,
+        "min_GC_Content": 39.5,
+        "max_GC_Content": 40.11
+    },
+    "Haemophilus haemolyticus": {
+        "min_genome_size": 1804755,
+        "max_genome_size": 2048873,
+        "min_N50": 46476,
+        "max_N50": 377348,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 100,
+        "min_GC_Content": 38.29,
+        "max_GC_Content": 38.73
+    },
+    "Haemophilus influenzae": {
+        "min_genome_size": 1760726,
+        "max_genome_size": 1998377,
+        "min_N50": 28977,
+        "max_N50": 1150462,
+        "min_no_of_contigs": 15,
+        "max_no_of_contigs": 135,
+        "min_GC_Content": 37.77,
+        "max_GC_Content": 38.3
+    },
+    "Haemophilus parainfluenzae": {
+        "min_genome_size": 1855648,
+        "max_genome_size": 2212501,
+        "min_N50": 11078,
+        "max_N50": 441357,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 323,
+        "min_GC_Content": 39.11,
+        "max_GC_Content": 39.82
+    },
+    "Hafnia paralvei": {
+        "min_genome_size": 4470800,
+        "max_genome_size": 5057347,
+        "min_N50": 79747,
+        "max_N50": 946699,
+        "min_no_of_contigs": 37,
+        "max_no_of_contigs": 170,
+        "min_GC_Content": 47.88,
+        "max_GC_Content": 48.33
+    },
+    "Helicobacter pylori": {
+        "min_genome_size": 1540147,
+        "max_genome_size": 1694090,
+        "min_N50": 32063,
+        "max_N50": 191816,
+        "min_no_of_contigs": 22,
+        "max_no_of_contigs": 129,
+        "min_GC_Content": 38.54,
+        "max_GC_Content": 39.27
+    },
+    "Hungateiclostridium thermocellum": {
+        "min_genome_size": 3465450,
+        "max_genome_size": 3502833,
+        "min_N50": 77896,
+        "max_N50": 127100,
+        "min_no_of_contigs": 117,
+        "max_no_of_contigs": 208,
+        "min_GC_Content": 39.07,
+        "max_GC_Content": 39.11
+    },
+    "Janthinobacterium lividum": {
+        "min_genome_size": 6042276,
+        "max_genome_size": 6671668,
+        "min_N50": 14631,
+        "max_N50": 808657,
+        "min_no_of_contigs": 51,
+        "max_no_of_contigs": 850,
+        "min_GC_Content": 62.36,
+        "max_GC_Content": 62.84
+    },
+    "Klebsiella aerogenes": {
+        "min_genome_size": 4959692,
+        "max_genome_size": 5621348,
+        "min_N50": 75806,
+        "max_N50": 1121152,
+        "min_no_of_contigs": 31,
+        "max_no_of_contigs": 193,
+        "min_GC_Content": 54.48,
+        "max_GC_Content": 55.25
+    },
+    "Klebsiella africana": {
+        "min_genome_size": 5053592,
+        "max_genome_size": 5595140,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 56.22,
+        "max_GC_Content": 57.75
+    },
+    "Klebsiella grimontii": {
+        "min_genome_size": 5615528,
+        "max_genome_size": 6667329,
+        "min_N50": 93142,
+        "max_N50": 939543,
+        "min_no_of_contigs": 39,
+        "max_no_of_contigs": 311,
+        "min_GC_Content": 54.77,
+        "max_GC_Content": 56.11
+    },
+    "Klebsiella huaxiensis": {
+        "min_genome_size": 6145586,
+        "max_genome_size": 6401769,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 53.19,
+        "max_GC_Content": 53.41
+    },
+    "Klebsiella michiganensis": {
+        "min_genome_size": 5760427,
+        "max_genome_size": 6908508,
+        "min_N50": 55640,
+        "max_N50": 437722,
+        "min_no_of_contigs": 61,
+        "max_no_of_contigs": 379,
+        "min_GC_Content": 55.04,
+        "max_GC_Content": 56.14
+    },
+    "Klebsiella ornithinolytica": {
+        "min_genome_size": 5337988,
+        "max_genome_size": 6434434,
+        "min_N50": 83479,
+        "max_N50": 871877,
+        "min_no_of_contigs": 42,
+        "max_no_of_contigs": 342,
+        "min_GC_Content": 54.68,
+        "max_GC_Content": 55.99
+    },
+    "Klebsiella oxytoca": {
+        "min_genome_size": 5667910,
+        "max_genome_size": 6600977,
+        "min_N50": 68938,
+        "max_N50": 615483,
+        "min_no_of_contigs": 53,
+        "max_no_of_contigs": 346,
+        "min_GC_Content": 54.46,
+        "max_GC_Content": 55.33
+    },
+    "Klebsiella pasteurii": {
+        "min_genome_size": 5779946,
+        "max_genome_size": 6531622,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 54.93,
+        "max_GC_Content": 55.58
+    },
+    "Klebsiella planticola": {
+        "min_genome_size": 5410078,
+        "max_genome_size": 6398726,
+        "min_N50": 77025,
+        "max_N50": 578420,
+        "min_no_of_contigs": 48,
+        "max_no_of_contigs": 388,
+        "min_GC_Content": 54.92,
+        "max_GC_Content": 55.93
+    },
+    "Klebsiella pneumoniae": {
+        "min_genome_size": 5158682,
+        "max_genome_size": 6015463,
+        "min_N50": 54993,
+        "max_N50": 587004,
+        "min_no_of_contigs": 53,
+        "max_no_of_contigs": 389,
+        "min_GC_Content": 56.49,
+        "max_GC_Content": 57.63
+    },
+    "Klebsiella quasipneumoniae": {
+        "min_genome_size": 4210819,
+        "max_genome_size": 6772312,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 56.84,
+        "max_GC_Content": 58.56
+    },
+    "Klebsiella quasivariicola": {
+        "min_genome_size": 5707793,
+        "max_genome_size": 5838432,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 56.68,
+        "max_GC_Content": 56.7
+    },
+    "Klebsiella spallanzanii": {
+        "min_genome_size": 5900034,
+        "max_genome_size": 6390426,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 53.19,
+        "max_GC_Content": 53.58
+    },
+    "Klebsiella variicola": {
+        "min_genome_size": 5318697,
+        "max_genome_size": 6256044,
+        "min_N50": 38058,
+        "max_N50": 1022420,
+        "min_no_of_contigs": 17,
+        "max_no_of_contigs": 304,
+        "min_GC_Content": 56.41,
+        "max_GC_Content": 57.68
+    },
+    "Lacticaseibacillus paracasei": {
+        "min_genome_size": 2651786,
+        "max_genome_size": 3291178,
+        "min_N50": 29074,
+        "max_N50": 266150,
+        "min_no_of_contigs": 49,
+        "max_no_of_contigs": 314,
+        "min_GC_Content": 46.06,
+        "max_GC_Content": 46.57
+    },
+    "Lacticaseibacillus rhamnosus": {
+        "min_genome_size": 2822344,
+        "max_genome_size": 3105539,
+        "min_N50": 50957,
+        "max_N50": 722224,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 186,
+        "min_GC_Content": 46.52,
+        "max_GC_Content": 46.75
+    },
+    "Lactiplantibacillus plantarum": {
+        "min_genome_size": 2946694,
+        "max_genome_size": 3571925,
+        "min_N50": 53901,
+        "max_N50": 549233,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 261,
+        "min_GC_Content": 44.03,
+        "max_GC_Content": 45.16
+    },
+    "Lactobacillus acidophilus": {
+        "min_genome_size": 1954687,
+        "max_genome_size": 2015769,
+        "min_N50": 115477,
+        "max_N50": 237694,
+        "min_no_of_contigs": 20,
+        "max_no_of_contigs": 55,
+        "min_GC_Content": 34.57,
+        "max_GC_Content": 34.62
+    },
+    "Lactobacillus crispatus": {
+        "min_genome_size": 1918463,
+        "max_genome_size": 2606401,
+        "min_N50": 10161,
+        "max_N50": 127136,
+        "min_no_of_contigs": 50,
+        "max_no_of_contigs": 442,
+        "min_GC_Content": 36.37,
+        "max_GC_Content": 37.06
+    },
+    "Lactobacillus gasseri": {
+        "min_genome_size": 1790681,
+        "max_genome_size": 2081017,
+        "min_N50": 44614,
+        "max_N50": 1035067,
+        "min_no_of_contigs": 13,
+        "max_no_of_contigs": 140,
+        "min_GC_Content": 34.66,
+        "max_GC_Content": 35.21
+    },
+    "Lactobacillus johnsonii": {
+        "min_genome_size": 1715385,
+        "max_genome_size": 1988377,
+        "min_N50": 31976,
+        "max_N50": 133632,
+        "min_no_of_contigs": 38,
+        "max_no_of_contigs": 158,
+        "min_GC_Content": 34.29,
+        "max_GC_Content": 34.66
+    },
+    "Lactobacillus paragasseri": {
+        "min_genome_size": 1862133,
+        "max_genome_size": 2130660,
+        "min_N50": 41666,
+        "max_N50": 1131703,
+        "min_no_of_contigs": 11,
+        "max_no_of_contigs": 152,
+        "min_GC_Content": 34.56,
+        "max_GC_Content": 35.06
+    },
+    "Lactococcus lactis": {
+        "min_genome_size": 2243617,
+        "max_genome_size": 2818029,
+        "min_N50": 15207,
+        "max_N50": 432517,
+        "min_no_of_contigs": 21,
+        "max_no_of_contigs": 273,
+        "min_GC_Content": 34.67,
+        "max_GC_Content": 35.39
+    },
+    "Legionella longbeachae": {
+        "min_genome_size": 3977100,
+        "max_genome_size": 4275913,
+        "min_N50": 32482,
+        "max_N50": 263288,
+        "min_no_of_contigs": 46,
+        "max_no_of_contigs": 252,
+        "min_GC_Content": 37.04,
+        "max_GC_Content": 37.19
+    },
+    "Legionella pneumophila": {
+        "min_genome_size": 3226277,
+        "max_genome_size": 3776490,
+        "min_N50": 48078,
+        "max_N50": 638021,
+        "min_no_of_contigs": 20,
+        "max_no_of_contigs": 226,
+        "min_GC_Content": 38.12,
+        "max_GC_Content": 38.39
+    },
+    "Leptospira borgpetersenii": {
+        "min_genome_size": 3700183,
+        "max_genome_size": 3980659,
+        "min_N50": 32382,
+        "max_N50": 184020,
+        "min_no_of_contigs": 98,
+        "max_no_of_contigs": 393,
+        "min_GC_Content": 40.01,
+        "max_GC_Content": 40.31
+    },
+    "Leptospira interrogans": {
+        "min_genome_size": 4376215,
+        "max_genome_size": 5152613,
+        "min_N50": 11071,
+        "max_N50": 202494,
+        "min_no_of_contigs": 108,
+        "max_no_of_contigs": 843,
+        "min_GC_Content": 34.91,
+        "max_GC_Content": 35.39
+    },
+    "Ligilactobacillus salivarius": {
+        "min_genome_size": 1806912,
+        "max_genome_size": 2206283,
+        "min_N50": 16760,
+        "max_N50": 343344,
+        "min_no_of_contigs": 31,
+        "max_no_of_contigs": 251,
+        "min_GC_Content": 32.46,
+        "max_GC_Content": 33.12
+    },
+    "Limosilactobacillus fermentum": {
+        "min_genome_size": 1882336,
+        "max_genome_size": 2208256,
+        "min_N50": 25934,
+        "max_N50": 76056,
+        "min_no_of_contigs": 113,
+        "max_no_of_contigs": 354,
+        "min_GC_Content": 51.08,
+        "max_GC_Content": 52.34
+    },
+    "Limosilactobacillus mucosae": {
+        "min_genome_size": 1883073,
+        "max_genome_size": 2318063,
+        "min_N50": 70877,
+        "max_N50": 299166,
+        "min_no_of_contigs": 32,
+        "max_no_of_contigs": 106,
+        "min_GC_Content": 46.28,
+        "max_GC_Content": 46.91
+    },
+    "Limosilactobacillus reuteri": {
+        "min_genome_size": 1816608,
+        "max_genome_size": 2342170,
+        "min_N50": 15954,
+        "max_N50": 121411,
+        "min_no_of_contigs": 55,
+        "max_no_of_contigs": 373,
+        "min_GC_Content": 38.28,
+        "max_GC_Content": 38.91
+    },
+    "Listeria grayi": {
+        "min_genome_size": 2577124,
+        "max_genome_size": 2860271,
+        "min_N50": 144956,
+        "max_N50": 683667,
+        "min_no_of_contigs": 22,
+        "max_no_of_contigs": 88,
+        "min_GC_Content": 41.22,
+        "max_GC_Content": 41.68
+    },
+    "Listeria innocua": {
+        "min_genome_size": 2763297,
+        "max_genome_size": 3055016,
+        "min_N50": 48989,
+        "max_N50": 1502044,
+        "min_no_of_contigs": 12,
+        "max_no_of_contigs": 178,
+        "min_GC_Content": 37.2,
+        "max_GC_Content": 37.5
+    },
+    "Listeria monocytogenes": {
+        "min_genome_size": 2840561,
+        "max_genome_size": 3157801,
+        "min_N50": 66708,
+        "max_N50": 1502497,
+        "min_no_of_contigs": 14,
+        "max_no_of_contigs": 111,
+        "min_GC_Content": 37.71,
+        "max_GC_Content": 38.08
+    },
+    "Listeria seeligeri": {
+        "min_genome_size": 2766272,
+        "max_genome_size": 3031776,
+        "min_N50": 91164,
+        "max_N50": 567245,
+        "min_no_of_contigs": 20,
+        "max_no_of_contigs": 96,
+        "min_GC_Content": 37.12,
+        "max_GC_Content": 37.36
+    },
+    "Listeria welshimeri": {
+        "min_genome_size": 2692469,
+        "max_genome_size": 2953271,
+        "min_N50": 79093,
+        "max_N50": 1520615,
+        "min_no_of_contigs": 16,
+        "max_no_of_contigs": 108,
+        "min_GC_Content": 36.07,
+        "max_GC_Content": 36.38
+    },
+    "Mammaliicoccus sciuri": {
+        "min_genome_size": 2571994,
+        "max_genome_size": 3038680,
+        "min_N50": 52189,
+        "max_N50": 675428,
+        "min_no_of_contigs": 21,
+        "max_no_of_contigs": 319,
+        "min_GC_Content": 32.28,
+        "max_GC_Content": 32.66
+    },
+    "Mannheimia haemolytica": {
+        "min_genome_size": 2448855,
+        "max_genome_size": 2709163,
+        "min_N50": 26385,
+        "max_N50": 134276,
+        "min_no_of_contigs": 79,
+        "max_no_of_contigs": 224,
+        "min_GC_Content": 40.91,
+        "max_GC_Content": 41.18
+    },
+    "Mesomycoplasma hyopneumoniae": {
+        "min_genome_size": 869792,
+        "max_genome_size": 938947,
+        "min_N50": 40415,
+        "max_N50": 218354,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 90,
+        "min_GC_Content": 28.4,
+        "max_GC_Content": 28.68
+    },
+    "Micrococcus luteus": {
+        "min_genome_size": 2382742,
+        "max_genome_size": 2750189,
+        "min_N50": 9356,
+        "max_N50": 250341,
+        "min_no_of_contigs": 49,
+        "max_no_of_contigs": 520,
+        "min_GC_Content": 72.51,
+        "max_GC_Content": 73.32
+    },
+    "Moraxella bovoculi": {
+        "min_genome_size": 1998151,
+        "max_genome_size": 2203161,
+        "min_N50": 55292,
+        "max_N50": 535492,
+        "min_no_of_contigs": 13,
+        "max_no_of_contigs": 107,
+        "min_GC_Content": 45.11,
+        "max_GC_Content": 45.73
+    },
+    "Moraxella catarrhalis": {
+        "min_genome_size": 1820407,
+        "max_genome_size": 2067070,
+        "min_N50": 134537,
+        "max_N50": 478767,
+        "min_no_of_contigs": 8,
+        "max_no_of_contigs": 66,
+        "min_GC_Content": 41.23,
+        "max_GC_Content": 41.73
+    },
+    "Morganella morganii": {
+        "min_genome_size": 3687104,
+        "max_genome_size": 4450705,
+        "min_N50": 44379,
+        "max_N50": 1210981,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 238,
+        "min_GC_Content": 50.1,
+        "max_GC_Content": 51.31
+    },
+    "Mycobacterium abscessus": {
+        "min_genome_size": 4740423,
+        "max_genome_size": 5597820,
+        "min_N50": 74486,
+        "max_N50": 2574473,
+        "min_no_of_contigs": 7,
+        "max_no_of_contigs": 174,
+        "min_GC_Content": 63.91,
+        "max_GC_Content": 64.31
+    },
+    "Mycobacterium avium": {
+        "min_genome_size": 4734387,
+        "max_genome_size": 5899412,
+        "min_N50": 14770,
+        "max_N50": 269647,
+        "min_no_of_contigs": 73,
+        "max_no_of_contigs": 615,
+        "min_GC_Content": 68.55,
+        "max_GC_Content": 69.4
+    },
+    "Mycobacterium chelonae": {
+        "min_genome_size": 4922095,
+        "max_genome_size": 5800641,
+        "min_N50": 80843,
+        "max_N50": 1246668,
+        "min_no_of_contigs": 12,
+        "max_no_of_contigs": 171,
+        "min_GC_Content": 63.71,
+        "max_GC_Content": 64.19
+    },
+    "Mycobacterium intracellulare": {
+        "min_genome_size": 5287766,
+        "max_genome_size": 7229137,
+        "min_N50": 35281,
+        "max_N50": 612048,
+        "min_no_of_contigs": 33,
+        "max_no_of_contigs": 421,
+        "min_GC_Content": 67.14,
+        "max_GC_Content": 68.22
+    },
+    "Mycobacterium kansasii": {
+        "min_genome_size": 6322176,
+        "max_genome_size": 6828910,
+        "min_N50": 29616,
+        "max_N50": 250476,
+        "min_no_of_contigs": 142,
+        "max_no_of_contigs": 484,
+        "min_GC_Content": 65.95,
+        "max_GC_Content": 66.24
+    },
+    "Mycobacterium marinum": {
+        "min_genome_size": 5255952,
+        "max_genome_size": 6313940,
+        "min_N50": 22763,
+        "max_N50": 76969,
+        "min_no_of_contigs": 275,
+        "max_no_of_contigs": 619,
+        "min_GC_Content": 65.49,
+        "max_GC_Content": 65.72
+    },
+    "Mycobacterium smegmatis": {
+        "min_genome_size": 6828351,
+        "max_genome_size": 6918842,
+        "min_N50": 61810,
+        "max_N50": 184049,
+        "min_no_of_contigs": 112,
+        "max_no_of_contigs": 283,
+        "min_GC_Content": 67.28,
+        "max_GC_Content": 67.46
+    },
+    "Mycobacterium tuberculosis": {
+        "min_genome_size": 4274215,
+        "max_genome_size": 4424190,
+        "min_N50": 34259,
+        "max_N50": 179520,
+        "min_no_of_contigs": 81,
+        "max_no_of_contigs": 314,
+        "min_GC_Content": 65.33,
+        "max_GC_Content": 65.65
+    },
+    "Mycobacterium xenopi": {
+        "min_genome_size": 4761398,
+        "max_genome_size": 4761682,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 65.9,
+        "max_GC_Content": 65.9
+    },
+    "Mycoplasmoides pneumoniae": {
+        "min_genome_size": 769993,
+        "max_genome_size": 832190,
+        "min_N50": 30998,
+        "max_N50": 466258,
+        "min_no_of_contigs": 11,
+        "max_no_of_contigs": 91,
+        "min_GC_Content": 39.62,
+        "max_GC_Content": 40.55
+    },
+    "Mycoplasmopsis bovis": {
+        "min_genome_size": 895313,
+        "max_genome_size": 1037306,
+        "min_N50": 8652,
+        "max_N50": 36799,
+        "min_no_of_contigs": 102,
+        "max_no_of_contigs": 269,
+        "min_GC_Content": 29.23,
+        "max_GC_Content": 29.63
+    },
+    "Neisseria bergeri": {
+        "min_genome_size": 1998511,
+        "max_genome_size": 2241652,
+        "min_N50": 97518,
+        "max_N50": 526586,
+        "min_no_of_contigs": 10,
+        "max_no_of_contigs": 91,
+        "min_GC_Content": 51.61,
+        "max_GC_Content": 52.2
+    },
+    "Neisseria flavescens": {
+        "min_genome_size": 2151221,
+        "max_genome_size": 2416431,
+        "min_N50": 48345,
+        "max_N50": 337619,
+        "min_no_of_contigs": 24,
+        "max_no_of_contigs": 122,
+        "min_GC_Content": 48.8,
+        "max_GC_Content": 49.43
+    },
+    "Neisseria gonorrhoeae": {
+        "min_genome_size": 2078440,
+        "max_genome_size": 2220814,
+        "min_N50": 28250,
+        "max_N50": 88815,
+        "min_no_of_contigs": 100,
+        "max_no_of_contigs": 224,
+        "min_GC_Content": 52.28,
+        "max_GC_Content": 52.74
+    },
+    "Neisseria lactamica": {
+        "min_genome_size": 2094635,
+        "max_genome_size": 2273431,
+        "min_N50": 59612,
+        "max_N50": 328892,
+        "min_no_of_contigs": 29,
+        "max_no_of_contigs": 113,
+        "min_GC_Content": 51.94,
+        "max_GC_Content": 52.53
+    },
+    "Neisseria meningitidis": {
+        "min_genome_size": 2033458,
+        "max_genome_size": 2250575,
+        "min_N50": 18777,
+        "max_N50": 78040,
+        "min_no_of_contigs": 101,
+        "max_no_of_contigs": 306,
+        "min_GC_Content": 51.29,
+        "max_GC_Content": 52.14
+    },
+    "Neisseria perflava": {
+        "min_genome_size": 2153110,
+        "max_genome_size": 2427741,
+        "min_N50": 137838,
+        "max_N50": 546829,
+        "min_no_of_contigs": 16,
+        "max_no_of_contigs": 68,
+        "min_GC_Content": 48.72,
+        "max_GC_Content": 49.31
+    },
+    "Neisseria polysaccharea": {
+        "min_genome_size": 1977390,
+        "max_genome_size": 2183716,
+        "min_N50": 76958,
+        "max_N50": 306142,
+        "min_no_of_contigs": 20,
+        "max_no_of_contigs": 74,
+        "min_GC_Content": 51.52,
+        "max_GC_Content": 52.35
+    },
+    "Oenococcus oeni": {
+        "min_genome_size": 1740923,
+        "max_genome_size": 1888579,
+        "min_N50": 86448,
+        "max_N50": 241946,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 60,
+        "min_GC_Content": 37.71,
+        "max_GC_Content": 38.06
+    },
+    "Orientia tsutsugamushi": {
+        "min_genome_size": 138385,
+        "max_genome_size": 2595980,
+        "min_N50": 616,
+        "max_N50": 18812,
+        "min_no_of_contigs": 212,
+        "max_no_of_contigs": 3331,
+        "min_GC_Content": 29.78,
+        "max_GC_Content": 44.28
+    },
+    "Ornithobacterium rhinotracheale": {
+        "min_genome_size": 2265171,
+        "max_genome_size": 2403961,
+        "min_N50": 29598,
+        "max_N50": 151866,
+        "min_no_of_contigs": 61,
+        "max_no_of_contigs": 204,
+        "min_GC_Content": 37.22,
+        "max_GC_Content": 37.79
+    },
+    "Paenibacillus larvae": {
+        "min_genome_size": 3681623,
+        "max_genome_size": 4438347,
+        "min_N50": 21844,
+        "max_N50": 84597,
+        "min_no_of_contigs": 179,
+        "max_no_of_contigs": 795,
+        "min_GC_Content": 43.95,
+        "max_GC_Content": 44.82
+    },
+    "Parabacteroides distasonis": {
+        "min_genome_size": 4736473,
+        "max_genome_size": 5602424,
+        "min_N50": 28266,
+        "max_N50": 617720,
+        "min_no_of_contigs": 34,
+        "max_no_of_contigs": 408,
+        "min_GC_Content": 44.77,
+        "max_GC_Content": 45.42
+    },
+    "Parabacteroides goldsteinii": {
+        "min_genome_size": 6364510,
+        "max_genome_size": 7541106,
+        "min_N50": 35912,
+        "max_N50": 378465,
+        "min_no_of_contigs": 61,
+        "max_no_of_contigs": 605,
+        "min_GC_Content": 43.19,
+        "max_GC_Content": 43.79
+    },
+    "Parabacteroides merdae": {
+        "min_genome_size": 4267789,
+        "max_genome_size": 5295682,
+        "min_N50": 42904,
+        "max_N50": 576946,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 311,
+        "min_GC_Content": 44.92,
+        "max_GC_Content": 45.8
+    },
+    "Pasteurella multocida": {
+        "min_genome_size": 2194845,
+        "max_genome_size": 2494689,
+        "min_N50": 26027,
+        "max_N50": 574698,
+        "min_no_of_contigs": 16,
+        "max_no_of_contigs": 171,
+        "min_GC_Content": 40.13,
+        "max_GC_Content": 40.53
+    },
+    "Pectobacterium brasiliense": {
+        "min_genome_size": 4646903,
+        "max_genome_size": 5108429,
+        "min_N50": 131382,
+        "max_N50": 1055264,
+        "min_no_of_contigs": 32,
+        "max_no_of_contigs": 128,
+        "min_GC_Content": 51.14,
+        "max_GC_Content": 52.23
+    },
+    "Pediococcus acidilactici": {
+        "min_genome_size": 1807238,
+        "max_genome_size": 2159651,
+        "min_N50": 125967,
+        "max_N50": 496610,
+        "min_no_of_contigs": 11,
+        "max_no_of_contigs": 57,
+        "min_GC_Content": 41.76,
+        "max_GC_Content": 42.37
+    },
+    "Pediococcus pentosaceus": {
+        "min_genome_size": 1708652,
+        "max_genome_size": 1953491,
+        "min_N50": 209985,
+        "max_N50": 468256,
+        "min_no_of_contigs": 11,
+        "max_no_of_contigs": 47,
+        "min_GC_Content": 37.0,
+        "max_GC_Content": 37.32
+    },
+    "Phocaeicola dorei": {
+        "min_genome_size": 4908082,
+        "max_genome_size": 6009754,
+        "min_N50": 30026,
+        "max_N50": 458662,
+        "min_no_of_contigs": 39,
+        "max_no_of_contigs": 506,
+        "min_GC_Content": 41.43,
+        "max_GC_Content": 42.35
+    },
+    "Phocaeicola vulgatus": {
+        "min_genome_size": 4570738,
+        "max_genome_size": 5779186,
+        "min_N50": 30885,
+        "max_N50": 222972,
+        "min_no_of_contigs": 78,
+        "max_no_of_contigs": 581,
+        "min_GC_Content": 41.81,
+        "max_GC_Content": 42.86
+    },
+    "Priestia megaterium": {
+        "min_genome_size": 5053487,
+        "max_genome_size": 6136796,
+        "min_N50": 182791,
+        "max_N50": 2127714,
+        "min_no_of_contigs": 33,
+        "max_no_of_contigs": 197,
+        "min_GC_Content": 37.38,
+        "max_GC_Content": 38.1
+    },
+    "Proteus mirabilis": {
+        "min_genome_size": 3729326,
+        "max_genome_size": 4325876,
+        "min_N50": 27843,
+        "max_N50": 520075,
+        "min_no_of_contigs": 39,
+        "max_no_of_contigs": 323,
+        "min_GC_Content": 38.38,
+        "max_GC_Content": 39.45
+    },
+    "Providencia rettgeri": {
+        "min_genome_size": 4165914,
+        "max_genome_size": 5088432,
+        "min_N50": 14870,
+        "max_N50": 732549,
+        "min_no_of_contigs": 37,
+        "max_no_of_contigs": 598,
+        "min_GC_Content": 40.0,
+        "max_GC_Content": 41.09
+    },
+    "Providencia stuartii": {
+        "min_genome_size": 4148828,
+        "max_genome_size": 4739403,
+        "min_N50": 21813,
+        "max_N50": 533148,
+        "min_no_of_contigs": 54,
+        "max_no_of_contigs": 452,
+        "min_GC_Content": 41.17,
+        "max_GC_Content": 41.98
+    },
+    "Pseudoalteromonas nigrifaciens": {
+        "min_genome_size": 3872287,
+        "max_genome_size": 3877189,
+        "min_N50": 413476,
+        "max_N50": 616042,
+        "min_no_of_contigs": 35,
+        "max_no_of_contigs": 65,
+        "min_GC_Content": 39.97,
+        "max_GC_Content": 39.98
+    },
+    "Pseudomonas aeruginosa": {
+        "min_genome_size": 6089817,
+        "max_genome_size": 7322886,
+        "min_N50": 34504,
+        "max_N50": 771178,
+        "min_no_of_contigs": 43,
+        "max_no_of_contigs": 494,
+        "min_GC_Content": 65.51,
+        "max_GC_Content": 66.63
+    },
+    "Pseudomonas alloputida": {
+        "min_genome_size": 5699045,
+        "max_genome_size": 6714418,
+        "min_N50": 52426,
+        "max_N50": 314560,
+        "min_no_of_contigs": 100,
+        "max_no_of_contigs": 328,
+        "min_GC_Content": 61.1,
+        "max_GC_Content": 62.01
+    },
+    "Pseudomonas asiatica": {
+        "min_genome_size": 5672727,
+        "max_genome_size": 6697239,
+        "min_N50": 37571,
+        "max_N50": 429286,
+        "min_no_of_contigs": 70,
+        "max_no_of_contigs": 348,
+        "min_GC_Content": 62.07,
+        "max_GC_Content": 62.95
+    },
+    "Pseudomonas avellanae": {
+        "min_genome_size": 5741036,
+        "max_genome_size": 6507806,
+        "min_N50": 27331,
+        "max_N50": 187757,
+        "min_no_of_contigs": 169,
+        "max_no_of_contigs": 515,
+        "min_GC_Content": 58.25,
+        "max_GC_Content": 58.89
+    },
+    "Pseudomonas fluorescens": {
+        "min_genome_size": 5502517,
+        "max_genome_size": 7478726,
+        "min_N50": 44051,
+        "max_N50": 548626,
+        "min_no_of_contigs": 48,
+        "max_no_of_contigs": 321,
+        "min_GC_Content": 58.83,
+        "max_GC_Content": 63.46
+    },
+    "Pseudomonas fulva": {
+        "min_genome_size": 4714068,
+        "max_genome_size": 5360274,
+        "min_N50": 122022,
+        "max_N50": 395105,
+        "min_no_of_contigs": 53,
+        "max_no_of_contigs": 201,
+        "min_GC_Content": 61.22,
+        "max_GC_Content": 61.98
+    },
+    "Pseudomonas glycinae": {
+        "min_genome_size": 6393889,
+        "max_genome_size": 6422280,
+        "min_N50": 133753,
+        "max_N50": 543970,
+        "min_no_of_contigs": 53,
+        "max_no_of_contigs": 151,
+        "min_GC_Content": 60.54,
+        "max_GC_Content": 60.58
+    },
+    "Pseudomonas juntendi": {
+        "min_genome_size": 5318923,
+        "max_genome_size": 6183319,
+        "min_N50": 45432,
+        "max_N50": 164030,
+        "min_no_of_contigs": 132,
+        "max_no_of_contigs": 352,
+        "min_GC_Content": 61.85,
+        "max_GC_Content": 62.64
+    },
+    "Pseudomonas marginalis": {
+        "min_genome_size": 6665208,
+        "max_genome_size": 7123707,
+        "min_N50": 34593,
+        "max_N50": 386843,
+        "min_no_of_contigs": 52,
+        "max_no_of_contigs": 345,
+        "min_GC_Content": 60.08,
+        "max_GC_Content": 60.56
+    },
+    "Pseudomonas monteilii": {
+        "min_genome_size": 5587077,
+        "max_genome_size": 6834208,
+        "min_N50": 42650,
+        "max_N50": 515128,
+        "min_no_of_contigs": 66,
+        "max_no_of_contigs": 355,
+        "min_GC_Content": 61.31,
+        "max_GC_Content": 62.37
+    },
+    "Pseudomonas paracarnis": {
+        "min_genome_size": 5877883,
+        "max_genome_size": 6595781,
+        "min_N50": 54631,
+        "max_N50": 369139,
+        "min_no_of_contigs": 57,
+        "max_no_of_contigs": 258,
+        "min_GC_Content": 59.66,
+        "max_GC_Content": 60.28
+    },
+    "Pseudomonas protegens": {
+        "min_genome_size": 6563070,
+        "max_genome_size": 7356574,
+        "min_N50": 54414,
+        "max_N50": 1234532,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 335,
+        "min_GC_Content": 62.14,
+        "max_GC_Content": 63.53
+    },
+    "Pseudomonas putida": {
+        "min_genome_size": 5157521,
+        "max_genome_size": 7069270,
+        "min_N50": 32589,
+        "max_N50": 601169,
+        "min_no_of_contigs": 29,
+        "max_no_of_contigs": 462,
+        "min_GC_Content": 59.97,
+        "max_GC_Content": 63.48
+    },
+    "Pseudomonas syringae": {
+        "min_genome_size": 5810414,
+        "max_genome_size": 6361497,
+        "min_N50": 5009,
+        "max_N50": 406520,
+        "min_no_of_contigs": 48,
+        "max_no_of_contigs": 2175,
+        "min_GC_Content": 58.44,
+        "max_GC_Content": 61.06
+    },
+    "Ralstonia pseudosolanacearum": {
+        "min_genome_size": 5382472,
+        "max_genome_size": 6170299,
+        "min_N50": 34516,
+        "max_N50": 158231,
+        "min_no_of_contigs": 115,
+        "max_no_of_contigs": 447,
+        "min_GC_Content": 66.44,
+        "max_GC_Content": 67.15
+    },
+    "Ralstonia solanacearum": {
+        "min_genome_size": 5020235,
+        "max_genome_size": 5716866,
+        "min_N50": 36955,
+        "max_N50": 199886,
+        "min_no_of_contigs": 96,
+        "max_no_of_contigs": 372,
+        "min_GC_Content": 66.35,
+        "max_GC_Content": 66.8
+    },
+    "Renibacterium salmoninarum": {
+        "min_genome_size": 3060596,
+        "max_genome_size": 3061454,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 56.26,
+        "max_GC_Content": 56.26
+    },
+    "Rhizobium leguminosarum": {
+        "min_genome_size": 6739448,
+        "max_genome_size": 7991791,
+        "min_N50": 170917,
+        "max_N50": 534092,
+        "min_no_of_contigs": 57,
+        "max_no_of_contigs": 244,
+        "min_GC_Content": 60.51,
+        "max_GC_Content": 60.97
+    },
+    "Salmonella arizonae": {
+        "min_genome_size": 4413019,
+        "max_genome_size": 4803895,
+        "min_N50": 69058,
+        "max_N50": 415218,
+        "min_no_of_contigs": 61,
+        "max_no_of_contigs": 201,
+        "min_GC_Content": 51.17,
+        "max_GC_Content": 51.56
+    },
+    "Salmonella bongori": {
+        "min_genome_size": 4304810,
+        "max_genome_size": 4861501,
+        "min_N50": 33371,
+        "max_N50": 519529,
+        "min_no_of_contigs": 48,
+        "max_no_of_contigs": 263,
+        "min_GC_Content": 51.04,
+        "max_GC_Content": 51.47
+    },
+    "Salmonella enterica": {
+        "min_genome_size": 4513905,
+        "max_genome_size": 5161887,
+        "min_N50": 62108,
+        "max_N50": 746184,
+        "min_no_of_contigs": 31,
+        "max_no_of_contigs": 191,
+        "min_GC_Content": 51.84,
+        "max_GC_Content": 52.34
+    },
+    "Serratia bockelmannii": {
+        "min_genome_size": 4996232,
+        "max_genome_size": 5515076,
+        "min_N50": 48731,
+        "max_N50": 1425356,
+        "min_no_of_contigs": 24,
+        "max_no_of_contigs": 293,
+        "min_GC_Content": 58.72,
+        "max_GC_Content": 59.69
+    },
+    "Serratia liquefaciens": {
+        "min_genome_size": 5113961,
+        "max_genome_size": 5677117,
+        "min_N50": 59370,
+        "max_N50": 1229680,
+        "min_no_of_contigs": 27,
+        "max_no_of_contigs": 302,
+        "min_GC_Content": 54.94,
+        "max_GC_Content": 55.69
+    },
+    "Serratia marcescens": {
+        "min_genome_size": 4889673,
+        "max_genome_size": 5557941,
+        "min_N50": 55890,
+        "max_N50": 3079611,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 228,
+        "min_GC_Content": 59.28,
+        "max_GC_Content": 60.22
+    },
+    "Serratia nematodiphila": {
+        "min_genome_size": 4955458,
+        "max_genome_size": 5372772,
+        "min_N50": 20049,
+        "max_N50": 1287443,
+        "min_no_of_contigs": 27,
+        "max_no_of_contigs": 575,
+        "min_GC_Content": 59.23,
+        "max_GC_Content": 59.83
+    },
+    "Serratia nevei": {
+        "min_genome_size": 4932183,
+        "max_genome_size": 5988264,
+        "min_N50": 48460,
+        "max_N50": 683928,
+        "min_no_of_contigs": 35,
+        "max_no_of_contigs": 419,
+        "min_GC_Content": 58.24,
+        "max_GC_Content": 60.1
+    },
+    "Serratia sarumannii": {
+        "min_genome_size": 4988969,
+        "max_genome_size": 5418735,
+        "min_N50": 0,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 0,
+        "min_GC_Content": 59.6,
+        "max_GC_Content": 60.14
+    },
+    "Serratia ureilytica": {
+        "min_genome_size": 4988430,
+        "max_genome_size": 5423805,
+        "min_N50": 59730,
+        "max_N50": 3155572,
+        "min_no_of_contigs": 21,
+        "max_no_of_contigs": 181,
+        "min_GC_Content": 59.15,
+        "max_GC_Content": 59.79
+    },
+    "Sinorhizobium medicae": {
+        "min_genome_size": 6425204,
+        "max_genome_size": 7109957,
+        "min_N50": 31580,
+        "max_N50": 251991,
+        "min_no_of_contigs": 91,
+        "max_no_of_contigs": 484,
+        "min_GC_Content": 60.97,
+        "max_GC_Content": 61.27
+    },
+    "Sinorhizobium meliloti": {
+        "min_genome_size": 6450652,
+        "max_genome_size": 7529695,
+        "min_N50": 34104,
+        "max_N50": 288887,
+        "min_no_of_contigs": 82,
+        "max_no_of_contigs": 507,
+        "min_GC_Content": 61.77,
+        "max_GC_Content": 62.28
+    },
+    "Staphylococcus argenteus": {
+        "min_genome_size": 2656647,
+        "max_genome_size": 2868489,
+        "min_N50": 31530,
+        "max_N50": 1067561,
+        "min_no_of_contigs": 16,
+        "max_no_of_contigs": 239,
+        "min_GC_Content": 32.18,
+        "max_GC_Content": 32.38
+    },
+    "Staphylococcus aureus": {
+        "min_genome_size": 2661494,
+        "max_genome_size": 3005982,
+        "min_N50": 26378,
+        "max_N50": 752547,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 272,
+        "min_GC_Content": 32.58,
+        "max_GC_Content": 32.9
+    },
+    "Staphylococcus capitis": {
+        "min_genome_size": 2384139,
+        "max_genome_size": 2638026,
+        "min_N50": 39560,
+        "max_N50": 850616,
+        "min_no_of_contigs": 25,
+        "max_no_of_contigs": 145,
+        "min_GC_Content": 32.67,
+        "max_GC_Content": 32.92
+    },
+    "Staphylococcus chromogenes": {
+        "min_genome_size": 2222329,
+        "max_genome_size": 2419439,
+        "min_N50": 76880,
+        "max_N50": 1261817,
+        "min_no_of_contigs": 15,
+        "max_no_of_contigs": 102,
+        "min_GC_Content": 36.42,
+        "max_GC_Content": 36.85
+    },
+    "Staphylococcus coagulans": {
+        "min_genome_size": 2200250,
+        "max_genome_size": 2536387,
+        "min_N50": 71873,
+        "max_N50": 470853,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 116,
+        "min_GC_Content": 35.69,
+        "max_GC_Content": 35.89
+    },
+    "Staphylococcus epidermidis": {
+        "min_genome_size": 2366665,
+        "max_genome_size": 2784329,
+        "min_N50": 11528,
+        "max_N50": 299959,
+        "min_no_of_contigs": 40,
+        "max_no_of_contigs": 436,
+        "min_GC_Content": 31.75,
+        "max_GC_Content": 32.42
+    },
+    "Staphylococcus equorum": {
+        "min_genome_size": 2674851,
+        "max_genome_size": 2919299,
+        "min_N50": 244490,
+        "max_N50": 817977,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 54,
+        "min_GC_Content": 32.83,
+        "max_GC_Content": 33.13
+    },
+    "Staphylococcus haemolyticus": {
+        "min_genome_size": 2349429,
+        "max_genome_size": 2671649,
+        "min_N50": 19868,
+        "max_N50": 137618,
+        "min_no_of_contigs": 62,
+        "max_no_of_contigs": 310,
+        "min_GC_Content": 32.51,
+        "max_GC_Content": 32.86
+    },
+    "Staphylococcus hominis": {
+        "min_genome_size": 2090237,
+        "max_genome_size": 2532283,
+        "min_N50": 5570,
+        "max_N50": 800376,
+        "min_no_of_contigs": 26,
+        "max_no_of_contigs": 1497,
+        "min_GC_Content": 31.19,
+        "max_GC_Content": 33.44
+    },
+    "Staphylococcus lugdunensis": {
+        "min_genome_size": 2492530,
+        "max_genome_size": 2683989,
+        "min_N50": 83789,
+        "max_N50": 776337,
+        "min_no_of_contigs": 20,
+        "max_no_of_contigs": 78,
+        "min_GC_Content": 33.59,
+        "max_GC_Content": 33.82
+    },
+    "Staphylococcus pseudintermedius": {
+        "min_genome_size": 2440099,
+        "max_genome_size": 2790323,
+        "min_N50": 32142,
+        "max_N50": 364121,
+        "min_no_of_contigs": 37,
+        "max_no_of_contigs": 214,
+        "min_GC_Content": 37.19,
+        "max_GC_Content": 37.8
+    },
+    "Staphylococcus saprophyticus": {
+        "min_genome_size": 2513141,
+        "max_genome_size": 2768077,
+        "min_N50": 67971,
+        "max_N50": 1370498,
+        "min_no_of_contigs": 20,
+        "max_no_of_contigs": 114,
+        "min_GC_Content": 32.83,
+        "max_GC_Content": 33.15
+    },
+    "Staphylococcus simulans": {
+        "min_genome_size": 2533811,
+        "max_genome_size": 2823089,
+        "min_N50": 17392,
+        "max_N50": 648969,
+        "min_no_of_contigs": 21,
+        "max_no_of_contigs": 339,
+        "min_GC_Content": 35.67,
+        "max_GC_Content": 36.19
+    },
+    "Staphylococcus warneri": {
+        "min_genome_size": 2333395,
+        "max_genome_size": 2656205,
+        "min_N50": 25902,
+        "max_N50": 1277193,
+        "min_no_of_contigs": 20,
+        "max_no_of_contigs": 198,
+        "min_GC_Content": 32.43,
+        "max_GC_Content": 32.79
+    },
+    "Staphylococcus xylosus": {
+        "min_genome_size": 2731052,
+        "max_genome_size": 2983491,
+        "min_N50": 31450,
+        "max_N50": 637085,
+        "min_no_of_contigs": 19,
+        "max_no_of_contigs": 221,
+        "min_GC_Content": 32.4,
+        "max_GC_Content": 32.75
+    },
+    "Stenotrophomonas geniculata": {
+        "min_genome_size": 4430698,
+        "max_genome_size": 5291737,
+        "min_N50": 31606,
+        "max_N50": 1168706,
+        "min_no_of_contigs": 16,
+        "max_no_of_contigs": 255,
+        "min_GC_Content": 65.7,
+        "max_GC_Content": 66.68
+    },
+    "Stenotrophomonas maltophilia": {
+        "min_genome_size": 4196754,
+        "max_genome_size": 5205439,
+        "min_N50": 23562,
+        "max_N50": 611570,
+        "min_no_of_contigs": 26,
+        "max_no_of_contigs": 404,
+        "min_GC_Content": 65.74,
+        "max_GC_Content": 67.07
+    },
+    "Stenotrophomonas pavanii": {
+        "min_genome_size": 4303804,
+        "max_genome_size": 4868502,
+        "min_N50": 36516,
+        "max_N50": 495784,
+        "min_no_of_contigs": 32,
+        "max_no_of_contigs": 241,
+        "min_GC_Content": 66.78,
+        "max_GC_Content": 67.5
+    },
+    "Stenotrophomonas sepilia": {
+        "min_genome_size": 4261093,
+        "max_genome_size": 4744180,
+        "min_N50": 45182,
+        "max_N50": 386384,
+        "min_no_of_contigs": 34,
+        "max_no_of_contigs": 195,
+        "min_GC_Content": 66.29,
+        "max_GC_Content": 66.96
+    },
+    "Streptococcus agalactiae": {
+        "min_genome_size": 1952753,
+        "max_genome_size": 2261601,
+        "min_N50": 36105,
+        "max_N50": 609839,
+        "min_no_of_contigs": 17,
+        "max_no_of_contigs": 134,
+        "min_GC_Content": 35.06,
+        "max_GC_Content": 35.62
+    },
+    "Streptococcus anginosus": {
+        "min_genome_size": 1820579,
+        "max_genome_size": 2233362,
+        "min_N50": 70495,
+        "max_N50": 536511,
+        "min_no_of_contigs": 13,
+        "max_no_of_contigs": 105,
+        "min_GC_Content": 38.21,
+        "max_GC_Content": 39.21
+    },
+    "Streptococcus canis": {
+        "min_genome_size": 1874633,
+        "max_genome_size": 2264286,
+        "min_N50": 45211,
+        "max_N50": 230759,
+        "min_no_of_contigs": 42,
+        "max_no_of_contigs": 144,
+        "min_GC_Content": 39.44,
+        "max_GC_Content": 39.78
+    },
+    "Streptococcus dysgalactiae": {
+        "min_genome_size": 1961974,
+        "max_genome_size": 2277865,
+        "min_N50": 34396,
+        "max_N50": 122696,
+        "min_no_of_contigs": 65,
+        "max_no_of_contigs": 183,
+        "min_GC_Content": 39.0,
+        "max_GC_Content": 39.62
+    },
+    "Streptococcus equi": {
+        "min_genome_size": 1980300,
+        "max_genome_size": 2201396,
+        "min_N50": 24311,
+        "max_N50": 124200,
+        "min_no_of_contigs": 47,
+        "max_no_of_contigs": 205,
+        "min_GC_Content": 40.95,
+        "max_GC_Content": 41.79
+    },
+    "Streptococcus gordonii": {
+        "min_genome_size": 2106325,
+        "max_genome_size": 2322064,
+        "min_N50": 104257,
+        "max_N50": 687817,
+        "min_no_of_contigs": 12,
+        "max_no_of_contigs": 60,
+        "min_GC_Content": 40.18,
+        "max_GC_Content": 40.64
+    },
+    "Streptococcus mitis": {
+        "min_genome_size": 1818020,
+        "max_genome_size": 2259249,
+        "min_N50": 41746,
+        "max_N50": 552481,
+        "min_no_of_contigs": 14,
+        "max_no_of_contigs": 165,
+        "min_GC_Content": 39.27,
+        "max_GC_Content": 41.18
+    },
+    "Streptococcus mutans": {
+        "min_genome_size": 1929584,
+        "max_genome_size": 2109885,
+        "min_N50": 74689,
+        "max_N50": 676726,
+        "min_no_of_contigs": 13,
+        "max_no_of_contigs": 73,
+        "min_GC_Content": 36.57,
+        "max_GC_Content": 36.92
+    },
+    "Streptococcus oralis": {
+        "min_genome_size": 1788943,
+        "max_genome_size": 2191630,
+        "min_N50": 54532,
+        "max_N50": 1386506,
+        "min_no_of_contigs": 8,
+        "max_no_of_contigs": 121,
+        "min_GC_Content": 39.39,
+        "max_GC_Content": 41.44
+    },
+    "Streptococcus parasanguinis": {
+        "min_genome_size": 2009054,
+        "max_genome_size": 2271343,
+        "min_N50": 59674,
+        "max_N50": 634473,
+        "min_no_of_contigs": 12,
+        "max_no_of_contigs": 83,
+        "min_GC_Content": 41.3,
+        "max_GC_Content": 42.17
+    },
+    "Streptococcus pneumoniae": {
+        "min_genome_size": 1966485,
+        "max_genome_size": 2242975,
+        "min_N50": 24564,
+        "max_N50": 269432,
+        "min_no_of_contigs": 28,
+        "max_no_of_contigs": 215,
+        "min_GC_Content": 39.37,
+        "max_GC_Content": 39.82
+    },
+    "Streptococcus pseudopneumoniae": {
+        "min_genome_size": 1934222,
+        "max_genome_size": 2335725,
+        "min_N50": 28397,
+        "max_N50": 137034,
+        "min_no_of_contigs": 59,
+        "max_no_of_contigs": 257,
+        "min_GC_Content": 39.52,
+        "max_GC_Content": 39.97
+    },
+    "Streptococcus pyogenes": {
+        "min_genome_size": 1685315,
+        "max_genome_size": 1938666,
+        "min_N50": 60758,
+        "max_N50": 284356,
+        "min_no_of_contigs": 18,
+        "max_no_of_contigs": 89,
+        "min_GC_Content": 38.08,
+        "max_GC_Content": 38.47
+    },
+    "Streptococcus salivarius": {
+        "min_genome_size": 2056384,
+        "max_genome_size": 2429848,
+        "min_N50": 55166,
+        "max_N50": 326360,
+        "min_no_of_contigs": 26,
+        "max_no_of_contigs": 108,
+        "min_GC_Content": 39.31,
+        "max_GC_Content": 40.1
+    },
+    "Streptococcus suis": {
+        "min_genome_size": 1896992,
+        "max_genome_size": 2524579,
+        "min_N50": 20374,
+        "max_N50": 222848,
+        "min_no_of_contigs": 30,
+        "max_no_of_contigs": 281,
+        "min_GC_Content": 39.3,
+        "max_GC_Content": 43.67
+    },
+    "Streptococcus uberis": {
+        "min_genome_size": 1797581,
+        "max_genome_size": 2115326,
+        "min_N50": 40418,
+        "max_N50": 1092883,
+        "min_no_of_contigs": 10,
+        "max_no_of_contigs": 119,
+        "min_GC_Content": 36.09,
+        "max_GC_Content": 36.64
+    },
+    "Streptomyces albidoflavus": {
+        "min_genome_size": 6505250,
+        "max_genome_size": 7738860,
+        "min_N50": 6718,
+        "max_N50": 641696,
+        "min_no_of_contigs": 46,
+        "max_no_of_contigs": 1543,
+        "min_GC_Content": 72.92,
+        "max_GC_Content": 73.55
+    },
+    "Streptomyces anthocyanicus": {
+        "min_genome_size": 8144841,
+        "max_genome_size": 8901430,
+        "min_N50": 32859,
+        "max_N50": 406808,
+        "min_no_of_contigs": 94,
+        "max_no_of_contigs": 565,
+        "min_GC_Content": 72.04,
+        "max_GC_Content": 72.27
+    },
+    "Stutzerimonas stutzeri": {
+        "min_genome_size": 4312085,
+        "max_genome_size": 5102876,
+        "min_N50": 63427,
+        "max_N50": 677178,
+        "min_no_of_contigs": 23,
+        "max_no_of_contigs": 609,
+        "min_GC_Content": 61.31,
+        "max_GC_Content": 64.24
+    },
+    "Taylorella equigenitalis": {
+        "min_genome_size": 1615015,
+        "max_genome_size": 1711338,
+        "min_N50": 143340,
+        "max_N50": 439476,
+        "min_no_of_contigs": 12,
+        "max_no_of_contigs": 47,
+        "min_GC_Content": 37.29,
+        "max_GC_Content": 37.52
+    },
+    "Treponema pallidum": {
+        "min_genome_size": 948626,
+        "max_genome_size": 1481029,
+        "min_N50": 3978,
+        "max_N50": 598999,
+        "min_no_of_contigs": 22,
+        "max_no_of_contigs": 680,
+        "min_GC_Content": 51.28,
+        "max_GC_Content": 52.9
+    },
+    "Turicibacter sanguinis": {
+        "min_genome_size": 2890509,
+        "max_genome_size": 3214366,
+        "min_N50": 11941,
+        "max_N50": 150576,
+        "min_no_of_contigs": 69,
+        "max_no_of_contigs": 556,
+        "min_GC_Content": 34.04,
+        "max_GC_Content": 34.29
+    },
+    "Vibrio alginolyticus": {
+        "min_genome_size": 5018798,
+        "max_genome_size": 5488378,
+        "min_N50": 68540,
+        "max_N50": 815732,
+        "min_no_of_contigs": 68,
+        "max_no_of_contigs": 219,
+        "min_GC_Content": 44.38,
+        "max_GC_Content": 44.72
+    },
+    "Vibrio anguillarum": {
+        "min_genome_size": 3815753,
+        "max_genome_size": 4500058,
+        "min_N50": 33629,
+        "max_N50": 408958,
+        "min_no_of_contigs": 85,
+        "max_no_of_contigs": 339,
+        "min_GC_Content": 44.18,
+        "max_GC_Content": 44.72
+    },
+    "Vibrio cholerae": {
+        "min_genome_size": 3848514,
+        "max_genome_size": 4254951,
+        "min_N50": 77754,
+        "max_N50": 555248,
+        "min_no_of_contigs": 62,
+        "max_no_of_contigs": 226,
+        "min_GC_Content": 47.18,
+        "max_GC_Content": 47.75
+    },
+    "Vibrio diabolicus": {
+        "min_genome_size": 4984143,
+        "max_genome_size": 5401775,
+        "min_N50": 104967,
+        "max_N50": 883789,
+        "min_no_of_contigs": 46,
+        "max_no_of_contigs": 146,
+        "min_GC_Content": 44.61,
+        "max_GC_Content": 44.94
+    },
+    "Vibrio fluvialis": {
+        "min_genome_size": 4439503,
+        "max_genome_size": 4912376,
+        "min_N50": 108179,
+        "max_N50": 791152,
+        "min_no_of_contigs": 36,
+        "max_no_of_contigs": 145,
+        "min_GC_Content": 49.69,
+        "max_GC_Content": 50.32
+    },
+    "Vibrio mediterranei": {
+        "min_genome_size": 5708284,
+        "max_genome_size": 5766395,
+        "min_N50": 412645,
+        "max_N50": 548654,
+        "min_no_of_contigs": 49,
+        "max_no_of_contigs": 131,
+        "min_GC_Content": 43.99,
+        "max_GC_Content": 44.01
+    },
+    "Vibrio metschnikovii": {
+        "min_genome_size": 3650534,
+        "max_genome_size": 4073104,
+        "min_N50": 74990,
+        "max_N50": 507943,
+        "min_no_of_contigs": 100,
+        "max_no_of_contigs": 458,
+        "min_GC_Content": 43.94,
+        "max_GC_Content": 44.39
+    },
+    "Vibrio parahaemolyticus": {
+        "min_genome_size": 4941999,
+        "max_genome_size": 5473118,
+        "min_N50": 93485,
+        "max_N50": 908595,
+        "min_no_of_contigs": 46,
+        "max_no_of_contigs": 173,
+        "min_GC_Content": 45.02,
+        "max_GC_Content": 45.43
+    },
+    "Vibrio vulnificus": {
+        "min_genome_size": 4754786,
+        "max_genome_size": 5427877,
+        "min_N50": 64040,
+        "max_N50": 621074,
+        "min_no_of_contigs": 69,
+        "max_no_of_contigs": 303,
+        "min_GC_Content": 46.35,
+        "max_GC_Content": 46.94
+    },
+    "Wolbachia pipientis": {
+        "min_genome_size": 1169668,
+        "max_genome_size": 1343489,
+        "min_N50": 13743,
+        "max_N50": 33917,
+        "min_no_of_contigs": 100,
+        "max_no_of_contigs": 222,
+        "min_GC_Content": 35.04,
+        "max_GC_Content": 35.76
+    },
+    "Xanthomonas arboricola": {
+        "min_genome_size": 4723539,
+        "max_genome_size": 5321041,
+        "min_N50": 53687,
+        "max_N50": 2886222,
+        "min_no_of_contigs": 6,
+        "max_no_of_contigs": 223,
+        "min_GC_Content": 65.2,
+        "max_GC_Content": 65.96
+    },
+    "Xanthomonas campestris": {
+        "min_genome_size": 4872174,
+        "max_genome_size": 5252314,
+        "min_N50": 59657,
+        "max_N50": 401652,
+        "min_no_of_contigs": 40,
+        "max_no_of_contigs": 213,
+        "min_GC_Content": 64.89,
+        "max_GC_Content": 65.41
+    },
+    "Xanthomonas cissicola": {
+        "min_genome_size": 5018629,
+        "max_genome_size": 5441901,
+        "min_N50": 57352,
+        "max_N50": 425167,
+        "min_no_of_contigs": 69,
+        "max_no_of_contigs": 290,
+        "min_GC_Content": 64.5,
+        "max_GC_Content": 64.81
+    },
+    "Xanthomonas euvesicatoria": {
+        "min_genome_size": 4930725,
+        "max_genome_size": 5370583,
+        "min_N50": 52144,
+        "max_N50": 513158,
+        "min_no_of_contigs": 35,
+        "max_no_of_contigs": 267,
+        "min_GC_Content": 64.53,
+        "max_GC_Content": 65.03
+    },
+    "Xanthomonas hortorum": {
+        "min_genome_size": 5066786,
+        "max_genome_size": 5735153,
+        "min_N50": 16687,
+        "max_N50": 143438,
+        "min_no_of_contigs": 121,
+        "max_no_of_contigs": 796,
+        "min_GC_Content": 63.52,
+        "max_GC_Content": 63.85
+    },
+    "Xanthomonas oryzae": {
+        "min_genome_size": 4003607,
+        "max_genome_size": 4702416,
+        "min_N50": 4332,
+        "max_N50": 30525,
+        "min_no_of_contigs": 478,
+        "max_no_of_contigs": 1624,
+        "min_GC_Content": 63.33,
+        "max_GC_Content": 63.87
+    },
+    "Xylella fastidiosa": {
+        "min_genome_size": 2407487,
+        "max_genome_size": 2697429,
+        "min_N50": 42939,
+        "max_N50": 259583,
+        "min_no_of_contigs": 71,
+        "max_no_of_contigs": 323,
+        "min_GC_Content": 51.46,
+        "max_GC_Content": 52.53
+    },
+    "Yersinia enterocolitica": {
+        "min_genome_size": 4392257,
+        "max_genome_size": 5107213,
+        "min_N50": 34638,
+        "max_N50": 639449,
+        "min_no_of_contigs": 31,
+        "max_no_of_contigs": 330,
+        "min_GC_Content": 46.74,
+        "max_GC_Content": 47.45
+    },
+    "Yersinia intermedia": {
+        "min_genome_size": 4674537,
+        "max_genome_size": 5378349,
+        "min_N50": 52366,
+        "max_N50": 418641,
+        "min_no_of_contigs": 45,
+        "max_no_of_contigs": 307,
+        "min_GC_Content": 47.31,
+        "max_GC_Content": 47.96
+    },
+    "Yersinia pestis": {
+        "min_genome_size": 4402469,
+        "max_genome_size": 4913435,
+        "min_N50": 17756,
+        "max_N50": 151058,
+        "min_no_of_contigs": 114,
+        "max_no_of_contigs": 535,
+        "min_GC_Content": 47.31,
+        "max_GC_Content": 47.77
+    },
+    "Yersinia ruckeri": {
+        "min_genome_size": 3632767,
+        "max_genome_size": 3900268,
+        "min_N50": 112684,
+        "max_N50": 322209,
+        "min_no_of_contigs": 36,
+        "max_no_of_contigs": 124,
+        "min_GC_Content": 47.37,
+        "max_GC_Content": 47.64
+    }
+}

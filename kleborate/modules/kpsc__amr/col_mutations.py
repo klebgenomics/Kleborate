@@ -141,16 +141,14 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
                         pos, base = del_info
                         pmrb_deletion = (f"pmrB:c.{base}{pos}del", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
 
-    # --- Summarise detected truncations ---
     truncations = []
     
-    # Process mgrB logic
     if mgrb_frameshift:
         truncations.append(mgrb_frameshift)
     elif mgrb_deletion:
         truncations.append(mgrb_deletion)
     elif mgrb_hit_data is None:
-        # No hit found at all
+        # mgrb gene is deleted
         truncations.append(("mgrB:del", {"Genetic_variation_type": "Gene absent", "Coverage": "0.00%"}))
     else:
         # Check start codon
@@ -159,13 +157,11 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
             if mgrb_start_codon not in start_codons:
                 truncations.append(('mgrB$', {**mgrb_hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}))
 
-    # Process pmrB logic
     if pmrb_frameshift:
         truncations.append(pmrb_frameshift)
     elif pmrb_deletion:
         truncations.append(pmrb_deletion)
     elif pmrb_hit_data is None:
-        # No hit found at all
         truncations.append(("pmrB:del", {"Genetic_variation_type": "Gene absent", "Coverage": "0.00%"}))
     else:
         # Check start codon
@@ -174,10 +170,11 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
             if pmrb_start_codon not in start_codons:
                 truncations.append(('pmrB$', {**pmrb_hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}))
 
-    # Write to hits_dict
     for trunc_name, hit_metadata in truncations:
         data = dict(hit_metadata) if hit_metadata else {}
         hits_dict['Col_mutations'].append([trunc_name, data])
+      
+
         
 # def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
 

@@ -178,7 +178,6 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
                 # Inexact Match
                 else:
                     aac_muts = check_for_aac_mutations(hit)
-                    # print(aac_muts)
                     has_cr_muts = any("Trp102Arg" in m for m in aac_muts) and \
                                   any("Asp179Tyr" in m for m in aac_muts)
                     
@@ -264,7 +263,7 @@ def check_for_aac_mutations(hit):
 
     alignments = protein_aligner.align(aac_ref, query_translation)
     prt_alignment = alignments[0]
-    # print(prt_alignment)
+
 
     mapping = get_mapping_by_query_pos(prt_alignment)
 
@@ -296,7 +295,6 @@ def get_mapping_by_query_pos(alignment):
         t_base = aligned_target[i]
         q_base = aligned_query[i]
         
-        # only increment and map if it's not a gap in the query
         if q_base != '-':
             query_counter += 1
             query_pos_map[query_counter] = (t_base, q_base)
@@ -322,119 +320,3 @@ def get_mapping_by_query_pos(alignment):
             
 #     return query_pos_map
 
-
-
-# def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_coverage, min_identity, min_spurious_coverage, min_spurious_identity):
-    
-#     """f
-#     This function takes:
-#     * assembly:  assembly in FASTA format
-#     * ref_file: a path for a CARD reference in FASTA format
-#     * minimap2_index: a path for the assembly's minimap2 index (for faster alignment) (optional)
-#     * min_identity: hits with a lower percent identity than this are discarded
-    
-#     This function returns:
-#     * dictionary with SHV mutations, truncated_resistance_hits, spurious_resistance_hits, _acquired mutations
-#     """
-    
-#     hits_dict = collections.defaultdict(list)  # key = class, value = list
-#     alignment_hits = align_query_to_ref(ref_file, assembly,ref_index=minimap2_index,  min_identity=min_identity, min_query_coverage=min_spurious_coverage)
-#     alignment_hits = cull_redundant_hits(alignment_hits)
-    
-#     # calculate alignment coverage
-#     for hit in alignment_hits:
-#         alignment_length = hit.query_end - hit.query_start
-#         coverage = (alignment_length / hit.query_length) * 100
-#         if coverage >= min_spurious_coverage:
-#             if hit.percent_identity < 100.0:
-#                 aa_result = check_for_exact_aa_match(ref_file, hit, assembly)
-#                 if aa_result is not None:
-#                     hit.query_name = aa_result
-#                     exact_match = True
-#                 else:
-#                     exact_match = False
-#             else:
-#                 aa_result = None
-#                 exact_match = True
-
-#             hit_allele, hit_class, hit_bla_class = gene_info[hit.query_name]
-            
-#             hit_bla_class, shv_muts, class_changing_muts, omega_loop_seq = \
-#                     check_for_shv_mutations(hit, hit_allele, hit_bla_class, exact_match)
-            
-#             if hit_class == 'Bla' and hit_bla_class:
-#                 hit_class = hit_bla_class
-
-#             # if hit_class == 'Bla':
-#             #     hit_class = hit_bla_class
-
-#             # Handle SHV mutations
-
-#             for mut in shv_muts:
-#                 mut_str, mut_metadata = mut
-#                 mut_metadata['Genetic_variation_type'] = 'Protein variant detected'
-#                 hits_dict['SHV_mutations'].append([mut_str, mut_metadata])
-#                 # print(hits_dict)
-#             # for mut in shv_muts:
-#             #     hits_dict['SHV_mutations'].append([mut, {'Mutation_type': 'Protein variant detected'}])
-#             if omega_loop_seq is not None:
-#                 hits_dict['SHV_mutations'].append([f'omega-loop={omega_loop_seq}', {'Genetic_variation_type': 'Protein variant detected'}])
-
-#             if not hits_dict['SHV_mutations']:
-#                 del hits_dict['SHV_mutations']
-
-#             if not (hit_class.endswith('_chr') or hit_class.endswith('_mutations')):
-#                 hit_class += '_acquired'
-
-#             trunc_cov = 100.0
-#             if aa_result is not None:
-#                 hit_allele += '^'
-#             else:
-#                 if hit.percent_identity < 100:
-#                     hit_allele += '*'
-                
-#                 if alignment_length < hit.query_length:   
-#                         hit_allele += '?'
-#                 trunc_suffix, trunc_cov, _ = truncation_check(hit)
-#                 hit_allele += trunc_suffix
-                
-#             if class_changing_muts:
-#                 hit_allele += ' +' + ' +'.join(class_changing_muts)
-
-#             # Constructing hit_data dictionary for extra information
-#             hit_data = {
-#                 'Input_sequence_ID': hit.ref_name,
-#                 'Input_gene_length': hit.ref_length,
-#                 'Input_gene_start': hit.ref_start,
-#                 'Input_gene_stop': hit.ref_end,
-#                 'Reference_gene_length': hit.query_length,
-#                 'Reference_gene_start': hit.query_start,
-#                 'Reference_gene_stop': hit.query_end,
-#                 'Sequence_identity': f"{hit.percent_identity:.2f}%",
-#                 'Coverage': f"{coverage:.2f}%",
-#                 'Strand_orientation':hit.strand
-#             }
-
-#             # print(hits_dict)
-
-#             # If the hit is decent (above the min coverage and identity thresholds), it goes in the
-#             # column for the class.
-#             if coverage >= min_coverage and hit.percent_identity >= min_identity and trunc_cov >= 90.0:
-#                 if hit_class.endswith('_acquired') or hit_class.endswith('_chr'):
-#                     hit_data['Genetic_variation_type'] = 'Gene presence detected'
-#                 hits_dict[hit_class].append([hit_allele, hit_data])
-            
-#                 # print(hits_dict)
-#             # If the hit is decent but the gene is truncated, it goes in the
-#             # truncated_resistance_hits column.
-#             elif coverage >= min_coverage and hit.percent_identity >= min_identity and trunc_cov < 90.0:
-#                 hit_data['Genetic_variation_type'] = 'Gene presence detected'
-#                 hits_dict['truncated_resistance_hits'].append([hit_allele, hit_data])
-                
-#             # If the hit is bad (below the min coverage and identity thresholds but above the
-#             # thresholds for spurious hits) then it goes in the spurious hit column.
-#             else:
-#                 hit_data['Genetic_variation_type'] = 'Gene presence detected'
-#                 hits_dict['spurious_resistance_hits'].append([hit_allele, hit_data])
-    
-#     return hits_dict

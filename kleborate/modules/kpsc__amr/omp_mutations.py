@@ -225,7 +225,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
         data = dict(t_hit_data) if t_hit_data else {}
         hits_dict['Omp_mutations'].append([trunc_name, data])
 
-    # --- NEW: Check for completely missing genes ---
+    # --- check if OmpK35 and OmpK36 gene is deleted ---
     if ompk35_hit_data is None:
         hits_dict['Omp_mutations'].append([
             "OmpK35:del", 
@@ -237,6 +237,12 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
             "OmpK36:del", 
             {"Genetic_variation_type": "Gene absent", "Coverage": "0.00%"}
         ])
+
+
+
+
+
+
 
 # def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
 #     """

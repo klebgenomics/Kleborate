@@ -185,10 +185,10 @@ def get_results(assembly, minimap2_index, args, previous_results):
     # --- software and database metadata ---
     res_hits['Software_name'] = 'Kleborate'
     res_hits['Software_version'] = get_version()
-    res_hits['Reference_database_name'] = 'CARD'
-    res_hits['Reference_database_version'] = '3.2.9'
+    res_hits['Reference_database_name'] = 'KleborateAMRdb'
+    res_hits['Reference_database_version'] = '3.3.0'
 
-    # --- map alleles to CARD ARO_accessions and CARD_class---
+    # --- map alleles to amrdb ARO_accessions and amrdb_class---
     allele_to_accession = {}
     allele_to_drug_class = {}
     drug_class_to_accession = {}
@@ -274,8 +274,6 @@ def get_results(assembly, minimap2_index, args, previous_results):
     # Format the res_hits dictionary
     res_hits = format_res_hits(res_hits, full_headers)
 
-    # print(res_hits)
-
     # Double check that all results correspond to a header in full_headers
     for h in res_hits.keys():
         if h not in full_headers:
@@ -283,39 +281,5 @@ def get_results(assembly, minimap2_index, args, previous_results):
 
     # Return a dictionary with values from res_hits or '-'
     return {r: res_hits[r] if r in res_hits else '-' for r in full_headers}
-
-
-
-# def get_results(assembly, minimap2_index, args, previous_results):
-#     gene_info, _, _ = read_class_file(data_dir() / 'CARD_AMR_clustered.csv')
-#     full_headers, _ = get_headers() 
-#     qrdr = data_dir() / 'QRDR_120.fasta'
-#     trunc = data_dir() / 'MgrB_and_PmrB.fasta'
-#     omp = data_dir() / 'OmpK.fasta'
-
-#     ref_file = data_dir() / 'CARD_v3.2.9.fasta'
-
-#     res_hits = resminimap_assembly(
-#         assembly,
-#         minimap2_index, 
-#         ref_file, 
-#         gene_info, 
-#         qrdr, 
-#         trunc, 
-#         omp,   
-#         args.klebsiella_pneumo_complex__amr_min_coverage, 
-#         args.klebsiella_pneumo_complex__amr_min_identity,
-#         args.klebsiella_pneumo_complex__amr_min_spurious_coverage,
-#         args.klebsiella_pneumo_complex__amr_min_spurious_identity
-#     )
-
-#     # Double check that there weren't any results without a corresponding full headers.
-#     for h in res_hits.keys():
-#         if h not in full_headers:
-#             sys.exit( f'Error: results contained a value ({h}) that is not covered by the '
-#                       f'full headers')
-
-#     return {r: ';'.join(sorted(res_hits[r])) if r in res_hits else '-' for r in full_headers}
-
 
 
