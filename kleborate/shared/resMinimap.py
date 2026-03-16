@@ -43,6 +43,7 @@ def resminimap_assembly(assembly, minimap2_index, ref_file, gene_info, qrdr, tru
     return hits_dict
 
 
+
 def read_class_file(res_class_file):
     gene_info = {}  # key = sequence id (fasta header in ref file), value = (allele,class,Bla_Class)
     res_classes = []
@@ -89,6 +90,7 @@ def read_class_file(res_class_file):
     return gene_info, res_classes, bla_classes
 
 
+
 def get_res_headers(res_classes, bla_classes):
     res_headers = res_classes + bla_classes
 
@@ -105,6 +107,7 @@ def get_res_headers(res_classes, bla_classes):
                    for h in res_headers]
 
     return res_headers
+
 
 
 def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_coverage, min_identity, min_spurious_coverage, min_spurious_identity):
@@ -233,6 +236,7 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
     return hits_dict
 
 
+
 def check_for_aac_mutations(hit):
     
     loci = [(102, 'W'), (179, 'D')]
@@ -281,6 +285,7 @@ def check_for_aac_mutations(hit):
     return mutations
 
 
+
 def get_mapping_by_query_pos(alignment):
     """
     Maps alignment indices to query positions, starting at 16.
@@ -300,6 +305,7 @@ def get_mapping_by_query_pos(alignment):
             query_pos_map[query_counter] = (t_base, q_base)
             
     return query_pos_map
+ 
     
 # def get_mapping_by_query_pos(alignment):
 #     """

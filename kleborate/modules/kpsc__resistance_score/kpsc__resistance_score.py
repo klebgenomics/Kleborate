@@ -45,12 +45,14 @@ def check_cli_options(args):
 def check_external_programs():
     return []
 
+
 def data_dir():
     return pathlib.Path(__file__).parents[1] / 'kpsc__amr' / 'data'
 
 
+
 def get_results(assembly, minimap2_index, args, previous_results):
-    _, res_classes, bla_classes = read_class_file(data_dir() / 'KleborateAMRdb_v3.3.csv')
+    _, res_classes, bla_classes = read_class_file(data_dir() / 'Kleborate_AMRdb_v3.3.csv')
     res_headers = get_res_headers(res_classes, bla_classes)
 
     """
@@ -89,10 +91,3 @@ def get_results(assembly, minimap2_index, args, previous_results):
     else:
         return {'resistance_score': '0'}
     
-
-
-
-
-
-
-

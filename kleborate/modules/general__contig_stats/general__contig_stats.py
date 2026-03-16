@@ -172,12 +172,12 @@ def get_qc_warnings(total_size, N50, contig_count, gc_content, ambiguous_bases, 
         warnings.append('N50')
 
     # Contig Count Check (Min and Max)
-    min_contigs = spec.get('min_no_of_contigs')
-    max_contigs = spec.get('max_no_of_contigs')
-    if min_contigs is not None and contig_count < min_contigs:
-        warnings.append('contig_count')
-    if max_contigs is not None and contig_count > max_contigs:
-        warnings.append('contig_count')
+    # min_contigs = spec.get('min_no_of_contigs')
+    # max_contigs = spec.get('max_no_of_contigs')
+    # if min_contigs is not None and contig_count < min_contigs:
+    #     warnings.append('contig_count')
+    # if max_contigs is not None and contig_count > max_contigs:
+    #     warnings.append('contig_count')
 
     # GC Content Check (Min and Max)
     min_gc = spec.get('min_GC_Content')
@@ -192,6 +192,7 @@ def get_qc_warnings(total_size, N50, contig_count, gc_content, ambiguous_bases, 
         warnings.append('ambiguous_bases')
 
     return ','.join(warnings) if warnings else '-'
+
 
 # def get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specification_dict):
 #     warnings = []

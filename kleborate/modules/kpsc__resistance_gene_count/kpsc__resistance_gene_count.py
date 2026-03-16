@@ -17,6 +17,7 @@ from collections import defaultdict
 
 from ...shared.resMinimap import read_class_file, get_res_headers
 
+
 def description():
     return 'Resistance genes counts, excluding the Bla class which is intrinsic' \
            'results of the kpsc__amr module'
@@ -26,10 +27,12 @@ def prerequisite_modules():
     return ['kpsc__amr']
 
 
+
 def get_headers():
     full_headers = ['num_resistance_genes']
     stdout_headers = ['num_resistance_genes']
     return full_headers, stdout_headers
+
 
 
 def add_cli_options(parser):
@@ -43,6 +46,7 @@ def check_cli_options(args):
 def check_external_programs():
     return []
 
+
 def data_dir():
     return pathlib.Path(__file__).parents[1] / 'kpsc__amr' / 'data'
 
@@ -51,7 +55,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     """
     Counts up all resistance genes, excluding the 'Bla' class which is intrinsic.
     """
-    _, res_classes, bla_classes = read_class_file(data_dir() / 'KleborateAMRdb_v3.3.csv')
+    _, res_classes, bla_classes = read_class_file(data_dir() / 'Kleborate_AMRdb_v3.3.csv')
     bla_classes = [c for c in bla_classes if c and c != 'NA']
     res_headers = get_res_headers(res_classes, bla_classes)
 
@@ -72,7 +76,4 @@ def get_results(assembly, minimap2_index, args, previous_results):
             gene_list.extend(genes)
 
     return {'num_resistance_genes': len(gene_list)}
-
-
-
 

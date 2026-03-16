@@ -79,7 +79,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
             if coverage == 0.0:
                 aln = dna_aligner.align(mgrb_ref_seq, mgrb_query_seq)[0]
                 deleted_base_pos = find_start_deletion_in_alignment(aln)
-                deletion_report = f"mgrB_{deleted_base_pos}"
+                deletion_report = f"mgrB:{deleted_base_pos}"
                 mgrb_deletion = (deletion_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
                 continue
 
@@ -96,7 +96,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
                         if fs_info is not None:
                             aa_pos, ref_aa, alt_aa, fs_len = fs_info
                             alt_str = aa_map.get(alt_aa, alt_aa)
-                            fs_report = f"mgrB_{ref_aa}{aa_pos}{alt_str}" if fs_len == 0 else f"mgrB_{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
+                            fs_report = f"mgrB:p.{ref_aa}{aa_pos}{alt_str}" if fs_len == 0 else f"mgrB:p.{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
                             mgrb_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
                 
                 elif best_mgrb_cov < 90.0 and mgrb_dna_cov < 90.0:
@@ -115,7 +115,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
             if coverage == 0.0:
                 aln = dna_aligner.align(pmrb_ref_seq, pmrb_query_seq)[0]
                 deleted_base_pos = find_start_deletion_in_alignment(aln)
-                pmrb_deletion = (f"pmrB_{deleted_base_pos}", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                pmrb_deletion = (f"pmrB:{deleted_base_pos}", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
                 continue 
 
             if coverage > best_pmrb_cov:
@@ -131,7 +131,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
                         if fs_info is not None:
                             aa_pos, ref_aa, alt_aa, fs_len = fs_info
                             alt_str = aa_map.get(alt_aa, alt_aa)
-                            fs_report = f"pmrB_{ref_aa}{aa_pos}{alt_str}" if fs_len == 0 else f"pmrB_{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
+                            fs_report = f"pmrB:p.{ref_aa}{aa_pos}{alt_str}" if fs_len == 0 else f"pmrB:p.{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
                             pmrb_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})   
 
                 elif best_pmrb_cov < 90.0 and pmrb_dna_cov < 90.0:
@@ -149,7 +149,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
         truncations.append(mgrb_deletion)
     elif mgrb_hit_data is None:
         # mgrb gene is deleted
-        truncations.append(("mgrB:del", {"Genetic_variation_type": "Gene absent", "Coverage": "0.00%"}))
+        truncations.append(("mgrB:del", {"Genetic_variation_type": "Gene deleted", "Coverage": "0.00%"}))
     else:
         # Check start codon
         if mgrb_query_seq:
@@ -161,8 +161,9 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
         truncations.append(pmrb_frameshift)
     elif pmrb_deletion:
         truncations.append(pmrb_deletion)
+        # pmrb gene is deleted
     elif pmrb_hit_data is None:
-        truncations.append(("pmrB:del", {"Genetic_variation_type": "Gene absent", "Coverage": "0.00%"}))
+        truncations.append(("pmrB:del", {"Genetic_variation_type": "Gene deleted", "Coverage": "0.00%"}))
     else:
         # Check start codon
         if pmrb_query_seq:
@@ -175,7 +176,8 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
         hits_dict['Col_mutations'].append([trunc_name, data])
       
 
-        
+
+
 # def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
 
 #     best_mgrb_cov, best_pmrb_cov = 0.0, 0.0

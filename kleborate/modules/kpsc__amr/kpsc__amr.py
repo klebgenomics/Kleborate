@@ -34,7 +34,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    _, res_classes, bla_classes = read_class_file(data_dir() / 'KleborateAMRdb_v3.3.csv')
+    _, res_classes, bla_classes = read_class_file(data_dir() / 'Kleborate_AMRdb_v3.3.csv')
     bla_classes = [c for c in bla_classes if c]
     res_headers = get_res_headers(res_classes, bla_classes)
     res_headers += ['truncated_resistance_hits', 'spurious_resistance_hits']
@@ -160,12 +160,12 @@ def format_res_hits(res_hits, full_headers):
 
 def get_results(assembly, minimap2_index, args, previous_results):
     # Read gene info and headers
-    gene_info, _, _ = read_class_file(data_dir() / 'KleborateAMRdb_v3.3.csv')
+    gene_info, _, _ = read_class_file(data_dir() / 'Kleborate_AMRdb_v3.3.csv')
     full_headers, _ = get_headers()
     qrdr = data_dir() / 'QRDR_120.fasta'
     trunc = data_dir() / 'MgrB_and_PmrB.fasta'
     omp = data_dir() / 'OmpK.fasta'
-    ref_file = data_dir() / 'KleborateAMRdb_v3.3.fasta'
+    ref_file = data_dir() / 'Kleborate_AMRdb_v3.3.fasta'
 
     # Run minimap and get results
     res_hits = resminimap_assembly(
@@ -185,7 +185,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     # --- software and database metadata ---
     res_hits['Software_name'] = 'Kleborate'
     res_hits['Software_version'] = get_version()
-    res_hits['Reference_database_name'] = 'KleborateAMRdb'
+    res_hits['Reference_database_name'] = 'Kleborate_AMRdb'
     res_hits['Reference_database_version'] = '3.3.0'
 
     # --- map alleles to amrdb ARO_accessions and amrdb_class---
@@ -193,7 +193,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     allele_to_drug_class = {}
     drug_class_to_accession = {}
 
-    with open(data_dir() / 'KleborateAMRdb_v3.3.csv', newline='', encoding='utf-8') as csvfile:
+    with open(data_dir() / 'Kleborate_AMRdb_v3.3.csv', newline='', encoding='utf-8') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=',', skipinitialspace=True)
         for row in reader:
             allele = row['allele'].strip()

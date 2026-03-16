@@ -15,7 +15,7 @@ from Bio.Seq import Seq
 import traceback
 from Bio import Align
 from Bio.Align import substitution_matrices
-from ...shared.alignment import align_query_to_ref, truncation_check, translate_nucl_to_prot, translate_nucl_to_prot, get_bases_per_ref_pos, find_start_deletion_in_alignment, deletion_checks, get_frameshift_info
+from ...shared.alignment import align_query_to_ref, truncation_check, translate_nucl_to_prot, get_bases_per_ref_pos, find_start_deletion_in_alignment, deletion_checks, get_frameshift_info
 from ...shared.misc import load_fasta, reverse_complement
 
 
@@ -80,7 +80,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
             if coverage == 0.0:
                 aln = dna_aligner.align(ompk35_ref_seq, ompk35_query_seq)[0]
                 deleted_base_pos = find_start_deletion_in_alignment(aln)
-                deletion_report = f"OmpK35_{deleted_base_pos}"
+                deletion_report = f"OmpK35:{deleted_base_pos}"
 
                 ompk35_deletion = (
                     deletion_report,
@@ -97,15 +97,16 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                         ompk35_ref_trans = translate_nucl_to_prot(ompk35_ref_seq)
                         ompk35_query_trans = translate_nucl_to_prot(ompk35_query_seq)
                         ompk35_prot_align = aligner.align(ompk35_ref_trans, ompk35_query_trans)
+                        # print(ompk35_prot_align[0])
 
                         fs_info = get_frameshift_info(ompk35_prot_align[0])
                         if fs_info is not None:
                             aa_pos, ref_aa, alt_aa, fs_len = fs_info
                             alt_str = aa_map.get(alt_aa, alt_aa)
                             if fs_len == 0:
-                                fs_report = f"OmpK35_{ref_aa}{aa_pos}{alt_str}"
+                                fs_report = f"OmpK35:p.{ref_aa}{aa_pos}{alt_str}"
                             else:
-                                fs_report = f"OmpK35_{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
+                                fs_report = f"OmpK35:p.{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
 
                             ompk35_frameshift = (
                                 fs_report,
@@ -132,7 +133,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
             if coverage == 0.0:
                 aln = dna_aligner.align(ompk36_ref_seq, ompk36_query_seq)[0]
                 deleted_base_pos = find_start_deletion_in_alignment(aln)
-                deletion_report = f"OmpK36_{deleted_base_pos}"
+                deletion_report = f"OmpK36:{deleted_base_pos}"
 
                 ompk36_deletion = (
                     deletion_report,
@@ -156,9 +157,9 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                             aa_pos, ref_aa, alt_aa, fs_len = fs_info
                             alt_str = aa_map.get(alt_aa, alt_aa)
                             if fs_len == 0:
-                                fs_report = f"OmpK36_{ref_aa}{aa_pos}{alt_str}"
+                                fs_report = f"OmpK36:p.{ref_aa}{aa_pos}{alt_str}"
                             else:
-                                fs_report = f"OmpK36_{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
+                                fs_report = f"OmpK36:p.{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
 
                             ompk36_frameshift = (
                                 fs_report,
@@ -229,13 +230,13 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
     if ompk35_hit_data is None:
         hits_dict['Omp_mutations'].append([
             "OmpK35:del", 
-            {"Genetic_variation_type": "Gene absent", "Coverage": "0.00%"}
+            {"Genetic_variation_type": "Gene deleted", "Coverage": "0.00%"}
         ])
 
     if ompk36_hit_data is None:
         hits_dict['Omp_mutations'].append([
             "OmpK36:del", 
-            {"Genetic_variation_type": "Gene absent", "Coverage": "0.00%"}
+            {"Genetic_variation_type": "Gene deleted", "Coverage": "0.00%"}
         ])
 
 
