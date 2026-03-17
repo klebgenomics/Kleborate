@@ -66,7 +66,6 @@ def check_external_programs():
 
 
 def get_results(assembly, minimap2_index, args, previous_results):
-    #print(previous_results)
     sketch_file = pathlib.Path(__file__).parents[0] / 'data' / 'species_mash_sketches.msh'
     species, distance = get_enterobacterales__species(assembly, sketch_file)
     if distance <= args.enterobacterales__species_strong:
