@@ -38,9 +38,9 @@ def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
     group.add_argument('--escherichia_mlst_achtman_min_identity', type=float, default=90.0,
-                       help='Minimum alignment percent identity for Escherchia-Achtman MLST')
+                       help='Minimum alignment percent identity for Escherichia-Achtman MLST')
     group.add_argument('--escherichia_mlst_achtman_min_coverage', type=float, default=80.0,
-                       help='Minimum alignment percent coverage for Escherchia-Achtman MLST')
+                       help='Minimum alignment percent coverage for Escherichia-Achtman MLST')
     group.add_argument('--escherichia_mlst_achtman_required_exact_matches', type=int, default=3,
                        help='At least this many exact matches are required to call an ST')
     return group
