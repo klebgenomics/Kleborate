@@ -29,8 +29,7 @@ def prerequisite_modules():
 
 def get_headers():
     full_headers = ['Oxf_ST',
-                    'gltA', 'gyrB', 'gdhB', 'recA', 'cpn60', 'gpi', 'rpoD', 
-                    'clonal_complex']
+                    'gltA', 'gyrB', 'gdhB', 'recA', 'cpn60', 'gpi', 'rpoD']
     stdout_headers = ['Oxf_ST']
     return full_headers, stdout_headers
 
