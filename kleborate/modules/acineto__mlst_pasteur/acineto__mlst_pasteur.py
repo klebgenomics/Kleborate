@@ -28,9 +28,10 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['ST',
-                    'clonal_complex', 'Pas_cpn60', 'Pas_fusA', 'Pas_gltA', 'Pas_pyrG', 'Pas_recA', 'Pas_rplB', 'Pas_rpoB']
-    stdout_headers = ['ST']
+    full_headers = ['Pas_ST',
+     'Pas_cpn60', 'Pas_fusA', 'Pas_gltA', 'Pas_pyrG', 'Pas_recA', 'Pas_rplB', 'Pas_rpoB',
+                    'species',]
+    stdout_headers = ['Pas_ST', 'species']
     return full_headers, stdout_headers
 
 
@@ -38,9 +39,9 @@ def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
     group.add_argument('--acinetobacter_mlst_pasteur_min_identity', type=float, default=90.0,
-                       help='Minimum alignment percent identity for Acinetobacter Oxford MLST')
+                       help='Minimum alignment percent identity for Acinetobacter Pasteur MLST')
     group.add_argument('--acinetobacter_mlst_pasteur_min_coverage', type=float, default=80.0,
-                       help='Minimum alignment percent coverage for Acinetobacter Oxford MLST')
+                       help='Minimum alignment percent coverage for Acinetobacter Pasteur MLST')
     group.add_argument('--acinetobacter_mlst_pasteur_required_exact_matches', type=int, default=3,
                        help='At least this many exact matches are required to call an ST')
     return group
@@ -66,16 +67,16 @@ def data_dir():
 
 
 def get_results(assembly, minimap2_index, args, previous_results):
-    genes = ['Oxf_gltA', 'Oxf_gyrB', 'Oxf_gdhB', 'Oxf_recA', 'Oxf_cpn60', 'Oxf_gpi', 'Oxf_rpoD']
+    genes = ['Pas_cpn60', 'Pas_fusA', 'Pas_gltA', 'Pas_pyrG', 'Pas_recA', 'Pas_rplB', 'Pas_rpoB']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
 
-    st, clonal_complex, alleles = \
-        mlst(assembly, minimap2_index, profiles, alleles, genes, 'clonal_complex',
+    st, species, alleles = \
+        mlst(assembly, minimap2_index, profiles, alleles, genes, 'species',
              args.acinetobacter_mlst_pasteur_min_identity, args.acinetobacter_mlst_pasteur_min_coverage,
              args.acinetobacter_mlst_pasteur_required_exact_matches)
 
-    return {'ST': st, 'clonal_complex': clonal_complex,
+    return {'Pas_ST': st, 'species': species,
             'Pas_cpn60': alleles['Pas_cpn60'], 'Pas_fusA': alleles['Pas_fusA'], 'Pas_gltA': alleles['Pas_gltA'],
             'Pas_pyrG': alleles['Pas_pyrG'], 'Pas_recA': alleles['Pas_recA'], 'Pas_rplB': alleles['Pas_rplB'],
             'Pas_rpoB': alleles['Pas_rpoB']}

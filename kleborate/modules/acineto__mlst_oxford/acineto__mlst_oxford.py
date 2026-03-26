@@ -28,10 +28,10 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['ST',
+    full_headers = ['Oxf_ST',
                     'gltA', 'gyrB', 'gdhB', 'recA', 'cpn60', 'gpi', 'rpoD', 
                     'clonal_complex']
-    stdout_headers = ['ST']
+    stdout_headers = ['Oxf_ST']
     return full_headers, stdout_headers
 
 def add_cli_options(parser):
@@ -75,7 +75,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
              args.acinetobacter_mlst_oxford_min_identity, args.acinetobacter_mlst_oxford_min_coverage,
              args.acinetobacter_mlst_oxford_required_exact_matches)
 
-    return {'ST': st, 'clonal_complex': clonal_complex, 
+    return {'Oxf_ST': st, 'clonal_complex': clonal_complex, 
             'gltA': alleles['gltA'], 'gyrB': alleles['gyrB'], 'gdhB': alleles['gdhB'],
             'recA': alleles['recA'], 'cpn60': alleles['cpn60'], 'gpi': alleles['gpi'],
             'rpoD': alleles['rpoD']}
