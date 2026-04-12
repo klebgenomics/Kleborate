@@ -15,7 +15,9 @@ import gzip
 import sys
 import subprocess
 import re
-
+import os
+import pathlib
+import datetime
 
 def load_fasta(filename):
     """
@@ -162,9 +164,133 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_schema_name": "scgMLST629_S",
         "genotyping_software_name": "MiST",
         "genotyping_software_version": get_tool_version(['mist', '--version'])
+    },
+
+    "Sublineage": {
+        "genotyping_method": "Sublineage",
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+        "genotyping_database_version": get_tool_version(['mist', '--version']),
+        "genotyping_schema_name": "scgMLST629_S",
+        "genotyping_software_name": "MiST",
+        "genotyping_software_version": get_tool_version(['mist', '--version'])
+    },
+
+    "Clonal group": {
+        "genotyping_method": "Clonal group",
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+        "genotyping_database_version": get_tool_version(['mist', '--version']),
+        "genotyping_schema_name": "scgMLST629_S",
+        "genotyping_software_name": "MiST",
+        "genotyping_software_version": get_tool_version(['mist', '--version'])
     }
 }
+# KLEBSIELLA_TYPING_SPEC = {
+#     "species": {
+#         "genotyping_method": "In silico species detection",
+#         "genotyping_schema_taxon": "Enterobacterales",
+#         "genotyping_database_name": "kleborate_enterobacterales__species",
+#         "genotyping_database_version": get_tool_version(['kleborate', '--version']),
+#         "genotyping_schema_name": "enterobacterales__species",
+#         "genotyping_software_name": "Kleborate",
+#         "genotyping_software_version": get_tool_version(['kleborate', '--version'])
+#     },  
 
+#     "ST": {
+#         "genotyping_method": "MLST",
+#         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+#         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+#         "genotyping_database_version": "2024-12-31", 
+#         "genotyping_schema_name": "MLST",
+#         "genotyping_software_name": "Kleborate",
+#         "genotyping_software_version": get_tool_version(['kleborate', '--version'])
+#     },
+
+#     "K_locus": {
+#         "genotyping_method": "in silico serotyping",
+#         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+#         "genotyping_database_name": "kaptive_Klebsiella_k_locus_primary_reference", 
+#         "genotyping_database_version": get_tool_version(['kaptive', '--version']),
+#         "genotyping_schema_name": "Klebsiella_k_locus_primary_reference",
+#         "genotyping_software_name": "Kaptive",
+#         "genotyping_software_version": get_tool_version(['kaptive', '--version']),
+#         "genotype_predicted_phenotype": "K_type"
+#     },
+
+#     "O_locus": {
+#         "genotyping_method": "in silico serotyping",
+#         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+#         "genotyping_database_name": "kaptive_Klebsiella_o_locus_primary_reference", 
+#         "genotyping_database_version": get_tool_version(['kaptive', '--version']),
+#         "genotyping_schema_name": "Klebsiella_o_locus_primary_reference",
+#         "genotyping_software_name": "Kaptive",
+#         "genotyping_software_version": get_tool_version(['kaptive', '--version']),
+#         "genotype_predicted_phenotype": "O_type"
+#     },
+
+#     "cgST": {
+#         "genotyping_method": "cgMLST",
+#         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+#         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+#         "genotyping_database_version": get_tool_version(['mist', '--version']),
+#         "genotyping_schema_name": "scgMLST629_S",
+#         "genotyping_software_name": "MiST",
+#         "genotyping_software_version": get_tool_version(['mist', '--version'])
+#     },
+
+#     "LINcodes": {
+#         "genotyping_method": "LINcode",
+#         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex[NCBITaxon:3390273]",
+#         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+#         "genotyping_database_version": get_tool_version(['mist', '--version']),
+#         "genotyping_schema_name": "scgMLST629_S",
+#         "genotyping_software_name": "MiST",
+#         "genotyping_software_version": get_tool_version(['mist', '--version'])
+#     }
+# }
+
+
+
+def get_db_version(db_path=None, module_name=None):
+    """
+    Returns the version of a database. 
+    """
+    # pre-installed versions of the databases (the "defaults")
+    DEFAULTS = {
+        'kpsc__mlst': '2024-12-31',
+        'kpsc__cgmlst': '2024-12-31'
+    }
+
+    # if the user has provided a custom DB path, get the download date
+    if db_path and os.path.exists(db_path):
+        timestamp = os.path.getmtime(db_path)
+        return datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%d')
+
+    return DEFAULTS.get(module_name)
+
+def get_all_db_versions(custom_paths=None):
+    """
+    Iterates through all modules defined in get_presets and assigns a version.
+    custom_paths: a dict mapping module name to file path, e.g. {'kpsc__mlst': '/path/to/db'}
+    """
+    presets = get_presets()
+    version_tracking = {}
+    paths = custom_paths or {}
+
+    for species, groups in presets.items():
+        all_modules = groups['check'] + groups['pass']
+        
+        for item in all_modules:
+            module_id = item[0] if isinstance(item, tuple) else item
+            
+            # Record the version
+            version_tracking[module_id] = get_db_version(
+                db_path=paths.get(module_id), 
+                module_name=module_id
+            )
+            
+    return version_tracking
 
 
 # HaRmronization headers

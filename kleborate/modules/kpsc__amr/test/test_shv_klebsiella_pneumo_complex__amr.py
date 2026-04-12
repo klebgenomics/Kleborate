@@ -50,8 +50,8 @@ def test_get_results_2():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage', 'klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / '02.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0 ), {})
-    assert results['Bla_ESBL_acquired'] == 'SHV-1* +238Y'
-    assert results['SHV_mutations'] == '238Y'
+    assert results['Bla_ESBL_acquired'] == 'SHV-1* +SHV:p.G238Y'
+    assert results['SHV_mutations'] == 'SHV:p.G238Y'
 
 def test_get_results_3():
     """
@@ -60,8 +60,8 @@ def test_get_results_3():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage','klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / '03.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Bla_ESBL_acquired'] == 'SHV-1* +238Y'
-    assert results['SHV_mutations'] == '238Y'
+    assert results['Bla_ESBL_acquired'] == 'SHV-1* +SHV:p.G238Y'
+    assert results['SHV_mutations'] == 'SHV:p.G238Y'
 
 def test_get_results_4():
     """
@@ -82,7 +82,7 @@ def test_get_results_5():
     results = get_results(get_test_genome_dir() / '05.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
     assert results['Bla_ESBL_acquired'] == 'SHV-29'
-    assert results['SHV_mutations'] == '238A;35Q'
+    assert results['SHV_mutations'] == 'SHV:p.L35Q;SHV:p.G238A'
 
 def test_get_results_6():
     """
@@ -91,8 +91,8 @@ def test_get_results_6():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage','klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / '06.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Bla_ESBL_inhR_acquired'] == 'SHV-29* +234Y'
-    assert results['SHV_mutations'] ==  '234Y;238A;35Q'
+    assert results['Bla_ESBL_inhR_acquired'] == 'SHV-29* +SHV:p.K234Y'
+    assert results['SHV_mutations'] ==  'SHV:p.L35Q;SHV:p.K234Y;SHV:p.G238A'
 
 def test_get_results_7():
     """
@@ -124,7 +124,7 @@ def test_get_results_9():
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
     print(results)
     assert results['Bla_chr'] == 'SHV-1*'
-    assert results['SHV_mutations'] == '174R;omega-loop=RWETELNEALRGDARD'
+    assert results['SHV_mutations'] == 'SHV:p.P174R;omega-loop=RWETELNEALRGDARD'
 
 def test_bla_class_01():
     assert get_new_bla_class(False, False) == 'Bla_chr'

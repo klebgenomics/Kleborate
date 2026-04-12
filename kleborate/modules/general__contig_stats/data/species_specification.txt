@@ -1520,14 +1520,14 @@
         "max_GC_Content": 55.93
     },
     "Klebsiella pneumoniae": {
-        "min_genome_size": 5158682,
-        "max_genome_size": 6015463,
-        "min_N50": 54993,
-        "max_N50": 587004,
-        "min_no_of_contigs": 53,
-        "max_no_of_contigs": 389,
-        "min_GC_Content": 56.49,
-        "max_GC_Content": 57.63
+        "min_genome_size": 4900000,
+        "max_genome_size": 6400000,
+        "min_N50": 54000,
+        "max_N50": 0,
+        "min_no_of_contigs": 0,
+        "max_no_of_contigs": 390,
+        "min_GC_Content": 56.00,
+        "max_GC_Content": 59.00
     },
     "Klebsiella quasipneumoniae": {
         "min_genome_size": 4210819,

@@ -42,5 +42,5 @@ def test_get_results_1():
     results = get_results(get_test_genome_dir() / 'tem.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
     assert results['Bla_ESBL_acquired'] == '-'
-    assert results['Bla_acquired'] == 'TEM-1D.v1^'
+    assert results['Bla_acquired'] == 'TEM-1^'
 

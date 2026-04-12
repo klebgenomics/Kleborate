@@ -545,7 +545,7 @@ def output_headers(full_headers, stdout_headers, outfile):
 
 
 
-
+file_lock = threading.Lock()
 def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, outfile, results, trim_headers=False):
     input_file_name = results['strain']
 
@@ -689,17 +689,27 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
             row['Reference_database_name'] = db_name
             row['Reference_database_version'] = db_version
 
+
+    # Define the output columns
     headers = ['Input_file_name', 'Gene_symbol', 'Mutation'] + annotation_fields
 
-    with open(outfile, 'a') as f:
-        if f.tell() == 0:
-            f.write('\t'.join(headers) + '\n')
-        for row in rows:
-            f.write('\t'.join([str(row.get(h, '-')).strip("[]").replace("'", "") for h in headers]) + '\n')
+    # Use the shared file_lock to prevent duplicate headers and row interleaving
+    with file_lock:
+        with open(outfile, 'at') as f:
+            # Check if the file is new/empty while holding the lock
+            if f.tell() == 0:
+                f.write('\t'.join(headers) + '\n')
+            
+            for row in rows:
+                # Formatting the values to match your style (stripping brackets and quotes)
+                line = '\t'.join([
+                    str(row.get(h, '-')).strip("[]").replace("'", "") 
+                    for h in headers
+                ])
+                f.write(line + '\n')
 
 
 
-file_lock = threading.Lock()
 def output_results(full_headers, stdout_headers, outfile, results, trim_headers=False):
     """
     This function writes the results to stdout and the output file.
@@ -744,8 +754,8 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
 
     sample = results.get("strain", "")
     
-    # link genotype to Kaptive confidence results
     confidence_map = {
+        "species": "species_match",
         "K_locus": "K_locus_confidence",
         "O_locus": "O_locus_confidence"
     }
@@ -794,14 +804,82 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
             rows.append(row)
 
     if rows:
-        write_header = not os.path.exists(outfile) or os.path.getsize(outfile) == 0
-        
-        with open(outfile, "at") as o:
-            if write_header:
-                o.write("\t".join(header) + "\n")
-            for row in rows:
-                o.write("\t".join(str(row[col]) for col in header) + "\n")
+        with file_lock:
+            # open in append-text mode
+            with open(outfile, "at") as o:
+                if o.tell() == 0:
+                    o.write("\t".join(header) + "\n")
+                
+                for row in rows:
+                    # str(row.get(col, "-")) ensures we don't crash if a column key is missing
+                    o.write("\t".join(str(row.get(col, "-")) for col in header) + "\n")
 
+
+# def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=None):
+#     if typing_spec is None:
+#         typing_spec = KLEBSIELLA_TYPING_SPEC
+
+#     sample = results.get("strain", "")
+    
+#     # link genotype to confidence results
+#     # Added "species": "species_match" to handle Kleborate species confidence
+#     confidence_map = {
+#         "species": "species_match",
+#         "K_locus": "K_locus_confidence",
+#         "O_locus": "O_locus_confidence"
+#     }
+
+#     header = [
+#         "sample", "genotyping_method", "genotyping_schema_taxon",
+#         "genotyping_database_name", "genotyping_database_version",
+#         "genotyping_schema_name", "genotyping_software_name",
+#         "genotyping_software_version", "genotype", "genotype_confidence_value", "genotype_predicted_phenotype"
+#     ]
+
+#     rows = []
+#     for genotype_field, meta in typing_spec.items():
+#         genotype_value = "-"
+#         confidence_value = "-"
+#         phenotype_value = "-"  
+        
+#         target_phenotype_header = meta.get("genotype_predicted_phenotype")
+
+#         for res_key, res_val in results.items():
+#             trimmed_key = res_key.split('__')[-1]
+            
+#             if trimmed_key == genotype_field:
+#                 genotype_value = res_val
+
+#             if genotype_field in confidence_map and trimmed_key == confidence_map[genotype_field]:
+#                 confidence_value = res_val
+            
+#             if target_phenotype_header and trimmed_key == target_phenotype_header:
+#                 phenotype_value = res_val
+
+#         if genotype_value != "-" and genotype_value is not None:
+#             row = {
+#                 "sample": sample,
+#                 "genotyping_method": meta.get("genotyping_method", "-"),
+#                 "genotyping_schema_taxon": meta.get("genotyping_schema_taxon", "-"),
+#                 "genotyping_database_name": meta.get("genotyping_database_name", "-"),
+#                 "genotyping_database_version": meta.get("genotyping_database_version", "-"),
+#                 "genotyping_schema_name": meta.get("genotyping_schema_name", "-"),
+#                 "genotyping_software_name": meta.get("genotyping_software_name", "-"),
+#                 "genotyping_software_version": meta.get("genotyping_software_version", "-"),
+#                 "genotype_predicted_phenotype": phenotype_value,
+#                 "genotype": genotype_value,
+#                 "genotype_confidence_value": confidence_value
+#             }
+#             rows.append(row)
+
+#     if rows:
+#         write_header = not os.path.exists(outfile) or os.path.getsize(outfile) == 0
+        
+#         with open(outfile, "at") as o:
+#             if write_header:
+#                 o.write("\t".join(header) + "\n")
+#             for row in rows:
+#                 o.write("\t".join(str(row[col]) for col in header) + "\n")
 
 
 def paper_refs():

@@ -6,9 +6,7 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2024 Kat Holt
-Copyright 2024 Ryan Wick (rrwick@gmail.com)
-Copyright 2024 (gathonimaranga@gmail.com)
+Copyright 2026 (gathonimaranga@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -47,7 +45,7 @@ def test_get_results_2():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage', 'klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'test_res_omp_2.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Omp_mutations'] == 'OmpK35-36%;OmpK36_c25t'
+    assert results['Omp_mutations'] == 'OmpK35:p.N116KfsTer16;OmpK36:c.25C>T'
 
 
 def test_get_results_3():
@@ -55,24 +53,24 @@ def test_get_results_3():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage','klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'test_res_omp_3.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Omp_mutations'] == 'OmpK35-10%'
+    assert results['Omp_mutations'] == 'OmpK35:p.Y36Ter'
 
 
 def test_get_results_4():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage','klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'test_res_omp_4.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0,klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Omp_mutations'] == '-'
+    assert results['Omp_mutations'] == 'OmpK36:del'
 
 def test_get_results_5():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage','klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'test_res_omp_5.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Omp_mutations'] == 'OmpK36GD'
+    assert results['Omp_mutations'] == 'OmpK36:p.134_135insGD'
 
 def test_get_results_6():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage','klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'test_res_omp_6.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Omp_mutations'] == 'OmpK36TD'
+    assert results['Omp_mutations'] == 'OmpK36:p.136_137insTD'
 

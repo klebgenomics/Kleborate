@@ -44,14 +44,14 @@ def test_get_results_2():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage', 'klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'test_res_qrdr_2.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Flq_mutations'] == 'GyrA-83C'
+    assert results['Flq_mutations'] == 'GyrA:p.S83C'
     
 
 def test_get_results_3():
     Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage', 'klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'test_res_qrdr_3.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
-    assert results['Flq_mutations'] == 'ParC-84D'
+    assert results['Flq_mutations'] == 'ParC:p.E84D'
     
 
 def test_get_results_4():
@@ -59,6 +59,6 @@ def test_get_results_4():
     results = get_results(get_test_genome_dir() / 'test_res_qrdr_4.fasta', None,
                           Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
     print(results)
-    assert results['Flq_mutations'] == 'GyrA-83C;ParC-84D'
+    assert results['Flq_mutations'] == 'GyrA:p.S83C;ParC:p.E84D'
 
 

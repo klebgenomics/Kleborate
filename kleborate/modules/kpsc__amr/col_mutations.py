@@ -17,7 +17,6 @@ from Bio.Align import substitution_matrices
 from ...shared.alignment import align_query_to_ref, truncation_check, translate_nucl_to_prot, find_start_deletion_in_alignment, deletion_checks, get_frameshift_info
 from ...shared.misc import load_fasta, reverse_complement
 
-
 def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
 
     best_mgrb_cov, best_pmrb_cov = 0.0, 0.0
@@ -72,22 +71,21 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
 
         # --- mgrB checks ---
         if hit.query_name == 'mgrB':
-            mgrb_ref_seq = ref_seqs['mgrB']
-            mgrb_query_seq = hit.ref_seq
-            mgrb_hit_data = hit_data
-
-            if coverage == 0.0:
-                aln = dna_aligner.align(mgrb_ref_seq, mgrb_query_seq)[0]
-                deleted_base_pos = find_start_deletion_in_alignment(aln)
-                deletion_report = f"mgrB:{deleted_base_pos}"
-                mgrb_deletion = (deletion_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
-                continue
-
-            if coverage > best_mgrb_cov:
+            if coverage >= best_mgrb_cov:
                 best_mgrb_cov = coverage
                 mgrb_dna_cov = dna_hit_cov
+                mgrb_hit_data = hit_data
+                mgrb_query_seq = hit.ref_seq
+                mgrb_ref_seq = ref_seqs['mgrB']
+
+                mgrb_frameshift, mgrb_deletion = None, None
+
+                if coverage == 0.0:
+                    aln = dna_aligner.align(mgrb_ref_seq, mgrb_query_seq)[0]
+                    deleted_base_pos = find_start_deletion_in_alignment(aln)
+                    mgrb_deletion = (f"mgrB:{deleted_base_pos}", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
                 
-                if best_mgrb_cov < 90.0 and mgrb_dna_cov > 90.0:
+                elif best_mgrb_cov < 90.0 and mgrb_dna_cov > 90.0:
                     if translation:
                         mgrb_ref_trans = translate_nucl_to_prot(mgrb_ref_seq)
                         mgrb_query_trans = translate_nucl_to_prot(mgrb_query_seq)
@@ -108,21 +106,21 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
 
         # --- pmrB checks ---
         elif hit.query_name == 'pmrB':
-            pmrb_ref_seq = ref_seqs['pmrB']
-            pmrb_query_seq = hit.ref_seq
-            pmrb_hit_data = hit_data
-
-            if coverage == 0.0:
-                aln = dna_aligner.align(pmrb_ref_seq, pmrb_query_seq)[0]
-                deleted_base_pos = find_start_deletion_in_alignment(aln)
-                pmrb_deletion = (f"pmrB:{deleted_base_pos}", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
-                continue 
-
-            if coverage > best_pmrb_cov:
+            if coverage >= best_pmrb_cov:
                 best_pmrb_cov = coverage
                 pmrb_dna_cov = dna_hit_cov 
+                pmrb_hit_data = hit_data
+                pmrb_query_seq = hit.ref_seq
+                pmrb_ref_seq = ref_seqs['pmrB']
 
-                if best_pmrb_cov < 90.0 and pmrb_dna_cov > 90.0:
+                pmrb_frameshift, pmrb_deletion = None, None
+
+                if coverage == 0.0:
+                    aln = dna_aligner.align(pmrb_ref_seq, pmrb_query_seq)[0]
+                    deleted_base_pos = find_start_deletion_in_alignment(aln)
+                    pmrb_deletion = (f"pmrB:{deleted_base_pos}", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                
+                elif best_pmrb_cov < 90.0 and pmrb_dna_cov > 90.0:
                     if translation:
                         pmrb_ref_trans = translate_nucl_to_prot(pmrb_ref_seq)
                         pmrb_query_trans = translate_nucl_to_prot(pmrb_query_seq)
@@ -141,6 +139,7 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
                         pos, base = del_info
                         pmrb_deletion = (f"pmrB:c.{base}{pos}del", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
 
+    # --- Truncation reporting logic ---
     truncations = []
     
     if mgrb_frameshift:
@@ -148,24 +147,22 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
     elif mgrb_deletion:
         truncations.append(mgrb_deletion)
     elif mgrb_hit_data is None:
-        # mgrb gene is deleted
         truncations.append(("mgrB:del", {"Genetic_variation_type": "Gene deleted", "Coverage": "0.00%"}))
     else:
-        # Check start codon
+        # Check start codon only if no truncation found and gene exists
         if mgrb_query_seq:
             mgrb_start_codon = mgrb_query_seq[:3].upper()
             if mgrb_start_codon not in start_codons:
                 truncations.append(('mgrB$', {**mgrb_hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}))
 
+
     if pmrb_frameshift:
         truncations.append(pmrb_frameshift)
     elif pmrb_deletion:
         truncations.append(pmrb_deletion)
-        # pmrb gene is deleted
     elif pmrb_hit_data is None:
         truncations.append(("pmrB:del", {"Genetic_variation_type": "Gene deleted", "Coverage": "0.00%"}))
     else:
-        # Check start codon
         if pmrb_query_seq:
             pmrb_start_codon = pmrb_query_seq[:3].upper()
             if pmrb_start_codon not in start_codons:
@@ -174,7 +171,8 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
     for trunc_name, hit_metadata in truncations:
         data = dict(hit_metadata) if hit_metadata else {}
         hits_dict['Col_mutations'].append([trunc_name, data])
-      
+
+
 
 
 

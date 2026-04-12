@@ -220,7 +220,7 @@ def map_shigapass_serotype(serotype):
     """
     Maps ShigaPass serotype (e.g., 'SB2', 'SF1-5') to its full species name
     """
-    if not serotype or serotype == '-':
+    if not serotype or serotype == '-' or "Not Shigella" in serotype:
         return '-'
 
     species_code = ''
@@ -267,21 +267,6 @@ def get_results(assembly, minimap2_index, args, previous_results):
     predicted_serotype_raw = run_shigapass_for_single_assembly(assembly, args)
     predicted_serotype = map_shigapass_serotype(predicted_serotype_raw)
 
-    # ShigaPass serotype — only run if any virulence markers starts with 'ipaH'
-    # has_ipah = any(
-    #     mk.startswith('ipaH') or
-    #     any((h or '').startswith('ipaH') for h in (marker_hits or []))
-    #     for mk, marker_hits in virulence_markers.items()
-    # )
-    
-    # print(has_ipah)
-    # if has_ipah:
-    #     predicted_serotype_raw = run_shigapass_for_single_assembly(assembly, args)
-    #     predicted_serotype = map_shigapass_serotype(predicted_serotype_raw)
-    # else:
-    #     predicted_serotype_raw = '-'
-    #     predicted_serotype = '-'
-
     # markers
     result_dict = {header: '-' for header in full_headers}
     for marker, marker_hits in virulence_markers.items():
@@ -296,6 +281,9 @@ def get_results(assembly, minimap2_index, args, previous_results):
         result_dict['Pathotype'] = '-'
 
     return result_dict
+
+
+
 
 
     # if pathovar != '-':
