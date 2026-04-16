@@ -52,13 +52,15 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
     )
 
     alignment_hits = align_query_to_ref(omp, assembly, min_query_coverage=None, min_identity=None)
+    # print(alignment_hits)
 
     if 'Omp_mutations' not in hits_dict:
         hits_dict['Omp_mutations'] = []
 
     for hit in alignment_hits:
         _, coverage, translation = truncation_check(hit)
-        print(f"{hit.query_name} coverage: {coverage}")
+        # print(f"{hit.query_name} coverage: {coverage}")
+        # print(f"{hit.query_name} seq: {hit.ref_seq}")
         dna_hit_cov = hit.query_cov
 
         hit_data = {

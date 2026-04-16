@@ -47,11 +47,13 @@ def check_for_mgrb_pmrb_gene_truncations(hits_dict, assembly, trunc, min_ident):
     )
 
     alignment_hits = align_query_to_ref(trunc, assembly, None, min_identity=None)
+    # print(alignment_hits)
 
     if 'Col_mutations' not in hits_dict:
         hits_dict['Col_mutations'] = []
 
     for hit in alignment_hits:
+        # print(hit.query_name, hit.ref_seq)
         assert hit.query_name == 'pmrB' or hit.query_name == 'mgrB'
         _, coverage, translation = truncation_check(hit)
         dna_hit_cov = hit.query_cov

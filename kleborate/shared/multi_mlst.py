@@ -189,6 +189,7 @@ def check_polyT_tract(hits_per_gene, assembly):
     """
     For rmpA hit, extracts the upstream sequence and
     checks for poly-T tract (G(T+)A).
+    Returns length of the poly T tract and annotated expression
     Returns 'untypable' if rmpA is found but the pattern is not matched.
     """
     poly_t_status_map = {
@@ -210,7 +211,6 @@ def check_polyT_tract(hits_per_gene, assembly):
     
     poly_t_pattern = re.compile(r"G(T+)A", re.IGNORECASE)
 
-    # 1. Initialize a flag to track if rmpA is present in the hits
     rmpA_found = False
 
     for gene in hits_per_gene:
@@ -224,7 +224,7 @@ def check_polyT_tract(hits_per_gene, assembly):
                 contig_start, contig_end = hit.ref_start, hit.ref_end
                 full_contig_seq = assembly_seqs[hit.ref_name]
 
-                # Extract upstream sequence ---
+                # Extract upstream sequence 
                 if hit.strand == '+':
                     upstream_start = max(0, contig_start - upstream_length)
                     upstream_seq = full_contig_seq[upstream_start:contig_start]
@@ -242,7 +242,7 @@ def check_polyT_tract(hits_per_gene, assembly):
                     poly_t_string = match.group(1)
                     poly_t_length = len(poly_t_string)
 
-                    # Determine ON/OFF status
+                    # Determine ON/reduced expression status
                     if poly_t_length in poly_t_status_map:
                         status_results = f"{poly_t_length}T ({poly_t_status_map[poly_t_length]})"
                         if poly_t_length >= 11 and poly_t_status_map[poly_t_length] == "ON":
@@ -252,19 +252,19 @@ def check_polyT_tract(hits_per_gene, assembly):
     if results:
         return results[0]
     elif rmpA_found:
-        # rmpA gene is present, but no exact match to polyT pattern 
+        # if rmpA gene is present, but no exact match to polyT pattern 
         return 'untypable'
     else:
         return '-'
 
 
+
 def check_argR_status(assembly, argR_ref, min_identity, min_coverage):
     """
-    searches for the argR gene in the assembly,
-    and checks for ArgR gene or truncation of the encoded ArgR protein.
+    searches for the argR gene or truncation of the encoded ArgR protein in the assembly,
 
     Returns:
-        list: argR_status 
+        argR_status 
     """
     argR_status = []
     
@@ -276,9 +276,9 @@ def check_argR_status(assembly, argR_ref, min_identity, min_coverage):
         min_identity=min_identity
     )
 
+
     if not argR_aln:
         argR_status.append('-')
-        # argR_status.append('argR missing')
     else:
         hit = argR_aln[0]
         _, coverage, _ = truncation_check(hit)
@@ -288,6 +288,7 @@ def check_argR_status(assembly, argR_ref, min_identity, min_coverage):
         else:
             argR_status.append('truncated-' + ('%.0f' % coverage) + '%')
     return argR_status
+
 
 
 def check_argR_box(hits_per_gene, assembly):
@@ -336,6 +337,7 @@ def check_argR_box(hits_per_gene, assembly):
         return '-'
 
 
+
 def poly_G_variation(hits_per_gene):
     """
     In silico extension of Poly G tract in rmpA
@@ -377,6 +379,7 @@ def poly_G_variation(hits_per_gene):
                     pcov_plus1 = 100.0 * (len(translation_plus1) / org_aa_length)
                     pcov_plus2 = 100.0 * (len(translation_plus2) / org_aa_length)
 
+
                     # +1 G
                     if pcov_plus1 >= COVERAGE_THRESHOLD:
                         reannotated_status = "OFF"
@@ -397,7 +400,7 @@ def poly_G_variation(hits_per_gene):
 
 def poly_A_variation(hits_per_gene):
     """
-
+    In silico extension of Poly A tract in rmpD
     """
     loci_status = []
     COVERAGE_THRESHOLD = 95.0
@@ -436,6 +439,7 @@ def poly_A_variation(hits_per_gene):
                     # Coverage percentages relative to original gene AA length
                     pcov_plus1 = 100.0 * (len(translation_plus1) / org_aa_length)
                     pcov_plus2 = 100.0 * (len(translation_plus2) / org_aa_length)
+
 
                     # try +1 A
                     if pcov_plus1 >= COVERAGE_THRESHOLD:
@@ -512,6 +516,7 @@ def poly_G_rmpC_variation(hits_per_gene):
         return loci_status[0]
 
 
+
 def allele_type(allele_value):
     if '%' in allele_value: 
         return "truncated" 
@@ -520,6 +525,7 @@ def allele_type(allele_value):
         return "inexact"
     else:
         return "exact"
+
 
 
 def process_status_dict(filepath, prefix):
@@ -532,6 +538,7 @@ def process_status_dict(filepath, prefix):
     return status_dict
 
 
+
 def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_func):
     if allele_value in ('-', None):
         return "-"
@@ -540,53 +547,56 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
     if not allele or allele == "-":
         return "-"
 
-    # Extract the allele call (e.g., "2" from "2*-76%")
     allele_id = re.split(r"[\*\-]", allele, maxsplit=1)[0].strip()
 
-    # Determine truncation percentage
+    # truncation percentage 
     truncation_matches = re.findall(r"(\d+(?:\.\d+)?)\s*%", allele)
     truncation_pct = f"{truncation_matches[-1]}%" if truncation_matches else None
 
     is_inexact_call = "*" in allele
     is_truncated_call = "%" in allele
 
-    # --- 1. Handle Poly-Tract Variation (Reversible Status) ---
     if is_inexact_call or is_truncated_call:
+        # poly tract extension
         poly_tract_variation = poly_variation_func(hits_per_gene)
         
-        # Normalize the status from the function
+        # Normalize poly-tract extension result
         poly_status = "-"
         if isinstance(poly_tract_variation, list) and poly_tract_variation:
             poly_status = str(poly_tract_variation[0])
         elif poly_tract_variation is not None:
             poly_status = str(poly_tract_variation)
 
-        if "OFF" in poly_status:
-            # Construct the string with original markers + (OFF)
-            if is_truncated_call:
-                return f"{allele_id}*-{truncation_pct} (OFF)"
-            return f"{allele_id}* (OFF)"
+        # status of the allele in the dict
+        dict_status = allele_dict.get(allele_id, "-")
+        if isinstance(dict_status, list):
+            dict_status = dict_status[0] if dict_status else "-"
+        dict_status = str(dict_status)
 
-        # If not reversible/OFF, return the original formatted markers
+        if "OFF" in poly_status or "OFF" in dict_status:
+            status_suffix = " (OFF)"
+        elif "ON" in poly_status or "ON" in dict_status:
+            status_suffix = " (ON)"
+        else:
+            status_suffix = ""
+
         if is_truncated_call:
-            return f"{allele_id}*-{truncation_pct}"
-        if is_inexact_call:
-            return f"{allele_id}*"
+            return f"{allele_id}*-{truncation_pct}{status_suffix}"
+        return f"{allele_id}*{status_suffix}"
 
-    # --- 2. Handle Exact Matches (Already in allele_dict) ---
-    exact_status = allele_dict.get(allele, "-")
-    if isinstance(exact_status, list):
-        exact_status = exact_status[0] if exact_status else "-"
+    # exact matches
+    dict_status = allele_dict.get(allele, "-")
+    if isinstance(dict_status, list):
+        dict_status = dict_status[0] if dict_status else "-"
 
-    if exact_status is None or str(exact_status).strip() == "-":
+    if dict_status is None or str(dict_status).strip() == "-":
         return "-"
 
-    exact_status_str = str(exact_status).strip()
+    exact_status_str = str(dict_status).strip()
 
-    # If already OFF in the dictionary, maintain that status
-    if "OFF" in exact_status_str:
+    if "OFF" in exact_status_str or "ON" in exact_status_str:
         if allele_id and allele_id not in exact_status_str:
-            return f"{allele_id} (OFF)"
+            return f"{allele_id} ({exact_status_str})"
         return exact_status_str
 
     return exact_status_str
@@ -594,7 +604,6 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
 
 
 # def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_func):
-    
 #     if allele_value in ('-', None):
 #         return "-"
 
@@ -602,10 +611,9 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
 #     if not allele or allele == "-":
 #         return "-"
 
-#     # Extract the allele call
 #     allele_id = re.split(r"[\*\-]", allele, maxsplit=1)[0].strip()
 
-#     # truncation
+#     # truncation percentage 
 #     truncation_matches = re.findall(r"(\d+(?:\.\d+)?)\s*%", allele)
 #     truncation_pct = f"{truncation_matches[-1]}%" if truncation_matches else None
 
@@ -613,36 +621,39 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
 #     is_truncated_call = "%" in allele
 
 #     if is_inexact_call or is_truncated_call:
+#         # poly tract extension
 #         poly_tract_variation = poly_variation_func(hits_per_gene)
-#         poly_tract_variation_status = (
-#             poly_tract_variation[0] if isinstance(poly_tract_variation, list) and poly_tract_variation else
-#             poly_tract_variation if poly_tract_variation is not None else
-#             "-"
-#         )
+        
+#         # Normalize poly-tract extension result
+#         poly_status = "-"
+#         if isinstance(poly_tract_variation, list) and poly_tract_variation:
+#             poly_status = str(poly_tract_variation[0])
+#         elif poly_tract_variation is not None:
+#             poly_status = str(poly_tract_variation)
 
-#         # If the allele is reversibly off
-#         if poly_tract_variation_status != "-" and "OFF" in str(poly_tract_variation_status):
-#             return f"{allele_id} (OFF)"
+#         # status of the allele in the dict
+#         dict_status = allele_dict.get(allele_id, "-")
+#         if isinstance(dict_status, list):
+#             dict_status = dict_status[0] if dict_status else "-"
+#         dict_status = str(dict_status)
 
-#         # If the tract is non-reversible
+#         if "OFF" in poly_status or "OFF" in dict_status:
+#             if is_truncated_call:
+#                 return f"{allele_id}*-{truncation_pct} (OFF)"
+#             return f"{allele_id}* (OFF)"
+
 #         if is_truncated_call:
 #             return f"{allele_id}*-{truncation_pct}"
+#         return f"{allele_id}*"
 
-#         if is_inexact_call:
-#             return f"{allele_id}*"
+#     dict_status = allele_dict.get(allele, "-")
+#     if isinstance(dict_status, list):
+#         dict_status = dict_status[0] if dict_status else "-"
 
-#     exact_status = allele_dict.get(allele, "-")
-
-#     if isinstance(exact_status, list):
-#         exact_status = exact_status[0] if exact_status else "-"
-
-#     if exact_status is None:
+#     if dict_status is None or str(dict_status).strip() == "-":
 #         return "-"
 
-#     exact_status_str = str(exact_status).strip()
-
-#     if exact_status_str == "-":
-#         return "-"
+#     exact_status_str = str(dict_status).strip()
 
 #     if "OFF" in exact_status_str:
 #         if allele_id and allele_id not in exact_status_str:
@@ -653,7 +664,6 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
 
 
 
-
 def translate_nucl_to_prot(nucl_seq):
     ambiguous_bases = set(b for b in nucl_seq) - {'A', 'C', 'G', 'T'}
     for b in ambiguous_bases:
@@ -661,6 +671,4 @@ def translate_nucl_to_prot(nucl_seq):
     nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
     coding_dna = Seq(nucl_seq)
     return str(coding_dna.translate(table='Bacterial', to_stop=True))
-
-
 
