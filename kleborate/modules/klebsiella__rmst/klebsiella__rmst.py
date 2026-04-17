@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Mary Maranga
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -19,9 +19,11 @@ import ast
 import re
 
 
-from ...shared.multi_mlst import multi_mlst, poly_G_variation, poly_G_rmpC_variation, poly_A_variation, check_argR_box, check_argR_status,check_polyT_tract, translate_nucl_to_prot, allele_type, process_status_dict, get_gene_status
+from ...shared.multi_mlst import multi_mlst
 from ...shared.alignment import truncation_check
 from ...shared.misc import load_fasta, reverse_complement
+from .rmpADC_calling import poly_G_variation, poly_G_rmpC_variation, poly_A_variation, check_argR_box, check_argR_status,check_polyT_tract, translate_nucl_to_prot, process_status_dict, get_gene_status
+
 
 def description():
     return 'MLST on the KpSC Rmp locus (rmp genes)'
@@ -155,24 +157,30 @@ def get_results(assembly, minimap2_index, args, previous_results):
     has_reversible_off = any("OFF" in s for s in existing_statuses)
     has_true_truncation = any(("%" in s and "OFF" not in s) for s in existing_statuses)
 
-    if isinstance(lineage, str):
+    # annotate lineage with partial if any gene is truncated or incomplete
+    if hasattr(lineage, "replace"):
+        is_partial = any(x in lineage for x in ["(truncated)", "(incomplete)", "(unknown)"])
         lineage = lineage.replace(" (truncated)", "").replace(" (incomplete)", "").replace(" (unknown)", "")
+        
+        if is_partial:
+            lineage = f"{lineage} (partial)"
 
-    if not existing_statuses:
-        # rmp locus not detected
+    # Determine RmpADC_status
+    # if any gene is missing the rmpADC_status is set as '-'
+    if any(s == "-" for s in combined_status_f):
         RmpADC_status = "-"
     elif has_true_truncation:
         RmpADC_status = "-"
-        lineage = f"{lineage} (partial)"
     elif has_reversible_off:
         RmpADC_status = "Phase OFF"
     else:
         RmpADC_status = "Phase ON"
     
+    
     if RmpADC_status != "-":
         annotation_groups = []
         
-        # annotate the rmpADC status column
+        # annotate the rmpADC status column with rmpA_promoter annotations
         promoter_anns = []
         if promoter_polyT != "-":
             if "reduced expression" in promoter_polyT: promoter_anns.append("reduced expression")
@@ -183,7 +191,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
         if promoter_anns:
             annotation_groups.append(f"({', '.join(promoter_anns)})")
 
-        # argR checks
+        # annotate the rmpADC status column with argR status annotations
         argR_str = str(argR_status)
         argR_ann = ""
         if "truncated" in argR_str:
