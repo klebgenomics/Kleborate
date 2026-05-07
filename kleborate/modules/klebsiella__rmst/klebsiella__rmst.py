@@ -50,7 +50,7 @@ def add_cli_options(parser):
                        help='Minimum alignment percent identity for klebsiella__rmst spurious results')
     group.add_argument('--klebsiella__rmst_min_spurious_coverage', type=float, default=40.0,
                        help='Minimum alignment percent coverage for klebsiella__rmst spurious results')
-    group.add_argument('--klebsiella__rmst_required_exact_matches', type=int, default=2,
+    group.add_argument('--klebsiella__rmst_required_exact_matches', type=int, default=1,
                        help='At least this many exact matches are required to call an ST')
     group.add_argument('--klebsiella__rmst_min_gene_count', type=int, default=2,
                        help='At least this many exact alleles required to report a novel allele')
@@ -109,6 +109,8 @@ def get_results(assembly, minimap2_index, args, previous_results):
     st, lineage, alleles = results
     if st == 'NA': st = 0
     else: st = st[2:]
+
+    # print(lineage)
 
     spurious_hits_list = [item for h in spurious_hits.values() for item in h]
     spurious_virulence_hits = ';'.join(spurious_hits_list) if spurious_hits_list else '-'

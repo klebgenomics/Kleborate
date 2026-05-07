@@ -86,7 +86,7 @@ def check_peg(ref_file, assembly, minimap2_index, min_coverage, min_identity):
         if coverage >= 100.0:
             return 'present'
         else:
-            return f'truncated ({coverage}%)'
+            return f'truncated-{(coverage)}%'
 
 
 def get_results(assembly, minimap2_index, args, previous_results):
