@@ -59,27 +59,27 @@ def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
 
-    group.add_argument('--klebsiella_pneumo_complex__amr_min_identity', type=float, default=90.0,
-                       help='Minimum alignment percent identity for klebsiella_pneumo_complex Amr results')
-    group.add_argument('--klebsiella_pneumo_complex__amr_min_coverage', type=float, default=80.0,
-                       help='Minimum alignment percent coverage for klebsiella_pneumo_complex Amr  results')
-    group.add_argument('--klebsiella_pneumo_complex__amr_min_spurious_identity', type=float, default=80.0,
-                       help='Minimum alignment percent identity for klebsiella_pneumo_complex Amr spurious results')
-    group.add_argument('--klebsiella_pneumo_complex__amr_min_spurious_coverage', type=float, default=40.0,
-                       help='Minimum alignment percent coverage for klebsiella_pneumo_complex Amr spurious results')
+    group.add_argument('--kpsc__amr_min_identity', type=float, default=90.0,
+                       help='Minimum alignment percent identity for kpsc Amr results')
+    group.add_argument('--kpsc__amr_min_coverage', type=float, default=80.0,
+                       help='Minimum alignment percent coverage for kpsc Amr  results')
+    group.add_argument('--kpsc__amr_min_spurious_identity', type=float, default=80.0,
+                       help='Minimum alignment percent identity for kpsc Amr spurious results')
+    group.add_argument('--kpsc__amr_min_spurious_coverage', type=float, default=40.0,
+                       help='Minimum alignment percent coverage for kpsc Amr spurious results')
     
     return group
 
 
 def check_cli_options(args):
-    if args.klebsiella_pneumo_complex__amr_min_identity <= 50.0 or args.klebsiella_pneumo_complex__amr_min_identity >= 100.0:
-        sys.exit('Error: --klebsiella_pneumo_complex__amr_min_identity must be between 50.0 and 100.0')
-    if args.klebsiella_pneumo_complex__amr_min_coverage <= 50.0 or args.klebsiella_pneumo_complex__amr_min_coverage >= 100.0:
-        sys.exit('Error: --klebsiella_pneumo_complex__amr_min_coverage must be between 50.0 and 100.0')
-    if args.klebsiella_pneumo_complex__amr_min_spurious_identity <= 50.0 or args.klebsiella_pneumo_complex__amr_min_spurious_identity >= 100.0:
-        sys.exit('Error: --klebsiella_pneumo_complex__amr_min_spurious_identity must be between 50.0 and 100.0')
-    if args.klebsiella_pneumo_complex__amr_min_spurious_coverage <= 30.0 or args.klebsiella_pneumo_complex__amr_min_spurious_coverage >= 100.0:
-        sys.exit('Error: --klebsiella_pneumo_complex__amr_min_spurious_coverage must be between 30.0 and 100.0')
+    if args.kpsc__amr_min_identity <= 50.0 or args.kpsc__amr_min_identity >= 100.0:
+        sys.exit('Error: --kpsc__amr_min_identity must be between 50.0 and 100.0')
+    if args.kpsc__amr_min_coverage <= 50.0 or args.kpsc__amr_min_coverage >= 100.0:
+        sys.exit('Error: --kpsc__amr_min_coverage must be between 50.0 and 100.0')
+    if args.kpsc__amr_min_spurious_identity <= 50.0 or args.kpsc__amr_min_spurious_identity >= 100.0:
+        sys.exit('Error: --kpsc__amr_min_spurious_identity must be between 50.0 and 100.0')
+    if args.kpsc__amr_min_spurious_coverage <= 30.0 or args.kpsc__amr_min_spurious_coverage >= 100.0:
+        sys.exit('Error: --kpsc__amr_min_spurious_coverage must be between 30.0 and 100.0')
 
 
 def check_external_programs():
@@ -176,10 +176,10 @@ def get_results(assembly, minimap2_index, args, previous_results):
         qrdr,
         trunc,
         omp,
-        args.klebsiella_pneumo_complex__amr_min_coverage,
-        args.klebsiella_pneumo_complex__amr_min_identity,
-        args.klebsiella_pneumo_complex__amr_min_spurious_coverage,
-        args.klebsiella_pneumo_complex__amr_min_spurious_identity
+        args.kpsc__amr_min_coverage,
+        args.kpsc__amr_min_identity,
+        args.kpsc__amr_min_spurious_coverage,
+        args.kpsc__amr_min_spurious_identity
     )
 
     # --- software and database metadata ---
@@ -188,7 +188,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     res_hits['Reference_database_name'] = 'Kleborate_AMRdb'
     res_hits['Reference_database_version'] = '3.3.0'
 
-    # --- map alleles to amrdb ARO_accessions and amrdb_class---
+    # --- map alleles to accessions and CARD_class ---
     allele_to_accession = {}
     allele_to_drug_class = {}
     drug_class_to_accession = {}
@@ -197,12 +197,11 @@ def get_results(assembly, minimap2_index, args, previous_results):
         reader = csv.DictReader(csvfile, delimiter=',', skipinitialspace=True)
         for row in reader:
             allele = row['allele'].strip()
-            accession = row['ARO_class'].strip()
+            accession = row['accession'].strip()
             drug_class = row.get('CARD_class', '-').strip()
             if allele:
                 allele_to_accession[allele] = accession
                 allele_to_drug_class[allele] = drug_class
-            # Build reverse mapping for mutation lookup
             if drug_class and accession:
                 if drug_class not in drug_class_to_accession:
                     drug_class_to_accession[drug_class] = accession
@@ -213,8 +212,14 @@ def get_results(assembly, minimap2_index, args, previous_results):
     mutation_drug_class = {
         'SHV_mutations': 'penicillin beta-lactam',
         'Col_mutations': 'peptide antibiotic',
-        'Omp_mutations': '',  # OMP is not class specific
+        'Omp_mutations': '',               # OMP is not class specific
         'Flq_mutations': 'fluoroquinolone antibiotic'
+    }
+
+    col_omp_accessions = {
+        'OmpK36': 'NC_016845.1:3727882-3728985',
+        'mgrB':   'NC_016845.1:3337154-3337297',
+        'pmrB':   'NC_016845.1:1694393-1695491',
     }
 
     # --- Reference accession and drug class assignment ---
@@ -222,16 +227,15 @@ def get_results(assembly, minimap2_index, args, previous_results):
         if not isinstance(res_hits[category], list):
             continue
 
-        #  retrieve drug class for mutation category
+        # retrieve drug class for mutation category
         mutation_class = mutation_drug_class.get(category, None)
         mutation_accession = None
 
         if mutation_class:
             mutation_accession = drug_class_to_accession.get(mutation_class, '-')
 
-        # Iterate through individual hits
+
         for hit in res_hits[category]:
-            # process only lists with metadata
             if not isinstance(hit, list) or len(hit) < 2:
                 continue
             # extract gene name
@@ -241,27 +245,29 @@ def get_results(assembly, minimap2_index, args, previous_results):
             for elem in hit[1:]:
                 if isinstance(elem, dict):
                     merged.update(elem)
-            
+
             matched_accession = None
             matched_drug_class = None
 
-            # Mutation fields
             if mutation_class is not None:
-                # use the mapped class, and accession 
                 matched_drug_class = mutation_class
                 matched_accession = mutation_accession
+                for key, acc in col_omp_accessions.items():
+                    if gene_name.startswith(key):
+                        matched_accession = acc
+                        break
             else:
                 # map gene to accession
                 if gene_name in allele_to_accession:
                     matched_accession = allele_to_accession[gene_name]
                     matched_drug_class = allele_to_drug_class.get(gene_name, '-')
                 else:
-                    # find the longest matching prefix
                     for allele in sorted_alleles:
                         if gene_name.startswith(allele):
                             matched_accession = allele_to_accession[allele]
                             matched_drug_class = allele_to_drug_class.get(allele, '-')
                             break
+
             # Add accession and drug class
             merged['Reference_accession'] = matched_accession if matched_accession else '-'
             merged['Drug_class'] = matched_drug_class if matched_drug_class else '-'
@@ -281,5 +287,132 @@ def get_results(assembly, minimap2_index, args, previous_results):
 
     # Return a dictionary with values from res_hits or '-'
     return {r: res_hits[r] if r in res_hits else '-' for r in full_headers}
+
+
+
+
+# def get_results(assembly, minimap2_index, args, previous_results):
+#     # Read gene info and headers
+#     gene_info, _, _ = read_class_file(data_dir() / 'Kleborate_AMRdb_v3.3.csv')
+#     full_headers, _ = get_headers()
+#     qrdr = data_dir() / 'QRDR_120.fasta'
+#     trunc = data_dir() / 'MgrB_and_PmrB.fasta'
+#     omp = data_dir() / 'OmpK.fasta'
+#     ref_file = data_dir() / 'Kleborate_AMRdb_v3.3.fasta'
+
+#     # Run minimap and get results
+#     res_hits = resminimap_assembly(
+#         assembly,
+#         minimap2_index,
+#         ref_file,
+#         gene_info,
+#         qrdr,
+#         trunc,
+#         omp,
+#         args.kpsc__amr_min_coverage,
+#         args.kpsc__amr_min_identity,
+#         args.kpsc__amr_min_spurious_coverage,
+#         args.kpsc__amr_min_spurious_identity
+#     )
+
+#     # --- software and database metadata ---
+#     res_hits['Software_name'] = 'Kleborate'
+#     res_hits['Software_version'] = get_version()
+#     res_hits['Reference_database_name'] = 'Kleborate_AMRdb'
+#     res_hits['Reference_database_version'] = '3.3.0'
+
+#     # --- map alleles to amrdb ARO_accessions and amrdb_class---
+#     allele_to_accession = {}
+#     allele_to_drug_class = {}
+#     drug_class_to_accession = {}
+
+#     with open(data_dir() / 'Kleborate_AMRdb_v3.3.csv', newline='', encoding='utf-8') as csvfile:
+#         reader = csv.DictReader(csvfile, delimiter=',', skipinitialspace=True)
+#         for row in reader:
+#             allele = row['allele'].strip()
+#             accession = row['ARO_class'].strip()
+#             drug_class = row.get('CARD_class', '-').strip()
+#             if allele:
+#                 allele_to_accession[allele] = accession
+#                 allele_to_drug_class[allele] = drug_class
+#             # Build reverse mapping for mutation lookup
+#             if drug_class and accession:
+#                 if drug_class not in drug_class_to_accession:
+#                     drug_class_to_accession[drug_class] = accession
+
+#     sorted_alleles = sorted(allele_to_accession.keys(), key=len, reverse=True)
+
+#     # --- Define mutation drug class mapping ---
+#     mutation_drug_class = {
+#         'SHV_mutations': 'penicillin beta-lactam',
+#         'Col_mutations': 'peptide antibiotic',
+#         'Omp_mutations': '',  # OMP is not class specific
+#         'Flq_mutations': 'fluoroquinolone antibiotic'
+#     }
+
+#     # --- Reference accession and drug class assignment ---
+#     for category in res_hits:
+#         if not isinstance(res_hits[category], list):
+#             continue
+
+#         #  retrieve drug class for mutation category
+#         mutation_class = mutation_drug_class.get(category, None)
+#         mutation_accession = None
+
+#         if mutation_class:
+#             mutation_accession = drug_class_to_accession.get(mutation_class, '-')
+
+#         # Iterate through individual hits
+#         for hit in res_hits[category]:
+#             # process only lists with metadata
+#             if not isinstance(hit, list) or len(hit) < 2:
+#                 continue
+#             # extract gene name
+#             gene_name = hit[0]
+#             merged = {}
+#             # merge all metadata
+#             for elem in hit[1:]:
+#                 if isinstance(elem, dict):
+#                     merged.update(elem)
+            
+#             matched_accession = None
+#             matched_drug_class = None
+
+#             # Mutation fields
+#             if mutation_class is not None:
+#                 # use the mapped class, and accession 
+#                 matched_drug_class = mutation_class
+#                 matched_accession = mutation_accession
+#             else:
+#                 # map gene to accession
+#                 if gene_name in allele_to_accession:
+#                     matched_accession = allele_to_accession[gene_name]
+#                     matched_drug_class = allele_to_drug_class.get(gene_name, '-')
+#                 else:
+#                     # find the longest matching prefix
+#                     for allele in sorted_alleles:
+#                         if gene_name.startswith(allele):
+#                             matched_accession = allele_to_accession[allele]
+#                             matched_drug_class = allele_to_drug_class.get(allele, '-')
+#                             break
+#             # Add accession and drug class
+#             merged['Reference_accession'] = matched_accession if matched_accession else '-'
+#             merged['Drug_class'] = matched_drug_class if matched_drug_class else '-'
+
+#             for elem in hit[1:]:
+#                 if isinstance(elem, dict):
+#                     elem['Reference_accession'] = merged['Reference_accession']
+#                     elem['Drug_class'] = merged['Drug_class']
+
+#     # Format the res_hits dictionary
+#     res_hits = format_res_hits(res_hits, full_headers)
+
+#     # Double check that all results correspond to a header in full_headers
+#     for h in res_hits.keys():
+#         if h not in full_headers:
+#             sys.exit(f'Error: results contained a value ({h}) that is not covered by the full_headers')
+
+#     # Return a dictionary with values from res_hits or '-'
+#     return {r: res_hits[r] if r in res_hits else '-' for r in full_headers}
 
 

@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga
+Copyright 2026 Mary Maranga
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -71,10 +71,6 @@ def parse_arguments(args, all_module_names, modules):
                              help=f'Module presets, choose from: ' + ', '.join(get_presets()))
     module_args.add_argument('-m', '--modules', type=str,
                              help='Comma-delimited list of Kleborate modules to use')
-    
-    # # arg for cgmlst DB
-    # module_args.add_argument('--kpsc_cgmlst_db', type=str,
-    #                          help='Path to the database for kpsc__cgmlst module')
 
     add_module_cli_arguments(parser, args, all_module_names, modules)
 
@@ -334,10 +330,10 @@ def get_used_module_names(args, all_module_names, presets):
         pass_modules = presets[args.preset].get('pass', []) 
 
         if args.preset == 'escherichia' and args.modules is None:
-            pass_modules = [module for module in pass_modules if module != 'escherichia__mlst_pasteur']
-
-        if args.preset == 'kpsc':
-             pass_modules = [module for module in pass_modules if module != 'kpsc__cgmlst']
+            pass_modules = [
+                module for module in pass_modules 
+                if module not in ('escherichia__mlst_pasteur', 'escherichia__vfdb')
+            ]
 
         module_names += check_modules + pass_modules  # Combine check and pass modules for the overall list
 
@@ -558,7 +554,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
     prefix = 'kpsc__amr__'
 
     def clean(val):
-    # strip any “-digits%” suffix
         val = re.sub(r'-\d+%$', '', val)
         return val.translate(str.maketrans('', '', '^*?')).strip()
 
@@ -592,32 +587,27 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
             row = {
                 'Input_file_name': input_file_name,
                 'Gene_symbol': variant,
-                'Mutation': '-',
+                'Nucleotide_mutation': '',
+                'Amino_acid_mutation': '',
                 'Software_name': software_name,
                 'Software_version': software_version,
                 'Reference_database_name': db_name,
                 'Reference_database_version': db_version
             }
 
-            # set annottaion field for each variant
+            # set annotation field for each variant
             for field in annotation_fields:
                 ann_key = prefix + field
                 ann_values = parsed.get(ann_key, [])
-                matched_val = '-'
+                matched_val = ''
                 for item in ann_values:
-                    # Custom parsing for Reference_accession to handle nested colons
-                    if field == 'Reference_accession' and 'ARO:' in item:
-                        idx = item.find('ARO:')
-                        g = item[:idx-1]
-                        v = item[idx:]
+                    if ':' in item:
+                        idx = item.rfind(':')
+                        g = item[:idx]
+                        v = item[idx+1:]
                     else:
-                        if ':' in item:
-                            idx = item.rfind(':')
-                            g = item[:idx]
-                            v = item[idx+1:]
-                        else:
-                            g = item
-                            v = item
+                        g = item
+                        v = item
                     if clean(g) == variant:
                         matched_val = v
                         break
@@ -628,7 +618,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
             rows.append(row)
 
-    # ----- MUTATIONS-----
+    # ----- MUTATIONS -----
     for header in mutation_variant_headers:
         key = prefix + header
         variants = parsed.get(key, [])
@@ -649,10 +639,19 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
             if Gene_symbol.startswith('SHV') and not Gene_symbol.startswith('bla'):
                 Gene_symbol = 'bla' + Gene_symbol
 
+            # Split mutation into nucleotide vs amino acid
+            nucleotide_mutation = ''
+            amino_acid_mutation = ''
+            if mutation.startswith('p.'):
+                amino_acid_mutation = mutation
+            elif mutation.startswith('c.'):
+                nucleotide_mutation = mutation
+
             row = {
                 'Input_file_name': input_file_name,
                 'Gene_symbol': Gene_symbol,
-                'Mutation': mutation,
+                'Nucleotide_mutation': nucleotide_mutation,
+                'Amino_acid_mutation': amino_acid_mutation,
                 'Software_name': software_name,
                 'Software_version': software_version,
                 'Reference_database_name': db_name,
@@ -663,20 +662,15 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
             for field in annotation_fields:
                 ann_key = prefix + field
                 ann_values = parsed.get(ann_key, [])
-                matched_val = '-'
+                matched_val = ''
                 for item in ann_values:
-                    if field == 'Reference_accession' and 'ARO:' in item:
-                        idx = item.find('ARO:')
-                        g = item[:idx-1]
-                        v = item[idx:]
+                    if ':' in item:
+                        idx = item.rfind(':')
+                        g = item[:idx]
+                        v = item[idx+1:]
                     else:
-                        if ':' in item:
-                            idx = item.rfind(':')
-                            g = item[:idx]
-                            v = item[idx+1:]
-                        else:
-                            g = item
-                            v = item
+                        g = item
+                        v = item
                     if clean(g) == variant:
                         matched_val = v
                         break
@@ -685,31 +679,194 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
     # set software and database information
     for row in rows:
-        if row['Software_name'] in ['-', ''] or row['Software_version'] in ['-', ''] \
-           or row['Reference_database_name'] in ['-', ''] or row['Reference_database_version'] in ['-', '']:
+        if row['Software_name'] in ['', '-'] or row['Software_version'] in ['', '-'] \
+           or row['Reference_database_name'] in ['', '-'] or row['Reference_database_version'] in ['', '-']:
             row['Software_name'] = software_name
             row['Software_version'] = software_version
             row['Reference_database_name'] = db_name
             row['Reference_database_version'] = db_version
 
-
     # Define the output columns
-    headers = ['Input_file_name', 'Gene_symbol', 'Mutation'] + annotation_fields
+    headers = ['Input_file_name', 'Gene_symbol', 'Nucleotide_mutation', 'Amino_acid_mutation'] + annotation_fields
 
-    # Use the shared file_lock to prevent duplicate headers and row interleaving
     with file_lock:
         with open(outfile, 'at') as f:
-            # Check if the file is new/empty while holding the lock
             if f.tell() == 0:
                 f.write('\t'.join(headers) + '\n')
-            
+
             for row in rows:
-                # Formatting the values to match your style (stripping brackets and quotes)
                 line = '\t'.join([
-                    str(row.get(h, '-')).strip("[]").replace("'", "") 
+                    str(row.get(h, '')).strip("[]").replace("'", "")
                     for h in headers
                 ])
                 f.write(line + '\n')
+
+
+
+# def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, outfile, results, trim_headers=False):
+#     input_file_name = results['strain']
+
+#     mutation_variant_headers = [
+#         'SHV_mutations', 'Omp_mutations', 'Col_mutations', 'Flq_mutations'
+#     ]
+
+#     acquired_res_headers = [h for h in res_headers if h not in mutation_variant_headers]
+
+#     prefix = 'kpsc__amr__'
+
+#     def clean(val):
+#     # strip any “-digits%” suffix
+#         val = re.sub(r'-\d+%$', '', val)
+#         return val.translate(str.maketrans('', '', '^*?')).strip()
+
+#     parsed = {}
+#     for k, v in results.items():
+#         if isinstance(v, list) and v:
+#             val = v[0]
+#             if isinstance(val, str) and val != '-':
+#                 parsed[k] = [clean(x) for x in val.split(';')]
+#             else:
+#                 parsed[k] = []
+#         else:
+#             parsed[k] = []
+
+#     rows = []
+
+#     software_name = results['kpsc__amr__Software_name']
+#     software_version = results['kpsc__amr__Software_version']
+#     db_name = results['kpsc__amr__Reference_database_name']
+#     db_version = results['kpsc__amr__Reference_database_version']
+
+
+#     # ----- ACQUIRED GENES -----
+#     for header in acquired_res_headers:
+#         key = prefix + header
+#         variants = parsed.get(key, [])
+#         for variant in variants:
+#             if not variant or variant == '-':
+#                 continue
+
+#             row = {
+#                 'Input_file_name': input_file_name,
+#                 'Gene_symbol': variant,
+#                 'Mutation': '-',
+#                 'Software_name': software_name,
+#                 'Software_version': software_version,
+#                 'Reference_database_name': db_name,
+#                 'Reference_database_version': db_version
+#             }
+
+#             # set annottaion field for each variant
+#             for field in annotation_fields:
+#                 ann_key = prefix + field
+#                 ann_values = parsed.get(ann_key, [])
+#                 matched_val = '-'
+#                 for item in ann_values:
+#                     # Custom parsing for Reference_accession to handle nested colons
+#                     if field == 'Reference_accession' and 'ARO:' in item:
+#                         idx = item.find('ARO:')
+#                         g = item[:idx-1]
+#                         v = item[idx:]
+#                     else:
+#                         if ':' in item:
+#                             idx = item.rfind(':')
+#                             g = item[:idx]
+#                             v = item[idx+1:]
+#                         else:
+#                             g = item
+#                             v = item
+#                     if clean(g) == variant:
+#                         matched_val = v
+#                         break
+#                 row[field] = matched_val
+
+#             if header == 'Flq_acquired':
+#                 row['Drug_class'] = 'Fluoroquinolone antibiotic'
+
+#             rows.append(row)
+
+#     # ----- MUTATIONS-----
+#     for header in mutation_variant_headers:
+#         key = prefix + header
+#         variants = parsed.get(key, [])
+#         for variant in variants:
+#             if not variant or variant == '-':
+#                 continue
+
+#             # Extract gene symbol and mutation after first colon
+#             if ':' in variant:
+#                 Gene_symbol, mutation = variant.split(':', 1)
+#             elif '-' in variant:
+#                 Gene_symbol = variant.split('-')[0]
+#                 mutation = variant
+#             else:
+#                 Gene_symbol = variant
+#                 mutation = variant
+
+#             if Gene_symbol.startswith('SHV') and not Gene_symbol.startswith('bla'):
+#                 Gene_symbol = 'bla' + Gene_symbol
+
+#             row = {
+#                 'Input_file_name': input_file_name,
+#                 'Gene_symbol': Gene_symbol,
+#                 'Mutation': mutation,
+#                 'Software_name': software_name,
+#                 'Software_version': software_version,
+#                 'Reference_database_name': db_name,
+#                 'Reference_database_version': db_version
+#             }
+
+#             # add annotation field for each variant
+#             for field in annotation_fields:
+#                 ann_key = prefix + field
+#                 ann_values = parsed.get(ann_key, [])
+#                 matched_val = '-'
+#                 for item in ann_values:
+#                     if field == 'Reference_accession' and 'ARO:' in item:
+#                         idx = item.find('ARO:')
+#                         g = item[:idx-1]
+#                         v = item[idx:]
+#                     else:
+#                         if ':' in item:
+#                             idx = item.rfind(':')
+#                             g = item[:idx]
+#                             v = item[idx+1:]
+#                         else:
+#                             g = item
+#                             v = item
+#                     if clean(g) == variant:
+#                         matched_val = v
+#                         break
+#                 row[field] = matched_val
+#             rows.append(row)
+
+#     # set software and database information
+#     for row in rows:
+#         if row['Software_name'] in ['-', ''] or row['Software_version'] in ['-', ''] \
+#            or row['Reference_database_name'] in ['-', ''] or row['Reference_database_version'] in ['-', '']:
+#             row['Software_name'] = software_name
+#             row['Software_version'] = software_version
+#             row['Reference_database_name'] = db_name
+#             row['Reference_database_version'] = db_version
+
+
+#     # Define the output columns
+#     headers = ['Input_file_name', 'Gene_symbol', 'Mutation'] + annotation_fields
+
+#     # Use the shared file_lock to prevent duplicate headers and row interleaving
+#     with file_lock:
+#         with open(outfile, 'at') as f:
+#             # Check if the file is new/empty while holding the lock
+#             if f.tell() == 0:
+#                 f.write('\t'.join(headers) + '\n')
+            
+#             for row in rows:
+#                 # Formatting the values to match your style (stripping brackets and quotes)
+#                 line = '\t'.join([
+#                     str(row.get(h, '-')).strip("[]").replace("'", "") 
+#                     for h in headers
+#                 ])
+#                 f.write(line + '\n')
 
 
 

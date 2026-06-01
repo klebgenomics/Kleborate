@@ -20,8 +20,9 @@ import re
 import tempfile
 from pathlib import Path
 
+
 def description():
-    return 'Klebsiella cgMLST and LINcodes typing with MIST'
+    return 'E.coli cgMLST and LINcodes typing with MIST'
 
 
 def prerequisite_modules():
@@ -29,7 +30,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['cgST', 'LIN code','Sublineage', 'Clonal group']
+    full_headers = ['cgST', 'LINcodes','Sublineage', 'Clonal group']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -52,25 +53,31 @@ def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
+
 def extract_lincode_from_stdout(stdout):
+    """
+    Extracts scgST, LINcode, Clonal Group, and Sublineage from stdout.
+    """
+    results = {}
 
-    results = {
-        'cgST': '-',
-        'LINcodes': '-',
-        'Clonal group': '-',
-        'Sublineage': '-'
-    }
-
-    st_match = re.search(r'Best matching: (scgST-(\d+))', stdout)
+    # Regex patterns
+    st_match = re.search(r'Best matching: (scgST-\d+)', stdout)
     lin_match = re.search(r'LINcode for scgMST-\d+: ([\d_]+|-|n/a)', stdout, re.IGNORECASE)
     partial_lin_match = re.search(r'Partial LINcode for input strain: ([\d_*]+)', stdout)
     
+    # New patterns for Clonal group and Sublineage
     cg_match = re.search(r'Clonal group:\s*(.+)', stdout)
     sl_match = re.search(r'Sublineage:\s*(.+)', stdout)
 
+    # Extract scgST
     if st_match:
-        results['cgST'] = st_match.group(2)
+        try:
+            st_value = st_match.group(1).split('-')[1]
+            results['cgST'] = int(st_value)
+        except (IndexError, ValueError):
+            pass
 
+    # Extract LINcode (Full or Partial fallback)
     lin_value = lin_match.group(1) if lin_match else 'n/a'
     
     if lin_value.lower() in {'n/a', '-'} or not lin_match:
@@ -79,65 +86,20 @@ def extract_lincode_from_stdout(stdout):
     else:
         results['LINcodes'] = lin_value
 
+    # Extract Clonal Group and Sublineage
     if cg_match:
-        val = cg_match.group(1).strip()
-        results['Clonal group'] = '-' if val.lower() == 'n/a' else val
+        results['Clonal group'] = cg_match.group(1).strip()
         
     if sl_match:
-        val = sl_match.group(1).strip()
-        results['Sublineage'] = '-' if val.lower() == 'n/a' else val
+        results['Sublineage'] = sl_match.group(1).strip()
 
     return results
 
 
 
-# def extract_lincode_from_stdout(stdout):
-#     """
-#     Extracts scgST, LINcode, Clonal Group, and Sublineage from stdout.
-#     """
-#     results = {}
-
-#     # Regex patterns
-#     st_match = re.search(r'Best matching: (scgST-\d+)', stdout)
-#     print(st_match)
-#     lin_match = re.search(r'LINcode for scgMST-\d+: ([\d_]+|-|n/a)', stdout, re.IGNORECASE)
-#     partial_lin_match = re.search(r'Partial LINcode for input strain: ([\d_*]+)', stdout)
-    
-#     # New patterns for Clonal group and Sublineage
-#     cg_match = re.search(r'Clonal group:\s*(.+)', stdout)
-#     sl_match = re.search(r'Sublineage:\s*(.+)', stdout)
-
-#     # Extract scgST
-#     if st_match:
-#         try:
-#             st_value = st_match.group(1).split('-')[1]
-#             results['cgST'] = int(st_value)
-#         except (IndexError, ValueError):
-#             pass
-
-#     # Extract LINcode (Full or Partial fallback)
-#     lin_value = lin_match.group(1) if lin_match else 'n/a'
-    
-#     if lin_value.lower() in {'n/a', '-'} or not lin_match:
-#         if partial_lin_match:
-#             results['LINcodes'] = partial_lin_match.group(1)
-#     else:
-#         results['LINcodes'] = lin_value
-
-#     # Extract Clonal Group and Sublineage
-#     if cg_match:
-#         results['Clonal group'] = cg_match.group(1).strip()
-        
-#     if sl_match:
-#         results['Sublineage'] = sl_match.group(1).strip()
-
-#     return results
-
-
-
 def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
     """
-    Runs MiST and mist_to_partial_lincode.py to extract LINcodes for an assembly, extracts the cgST and Lincode
+    Runs MiST and mist_to_partial_lincode.py to extract LINcodes for an assembly, extracts the cgST and Lincode.
 
     """
     assembly_id = assembly.stem
@@ -179,64 +141,33 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
         return results
 
 
-
-
 def get_results(assembly, minimap2_index, args, previous_results):
-
+    """
+    Returns:
+        - "cgST": best matching scgST
+        - "LINcodes": full LINcode string
+    """
     if isinstance(assembly, str):
         assembly = pathlib.Path(assembly)
-        
     db_path = data_dir() / "kleb_scgmlst_s-index"
     mist_script_path = data_dir() / "mist_to_partial_lincode.py"
-    
+    if not db_path.exists():
+        pass
+    if not mist_script_path.exists():
+        pass
     try:
         extracted_data = run_mist_and_extract_lincode(assembly, db_path, mist_script_path)
-        
-        raw_st = extracted_data.get('cgST', '-')
-        formatted_cgst = f"cgST{raw_st}" if raw_st != '-' else "-"
-        
+        formatted_cgst = f"cgST{extracted_data['cgST']}"
         return {
             "cgST": formatted_cgst,
-            "LIN code": extracted_data.get('LINcodes', '-'),
-            "Sublineage": extracted_data.get('Sublineage', '-'),
-            "Clonal group": extracted_data.get('Clonal group', '-')
+            "LIN code": extracted_data['LINcodes'],
+            "Sublineage":extracted_data['Sublineage'],
+            "Clonal group" : extracted_data['Clonal group']
         }
-    except Exception as e:
+    except Exception:
         return {
             "cgST": "-",
             "LIN code": "-",
             "Sublineage": "-",
             "Clonal group": "-"
         }
-
-
-# def get_results(assembly, minimap2_index, args, previous_results):
-#     """
-#     Returns:
-#         - "cgST": best matching scgST
-#         - "LINcodes": full LINcode string
-#     """
-#     if isinstance(assembly, str):
-#         assembly = pathlib.Path(assembly)
-#     db_path = data_dir() / "kleb_scgmlst_s-index"
-#     mist_script_path = data_dir() / "mist_to_partial_lincode.py"
-#     if not db_path.exists():
-#         pass
-#     if not mist_script_path.exists():
-#         pass
-#     try:
-#         extracted_data = run_mist_and_extract_lincode(assembly, db_path, mist_script_path)
-#         formatted_cgst = f"cgST{extracted_data['cgST']}"
-#         return {
-#             "cgST": formatted_cgst,
-#             "LIN code": extracted_data['LINcodes'],
-#             "Sublineage":extracted_data['Sublineage'],
-#             "Clonal group" : extracted_data['Clonal group']
-#         }
-#     except Exception:
-#         return {
-#             "cgST": "-",
-#             "LIN code": "-",
-#             "Sublineage": "-",
-#             "Clonal group": "-"
-#         }

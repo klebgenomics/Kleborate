@@ -112,11 +112,17 @@ def get_res_headers(res_classes, bla_classes):
 
 def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_coverage, min_identity, min_spurious_coverage, min_spurious_identity):
     """
-    Version with try-except blocks removed.
+    This function takes:
+    * assembly:  assembly in FASTA format
+    * ref_file: a path for a CARD reference in FASTA format
+    * minimap2_index: a path for the assembly's minimap2 index (for faster alignment) (optional)
+    * min_identity: hits with a lower percent identity than this are discarded
+    
+    This function returns:
+    * dictionary with SHV mutations, truncated_resistance_hits, spurious_resistance_hits, _acquired mutations
     """
     hits_dict = collections.defaultdict(list) 
 
-    # Alignment and culling
     alignment_hits = align_query_to_ref(ref_file, assembly, ref_index=minimap2_index, min_identity=min_identity, min_query_coverage=min_spurious_coverage)
     alignment_hits = cull_redundant_hits(alignment_hits)
 
@@ -148,14 +154,14 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
             if hit_class == 'Bla' and hit_bla_class:
                 hit_class = hit_bla_class
 
-            # Handle SHV mutations
+            # SHV mutations
             for mut in shv_muts:
                 mut_str, mut_metadata = mut
                 mut_metadata['Genetic_variation_type'] = 'Protein variant detected'
                 hits_dict['SHV_mutations'].append([mut_str, mut_metadata])
 
             if omega_loop_seq is not None:
-                hits_dict['SHV_mutations'].append([f'omega-loop={omega_loop_seq}', {'Genetic_variation_type': 'Protein variant detected'}])
+                hits_dict['SHV_mutations'].append([f'blaSHV:p.{omega_loop_seq}', {'Genetic_variation_type': 'Protein variant detected'}])
 
             if not hits_dict['SHV_mutations']:
                 del hits_dict['SHV_mutations']
@@ -214,10 +220,10 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
                 'Input_gene_start': hit.ref_start,
                 'Input_gene_stop': hit.ref_end,
                 'Reference_gene_length': hit.query_length,
-                'Reference_gene_start': hit.query_start,
+                'Reference_gene_start': hit.query_start + 1,
                 'Reference_gene_stop': hit.query_end,
-                'Sequence_identity': f"{hit.percent_identity:.2f}%",
-                'Coverage': f"{coverage:.2f}%",
+                'Sequence_identity': f"{hit.percent_identity:.2f}",
+                'Coverage': f"{coverage:.2f}",
                 'Strand_orientation': hit.strand
             }
 
@@ -307,6 +313,7 @@ def get_mapping_by_query_pos(alignment):
     return query_pos_map
  
     
+
 # def get_mapping_by_query_pos(alignment):
 #     """
 #     """

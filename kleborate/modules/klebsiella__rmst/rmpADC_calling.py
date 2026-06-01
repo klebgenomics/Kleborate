@@ -31,6 +31,7 @@ def check_polyT_tract(hits_per_gene, assembly):
     Returns 'untypable' if rmpA is found but the pattern is not matched.
     """
     poly_t_status_map = {
+        7: "reduced expression",
         8: "reduced expression",
         9: "reduced expression",
         10: "reduced expression",
@@ -75,6 +76,7 @@ def check_polyT_tract(hits_per_gene, assembly):
                 
                 # Search for G(T+)A and check length
                 match = poly_t_pattern.search(upstream_seq)
+                # print(upstream_seq)
 
                 if match:
                     poly_t_string = match.group(1)

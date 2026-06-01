@@ -51,9 +51,9 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    if not shutil.which('Kaptive'):
+        sys.exit('Error: could not find kaptive')
+    return ['kaptive']
 
 
 def data_dir():

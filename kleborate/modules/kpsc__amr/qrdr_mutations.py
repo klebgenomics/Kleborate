@@ -68,6 +68,22 @@ def check_for_qrdr_mutations(hits_dict, assembly, qrdr, min_identity, min_covera
             else:
                 assert False
 
+            coords = alignments[0].coordinates
+            ref_protein_start  = int(coords[0, 0]) + 1
+            ref_protein_stop   = int(coords[0, -1])
+            ref_protein_length = ref_protein_stop - ref_protein_start + 1
+
+            input_protein_start  = int(coords[1, 0]) + 1
+            input_protein_length = int(coords[1, -1]) - input_protein_start + 1
+
+            hit_data.update({
+                'Input_protein_length':     input_protein_length,
+                'Input_protein_start':      input_protein_start,
+                'Reference_protein_length': ref_protein_length,
+                'Reference_protein_start':  ref_protein_start,
+                'Reference_protein_stop':   ref_protein_stop,
+            })
+
             bases_per_ref_pos = get_bases_per_ref_pos(alignments[0])
             loci = qrdr_loci[hit.query_name]
 
@@ -77,12 +93,12 @@ def check_for_qrdr_mutations(hits_dict, assembly, qrdr, min_identity, min_covera
                 if pos in bases_per_ref_pos and assembly_base != wt_base \
                         and assembly_base != '-' and assembly_base != '.':
                     
-                    # Updated to use single-letter code
                     mutation = f"{hit.query_name}:p.{wt_base}{pos}{assembly_base}"
                     snps.append([mutation, {'Genetic_variation_type': 'Protein variant detected'},hit_data])
 
     if snps:
         hits_dict['Flq_mutations'].extend(snps)
+
 
 
 # def check_for_qrdr_mutations(hits_dict, assembly, qrdr, min_identity, min_coverage):

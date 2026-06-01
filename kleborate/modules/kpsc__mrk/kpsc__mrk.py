@@ -36,6 +36,7 @@ def get_headers():
 
 
 
+
 def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
@@ -46,6 +47,7 @@ def add_cli_options(parser):
     group.add_argument('--klebsiella_pneumo_complex__mrk_mlst_required_exact_matches', type=int, default=4,
                        help='At least this many exact matches are required to call an ST')
     return group
+
 
 
 

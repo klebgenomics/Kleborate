@@ -138,6 +138,7 @@ def align_query_to_ref(query_filename, ref_filename, ref_index=None, preset='map
          alignments = [a for a in alignments if a.query_cov >= min_query_coverage]
      return alignments
 
+
 def get_expanded_cigar(cigar):
     """
     Takes in a normal CIGAR string and returns an expanded version.
@@ -173,6 +174,7 @@ def overlapping(hit, existing_hits):
     return False
   
 
+
 def cull_redundant_hits(minimap_hits):
     
     # Sort the hits from best to worst. Hit quality is defined as the product of gene coverage,identity and score
@@ -186,6 +188,7 @@ def cull_redundant_hits(minimap_hits):
             filtered_minimap_hits.append(h)
 
     return filtered_minimap_hits
+
 
 
 def truncation_check(alignment, cov_threshold=90.0): 
@@ -215,6 +218,7 @@ def truncation_check(alignment, cov_threshold=90.0):
         return '', coverage, translation
     else:
         return '-{:.0f}%'.format(coverage), coverage, translation
+
 
 
 def check_for_exact_aa_match(ref_file, hit, contigs):
@@ -303,19 +307,6 @@ def is_exact_aa_match(gene_nucl_seq_1, ref_nucl_seq):
     return (ref_prot in gene_prot_1) or (ref_prot in gene_prot_2) or (ref_prot in gene_prot_3)
 
 
-# def translate_nucl_to_prot(nucl_seq):
-#     # First try to translate as a complete coding sequence. This will allow for alternative start
-#     # codons (e.g. GTG -> M) if it works. We have to manually add the stop codon (*) here because
-#     # using cds=True turns that off.
-#     try:
-#         return str(Seq(nucl_seq).translate(table='Bacterial', to_stop=False, cds=True)) + '*'
-#     except TranslationError:
-#         pass
-
-#     # If that failed, we will translate in a more relaxed way using a nucleotide sequence truncated
-#     # to a multiple-of-three length.
-#     truncated_nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
-#     return str(Seq(truncated_nucl_seq).translate(table='Bacterial', to_stop=False, cds=False))
 
 def get_bases_per_ref_pos(alignment):
     aligned_seq1, aligned_seq2 = alignment[0], alignment[1]
@@ -329,6 +320,7 @@ def get_bases_per_ref_pos(alignment):
         ref_pos += 1
     return bases_per_ref_pos
     
+
 
 def get_frameshift_info(alignment):
     """
@@ -375,7 +367,7 @@ def get_frameshift_info(alignment):
             if not is_frameshift:
                 continue
 
-            # Determine true frameshift position and amino acid
+            # Determine frameshift position and amino acid
             frameshift_ref_pos = ref_aa_position
             frameshift_ref_aa = ref_aa
 
@@ -472,6 +464,7 @@ def deletion_checks(alignment, ref_seq):
     return best_start, deleted_base
 
 
+
 def find_start_deletion_in_alignment(alignment):
     """
     Finds deletion if the hit does not start at the first base of the gene
@@ -490,6 +483,7 @@ def find_start_deletion_in_alignment(alignment):
         return f"c.({start_del})del"
     else:
         return f"c.({start_del}_{end_del})del"
+
 
 
 def translate_nucl_to_prot(nucl_seq):

@@ -132,13 +132,16 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     pos_177_mut, pos_177_aa = get_mut(ref_aligned, hit_aligned, 172, 177, 'A')
     pos_178_mut, pos_178_aa = get_mut(ref_aligned, hit_aligned, 173, 178, 'R')
 
-    omega_loop_seq = ''.join([pos_164_aa, pos_165_aa, pos_166_aa, pos_167_aa, pos_168_aa,
+    omega_loop_raw_seq = ''.join([pos_164_aa, pos_165_aa, pos_166_aa, pos_167_aa, pos_168_aa,
                               pos_169_aa, pos_170_aa, pos_171_aa, pos_172_aa, pos_173_aa,
                               pos_174_aa, pos_175_aa, pos_176_aa, pos_177_aa, pos_178_aa,
                               pos_179_aa])
                               
-    if omega_loop_seq == 'RWETELNEALPGDARD':  # if it's the same as SHV-1
+    if omega_loop_raw_seq == 'RWETELNEALPGDARD':  # if it's the same as SHV-1
         omega_loop_seq = None
+    else:
+        omega_loop_seq = f"164_179={omega_loop_raw_seq}"
+
 
     shv_mutations = [pos_025_mut, pos_035_mut, pos_069_mut, pos_130_mut, pos_146_mut, pos_148_mut,
                      pos_156_mut, pos_164_mut, pos_165_mut, pos_166_mut, pos_167_mut, pos_168_mut,
