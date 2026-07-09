@@ -55,7 +55,6 @@ def setup_bigsdb_credentials(token_path, key_name, site_name):
 
     install_dependencies()
     
-    # CHANGED: Use the pip-installed executable instead of downloading the script locally
     downloader_bin = shutil.which("bigsdb_downloader") or shutil.which("bigsdb_downloader.py")
     if not downloader_bin:
         print("\n[ERROR] 'bigsdb_downloader' command not found. Please install it via pip first:")
@@ -63,7 +62,6 @@ def setup_bigsdb_credentials(token_path, key_name, site_name):
         sys.exit(1)
     
     print("\n--- Pasteur Authentication Setup ---")
-    # CHANGED: Running the tool globally using its executable alias
     subprocess.run([downloader_bin, "--key_name", key_name, 
                     "--site", site_name, "--db", "pubmlst_klebsiella_seqdef", "--setup"], check=True)
 
@@ -137,12 +135,6 @@ if __name__ == "__main__":
 
 
 
-# import os
-# import sys
-# import shutil
-# import subprocess
-# import pathlib
-# import urllib.request
 
 # def install_dependencies():
 #     """Ensures the required libraries for BIGSdb_downloader are present."""
