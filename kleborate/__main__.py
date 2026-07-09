@@ -612,7 +612,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                         if set_mutation:
                             v = strip_mutation_from_accession(row, v, g)
                         else:
-                            v = strip_mutation_from_accession({}, v, g)  # discard mutations for non-matching
+                            v = strip_mutation_from_accession({}, v, g)
                     else:
                         v = strip_mutation_from_accession({}, v, g)
             else:
@@ -625,7 +625,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
     parsed = parse_results()
     rows = []
 
-    # Fields that should not be overwritten by the gene-matching loops
     global_software_fields = {
         'Analysis Software Name', 'Analysis Software Version', 
         'Reference Database Name', 'Reference Database Version'
@@ -642,7 +641,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
             for field in annotation_fields:
                 if field in global_software_fields:
-                    continue  # Skip to prevent overwriting the values set in base_row()
+                    continue  
                 
                 ann_values = parsed.get(prefix + field, [])
                 match_fn = lambda g, vc=var_clean: clean(g).split(':')[0].lower() == vc
@@ -681,7 +680,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
 
             for field in annotation_fields:
                 if field in global_software_fields:
-                    continue  # Skip to prevent overwriting the values set in base_row()
+                    continue 
 
                 ann_values = parsed.get(prefix + field, [])
                 match_fn = lambda g, ss=search_symbol: get_base_gene(g) == get_base_gene(ss)
@@ -698,239 +697,6 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                 f.write('\t'.join(headers) + '\n')
             for row in rows:
                 f.write('\t'.join(str(row.get(h, '')).strip("[]").replace("'", "") for h in headers) + '\n')
-
-
-
-
-# working
-# def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, outfile, results, trim_headers=False):
-#     input_file_name = results['strain']
-
-#     mutation_variant_headers = [
-#         'SHV_mutations', 'Omp_mutations', 'Col_mutations', 'Flq_mutations'
-#     ]
-
-#     acquired_res_headers = [h for h in res_headers if h not in mutation_variant_headers]
-
-#     prefix = 'kpsc__amr__'
-
-#     def clean(val):
-#         val = re.sub(r'-\d+%$', '', val)
-#         return val.translate(str.maketrans('', '', '^*?')).strip()
-
-#     # Helper: Extracts base gene names for matching values that have variants or positions
-#     def get_base_gene(val):
-#         val = clean(val)
-#         if ':' in val:
-#             val = val.split(':')[0]
-#         if '-' in val:
-#             val = val.split('-')[0]
-#         return val.lower()
-
-#     parsed = {}
-#     for k, v in results.items():
-#         if isinstance(v, list) and v:
-#             val = v[0]
-#             if isinstance(val, str) and val != '-':
-#                 parsed[k] = [clean(x) for x in val.split(';')]
-#             else:
-#                 parsed[k] = []
-#         else:
-#             parsed[k] = []
-
-#     rows = []
-
-#     software_name = results['kpsc__amr__Analysis Software Name']
-#     software_version = results['kpsc__amr__Analysis Software Version']
-#     db_name = results['kpsc__amr__Reference Database Name']
-#     db_version = results['kpsc__amr__Reference Database Version']
-
-
-#     # ----- ACQUIRED GENES -----
-#     for header in acquired_res_headers:
-#         key = prefix + header
-#         variants = parsed.get(key, [])
-#         for variant in variants:
-#             if not variant or variant == '-':
-#                 continue
-
-#             row = {
-#                 'Input File Name': input_file_name,
-#                 'Gene Symbol': variant,
-#                 'Nucleotide Mutation': '',
-#                 'Amino acid mutation': '',
-#                 'Analyis Software Name': software_name,
-#                 'Analysis Software Version': software_version,
-#                 'Reference Database Name': db_name,
-#                 'Reference Database Version': db_version
-#             }
-
-#             # set annotation field for each variant
-#             for field in annotation_fields:
-#                 ann_key = prefix + field
-#                 ann_values = parsed.get(ann_key, [])
-#                 matched_val = ''
-#                 for item in ann_values:
-#                     if ':' in item:
-#                         if field == 'Reference Accession':
-#                             idx = item.find(':')
-#                         else:
-#                             idx = item.rfind(':')
-#                         g = item[:idx]
-#                         v = item[idx+1:]
-
-#                         if field == 'Reference Accession':
-#                             if v.startswith('p.') or v.startswith('c.'):
-#                                 if v.startswith('c.'):
-#                                     row['Nucleotide mutation'] = v.split(':', 1)[0]
-#                                 v = v.split(':', 1)[1]
-#                             elif v.startswith('del:'):
-#                                 row['Nucleotide mutation'] = 'del'
-#                                 v = v.split(':', 1)[1]
-#                             elif ':' in v and ('del' in g or 'del' in v.split(':', 1)[0] or 'c.' in v.split(':', 1)[0]):
-#                                 prefix_mutation = v.split(':', 1)[0]
-#                                 if 'c.' in prefix_mutation or 'del' in prefix_mutation:
-#                                     row['Nucleotide mutation'] = prefix_mutation
-#                                 remaining_parts = v.split(':')
-#                                 if len(remaining_parts) > 1:
-#                                     v = ':'.join(remaining_parts[1:])
-#                     else:
-#                         g = item
-#                         v = item
-
-#                     g_clean = clean(g).split(':')[0].lower()
-#                     var_clean = clean(variant).lower()
-                    
-#                     if g_clean == var_clean:
-#                         matched_val = v
-#                         break
-#                 row[field] = matched_val
-
-#             if header == 'Flq_acquired':
-#                 row['Drug Class'] = 'Fluoroquinolone antibiotic'
-
-#             rows.append(row)
-
-
-#     # ----- MUTATIONS -----
-#     for header in mutation_variant_headers:
-#         key = prefix + header
-#         variants = parsed.get(key, [])
-#         for variant in variants:
-#             if not variant or variant == '-':
-#                 continue
-
-#             # Extract gene symbol and mutation after first colon
-#             if ':' in variant:
-#                 Gene_symbol, mutation = variant.split(':', 1)
-#             elif '-' in variant:
-#                 Gene_symbol = variant.split('-')[0]
-#                 mutation = variant
-#             else:
-#                 Gene_symbol = variant
-#                 mutation = variant
-
-#             search_symbol = Gene_symbol
-
-#             if Gene_symbol.startswith('SHV') and not Gene_symbol.startswith('bla'):
-#                 Gene_symbol = 'bla' + Gene_symbol
-
-#             # Split mutation into nucleotide vs amino acid
-#             numeric_mutation = ''
-#             nucleotide_mutation = ''
-#             amino_acid_mutation = ''
-#             if mutation.startswith('p.'):
-#                 amino_acid_mutation = mutation
-#             elif mutation.startswith('c.'):
-#                 nucleotide_mutation = mutation
-#             elif mutation == 'del':
-#                 nucleotide_mutation = 'del'
-
-#             row = {
-#                 'Input File Name': input_file_name,
-#                 'Gene Symbol': Gene_symbol,
-#                 'Nucleotide mutation': nucleotide_mutation,
-#                 'Amino acid mutation': amino_acid_mutation,
-#                 'Analysis Software name': software_name,
-#                 'Analysis Software version': software_version,
-#                 'Reference database name': db_name,
-#                 'Reference database version': db_version
-#             }
-
-#             # add annotation field for each variant
-#             for field in annotation_fields:
-#                 ann_key = prefix + field
-#                 ann_values = parsed.get(ann_key, [])
-#                 matched_val = ''
-#                 for item in ann_values:
-#                     if ':' in item:
-#                         if field == 'Reference Accession':
-#                             idx = item.find(':')
-#                         else:
-#                             idx = item.rfind(':')
-#                         g = item[:idx]
-#                         v = item[idx+1:]
-
-#                         if field == 'Reference Accession':
-#                             if get_base_gene(g) == get_base_gene(search_symbol):
-#                                 if v.startswith('p.') or v.startswith('c.'):
-#                                     if v.startswith('c.'):
-#                                         row['Nucleotide mutation'] = v.split(':', 1)[0]
-#                                     v = v.split(':', 1)[1]
-#                                 elif v.startswith('del:'):
-#                                     row['Nucleotide mutation'] = 'del'
-#                                     v = v.split(':', 1)[1]
-#                                 elif ':' in v and ('del' in g or 'del' in v.split(':', 1)[0] or 'c.' in v.split(':', 1)[0]):
-#                                     prefix_mutation = v.split(':', 1)[0]
-#                                     if 'c.' in prefix_mutation or 'del' in prefix_mutation:
-#                                         row['Nucleotide mutation'] = prefix_mutation
-#                                     remaining_parts = v.split(':')
-#                                     if len(remaining_parts) > 1:
-#                                         v = ':'.join(remaining_parts[1:])
-#                             else:
-#                                 if v.startswith('p.') or v.startswith('c.'):
-#                                     v = v.split(':', 1)[1]
-#                                 elif v.startswith('del:'):
-#                                     v = v.split(':', 1)[1]
-#                                 elif ':' in v and ('del' in g or 'del' in v.split(':', 1)[0] or 'c.' in v.split(':', 1)[0]):
-#                                     remaining_parts = v.split(':')
-#                                     if len(remaining_parts) > 1:
-#                                         v = ':'.join(remaining_parts[1:])
-#                     else:
-#                         g = item
-#                         v = item
-
-#                     if get_base_gene(g) == get_base_gene(search_symbol):
-#                         matched_val = v
-#                         break
-#                 row[field] = matched_val
-#             rows.append(row)
-
-#     # set software and database information
-#     for row in rows:
-#         if row['Analysis Software Name'] in ['', '-'] or row['Analysis Software version'] in ['', '-'] \
-#            or row['Reference Database Name'] in ['', '-'] or row['Reference Database Version'] in ['', '-']:
-#             row['Analysis Software Name'] = software_name
-#             row['Software Version'] = software_version
-#             row['Reference Database Name'] = db_name
-#             row['Reference Database Version'] = db_version
-
-#     # Define the output columns
-#     headers = ['Input File Name', 'Gene Symbol', 'Nucleotide mutation', 'Amino acid mutation'] + annotation_fields
-
-#     with file_lock:
-#         with open(outfile, 'at') as f:
-#             if f.tell() == 0:
-#                 f.write('\t'.join(headers) + '\n')
-
-#             for row in rows:
-#                 line = '\t'.join([
-#                     str(row.get(h, '')).strip("[]").replace("'", "")
-#                     for h in headers
-#                 ])
-#                 f.write(line + '\n')
-
-                
 
 
 
@@ -1053,150 +819,6 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
                 for row in rows:
                     line = "\t".join(str(row.get(col, "")) for col in header)
                     o.write(line + "\n")
-
-
-# def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=None):
-#     if typing_spec is None:
-#         typing_spec = KLEBSIELLA_TYPING_SPEC
-
-#     sample = results.get("strain", "")
-    
-#     confidence_map = {
-#         "species": "species_match",
-#         "K_locus": "K_locus_confidence",
-#         "O_locus": "O_locus_confidence"
-#     }
-
-#     header = [
-#         "sample", "genotyping_method", "genotyping_schema_taxon",
-#         "genotyping_database_name", "genotyping_database_version",
-#         "genotyping_schema_name", "genotyping_software_name",
-#         "genotyping_software_version", "genotype", "genotype_confidence_value", "genotype_predicted_phenotype"
-#     ]
-
-#     rows = []
-#     for genotype_field, meta in typing_spec.items():
-#         genotype_value = ""
-#         confidence_value = ""
-#         phenotype_value = "" 
-        
-#         target_phenotype_header = meta.get("genotype_predicted_phenotype")
-
-#         #  Subspecies 
-#         if genotype_field == "subspecies":
-#             st_raw = results.get("ST", "")
-#             match = re.search(r'\((subsp\.[^)]+)\)', str(st_raw))
-#             if match:
-#                 genotype_value = match.group(1)
-#             else:
-#                 continue 
-#         else:
-#             for res_key, res_val in results.items():
-#                 trimmed_key = res_key.split('__')[-1]
-                
-#                 if trimmed_key == genotype_field:
-#                     genotype_value = res_val
-
-#                 if genotype_field in confidence_map and trimmed_key == confidence_map[genotype_field]:
-#                     confidence_value = res_val
-                
-#                 if target_phenotype_header and trimmed_key == target_phenotype_header:
-#                     phenotype_value = res_val
-
-#         if genotype_value and genotype_value != "-":
-#             row = {
-#                 "sample": sample,
-#                 "genotyping_method": meta.get("genotyping_method", ""),
-#                 "genotyping_schema_taxon": meta.get("genotyping_schema_taxon", ""),
-#                 "genotyping_database_name": meta.get("genotyping_database_name", ""),
-#                 "genotyping_database_version": meta.get("genotyping_database_version", ""),
-#                 "genotyping_schema_name": meta.get("genotyping_schema_name", ""),
-#                 "genotyping_software_name": meta.get("genotyping_software_name", ""),
-#                 "genotyping_software_version": meta.get("genotyping_software_version", ""),
-#                 "genotype": genotype_value,
-#                 "genotype_confidence_value": confidence_value if confidence_value != "-" else "",
-#                 "genotype_predicted_phenotype": phenotype_value if phenotype_value != "-" else ""
-#             }
-#             rows.append(row)
-
-#     if rows:
-#         with file_lock:
-#             with open(outfile, "at") as o:
-#                 if o.tell() == 0:
-#                     o.write("\t".join(header) + "\n")
-                
-#                 for row in rows:
-#                     line = "\t".join(str(row.get(col, "")) for col in header)
-#                     o.write(line + "\n")
-
-
-
-# def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=None):
-#     if typing_spec is None:
-#         typing_spec = KLEBSIELLA_TYPING_SPEC
-
-#     sample = results.get("strain", "")
-    
-#     confidence_map = {
-#         "species": "species_match",
-#         "K_locus": "K_locus_confidence",
-#         "O_locus": "O_locus_confidence"
-#     }
-
-#     header = [
-#         "sample", "genotyping_method", "genotyping_schema_taxon",
-#         "genotyping_database_name", "genotyping_database_version",
-#         "genotyping_schema_name", "genotyping_software_name",
-#         "genotyping_software_version", "genotype", "genotype_confidence_value", "genotype_predicted_phenotype"
-#     ]
-
-#     rows = []
-#     for genotype_field, meta in typing_spec.items():
-#         genotype_value = "-"
-#         confidence_value = "-"
-#         phenotype_value = "-"  
-        
-#         target_phenotype_header = meta.get("genotype_predicted_phenotype")
-
-#         for res_key, res_val in results.items():
-#             trimmed_key = res_key.split('__')[-1]
-            
-#             if trimmed_key == genotype_field:
-#                 genotype_value = res_val
-
-#             if genotype_field in confidence_map and trimmed_key == confidence_map[genotype_field]:
-#                 confidence_value = res_val
-            
-#             if target_phenotype_header and trimmed_key == target_phenotype_header:
-#                 phenotype_value = res_val
-
-#         if genotype_value != "-" and genotype_value is not None:
-#             row = {
-#                 "sample": sample,
-#                 "genotyping_method": meta.get("genotyping_method", "-"),
-#                 "genotyping_schema_taxon": meta.get("genotyping_schema_taxon", "-"),
-#                 "genotyping_database_name": meta.get("genotyping_database_name", "-"),
-#                 "genotyping_database_version": meta.get("genotyping_database_version", "-"),
-#                 "genotyping_schema_name": meta.get("genotyping_schema_name", "-"),
-#                 "genotyping_software_name": meta.get("genotyping_software_name", "-"),
-#                 "genotyping_software_version": meta.get("genotyping_software_version", "-"),
-#                 "genotype_predicted_phenotype": phenotype_value,
-#                 "genotype": genotype_value,
-#                 "genotype_confidence_value": confidence_value
-#             }
-#             rows.append(row)
-
-#     if rows:
-#         with file_lock:
-#             # open in append-text mode
-#             with open(outfile, "at") as o:
-#                 if o.tell() == 0:
-#                     o.write("\t".join(header) + "\n")
-                
-#                 for row in rows:
-#                     # str(row.get(col, "-")) ensures we don't crash if a column key is missing
-#                     o.write("\t".join(str(row.get(col, "-")) for col in header) + "\n")
-
 
 
 def paper_refs():
