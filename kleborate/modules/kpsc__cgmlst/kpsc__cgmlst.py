@@ -61,15 +61,15 @@ def extract_lincode_from_stdout(stdout):
         'Sublineage': '-'
     }
 
-    st_match = re.search(r'Best matching: (scgST-(\d+))', stdout)
+    st_matches = re.findall(r'(?:Best matching: scgST-|Profile: scgST-)(\d+)', stdout)
     lin_match = re.search(r'LINcode for scgMST-\d+: ([\d_]+|-|n/a)', stdout, re.IGNORECASE)
     partial_lin_match = re.search(r'Partial LINcode for input strain: ([\d_*]+)', stdout)
     
-    cg_match = re.search(r'Clonal group:\s*(.+)', stdout)
-    sl_match = re.search(r'Sublineage:\s*(.+)', stdout)
+    cg_matches = re.findall(r'Clonal group:\s*(.+)', stdout)
+    sl_matches = re.findall(r'Sublineage:\s*(.+)', stdout)
 
-    if st_match:
-        results['cgST'] = st_match.group(2)
+    if st_matches:
+        results['cgST'] = "; ".join(dict.fromkeys(st_matches))
 
     lin_value = lin_match.group(1) if lin_match else 'n/a'
     
@@ -79,60 +79,15 @@ def extract_lincode_from_stdout(stdout):
     else:
         results['LINcodes'] = lin_value
 
-    if cg_match:
-        val = cg_match.group(1).strip()
-        results['Clonal group'] = '-' if val.lower() == 'n/a' else val
+    if cg_matches:
+        vals = [v.strip() for v in cg_matches if v.strip().lower() != 'n/a']
+        results['Clonal group'] = "; ".join(dict.fromkeys(vals)) if vals else '-'
         
-    if sl_match:
-        val = sl_match.group(1).strip()
-        results['Sublineage'] = '-' if val.lower() == 'n/a' else val
+    if sl_matches:
+        vals = [v.strip() for v in sl_matches if v.strip().lower() != 'n/a']
+        results['Sublineage'] = "; ".join(dict.fromkeys(vals)) if vals else '-'
 
     return results
-
-
-
-# def extract_lincode_from_stdout(stdout):
-#     """
-#     Extracts scgST, LINcode, Clonal Group, and Sublineage from stdout.
-#     """
-#     results = {}
-
-#     # Regex patterns
-#     st_match = re.search(r'Best matching: (scgST-\d+)', stdout)
-#     print(st_match)
-#     lin_match = re.search(r'LINcode for scgMST-\d+: ([\d_]+|-|n/a)', stdout, re.IGNORECASE)
-#     partial_lin_match = re.search(r'Partial LINcode for input strain: ([\d_*]+)', stdout)
-    
-#     # New patterns for Clonal group and Sublineage
-#     cg_match = re.search(r'Clonal group:\s*(.+)', stdout)
-#     sl_match = re.search(r'Sublineage:\s*(.+)', stdout)
-
-#     # Extract scgST
-#     if st_match:
-#         try:
-#             st_value = st_match.group(1).split('-')[1]
-#             results['cgST'] = int(st_value)
-#         except (IndexError, ValueError):
-#             pass
-
-#     # Extract LINcode (Full or Partial fallback)
-#     lin_value = lin_match.group(1) if lin_match else 'n/a'
-    
-#     if lin_value.lower() in {'n/a', '-'} or not lin_match:
-#         if partial_lin_match:
-#             results['LINcodes'] = partial_lin_match.group(1)
-#     else:
-#         results['LINcodes'] = lin_value
-
-#     # Extract Clonal Group and Sublineage
-#     if cg_match:
-#         results['Clonal group'] = cg_match.group(1).strip()
-        
-#     if sl_match:
-#         results['Sublineage'] = sl_match.group(1).strip()
-
-#     return results
-
 
 
 def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
@@ -179,8 +134,6 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
         return results
 
 
-
-
 def get_results(assembly, minimap2_index, args, previous_results):
 
     if isinstance(assembly, str):
@@ -193,7 +146,11 @@ def get_results(assembly, minimap2_index, args, previous_results):
         extracted_data = run_mist_and_extract_lincode(assembly, db_path, mist_script_path)
         
         raw_st = extracted_data.get('cgST', '-')
-        formatted_cgst = f"cgST{raw_st}" if raw_st != '-' else "-"
+        
+        if raw_st != '-':
+            formatted_cgst = "; ".join([f"cgST{st.strip()}" for st in raw_st.split(";")])
+        else:
+            formatted_cgst = "-"
         
         return {
             "cgST": formatted_cgst,
@@ -209,34 +166,3 @@ def get_results(assembly, minimap2_index, args, previous_results):
             "Clonal group": "-"
         }
 
-
-# def get_results(assembly, minimap2_index, args, previous_results):
-#     """
-#     Returns:
-#         - "cgST": best matching scgST
-#         - "LINcodes": full LINcode string
-#     """
-#     if isinstance(assembly, str):
-#         assembly = pathlib.Path(assembly)
-#     db_path = data_dir() / "kleb_scgmlst_s-index"
-#     mist_script_path = data_dir() / "mist_to_partial_lincode.py"
-#     if not db_path.exists():
-#         pass
-#     if not mist_script_path.exists():
-#         pass
-#     try:
-#         extracted_data = run_mist_and_extract_lincode(assembly, db_path, mist_script_path)
-#         formatted_cgst = f"cgST{extracted_data['cgST']}"
-#         return {
-#             "cgST": formatted_cgst,
-#             "LIN code": extracted_data['LINcodes'],
-#             "Sublineage":extracted_data['Sublineage'],
-#             "Clonal group" : extracted_data['Clonal group']
-#         }
-#     except Exception:
-#         return {
-#             "cgST": "-",
-#             "LIN code": "-",
-#             "Sublineage": "-",
-#             "Clonal group": "-"
-#         }

@@ -31,7 +31,7 @@ def prerequisite_modules():
 
 def get_headers():
     full_headers = ['mrkST', 'mrkA', 'mrkB', 'mrkC', 'mrkD', 'mrkF', 'mrkH', 'mrkI', 'mrkJ']
-    stdout_headers = ['mrkST']
+    stdout_headers = []
     return full_headers, stdout_headers
 
 
@@ -82,6 +82,10 @@ def get_results(assembly, minimap2_index, args, previous_results):
     st, _, alleles = mlst(assembly, minimap2_index, profiles, alleles, genes, None,
                           args.klebsiella_pneumo_complex__mrk_mlst_min_identity, args.klebsiella_pneumo_complex__mrk_mlst_min_coverage,
                           args.klebsiella_pneumo_complex__mrk_mlst_required_exact_matches)
+
+
+    if st == 'NA':
+        st = 0
 
     return {'mrkST': st,
             'mrkA': alleles['mrkA'], 'mrkB': alleles['mrkB'], 'mrkC': alleles['mrkC'],

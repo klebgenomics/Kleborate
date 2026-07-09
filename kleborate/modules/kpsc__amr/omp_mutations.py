@@ -51,7 +51,6 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
     )
 
     alignment_hits = align_query_to_ref(omp, assembly, min_query_coverage=None, min_identity=None)
-    # print(alignment_hits)
 
     if 'Omp_mutations' not in hits_dict:
         hits_dict['Omp_mutations'] = []
@@ -61,16 +60,16 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
         dna_hit_cov = hit.query_cov
 
         hit_data = {
-            'Input_sequence_ID': hit.ref_name,
-            'Input_gene_length': hit.ref_length,
-            'Input_gene_start': hit.ref_start,
-            'Input_gene_stop': hit.ref_end,
-            'Reference_gene_length': hit.query_length,
-            'Reference_gene_start': hit.query_start +1,
-            'Reference_gene_stop': hit.query_end,
-            'Sequence_identity': f"{hit.percent_identity:.2f}",
-            'Coverage': f"{coverage:.2f}%",
-            'Strand_orientation': hit.strand
+            'Input Sequence ID': hit.ref_name,
+            'Input Gene Length': hit.ref_length,
+            'Input Gene Start': hit.ref_start +1,
+            'Input Gene Stop': hit.ref_end,
+            'Reference Gene Length': hit.query_length,
+            'Reference Gene Start': hit.query_start +1,
+            'Reference Gene Stop': hit.query_end,
+            'Sequence Identity': f"{hit.percent_identity:.2f}",
+            'Coverage': f"{coverage:.2f}",
+            'Strand Orientation': hit.strand
         }
 
         # --- Frameshift and Deletion checks in OmpK35 ---
@@ -90,7 +89,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                     insertion_pos = insertion_checks(ompk35_aln)
                     ompK35_insertion = (
                         f"ompK35:p.{insertion_pos}",
-                        {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'}
                     )
 
 
@@ -99,7 +98,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                     deleted_base_pos = find_start_deletion_in_alignment(aln)
                     ompk35_deletion = (
                         f"ompK35:{deleted_base_pos}",
-                        {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'}
                     )
                 
                 elif best_ompk35_cov < 90.0 and ompk35_dna_cov > 90.0:
@@ -112,14 +111,14 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                             aa_pos, ref_aa, alt_aa, fs_len = fs_info
                             alt_str = aa_map.get(alt_aa, alt_aa)
                             fs_report = f"ompK35:p.{ref_aa}{aa_pos}{alt_str}" if fs_len == 0 else f"ompK35:p.{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
-                            ompk35_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                            ompk35_frameshift = (fs_report, {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'})
                 
                 elif best_ompk35_cov < 90.0 and ompk35_dna_cov < 90.0:
                     ompk35_dna_alignments = dna_aligner.align(ompk35_ref_seq, ompk35_query_seq)
                     del_info = deletion_checks(ompk35_dna_alignments[0], ompk35_ref_seq)
                     if del_info is not None:
                         pos, base = del_info
-                        ompk35_deletion = (f"ompK35:c.{base}{pos}del", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                        ompk35_deletion = (f"ompK35:c.{base}{pos}del", {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'})
 
         # --- Frameshift and Deletion checks in OmpK36 ---
         elif hit.query_name == 'OmpK36':
@@ -137,7 +136,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                     insertion_pos = insertion_checks(ompk36_dna_alignments )
                     ompK36_insertion = (
                         f"ompK35:p.{insertion_pos}",
-                        {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'}
                     )
 
 
@@ -146,7 +145,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                     deleted_base_pos = find_start_deletion_in_alignment(aln)
                     ompk36_deletion = (
                         f"ompK36:{deleted_base_pos}",
-                        {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'}
+                        {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'}
                     )
                 
                 elif best_ompk36_cov < 90.0 and ompk36_dna_cov > 90.0:
@@ -159,13 +158,13 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                             aa_pos, ref_aa, alt_aa, fs_len = fs_info
                             alt_str = aa_map.get(alt_aa, alt_aa)
                             fs_report = f"ompK36:p.{ref_aa}{aa_pos}{alt_str}" if fs_len == 0 else f"ompK36:p.{ref_aa}{aa_pos}{alt_str}fsTer{fs_len}"
-                            ompk36_frameshift = (fs_report, {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                            ompk36_frameshift = (fs_report, {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'})
                 
                 elif best_ompk36_cov < 90.0 and ompk36_dna_cov < 90.0:
                     del_info = deletion_checks(ompk36_dna_alignments[0], ompk36_ref_seq)
                     if del_info is not None:
                         pos, base = del_info
-                        ompk36_deletion = (f"ompK36:c.{base}{pos}del", {**hit_data, 'Genetic_variation_type': 'Inactivating mutation detected'})
+                        ompk36_deletion = (f"ompK36:c.{base}{pos}del", {**hit_data, 'Genetic Variation Type': 'Inactivating mutation detected'})
 
                 # ----- OmpK36 Nucleotide variant -----
                 bases_per_ref_pos = get_bases_per_ref_pos(ompk36_dna_alignments[0])
@@ -174,11 +173,15 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                     assembly_base = bases_per_ref_pos[pos]
                     ref_base = ompk36_ref_seq[pos - 1]
                     if ref_base == wt_base and assembly_base == 'T':
-                        hits_dict['Omp_mutations'].append([
-                            f"{hit.query_name}:c.{pos}{wt_base.upper()}>{assembly_base.upper()}",
-                            {'Genetic_variation_type': 'Nucleotide variant detected', **hit_data}
-                        ])
 
+                        hits_dict['Omp_mutations'].append([
+                            f"{hit.query_name[0].lower() + hit.query_name[1:]}:c.{pos}{wt_base.upper()}>{assembly_base.upper()}",
+                            {'Genetic Variation Type': 'Nucleotide variant detected', **hit_data}
+                        ])
+                        # hits_dict['Omp_mutations'].append([
+                        #     f"{hit.query_name}:c.{pos}{wt_base.upper()}>{assembly_base.upper()}",
+                        #     {'Genetic Variation Type': 'Nucleotide variant detected', **hit_data}
+                        # ])
                 # ----- OmpK36 L3 insertion checks -----
                 if coverage >= min_coverage and translation:
                     l3_insertion, insertion_type = None, None
@@ -198,7 +201,7 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                         
                         hits_dict['Omp_mutations'].append([
                             insertion_annotation,
-                            {'Genetic_variation_type': 'Protein variant detected', **hit_data}
+                            {'Genetic Variation Type': 'Inactivating mutation detected', **hit_data}
                         ])
 
     truncations = []
@@ -224,13 +227,13 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
     if ompk35_hit_data is None:
         hits_dict['Omp_mutations'].append([
             "ompK35:del", 
-            {"Genetic_variation_type": "Gene deletion", "Coverage": "0.00%"}
+            {"Genetic Variation Type": "Gene deletion detected", "Coverage": "0.00"}
         ])
 
     if ompk36_hit_data is None:
         hits_dict['Omp_mutations'].append([
             "ompK36:del", 
-            {"Genetic_variation_type": "Gene deletion", "Coverage": "0.00%"}
+            {"Genetic Variation Type": "Gene deletion detected", "Coverage": "0.00"}
         ])
 
 

@@ -81,3 +81,63 @@ Genomes identified as belonging to the *K. oxytoca* species complex are subjecte
    -m klebsiella__ybst, klebsiella__cbst, klebsiella__abst, klebsiella__smst, klebsiella__rmst
 
 These modules were primarily designed for typing of *K. pneumoniae* species complex, and the databases are populated from variation detected in KpSC genomes. However they can appear in KoSC genomes and so typing is included in the KoSC preset.
+
+
+
+KoSC K and O locus typing with Kaptive
+-----------------------------------------
+
+.. code-block:: Python
+
+   -m kosc_kaptive
+
+This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://kaptive.readthedocs.io/en/latest/>`_ for more details of how Kaptive works, tutorials, and citations.
+
+
+Kaptive parameters
++++++++++++++++++++
+
+``-t , --threads``
+
+Number of threads for alignment (default: 1)
+
+``--k-db, KoSC_K_locus_database.gbk``
+
+Kaptive database for K-locus typing
+
+``--o-db, KoSC_O_locus_database.gbk``
+
+Kaptive database for o-locus typing
+
+
+
+Kaptive outputs
++++++++++++++++++
+
+Kaptive results are output in the following columns:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Column Name
+     - Description
+   * - Best match locus
+     - The locus type which most closely matches the assembly.
+   * - Best match type
+     - The predicted serotype/phenotype of the assembly.
+   * - Match confidence
+     - Typeable or Untypeable.
+   * - Problems
+     - Characters indicating issues with the locus match (see problems).
+   * - Identity
+     - Weighted percent identity of the best matching locus to the assembly.
+   * - Coverage
+     - Weighted percent coverage of the best matching locus in the assembly.
+   * - Length discrepancy
+     - If the locus was found in a single piece, this is the difference between the locus length and the assembly length.
+   * - Expected genes in locus
+     - A fraction indicating how many of the genes in the best matching locus were found in the locus part of the assembly.
+   * - Expected genes in locus, details
+     - Gene names for the expected genes found in the locus part of the assembly.
+   * - Missing expected genes
+     - A string listing the gene names of expected genes that were not found.

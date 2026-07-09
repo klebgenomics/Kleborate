@@ -125,6 +125,7 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
 
     alignment_hits = align_query_to_ref(ref_file, assembly, ref_index=minimap2_index, min_identity=min_identity, min_query_coverage=min_spurious_coverage)
     alignment_hits = cull_redundant_hits(alignment_hits)
+    # print(alignment_hits)
 
     # calculate alignment coverage
     for hit in alignment_hits:
@@ -157,12 +158,15 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
             # SHV mutations
             for mut in shv_muts:
                 mut_str, mut_metadata = mut
-                mut_metadata['Genetic_variation_type'] = 'Protein variant detected'
+                mut_metadata['Genetic Variation Type'] = 'Protein variant detected'
                 hits_dict['SHV_mutations'].append([mut_str, mut_metadata])
 
             if omega_loop_seq is not None:
-                hits_dict['SHV_mutations'].append([f'blaSHV:p.{omega_loop_seq}', {'Genetic_variation_type': 'Protein variant detected'}])
+                omega_str, omega_metadata = omega_loop_seq
+                omega_metadata['Genetic Variation Type'] = 'Protein variant detected'
+                hits_dict['SHV_mutations'].append([f'blaSHV:p.{omega_str}', omega_metadata])
 
+                # hits_dict['SHV_mutations'].append([f'blaSHV:p.{omega_loop_seq}', {'Genetic Variation Type': 'Protein variant detected'}])
             if not hits_dict['SHV_mutations']:
                 del hits_dict['SHV_mutations']
     
@@ -215,28 +219,28 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
                 hit_allele += ' +' + ' +'.join(class_changing_muts)
 
             hit_data = {
-                'Input_sequence_ID': hit.ref_name,
-                'Input_gene_length': hit.ref_length,
-                'Input_gene_start': hit.ref_start,
-                'Input_gene_stop': hit.ref_end,
-                'Reference_gene_length': hit.query_length,
-                'Reference_gene_start': hit.query_start + 1,
-                'Reference_gene_stop': hit.query_end,
-                'Sequence_identity': f"{hit.percent_identity:.2f}",
+                'Input Sequence ID': hit.ref_name,
+                'Input Gene Length': hit.ref_length,
+                'Input Gene Start': hit.ref_start +1,
+                'Input Gene Stop': hit.ref_end,
+                'Reference Gene Length': hit.query_length,
+                'Reference Gene Start': hit.query_start +1,
+                'Reference Gene Stop': hit.query_end,
+                'Sequence Identity': f"{hit.percent_identity:.2f}",
                 'Coverage': f"{coverage:.2f}",
-                'Strand_orientation': hit.strand
+                'Strand Orientation': hit.strand
             }
 
             for t_class in target_classes:
                 if coverage >= min_coverage and hit.percent_identity >= min_identity and trunc_cov >= 90.0:
                     if t_class.endswith('_acquired') or t_class.endswith('_chr'):
-                        hit_data['Genetic_variation_type'] = 'Gene presence detected'
+                        hit_data['Genetic Variation Type'] = 'Gene presence detected'
                     hits_dict[t_class].append([hit_allele, hit_data])
                 elif coverage >= min_coverage and hit.percent_identity >= min_identity and trunc_cov < 90.0:
-                    hit_data['Genetic_variation_type'] = 'Gene presence detected'
+                    hit_data['Genetic Variation Type'] = 'Gene presence detected'
                     hits_dict['truncated_resistance_hits'].append([hit_allele, hit_data])
                 else:
-                    hit_data['Genetic_variation_type'] = 'Gene presence detected'
+                    hit_data['Genetic Variation Type'] = 'Gene presence detected'
                     hits_dict['spurious_resistance_hits'].append([hit_allele, hit_data])
 
     return hits_dict

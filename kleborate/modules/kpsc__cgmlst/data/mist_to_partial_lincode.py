@@ -8,6 +8,7 @@ The JSON input file should be generated with the MiST software and the Institut 
 Example command:
 mist call --fasta my_kleb_genome.fasta --db kleb_scgmlst_s --output my_kleb_genome.json
 """
+
 import json
 import sys
 
@@ -15,7 +16,7 @@ MISMATCH_CUTOFFS = [629, 610, 585, 190, 43, 10, 7, 4, 2, 1]
 METADATA = [
     {'key': 'Phylogroup', 'bin_min': 2},
     {'key': 'Sublineage', 'bin_min': 3},
-    {'key': 'Clonal group', 'bin_min': 4}
+    {'key': 'Clonal group', 'bin_min': 4},
 ]
 
 
@@ -28,9 +29,10 @@ def determine_bin(nb_diff) -> int:
     for i, threshold in enumerate(MISMATCH_CUTOFFS):
         if i == len(MISMATCH_CUTOFFS) - 1:
             return i
-        if threshold >= nb_diff >= MISMATCH_CUTOFFS[i+1]:
+        if threshold >= nb_diff >= MISMATCH_CUTOFFS[i + 1]:
             return i
     raise ValueError('Cannot determine bin')
+
 
 def create_lin_code(lin_code_in: str, bin_: int) -> str:
     """
@@ -50,35 +52,36 @@ if __name__ == '__main__':
         data_in = json.load(handle)
 
     # Check if the input contains profile information
-    if data_in['profile'] is None:
+    if data_in['profiles'] is None:
         raise ValueError('Profile information is missing')
 
-    # Log the results
-    best_matching_st = data_in['profile']['name']
-    print(f'Best matching: scgST-{best_matching_st}')
+    for data_profile in data_in['profiles']:
+        # Log the results
+        best_matching_st = data_profile['name']
+        print(f'\n--- Profile: scgST-{best_matching_st} ---')
 
-    nb_loci = len(data_in['profile']['alleles'])
-    try:
-        nb_matches = data_in['profile']['nb_matches']
-    except KeyError:
-        nb_matches = int(data_in['profile']['pct_match'] * nb_loci / 100)
-    print(f'Number of matches: {nb_matches}/{nb_loci}')
+        nb_loci = len(data_profile['alleles'])
+        try:
+            nb_matches = data_profile['nb_matches']
+        except KeyError:
+            nb_matches = int(data_profile['pct_match'] * nb_loci / 100)
+        print(f'Number of matches: {nb_matches}/{nb_loci}')
 
-    # Parse the ST metadata
-    metadata_st = {k: v for k, v in data_in['profile']['metadata']}
-    lin_code = metadata_st['LINcode']
-    print(f'LINcode for scgMST-{best_matching_st}: {lin_code}')
+        # Parse the ST metadata
+        metadata_st = {k: v for k, v in data_profile['metadata']}
+        lin_code = metadata_st['LINcode']
+        print(f'LINcode for scgMST-{best_matching_st}: {lin_code}')
 
-    # Construct the partial LINcode
-    bin_nb = determine_bin(nb_loci - nb_matches)
-    partial_lin_code = create_lin_code(lin_code, bin_nb)
-    print(f'Partial LINcode for input strain: {partial_lin_code}')
+        # Construct the partial LINcode
+        bin_nb = determine_bin(nb_loci - nb_matches)
+        partial_lin_code = create_lin_code(lin_code, bin_nb)
+        print(f'Partial LINcode for input strain: {partial_lin_code}')
 
-    # Report the associated metadata
-    for metadata_col in METADATA:
-        value = data_in['profile']
-        if metadata_col['bin_min'] > bin_nb:
-            value = 'Cannot be determined'
-        else:
-            value = metadata_st[metadata_col['key']]
-        print(f"{metadata_col['key']}: {value}")
+        # Report the associated metadata
+        for metadata_col in METADATA:
+            value = data_profile
+            if metadata_col['bin_min'] > bin_nb:
+                value = 'Cannot be determined'
+            else:
+                value = metadata_st[metadata_col['key']]
+            print(f"{metadata_col['key']}: {value}")

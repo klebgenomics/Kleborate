@@ -61,15 +61,15 @@ Summary of availabe modules and their output columns
      - AGly_acquired, Col_acquired, Fcyn_acquired, Flq_acquired, Gly_acquired, MLS_acquired, Phe_acquired, Rif_acquired, Sul_acquired, Tet_acquired, Tgc_acquired, Tmt_acquired, Bla_acquired, Bla_ESBL_acquired, Bla_ESBL_inhR_acquired, Bla_Carb_acquired, Bla_chr, SHV_mutations, Omp_mutations, Col_mutations, Flq_mutations, truncated_resistance_hits, spurious_resistance_hits
    * - :ref:`klebsiella_pneumo_complex__resistance_score <Resistance scores and counts>`
      - resistance_score (Score of 0-3)
-   * - :ref:`klebsiella_pneumo_complex__resistance_gene_count <Resistance scores and counts>`
+   * - :ref:`kpsc__resistance_gene_count <Resistance scores and counts>`
      - num_resistance_genes
-   * - :ref:`klebsiella_pneumo_complex__resistance_class_count <Resistance scores and counts>`
+   * - :ref:`kpsc__resistance_class_count <Resistance scores and counts>`
      - num_resistance_classes
-   * - :ref:`klebsiella_pneumo_complex__cipro_prediction <klebsiella_pneumo_complex__cipro_prediction>`
+   * - :ref:`kpsc__cipro_prediction <kpsc__cipro_prediction>`
      - Ciprofloxacin_prediction, Ciprofloxacin_profile, Ciprofloxacin_profile_support, Ciprofloxacin_MIC_prediction
-   * - :ref:`klebsiella_pneumo_complex__wzi <klebsiella_pneumo_complex__wzi>`
+   * - :ref:`kpsc__wzi <kpsc__wzi>`
      - wzi allele
-   * - :ref:`klebsiella_pneumo_complex__kaptive <klebsiella_pneumo_complex__kaptive>`
+   * - :ref:`kpsc__kaptive <kpsc__kaptive>`
      - Best match locus, Best match type, Match confidence, Problems, Identity, Coverage, Length discrepancy, Expected genes in locus, details, Missing expected gene
    * - :ref:`klebsiella_oxytoca_complex__mlst <klebsiella_oxytoca_complex__mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB

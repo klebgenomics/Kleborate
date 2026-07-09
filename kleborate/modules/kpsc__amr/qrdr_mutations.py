@@ -47,16 +47,16 @@ def check_for_qrdr_mutations(hits_dict, assembly, qrdr, min_identity, min_covera
         _, coverage, translation = truncation_check(hit)
 
         hit_data = {
-                'Input_sequence_ID': hit.ref_name,
-                'Input_gene_length': hit.ref_length,
-                'Input_gene_start': hit.ref_start,
-                'Input_gene_stop': hit.ref_end,
-                'Reference_gene_length': hit.query_length,
-                'Reference_gene_start': hit.query_start,
-                'Reference_gene_stop': hit.query_end,
-                'Sequence_identity': f"{hit.percent_identity:.2f}%",
-                'Coverage': f"{hit.query_cov:.2f}%", # Dna hit coverage
-                'Strand_orientation':hit.strand
+                'Input Sequence ID': hit.ref_name,
+                'Input Gene Length': hit.ref_length,
+                'Input Gene Start': hit.ref_start,
+                'Input Gene Stop': hit.ref_end,
+                'Reference Gene Length': hit.query_length,
+                'Reference Gene Start': hit.query_start +1,
+                'Reference Gene Stop': hit.query_end,
+                'Sequence Identity': f"{hit.percent_identity:.2f}",
+                'Coverage': f"{hit.query_cov:.2f}", 
+                'Strand Orientation':hit.strand
             }
 
 
@@ -74,14 +74,16 @@ def check_for_qrdr_mutations(hits_dict, assembly, qrdr, min_identity, min_covera
             ref_protein_length = ref_protein_stop - ref_protein_start + 1
 
             input_protein_start  = int(coords[1, 0]) + 1
+            input_protein_stop   = int(coords[1, -1])
             input_protein_length = int(coords[1, -1]) - input_protein_start + 1
 
             hit_data.update({
-                'Input_protein_length':     input_protein_length,
-                'Input_protein_start':      input_protein_start,
-                'Reference_protein_length': ref_protein_length,
-                'Reference_protein_start':  ref_protein_start,
-                'Reference_protein_stop':   ref_protein_stop,
+                'Input Protein Length':     input_protein_length,
+                'Input Protein Start':      input_protein_start,
+                'Input Protein Stop':       input_protein_stop,
+                'Reference Protein Length': ref_protein_length,
+                'Reference Protein Start':  ref_protein_start,
+                'Reference Protein Stop':   ref_protein_stop,
             })
 
             bases_per_ref_pos = get_bases_per_ref_pos(alignments[0])
@@ -93,8 +95,9 @@ def check_for_qrdr_mutations(hits_dict, assembly, qrdr, min_identity, min_covera
                 if pos in bases_per_ref_pos and assembly_base != wt_base \
                         and assembly_base != '-' and assembly_base != '.':
                     
-                    mutation = f"{hit.query_name}:p.{wt_base}{pos}{assembly_base}"
-                    snps.append([mutation, {'Genetic_variation_type': 'Protein variant detected'},hit_data])
+                    # mutation = f"{hit.query_name}:p.{wt_base}{pos}{assembly_base}"
+                    mutation = f"{hit.query_name[0].lower() + hit.query_name[1:]}:p.{wt_base}{pos}{assembly_base}"
+                    snps.append([mutation, {'Genetic Variation Type': 'Protein variant detected'},hit_data])
 
     if snps:
         hits_dict['Flq_mutations'].extend(snps)

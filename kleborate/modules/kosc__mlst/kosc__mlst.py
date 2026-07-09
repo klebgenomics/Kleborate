@@ -75,6 +75,9 @@ def get_results(assembly, minimap2_index, args, previous_results):
              args.klebsiella_oxytoca_complex__mlst_min_identity, args.klebsiella_oxytoca_complex__mlst_min_coverage,
              args.klebsiella_oxytoca_complex__mlst_required_exact_matches)
 
+    if st == 'NA':
+        st = 0
+
     return {'ST': st, 'clonal_complex': clonal_complex,
             'gapA': alleles['gapA'], 'infB': alleles['infB'], 'mdh': alleles['mdh'],
             'pgi': alleles['pgi'], 'phoE': alleles['phoE'], 'rpoB': alleles['rpoB'],

@@ -70,8 +70,7 @@ def get_kp_subspecies_based_on_st(st):
                    'ST3193', 'ST3766', 'ST3768', 'ST3771', 'ST3781', 'ST3782', 'ST3784', 'ST3802',
                    'ST3803'}
     rhinoscleromatis_sts = {'ST67', 'ST68', 'ST69', 'ST3772', 'ST3819'}
-    # st_minus_lv  = re.sub(r'-\dLV$', '', st)
-    # # st_minus_lv = st.replace('-1LV', '')  
+      
     if st in ozaenae_sts:
         return st + ' (subsp. ozaenae)'
     if st in rhinoscleromatis_sts:
@@ -89,6 +88,9 @@ def get_results(assembly, minimap2_index, args, previous_results):
                           args.klebsiella_pneumo_complex__mlst_min_identity, args.klebsiella_pneumo_complex__mlst_min_coverage,
                           args.klebsiella_pneumo_complex__mlst_required_exact_matches)
 
+    if st == 'NA':
+        st = '0'
+    
     st_annotation= get_kp_subspecies_based_on_st(st)
 
     return {'ST': st_annotation,

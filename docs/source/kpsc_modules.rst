@@ -58,14 +58,14 @@ We've included the phylogroup numbers in the table below for backwards compatibi
 
 :sup:`b` alternative (older) Kp phylogroup numbers as described in `Brisse et al. 2001 <https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-51-3-915#tab2>`_ and `Fevre et al. 2005 <https://aac.asm.org/content/49/12/5149>`_ prior to the identification of *K. variicola* subsp *tropica*\ , *K. quasivariicola* and *K. africana*.
 
-.. _klebsiella_pneumo_complex_mlst:
+.. _kpsc_mlst:
 
 KpSC MLST
 ---------
 
 .. code-block:: Python
 
-   -m klebsiella_pneumo_complex__mlst
+   -m kpsc__mlst
 
 Genomes identified by Kleborate as belonging to the *K. pneumoniae* species complex are subjected to MLST using the 7-locus scheme described at the  *K. pneumoniae* `\Bacteria Isolate Genome Sequence Database hosted at the Pasteur Institute <https://bigsdb.pasteur.fr/klebsiella/>`_. Note that this scheme is not specific to *K. pneumoniae sensu stricto* but covers the whole species complex. 
 
@@ -94,15 +94,15 @@ The relevant STs are:
 Parameters
 ++++++++++
 
-``--klebsiella_pneumo_complex__mlst_min_identity``
+``--kpsc__mlst_min_identity``
 
-Minimum alignment percent identity for klebsiella_pneumo_complex_MLST (default: 90.0)
+Minimum alignment percent identity for kpsc_MLST (default: 90.0)
 
-``--klebsiella_pneumo_complex__mlst_min_coverage`` 
+``--kpsc__mlst_min_coverage`` 
 
-Minimum alignment percent coverage for klebsiella_pneumo_complex_MLST (default: 80.0)
+Minimum alignment percent coverage for kpsc_MLST (default: 80.0)
 
-``--klebsiella_pneumo_complex__mlst_required_exact_matches`` 
+``--kpsc__mlst_required_exact_matches`` 
 
 At least this many exact matches are required to call an ST (default: 3)
 
@@ -336,6 +336,7 @@ Output of the smst module is the following columns:
 
 .. _klebsiella__rmpa2:
 
+
 Hypermucoidy loci
 ^^^^^^^^^^^^^^^^^^
 
@@ -348,6 +349,16 @@ The *rmpA* locus is associated with the hypermucoidy phenotype that is a virulen
 In light of this information, we screened and extracted the *rmpA*\ , *rmpD* and *rmpC* sequences from the 2733 genomes included in the aerobactin and salmochelin study, and generated a RmST typing scheme. We observed four distinct *rmp* lineages, which were associated with the KpVP-1 (\ *rmp 1*\ ), KpVP-2 (\ *rmp 2*\ ), *iuc2A* virulence plasmids (\ *rmp 2A*\ ), ICE *Kp1* (rmp 3) and the *rmp4* lineage which is associated with *K. pneumoniae* CG67 `Lam et al., 2024 BioRxiv <https://www.biorxiv.org/content/10.1101/2024.05.28.596137v1/>`_
 
 The klebsiella__rmst module screens for *rmpADC* and will report a sequence type, along with the associated lineage and mobile genetic element.
+
+
+
+Additionally, Kleborate types for expression of the rmp locus and the associated hypermucoidy phenotype 
+Where a rmp locus is detected, Kleborate checks the status of each of these four loci to determine whether each is ON (wildtype, corresponding to normal expression), OFF (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. These values are then summarised to annotate the status of the locus as a whole, as follows. If all four component loci are present and ON, the ‘rmp locus status’ is annotated as Phase ON. If all components are present but one or more is OFF, the status is annotated as Phase OFF. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual rmp genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
+
+
+The RmST module also checks for presence of the argR gene in the genomes, and conservation of the ARG box in the rmpA promoter. The argR gene is screened via alignment against the reference sequence from K. pneumoniae strain KPPR1. where a hit is detected, its nucleotide sequence is translated and the length of the encoded protein determined. Full-length genes are reported as ‘present’,protein sequences with a coverage <100% compared with the reference ArgR encoded by KPPR1 are reported as ‘truncated-X%’ (‘X’ indicates the percent coverage). If there is no hit, the value returned is ‘-’. The ARG box is checked by searching for an exact match to the reference sequence string (ATTGAATTTTTATTCATT) from KPPR1, within 150 bp upstream of rmpA. If this is not found, the annotation ‘ARG box lost’ is added to the ‘rmpA_promoter’ field.
+
+
 
 The *rmpA2* gene is homologous to *rmpA*, and the klebsiella__rmpa2 module screens for alleles of *rmpA2*.
 
@@ -383,14 +394,24 @@ Output of the rmst module is the following columns:
 
 .. list-table::
 
-   * - RmpADC
-     - Lineage
-
    * - RmST
      - Sequence type
 
+   * - RmpADC
+     - Lineage
+
+   * - RmpADC_status
+     - expression states of the rmp locus
+
    * - rmpA, rmpD, rmpC
      - allele number (rmp locus)
+
+   * - rmpA promoter
+     - expression states of the rmp promoter and ARG box
+
+   * - argR
+       Presence of argR gene
+
 
 
 rmpA2 Parameters
@@ -417,14 +438,14 @@ Output of the rmst module is the following columns:
 
 
 
-.. _klebsiella_pneumo_complex__virulence_score:
+.. _kpsc__virulence_score:
 
 Virulence score
 ^^^^^^^^^^^^^^^^^^
 
 .. code-block:: Python
 
-   -m klebsiella_pneumo_complex__virulence_score
+   -m kpsc__virulence_score
 
 This module takes ``klebsiella__abst``, ``klebsiella__cbst``, ``klebsiella__ybst`` as  prerequisite and calculates a virulence score, which ranges from 0 to 5 as outlined below. Note neither the salmochelin (iro) locus nor rmpADC are explicitly considered in the virulence score, for simplicity. The iro and rmpADC loci typically appear alongside the aerobactin (iuc) locus on the Kp virulence plasmids, and so presence of iuc (score of 3-5) generally implies presence of iro and rmpADC. However we prioritise iuc in the calculation of the score, as aerobactin is specifically associated with growth in blood and is a stronger predictor of the hypervirulence phenotype `see this review <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6349525/>`_. The iro and rmpADC loci are also occasionally present with ybt, in the ICEKp variant - ICEKp1, but this will still score 1.
 
@@ -462,15 +483,48 @@ Virulence score is output in the following column:
 
 
 
+Peg-344 typing
+-----------------------------------
 
-.. _klebsiella_pneumo_complex__amr:
+-m klebsiella__peg-344
+
+This module checksfor presence/absence of *peg-344* gene by aligning the genomes against NTUH-K2044 peg-344 reference sequence (protein BAH65947.1)
+
+Parameters
+++++++++++
+
+``--klebsiella__peg-344_min_identity``
+
+Minimum alignment percent identity for detecting *peg-344* gene (default: 90.0)
+
+``--klebsiella__peg-344_min_coverage`` 
+
+Minimum alignment percent coverage for detecting *peg-344* gene (default: 80.0)
+
+* In order to consider a Minimap2 hit, it must exceed both 90% identity and 80% coverage
+* Where a hit is detected, the aligned sequence is translated and the resulting amino acid sequence is assesed for truncations (expressed as % amino acid length from the start codon)
+* If the encoded protein is less than 100% of the expected length, the gene is flagged as truncated and reported with the percentage of the reference length recovered (e.g., "truncated-25%")
+* If the full protein length is found, the gene is reported as present
+
+
+peg-344 Outputs
+++++++++++++++++++
+
+Output of the klebsiella__peg-344 module is the following columns:
+
+.. list-table::
+    * peg-344
+    - present or truncated
+
+
+.. _kpsc__amr:
 
 KpSC AMR
 --------
 
 .. code-block:: Python
 
-   -m klebsiella_pneumo_complex__amr
+   -m kpsc__amr
 
 Acquired AMR genes
 ^^^^^^^^^^^^^^^^^^
@@ -524,21 +578,21 @@ Note these do not count towards acquired resistance gene counts, but do count to
 AMR parameters
 ++++++++++++++++++++++++++++++++++++++
 
-``--klebsiella_pneumo_complex__amr_min_identity`` 
+``--kpsc__amr_min_identity`` 
 
-Minimum alignment percent identity for klebsiella_pneumo_complex Amr results (default: 90.0)
+Minimum alignment percent identity for kpsc Amr results (default: 90.0)
 
-``--klebsiella_pneumo_complex__amr_min_coverage`` 
+``--kpsc__amr_min_coverage`` 
 
-Minimum alignment percent coverage for klebsiella_pneumo_complex Amr results (default: 80.0)
+Minimum alignment percent coverage for kpsc Amr results (default: 80.0)
 
-``--klebsiella_pneumo_complex__amr_min_spurious_identity`` 
+``--kpsc__amr_min_spurious_identity`` 
 
-Minimum alignment percent identity for klebsiella_pneumo_complex Amr spurious results (default: 80.0)
+Minimum alignment percent identity for kpsc Amr spurious results (default: 80.0)
 
-``--klebsiella_pneumo_complex__amr_min_spurious_coverage`` 
+``--kpsc__amr_min_spurious_coverage`` 
 
-Minimum alignment percent coverage for klebsiella_pneumo_complex Amr spurious results (default: 40.0)
+Minimum alignment percent coverage for kpsc Amr spurious results (default: 40.0)
 
 AMR outputs
 ++++++++++++++++++++++++++++++++++++++
@@ -697,11 +751,11 @@ hAMRonization report for Kleborate
 Resistance scores and counts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Running the KpSC AMR module automatically runs additional modules for generating counts of resistance genes and drug classes, and calculating a resistance score. These modules take  ``klebsiella_pneumo_complex__amr`` as a prerequisite and can be specified manually as follows:
+Running the KpSC AMR module automatically runs additional modules for generating counts of resistance genes and drug classes, and calculating a resistance score. These modules take  ``kpsc__amr`` as a prerequisite and can be specified manually as follows:
 
 .. code-block:: Python
 
-   -m klebsiella_pneumo_complex__resistance_score, klebsiella_pneumo_complex__resistance_gene_count, klebsiella_pneumo_complex__resistance_class_count
+   -m kpsc__resistance_score, kpsc__resistance_gene_count, kpsc__resistance_class_count
 
 
 Resistance score
@@ -754,7 +808,7 @@ Resistance scores and counts are output in the following columns:
      - Number of drug classes to which resistance determinants have been acquired (in addition to intrinsic ampicillin)
 
 
-.. _klebsiella_pneumo_complex__cipro_prediction:
+.. _kpsc__cipro_prediction:
 
 
 Ciprofloxacin resistance prediction
@@ -763,7 +817,7 @@ Ciprofloxacin resistance prediction
 
 .. code-block:: Python
 
-   -m klebsiella_pneumo_complex__cipro_prediction
+   -m kpsc__cipro_prediction
 
 Ciprofloxacin resistance prediction is performed based on assigning the genome to one of ten genotype profiles, based on:
 
@@ -849,7 +903,7 @@ Results of the ciprofloxacin resistance prediction are reported in Kleborate wit
      - Indicates the MIC distribution observed for the genotype profile in **Ciprofloxacin_profile**, in the form of median value and interquartile range, based on the KlebNET-GSP AMR Genotype-Phenotype Group data enumerated in the **Ciprofloxacin_profile_support** column.
 
 
-.. _klebsiella_pneumo_complex__kaptive:
+.. _kpsc__kaptive:
 
 
 KpSC K and O locus typing with Kaptive
@@ -857,7 +911,7 @@ KpSC K and O locus typing with Kaptive
 
 .. code-block:: Python
 
-   -m klebsiella_pneumo_complex__kaptive
+   -m kpsc__kaptive
 
 This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://kaptive.readthedocs.io/en/latest/>`_ for more details of how Kaptive works, tutorials, and citations.
 
@@ -911,7 +965,7 @@ Kaptive results are output in the following columns:
 
 
 
-.. _klebsiella_pneumo_complex__wzi:
+.. _kpsc__wzi:
 
 
 KpSC Wzi typing for K antigen prediction
@@ -919,7 +973,7 @@ KpSC Wzi typing for K antigen prediction
 
 .. code-block:: Python
 
-   -m klebsiella_pneumo_complex__wzi
+   -m kpsc__wzi
 
 This module reports the closest match amongst the *wzi* alleles in the `BIGSdb <http://bigsdb.pasteur.fr/klebsiella/klebsiella.html>`_. This is a marker of capsule locus (KL) type, which is predictive of capsule (K) serotype. Although there is not a 1-1 relationship between *wzi* allele and KL/K type, there is a strong correlation (see `Wyres et al, MGen 2016 <http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102>`_ and `Brisse et al, J Clin Micro 2013 <https://jcm.asm.org/content/51/12/4073.long>`_). Note the *wzi database* is populated with alleles from the *Klebsiella pneumoniae* species complex and is not reliable for other species.
 
@@ -937,3 +991,83 @@ Wzi typing results are output in the following columns:
 
    * - K_locus
      - K locus typically associated with this wzi allele
+
+
+KpSC cgMLST 
+-----------------------------------------
+.. code-block:: Python
+
+   -m kpsc__cgmlst
+
+This module will run `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool for cgMLST allele calling. Please see this document on how to download the Klebsiella cgMLST scheme when installing Kleborate
+
+
+
+KpSC cgMLST outputs
++++++++++++++++++
+
+Mist results are output in the following columns:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Column Name
+     - Description
+
+   * - cgST
+     - Best matching scgST
+
+   * - LINcode
+     - LINcode / Partial LINcode for input strain
+
+   * - Sublineage
+     - Sublineage for input strain
+
+   * - Clonal group
+     - Clonal group for input strain
+
+
+KpSC mrk
+-------------------------------------
+MLST scheme for the mrk operon
+
+
+.. code-block:: Python
+
+   -m kpsc__mrk
+
+
+
+Parameters
+++++++++++
+
+``--kpsc__mrk_min_identity``
+
+Minimum alignment percent identity for kpsc__mrk (default: 90.0)
+
+``--kpsc__mrk_min_coverage`` 
+
+Minimum alignment percent coverage for kpsc__mrk (default: 80.0)
+
+``--kpsc__mrk_required_exact_matches`` 
+
+At least this many exact matches are required to call an ST (default: 4)
+
+
+Outputs
++++++++
+
+Output of the KpSC mrk module is the following columns:
+
+.. list-table::
+
+   * - ST
+     - sequence type
+
+   * - mrkA, mrkB, mrkC, mrkD, mrkF, mrkH, mrkI, mrkJ
+     - allele number
+
+* Kleborate reports the closest matching ST if a precise match is not found.
+* Imprecise allele matches are indicated with a ``*``.
+* Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that disagree with the ST reported.
+     

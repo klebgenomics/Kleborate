@@ -72,17 +72,18 @@ def pks_minimap(assembly, minimap2_index, ref_file, min_identity, min_coverage):
     if not alignment_hits:
         return '-'
     
-    if alignment_hits:
-        for hit in alignment_hits:
-            alignment_length = hit.query_end - hit.query_start
-            coverage = (alignment_length / hit.query_length) * 100
-            allele = hit.query_name
-            if coverage < 100.0 or hit.percent_identity < 100.0:
-                return f"{allele}*"
-            else:
-                return allele
-    else:
-        return ''
+    
+    for hit in alignment_hits:
+        alignment_length = hit.query_end - hit.query_start
+        coverage = (alignment_length / hit.query_length) * 100
+        allele = hit.query_name
+        
+        if coverage < 100.0 or hit.percent_identity < 100.0:
+            return f"{allele}*"
+        else:
+            return allele
+
+    return '-'
 
 
 
@@ -97,8 +98,10 @@ def get_results(assembly, minimap2_index, args, previous_results):
         args.escherichia__pks_min_coverage
     )
 
-    if not result:
+    # Safely handle empty string or None, though pks_minimap will defaults to '-'
+    if not result or result == '':
         return {'clbB': '-'}
-    else:
-        return {'clbB': result}
+    
+    return {'clbB': result}
+
 

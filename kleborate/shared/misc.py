@@ -127,7 +127,6 @@ def get_mlst_db_version():
 def get_cgmlst_db_version():
     """
     Returns the download date of the kpsc__cgmlst database,
-    used for cgST, LINcodes, Sublineage, and Clonal group entries.
     """
     import kleborate
 
@@ -211,8 +210,8 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_software_version": get_tool_version(['mist', '--version'])
     },
 
-    "LINcodes": {
-        "genotyping_method": "LINcode",
+    "LIN code": {
+        "genotyping_method": "LIN code",
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
         "genotyping_database_version": get_cgmlst_db_version(),
@@ -259,10 +258,9 @@ res_headers = [
 
 
 annotation_fields = [
-        'Genetic_variation_type','Drug_class','Input_sequence_ID','Input_gene_length', 'Input_gene_start', 'Input_gene_stop', 'Reference_gene_length',
-        'Reference_gene_start', 'Reference_gene_stop', 'Sequence_identity', 'Coverage','Reference_accession','Strand_orientation',
-        'Software_name', 'Software_version', 'Reference_database_name',
-        'Reference_database_version','Input_protein_length','Reference_protein_length','Input_protein_start', 'Input_protein_stop','Antimicrobial_agent', 
-        'Coverage_depth', 'Coverage_ratio','Predicted_phenotype','predicted_phenotype_confidence_level', 
-        'Reference_protein_start', 'Reference_protein_stop','Resistance_mechanism'
+        'Genetic Variation Type','Drug Class','Input Sequence ID','Input Gene Length', 'Input Gene Start', 'Input Gene Stop', 'Reference Gene Length',
+        'Reference Gene Start', 'Reference Gene Stop', 'Sequence Identity', 'Coverage','Reference Accession','Strand Orientation',
+        'Analysis Software Name', 'Analysis Software Version', 'Reference Database Name',
+        'Reference Database Version','Input Protein Length','Reference Protein Length','Input Protein Start', 'Input Protein Stop',
+        'Reference Protein Start', 'Reference Protein Stop'
 ]

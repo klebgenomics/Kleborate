@@ -21,5 +21,10 @@ For information on how to install and run Kleborate v3, please visit the [Docs](
 
 If you use Kleborate, please cite the paper: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for Klebsiella pneumoniae and its related species complex, Nature Communications (2021). [https://www.nature.com/articles/s41467-021-24448-3](https://www.nature.com/articles/s41467-021-24448-3)
 
-If you use the Kaptive calls for K and O locus typing please also cite Wyres, KL. et al. Identification of Klebsiella capsule synthesis loci from whole genome data. Microbial Genomics (2016). [http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102](http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102)
+
+If you use the Kaptive calls for K and O locus typing please cite: Stanton  et al. Fast and accurate in silico antigen typing with Kaptive 3. Microbial Genomics (2025). [10.1099/mgen.0.001428] (https://pubmed.ncbi.nlm.nih.gov/40553506/)
+
+
+If you use the cgMLST and LIN code calls, please cite the paper: Bogaerts et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes. BMC Genomics (2025). (https://doi.org/10.1186/s12864-025-12324-z)
+
 

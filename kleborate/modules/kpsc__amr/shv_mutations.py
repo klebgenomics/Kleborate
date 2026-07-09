@@ -32,16 +32,16 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
 
 
     hit_data = {
-                'Input_sequence_ID': hit.ref_name,
-                'Input_gene_length': hit.ref_length,
-                'Input_gene_start': hit.ref_start,
-                'Input_gene_stop': hit.ref_end,
-                'Reference_gene_length': hit.query_length,
-                'Reference_gene_start': hit.query_start,
-                'Reference_gene_stop': hit.query_end,
-                'Sequence_identity': f"{hit.percent_identity:.2f}%",
-                'Coverage': f"{hit.query_cov:.2f}%", # Dna hit coverage
-                'Strand_orientation':hit.strand
+                'Input Sequence ID': hit.ref_name,
+                'Input Gene Length': hit.ref_length,
+                'Input Gene Start': hit.ref_start +1,
+                'Input Gene Stop': hit.ref_end,
+                'Reference Gene Length': hit.query_length,
+                'Reference Gene Start': hit.query_start +1,
+                'Reference Gene Stop': hit.query_end,
+                'Sequence Identity': f"{hit.percent_identity:.2f}",
+                'Coverage': f"{hit.query_cov:.2f}", # Dna hit coverage
+                'Strand Orientation':hit.strand
             }
 
     # BioPython doesn't like it if the sequence isn't a multiple of 3.
@@ -140,7 +140,8 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     if omega_loop_raw_seq == 'RWETELNEALPGDARD':  # if it's the same as SHV-1
         omega_loop_seq = None
     else:
-        omega_loop_seq = f"164_179={omega_loop_raw_seq}"
+        # omega_loop_seq = f"164_179={omega_loop_raw_seq}"
+        omega_loop_seq = [f"164_179={omega_loop_raw_seq}", hit_data.copy()]
 
 
     shv_mutations = [pos_025_mut, pos_035_mut, pos_069_mut, pos_130_mut, pos_146_mut, pos_148_mut,
@@ -197,49 +198,6 @@ def get_mut(ref_aligned, hit_aligned, ref_pos, ambler_pos, ref_aa):
         mutation_notation = ''
 
     return mutation_notation, hit_aa
-# def get_mut(ref_aligned, hit_aligned, ref_pos, ambler_pos, ref_aa):
-#     """
-#     Identifies and formats a mutation at a given position in the alignment.
-
-#     Parameters:
-#         ref_pos (int): 0-based index into the ungapped reference sequence.
-#         ambler_pos (int): 1-based Ambler position for human-readable reporting.
-#         ref_aa (str): Expected amino acid in the reference at this position.
-
-#     Returns:
-#         tuple: (mutation_str, hit_aa)
-#             - mutation_str: e.g., "SHV:p.Ser35Gln" or "" if no mutation
-#             - hit_aa: the amino acid from the aligned hit
-#     """
-#     gene_name = "SHV"  # Hardcoded gene name for mutation reporting
-
-#     aa_map = {
-#         'A': 'Ala', 'C': 'Cys', 'D': 'Asp', 'E': 'Glu', 'F': 'Phe', 'G': 'Gly',
-#         'H': 'His', 'I': 'Ile', 'K': 'Lys', 'L': 'Leu', 'M': 'Met', 'N': 'Asn',
-#         'P': 'Pro', 'Q': 'Gln', 'R': 'Arg', 'S': 'Ser', 'T': 'Thr', 'V': 'Val',
-#         'W': 'Trp', 'Y': 'Tyr'
-#     }
-
-#     ref_no_gaps, hit_no_gaps = [], []
-#     for a, b in zip(ref_aligned, hit_aligned):
-#         if a != '-':
-#             ref_no_gaps.append(a)
-#             hit_no_gaps.append(b)
-
-#     assert len(ref_no_gaps) == 286
-#     assert ref_no_gaps[ref_pos] == ref_aa
-
-#     hit_aa = hit_no_gaps[ref_pos]
-
-#     if ref_aa != hit_aa and hit_aa != '-':
-#         ref_aa_3 = aa_map.get(ref_aa, ref_aa)
-#         hit_aa_3 = aa_map.get(hit_aa, hit_aa)
-#         mutation_notation = f'{gene_name}:p.{ref_aa_3}{ambler_pos}{hit_aa_3}'
-#     else:
-#         mutation_notation = ''
-
-#     return mutation_notation, hit_aa
-
 
 
 def get_percent_identity(ref_aligned, hit_aligned):

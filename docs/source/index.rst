@@ -72,7 +72,7 @@ Changes from v2
 
 When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for *K. pneumoniae* the same logic is implemented as Kleborate v2, plus the following changes/updates:
 
-* MLST & virulence databases updated (April 2024)
+* Updated MLST & virulence databases 
 * Column ``Chr_ST``  has been removed in v3, as it is redundant with ``ST`` 
 * AMR database updated based on CARD v3.2.9 (June 2024)
 * Added ``$`` to indicate when PmrB or MgrB have a mutation in the start codon that may disrupt translation (in ``Col_mutations`` column)
@@ -83,6 +83,13 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Added new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_. standard developed by the Public Health Alliance for Genomic Epidemiology (PHA4GE).
 * Added a module for Ciprofloxacin resistance prediction
 *  Mutations are reported using  `HGVS nomenclature <https://github.com/AMRverse/AMRrulesCuration/blob/main/syntax.md>`_.
+* Added new module for cgMLST and Lin codes
+* Added new module for typing mrk operon
+* Updated rmp typing
+* Added new module for typing peg-344 gene
+* Updated assembly statistics module to use qualibact-v1.0 curated thresholds
+* Added new genome specification report compartible with the Public Health Alliance for Genomic Epidemiology (PHA4GE).
+
 * Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, AMR typing using AMRFinderPlus
 
 
