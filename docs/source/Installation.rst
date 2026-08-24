@@ -7,16 +7,19 @@ Dependencies
 Kleborate requires the following software and libraries to be installed and available in your path:
 
 
-* `Python <https://www.python.org/>`_ v3.9 or later
-* `Biopython <https://biopython.org/>`_ v1.75 or later
-* `Mash <https://github.com/marbl/Mash>`_ v2.0 or later
+* `Python <https://www.python.org/>`_ 
+* `Biopython <https://biopython.org/>`_ 
+* `Mash <https://github.com/marbl/Mash>`_ 
 * `Minimap2 <https://github.com/lh3/minimap2>`_ 
-* `Kaptive <https://github.com/klebgenomics/Kaptive>`_ 
-* `DNA Features Viewer <https://edinburgh-genome-foundry.github.io/DnaFeaturesViewer/>`_
 * `ectyper <https://github.com/phac-nml/ecoli_serotyping>`_ 
 * `stxtyper <https://github.com/ncbi/stxtyper>`_
 * `ncbi-amrfinderplus <https://github.com/ncbi/amr>`_
 * `EzClermont <https://github.com/nickp60/EzClermont>`_
+* `Kaptive <https://github.com/klebgenomics/Kaptive>`_ 
+* `rammappy <https://tomdstanton.github.io/rammappy>`_
+* `numba <https://numba.pydata.org/>`_
+* `gb-io <https://gb-io.readthedocs.io/en/stable/>`_ 
+* `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_
 
 
 Install Kleborate 
@@ -24,7 +27,7 @@ Install Kleborate
 
 Create a conda environment and install Kleborate dependancies::
 
-   conda create -n klebsiella_analysis -c bioconda python=3.9 minimap2 mash ezclermont ectyper stxtyper ncbi-amrfinderplus -y
+   conda create -n klebsiella_analysis -c bioconda python=3.11 minimap2 mash mist_typing ezclermont ectyper stxtyper shigapass ncbi-amrfinderplus -y
    
 
 Activate the conda environment and install kleborate using pip::
@@ -43,7 +46,2353 @@ Download the AMRFinder database::
    amrfinder -u
 
 
-Test installation::
+Test Data::
+
+
+Test installation
+
+To test that Kleborate is installed and working correctly, download the example genome assembly and run Kleborate using the  -p kpsc::
 
    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/813/595/GCF_002813595.1_ASM281359v1/GCF_002813595.1_ASM281359v1_genomic.fna.gz
    kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -p kpsc
+
+If the installation is successful, the analysis should complete without errors and generate the expected output files.
+
+
+Additional test datasets are provided in::
+   test/kpsc_test/data/
+
+You can use these datasets to further validate your installation
+
+The generated output should match the corresponding reference files located in::
+
+   `test/kpsc_test/example_output/ <https://github.com/user/repo/tree/main/test/kpsc_test/example_output/>`_
+
+   
+   `klebsiella_pneumo_complex_output.txt <https://github.com/user/repo/blob/main/test/kpsc_test/example_output/klebsiella_pneumo_complex_output.txt>`_:
+
+   .. list-table:: Kleborate main table
+   :widths: auto
+   :header-rows: 1
+
+   * - strain
+     - species
+     - species_match
+     - contig_count
+     - N50
+     - largest_contig
+     - total_size
+     - GC_content
+     - ambiguous_bases
+     - QC_warnings
+     - ST
+     - gapA
+     - infB
+     - mdh
+     - pgi
+     - phoE
+     - rpoB
+     - tonB
+     - YbST
+     - Yersiniabactin
+     - ybtS
+     - ybtX
+     - ybtQ
+     - ybtP
+     - ybtA
+     - irp2
+     - irp1
+     - ybtU
+     - ybtT
+     - ybtE
+     - fyuA
+     - spurious_YbST
+     - CbST
+     - Colibactin
+     - clbA
+     - clbB
+     - clbC
+     - clbD
+     - clbE
+     - clbF
+     - clbG
+     - clbH
+     - clbI
+     - clbL
+     - clbM
+     - clbN
+     - clbO
+     - clbP
+     - clbQ
+     - spurious_CbST
+     - AbST
+     - Aerobactin
+     - iucA
+     - iucB
+     - iucC
+     - iucD
+     - iutA
+     - spurious_AbST
+     - SmST
+     - Salmochelin
+     - iroB
+     - iroC
+     - iroD
+     - iroN
+     - spurious_SmST
+     - RmST
+     - RmpADC
+     - RmpADC_status
+     - rmpA
+     - rmpD
+     - rmpC
+     - rmpA_promoter
+     - argR
+     - spurious_rmst_hits
+     - virulence_score
+     - spurious_virulence_hits
+     - rmpA2
+     - peg-344
+     - AGly_acquired
+     - Col_acquired
+     - Fcyn_acquired
+     - Flq_acquired
+     - Gly_acquired
+     - MLS_acquired
+     - Phe_acquired
+     - Rif_acquired
+     - Sul_acquired
+     - Tet_acquired
+     - Tgc_acquired
+     - Tmt_acquired
+     - Bla_acquired
+     - Bla_inhR_acquired
+     - Bla_ESBL_acquired
+     - Bla_ESBL_inhR_acquired
+     - Bla_Carb_acquired
+     - Bla_chr
+     - SHV_mutations
+     - Omp_mutations
+     - Col_mutations
+     - Flq_mutations
+     - truncated_resistance_hits
+     - spurious_resistance_hits
+     - resistance_score
+     - num_resistance_classes
+     - num_resistance_genes
+     - Ciprofloxacin_prediction
+     - Ciprofloxacin_profile_support
+     - Ciprofloxacin_profile
+     - Ciprofloxacin_MIC_prediction
+     - wzi
+     - K_locus
+     - K_type
+     - K_locus_confidence
+     - K_locus_problems
+     - K_locus_identity
+     - K_Missing_expected_genes
+     - O_locus
+     - O_type
+     - O_locus_confidence
+     - O_locus_problems
+     - O_locus_identity
+     - O_Missing_expected_genes
+     - cgST
+     - LIN code
+     - Sublineage
+     - Clonal group
+     - mrkST
+     - mrkA
+     - mrkB
+     - mrkC
+     - mrkD
+     - mrkF
+     - mrkH
+     - mrkI
+     - mrkJ
+   * - 2024187392
+     - Klebsiella pneumoniae
+     - strong
+     - 132
+     - 174550
+     - 459900
+     - 5682502
+     - 56.66
+     - yes (20)
+     - ambiguous_bases
+     - ST383
+     - 2
+     - 6
+     - 1
+     - 3
+     - 8
+     - 1
+     - 18
+     - 183
+     - ybt 9; ICEKp3
+     - 5
+     - 11
+     - 6
+     - 5
+     - 1
+     - 25
+     - 37
+     - 9
+     - 5
+     - 5
+     - 11
+     - -
+     - 0
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - 63
+     - iuc 1
+     - 1
+     - 15
+     - 1
+     - 1
+     - 1
+     - -
+     - 0
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - 147
+     - rmp 1; KpVP-1
+     - Phase ON
+     - 27
+     - 2
+     - 2
+     - 11T
+     - present
+     - -
+     - 4
+     - -
+     - rmpA2_6*-47%
+     - present
+     - strB.v1;aph(3')-Ia.v1^;aph(3'')-Ib.v1*;aadA1.v2;aph(3')-VI;armA;aac(6')-Ib-AKT
+     - -
+     - fosA5.v1*
+     - qnrS1
+     - -
+     - msrE;mrx;mphA;mphE.v2
+     - -
+     - -
+     - sul1;sul2
+     - tet(A).v1
+     - -
+     - dfrA5
+     - -
+     - -
+     - CTX-M-15;CTX-M-14^
+     - -
+     - NDM-5;OXA-48
+     - SHV-1
+     - -
+     - ompK36:p.135_136insD;ompK35:c.T106del
+     - mgrB:c.T50del
+     - gyrA:p.S83F;gyrA:p.D87N;parC:p.S80I
+     - OXA-9.v1*-42%;TEM-135.v1*?-0%
+     - catA1*?-0%
+     - 3
+     - 10
+     - 21
+     - nonwildtype R
+     - 99.22% R (N=2424/2443)
+     - >0 QRDR, >0 PMQR, * aac(6`)-Ib-cr
+     - 4 mg/L [4-4]
+     - -
+     - KL30
+     - K30
+     - Typeable
+     - !
+     - 97.43%
+     - -
+     - OL2α.2
+     - O1αβ,2β
+     - Typeable
+     - -
+     - 99.10%
+     - -
+     - cgST19975; cgST20666; cgST52869; cgST63343
+     - 0_0_87_5_0_3_1_0_0_0
+     - SL383
+     - CG383
+     - ST2977
+     - 22
+     - 147
+     - 352
+     - 231
+     - 71
+     - 256
+     - 143
+     - 140
+   * - ERR14097885
+     - Klebsiella pneumoniae
+     - strong
+     - 140
+     - 245450
+     - 558119
+     - 5866622
+     - 56.56
+     - no
+     - -
+     - ST147
+     - 3
+     - 4
+     - 6
+     - 1
+     - 7
+     - 4
+     - 38
+     - 584-2LV
+     - ybt 9; ICEKp?
+     - 5
+     - 11
+     - 6
+     - 5
+     - 1
+     - 293
+     - 318
+     - 9
+     - 5
+     - 142
+     - 11
+     - -
+     - 0
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - 63
+     - iuc 1
+     - 1
+     - 15
+     - 1
+     - 1
+     - 1
+     - -
+     - 0
+     - -
+     - -
+     - -
+     - -
+     - -
+     - -
+     - 147
+     - rmp 1; KpVP-1
+     - Phase ON
+     - 27
+     - 2
+     - 2
+     - 11T
+     - present
+     - -
+     - 4
+     - -
+     - rmpA2_6*-47%
+     - present
+     - aph(3')-Ia.v1^;aadA1.v2;aph(3')-VI;armA
+     - -
+     - fosA5.v1*
+     - qnrS1
+     - -
+     - msrE;mrx*;mphA;mphE.v2
+     - catB3.v2
+     - arr-3
+     - sul1;sul2
+     - -
+     - -
+     - dfrA5;dfrA50*
+     - OXA-9.v1;OXA-1
+     - -
+     - CTX-M-15
+     - -
+     - NDM-5
+     - SHV-11^
+     - SHV:p.L35Q
+     - ompK36:p.134_135insGD;ompK35:p.R60LfsTer31
+     - pmrB:c.G445del
+     - gyrA:p.S83I;parC:p.S80I
+     - TEM-150*?-0%;aac(6')-Ib-AKT.v3?-89%
+     - -
+     - 3
+     - 12
+     - 20
+     - nonwildtype R
+     - 99.22% R (N=2424/2443)
+     - >0 QRDR, >0 PMQR, * aac(6`)-Ib-cr
+     - 4 mg/L [4-4]
+     - wzi64
+     - KL64
+     - K64
+     - Typeable
+     - -
+     - 100.00%
+     - -
+     - OL2α.1
+     - O2α
+     - Typeable
+     - -
+     - 99.03%
+     - -
+     - cgST10000; cgST11351; cgST35980; cgST65374
+     - 0_0_197_0_4_1_0_7_15_0
+     - SL147
+     - CG147
+     - ST8-1LV
+     - 6
+     - 3
+     - 2
+     - 12
+     - 8
+     - 7
+     - 15
+     - -
+
+
+   `klebsiella_pneumo_complex_hAMRonization_output.txt <https://github.com/user/repo/blob/main/test/kpsc_test/example_output/klebsiella_pneumo_complex_hAMRonization_output.tx>`_:
+
+   .. list-table::Kleborate hAMRonization output
+   :widths: auto
+   :header-rows: 1
+
+   * - Input File Name
+     - Gene Symbol
+     - Gene Name
+     - Nucleotide mutation
+     - Amino acid mutation
+     - Genetic Variation Type
+     - Drug Class
+     - Input Sequence ID
+     - Input Gene Length
+     - Input Gene Start
+     - Input Gene Stop
+     - Reference Gene Length
+     - Reference Gene Start
+     - Reference Gene Stop
+     - Sequence Identity
+     - Coverage
+     - Reference Accession
+     - Strand Orientation
+     - Analysis Software Name
+     - Analysis Software Version
+     - Reference Database Name
+     - Reference Database Version
+     - Input Protein Length
+     - Reference Protein Length
+     - Input Protein Start
+     - Input Protein Stop
+     - Reference Protein Start
+     - Reference Protein Stop
+   * - 2024187392
+     - strB.v1
+     - strB.v1
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 45_pilon
+     - 15773
+     - 13554
+     - 14390
+     - 837
+     - 1
+     - 837
+     - 100.00
+     - 100.00
+     - NG_047464.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - aph(3)-Ia.v1
+     - aph(3)-Ia.v1
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 94_pilon
+     - 1056
+     - 67
+     - 882
+     - 816
+     - 1
+     - 816
+     - 99.75
+     - 100.00
+     - CP157740.1:12584-13348
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - aph(3)-Ib.v1
+     - aph(3)-Ib.v1
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 45_pilon
+     - 15773
+     - 14390
+     - 15193
+     - 804
+     - 1
+     - 804
+     - 99.88
+     - 100.00
+     - NG_047413.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - aadA1.v2
+     - aadA1.v2
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 74_pilon
+     - 2416
+     - 659
+     - 1447
+     - 789
+     - 1
+     - 789
+     - 100.00
+     - 100.00
+     - NG_047327.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - aph(3)-VI
+     - aph(3)-VI
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 48_pilon
+     - 12362
+     - 5950
+     - 6729
+     - 780
+     - 1
+     - 780
+     - 100.00
+     - 100.00
+     - NG_051730.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - armA
+     - armA
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 57_pilon
+     - 7423
+     - 6437
+     - 7210
+     - 774
+     - 1
+     - 774
+     - 100.00
+     - 100.00
+     - NG_047476.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - aac(6)-Ib-AKT
+     - aac(6)-Ib-AKT
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 74_pilon
+     - 2416
+     - 35
+     - 589
+     - 555
+     - 1
+     - 555
+     - 100.00
+     - 100.00
+     - NG_056043.1:5-559
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - fosA5.v1
+     - fosA5.v1
+     - 
+     - 
+     - Gene presence detected
+     - fosfomycin antibiotic
+     - 13_pilon
+     - 166552
+     - 13876
+     - 14295
+     - 420
+     - 1
+     - 420
+     - 99.05
+     - 100.00
+     - NG_047882.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - qnrS1
+     - qnrS1
+     - 
+     - 
+     - Gene presence detected
+     - Fluoroquinolone antibiotic
+     - 48_pilon
+     - 12362
+     - 1416
+     - 2072
+     - 657
+     - 1
+     - 657
+     - 100.00
+     - 100.00
+     - NG_050543.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - msrE
+     - msrE
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 57_pilon
+     - 7423
+     - 2663
+     - 4138
+     - 1476
+     - 1
+     - 1476
+     - 100.00
+     - 100.00
+     - NG_048007.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - mrx
+     - mrx
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 66_pilon
+     - 4017
+     - 973
+     - 2211
+     - 1239
+     - 1
+     - 1239
+     - 100.00
+     - 100.00
+     - LC613143.1:28805-30043
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - mphA
+     - mphA
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 66_pilon
+     - 4017
+     - 71
+     - 976
+     - 906
+     - 1
+     - 906
+     - 100.00
+     - 100.00
+     - NG_047985.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - mphE.v2
+     - mphE.v2
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 57_pilon
+     - 7423
+     - 1723
+     - 2607
+     - 885
+     - 1
+     - 885
+     - 100.00
+     - 100.00
+     - NG_064660.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - sul1
+     - sul1
+     - 
+     - 
+     - Gene presence detected
+     - sulfonamide antibiotic
+     - 85_pilon
+     - 1489
+     - 312
+     - 1151
+     - 840
+     - 1
+     - 840
+     - 100.00
+     - 100.00
+     - NG_048082.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - sul2
+     - sul2
+     - 
+     - 
+     - Gene presence detected
+     - sulfonamide antibiotic
+     - 60_pilon
+     - 5091
+     - 3808
+     - 4623
+     - 816
+     - 1
+     - 816
+     - 100.00
+     - 100.00
+     - NG_051852.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - tet(A).v1
+     - tet(A).v1
+     - 
+     - 
+     - Gene presence detected
+     - tetracycline antibiotic
+     - 64_pilon
+     - 4106
+     - 901
+     - 2100
+     - 1200
+     - 1
+     - 1200
+     - 100.00
+     - 100.00
+     - NG_048154.1:101-1300
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - dfrA5
+     - dfrA5
+     - 
+     - 
+     - Gene presence detected
+     - trimethoprim antibiotic
+     - 81_pilon
+     - 1897
+     - 1351
+     - 1824
+     - 474
+     - 1
+     - 474
+     - 100.00
+     - 100.00
+     - NG_051699.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - CTX-M-15
+     - CTX-M-15
+     - 
+     - 
+     - Gene presence detected
+     - third-generation cephalosporin
+     - 80_pilon
+     - 1902
+     - 981
+     - 1856
+     - 876
+     - 1
+     - 876
+     - 100.00
+     - 100.00
+     - NG_048935.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - CTX-M-14
+     - CTX-M-14
+     - 
+     - 
+     - Gene presence detected
+     - third-generation cephalosporin
+     - 88_pilon
+     - 1256
+     - 341
+     - 1216
+     - 876
+     - 1
+     - 876
+     - 99.89
+     - 100.00
+     - NG_048929.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - NDM-5
+     - NDM-5
+     - 
+     - 
+     - Gene presence detected
+     - carbapenem
+     - 48_pilon
+     - 12362
+     - 9162
+     - 9974
+     - 813
+     - 1
+     - 813
+     - 100.00
+     - 100.00
+     - NG_049337.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - OXA-48
+     - OXA-48
+     - 
+     - 
+     - Gene presence detected
+     - carbapenem
+     - 84_pilon
+     - 1610
+     - 26
+     - 823
+     - 798
+     - 1
+     - 798
+     - 100.00
+     - 100.00
+     - NG_049762.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - SHV-1
+     - SHV-1
+     - 
+     - 
+     - Gene presence detected
+     - penicillin beta-lactam
+     - 14_pilon
+     - 148667
+     - 119862
+     - 120722
+     - 861
+     - 1
+     - 861
+     - 100.00
+     - 100.00
+     - CP165807.1:2737916-2738776
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - OXA-9.v1
+     - OXA-9.v1
+     - 
+     - 
+     - Gene presence detected
+     - penicillin beta-lactam
+     - 74_pilon
+     - 2416
+     - 1492
+     - 2331
+     - 840
+     - 1
+     - 840
+     - 99.88
+     - 100.00
+     - CP067618.1:18845-19684
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - TEM-135.v1
+     - TEM-135.v1
+     - 
+     - 
+     - Gene presence detected
+     - penicillin beta-lactam
+     - 96_pilon
+     - 991
+     - 2
+     - 844
+     - 861
+     - 19
+     - 861
+     - 99.88
+     - 97.91
+     - CP117718.1:71328-72188
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - catA1
+     - catA1
+     - 
+     - 
+     - Gene presence detected
+     - phenicol antibiotic
+     - 93_pilon
+     - 1119
+     - 670
+     - 1119
+     - 660
+     - 211
+     - 660
+     - 99.78
+     - 68.18
+     - NG_047582.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - ompK36
+     - ompK36
+     - 
+     - p.135_136insD
+     - Inactivating mutation detected
+     - -
+     - 2_pilon
+     - 438666
+     - 240738
+     - 241859
+     - 1104
+     - 1
+     - 1104
+     - 92.38
+     - 101.63
+     - NC_016845.1:3727882-3728985
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - ompK35
+     - ompK35
+     - c.T106del
+     - 
+     - Inactivating mutation detected
+     - -
+     - 22_pilon
+     - 93665
+     - 2
+     - 106
+     - 1080
+     - 1
+     - 105
+     - 100.00
+     - 9.75
+     - -
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - mgrB
+     - mgrB
+     - c.T50del
+     - 
+     - Inactivating mutation detected
+     - peptide antibiotic
+     - 11_pilon
+     - 174550
+     - 2
+     - 50
+     - 144
+     - 1
+     - 49
+     - 100.00
+     - 34.04
+     - NC_016845.1:3337154-3337297
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - 2024187392
+     - gyrA
+     - gyrA
+     - 
+     - p.S83F
+     - Protein variant detected
+     - fluoroquinolone antibiotic
+     - 2_pilon
+     - 438666
+     - 230990
+     - 231350
+     - 360
+     - 1
+     - 360
+     - 99.44
+     - 100.00
+     - HM560971.1:119269-119072
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 120
+     - 120
+     - 1
+     - 120
+     - 1
+     - 120
+   * - 2024187392
+     - gyrA
+     - gyrA
+     - 
+     - p.D87N
+     - Protein variant detected
+     - fluoroquinolone antibiotic
+     - 2_pilon
+     - 438666
+     - 230990
+     - 231350
+     - 360
+     - 1
+     - 360
+     - 99.44
+     - 100.00
+     - HM560971.1:119269-119072
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 120
+     - 120
+     - 1
+     - 120
+     - 1
+     - 120
+   * - 2024187392
+     - parC
+     - parC
+     - 
+     - p.S80I
+     - Protein variant detected
+     - fluoroquinolone antibiotic
+     - 24_pilon
+     - 87413
+     - 57118
+     - 57478
+     - 360
+     - 1
+     - 360
+     - 99.72
+     - 100.00
+     - HM560971.1:119269-119072
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 120
+     - 120
+     - 1
+     - 120
+     - 1
+     - 120
+   * - ERR14097885
+     - aph(3)-Ia.v1
+     - aph(3)-Ia.v1
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 76
+     - 1051
+     - 67
+     - 882
+     - 816
+     - 1
+     - 816
+     - 99.75
+     - 100.00
+     - CP157740.1:12584-13348
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - aadA1.v2
+     - aadA1.v2
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 62
+     - 2006
+     - 136
+     - 924
+     - 789
+     - 1
+     - 789
+     - 100.00
+     - 100.00
+     - NG_047327.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - aph(3)-VI
+     - aph(3)-VI
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 44
+     - 7811
+     - 1083
+     - 1862
+     - 780
+     - 1
+     - 780
+     - 100.00
+     - 100.00
+     - NG_051730.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - armA
+     - armA
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 45
+     - 7423
+     - 6437
+     - 7210
+     - 774
+     - 1
+     - 774
+     - 100.00
+     - 100.00
+     - NG_047476.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - fosA5.v1
+     - fosA5.v1
+     - 
+     - 
+     - Gene presence detected
+     - fosfomycin antibiotic
+     - 14
+     - 158741
+     - 13893
+     - 14311
+     - 420
+     - 1
+     - 420
+     - 98.10
+     - 100.00
+     - NG_047882.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - qnrS1
+     - qnrS1
+     - 
+     - 
+     - Gene presence detected
+     - Fluoroquinolone antibiotic
+     - 44
+     - 7811
+     - 5740
+     - 6396
+     - 657
+     - 1
+     - 657
+     - 100.00
+     - 100.00
+     - NG_050543.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - msrE
+     - msrE
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 45
+     - 7423
+     - 2663
+     - 4138
+     - 1476
+     - 1
+     - 1476
+     - 100.00
+     - 100.00
+     - NG_048007.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - mrx
+     - mrx
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 46
+     - 5939
+     - 3731
+     - 4969
+     - 1239
+     - 1
+     - 1239
+     - 99.92
+     - 100.00
+     - LC613143.1:28805-30043
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - mphA
+     - mphA
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 46
+     - 5939
+     - 4966
+     - 5871
+     - 906
+     - 1
+     - 906
+     - 100.00
+     - 100.00
+     - NG_047985.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - mphE.v2
+     - mphE.v2
+     - 
+     - 
+     - Gene presence detected
+     - macrolide antibiotic
+     - 45
+     - 7423
+     - 1723
+     - 2607
+     - 885
+     - 1
+     - 885
+     - 100.00
+     - 100.00
+     - NG_064660.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - catB3.v2
+     - catB3.v2
+     - 
+     - 
+     - Gene presence detected
+     - phenicol antibiotic
+     - 57
+     - 2443
+     - 1165
+     - 1797
+     - 633
+     - 1
+     - 633
+     - 100.00
+     - 100.00
+     - NG_047604.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - arr-3
+     - arr-3
+     - 
+     - 
+     - Gene presence detected
+     - rifamycin antibiotic
+     - 57
+     - 2443
+     - 1882
+     - 2334
+     - 453
+     - 1
+     - 453
+     - 100.00
+     - 100.00
+     - NG_048581.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - sul1
+     - sul1
+     - 
+     - 
+     - Gene presence detected
+     - sulfonamide antibiotic
+     - 67
+     - 1611
+     - 318
+     - 1157
+     - 840
+     - 1
+     - 840
+     - 100.00
+     - 100.00
+     - NG_048082.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - sul2
+     - sul2
+     - 
+     - 
+     - Gene presence detected
+     - sulfonamide antibiotic
+     - 48
+     - 5101
+     - 3806
+     - 4621
+     - 816
+     - 1
+     - 816
+     - 100.00
+     - 100.00
+     - NG_051852.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - dfrA5
+     - dfrA5
+     - 
+     - 
+     - Gene presence detected
+     - trimethoprim antibiotic
+     - 85
+     - 560
+     - 71
+     - 544
+     - 474
+     - 1
+     - 474
+     - 100.00
+     - 100.00
+     - NG_051699.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - dfrA50
+     - dfrA50
+     - 
+     - 
+     - Gene presence detected
+     - trimethoprim antibiotic
+     - 17
+     - 112548
+     - 12768
+     - 13244
+     - 477
+     - 1
+     - 477
+     - 98.95
+     - 100.00
+     - NG_242637.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - OXA-9.v1
+     - OXA-9.v1
+     - 
+     - 
+     - Gene presence detected
+     - penicillin beta-lactam
+     - 62
+     - 2006
+     - 969
+     - 1808
+     - 840
+     - 1
+     - 840
+     - 100.00
+     - 100.00
+     - CP067618.1:18845-19684
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - OXA-1
+     - OXA-1
+     - 
+     - 
+     - Gene presence detected
+     - penicillin beta-lactam
+     - 57
+     - 2443
+     - 197
+     - 1027
+     - 831
+     - 1
+     - 831
+     - 100.00
+     - 100.00
+     - NG_049392.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - CTX-M-15
+     - CTX-M-15
+     - 
+     - 
+     - Gene presence detected
+     - third-generation cephalosporin
+     - 59
+     - 2170
+     - 981
+     - 1856
+     - 876
+     - 1
+     - 876
+     - 100.00
+     - 100.00
+     - NG_048935.1
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - NDM-5
+     - NDM-5
+     - 
+     - 
+     - Gene presence detected
+     - carbapenem
+     - 54
+     - 3392
+     - 192
+     - 1004
+     - 813
+     - 1
+     - 813
+     - 100.00
+     - 100.00
+     - NG_049337.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - SHV-11
+     - SHV-11
+     - 
+     - 
+     - Gene presence detected
+     - penicillin beta-lactam
+     - 3
+     - 391795
+     - 276306
+     - 277166
+     - 861
+     - 1
+     - 861
+     - 99.88
+     - 100.00
+     - CP168408.1:2797577-2798437
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - TEM-150
+     - TEM-150
+     - 
+     - 
+     - Gene presence detected
+     - penicillin beta-lactam
+     - 43
+     - 8581
+     - 1
+     - 842
+     - 861
+     - 20
+     - 861
+     - 99.88
+     - 97.79
+     - NG_050194.1
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - aac(6)-Ib-AKT.v3
+     - aac(6)-Ib-AKT.v3
+     - 
+     - 
+     - Gene presence detected
+     - aminoglycoside antibiotic
+     - 87
+     - 521
+     - 1
+     - 489
+     - 555
+     - 1
+     - 489
+     - 100.00
+     - 88.11
+     - NG_052418.1:101-655
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - blaSHV
+     - blaSHV
+     - 
+     - p.L35Q
+     - Protein variant detected
+     - penicillin beta-lactam
+     - 3
+     - 391795
+     - 276306
+     - 277166
+     - 861
+     - 1
+     - 861
+     - 99.88
+     - 100.00
+     - CP067381.1:82914-84074
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - ompK36
+     - ompK36
+     - 
+     - p.134_135insGD
+     - Inactivating mutation detected
+     - -
+     - 11
+     - 198590
+     - 122632
+     - 123741
+     - 1104
+     - 1
+     - 1104
+     - 98.83
+     - 100.54
+     - NC_016845.1:3727882-3728985
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - ompK35
+     - ompK35
+     - 
+     - p.R60LfsTer31
+     - Inactivating mutation detected
+     - -
+     - 6
+     - 348123
+     - 178574
+     - 179660
+     - 1080
+     - 1
+     - 1080
+     - 99.26
+     - 25.07
+     - -
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - pmrB
+     - pmrB
+     - c.G445del
+     - 
+     - Inactivating mutation detected
+     - peptide antibiotic
+     - 6
+     - 348123
+     - 91
+     - 534
+     - 1098
+     - 1
+     - 444
+     - 99.55
+     - 40.55
+     - NC_016845.1:1694393-1695491
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+   * - ERR14097885
+     - gyrA
+     - gyrA
+     - 
+     - p.S83I
+     - Protein variant detected
+     - fluoroquinolone antibiotic
+     - 11
+     - 198590
+     - 112885
+     - 113245
+     - 360
+     - 1
+     - 360
+     - 99.44
+     - 100.00
+     - HM560971.1:119269-119072
+     - +
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 120
+     - 120
+     - 1
+     - 120
+     - 1
+     - 120
+   * - ERR14097885
+     - parC
+     - parC
+     - 
+     - p.S80I
+     - Protein variant detected
+     - fluoroquinolone antibiotic
+     - 19
+     - 103230
+     - 72931
+     - 73291
+     - 360
+     - 1
+     - 360
+     - 99.44
+     - 100.00
+     - HM560971.1:119269-119072
+     - -
+     - Kleborate
+     - 3.2.4
+     - Kleborate_AMRdb
+     - 3.3.0
+     - 120
+     - 120
+     - 1
+     - 120
+     - 1
+     - 120
+
+
+
+   `klebsiella_pneumo_complex_genotype_spec.txt <https://github.com/user/repo/blob/main/test/kpsc_test/example_output/klebsiella_pneumo_complex_genotype_spec.txt>`_:
+
+   .. list-table::Kleborate genotype specification output
+   :widths: auto
+   :header-rows: 1
+
+   * - sample
+     - genotyping_method
+     - genotyping_schema_taxon
+     - genotyping_database_name
+     - genotyping_database_version
+     - genotyping_schema_name
+     - genotyping_software_name
+     - genotyping_software_version
+     - genotype
+     - genotype_confidence_value
+     - genotype_predicted_phenotype
+   * - 2024187392
+     - In silico species detection
+     - Enterobacterales [NCBITaxon:91347]
+     - kleborate_enterobacterales__species
+     - 3.2.4
+     - enterobacterales__species
+     - Kleborate
+     - 3.2.4
+     - Klebsiella pneumoniae
+     - strong
+     - 
+   * - 2024187392
+     - MLST
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - MLST
+     - Kleborate
+     - 3.2.4
+     - ST383
+     - 
+     - 
+   * - 2024187392
+     - In silico serotyping
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - kaptive_Klebsiella_k_locus_primary_reference
+     - 3.1.0
+     - Klebsiella_k_locus_primary_reference
+     - Kaptive
+     - 3.1.0
+     - KL30
+     - Typeable
+     - K30
+   * - 2024187392
+     - In silico serotyping
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - kaptive_Klebsiella_o_locus_primary_reference
+     - 3.1.0
+     - Klebsiella_o_locus_primary_reference
+     - Kaptive
+     - 3.1.0
+     - OL2α.2
+     - Typeable
+     - O1αβ,2β
+   * - 2024187392
+     - cgMLST
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - cgST19975; cgST20666; cgST52869; cgST63343
+     - 
+     - 
+   * - 2024187392
+     - LIN code
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - 0_0_87_5_0_3_1_0_0_0
+     - 
+     - 
+   * - 2024187392
+     - Sublineage
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - SL383
+     - 
+     - 
+   * - 2024187392
+     - Clonal group
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - CG383
+     - 
+     - 
+   * - ERR14097885
+     - In silico species detection
+     - Enterobacterales [NCBITaxon:91347]
+     - kleborate_enterobacterales__species
+     - 3.2.4
+     - enterobacterales__species
+     - Kleborate
+     - 3.2.4
+     - Klebsiella pneumoniae
+     - strong
+     - 
+   * - ERR14097885
+     - MLST
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - MLST
+     - Kleborate
+     - 3.2.4
+     - ST147
+     - 
+     - 
+   * - ERR14097885
+     - In silico serotyping
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - kaptive_Klebsiella_k_locus_primary_reference
+     - 3.1.0
+     - Klebsiella_k_locus_primary_reference
+     - Kaptive
+     - 3.1.0
+     - KL64
+     - Typeable
+     - K64
+   * - ERR14097885
+     - In silico serotyping
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - kaptive_Klebsiella_o_locus_primary_reference
+     - 3.1.0
+     - Klebsiella_o_locus_primary_reference
+     - Kaptive
+     - 3.1.0
+     - OL2α.1
+     - Typeable
+     - O2α
+   * - ERR14097885
+     - cgMLST
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - cgST10000; cgST11351; cgST35980; cgST65374
+     - 
+     - 
+   * - ERR14097885
+     - LIN code
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - 0_0_197_0_4_1_0_7_15_0
+     - 
+     - 
+   * - ERR14097885
+     - Sublineage
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - SL147
+     - 
+     - 
+   * - ERR14097885
+     - Clonal group
+     - Klebsiella pneumoniae species complex [NCBITaxon:3390273]
+     - pubmlst_klebsiella_seqdef
+     - 2024-12-31
+     - scgMLST629_S
+     - MiST
+     - 1.2.0
+     - CG147
+     - 
+     -
+
+
+
+

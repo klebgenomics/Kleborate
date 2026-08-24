@@ -350,13 +350,13 @@ In light of this information, we screened and extracted the *rmpA*\ , *rmpD* and
 
 The klebsiella__rmst module screens for *rmpADC* and will report a sequence type, along with the associated lineage and mobile genetic element.
 
+Expression of the *rmp*locus
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Additionally, Kleborate also types for expression of the *rmp*locus and the associated hypermucoidy phenotype.
+When a *rmp* locus is detected, Kleborate checks the status of each of these loci to determine whether each is *ON* (wildtype, corresponding to normal expression), *OFF* (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. The combinatorial *rmp* expression status are used to annotate the status of the locus as a whole, as follows. If all component loci are present and *ON*, the ‘rmp locus status’ is annotated as *Phase ON*. If all components are present but one or more is *OFF*, the status is annotated as *Phase OFF*. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual *rmp* genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
 
 
-Additionally, Kleborate types for expression of the rmp locus and the associated hypermucoidy phenotype 
-Where a rmp locus is detected, Kleborate checks the status of each of these four loci to determine whether each is ON (wildtype, corresponding to normal expression), OFF (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. These values are then summarised to annotate the status of the locus as a whole, as follows. If all four component loci are present and ON, the ‘rmp locus status’ is annotated as Phase ON. If all components are present but one or more is OFF, the status is annotated as Phase OFF. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual rmp genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
-
-
-The RmST module also checks for presence of the argR gene in the genomes, and conservation of the ARG box in the rmpA promoter. The argR gene is screened via alignment against the reference sequence from K. pneumoniae strain KPPR1. where a hit is detected, its nucleotide sequence is translated and the length of the encoded protein determined. Full-length genes are reported as ‘present’,protein sequences with a coverage <100% compared with the reference ArgR encoded by KPPR1 are reported as ‘truncated-X%’ (‘X’ indicates the percent coverage). If there is no hit, the value returned is ‘-’. The ARG box is checked by searching for an exact match to the reference sequence string (ATTGAATTTTTATTCATT) from KPPR1, within 150 bp upstream of rmpA. If this is not found, the annotation ‘ARG box lost’ is added to the ‘rmpA_promoter’ field.
+The RmST module also checks for presence of the *argR* gene in the genomes, and conservation of the *ARG box* in the *rmpA* promoter. The *argR* gene is screened via alignment against the *K. pneumoniae* strain *KPPR1* reference strain. Where a hit is detected, its nucleotide sequence is translated and the length of the encoded protein determined. Full-length genes are reported as ‘present’,protein sequences with a coverage <100% compared with the reference ArgR encoded by KPPR1 are reported as ‘truncated-X%’ (‘X’ indicates the percent coverage). If there is no hit, the value returned is ‘-’. The ARG box is checked by searching for an exact match to the reference sequence string (ATTGAATTTTTATTCATT) from KPPR1, within 150 bp upstream of rmpA. If this is not found, the annotation ‘ARG box lost’ is added to the ‘rmpA_promoter’ field.
 
 
 
@@ -410,7 +410,7 @@ Output of the rmst module is the following columns:
      - expression states of the rmp promoter and ARG box
 
    * - argR
-       Presence of argR gene
+     - Presence of argR gene
 
 
 
@@ -488,7 +488,7 @@ Peg-344 typing
 
 -m klebsiella__peg-344
 
-This module checksfor presence/absence of *peg-344* gene by aligning the genomes against NTUH-K2044 peg-344 reference sequence (protein BAH65947.1)
+This module checks for presence/absence of *peg-344* gene by aligning the genomes against *NTUH-K2044* reference sequence (protein BAH65947.1)
 
 Parameters
 ++++++++++
@@ -999,12 +999,12 @@ KpSC cgMLST
 
    -m kpsc__cgmlst
 
-This module will run `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool for cgMLST allele calling. Please see this document on how to download the Klebsiella cgMLST scheme when installing Kleborate
-
+This module will run `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool for cgMLST allele calling. 
+To use this module, you must first download the Klebsiella cgMLST scheme during the Kleborate installation process: Please use this script for `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/main/kleborate/shared/setup_cgmlst.py>`_
 
 
 KpSC cgMLST outputs
-+++++++++++++++++
++++++++++++++++++++
 
 Mist results are output in the following columns:
 

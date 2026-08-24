@@ -1,6 +1,6 @@
 """
-Copyright 2023 Kat Holt, Ryan Wick (rrwick@gmail.com), Mary Maranga (gathonimaranga@gmail.com)
-https://github.com/klebgenomics/KleborateModular/
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com),Ryan Wick (rrwick@gmail.com)
+https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the Free Software Foundation,
@@ -139,7 +139,6 @@ def get_contig_stats(assembly):
 
 
 def load_species_specifications(file_path):
-    """Loads the species thresholds from a JSON-formatted text file."""
     with open(file_path, 'r') as file:
         return json.load(file)
 
@@ -147,8 +146,6 @@ def load_species_specifications(file_path):
 
 def get_qc_warnings(total_size, N50, contig_count, gc_content, ambiguous_bases, species, species_spec_dict):
     warnings = []
-    
-    # Logic to handle subspecies/versions using startswith
     spec = None
     for ref_species, ref_data in species_spec_dict.items():
         if species.startswith(ref_species):
@@ -156,7 +153,7 @@ def get_qc_warnings(total_size, N50, contig_count, gc_content, ambiguous_bases, 
             break
     
     if spec is None:
-        return '-' # No matching species found in dictionary
+        return '-' 
 
     # Genome Size Check (Min and Max)
     min_size = spec.get('min_genome_size')
@@ -171,14 +168,6 @@ def get_qc_warnings(total_size, N50, contig_count, gc_content, ambiguous_bases, 
     if min_n50 is not None and N50 < min_n50:
         warnings.append('N50')
 
-    # Contig Count Check (Min and Max)
-    # min_contigs = spec.get('min_no_of_contigs')
-    # max_contigs = spec.get('max_no_of_contigs')
-    # if min_contigs is not None and contig_count < min_contigs:
-    #     warnings.append('contig_count')
-    # if max_contigs is not None and contig_count > max_contigs:
-    #     warnings.append('contig_count')
-
     # GC Content Check (Min and Max)
     min_gc = spec.get('min_GC_Content')
     max_gc = spec.get('max_GC_Content')
@@ -192,22 +181,3 @@ def get_qc_warnings(total_size, N50, contig_count, gc_content, ambiguous_bases, 
         warnings.append('ambiguous_bases')
 
     return ','.join(warnings) if warnings else '-'
-
-
-# def get_qc_warnings(total_size, N50, ambiguous_bases, species, species_specification_dict):
-#     warnings = []
-#     if species in species_specification_dict:
-#         species_spec = species_specification_dict[species]
-#         min_size, max_size = species_spec['min_genome_size'], species_spec['max_genome_size']
-#         if total_size < min_size:
-#             warnings.append('total_size')
-#         elif total_size > max_size:
-#             warnings.append('total_size')
-#     else:
-#         return '-'  # Skip QC for species not in the dictionary
-
-#     if N50 < 10000:
-#         warnings.append('N50')
-#     if 'yes' in ambiguous_bases:
-#         warnings.append('ambiguous_bases')
-#     return ','.join(warnings) if warnings else '-'

@@ -5,7 +5,7 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2025 Mary Maranga (gathonimaranga@gmail.com)
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify

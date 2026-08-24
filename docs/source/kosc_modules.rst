@@ -31,7 +31,7 @@ KoSC MLST
 
 .. code-block:: Python
 
-   -m klebsiella_oxytoca_complex__mlst
+   -m kosc__mlst
 
 Genomes identified as belonging to the *K. oxytoca* species complex are subjected to MLST using the 7-locus scheme described at the  *K. oxytoca* `\at PubMLST <https://pubmlst.org/organisms/klebsiella-oxytoca>`_.
 

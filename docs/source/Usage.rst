@@ -60,7 +60,14 @@ Check available modules, check version, print help:
 Output files
 --------------------
 
-Output files are tab-delimited (.txt) files, one per species/complex detected, named in the format: klebsiella_pneumo_complex_output.txt.
+Output files are tab-delimited (.txt) files, named in the format: 
+
+    klebsiella_pneumo_complex_output.txt - Main Kleborate results
+
+    klebsiella_pneumo_complex_hAMRonization_output.txt - Antimicrobial resistance results formatted according to the PHA4GE hAMRonization specification
+
+    klebsiella_pneumo_complex_genotype_spec.txt – Genotype results formatted according to the PHA4GE genotype specification format
+
 Columns included in each output file will depend on the modules that are run; essentially each module creates a set of results columns that are added to the output file for the relevant species/complex. By default, each column name is preprended with the name of the module that generated it. This can be turned off using --trim_headers when running kleborate, or these column headers can be stripped off later using the trim_headers.py script.
 
 
@@ -77,6 +84,11 @@ Parameters
 
 ``--trim_headers``
     Trim headers in the output files (switch on to remove module names from the column headers in the output files). Alternatively, users can trim the headers off later using this script: `trim_headers.py <https://github.com/klebgenomics/KleborateModular/blob/main/kleborate/shared/trim_headers.py>`_
+
+``--no_hamronization``                    
+    Disable generation of the hAMRonization output file (default: False)
+``--no_genotype_spec``                   
+    Disable generation of the genotype spec output file (default: False)
 
 **Modules:**
 

@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ def prerequisite_modules():
 
 def get_headers():
     full_headers = ['CbST', 'Colibactin', 'clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG',
-                    'clbH', 'clbI', 'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ', 'spurious_clb_hits']
+                    'clbH', 'clbI', 'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ', 'spurious_CbST']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -109,7 +109,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
             'clbG': alleles['clbG'], 'clbH': alleles['clbH'], 'clbI': alleles['clbI'],
             'clbL': alleles['clbL'], 'clbM': alleles['clbM'], 'clbN': alleles['clbN'],
             'clbO': alleles['clbO'], 'clbP': alleles['clbP'], 'clbQ': alleles['clbQ'],
-            'spurious_clb_hits':spurious_virulence_hits}
+            'spurious_CbST':spurious_virulence_hits}
 
 
     

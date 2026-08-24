@@ -2,7 +2,7 @@
 This module contains classes for interacting with bacterial genome assemblies and contigs and a pipeline
 to type them.
 
-Copyright 2025 Mary Maranga, Tom Stanton
+Copyright 2026 Mary Maranga, Tom Stanton
 https://github.com/klebgenomics/Kleborate/
 https://github.com/klebgenomics/Kaptive
 
@@ -16,13 +16,14 @@ If not, see <https://www.gnu.org/licenses/>.
 """
 
 import os
-from pathlib import Path
-import shutil
+os.environ['KMP_WARNINGS'] = '0'
 import sys
+from pathlib import Path
 
-from kaptive.database import load_database
-from kaptive.utils import check_cpus
-from kaptive.assembly import typing_pipeline
+from kaptive.db import Database
+from kaptive.db.manager import DatabaseManager
+from kaptive.core.genome import GenomeAssembly
+from kaptive.serotyping import Serotyper
 
 
 def description():
@@ -36,9 +37,10 @@ def prerequisite_modules():
 def get_headers():
     full_headers = [
         'K_locus', 'K_type', 'K_locus_confidence', 'K_locus_problems', 'K_locus_identity',
-        'K_Missing_expected_genes',
-        'O_locus', 'O_type', 'O_locus_confidence', 'O_locus_problems', 'O_locus_identity',
-        'O_Missing_expected_genes'
+        'K_Missing_expected_genes', 'K_Database_name', 'K_Database_version',
+        'O_locus', 'O_type', 'O_locus_confidence', 'O_locus_problems', 
+        'O_locus_identity', 'O_Missing_expected_genes', 'O_Database_name', 'O_Database_version',
+        'Kaptive version'
     ]
     stdout_headers = []
     return full_headers, stdout_headers
@@ -47,81 +49,89 @@ def get_headers():
 def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
-    # group.add_argument('-t', '--threads', type=check_cpus, default=8, metavar='',
-    #                    help="Kaptive number of threads for alignment (default: %(default)s)")
-    group.add_argument('--k-db', type=load_database, default=load_database('kpsc_k'), metavar='',
+    group.add_argument('--kpsc-k-db', type=str, default='kpsc_k', metavar='',
                        help="Kaptive database for K-locus typing (default: kpsc_k)")
-    group.add_argument('--o-db', type=load_database, default=load_database('kpsc_o'), metavar='',
+    group.add_argument('--kpsc-o-db', type=str, default='kpsc_o', metavar='',
                        help="Kaptive database for O-locus typing (default: kpsc_o)")
     return group
 
 
-def check_cli_options(args):
-    if hasattr(args, 'threads') and args.threads < 1:
-        raise ValueError("The number of threads must be at least 1.")
+def load_or_install_db(db_input):
+    """Loads/downloads a Kaptive database"""
+    if isinstance(db_input, Database):
+        return db_input
+    
+    db_str = str(db_input)
+    
+    if os.path.exists(db_str):
+        return Database.load(db_str)
 
-# def check_cli_options(args):
-#     if args.threads < 1:
-#         raise ValueError("The number of threads must be at least 1.")
+    db_mgr = DatabaseManager()
+    
+    db_obj = db_mgr.get(db_str)
+    
+    if isinstance(db_obj, Database):
+        return db_obj
+    return Database.load(db_obj)
+
+
+
+def check_cli_options(args):
+    # Reads from module-specific args namespace
+    args.k_db = load_or_install_db(args.kpsc_k_db)
+    args.o_db = load_or_install_db(args.kpsc_o_db)
+
+    args.k_typer = Serotyper(args.k_db)
+    args.o_typer = Serotyper(args.o_db)
 
 
 def check_external_programs():
-    if not shutil.which('kaptive'):
-        sys.exit('Error: could not find kaptive')
-    return ['kaptive']
+    return []
 
 
-# define all headers
+def extract_fields(prefix, result, full_headers):
+    """Pull the fields from SerotypingResult into results_dict entries."""
+    fields = {}
+    if result is None:
+        return fields
 
-all_headers = [
-    'Assembly', 'locus', 'type', 'locus confidence',
-    'locus problems', 'locus identity', 'Coverage', 'Length discrepancy',
-    'Expected genes in locus', 'Expected genes in locus, details',
-    'Missing expected genes', 'Other genes in locus',
-    'Other genes in locus, details', 'Expected genes outside locus',
-    'Expected genes outside locus, details', 'Other genes outside locus',
-    'Other genes outside locus, details', 'Truncated genes, details'
-]
+    fields[f'{prefix}_locus'] = result.best_locus_name
+    fields[f'{prefix}_type'] = result.phenotype
+    fields[f'{prefix}_locus_confidence'] = 'Typeable' if result.typeable else 'Untypeable'
+    fields[f'{prefix}_locus_problems'] = result.problems.to_symbols().decode('utf-8')
+    fields[f'{prefix}_locus_identity'] = '%.2f%%' % result.percent_identity
+    fields[f'{prefix}_Missing_expected_genes'] = ';'.join(result.missing_expected_genes)
+    fields[f'{prefix}_Database_name'] = result.database_name
+    fields[f'{prefix}_Database_version'] = result.database_version
+    fields['Kaptive version'] = result.kaptive_version
+
+    for h in fields.keys():
+        if h not in full_headers:
+            sys.exit(f'Error: results contained a value ({h}) that is not covered by the full headers')
+
+    return fields
 
 
 def get_results(assembly, minimap2_index, args, previous_results):
     full_headers, _ = get_headers()
-
     assembly_path = Path(assembly)
 
+    genome = GenomeAssembly.ensure(assembly_path)
+
     results_dict = {}
-    threads = getattr(args, 'threads',1)
 
-    k_results = typing_pipeline(assembly_path, args.k_db, threads=threads)
-    if k_results is not None:
-        k_result_table = k_results.format('tsv')
-        for line in k_result_table.split('\n'):
-            if line:
-                parts = line.split('\t')
-                for key, value in zip(all_headers, parts):
-                    header = 'K_' + key.replace(' ', '_')
-                    if header in full_headers:
-                        results_dict[header] = value
+    k_result = args.k_typer(genome)
+    if k_result is not None:
+        results_dict.update(extract_fields('K', k_result, full_headers))
     else:
-        print("Warning: No gene alignments sufficient for typing. Skipping k_results processing.")
+        print("Warning: No gene alignments sufficient for K-locus typing. Skipping k_results processing.")
 
-    o_results = typing_pipeline(assembly_path, args.o_db, threads=threads)
-    if o_results is not None:
-        o_result_table = o_results.format('tsv')
-        for line in o_result_table.split('\n'):
-            if line:
-                parts = line.split('\t')
-                for key, value in zip(all_headers, parts):
-                    header = 'O_' + key.replace(' ', '_')
-                    if header in full_headers:
-                        results_dict[header] = value
+    o_result = args.o_typer(genome)
+    if o_result is not None:
+        results_dict.update(extract_fields('O', o_result, full_headers))
     else:
-        print("Warning: No gene alignments sufficient for typing. Skipping o_results processing.")
-
-    for h in results_dict.keys():
-        if h not in full_headers:
-            sys.exit(f'Error: results contained a value ({h}) that is not covered by the full headers')
+        print("Warning: No gene alignments sufficient for O-locus typing. Skipping o_results processing.")
 
     results_dict = {k: (v if v else '-') for k, v in results_dict.items()}
-
     return results_dict
+

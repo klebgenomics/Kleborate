@@ -34,7 +34,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['RmST', 'RmpADC', 'RmpADC_status','rmpA', 'rmpD', 'rmpC', 'rmpA_promoter', 'argR','spurious_rmst_hits']
+    full_headers = ['RmST', 'RmpADC', 'RmpADC_status','rmpA', 'rmpD', 'rmpC', 'rmpA_promoter', 'argR','spurious_RmST']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -174,9 +174,9 @@ def get_results(assembly, minimap2_index, args, previous_results):
     elif has_true_truncation:
         RmpADC_status = "-"
     elif has_reversible_off:
-        RmpADC_status = "Phase OFF"
+        RmpADC_status = "OFF"
     else:
-        RmpADC_status = "Phase ON"
+        RmpADC_status = "ON"
     
     
     if RmpADC_status != "-":
@@ -185,8 +185,8 @@ def get_results(assembly, minimap2_index, args, previous_results):
         # annotate the rmpADC status column with rmpA_promoter annotations
         promoter_anns = []
         if promoter_polyT != "-":
-            if "reduced expression" in promoter_polyT: promoter_anns.append("reduced expression")
-            elif "untypable" in promoter_polyT: promoter_anns.append("untypable")
+            if "reduced expression" in promoter_polyT: promoter_anns.append("reduced")
+            elif "untypable" in promoter_polyT: promoter_anns.append("untypable promoter")
         if promoter_argR != "-" and "ARG-box lost" in promoter_argR:
             promoter_anns.append("ARG box lost")
         
@@ -224,7 +224,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
         'RmpADC_status': RmpADC_status,
         'rmpA_promoter': rmpA_promoter,
         'argR': argR_status,
-        'spurious_rmst_hits': spurious_virulence_hits
+        'spurious_RmST': spurious_virulence_hits
     }
 
 

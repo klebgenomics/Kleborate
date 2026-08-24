@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -44,8 +44,6 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
     # DNA aligner
     dna_aligner = Align.PairwiseAligner(
         mode='global',
-        # match_score=5,
-        # mismatch_score=-10,
         open_gap_score=-10,
         extend_gap_score=-0.5
     )
@@ -178,10 +176,6 @@ def check_omp_genes(hits_dict, assembly, omp, min_identity, min_coverage):
                             f"{hit.query_name[0].lower() + hit.query_name[1:]}:c.{pos}{wt_base.upper()}>{assembly_base.upper()}",
                             {'Genetic Variation Type': 'Nucleotide variant detected', **hit_data}
                         ])
-                        # hits_dict['Omp_mutations'].append([
-                        #     f"{hit.query_name}:c.{pos}{wt_base.upper()}>{assembly_base.upper()}",
-                        #     {'Genetic Variation Type': 'Nucleotide variant detected', **hit_data}
-                        # ])
                 # ----- OmpK36 L3 insertion checks -----
                 if coverage >= min_coverage and translation:
                     l3_insertion, insertion_type = None, None

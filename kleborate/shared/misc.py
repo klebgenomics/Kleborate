@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Ryan Wick
+Copyright 2026 Mary Maranga, Kat Holt, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -19,6 +19,7 @@ import os
 import pathlib
 import datetime
 
+
 def load_fasta(filename):
     """
     Returns the names and sequences for the given fasta file as a list of tuples (name, seq).
@@ -31,7 +32,7 @@ def load_fasta(filename):
             line = line.strip()
             if not line:
                 continue
-            if line[0] == '>':  # Header line = start of new contig
+            if line[0] == '>': 
                 if name:
                     fasta_seqs.append((name.split()[0], sequence.upper()))
                     sequence = ''
@@ -69,7 +70,7 @@ def get_compression_type(filename):
 def get_open_func(filename):
     if get_compression_type(filename) == 'gz':
         return gzip.open
-    else:  # plain text
+    else:  
         return open
 
 
@@ -105,41 +106,49 @@ def get_tool_version(command):
 
 
 def get_mlst_db_version():
-    """
-    Returns the download date of the kpsc__mlst MLST database.
-    Verifies all .fasta files and profiles.tsv exist before returning version.
-    """
-    import kleborate
+    try:
+        import kleborate
+    except ImportError:
+        return None
 
     data_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'kpsc__mlst' / 'data'
-    if not data_dir.exists():
+    if not data_dir.is_dir():
         return None
 
-    db_files = sorted(data_dir.glob('*.fasta')) + [data_dir / 'profiles.tsv']
+    fasta_files = list(data_dir.glob('*.fasta'))
+    profiles_file = data_dir / 'profiles.tsv'
 
-    if not all(f.exists() for f in db_files):
+    if not fasta_files or not profiles_file.exists():
         return None
 
-    return max(datetime.datetime.fromtimestamp(f.stat().st_mtime).strftime('%Y-%m-%d') for f in db_files)
+    db_files = fasta_files + [profiles_file]
+    
+    return max(
+        datetime.datetime.fromtimestamp(f.stat().st_mtime).strftime('%Y-%m-%d')
+        for f in db_files
+    )
 
 
 
 def get_cgmlst_db_version():
-    """
-    Returns the download date of the kpsc__cgmlst database,
-    """
-    import kleborate
 
-    data_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'kpsc__cgmlst' / 'data'
-    if not data_dir.exists():
+    try:
+        import kleborate
+    except ImportError:
         return None
 
-    db_files = sorted(data_dir.glob('kleb_scgmlst_s-index*'))
+    data_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'kpsc__cgmlst' / 'data'
+    if not data_dir.is_dir():
+        return None
 
+    db_files = list(data_dir.glob('kleb_scgmlst_s-index*'))
     if not db_files:
         return None
 
-    return max(datetime.datetime.fromtimestamp(f.stat().st_mtime).strftime('%Y-%m-%d') for f in db_files)
+    return max(
+        datetime.datetime.fromtimestamp(f.stat().st_mtime).strftime('%Y-%m-%d')
+        for f in db_files
+    )
 
 
 
@@ -158,7 +167,7 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_method": "MLST",
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": get_mlst_db_version(), 
+        # "genotyping_database_version": get_mlst_db_version(), 
         "genotyping_database_version": "2024-12-31",
         "genotyping_schema_name": "MLST",
         "genotyping_software_name": "Kleborate",
@@ -169,7 +178,7 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_method": "In silico subspecies detection",
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": get_mlst_db_version(), 
+        # "genotyping_database_version": get_mlst_db_version(), 
         "genotyping_database_version": "2024-12-31",
         "genotyping_schema_name": "MLST",
         "genotyping_software_name": "Kleborate",
@@ -179,9 +188,9 @@ KLEBSIELLA_TYPING_SPEC = {
 
     "K_locus": {
         "genotyping_method": "In silico serotyping",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "kaptive_Klebsiella_k_locus_primary_reference", 
-        "genotyping_database_version": get_tool_version(['kaptive', '--version']),
+        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]", 
+        "genotyping_database_name": "",
+        "genotyping_database_version": "",
         "genotyping_schema_name": "Klebsiella_k_locus_primary_reference",
         "genotyping_software_name": "Kaptive",
         "genotyping_software_version": get_tool_version(['kaptive', '--version']),
@@ -191,8 +200,8 @@ KLEBSIELLA_TYPING_SPEC = {
     "O_locus": {
         "genotyping_method": "In silico serotyping",
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "kaptive_Klebsiella_o_locus_primary_reference", 
-        "genotyping_database_version": get_tool_version(['kaptive', '--version']),
+        "genotyping_database_name": "", 
+        "genotyping_database_version": "",
         "genotyping_schema_name": "Klebsiella_o_locus_primary_reference",
         "genotyping_software_name": "Kaptive",
         "genotyping_software_version": get_tool_version(['kaptive', '--version']),
@@ -204,7 +213,7 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
         "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_database_version": "2024-12-31",
+        # "genotyping_database_version": "2024-12-31",
         "genotyping_schema_name": "scgMLST629_S",
         "genotyping_software_name": "MiST",
         "genotyping_software_version": get_tool_version(['mist', '--version'])
@@ -215,7 +224,7 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
         "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_database_version": "2024-12-31",
+        # "genotyping_database_version": "2024-12-31",
         "genotyping_schema_name": "scgMLST629_S",
         "genotyping_software_name": "MiST",
         "genotyping_software_version": get_tool_version(['mist', '--version'])
@@ -226,7 +235,7 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
         "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_database_version": "2024-12-31",
+        # "genotyping_database_version": "2024-12-31",
         "genotyping_schema_name": "scgMLST629_S",
         "genotyping_software_name": "MiST",
         "genotyping_software_version": get_tool_version(['mist', '--version'])
@@ -237,13 +246,12 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
         "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_database_version": "2024-12-31",
+        # "genotyping_database_version": "2024-12-31",
         "genotyping_schema_name": "scgMLST629_S",
         "genotyping_software_name": "MiST",
         "genotyping_software_version": get_tool_version(['mist', '--version'])
     }
 }
-
 
 
 # HaRmronization headers

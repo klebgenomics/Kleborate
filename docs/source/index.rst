@@ -47,8 +47,11 @@ Citations
 
 If you use Kleborate, please cite the paper: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
 
+If you use the Kaptive calls for K and O locus typing please cite: Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
-If you use the Kaptive calls for K and O locus typing please also cite Wyres, KL. et al. Identification of *Klebsiella* capsule synthesis loci from whole genome data. *Microbial Genomics* (2016). `<http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102>`_
+If you use the cgMLST and LIN code calls, please cite the paper: Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
+
+
 
 The following papers provide more information on the component schemes and genotyping incorporated in Kleborate:
 
@@ -59,6 +62,9 @@ The following papers provide more information on the component schemes and genot
 
    Aerobactin and salmochelin:
    Lam, MMC. et al. Tracking key virulence loci encoding aerobactin and salmochelin siderophore synthesis in *Klebsiella pneumoniae*. *Genome Medicine* (2018). `Genome Medicine <https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5>`_
+
+   Kaptive for capsule (K) serotyping:
+   Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
    Kaptive for capsule (K) serotyping:
    Wyres, KL. et al. Identification of *Klebsiella* capsule synthesis loci from whole genome data. *Microbial Genomics* (2016). `Microbial Genomics 2 <http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102>`_
@@ -74,23 +80,24 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 
 * Updated MLST & virulence databases 
 * Column ``Chr_ST``  has been removed in v3, as it is redundant with ``ST`` 
-* AMR database updated based on CARD v3.2.9 (June 2024)
-* Added ``$`` to indicate when PmrB or MgrB have a mutation in the start codon that may disrupt translation (in ``Col_mutations`` column)
+* Updated AMR database to Kleborate_AMRdb_v3.3
+* Mutations are reported using  `HGVS nomenclature <https://github.com/AMRverse/AMRrulesCuration/blob/main/syntax.md>`_
+* Added ``p.(Met1?)`` to indicate when PmrB or MgrB have a mutation in the start codon that may disrupt translation (in ``Col_mutations`` column)
 * Added check for synonymous mutation in ompK36 (25 C > T) associated with increased resistance to carbapenems (in ``Omp_mutations`` column)
+* Added new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_ standard developed by the Public Health Alliance for Genomic Epidemiology (PHA4GE).
+* Added a module for Ciprofloxacin resistance prediction
+* Updated rmp typing to detect expression of the *rmp*locus
+* Added new module for typing *peg-344* gene
+* Added new module for cgMLST and Lin codes
+* Added new module for typing *mrk* operon
 * Updated to use Kaptive v3, which has some changes to the names of output variables:
   * ``K_locus_missing_genes``  has been renamed ``K_Missing_expected_genes`` 
   * ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
-* Added new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_. standard developed by the Public Health Alliance for Genomic Epidemiology (PHA4GE).
-* Added a module for Ciprofloxacin resistance prediction
-*  Mutations are reported using  `HGVS nomenclature <https://github.com/AMRverse/AMRrulesCuration/blob/main/syntax.md>`_.
-* Added new module for cgMLST and Lin codes
-* Added new module for typing mrk operon
-* Updated rmp typing
-* Added new module for typing peg-344 gene
 * Updated assembly statistics module to use qualibact-v1.0 curated thresholds
-* Added new genome specification report compartible with the Public Health Alliance for Genomic Epidemiology (PHA4GE).
+* Added new genome specification report compartible with the Public Health Alliance for Genomic Epidemiology.
+* Added new module for KoSC K and O locus typing
 
-* Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, AMR typing using AMRFinderPlus
+* Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, pks typing, AMR typing using AMRFinderPlus
 
 
 

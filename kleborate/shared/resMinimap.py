@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga
+Copyright 2026 Mary Maranga
 https://github.com/klebgenomics/Kleborate
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -166,7 +166,6 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
                 omega_metadata['Genetic Variation Type'] = 'Protein variant detected'
                 hits_dict['SHV_mutations'].append([f'blaSHV:p.{omega_str}', omega_metadata])
 
-                # hits_dict['SHV_mutations'].append([f'blaSHV:p.{omega_loop_seq}', {'Genetic Variation Type': 'Protein variant detected'}])
             if not hits_dict['SHV_mutations']:
                 del hits_dict['SHV_mutations']
     
@@ -316,24 +315,3 @@ def get_mapping_by_query_pos(alignment):
             
     return query_pos_map
  
-    
-
-# def get_mapping_by_query_pos(alignment):
-#     """
-#     """
-#     aligned_target = alignment[0]
-#     aligned_query = alignment[1]
-    
-#     query_pos_map = {}
-#     query_counter = 0
-    
-#     for i in range(len(aligned_query)):
-#         t_base = aligned_target[i]
-#         q_base = aligned_query[i]
-        
-#         if q_base != '-':
-#             query_counter += 1
-#             query_pos_map[query_counter] = (t_base, q_base)
-            
-#     return query_pos_map
-

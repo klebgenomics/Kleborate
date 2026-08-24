@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ def prerequisite_modules():
 
 def get_headers():
     full_headers = ['YbST', 'Yersiniabactin', 'ybtS', 'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1',
-                    'ybtU', 'ybtT', 'ybtE', 'fyuA', 'spurious_ybt_hits']
+                    'ybtU', 'ybtT', 'ybtE', 'fyuA', 'spurious_YbST']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -109,4 +109,4 @@ def get_results(assembly, minimap2_index, args, previous_results):
             'ybtP': alleles['ybtP'], 'ybtA': alleles['ybtA'], 'irp2': alleles['irp2'],
             'irp1': alleles['irp1'], 'ybtU': alleles['ybtU'], 'ybtT': alleles['ybtT'],
             'ybtE': alleles['ybtE'], 'fyuA': alleles['fyuA'],
-            'spurious_ybt_hits':spurious_virulence_hits}
+            'spurious_YbST':spurious_virulence_hits}

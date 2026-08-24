@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026  Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['AbST', 'Aerobactin', 'iucA', 'iucB', 'iucC', 'iucD', 'iutA', 'spurious_abst_hits']
+    full_headers = ['AbST', 'Aerobactin', 'iucA', 'iucB', 'iucC', 'iucD', 'iutA', 'spurious_AbST']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -105,7 +105,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     return {'AbST': st, 'Aerobactin': lineage,
             'iucA': alleles['iucA'], 'iucB': alleles['iucB'], 'iucC': alleles['iucC'],
             'iucD': alleles['iucD'], 'iutA': alleles['iutA'],
-            'spurious_abst_hits':spurious_virulence_hits}
+            'spurious_AbST':spurious_virulence_hits}
 
 
     

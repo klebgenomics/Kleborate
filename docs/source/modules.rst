@@ -41,7 +41,7 @@ Summary of availabe modules and their output columns
      - species, species_match
    * - :ref:`general__contig_stats <contig_stats>`
      - contig_count, N50, largest_contig, total_size, ambiguous_bases, QC_warnings
-   * - :ref:`klebsiella_pneumo_complex__mlst <klebsiella_pneumo_complex_mlst>`
+   * - :ref:`kpsc__mlst <klebsiella_pneumo_complex_mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
    * - :ref:`klebsiella__ybst <klebsiella__ybst>`
      - YbST, Yersiniabactin, ybtS, ybtX, ybtQ, ybtP, ybtA, irp2, irp1, ybtU, ybtT, ybtE, fyuA
@@ -55,11 +55,11 @@ Summary of availabe modules and their output columns
      - RmST, RmpADC, rmpA, rmpD, rmpC
    * - :ref:`klebsiella__rmpa2 <klebsiella__rmpa2>`
      - rmpA2
-   * - :ref:`klebsiella_pneumo_complex__virulence_score <klebsiella_pneumo_complex__virulence_score>`
+   * - :ref:`kpsc__virulence_score <klebsiella_pneumo_complex__virulence_score>`
      - virulence_score (Score of 0-5)
-   * - :ref:`klebsiella_pneumo_complex__amr <klebsiella_pneumo_complex__amr>`
+   * - :ref:`kpsc__amr <klebsiella_pneumo_complex__amr>`
      - AGly_acquired, Col_acquired, Fcyn_acquired, Flq_acquired, Gly_acquired, MLS_acquired, Phe_acquired, Rif_acquired, Sul_acquired, Tet_acquired, Tgc_acquired, Tmt_acquired, Bla_acquired, Bla_ESBL_acquired, Bla_ESBL_inhR_acquired, Bla_Carb_acquired, Bla_chr, SHV_mutations, Omp_mutations, Col_mutations, Flq_mutations, truncated_resistance_hits, spurious_resistance_hits
-   * - :ref:`klebsiella_pneumo_complex__resistance_score <Resistance scores and counts>`
+   * - :ref:`kpsc__resistance_score <Resistance scores and counts>`
      - resistance_score (Score of 0-3)
    * - :ref:`kpsc__resistance_gene_count <Resistance scores and counts>`
      - num_resistance_genes

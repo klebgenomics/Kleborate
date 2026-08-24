@@ -1,6 +1,6 @@
 
 """
-Copyright 2025 Mary Maranga
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com)
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify

@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -22,7 +22,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['virulence_score', 'spurious_virulence_hits']
+    full_headers = ['virulence_score']
     stdout_headers = ['virulence_score']
     return full_headers, stdout_headers
 
@@ -40,30 +40,9 @@ def check_external_programs():
 
 
 def get_results(assembly, minimap2_index, args, previous_results):
-    # spurious hits
-    
-    ybt = previous_results['klebsiella__ybst__spurious_ybt_hits']
-    abst = previous_results['klebsiella__abst__spurious_abst_hits']
-    clb = previous_results['klebsiella__cbst__spurious_clb_hits']
-    rmst = previous_results['klebsiella__rmst__spurious_rmst_hits']
-    smst = previous_results['klebsiella__smst__spurious_smst_hits']
-    
-    # Concatenate all lists
-    all_hits = ybt + abst + clb + rmst + smst
-
-    all_hits = [s for s in all_hits if s != '-']
-
-    # Check if the resulting list is empty
-    if not all_hits:
-        all_hits = '-'
-    else:
-        all_hits = ''.join(all_hits)
-
-    # virulence score
     has_ybt = (previous_results['klebsiella__ybst__Yersiniabactin'] != '-')
     has_aero = (previous_results['klebsiella__abst__Aerobactin'] != '-')
     has_coli = (previous_results['klebsiella__cbst__Colibactin'] != '-')
-
 
     # Calculate virulence score
     if has_coli and has_aero:
@@ -79,9 +58,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     else:
         virulence_score = '0'
 
-    # Return both spurious hits and virulence score
     return {
-        'spurious_virulence_hits': all_hits,
         'virulence_score': virulence_score
     }
 

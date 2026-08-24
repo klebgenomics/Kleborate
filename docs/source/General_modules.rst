@@ -53,8 +53,10 @@ This module takes ``enterobacterales__species`` as a prerequisite and  generates
 
 The module reports a standard set of assembly quality metrics (see Outputs below).
 
+Kleborate uses species-specific thresholds from `Qualibact <https://qualibact.org/species/>`_ to assess assembly quality. The expected ranges for genome size, contig count, N50 and G+C content are stored in the ``species_specification.txt``\  in the module directory
 
-It will also flag in the ``QC_warnings``\  column if an assembly size falls outside those specified in the ``species_specification.txt``\  in the module directory, or if N50 <10 kbp or ambiguous bases (Ns) are detected in the sequence.
+
+The ``QC_warnings``\  column flags an assemblies that falls outside those specified thresholds, or if ambiguous bases (Ns) are detected in the sequence.
 
 Outputs
 +++++++
@@ -75,8 +77,11 @@ Output of the contig stats module is the following columns:
    * - total_size
      - Total assembly size (in bp)
 
+   * - GC_content
+     - G+C content of the assembly, reported as a percentage
+
    * - ambiguous_bases
-     - Detection of ambiguous bases (yes or no). If yes, the number of ambiguous bases is also provided in brackets.
+     - Detection of ambiguous bases (yes or no). If yes, the number of ambiguous bases is also provided in brackets
 
    * - QC_warnings
-     - List of QC issues detected, including: ``ambiguous_bases``\ (ambiguous bases detected) ``N50``\ (N50 < 10 kbp), ``total_size`` (genome size falls outside expected range).
+     - List of QC issues detected, including: ``ambiguous_bases``\ (ambiguous bases detected) ``N50``\ (N50 < 10 kbp), ``total_size`` (genome size falls outside expected range)
