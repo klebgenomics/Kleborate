@@ -352,11 +352,10 @@ The klebsiella__rmst module screens for *rmpADC* and will report a sequence type
 
 Expression of the *rmp*locus
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Additionally, Kleborate also types for expression of the *rmp*locus and the associated hypermucoidy phenotype.
-When a *rmp* locus is detected, Kleborate checks the status of each of these loci to determine whether each is *ON* (wildtype, corresponding to normal expression), *OFF* (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. The combinatorial *rmp* expression status are used to annotate the status of the locus as a whole, as follows. If all component loci are present and *ON*, the ‘rmp locus status’ is annotated as *Phase ON*. If all components are present but one or more is *OFF*, the status is annotated as *Phase OFF*. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual *rmp* genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
+When a *rmp* locus is detected, Kleborate checks the status of each loci to determine whether it is *ON* (wildtype, corresponding to normal expression), *OFF* (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. The expression status of each loci is then combined to assign an overall rmp locus status, as follows. If all component loci are present and *ON*, the ‘rmp locus status’ is annotated as *Phase ON*. If all components are present but one or more is *OFF*, the status is annotated as *Phase OFF*. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual *rmp* genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
 
 
-The RmST module also checks for presence of the *argR* gene in the genomes, and conservation of the *ARG box* in the *rmpA* promoter. The *argR* gene is screened via alignment against the *K. pneumoniae* strain *KPPR1* reference strain. Where a hit is detected, its nucleotide sequence is translated and the length of the encoded protein determined. Full-length genes are reported as ‘present’,protein sequences with a coverage <100% compared with the reference ArgR encoded by KPPR1 are reported as ‘truncated-X%’ (‘X’ indicates the percent coverage). If there is no hit, the value returned is ‘-’. The ARG box is checked by searching for an exact match to the reference sequence string (ATTGAATTTTTATTCATT) from KPPR1, within 150 bp upstream of rmpA. If this is not found, the annotation ‘ARG box lost’ is added to the ‘rmpA_promoter’ field.
+The module also checks for presence of the *argR* gene in the genomes, and conservation of the *ARG box* in the *rmpA* promoter. The *argR* gene is screened via alignment against the *K. pneumoniae* strain *KPPR1* reference strain. Where a hit is detected, its nucleotide sequence is translated and the length of the encoded protein determined. Full-length genes are reported as ‘present’,protein sequences with a coverage <100% compared with the reference ArgR encoded by KPPR1 are reported as ‘truncated-X%’ (‘X’ indicates the percent coverage). If there is no hit, the value returned is ‘-’. The ARG box is checked by searching for an exact match to the reference sequence string (ATTGAATTTTTATTCATT) from KPPR1, within 150 bp upstream of rmpA. If this is not found, the annotation ‘ARG box lost’ is added to the ‘rmpA_promoter’ field.
 
 
 
@@ -518,6 +517,7 @@ Output of the klebsiella__peg-344 module is the following columns:
 
 
 .. _kpsc__amr:
+
 
 KpSC AMR
 --------
@@ -994,13 +994,93 @@ Wzi typing results are output in the following columns:
 
 
 KpSC cgMLST 
------------------------------------------
+----------------
 .. code-block:: Python
 
    -m kpsc__cgmlst
 
-This module will run `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool for cgMLST allele calling. 
-To use this module, you must first download the Klebsiella cgMLST scheme during the Kleborate installation process: Please use this script for `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/main/kleborate/shared/setup_cgmlst.py>`_
+This module performs cgMLST allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
+
+Before running this module, download the Klebsiella cgMLST scheme.  This is done during the Kleborate installation by running the `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/main/kleborate/shared/setup_cgmlst.py>`_ script.
+
+Klebsiella LINcodes are defined using the **scgMLST629_S** cgMLST scheme, hosted on the Institut Pasteur BIGSdb instance.
+
+* **Scheme URL:** ``https://bigsdb.pasteur.fr/api/db/pubmlst_klebsiella_seqdef/schemes/18``
+
+Prerequisites
+-------------
+Before running the setup script, ensure the following command-line tools are installed and available in your ``PATH``:
+
+* **MiST** (``mist``)
+* **bigsdb-downloader** (Required for authenticated Pasteur downloads: ``pip install bigsdb-downloader``)
+
+Database Setup Script
+---------------------
+To perform allele calling, Kleborate requires a local, indexed copy of the cgMLST scheme stored in its internal module data directory. 
+
+Run the automated setup script:
+
+.. code-block:: bash
+
+   python setup_cgmlst.py
+
+What the Script Does
+~~~~~~~~~~~~~~~~~~~~
+1. **Verifies Dependencies:** Confirms ``mist`` is accessible in your environment.
+2. **Downloads MiST Resources:** (e.g., ``download_bigsdb.py``) directly into your MiST installation if needed.
+3. Locates the Kleborate data path (``kleborate/modules/kpsc__cgmlst/data``)
+4. Downloads the **scgMLST629_S** scheme from the Institut Pasteur BIGSdb instance:
+   
+  
+Download Modes
+--------------
+When running ``setup_cgmlst.py``, you will be prompted to select one of two download modes:
+
+1. **Standard download (Public)**
+   Pulls public scheme data without requiring credentials. 
+
+2. **Latest Pasteur database (Authenticated)**
+   Pulls the most up-to-date scheme data directly from Institut Pasteur and requires OAuth authentication. Uses the ``bigsdb_auth`` downloader with credentials stored in ``.bigsdb_tokens/`` in your current working directory.
+
+Pasteur Credential Setup
+--------------------------------------
+If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/access_tokens``, the script initiates the OAuth setup:
+
+1. **Obtain API Client Credentials:**
+   * Register for database access via the `Institut Pasteur BIGSdb Portal <https://bigsdb.pasteur.fr/cgi-bin/bigsdb/bigsdb.pl>`_.
+   * Request an OAuth Client Key and Secret by emailing ``bigsdb@pasteur.fr``.
+
+2. **Run Authentication via the Setup Script:**
+   The script invokes ``bigsdb_downloader``:
+
+   .. code-block:: bash
+
+      bigsdb_downloader --key_name Pasteur --site Pasteur \
+        --db pubmlst_klebsiella_seqdef --setup
+
+3. **Input API Keys:**
+   Enter your ``Client ID`` and ``Client Secret`` at the terminal prompts.
+
+4. **Authorize in Browser:**
+   Open the generated URL in your browser, log in to your Pasteur account, and copy the verification code.
+
+5. **Complete Verification:**
+   Paste the verification code into the terminal. Access tokens will be saved to ``.bigsdb_tokens/``, and subsequent runs will skip re-authentication.
+
+Output Files
+------------
+Upon successful completion, the following assets are built inside the Kleborate data folder:
+
+* ``kleb_scgmlst_s/`` — Raw scheme FASTA alleles and ``profiles.tsv``.
+* ``kleb_scgmlst_s-index/`` — Indexed binary database used by ``mist`` during Kleborate runs.
+
+See Also
+--------
+* `BIGSdb_downloader Documentation <https://github.com/kjolley/BIGSdb_downloader>`_
+* `MiST Repository <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
+* `LINcodes <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
+* `Klebsiella LINcodes <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/Klebsiella-LINcodes-case-study>`_
+
 
 
 KpSC cgMLST outputs
@@ -1017,8 +1097,8 @@ Mist results are output in the following columns:
    * - cgST
      - Best matching scgST
 
-   * - LINcode
-     - LINcode / Partial LINcode for input strain
+   * - LIN code
+     - LIN code / Partial LINcode for input strain
 
    * - Sublineage
      - Sublineage for input strain
@@ -1027,9 +1107,10 @@ Mist results are output in the following columns:
      - Clonal group for input strain
 
 
+
 KpSC mrk
 -------------------------------------
-MLST scheme for the mrk operon
+This module performs MLST typing of the *mrk* operon in the *Klebsiella pneumoniae* species complex (KpSC).
 
 
 .. code-block:: Python

@@ -46,8 +46,6 @@ Download the AMRFinder database::
    amrfinder -u
 
 
-Test Data::
-
 
 Test installation
 
@@ -60,13 +58,13 @@ If the installation is successful, the analysis should complete without errors a
 
 
 Additional test datasets are provided in::
+
    test/kpsc_test/data/
 
 You can use these datasets to further validate your installation
 
-The generated output should match the corresponding reference files located in::
-
-   `test/kpsc_test/example_output/ <https://github.com/user/repo/tree/main/test/kpsc_test/example_output/>`_
+The generated output should match the corresponding reference files located in
+`test/kpsc_test/example_output/ <https://github.com/user/repo/tree/main/test/kpsc_test/example_output/>`_:
 
    
    `klebsiella_pneumo_complex_output.txt <https://github.com/user/repo/blob/main/test/kpsc_test/example_output/klebsiella_pneumo_complex_output.txt>`_:

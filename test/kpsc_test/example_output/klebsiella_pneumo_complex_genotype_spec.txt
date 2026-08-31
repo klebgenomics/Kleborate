@@ -1,0 +1,17 @@
+sample	genotyping_method	genotyping_schema_taxon	genotyping_database_name	genotyping_database_version	genotyping_schema_name	genotyping_software_name	genotyping_software_version	genotype	genotype_confidence_value	genotype_predicted_phenotype
+2024187392	In silico species detection	Enterobacterales [NCBITaxon:91347]	kleborate_enterobacterales__species	3.2.4	enterobacterales__species	Kleborate	3.2.4	Klebsiella pneumoniae	strong	
+2024187392	MLST	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	MLST	Kleborate	3.2.4	ST383		
+2024187392	In silico serotyping	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	kaptive_Klebsiella_k_locus_primary_reference	3.1.0	Klebsiella_k_locus_primary_reference	Kaptive	3.1.0	KL30	Typeable	K30
+2024187392	In silico serotyping	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	kaptive_Klebsiella_o_locus_primary_reference	3.1.0	Klebsiella_o_locus_primary_reference	Kaptive	3.1.0	OL2α.2	Typeable	O1αβ,2β
+2024187392	cgMLST	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	cgST19975; cgST20666; cgST52869; cgST63343		
+2024187392	LIN code	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	0_0_87_5_0_3_1_0_0_0		
+2024187392	Sublineage	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	SL383		
+2024187392	Clonal group	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	CG383		
+ERR14097885	In silico species detection	Enterobacterales [NCBITaxon:91347]	kleborate_enterobacterales__species	3.2.4	enterobacterales__species	Kleborate	3.2.4	Klebsiella pneumoniae	strong	
+ERR14097885	MLST	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	MLST	Kleborate	3.2.4	ST147		
+ERR14097885	In silico serotyping	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	kaptive_Klebsiella_k_locus_primary_reference	3.1.0	Klebsiella_k_locus_primary_reference	Kaptive	3.1.0	KL64	Typeable	K64
+ERR14097885	In silico serotyping	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	kaptive_Klebsiella_o_locus_primary_reference	3.1.0	Klebsiella_o_locus_primary_reference	Kaptive	3.1.0	OL2α.1	Typeable	O2α
+ERR14097885	cgMLST	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	cgST10000; cgST11351; cgST35980; cgST65374		
+ERR14097885	LIN code	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	0_0_197_0_4_1_0_7_15_0		
+ERR14097885	Sublineage	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	SL147		
+ERR14097885	Clonal group	Klebsiella pneumoniae species complex [NCBITaxon:3390273]	pubmlst_klebsiella_seqdef	2024-12-31	scgMLST629_S	MiST	1.2.0	CG147		
