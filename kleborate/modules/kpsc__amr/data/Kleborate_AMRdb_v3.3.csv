@@ -3169,12 +3169,7 @@ clusterid,queryID,class,gene,allele,seqID,accession,positions,size,cluster_conta
 163,fosA7,Fcyn,FosA,fosA7,1905,NG_054942.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
 163,fosA7.5,Fcyn,FosA,fosA7.5,2428,NG_067231.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
 163,fosA8,Fcyn,FosA,fosA8,3123,NG_066545.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
-163,fosA5,Fcyn,FosA,fosA5,3641,NG_047881.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
-163,fosA5.v1,Fcyn,FosA,fosA5.v1,3642,NG_047882.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
 163,fosA_PA1129,Fcyn,FosA,fosA_PA1129,3643,NG_047883.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
-163,fosA10,Fcyn,FosA,fosA10,3644,NG_047884.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
-163,fosA5.v2,Fcyn,FosA,fosA5.v2,3645,NG_050409.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
-163,fosA9,Fcyn,FosA,fosA9,3646,NG_076845.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
 164,fosB.1,Fcyn,FosB,fosB.1,1906,NG_065844.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
 164,fosB.2,Fcyn,FosB,fosB.2,1907,NG_055636.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
 164,fosB1,Fcyn,FosB,fosB1,1908,NG_047886.1,-,-,no,no,,,fosfomycin antibiotic,ARO:3007149
