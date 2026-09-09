@@ -57,23 +57,26 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
+
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def check_peg(ref_file, assembly, minimap2_index, min_coverage, min_identity):
+def check_peg(ref_file, assembly, ref_index, min_coverage, min_identity):
     """
     Checks presence of peg-344 gene.
     """
     alignment_hits = align_query_to_ref(
         ref_file,  
         assembly, 
-        ref_index=minimap2_index,
+        ref_index=ref_index,
         min_identity=min_identity,
         min_query_coverage=min_coverage
     )
@@ -89,13 +92,13 @@ def check_peg(ref_file, assembly, minimap2_index, min_coverage, min_identity):
             return f'truncated-{(coverage)}%'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     ref_file = data_dir() / 'peg-344.fasta'
     
     result = check_peg(
         ref_file, 
         assembly,
-        minimap2_index, 
+        ref_index, 
         args.klebsiella__peg_min_coverage,
         args.klebsiella__peg_min_identity)
 

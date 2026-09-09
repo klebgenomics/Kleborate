@@ -229,7 +229,7 @@ def parse_amrfinder_results(output, split_map):
     return results
     
 
-def get_results(assembly, index, previous_results, args):
+def get_results(assembly, ref_index, previous_results, args):
     organism = "Escherichia"
     raw_output = run_amrfinder(assembly, organism)
     

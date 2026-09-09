@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga (gathonimaranga@gmailcom)
+Copyright 2026 Mary Maranga (gathonimaranga@gmailcom)
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -51,20 +51,22 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def pks_minimap(assembly, minimap2_index, ref_file, min_identity, min_coverage):
+def pks_minimap(assembly, ref_index, ref_file, min_identity, min_coverage):
     alignment_hits = align_query_to_ref(
         ref_file,
         assembly,
-        ref_index=minimap2_index,
+        ref_index=ref_index,
         min_identity=min_identity,
         min_query_coverage=min_coverage
     )
@@ -87,12 +89,12 @@ def pks_minimap(assembly, minimap2_index, ref_file, min_identity, min_coverage):
 
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     clbB_ref = data_dir() / 'clbB.fasta'
 
     result = pks_minimap(
         assembly,
-        minimap2_index,
+        ref_index,
         clbB_ref,
         args.escherichia__pks_min_identity,
         args.escherichia__pks_min_coverage

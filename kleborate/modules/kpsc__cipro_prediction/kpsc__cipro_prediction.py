@@ -1,6 +1,6 @@
 
 """
-Copyright 2025, Kara Tsang, Kat Holt
+Copyright 2026, Kara Tsang, Kat Holt
 https://github.com/katholt/Kleborate/
 
 
@@ -48,7 +48,7 @@ def data_dir():
 
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     """
     Uses the Flq_mutations, Flq_acquired, and AGly_acquired columns to predict ciprofloxacin resistance
     """

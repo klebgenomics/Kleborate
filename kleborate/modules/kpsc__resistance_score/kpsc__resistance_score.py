@@ -49,7 +49,7 @@ def data_dir():
 
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     _, res_classes, bla_classes = read_class_file(data_dir() / 'Kleborate_AMRdb_v3.3.csv')
     res_headers = get_res_headers(res_classes, bla_classes)
 

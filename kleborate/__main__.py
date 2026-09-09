@@ -33,6 +33,7 @@ from functools import partial
 from .shared.help_formatter import MyParser, MyHelpFormatter
 from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, KLEBSIELLA_TYPING_SPEC
 from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
+from rammappy import Index
 
 
 
@@ -152,7 +153,8 @@ def main():
     def process_assembly(assembly):
         with tempfile.TemporaryDirectory() as temp_dir:
             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
-            minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
+            ref_index = build_index(assembly, unzipped_assembly)
+            # minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
             results = {'strain': get_strain_name(assembly)}
 
             pass_check = True # default, assume no check and run all modules
@@ -160,7 +162,7 @@ def main():
                 for module, check in presets[args.preset]['check']:
                     try:
                         module_results = modules[module].get_results(
-                            unzipped_assembly, minimap2_index, args, results
+                            unzipped_assembly, ref_index, args, results
                         )
                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
                         check_function = globals()[check]
@@ -178,7 +180,7 @@ def main():
                 for module in module_run_order:
                     if module not in preset_check_modules:
                         module_results = modules[module].get_results(
-                            unzipped_assembly, minimap2_index, args, results
+                            unzipped_assembly, ref_index, args, results
                         )
                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
             else:
@@ -259,7 +261,8 @@ def print_modules(args, all_module_names, modules):
         print('Available modules for Kleborate')
         print('-------------------------------')
         terminal_width = shutil.get_terminal_size().columns
-        end_formatting, bold = '\033[0m', '\033[1m'
+        end_formatting, bold = '\033[0m', '\033[1;97m'
+        # end_formatting, bold = '\033[0m', '\033[1m'
         for m in all_module_names:
             description = modules[m].description()
             text = f'{bold}{m}{end_formatting}: {description}'
@@ -340,7 +343,7 @@ def get_used_module_names(args, all_module_names, presets):
         if args.preset == 'escherichia' and args.modules is None:
             pass_modules = [
                 module for module in pass_modules 
-                if module not in ('escherichia__mlst_pasteur', 'escherichia__vfdb', 'escherichia__kaptive')
+                if module not in ('escherichia__mlst_pasteur', 'escherichia__vfdb')
             ]
 
         module_names += check_modules + pass_modules  # Combine check and pass modules for the overall list
@@ -486,20 +489,30 @@ def gunzip_assembly_if_necessary(assembly, temp_dir):
         return assembly
 
 
+def build_index(assembly, unzipped_assembly):
+    """
+    Builds a rammappy Index for this assembly once.
 
-def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir):
+    Returns a rammappy Index object -- this replaces the old
+    build_minimap2_index().
     """
-    A lot of the modules use minimap2 alignment, so pre-building the index for this assembly once
-    can save a bit of time.
-    """
-    if 'minimap2' not in external_programs:
-        return None
-    minimap2_index = (pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.mmi')).resolve()
-    command = ['minimap2', '-d', minimap2_index, unzipped_assembly]
-    p = subprocess.run(command, capture_output=True, text=True)
-    if p.returncode != 0:
-        sys.exit(f'\nError: minimap2 failed to index sample {assembly}:\n{p.stderr}')
-    return minimap2_index
+    ref_seqs_list = load_fasta(unzipped_assembly)
+    return Index.build([(name.encode(), seq.encode()) for name, seq in ref_seqs_list])
+
+
+# def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir):
+#     """
+#     A lot of the modules use minimap2 alignment, so pre-building the index for this assembly once
+#     can save a bit of time.
+#     """
+#     if 'minimap2' not in external_programs:
+#         return None
+#     minimap2_index = (pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.mmi')).resolve()
+#     command = ['minimap2', '-d', minimap2_index, unzipped_assembly]
+#     p = subprocess.run(command, capture_output=True, text=True)
+#     if p.returncode != 0:
+#         sys.exit(f'\nError: minimap2 failed to index sample {assembly}:\n{p.stderr}')
+#     return minimap2_index
 
 
 
@@ -864,111 +877,6 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
                     o.write(line + "\n")
 
                     
-# def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=None):
-#     if typing_spec is None:
-#         typing_spec = KLEBSIELLA_TYPING_SPEC
-
-#     sample = results.get("strain", "")
-    
-#     confidence_map = {
-#         "species": "species_match",
-#         "K_locus": "K_locus_confidence",
-#         "O_locus": "O_locus_confidence"
-#     }
-
-#     header = [
-#         "sample", "genotyping_method", "genotyping_schema_taxon",
-#         "genotyping_database_name", "genotyping_database_version",
-#         "genotyping_schema_name", "genotyping_software_name",
-#         "genotyping_software_version", "genotype", "genotype_confidence_value", "genotype_predicted_phenotype"
-#     ]
-
-#     rows = []
-#     for genotype_field, meta in typing_spec.items():
-#         genotype_value = ""
-#         confidence_value = ""
-#         phenotype_value = "" 
-        
-#         # Static defaults from spec
-#         db_name = meta.get("genotyping_database_name", "")
-#         db_version = meta.get("genotyping_database_version", "")
-        
-#         target_phenotype_header = meta.get("genotype_predicted_phenotype")
-
-#         #  Subspecies 
-#         if genotype_field == "subspecies":
-#             st_raw = ""
-#             for res_key, res_val in results.items():
-#                 if res_key.split('__')[-1] == "ST":
-#                     st_raw = res_val
-#                     break
-            
-#             match = re.search(r'\((subsp\.[^)]+)\)', str(st_raw))
-#             if match:
-#                 genotype_value = match.group(1)
-#             else:
-#                 continue 
-#         else:
-#             for res_key, res_val in results.items():
-#                 trimmed_key = res_key.split('__')[-1]
-#                 normalized_key = trimmed_key.strip().lower().replace(" ", "_")
-                
-#                 if trimmed_key == genotype_field:
-#                     genotype_value = res_val
-
-#                 if genotype_field in confidence_map and trimmed_key == confidence_map[genotype_field]:
-#                     confidence_value = res_val
-                
-#                 if target_phenotype_header and trimmed_key == target_phenotype_header:
-#                     phenotype_value = res_val
-
-#                 # Capture 'Database name' from results if empty in typing_spec
-#                 if not db_name and normalized_key in (
-#                     "database_name",
-#                     f"{genotype_field.lower()}_database_name",
-#                     f"{genotype_field.lower()}_database",
-#                     f"{genotype_field.lower()}_db"
-#                 ):
-#                     db_name = res_val
-
-#                 # Capture 'Database version' from results if empty in typing_spec
-#                 if not db_version and normalized_key in (
-#                     "database_version",
-#                     f"{genotype_field.lower()}_database_version",
-#                     f"{genotype_field.lower()}_version",
-#                     f"{genotype_field.lower()}_db_version"
-#                 ):
-#                     db_version = res_val
-
-#             if genotype_field == "ST":
-#                 genotype_value = re.sub(r'\s*\(subsp\.[^)]+\)', '', str(genotype_value))
-
-#         if genotype_value and genotype_value != "-":
-#             row = {
-#                 "sample": sample,
-#                 "genotyping_method": meta.get("genotyping_method", ""),
-#                 "genotyping_schema_taxon": meta.get("genotyping_schema_taxon", ""),
-#                 "genotyping_database_name": db_name if db_name and db_name != "-" else "",
-#                 "genotyping_database_version": db_version if db_version and db_version != "-" else "",
-#                 "genotyping_schema_name": meta.get("genotyping_schema_name", ""),
-#                 "genotyping_software_name": meta.get("genotyping_software_name", ""),
-#                 "genotyping_software_version": meta.get("genotyping_software_version", ""),
-#                 "genotype": genotype_value,
-#                 "genotype_confidence_value": confidence_value if confidence_value != "-" else "",
-#                 "genotype_predicted_phenotype": phenotype_value if phenotype_value != "-" else ""
-#             }
-#             rows.append(row)
-
-#     if rows:
-#         with file_lock:
-#             with open(outfile, "at") as o:
-#                 if o.tell() == 0:
-#                     o.write("\t".join(header) + "\n")
-                
-#                 for row in rows:
-#                     line = "\t".join(str(row.get(col, "")) for col in header)
-#                     o.write(line + "\n")
-
 
 def paper_refs():
     """

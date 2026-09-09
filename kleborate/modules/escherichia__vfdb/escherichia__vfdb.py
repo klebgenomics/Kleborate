@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga (gathonimaranga@gmail.com)
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com)
 https://github.com/klebgenomics/Kleborate
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -76,11 +76,6 @@ def get_headers():
     stdout_headers = []
     return full_headers, stdout_headers
 
-# def get_headers():
-#     full_headers = list(extract_fasta_headers(data_dir() / 'virulence_ecoli.fsa'))
-#     stdout_headers = []
-#     return full_headers, stdout_headers
-
 
 def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
@@ -99,12 +94,14 @@ def check_cli_options(args):
         sys.exit('Error: --escherichia__vfdb_min_coverage must be between 50.0 and 100.0')
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     
     ref_file = data_dir() / 'virulence_ecoli.fsa'
     notes = load_notes_mapping()
@@ -113,7 +110,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     # Run VF mapping
     virulence_markers = map_virulence_factors(
         assembly,
-        minimap2_index,
+        ref_index,
         ref_file,
         args.escherichia__vfdb_min_identity,
         args.escherichia__vfdb_min_coverage
@@ -125,23 +122,3 @@ def get_results(assembly, minimap2_index, args, previous_results):
         results[key] = virulence_markers.get(short_id, '-')
 
     return results
-
-# def get_results(assembly, minimap2_index, args, previous_results):
-#     full_headers, _ = get_headers()
-#     ref_file = data_dir() / 'virulence_ecoli.fsa'
-    
-#     virulence_markers = map_virulence_factors(
-#         assembly,
-#         minimap2_index,
-#         ref_file,
-#         args.escherichia__vfdb_min_identity,
-#         args.escherichia__vfdb_min_coverage
-#     )
-
-    
-#     results = {header: virulence_markers.get(header, '-') for header in full_headers}
-
-#     return results
-
-
-

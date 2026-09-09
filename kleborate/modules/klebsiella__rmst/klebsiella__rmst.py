@@ -69,11 +69,12 @@ def check_cli_options(args):
     if args.klebsiella__rmst_min_gene_count < 0:
         sys.exit('Error: --klebsiella__rmst_min_gene_count must be a positive integer')
 
-
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 
@@ -81,7 +82,7 @@ def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     argR_ref = data_dir() / 'argR.fasta'
     genes = ['rmpA', 'rmpC', 'rmpD']
     profiles = data_dir() / 'profiles.tsv'
@@ -93,7 +94,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     rmpD_dict = process_status_dict(data_dir()/'rmpD_polyA_status.txt', 'rmpD')
 
     results, spurious_hits, hits_per_gene = multi_mlst(
-        assembly, minimap2_index, profiles, alleles_files, genes,
+        assembly, ref_index, profiles, alleles_files, genes,
         'rmp_lineage', 
         args.klebsiella__rmst_min_identity,
         args.klebsiella__rmst_min_coverage, 

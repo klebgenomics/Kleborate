@@ -141,7 +141,7 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
         return results
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     """
     Returns:
         - "cgST": best matching scgST

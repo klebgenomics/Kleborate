@@ -39,7 +39,7 @@ def check_external_programs():
     return []
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     has_ybt = (previous_results['klebsiella__ybst__Yersiniabactin'] != '-')
     has_aero = (previous_results['klebsiella__abst__Aerobactin'] != '-')
     has_coli = (previous_results['klebsiella__cbst__Colibactin'] != '-')
@@ -62,21 +62,3 @@ def get_results(assembly, minimap2_index, args, previous_results):
         'virulence_score': virulence_score
     }
 
-
-# def get_results(assembly, minimap2_index, args, previous_results):
-#     has_ybt = (previous_results['klebsiella__ybst__YbST'] != 'NA')
-#     has_aero = (previous_results['klebsiella__abst__AbST'] != 'NA')
-#     has_coli = (previous_results['klebsiella__cbst__CbST'] != 'NA')
-
-#     if has_coli and has_aero:
-#         return {'virulence_score': '5'}
-#     elif has_aero and has_ybt:
-#         return {'virulence_score': '4'}
-#     elif has_aero:
-#         return {'virulence_score': '3'}
-#     elif has_coli:
-#         return {'virulence_score': '2'}
-#     elif has_ybt:
-#         return {'virulence_score': '1'}
-#     else:
-#         return {'virulence_score': '0'}

@@ -29,9 +29,9 @@ from kleborate.modules.kpsc__amr.omp_mutations import*
 from kleborate.modules.kpsc__amr.col_mutations import*
 
 
-def resminimap_assembly(assembly, minimap2_index, ref_file, gene_info, qrdr, trunc, omp,  min_coverage, min_identity,
+def resminimap_assembly(assembly, ref_index, ref_file, gene_info, qrdr, trunc, omp,  min_coverage, min_identity,
                           min_spurious_coverage, min_spurious_identity):
-    hits_dict = minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_coverage, min_identity, min_spurious_coverage, min_spurious_identity)
+    hits_dict = minimap_against_all(assembly, ref_index, ref_file, gene_info, min_coverage, min_identity, min_spurious_coverage, min_spurious_identity)
     
     if qrdr:
         check_for_qrdr_mutations(hits_dict, assembly, qrdr, min_identity, 90.0)
@@ -110,12 +110,12 @@ def get_res_headers(res_classes, bla_classes):
 
 
 
-def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_coverage, min_identity, min_spurious_coverage, min_spurious_identity):
+def minimap_against_all(assembly, ref_index, ref_file, gene_info, min_coverage, min_identity, min_spurious_coverage, min_spurious_identity):
     """
     This function takes:
     * assembly:  assembly in FASTA format
     * ref_file: a path for a CARD reference in FASTA format
-    * minimap2_index: a path for the assembly's minimap2 index (for faster alignment) (optional)
+    * ref_index: a path for the assembly's minimap2 index (for faster alignment) (optional)
     * min_identity: hits with a lower percent identity than this are discarded
     
     This function returns:
@@ -123,9 +123,8 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
     """
     hits_dict = collections.defaultdict(list) 
 
-    alignment_hits = align_query_to_ref(ref_file, assembly, ref_index=minimap2_index, min_identity=min_identity, min_query_coverage=min_spurious_coverage)
+    alignment_hits = align_query_to_ref(ref_file, assembly, ref_index=ref_index, min_identity=min_identity, min_query_coverage=min_spurious_coverage)
     alignment_hits = cull_redundant_hits(alignment_hits)
-    # print(alignment_hits)
 
     # calculate alignment coverage
     for hit in alignment_hits:
@@ -170,7 +169,6 @@ def minimap_against_all(assembly, minimap2_index, ref_file, gene_info, min_cover
                 del hits_dict['SHV_mutations']
     
             #---- aac Logic ---
-            # aac_pattern = r"^aac\(6'\)-Ib(?:-cr.*)?$"
             aac_pattern = r"^aac\(6'\)-Ib(?:-cr.*|\d.*)?$"
             is_aac = re.fullmatch(aac_pattern, hit.query_name.split('__')[2]) is not None
             target_classes = []

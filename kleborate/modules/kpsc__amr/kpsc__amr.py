@@ -80,12 +80,13 @@ def check_cli_options(args):
     if args.kpsc__amr_min_spurious_coverage <= 30.0 or args.kpsc__amr_min_spurious_coverage >= 100.0:
         sys.exit('Error: --kpsc__amr_min_spurious_coverage must be between 30.0 and 100.0')
 
-
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
-
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
+    
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
@@ -151,7 +152,7 @@ def format_res_hits(res_hits, full_headers):
     return formatted_dict
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     # Read gene info and headers
     gene_info, _, _ = read_class_file(data_dir() / 'Kleborate_AMRdb_v3.3.csv')
     full_headers, _ = get_headers()
@@ -163,7 +164,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     # Run minimap and get results
     res_hits = resminimap_assembly(
         assembly,
-        minimap2_index,
+        ref_index,
         ref_file,
         gene_info,
         qrdr,

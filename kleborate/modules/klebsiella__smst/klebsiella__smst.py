@@ -68,21 +68,23 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     genes = ['iroB', 'iroC', 'iroD', 'iroN']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
 
-    results, spurious_hits,_ = multi_mlst(assembly, minimap2_index, profiles, alleles, genes,
+    results, spurious_hits,_ = multi_mlst(assembly, ref_index, profiles, alleles, genes,
                                       'iro_lineage', args.klebsiella__smst_min_identity,
                                       args.klebsiella__smst_min_coverage, args.klebsiella__smst_required_exact_matches,
                                       check_for_truncation=True, report_incomplete=True,

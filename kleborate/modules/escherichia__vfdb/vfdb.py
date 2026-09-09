@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga (gathonimaranga@gmail.com)
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com)
 https://github.com/klebgenomics/Kleborate
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -37,7 +37,7 @@ def map_virulence_factors(assembly, minimap2_index, ref_file, min_identity, min_
     - ref_file: Virulence factors in FASTA format (path or file-like).
     - min_identity: Minimum identity percentage for alignment.
     - min_coverage: Minimum query coverage for alignment.
-    - minimap2_index: Path to the assembly's minimap2 index for faster alignment (optional).
+    - ref_index: Path to the assembly's minimap2 index for faster alignment (optional).
 
     Returns:
     - virulence_markers: Dictionary {factor_header: 'present' or '-'}
@@ -56,7 +56,7 @@ def map_virulence_factors(assembly, minimap2_index, ref_file, min_identity, min_
     alignment_hits = align_query_to_ref(
         ref_file,
         assembly,
-        ref_index=minimap2_index,
+        ref_index=ref_index,
         min_identity=min_identity,
         min_query_coverage=min_coverage
     )

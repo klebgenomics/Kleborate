@@ -23,7 +23,7 @@ from Bio.Data.CodonTable import TranslationError
 from .misc import load_fasta, reverse_complement
 
 
-def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
+def multi_mlst(assembly_path, ref_index, profiles_path, allele_paths, gene_names, extra_info,
                min_identity, min_coverage, required_exact_matches, check_for_truncation=False,
                report_incomplete=False, min_spurious_identity=None, min_spurious_coverage=None,
                unknown_group_name=None, min_gene_count=None):
@@ -36,14 +36,14 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
     
     if min_spurious_coverage is not None:
         hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
-                                               ref_index=minimap2_index, min_identity=min_spurious_identity,
+                                               ref_index=ref_index, min_identity=min_spurious_identity,
                                                min_query_coverage=min_spurious_coverage) for g in gene_names}
 
         spurious_hits = {g: [h for h in hits_per_gene[g] 
                              if h.query_cov < min_coverage and h.percent_identity < min_identity] for g in gene_names}
     else:
         hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
-                                               ref_index=minimap2_index, min_identity=min_identity,
+                                               ref_index=ref_index , min_identity=min_identity,
                                                min_query_coverage=min_coverage) for g in gene_names}
         spurious_hits = None
 
@@ -74,36 +74,6 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
          
     return combine_results(full_set_contigs, contig_results, gene_names), spurious_hits, hits_per_gene
 
-
-# def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
-#                min_identity, min_coverage, required_exact_matches, check_for_truncation=False,
-#                report_incomplete=False):
-#     """
-#     This function takes and returns the same things as the mlst function in mlst.py. However, it
-#     will look for cases where multiple contigs have hits for the full set of MLST genes, and in
-#     that case, MLST is run on each of them. Otherwise, it behaves like normal MLST.
-#     """
-#     profiles = load_st_profiles(profiles_path, gene_names, extra_info)
-#     hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
-#                                            ref_index=minimap2_index, min_identity=min_identity,
-#                                            min_query_coverage=min_coverage) for g in gene_names}
-#     hits_by_contig = cluster_hits_by_contig(hits_per_gene, gene_names)
-#     full_set_contigs = find_full_set_contigs(hits_by_contig)
-
-#     # If zero or one contigs have the full set of genes, then this is treated as a non-multi-MLST
-#     # case, i.e. the same as regular MLST.
-#     if len(full_set_contigs) < 2:
-#         return run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
-#                                check_for_truncation, report_incomplete)
-
-#     # If more than one contig has the full set of genes, then this is treated as a multi-MLST case,
-#     # where each full-set contig gets an MLST call.
-#     contig_results = {}
-#     for contig in full_set_contigs:
-#         contig_results[contig] = run_single_mlst(profiles, hits_by_contig[contig], gene_names,
-#                                                  required_exact_matches, check_for_truncation,
-#                                                  report_incomplete)
-#     return combine_results(full_set_contigs, contig_results, gene_names)
 
 
 def cluster_hits_by_contig(hits_per_gene, gene_names):

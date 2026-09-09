@@ -97,10 +97,11 @@ def check_cli_options(args):
         sys.exit('Error: --escherichia__pathovar_min_coverage must be between 50.0 and 100.0')
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
-
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
@@ -242,7 +243,7 @@ def map_shigapass_serotype(serotype):
 
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     full_headers, _ = get_headers()
 
     ref_file = data_dir() / 'virulence_ecoli.fsa'
@@ -258,7 +259,7 @@ def get_results(assembly, minimap2_index, args, previous_results):
     # Pathovar calling via minimap2
     pathovar, virulence_markers = minimap_pathovar(
         assembly,
-        minimap2_index,
+        ref_index,
         ref_file,
         args.escherichia__pathovar_min_identity,
         args.escherichia__pathovar_min_coverage
@@ -283,66 +284,6 @@ def get_results(assembly, minimap2_index, args, previous_results):
     return result_dict
 
 
-
-
-
-    # if pathovar != '-':
-    #     result_dict['Pathotype'] = pathovar
-    
-    # elif predicted_serotype != '-':
-    #     result_dict['Pathotype'] = predicted_serotype
-    # else:
-    #     result_dict['Pathotype'] = '-'
-
-    # return result_dict
-
-# def get_results(assembly, minimap2_index, args, previous_results) -> Dict:
-#     full_headers, _ = get_headers()
-
-#     ref_file = data_dir() / 'virulence_ecoli.fsa'
-
-#     species = previous_results.get('enterobacterales__species__species', '').strip()
-#     pathotype_species = ['Escherichia coli / Shigella']
-
-#     if species not in pathotype_species:
-#         result_dict = {header: '-' for header in full_headers}
-#         result_dict['Pathotype'] = '-'
-#         return result_dict
-
-#     # Pathovar calling via minimap2
-#     pathovar, virulence_markers = minimap_pathovar(
-#         assembly,
-#         minimap2_index,
-#         ref_file,
-#         args.escherichia__pathovar_min_identity,
-#         args.escherichia__pathovar_min_coverage
-#     )
-
-#     # ShigaPass serotype — only run if any virulence marker (key or hit) starts with 'ipaH'
-#     has_ipah = any(
-#         (mk.startswith('ipaH') and marker_hits) or
-#         any(h.startswith('ipaH') for h in (marker_hits or []))
-#         for mk, marker_hits in (virulence_markers or {}).items()
-#     )
-#     # ShigaPass serotype
-#     predicted_serotype = run_shigapass_for_single_assembly(assembly, args)
-
-#     # Build result row
-#     result_dict = {header: '-' for header in full_headers}
-#     for marker, marker_hits in virulence_markers.items():
-#         if marker in result_dict:
-#             result_dict[marker] = ";".join(marker_hits) if marker_hits else '-'
-
-#     result_dict['Predicted_Serotype'] = predicted_serotype if predicted_serotype else '-'
-
-#     if pathovar != '-':
-#         result_dict['Pathotype'] = pathovar
-#     elif predicted_serotype != '-':
-#         result_dict['Pathotype'] = predicted_serotype
-#     else:
-#         result_dict['Pathotype'] = '-'
-
-#     return result_dict
 
 
 

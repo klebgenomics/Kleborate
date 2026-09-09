@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Ryan Wick 
+Copyright 2026 Kat Holt, Ryan Wick 
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -57,24 +57,25 @@ def check_cli_options(args):
         sys.exit('Error: --escherichia_mlst_achtman_required_exact_matches must be a positive '
                  'integer')
 
-
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     genes = ['adk', 'fumC', 'gyrB', 'icd', 'mdh', 'purA', 'recA']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
 
     st, clonal_complex, alleles = \
-        mlst(assembly, minimap2_index, profiles, alleles, genes, 'clonal_complex',
+        mlst(assembly, ref_index, profiles, alleles, genes, 'clonal_complex',
              args.escherichia_mlst_achtman_min_identity, args.escherichia_mlst_achtman_min_coverage,
              args.escherichia_mlst_achtman_required_exact_matches)
 

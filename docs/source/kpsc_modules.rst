@@ -679,71 +679,94 @@ Additionally, we provide a new AMR genotyping report compatible with the `hAMRon
 hAMRonization report for Kleborate
 ++++++++++++++++++++++++++++++++++++++
 
-
 .. list-table::
 
-   * - Input_file_name
+   * - Input File Name
      - The name of the file containing the sequence data to be analysed
 
-   * - Gene_symbol
+   * - Gene Symbol
      - The short name of a gene
+
+   * - Gene Name
+     - Short name of a gene
+
+   * - Nucleotide mutation
+     - Nucleotide sequence change(s) detected in the sequence being analyzed compared to a reference
+  
+   * - Amino acid mutation
+    - The amino acid sequence change(s) detected in the sequence being analyzed compared to a reference
      
-   * - Mutation
-     - The amino acid/nucleotide sequence change(s) detected in the sequence being analyzed compared to a reference
-     
-   * - Genetic_variation_type
+   * - Genetic Variation Type
      - The class of genetic variation detected
      
-   * - Drug_class
+   * - Drug Class
      - Set of antibiotic molecule
      
    * - Input Sequence ID
      - An identifier of molecular sequence(s) or entries from a molecular sequence database
      
-   * - Input_gene_length
+   * - Input Gene Length
      - The length (number of positions) of a target gene sequence submitted by a user
      
-   * - Input_gene_start
+   * - Input Gene Start
      - The position of the first nucleotide in a gene sequence being analyzed (input gene sequence)
      
-   * - Input_gene_stop
+   * - Input Gene Stop
      - The position of the last nucleotide in a gene sequence being analyzed (input gene sequence)
      
-   * - Reference_gene_length
+   * - Reference Gene Length
      - The length (number of positions) of a gene reference sequence retrieved from a database.
      
-   * - Reference_gene_start
+   * - Reference Gene Start
      - The position of the first nucleotide in a reference gene sequence (sequence being used for comparison)
+
+   * - Reference Gene Stop
+     - The position of the last nucleotide in a reference gene sequence (sequence being used for comparison)
      
-   * - Sequence_identity
+   * - Sequence Identity
      - Sequence identity is the number (%) of matches (identical characters) in positions from an alignment of two molecular sequences.
      
    * - Coverage (percentage)
      - The percentage of the reference sequence covered by the sequence of interest.
 
-   * - Reference_accession
+   * - Reference Accession
      - An identifier that specifies an individual sequence record in a public sequence repository.
 
-   * - Strand_orientation
+   * - Strand Orientation
      - The orientation of a genomic element on the double-stranded molecule.
      
-   * - Software_name
+   * - Analysis Software Name
      - A name of a computer package, application used for the analysis of data
      
-   * - Software_version
+   * - Analysis Software Version
      - The version of software used to analyze data
      
-   * - Reference_database_name
+   * - Reference Database Name
      - An identifier of a biological or bioinformatics database
      
-   * - Reference_database_version
+   * - Reference Database Version
      - The version of the database containing the reference sequences used for analysis
      
-   * - Input_protein_length
+   * - Input Protein Length
      - The length (number of positions) of a protein target sequence submitted by a user
      
-   * - Reference_protein_length
+   * - Reference Protein Length
      - The length (number of positions) of a protein reference sequence retrieved from a database
+
+   * - Input Protein start
+     - The position of the first amino acid in the sequence being analyzed
+     
+   * - Reference Protein start
+     - The position of the first amino acid in a reference sequence
+
+   * - Input Protein Stop
+     - The position of the last amino acid in the sequence being analyzed
+     
+   * - Reference Protein Start
+     - The position of the first amino acid in a reference sequence
+
+   * - Reference Protein Stop
+     - The position of the last amino acid in a reference sequence
 
 
 .. _Resistance scores and counts:
@@ -1000,87 +1023,6 @@ KpSC cgMLST
    -m kpsc__cgmlst
 
 This module performs cgMLST allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
-
-Before running this module, download the Klebsiella cgMLST scheme.  This is done during the Kleborate installation by running the `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/main/kleborate/shared/setup_cgmlst.py>`_ script.
-
-Klebsiella LINcodes are defined using the **scgMLST629_S** cgMLST scheme, hosted on the Institut Pasteur BIGSdb instance.
-
-* **Scheme URL:** ``https://bigsdb.pasteur.fr/api/db/pubmlst_klebsiella_seqdef/schemes/18``
-
-Prerequisites
--------------
-Before running the setup script, ensure the following command-line tools are installed and available in your ``PATH``:
-
-* **MiST** (``mist``)
-* **bigsdb-downloader** (Required for authenticated Pasteur downloads: ``pip install bigsdb-downloader``)
-
-Database Setup Script
----------------------
-To perform allele calling, Kleborate requires a local, indexed copy of the cgMLST scheme stored in its internal module data directory. 
-
-Run the automated setup script:
-
-.. code-block:: bash
-
-   python setup_cgmlst.py
-
-What the Script Does
-~~~~~~~~~~~~~~~~~~~~
-1. **Verifies Dependencies:** Confirms ``mist`` is accessible in your environment.
-2. **Downloads MiST Resources:** (e.g., ``download_bigsdb.py``) directly into your MiST installation if needed.
-3. Locates the Kleborate data path (``kleborate/modules/kpsc__cgmlst/data``)
-4. Downloads the **scgMLST629_S** scheme from the Institut Pasteur BIGSdb instance:
-   
-  
-Download Modes
---------------
-When running ``setup_cgmlst.py``, you will be prompted to select one of two download modes:
-
-1. **Standard download (Public)**
-   Pulls public scheme data without requiring credentials. 
-
-2. **Latest Pasteur database (Authenticated)**
-   Pulls the most up-to-date scheme data directly from Institut Pasteur and requires OAuth authentication. Uses the ``bigsdb_auth`` downloader with credentials stored in ``.bigsdb_tokens/`` in your current working directory.
-
-Pasteur Credential Setup
---------------------------------------
-If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/access_tokens``, the script initiates the OAuth setup:
-
-1. **Obtain API Client Credentials:**
-   * Register for database access via the `Institut Pasteur BIGSdb Portal <https://bigsdb.pasteur.fr/cgi-bin/bigsdb/bigsdb.pl>`_.
-   * Request an OAuth Client Key and Secret by emailing ``bigsdb@pasteur.fr``.
-
-2. **Run Authentication via the Setup Script:**
-   The script invokes ``bigsdb_downloader``:
-
-   .. code-block:: bash
-
-      bigsdb_downloader --key_name Pasteur --site Pasteur \
-        --db pubmlst_klebsiella_seqdef --setup
-
-3. **Input API Keys:**
-   Enter your ``Client ID`` and ``Client Secret`` at the terminal prompts.
-
-4. **Authorize in Browser:**
-   Open the generated URL in your browser, log in to your Pasteur account, and copy the verification code.
-
-5. **Complete Verification:**
-   Paste the verification code into the terminal. Access tokens will be saved to ``.bigsdb_tokens/``, and subsequent runs will skip re-authentication.
-
-Output Files
-------------
-Upon successful completion, the following assets are built inside the Kleborate data folder:
-
-* ``kleb_scgmlst_s/`` — Raw scheme FASTA alleles and ``profiles.tsv``.
-* ``kleb_scgmlst_s-index/`` — Indexed binary database used by ``mist`` during Kleborate runs.
-
-See Also
---------
-* `BIGSdb_downloader Documentation <https://github.com/kjolley/BIGSdb_downloader>`_
-* `MiST Repository <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
-* `LINcodes <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
-* `Klebsiella LINcodes <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/Klebsiella-LINcodes-case-study>`_
-
 
 
 KpSC cgMLST outputs

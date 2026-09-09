@@ -25,8 +25,6 @@ from Bio.SeqRecord import SeqRecord
 import subprocess
 import re
 
-# from . import run
-
 
 def description():
     return ' Clermont PCR typing method for in silico analysis of E. coli whole genomes or assembled contigs'
@@ -93,7 +91,7 @@ def run_ezclermont(input_fasta, min_length):
         return None
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     min_length = args.escherichia__ezclermont_min_length
     output = run_ezclermont(assembly, min_length)
     if not output:

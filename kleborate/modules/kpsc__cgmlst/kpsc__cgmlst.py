@@ -45,6 +45,18 @@ def check_cli_options(args):
 def check_external_programs():
     if not shutil.which('mist'):
         sys.exit('Error: could not find mist')
+ 
+    db_path = data_dir() / "kleb_scgmlst_s-index"
+    if not db_path.exists() or not any(db_path.iterdir()):
+        sys.exit(
+            'Error: MiST cgMLST/LIN code database not found at '
+            f'{db_path}\n'
+            'This database is downloaded separately during setup and is not '
+            'installed automatically by pip/conda.\n'
+            'Please run the database setup step (see the installation '
+            'instructions) before running Kleborate with this module.'
+        )
+ 
     return ['mist']
 
 
@@ -95,6 +107,12 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
     Runs MiST and mist_to_partial_lincode.py to extract LINcodes for an assembly, extracts the cgST and Lincode
 
     """
+    if not db_path.exists() or not any(db_path.iterdir()):
+        raise FileNotFoundError(
+            f'MiST database not found at {db_path}. '
+            'Download the cgMLST/LIN code database before running this module.'
+        )
+
     assembly_id = assembly.stem
     with tempfile.TemporaryDirectory() as tempdir:
         json_path = os.path.join(tempdir, f"{assembly_id}.json")
@@ -134,7 +152,7 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
         return results
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
 
     if isinstance(assembly, str):
         assembly = pathlib.Path(assembly)

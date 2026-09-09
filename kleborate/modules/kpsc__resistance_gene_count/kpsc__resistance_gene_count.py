@@ -51,7 +51,7 @@ def data_dir():
     return pathlib.Path(__file__).parents[1] / 'kpsc__amr' / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     """
     Counts up all resistance genes, excluding the 'Bla' class which is intrinsic.
     """

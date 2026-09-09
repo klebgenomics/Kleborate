@@ -5,8 +5,8 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2023 Kat Holt
-Copyright 2023 Ryan Wick (rrwick@gmail.com)
+Copyright 2026 Kat Holt
+Copyright 2026 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -158,15 +158,6 @@ def test_get_used_module_names_1():
     assert module_names == ['b', 'c', 'd']
     assert check_modules == []
     assert pass_modules == []
-
-
-# def test_get_used_module_names_1():
-#     all_module_names = ['a', 'b', 'c', 'd', 'e']
-#     presets = {'1': ['a', 'b', 'c'], '2': ['c', 'd', 'e']}
-#     Args = collections.namedtuple('Args', ['modules', 'preset'])
-#     modules = kleborate.__main__.get_used_module_names(Args(modules='b,c,d', preset=None),
-#                                                        all_module_names, presets)
-#     assert modules == ['b', 'c', 'd']
 
 
 def test_get_used_module_names_2():

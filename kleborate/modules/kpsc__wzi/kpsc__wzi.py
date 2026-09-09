@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga
+Copyright 2026 Mary Maranga
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -55,22 +55,24 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     gene = 'wzi'
     profile = data_dir() / 'wzi.txt'
     allele = data_dir() / 'wzi.fasta' 
 
 
-    st, _, _= mlst(assembly, minimap2_index, profile, allele, gene, None,
+    st, _, _= mlst(assembly, ref_index, profile, allele, gene, None,
                           args.klebsiella_pneumo_complex__wzi_min_identity, args.klebsiella_pneumo_complex__wzi_min_coverage,
                           args.klebsiella_pneumo_complex__wzi_required_exact_matches)
 

@@ -82,8 +82,9 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Column ``Chr_ST``  has been removed in v3, as it is redundant with ``ST`` 
 * Updated AMR database to Kleborate_AMRdb_v3.3
 * Mutations are reported using  `HGVS nomenclature <https://github.com/AMRverse/AMRrulesCuration/blob/main/syntax.md>`_
-* Added ``p.(Met1?)`` to indicate when PmrB or MgrB have a mutation in the start codon that may disrupt translation (in ``Col_mutations`` column)
+* Added ``p.(Met1?)`` to indicate when pmrB or mgrB have a mutation in the start codon that may disrupt translation (in ``Col_mutations`` column)
 * Added check for synonymous mutation in ompK36 (25 C > T) associated with increased resistance to carbapenems (in ``Omp_mutations`` column)
+*Added checks for ``D`` ompK36 loop 3 (L3) insertions 
 * Added new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_ standard developed by the Public Health Alliance for Genomic Epidemiology (PHA4GE).
 * Added a module for Ciprofloxacin resistance prediction
 * Updated rmp typing to detect expression of the *rmp*locus
@@ -94,8 +95,8 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
   * ``K_locus_missing_genes``  has been renamed ``K_Missing_expected_genes`` 
   * ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
 * Updated assembly statistics module to use qualibact-v1.0 curated thresholds
-* Added new genome specification report compartible with the Public Health Alliance for Genomic Epidemiology.
-* Added new module for KoSC K and O locus typing
+* Added new genome specification report compartible with the `PHA4GE Microbial Genotyping Data Specification <https://github.com/pha4ge/genotyping-specification>>`_.
+* Added new module for KoSC K and O locus typing 
 
 * Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, pks typing, AMR typing using AMRFinderPlus
 

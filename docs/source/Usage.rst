@@ -87,6 +87,7 @@ Parameters
 
 ``--no_hamronization``                    
     Disable generation of the hAMRonization output file (default: False)
+    
 ``--no_genotype_spec``                   
     Disable generation of the genotype spec output file (default: False)
 

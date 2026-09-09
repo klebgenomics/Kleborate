@@ -15,76 +15,73 @@ import os
 import re
 import subprocess
 import sys
+import pathlib
+import uuid
 
 from Bio.Seq import Seq
 from Bio.Data.CodonTable import TranslationError
 from .misc import load_fasta, reverse_complement
+import rammappy
+from rammappy import Index, Aligner, Preset, Strand
+
+
+PRESET_MAP = {
+    'map-ont': Preset.MapOnt,
+    'sr': Preset.Sr,
+    'map-pb': Preset.MapPb,
+    'map-hifi': Preset.MapHifi,
+    'splice': Preset.Splice,
+    'asm5': Preset.Asm5,
+    'asm10': Preset.Asm10,
+    'asm20': Preset.Asm20,
+}
 
 
 class Alignment(object):
     """
-    Defines a minimap2 alignment. Each object is created from a single line in a minimap2 PAF file.
+    Defines an alignment object from a rammappy Mapping result.
 
-    It is assumed that minimap2 was run with its -c option so that full alignment is performed. If
-    -c wasn't used, then some pieces will be missing (e.g. CIGAR) and some will be incorrect (e.g.
-    percent_identity).
-
-    If dictionaries of the query and reference sequences are also provided (key=name, value=seq),
-    then the Alignment object will also contain the
+    rammappy's Mapping does not carry the query name/length (they're
+    implicit in the aligner.map() call), so they will be passed in explicitly.
     """
 
-    def __init__(self, paf_line, query_seqs=None, ref_seqs=None):
-        self.query_name, self.query_length = None, None
-        self.query_start, self.query_end = None, None
-        self.strand = None
-        self.ref_name, self.ref_length = None, None
-        self.ref_start, self.ref_end = None, None
-        self.matching_bases, self.num_bases = None, None
+    def __init__(self, mapping, query_name, query_length, query_seqs=None, ref_index=None):
+        self.query_name = query_name
+        self.query_length = query_length
+        self.query_start = int(mapping.query_start)
+        self.query_end = int(mapping.query_end)
+        self.strand = '+' if mapping.strand == Strand.Forward else '-'
+
+        ref_name = mapping.target_name
+        self.ref_name = ref_name.decode() if isinstance(ref_name, bytes) else ref_name
+        self.ref_length = int(mapping.target_len)
+        self.ref_start = int(mapping.target_start)
+        self.ref_end = int(mapping.target_end)
+
+        self.matching_bases = int(mapping.matches)
+        self.num_bases = int(mapping.block_len)
+        self.alignment_score = int(mapping.score) if mapping.score is not None else None
+
+        cigar_bytes = mapping.cigar
+        self.cigar = cigar_bytes.decode() if cigar_bytes else None
+
         self.percent_identity = None
         self.query_cov, self.ref_cov = None, None
-        self.cigar, self.alignment_score = None, None
         self.query_seq, self.ref_seq = None, None
 
-        self.parse_paf_line(paf_line)
         self.set_identity_and_coverages()
-        self.set_sequences(query_seqs, ref_seqs)
-
-    def parse_paf_line(self, paf_line):
-        line_parts = paf_line.strip().split('\t')
-        if len(line_parts) < 11:
-            sys.exit('Error: alignment file does not seem to be in PAF format')
-
-        self.query_name = line_parts[0]
-        self.query_length = int(line_parts[1])
-        self.query_start = int(line_parts[2])
-        self.query_end = int(line_parts[3])
-        self.strand = line_parts[4]
-
-        self.ref_name = line_parts[5]
-        self.ref_length = int(line_parts[6])
-        self.ref_start = int(line_parts[7])
-        self.ref_end = int(line_parts[8])
-
-        self.matching_bases = int(line_parts[9])
-        self.num_bases = int(line_parts[10])
-
-        self.cigar, self.alignment_score = None, None
-        for part in line_parts:
-            if part.startswith('cg:Z:'):
-                self.cigar = part[5:]
-            if part.startswith('AS:i:'):
-                self.alignment_score = int(part[5:])
+        self.set_sequences(query_seqs, ref_index)
 
     def set_identity_and_coverages(self):
-        self.percent_identity = 100.0 * self.matching_bases / self.num_bases
-        self.query_cov = 100.0 * (self.query_end - self.query_start) / self.query_length
-        self.ref_cov = 100.0 * (self.ref_end - self.ref_start) / self.ref_length
+        self.percent_identity = (100.0 * self.matching_bases / self.num_bases) if self.num_bases else 0.0
+        self.query_cov = (100.0 * (self.query_end - self.query_start) / self.query_length) if self.query_length else 0.0
+        self.ref_cov = (100.0 * (self.ref_end - self.ref_start) / self.ref_length) if self.ref_length else 0.0
 
-    def set_sequences(self, query_seqs, ref_seqs):
-        if query_seqs is not None:
+    def set_sequences(self, query_seqs, ref_index):
+        if query_seqs is not None and self.query_name in query_seqs:
             self.query_seq = query_seqs[self.query_name][self.query_start:self.query_end]
-        if ref_seqs is not None:
-            self.ref_seq = ref_seqs[self.ref_name][self.ref_start:self.ref_end]
+        if ref_index is not None:
+            self.ref_seq = ref_index.seq(self.ref_name, self.ref_start, self.ref_end)
             if self.strand == '-':
                 self.ref_seq = reverse_complement(self.ref_seq)
 
@@ -98,45 +95,65 @@ class Alignment(object):
         nucl_seq = self.ref_seq
         ambiguous_bases = set(b for b in nucl_seq) - {'A', 'C', 'G', 'T'}
         for b in ambiguous_bases:
-            nucl_seq = nucl_seq.split(b)[0]  # truncate to first ambiguous base
-        nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]  # truncate to a multiple of 3
+            nucl_seq = nucl_seq.split(b)[0]
+        nucl_seq = nucl_seq[:len(nucl_seq) // 3 * 3]
         coding_dna = Seq(nucl_seq)
         return str(coding_dna.translate(table='Bacterial', to_stop=True))
 
     def is_exact(self):
-        """
-        Returns True if the alignment covers the entire query with perfect identity.
-        """
-        return (self.matching_bases == self.num_bases and  # 100% identity
-                self.query_end - self.query_start == self.query_length)  # 100% coverage
+        return (self.matching_bases == self.num_bases and
+                self.query_end - self.query_start == self.query_length)
 
 
 def align_query_to_ref(query_filename, ref_filename, ref_index=None, preset='map-ont',
                         min_identity=None, min_query_coverage=None):
-     """
-     Runs minimap2 on two sequence files (FASTA or FASTQ) and returns a list of Alignment objects.
-     Optional arguments:
-     * ref_index: a minimap2 index for the reference. If provided, this will save a bit of time
-                  because minimap2 won't need to make the index.
-     * preset: the value for minimap2's preset option (-x)
-     * min_identity: if provided, alignments with an identity lower than this are discarded.
-                     Expressed as a percentage, so values should be 0-100.
-     * min_query_coverage: if provided, alignments with a query coverage lower than this are
-                           discarded. Expressed as a percentage, so values should be 0-100.
-     """
-     query_seqs = dict(load_fasta(query_filename))
-     ref_seqs = dict(load_fasta(ref_filename))
-     ref = ref_filename if ref_index is None else ref_index
-     with open(os.devnull, 'w') as dev_null:
-         out = subprocess.check_output(['minimap2','--end-bonus=10','--eqx', '-c', '-x', preset,
-                                        str(ref), str(query_filename)], stderr=dev_null)
-     alignments = [Alignment(x, query_seqs=query_seqs, ref_seqs=ref_seqs)
-                   for x in out.decode().splitlines()]
-     if min_identity is not None:
-         alignments = [a for a in alignments if a.percent_identity >= min_identity]
-     if min_query_coverage is not None:
-         alignments = [a for a in alignments if a.query_cov >= min_query_coverage]
-     return alignments
+    """
+    Runs rammappy on two sequence files (FASTA or FASTQ) and returns an Alignment object.
+
+    Optional arguments:
+    * ref_index: a pre-built rammappy Index object for the reference
+                 If provided, this saves the time ofre-indexing 
+                 (and re-parsing the reference FASTA) on every
+                 call.
+    * preset: the value for minimap2/rammappy's preset option.
+    * min_identity: if provided, alignments with an identity lower than
+                    this are discarded. Expressed as a percentage (0-100).
+    * min_query_coverage: if provided, alignments with a query coverage
+                          lower than this are discarded. Expressed as a
+                          percentage (0-100).
+    """
+    preset_enum = PRESET_MAP.get(preset, Preset.MapOnt)
+
+    query_seqs_list = load_fasta(query_filename)
+    query_seqs = dict(query_seqs_list)
+
+    if ref_index is not None:
+        index = ref_index
+    else:
+        ref_seqs_list = load_fasta(ref_filename)
+        index = Index.build([(name.encode(), seq.encode()) for name, seq in ref_seqs_list])
+
+    aligner = Aligner(index, preset=preset_enum, do_cs=False, do_md=False)
+
+    opts = aligner.options
+    alignment = opts.alignment
+    alignment.end_bonus = 10
+    opts.alignment = alignment
+    aligner.options = opts
+
+    alignments = []
+    for q_name, q_seq in query_seqs_list:
+        q_len = len(q_seq)
+        for mapping in aligner.map(q_name.encode(), q_seq.encode()):
+            alignments.append(Alignment(mapping, q_name, q_len,
+                                         query_seqs=query_seqs, ref_index=index))
+
+    if min_identity is not None:
+        alignments = [a for a in alignments if a.percent_identity >= min_identity]
+    if min_query_coverage is not None:
+        alignments = [a for a in alignments if a.query_cov >= min_query_coverage]
+
+    return alignments
 
 
 def get_expanded_cigar(cigar):

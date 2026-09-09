@@ -112,7 +112,7 @@ def extract_fields(prefix, result, full_headers):
     return fields
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     full_headers, _ = get_headers()
     assembly_path = Path(assembly)
 

@@ -1,8 +1,4 @@
 """
-This file carries out multi-MLST functions: similar to the regular MLST (found in mlst.py) but
-allowing for multiple STs per genome. This is useful for some virulence loci which can appear more
-than once per genome (e.g. on the chromosome and on a plasmid).
-
 Copyright 2026 Mary Maranga
 https://github.com/katholt/Kleborate/
 
@@ -430,67 +426,6 @@ def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_fun
         return exact_status_str
 
     return exact_status_str
-
-
-
-# def get_gene_status(allele_value, allele_dict, hits_per_gene, poly_variation_func):
-#     if allele_value in ('-', None):
-#         return "-"
-
-#     allele = str(allele_value).strip()
-#     if not allele or allele == "-":
-#         return "-"
-
-#     allele_id = re.split(r"[\*\-]", allele, maxsplit=1)[0].strip()
-
-#     # truncation percentage 
-#     truncation_matches = re.findall(r"(\d+(?:\.\d+)?)\s*%", allele)
-#     truncation_pct = f"{truncation_matches[-1]}%" if truncation_matches else None
-
-#     is_inexact_call = "*" in allele
-#     is_truncated_call = "%" in allele
-
-#     if is_inexact_call or is_truncated_call:
-#         # poly tract extension
-#         poly_tract_variation = poly_variation_func(hits_per_gene)
-        
-#         # Normalize poly-tract extension result
-#         poly_status = "-"
-#         if isinstance(poly_tract_variation, list) and poly_tract_variation:
-#             poly_status = str(poly_tract_variation[0])
-#         elif poly_tract_variation is not None:
-#             poly_status = str(poly_tract_variation)
-
-#         # status of the allele in the dict
-#         dict_status = allele_dict.get(allele_id, "-")
-#         if isinstance(dict_status, list):
-#             dict_status = dict_status[0] if dict_status else "-"
-#         dict_status = str(dict_status)
-
-#         if "OFF" in poly_status or "OFF" in dict_status:
-#             if is_truncated_call:
-#                 return f"{allele_id}*-{truncation_pct} (OFF)"
-#             return f"{allele_id}* (OFF)"
-
-#         if is_truncated_call:
-#             return f"{allele_id}*-{truncation_pct}"
-#         return f"{allele_id}*"
-
-#     dict_status = allele_dict.get(allele, "-")
-#     if isinstance(dict_status, list):
-#         dict_status = dict_status[0] if dict_status else "-"
-
-#     if dict_status is None or str(dict_status).strip() == "-":
-#         return "-"
-
-#     exact_status_str = str(dict_status).strip()
-
-#     if "OFF" in exact_status_str:
-#         if allele_id and allele_id not in exact_status_str:
-#             return f"{allele_id} (OFF)"
-#         return exact_status_str
-
-#     return exact_status_str
 
 
 

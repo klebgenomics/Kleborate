@@ -56,9 +56,12 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
+
 
 
 def data_dir():
@@ -78,13 +81,13 @@ def get_kp_subspecies_based_on_st(st):
     return st
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     genes = ['gapA', 'infB', 'mdh', 'pgi', 'phoE', 'rpoB', 'tonB']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
 
 
-    st, _, alleles = mlst(assembly, minimap2_index, profiles, alleles, genes, None,
+    st, _, alleles = mlst(assembly, ref_index, profiles, alleles, genes, None,
                           args.klebsiella_pneumo_complex__mlst_min_identity, args.klebsiella_pneumo_complex__mlst_min_coverage,
                           args.klebsiella_pneumo_complex__mlst_required_exact_matches)
 

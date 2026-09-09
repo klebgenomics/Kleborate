@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
     "Intended Audience :: Science/Research"
 ]
-dependencies = ["biopython","numpy","dna_features_viewer","kaptive","mash"]
+dependencies = ["biopython","numpy","kaptive","mash","rammappy"]
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-mock"]  # needed for running automated tests

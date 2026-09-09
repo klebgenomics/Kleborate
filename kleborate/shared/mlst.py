@@ -2,7 +2,7 @@
 This file contains code for standard assigning a standard MLST scheme (e.g. 7-gene Klebsiella
 pneumoniae ST) to an assembly.
 
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Kat Holt, Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -19,13 +19,13 @@ import re
 from .alignment import align_query_to_ref, truncation_check
 
 
-def mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
+def mlst(assembly_path, ref_index, profiles_path, allele_paths, gene_names, extra_info,
          min_identity, min_coverage, required_exact_matches, check_for_truncation=False, 
          unknown_group_name=None, min_gene_count=None):
     """
     This function takes:
     * assembly_path: a path for an assembly in FASTA format
-    * minimap2_index: a path for the assembly's minimap2 index (for faster alignment)
+    * ref_index: a path for the assembly's index (for faster alignment)
     * profiles_path: a path for the MLST profiles file in TSV format
     * allele_paths: a dictionary {gene name: path for the allele FASTA file}
     * gene_names: a list of the gene names in the MLST scheme
@@ -44,7 +44,7 @@ def mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names,
     """
     profiles = load_st_profiles(profiles_path, gene_names, extra_info)
     hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
-                                           ref_index=minimap2_index, min_identity=min_identity,
+                                           ref_index=ref_index, min_identity=min_identity,
                                            min_query_coverage=min_coverage) for g in gene_names}
     return run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
                            check_for_truncation, unknown_group_name, min_gene_count)
