@@ -3,17 +3,78 @@ import sys
 import shutil
 import subprocess
 import pathlib
+import tempfile
 import urllib.request
+import warnings
+warnings.filterwarnings("ignore")
 
 
 def install_dependencies():
-    """Ensures the required libraries for BIGSdb_downloader are present."""
-    try:
-        import requests
-        import requests_oauthlib
-    except ImportError:
-        print("\n--- Installing missing dependencies (requests, requests-oauthlib) ---")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "requests", "requests-oauthlib"])
+    """Ensures the required libraries for BIGSdb_downloader are present.
+    """
+    required = {
+        "requests": "requests",
+        "requests_oauthlib": "requests-oauthlib",
+        "rauth": "rauth",
+        "bigsdb_downloader": "bigsdb-downloader",
+    }
+    missing_pip_names = []
+    for module_name, pip_name in required.items():
+        try:
+            __import__(module_name)
+        except ImportError:
+            missing_pip_names.append(pip_name)
+
+    if missing_pip_names:
+        print(f"\n--- Installing missing dependencies ({', '.join(missing_pip_names)}) ---")
+        try:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", *missing_pip_names])
+        except subprocess.CalledProcessError as e:
+            print(f"[ERROR] Failed to pip install {missing_pip_names}: {e}")
+            return False
+
+    for module_name in required:
+        try:
+            __import__(module_name)
+        except ImportError as e:
+            print(f"[ERROR] {module_name} not importable after install: {e}")
+            return False
+
+    return True
+
+_RAUTH_PATCH_SRC = '''
+try:
+    import rauth.session as _rauth_session
+
+    _orig_parse_optional_params = _rauth_session.OAuth1Session._parse_optional_params
+
+    def _patched_parse_optional_params(self, oauth_params, req_kwargs):
+        if req_kwargs.get("params") is None:
+            req_kwargs["params"] = {}
+        if req_kwargs.get("data") is None:
+            req_kwargs["data"] = {}
+        return _orig_parse_optional_params(self, oauth_params, req_kwargs)
+
+    _rauth_session.OAuth1Session._parse_optional_params = _patched_parse_optional_params
+except ImportError:
+    pass
+'''
+
+
+def make_rauth_patch_sitecustomize():
+    patch_dir = pathlib.Path(tempfile.mkdtemp(prefix="rauth_patch_"))
+    (patch_dir / "sitecustomize.py").write_text(_RAUTH_PATCH_SRC)
+    return patch_dir
+
+
+def run_bigsdb_downloader(args):
+    runner_src = _RAUTH_PATCH_SRC + '''
+import sys
+from bigsdb_downloader.main import main
+sys.exit(main())
+'''
+    cmd = [sys.executable, "-c", runner_src] + args
+    return subprocess.run(cmd, check=True)
 
 
 def get_paths():
@@ -21,10 +82,10 @@ def get_paths():
     try:
         import kleborate
         import mist
-        
+
         k_path = pathlib.Path(kleborate.__file__).parent / 'modules' / 'kpsc__cgmlst' / 'data'
         m_path = pathlib.Path(mist.__file__).parent / 'resources' / 'pubmlst'
-        
+
         return k_path, m_path
     except ImportError as e:
         print(f"Error: Missing dependency. {e}")
@@ -58,16 +119,23 @@ def setup_bigsdb_credentials(token_path, key_name, site_name):
         print(f"\n[INFO] Tokens found at {token_path}. Skipping authentication.")
         return
 
-    install_dependencies()
-    downloader_bin = shutil.which("bigsdb_downloader") or shutil.which("bigsdb_downloader.py")
-    if not downloader_bin:
-        print("\n[ERROR] 'bigsdb_downloader' command not found. Please install it via pip first:")
+    if not install_dependencies():
+        print("\n[ERROR] Could not install/import the dependencies required for bigsdb-downloader.")
+        print("Please install it manually and re-run this script:")
         print("pip install bigsdb-downloader")
         sys.exit(1)
-    
+
     print("\n--- Pasteur Authentication Setup ---")
-    subprocess.run([downloader_bin, "--key_name", key_name, 
-                    "--site", site_name, "--db", "pubmlst_klebsiella_seqdef", "--setup"], check=True)
+    try:
+        run_bigsdb_downloader([
+            "--key_name", key_name,
+            "--site", site_name,
+            "--db", "pubmlst_klebsiella_seqdef",
+            "--setup",
+        ])
+    except subprocess.CalledProcessError as e:
+        print(f"\n[ERROR] bigsdb-downloader setup failed: {e}")
+        sys.exit(1)
 
 
 
@@ -82,8 +150,8 @@ def main():
 
     # Use the current working directory
     cwd = pathlib.Path.cwd()
-    
-    # define the token dir  
+
+    # define the token dir
     token_base = cwd / ".bigsdb_tokens"
     token_check = token_base / "access_tokens"
 
@@ -105,10 +173,18 @@ def main():
     raw_download_path = target_dir / "kleb_scgmlst_s"
     index_path = target_dir / "kleb_scgmlst_s-index"
 
+    download_env = None
+
     if mode == '2':
         setup_bigsdb_credentials(token_check, "Pasteur", "Pasteur")
-        
-    
+
+        patch_dir = make_rauth_patch_sitecustomize()
+        download_env = os.environ.copy()
+        existing_pythonpath = download_env.get("PYTHONPATH", "")
+        download_env["PYTHONPATH"] = (
+            str(patch_dir) + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
+        )
+
         download_cmd = [
             "mist", "download", "--downloader", "bigsdb_auth",
             "--url", scheme_url, "--output", str(raw_download_path),
@@ -123,7 +199,7 @@ def main():
 
     print(f"\n--- Downloading to {raw_download_path} ---")
     try:
-        subprocess.run(download_cmd, check=True)
+        subprocess.run(download_cmd, check=True, env=download_env)
     except subprocess.CalledProcessError:
         print(f"\n[ERROR] Download failed. Check tokens in: {token_base}")
         sys.exit(1)
@@ -137,3 +213,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
