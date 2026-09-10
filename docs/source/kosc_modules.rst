@@ -101,13 +101,13 @@ Kaptive parameters
 
 Number of threads for alignment (default: 1)
 
-``--k-db, KoSC_K_locus_database.gbk``
+``-kosc-k-db``
 
-Kaptive database for K-locus typing
+Kaptive database for Kosc K-locus typing
 
-``--o-db, KoSC_O_locus_database.gbk``
+`-kosc-o-db``
 
-Kaptive database for o-locus typing
+Kaptive database for Kosc o-locus typing
 
 
 
