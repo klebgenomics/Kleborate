@@ -81,7 +81,7 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Updated MLST & virulence databases 
 * Column ``Chr_ST``  has been removed in v3, as it is redundant with ``ST`` 
 * Updated AMR database to Kleborate_AMRdb_v3.3
-* Mutations are reported using  `HGVS nomenclature <https://github.com/AMRverse/AMRrulesCuration/blob/main/syntax.md>`_
+* Mutations are reported using  `HGVS nomenclature <https://hgvs-nomenclature.org/stable/recommendations/protein/substitution/>`_
 * Added ``p.(Met1?)`` to indicate when pmrB or mgrB have a mutation in the start codon that may disrupt translation (in ``Col_mutations`` column)
 * Added check for synonymous mutation in ompK36 (25 C > T) associated with increased resistance to carbapenems (in ``Omp_mutations`` column)
 * Added checks for ``D`` ompK36 loop 3 (L3) insertions
