@@ -936,7 +936,7 @@ KpSC K and O locus typing with Kaptive
 
    -m kpsc__kaptive
 
-This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://kaptive.readthedocs.io/en/latest/>`_ for more details of how Kaptive works, tutorials, and citations.
+This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
 
 Kaptive parameters
 +++++++++++++++++++
