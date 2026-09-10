@@ -95,7 +95,7 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
   * ``K_locus_missing_genes``  has been renamed ``K_Missing_expected_genes`` 
   * ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
 * Updated assembly statistics module to use qualibact-v1.0 curated thresholds
-* Added new genome specification report compartible with the `PHA4GE Microbial Genotyping Data Specification <https://github.com/pha4ge/genotyping-specification>>`_.
+* Added new genome specification report compatible with the `PHA4GE Microbial Genotyping Data Specification <https://github.com/pha4ge/genotyping-specification>`_
 * Added new module for KoSC K and O locus typing 
 
 * Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, pks typing, AMR typing using AMRFinderPlus
