@@ -84,10 +84,10 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Mutations are reported using  `HGVS nomenclature <https://github.com/AMRverse/AMRrulesCuration/blob/main/syntax.md>`_
 * Added ``p.(Met1?)`` to indicate when pmrB or mgrB have a mutation in the start codon that may disrupt translation (in ``Col_mutations`` column)
 * Added check for synonymous mutation in ompK36 (25 C > T) associated with increased resistance to carbapenems (in ``Omp_mutations`` column)
-*Added checks for ``D`` ompK36 loop 3 (L3) insertions 
+* Added checks for ``D`` ompK36 loop 3 (L3) insertions
 * Added new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_ standard developed by the Public Health Alliance for Genomic Epidemiology (PHA4GE).
 * Added a module for Ciprofloxacin resistance prediction
-* Updated rmp typing to detect expression of the *rmp*locus
+* Updated rmp typing to detect expression of the *rmp* locus
 * Added new module for typing *peg-344* gene
 * Added new module for cgMLST and Lin codes
 * Added new module for typing *mrk* operon
