@@ -97,10 +97,6 @@ This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3
 Kaptive parameters
 +++++++++++++++++++
 
-``-t , --threads``
-
-Number of threads for alignment (default: 1)
-
 ``-kosc-k-db``
 
 Kaptive database for Kosc K-locus typing
