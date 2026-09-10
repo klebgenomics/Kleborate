@@ -89,7 +89,7 @@ Before running the setup script, ensure the following tools are installed and av
 What the script does
 ~~~~~~~~~~~~~~~~~~~~
 1. **Verifies Dependencies:** Confirms ``mist`` is accessible in your environment.
-2. **Downloads  ``download_bigsdb.py`` directly into your MiST installation if needed.
+2. **Downloads  ``bigsdb-downloader`` directly into your MiST installation.
 3. Locates the Kleborate data path (``kleborate/modules/kpsc__cgmlst/data``)
 4. Downloads the **scgMLST629_S** scheme from the Institut Pasteur BIGSdb instance:
    
@@ -100,7 +100,7 @@ When running ``setup_cgmlst.py``, you will be prompted to select one of two down
 
 1. **Standard download (Public)** Pulls scheme data without requiring login credentials.
 2. **Latest Pasteur database (Authenticated)**
-   Pulls the most up-to-date scheme data directly from Institut Pasteur and requires OAuth authentication. Uses the ``bigsdb_auth`` downloader with credentials stored in ``.bigsdb_tokens/`` in your current working directory.
+   Pulls the most up-to-date scheme data directly from Institut Pasteur and requires OAuth authentication. Uses the ``bigsdb_auth`` downloader with credentials stored in ``.bigsdb_tokens/``.
 
 Pasteur Credential Setup (Mode 2)
 --------------------------------------
@@ -111,7 +111,7 @@ If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/acce
    * Request an OAuth Client Key and Secret by emailing ``bigsdb@pasteur.fr``.
 
 2. **Run Authentication via the Setup Script:**
-   The script invokes ``bigsdb_downloader``:
+   The script invokes ``bigsdb_downloader`` command:
 
    .. code-block:: bash
 
