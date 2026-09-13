@@ -31,7 +31,7 @@ from typing import Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import partial
 from .shared.help_formatter import MyParser, MyHelpFormatter
-from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, KLEBSIELLA_TYPING_SPEC
+from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_exclude_headers, KLEBSIELLA_TYPING_SPEC
 from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
 from rammappy import Index
 
@@ -215,8 +215,10 @@ def main():
                     klebsiella_pneumo_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_output.txt')
                     selective_headers = [
                         header for header in full_headers
-                        if not header.startswith('kpsc__amr') or
-                        header.split('__')[-1] in res_headers
+                        if (not header.startswith('kpsc__amr') or
+                        header.split('__')[-1] in res_headers) and
+                        (not header.startswith('kpsc__kaptive') or
+                        header.split('__')[-1] not in kaptive_exclude_headers)
                     ]
                     filtered_results = {header: results.get(header, "-") for header in selective_headers}
                     output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
@@ -887,7 +889,7 @@ def paper_refs():
            'Lam MMC, et al. A genomic surveillance framework and genotyping tool for Klebsiella ' \
            'pneumoniae and its related species complex. Nature Communications. 2021. ' \
            'doi:10.1038/s41467-021-24448-3.\n\n' \
-           'If you turn on the Kaptive option for full K and O typing, please also cite:\n' \
+           'If you use Kaptive for full K and O typing, please also cite:\n' \
            'Stanton TD, et al.  Fast and accurate in silico antigen typing with Kaptive 3 ' \
            'Microbial Genomics. 2025. doi: 10.1099/mgen.0.001428.'
     wrapped_text = ''

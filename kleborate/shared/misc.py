@@ -191,7 +191,7 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]", 
         "genotyping_database_name": "",
         "genotyping_database_version": "",
-        "genotyping_schema_name": "Klebsiella_k_locus_primary_reference",
+        "genotyping_schema_name": "-",
         "genotyping_software_name": "Kaptive",
         "genotyping_software_version": get_tool_version(['kaptive', '--version']),
         "genotype_predicted_phenotype": "K_type"
@@ -202,7 +202,7 @@ KLEBSIELLA_TYPING_SPEC = {
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "", 
         "genotyping_database_version": "",
-        "genotyping_schema_name": "Klebsiella_o_locus_primary_reference",
+        "genotyping_schema_name": "-",
         "genotyping_software_name": "Kaptive",
         "genotyping_software_version": get_tool_version(['kaptive', '--version']),
         "genotype_predicted_phenotype": "O_type"
@@ -231,7 +231,7 @@ KLEBSIELLA_TYPING_SPEC = {
     },
 
     "Sublineage": {
-        "genotyping_method": "Sublineage",
+        "genotyping_method": "LIN code",
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
         "genotyping_database_version": get_cgmlst_db_version(),
@@ -242,7 +242,7 @@ KLEBSIELLA_TYPING_SPEC = {
     },
 
     "Clonal group": {
-        "genotyping_method": "Clonal group",
+        "genotyping_method": "LIN code",
         "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
         "genotyping_database_name": "pubmlst_klebsiella_seqdef",
         "genotyping_database_version": get_cgmlst_db_version(),
@@ -272,3 +272,9 @@ annotation_fields = [
         'Reference Database Version','Input Protein Length','Reference Protein Length','Input Protein Start', 'Input Protein Stop',
         'Reference Protein Start', 'Reference Protein Stop'
 ]
+
+kaptive_exclude_headers = [
+                        'K_Database_name', 'K_Database_version',
+                        'O_Database_name', 'O_Database_version',
+                        'Kaptive version'
+                    ]

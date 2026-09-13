@@ -187,7 +187,7 @@ def get_results(assembly, ref_index, args, previous_results):
         promoter_anns = []
         if promoter_polyT != "-":
             if "reduced expression" in promoter_polyT: promoter_anns.append("reduced")
-            elif "untypable" in promoter_polyT: promoter_anns.append("untypable promoter")
+            elif "untypeable" in promoter_polyT: promoter_anns.append("untypeable promoter")
         if promoter_argR != "-" and "ARG-box lost" in promoter_argR:
             promoter_anns.append("ARG box lost")
         

@@ -45,11 +45,35 @@ For *K. pneumoniae* species complex, **Kleborate v3 can reproduce the outputs of
 Citations
 ----------
 
-If you use Kleborate, please cite the paper: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
+For kpsc typing please cite:
 
-If you use the Kaptive calls for K and O locus typing please cite: Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
+Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
 
-If you use the cgMLST and LIN code calls, please cite the paper: Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
+Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
+
+Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
+
+Brisse, S. et al. Virulent clones of *Klebsiella pneumoniae*: Identification and evolutionary scenario based on genomic and phenotypic characterization, *PLoS ONE* (2009). `<https://doi.org/10.1371/journal.pone.0004982>`_
+
+Diancourt, L. et al. Multilocus sequence typing of *Klebsiella pneumoniae* nosocomial isolates, *Journal of Clinical Microbiology* (2005). `<https://doi.org/10.1128/JCM.43.8.4178-4182.2005>`_
+
+Hennart, M. et al. A Dual Barcoding Approach to Bacterial Strain Nomenclature: Genomic Taxonomy of *Klebsiella pneumoniae* Strains, *Molecular Biology and Evolution* (2022). `<https://doi.org/10.1093/molbev/msac135>`_
+
+For Kosc typing please cite:
+
+Ashcroft, MM. et al. A capsule polysaccharide synthesis locus database for the *Klebsiella oxytoca* Species Complex, *bioRxiv* (2026). `<https://doi.org/10.64898/2026.07.16.739023>`_
+
+For *Escherichia* typing please cite:
+
+Wirth, T. et al. Sex and virulence in *Escherichia coli*: an evolutionary perspective, *Molecular Microbiology* (2006). `<https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_
+
+Ingle, D. et al. Evolution of atypical enteropathogenic *E. coli* by repeated acquisition of LEE pathogenicity island variants, *Nature Microbiology* (2016). `<https://doi.org/10.1038/nmicrobiol.2015.10>`_
+
+Feldgarden, M. et al. AMRFinderPlus and the Reference Gene Catalog facilitate examination of the genomic links among antimicrobial resistance, stress response, and virulence, *Scientific Reports* (2021). `<https://doi.org/10.1038/s41598-021-91456-0>`_
+
+Yassine, I. et al. ShigaPass: an in silico tool predicting *Shigella* serotypes from whole-genome sequencing assemblies, *Microbial Genomics* (2023). `<https://doi.org/10.1099/mgen.0.000961>`_
+
+Bessonov, K. et al. ECTyper: in silico *Escherichia coli* serotype and species prediction from raw and assembled whole-genome sequence data, *Microbial Genomics* (2021). `<https://doi.org/10.1099/mgen.0.000728>`_
 
 
 

@@ -24,7 +24,7 @@ def check_polyT_tract(hits_per_gene, assembly):
     For rmpA hit, extracts the upstream sequence and
     checks for poly-T tract (G(T+)A).
     Returns length of the poly T tract and annotated expression
-    Returns 'untypable' if rmpA is found but the pattern is not matched.
+    Returns 'untypeable' if rmpA is found but the pattern is not matched.
     """
     poly_t_status_map = {
         7: "reduced expression",
@@ -89,7 +89,7 @@ def check_polyT_tract(hits_per_gene, assembly):
         return results[0]
     elif rmpA_found:
         # if rmpA gene is present, but no exact match to polyT pattern 
-        return 'untypable'
+        return 'untypeable'
     else:
         return '-'
 
