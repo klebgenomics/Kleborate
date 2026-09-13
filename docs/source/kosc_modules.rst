@@ -89,7 +89,7 @@ KoSC K and O locus typing with Kaptive
 
 .. code-block:: Python
 
-   -m kosc_kaptive
+   -m kosc__kaptive
 
 This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
 
@@ -101,7 +101,7 @@ Kaptive parameters
 
 Kaptive database for Kosc K-locus typing
 
-`-kosc-o-db``
+``-kosc-o-db``
 
 Kaptive database for Kosc o-locus typing
 

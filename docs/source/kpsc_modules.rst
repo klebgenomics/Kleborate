@@ -351,7 +351,8 @@ In light of this information, we screened and extracted the *rmpA*\ , *rmpD* and
 The klebsiella__rmst module screens for *rmpADC* and will report a sequence type, along with the associated lineage and mobile genetic element.
 
 Expression of the *rmp*locus
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+++++++++++++++++++++++++++++++++++++
+
 When a *rmp* locus is detected, Kleborate checks the status of each loci to determine whether it is *ON* (wildtype, corresponding to normal expression), *OFF* (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. The expression status of each loci is then combined to assign an overall rmp locus status, as follows. If all component loci are present and *ON*, the ‘rmp locus status’ is annotated as *Phase ON*. If all components are present but one or more is *OFF*, the status is annotated as *Phase OFF*. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual *rmp* genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
 
 
@@ -483,9 +484,10 @@ Virulence score is output in the following column:
 
 
 Peg-344 typing
------------------------------------
+^^^^^^^^^^^^^^^^^^
 
--m klebsiella__peg-344
+.. code-block:: Python
+  -m klebsiella__peg-344
 
 This module checks for presence/absence of *peg-344* gene by aligning the genomes against *NTUH-K2044* reference sequence (protein BAH65947.1)
 
@@ -568,9 +570,9 @@ Additional chromosomal mutations associated with AMR
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * Fluoroquinolone resistance mutations: GyrA 83 & 87 and ParC 80 & 84. These appear in the ``Flq_mutations`` column.
-* Colistin resistance due to truncation or loss of core genes MgrB or PmrB. If these genes are missing or truncated, this information will be reported in the 'Col_mutations' column (truncations are expressed as % amino acid length from the start codon, if there is a mutation in the start codon this is indicated as ``$`` to flag that the gene is present but may not be translated correctly). Note if MgrB and PmrB are present and not truncated then nothing about them will be reported in the 'Col' column.
+* Colistin resistance due to truncation or loss of core genes MgrB or PmrB. If these genes are missing or truncated, this information will be reported in the 'Col_mutations' column (truncations are expressed as % amino acid length from the start codon, if there is a mutation in the start codon this is indicated as ``p.(Met1?)`` to flag that the gene is present but may not be translated correctly). Note if MgrB and PmrB are present and not truncated then nothing about them will be reported in the 'Col' column.
 
-* OmpK35 and OmpK36 truncations and point mutations shown to result in reduced susceptibility to beta-lactamases (`insertions GD or TD in the third loop <https://www.nature.com/articles/s41467-019-11756-y>`_ or `synonymous C > T at nucleotide 25 <https://doi.org/10.1073/pnas.2203593119>`_ ``ompK36_c25t``). This information will be reported in the ``Omp_mutations`` column (truncations are expressed as % amino acid length from the start codon ). Note that if a gene is fragmented across multiple contigs, Kleborate will attempt to predict the closest matching allele based on the longest fragment. If this longest fragment does not contain the start of the gene, the truncation will be reported as -0%. Additionally, if these core genes are present and not truncated then nothing about them will be reported in the 'Omp' column. The specific effect of OmpK mutations on drug susceptibility depends on multiple factors including what combinations of OmpK35 and OmpK36 alleles are present and what beta-lactamase genes are present (this is why we report them in their own column separate to Bla genes). See e.g. `paper <https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218>`_ and `this one <https://www.nature.com/articles/s41467-019-11756-y>`_ for more information on OmpK genes and drug resistance.
+* OmpK35 and OmpK36 truncations and point mutations shown to result in reduced susceptibility to beta-lactamases (`insertions GD, TD or D in the third loop <https://www.nature.com/articles/s41467-019-11756-y>`_ or `synonymous C > T at nucleotide 25 <https://doi.org/10.1073/pnas.2203593119>`_ ``ompK36_c25t``). This information will be reported in the ``Omp_mutations`` column (truncations are expressed as % amino acid length from the start codon ). Note that if a gene is fragmented across multiple contigs, Kleborate will attempt to predict the closest matching allele based on the longest fragment. If this longest fragment does not contain the start of the gene, the truncation will be reported as -0%. Additionally, if these core genes are present and not truncated then nothing about them will be reported in the 'Omp' column. The specific effect of OmpK mutations on drug susceptibility depends on multiple factors including what combinations of OmpK35 and OmpK36 alleles are present and what beta-lactamase genes are present (this is why we report them in their own column separate to Bla genes). See e.g. `paper <https://journals.plos.org/plospathogens/article?id=10.1371/journal.ppat.1007218>`_ and `this one <https://www.nature.com/articles/s41467-019-11756-y>`_ for more information on OmpK genes and drug resistance.
 
 Note these do not count towards acquired resistance gene counts, but do count towards drug classes (with the exception of Omp mutations, whose spectrum of effects depends on the presence of acquired beta-lactamases and thus their impact on specific beta-lactam drug classes is hard to predict).
 
@@ -677,7 +679,7 @@ Additionally, we provide a new AMR genotyping report compatible with the `hAMRon
 
 
 hAMRonization report for Kleborate
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++
 
 .. list-table::
 
@@ -692,76 +694,76 @@ hAMRonization report for Kleborate
 
    * - Nucleotide mutation
      - Nucleotide sequence change(s) detected in the sequence being analyzed compared to a reference
-  
+
    * - Amino acid mutation
-    - The amino acid sequence change(s) detected in the sequence being analyzed compared to a reference
-     
+     - The amino acid sequence change(s) detected in the sequence being analyzed compared to a reference
+
    * - Genetic Variation Type
      - The class of genetic variation detected
-     
+
    * - Drug Class
      - Set of antibiotic molecule
-     
+
    * - Input Sequence ID
      - An identifier of molecular sequence(s) or entries from a molecular sequence database
-     
+
    * - Input Gene Length
      - The length (number of positions) of a target gene sequence submitted by a user
-     
+
    * - Input Gene Start
      - The position of the first nucleotide in a gene sequence being analyzed (input gene sequence)
-     
+
    * - Input Gene Stop
      - The position of the last nucleotide in a gene sequence being analyzed (input gene sequence)
-     
+
    * - Reference Gene Length
-     - The length (number of positions) of a gene reference sequence retrieved from a database.
-     
+     - The length (number of positions) of a gene reference sequence retrieved from a database
+
    * - Reference Gene Start
      - The position of the first nucleotide in a reference gene sequence (sequence being used for comparison)
 
    * - Reference Gene Stop
      - The position of the last nucleotide in a reference gene sequence (sequence being used for comparison)
-     
+
    * - Sequence Identity
-     - Sequence identity is the number (%) of matches (identical characters) in positions from an alignment of two molecular sequences.
-     
+     - Sequence identity is the number (%) of matches (identical characters) in positions from an alignment of two molecular sequences
+
    * - Coverage (percentage)
-     - The percentage of the reference sequence covered by the sequence of interest.
+     - The percentage of the reference sequence covered by the sequence of interest
 
    * - Reference Accession
-     - An identifier that specifies an individual sequence record in a public sequence repository.
+     - An identifier that specifies an individual sequence record in a public sequence repository
 
    * - Strand Orientation
-     - The orientation of a genomic element on the double-stranded molecule.
-     
+     - The orientation of a genomic element on the double-stranded molecule
+
    * - Analysis Software Name
      - A name of a computer package, application used for the analysis of data
-     
+
    * - Analysis Software Version
      - The version of software used to analyze data
-     
+
    * - Reference Database Name
      - An identifier of a biological or bioinformatics database
-     
+
    * - Reference Database Version
      - The version of the database containing the reference sequences used for analysis
-     
+
    * - Input Protein Length
      - The length (number of positions) of a protein target sequence submitted by a user
-     
+
    * - Reference Protein Length
      - The length (number of positions) of a protein reference sequence retrieved from a database
 
    * - Input Protein start
      - The position of the first amino acid in the sequence being analyzed
-     
+
    * - Reference Protein start
      - The position of the first amino acid in a reference sequence
 
    * - Input Protein Stop
      - The position of the last amino acid in the sequence being analyzed
-     
+
    * - Reference Protein Start
      - The position of the first amino acid in a reference sequence
 
@@ -939,7 +941,7 @@ KpSC K and O locus typing with Kaptive
 This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
 
 Kaptive parameters
-+++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^
 
 ``--kpsc-k-db``
 Kaptive database for K-locus typing (default: ``kpsc_k``)
@@ -951,7 +953,7 @@ Kaptive database for O-locus typing
 
 
 Kaptive outputs
-+++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Kaptive results are output in the following columns:
 
@@ -1021,9 +1023,9 @@ This module performs cgMLST allele calling using `MiST <https://github.com/Bioin
 
 
 KpSC cgMLST outputs
-+++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Mist results are output in the following columns:
+cgMLST results are output in the following columns:
 
 .. list-table::
    :header-rows: 1
@@ -1057,7 +1059,7 @@ This module performs MLST typing of the *mrk* operon in the *Klebsiella pneumoni
 
 
 Parameters
-++++++++++
+^^^^^^^^^^^^^^^^^^^^^
 
 ``--kpsc__mrk_min_identity``
 
@@ -1073,7 +1075,7 @@ At least this many exact matches are required to call an ST (default: 4)
 
 
 Outputs
-+++++++
+^^^^^^^^^^^^^^^^^^^^^
 
 Output of the KpSC mrk module is the following columns:
 
