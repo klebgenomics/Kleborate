@@ -39,8 +39,6 @@ def main():
     ]
 
     print(f"\n--- Downloading to {raw_download_path} ---")
-    print("(EnteroBase E. coli cgMLST is large - the wiki benchmarks show ~2.5h to index,")
-    print(" so the download itself can also take a while.)")
     try:
         subprocess.run(download_cmd, check=True)
     except subprocess.CalledProcessError:
@@ -48,8 +46,6 @@ def main():
         sys.exit(1)
 
     print("\n--- Indexing ---")
-    print("Building the profile index (--build-profile-index) is strongly recommended here since")
-    print("EnteroBase cgMLST schemes can have hundreds of thousands of profiles.")
     subprocess.run(["mist", "index",
                      "--fasta-list", str(raw_download_path / "fasta_list.txt"),
                      "--profiles", str(raw_download_path / "profiles.tsv"),
