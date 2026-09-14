@@ -513,8 +513,6 @@ Minimum alignment percent coverage for detecting *peg-344* gene (default: 80.0)
 peg-344 Outputs
 ++++++++++++++++++
 
-Output of the klebsiella__peg-344 module is the following columns:
-
 .. list-table::
 
    * - peg-344
@@ -946,11 +944,11 @@ This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3
 Kaptive parameters
 ^^^^^^^^^^^^^^^^^^^^
 
-``--kpsc-k-db``
+``--kpsc_k``
 Kaptive database for K-locus typing
 
 
-``--kpsc-o-db``
+``--kpsc_o``
 Kaptive database for O-locus typing
 
 
@@ -1028,6 +1026,7 @@ This module performs cgMLST allele calling using `MiST <https://github.com/Bioin
 
 
 cgMLST outputs
+^^^^^^^^^^^^^^^^^^^^
 
 cgMLST results are output in the following columns:
 
@@ -1048,6 +1047,7 @@ cgMLST results are output in the following columns:
 
    * - Clonal group
      - Clonal group for input strain
+
 
 .. _kpsc__mrk:
 

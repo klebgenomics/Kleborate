@@ -435,6 +435,38 @@ Outputs
      - Presence or absence pattern of PCR products.
 
 
+.. _escherichia__pks:
+
+pks typing
+^^^^^^^^^^
+
+.. code-block:: bash
+
+  -m escherichia__pks
+
+This module checks for the presence/absence of the *clbB* gene (part of the colibactin polyketide biosynthesis gene cluster) by aligning genome assemblies against the `reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_.
+
+Parameters
+++++++++++
+
+``--escherichia__pks_min_identity``
+
+Minimum alignment percent identity for detecting *clbB* (default: 90.0)
+
+``--escherichia__pks_min_coverage``
+
+Minimum alignment percent coverage for detecting *clbB* (default: 80.0)
+
+
+pks Outputs
++++++++++++
+
+.. list-table::
+
+   * - clbB
+     - presence or absence of the gene
+
+
 .. _escherichia__amr:
 
 
@@ -568,7 +600,7 @@ This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3
 Kaptive parameters
 +++++++++++++++++++
 
-``-ecoli_kps``
+``--ecoli_kps``
 
 Group 2 + 3 CPS database 
 

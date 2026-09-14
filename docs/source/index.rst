@@ -63,7 +63,7 @@ Citations
 
 1. Ashcroft, MM. et al. A capsule polysaccharide synthesis locus database for the *Klebsiella oxytoca* Species Complex, *bioRxiv* (2026). `<https://doi.org/10.64898/2026.07.16.739023>`_
 
-**For *Escherichia* typing please cite**:
+**For Escherichia typing please cite**:
 
 1. Wirth, T. et al. Sex and virulence in *Escherichia coli*: an evolutionary perspective, *Molecular Microbiology* (2006). `<https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_
 

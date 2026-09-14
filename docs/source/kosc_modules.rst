@@ -2,7 +2,7 @@
 Modules for *Klebsiella oxytoca* species complex
 ****************************************************
 
-.. _klebsiella_oxytoca_complex__mlst:
+.. _kosc__mlst:
 
 .. code-block:: Python
 
@@ -83,6 +83,7 @@ Genomes identified as belonging to the *K. oxytoca* species complex are subjecte
 These modules were primarily designed for typing of *K. pneumoniae* species complex, and the databases are populated from variation detected in KpSC genomes. However they can appear in KoSC genomes and so typing is included in the KoSC preset.
 
 
+.. _kosc__kaptive:
 
 KoSC K and O locus typing with Kaptive
 -----------------------------------------
@@ -97,11 +98,11 @@ This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3
 Kaptive parameters
 +++++++++++++++++++
 
-``-kosc-k-db``
+``-kosc_k``
 
 Kaptive database for Kosc K-locus typing
 
-``-kosc-o-db``
+``-kosc_o``
 
 Kaptive database for Kosc o-locus typing
 

@@ -41,22 +41,20 @@ Create a conda environment containing Kleborate dependancies::
    
 
 Activate the environment and install kleborate (and Kaptive) using pip::
-   
 
-   conda activate klebsiella_analysis
-   pip install kleborate
+    conda activate klebsiella_analysis
+    pip install kleborate
 
-Or Bioconda:
+Or Bioconda::
 
-   conda install -c bioconda kleborate
-   pip install rammappy
-
+    conda install -c bioconda kleborate
+    pip install rammappy
 
 Database set up
 ============================
 Before running Kleborate, set up the reference databases required
 
-1. AMRFinderPlus Database
+AMRFinderPlus Database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 Download the latest AMRFinderPlus database:
 
@@ -65,12 +63,12 @@ Download the latest AMRFinderPlus database:
    amrfinder -u
 
 
-2. KpSC cgMLST Database (MiST)
+KpSC cgMLST Database (MiST)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``kpsc__cgmlst`` module performs core-genome MLST (cgMLST) allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_ and uses the **scgMLST629_S** scheme hosted on the Institut Pasteur BIGSdb instance.
 
-This requires a local, indexed copy of the cgMLST scheme stored in kleborate module data directory. Please run the `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/main/kleborate/shared/setup_cgmlst.py>`_ script to download and index it:
+This requires a local, indexed copy of the cgMLST scheme stored in kleborate module data directory. Please run the `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/development/kleborate/shared/setup_cgmlst.py>`_ script to download and index it:
 
 .. code-block:: bash
 
@@ -87,8 +85,8 @@ Before running the setup script, ensure the following tools are installed and av
 What the script does
 ~~~~~~~~~~~~~~~~~~~~
 1. **Verifies Dependencies:** Confirms ``mist`` is accessible in your environment.
-2. Downloads  ``bigsdb-downloader`` directly into your MiST installation.
-3. Locates the Kleborate data path (``kleborate/modules/kpsc__cgmlst/data``)
+2. Installs  ``bigsdb-downloader`` .
+3. Locates Kleborate data path (``kleborate/modules/kpsc__cgmlst/data``)
 4. Downloads the **scgMLST629_S** scheme from the Institut Pasteur BIGSdb instance:
    
   
@@ -108,21 +106,13 @@ If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/acce
    Register for database access via the `Institut Pasteur BIGSdb Portal <https://bigsdb.pasteur.fr/cgi-bin/bigsdb/bigsdb.pl>`_.
    * Request an OAuth Client Key and Secret by emailing ``bigsdb@pasteur.fr``.
 
-2. **Run Authentication via the Setup Script:**
-   The script invokes ``bigsdb_downloader`` command:
-
-   .. code-block:: bash
-
-      bigsdb_downloader --key_name Pasteur --site Pasteur \
-        --db pubmlst_klebsiella_seqdef --setup
-
-3. **Input API Keys:**
+2. **Run Authentication via the Setup Script and input API Keys:**
    Enter your ``Client ID`` and ``Client Secret`` at the terminal prompts.
 
-4. **Authorize in Browser:**
+3. **Authorize in Browser:**
    Open the generated URL in your browser, log in to your Pasteur account, and copy the verification code.
 
-5. **Complete Verification:**
+4. **Complete Verification:**
    Paste the verification code into the terminal. Access tokens will be saved to ``.bigsdb_tokens/``, and subsequent runs will skip re-authentication.
 
 Output Files
@@ -135,11 +125,11 @@ Upon completion, the following files will be downloaded inside the Kleborate dat
 
 
 3. *E. coli* cgMLST Database (MiST)
-----------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The ``ecoli__cgmlst`` module performs core-genome MLST (cgMLST) allele uses the **Escherichia.cgMLSTv1** scheme hosted on EnteroBase.
 
-Run the ``setup_ecoli_cgmlst.py`` script to download and index it:
+Run the ``setup_ecoli_cgmlst.py`` script to download and index the scheme:
 
 .. code-block:: bash
 
