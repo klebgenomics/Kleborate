@@ -350,11 +350,13 @@ In light of this information, we screened and extracted the *rmpA*\ , *rmpD* and
 
 The klebsiella__rmst module screens for *rmpADC* and will report a sequence type, along with the associated lineage and mobile genetic element.
 
-Expression of the *rmp*locus
+Expression of the rmp locus
 ++++++++++++++++++++++++++++++++++++
 
 When a *rmp* locus is detected, Kleborate checks the status of each loci to determine whether it is *ON* (wildtype, corresponding to normal expression), *OFF* (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. The expression status of each loci is then combined to assign an overall rmp locus status, as follows. If all component loci are present and *ON*, the ‘rmp locus status’ is annotated as *Phase ON*. If all components are present but one or more is *OFF*, the status is annotated as *Phase OFF*. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual *rmp* genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
 
+Detection of argR gene and ARG box
+++++++++++++++++++++++++++++++++++++
 
 The module also checks for presence of the *argR* gene in the genomes, and conservation of the *ARG box* in the *rmpA* promoter. The *argR* gene is screened via alignment against the *K. pneumoniae* strain *KPPR1* reference strain. Where a hit is detected, its nucleotide sequence is translated and the length of the encoded protein determined. Full-length genes are reported as ‘present’,protein sequences with a coverage <100% compared with the reference ArgR encoded by KPPR1 are reported as ‘truncated-X%’ (‘X’ indicates the percent coverage). If there is no hit, the value returned is ‘-’. The ARG box is checked by searching for an exact match to the reference sequence string (ATTGAATTTTTATTCATT) from KPPR1, within 150 bp upstream of rmpA. If this is not found, the annotation ‘ARG box lost’ is added to the ‘rmpA_promoter’ field.
 
@@ -514,8 +516,9 @@ peg-344 Outputs
 Output of the klebsiella__peg-344 module is the following columns:
 
 .. list-table::
-    * peg-344
-    - present or truncated
+
+   * - peg-344
+     - present or truncated
 
 
 .. _kpsc__amr:
@@ -944,7 +947,7 @@ Kaptive parameters
 ^^^^^^^^^^^^^^^^^^^^
 
 ``--kpsc-k-db``
-Kaptive database for K-locus typing (default: ``kpsc_k``)
+Kaptive database for K-locus typing
 
 
 ``--kpsc-o-db``
@@ -1013,6 +1016,8 @@ Wzi typing results are output in the following columns:
      - K locus typically associated with this wzi allele
 
 
+.. _kpsc__cgMLST:
+
 KpSC cgMLST 
 ----------------
 .. code-block:: Python
@@ -1022,8 +1027,7 @@ KpSC cgMLST
 This module performs cgMLST allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
 
 
-KpSC cgMLST outputs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+cgMLST outputs
 
 cgMLST results are output in the following columns:
 
@@ -1045,11 +1049,11 @@ cgMLST results are output in the following columns:
    * - Clonal group
      - Clonal group for input strain
 
-
+.. _kpsc__mrk:
 
 KpSC mrk
 -------------------------------------
-This module performs MLST typing of the *mrk* operon in the *Klebsiella pneumoniae* species complex (KpSC).
+This module performs MLST typing of KpSC *mrk* operon.
 
 
 .. code-block:: Python

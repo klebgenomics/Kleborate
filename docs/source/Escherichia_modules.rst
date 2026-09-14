@@ -176,7 +176,7 @@ How it works
 
 This module classifies *E. coli* genomes into DEC pathotypes based on the presence or absence of virulence marker genes using a curated database `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ DB.  Input assemblies are aligned to the database using Minimap2, and Kleborate assigns pathotypes based on logic adapted from `EnteroBase <https://enterobase.readthedocs.io/en/latest/pipelines/backend-pipeline-phylotypes.html?highlight=pathovar/>`_.
 
-Additionally, Kleborate distinguishes *Shigella* species based on the serotype-specific O-antigen biosynthetic gene cluster. The module aligns input genomes against a curated reference sequence derived from the *Shigella* serotyping pipeline, `shigatyper <https://github.com/CFSAN-Biostatistics/shigatyper>`_ using Minimap2.
+Additionally, Kleborate uses`ShigaPass <https://github.com/imanyass/ShigaPass>`_  to predict Shigella serotypes.
 
 All reference sequences and marker definitions used by this module are included in the **/data**  directory of this module.
 
@@ -516,3 +516,93 @@ Results of the *Escherichia* AMR module are grouped by drug class:
 
    * - ``Other Classes``
      - Resistance genes in other antimicrobial categories.
+
+
+.. _escherichia__cgMLST:
+
+Escherichia cgMLST 
+----------------
+.. code-block:: Python
+
+   -m escherichia__cgMLST
+
+This module performs cgMLST allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
+
+
+cgMLST outputs
+
+cgMLST results are output in the following columns:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Column Name
+     - Description
+
+   * - cgST
+     - Best matching scgST
+
+   * - LIN code
+     - LIN code / Partial LINcode for input strain
+
+   * - Sublineage
+     - Sublineage for input strain
+
+   * - Clonal group
+     - Clonal group for input strain
+
+
+
+.. _escherichia__kaptive:
+
+Typing of E. coli Group 2 and 3 CPS with Kaptive
+-----------------------------------------
+
+.. code-block:: Python
+
+   -m escherichia__kaptive
+
+This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
+
+
+Kaptive parameters
++++++++++++++++++++
+
+``-ecoli_kps``
+
+Group 2 + 3 CPS database 
+
+
+
+
+Kaptive outputs
++++++++++++++++++
+
+Kaptive results are output in the following columns:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Column Name
+     - Description
+   * - Best match locus
+     - The locus type which most closely matches the assembly.
+   * - Best match type
+     - The predicted serotype/phenotype of the assembly.
+   * - Match confidence
+     - Typeable or Untypeable.
+   * - Problems
+     - Characters indicating issues with the locus match (see problems).
+   * - Identity
+     - Weighted percent identity of the best matching locus to the assembly.
+   * - Coverage
+     - Weighted percent coverage of the best matching locus in the assembly.
+   * - Length discrepancy
+     - If the locus was found in a single piece, this is the difference between the locus length and the assembly length.
+   * - Expected genes in locus
+     - A fraction indicating how many of the genes in the best matching locus were found in the locus part of the assembly.
+   * - Expected genes in locus, details
+     - Gene names for the expected genes found in the locus part of the assembly.
+   * - Missing expected genes
+     - A string listing the gene names of expected genes that were not found.
+

@@ -41,7 +41,7 @@ Summary of availabe modules and their output columns
      - species, species_match
    * - :ref:`general__contig_stats <contig_stats>`
      - contig_count, N50, largest_contig, total_size, ambiguous_bases, QC_warnings
-   * - :ref:`kpsc__mlst <klebsiella_pneumo_complex_mlst>`
+   * - :ref:`kpsc__mlst <_kpsc_mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
    * - :ref:`klebsiella__ybst <klebsiella__ybst>`
      - YbST, Yersiniabactin, ybtS, ybtX, ybtQ, ybtP, ybtA, irp2, irp1, ybtU, ybtT, ybtE, fyuA
@@ -55,9 +55,9 @@ Summary of availabe modules and their output columns
      - RmST, RmpADC, rmpA, rmpD, rmpC
    * - :ref:`klebsiella__rmpa2 <klebsiella__rmpa2>`
      - rmpA2
-   * - :ref:`kpsc__virulence_score <klebsiella_pneumo_complex__virulence_score>`
+   * - :ref:`kpsc__virulence_score <kpsc__virulence_score>`
      - virulence_score (Score of 0-5)
-   * - :ref:`kpsc__amr <klebsiella_pneumo_complex__amr>`
+   * - :ref:`kpsc__amr <kpsc__amr>`
      - AGly_acquired, Col_acquired, Fcyn_acquired, Flq_acquired, Gly_acquired, MLS_acquired, Phe_acquired, Rif_acquired, Sul_acquired, Tet_acquired, Tgc_acquired, Tmt_acquired, Bla_acquired, Bla_ESBL_acquired, Bla_ESBL_inhR_acquired, Bla_Carb_acquired, Bla_chr, SHV_mutations, Omp_mutations, Col_mutations, Flq_mutations, truncated_resistance_hits, spurious_resistance_hits
    * - :ref:`kpsc__resistance_score <Resistance scores and counts>`
      - resistance_score (Score of 0-3)
@@ -71,8 +71,14 @@ Summary of availabe modules and their output columns
      - wzi allele
    * - :ref:`kpsc__kaptive <kpsc__kaptive>`
      - Best match locus, Best match type, Match confidence, Problems, Identity, Coverage, Length discrepancy, Expected genes in locus, details, Missing expected gene
-   * - :ref:`klebsiella_oxytoca_complex__mlst <klebsiella_oxytoca_complex__mlst>`
+   * - :ref:`kpsc__cgMLST <kpsc__cgMLST>`
+     - cgST,LIN code,Sublineage,Clonal group
+   * - :ref:`kpsc__mrk <kpsc__mrk>`
+     - ST,mrkA, mrkB, mrkC, mrkD, mrkF, mrkH, mrkI, mrkJ
+   * - :ref:`kosc__mlst <kosc__mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
+   * - :ref:`kosc__kaptive <kosc__kaptive>`
+     - Best match locus, Best match type, Match confidence, Problems, Identity, Coverage, Length discrepancy, Expected genes in locus, details, Missing expected gene
    * - :ref:`escherichia__mlst_pasteur <escherichia__mlst_achtman>`
      - ST, dinB, icdA, pabB, polB, putP, trpA, trpB, uidA
    * - :ref:`escherichia__mlst_achtman <escherichia__mlst_achtman>`
@@ -89,14 +95,3 @@ Summary of availabe modules and their output columns
      - Clermont_type, Clermont_profile
    * - :ref:`escherichia__amr <escherichia__amr>`
      - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin,    Methicillin, Other Classes
-
-
-
-
-
-
-
-
-
-
-
