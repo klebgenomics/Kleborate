@@ -45,35 +45,35 @@ For *K. pneumoniae* species complex, **Kleborate v3 can reproduce the outputs of
 Citations
 ----------
 
-For kpsc typing please cite:
+**For kpsc typing please cite**:
 
-Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
+1. Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
 
-Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
+2. Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
-Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
+3. Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
 
-Brisse, S. et al. Virulent clones of *Klebsiella pneumoniae*: Identification and evolutionary scenario based on genomic and phenotypic characterization, *PLoS ONE* (2009). `<https://doi.org/10.1371/journal.pone.0004982>`_
+4. Brisse, S. et al. Virulent clones of *Klebsiella pneumoniae*: Identification and evolutionary scenario based on genomic and phenotypic characterization, *PLoS ONE* (2009). `<https://doi.org/10.1371/journal.pone.0004982>`_
 
-Diancourt, L. et al. Multilocus sequence typing of *Klebsiella pneumoniae* nosocomial isolates, *Journal of Clinical Microbiology* (2005). `<https://doi.org/10.1128/JCM.43.8.4178-4182.2005>`_
+5. Diancourt, L. et al. Multilocus sequence typing of *Klebsiella pneumoniae* nosocomial isolates, *Journal of Clinical Microbiology* (2005). `<https://doi.org/10.1128/JCM.43.8.4178-4182.2005>`_
 
-Hennart, M. et al. A Dual Barcoding Approach to Bacterial Strain Nomenclature: Genomic Taxonomy of *Klebsiella pneumoniae* Strains, *Molecular Biology and Evolution* (2022). `<https://doi.org/10.1093/molbev/msac135>`_
+6. Hennart, M. et al. A Dual Barcoding Approach to Bacterial Strain Nomenclature: Genomic Taxonomy of *Klebsiella pneumoniae* Strains, *Molecular Biology and Evolution* (2022). `<https://doi.org/10.1093/molbev/msac135>`_
 
-For Kosc typing please cite:
+**For Kosc typing please cite**:
 
-Ashcroft, MM. et al. A capsule polysaccharide synthesis locus database for the *Klebsiella oxytoca* Species Complex, *bioRxiv* (2026). `<https://doi.org/10.64898/2026.07.16.739023>`_
+1. Ashcroft, MM. et al. A capsule polysaccharide synthesis locus database for the *Klebsiella oxytoca* Species Complex, *bioRxiv* (2026). `<https://doi.org/10.64898/2026.07.16.739023>`_
 
-For *Escherichia* typing please cite:
+**For *Escherichia* typing please cite**:
 
-Wirth, T. et al. Sex and virulence in *Escherichia coli*: an evolutionary perspective, *Molecular Microbiology* (2006). `<https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_
+1. Wirth, T. et al. Sex and virulence in *Escherichia coli*: an evolutionary perspective, *Molecular Microbiology* (2006). `<https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_
 
-Ingle, D. et al. Evolution of atypical enteropathogenic *E. coli* by repeated acquisition of LEE pathogenicity island variants, *Nature Microbiology* (2016). `<https://doi.org/10.1038/nmicrobiol.2015.10>`_
+2. Ingle, D. et al. Evolution of atypical enteropathogenic *E. coli* by repeated acquisition of LEE pathogenicity island variants, *Nature Microbiology* (2016). `<https://doi.org/10.1038/nmicrobiol.2015.10>`_
 
-Feldgarden, M. et al. AMRFinderPlus and the Reference Gene Catalog facilitate examination of the genomic links among antimicrobial resistance, stress response, and virulence, *Scientific Reports* (2021). `<https://doi.org/10.1038/s41598-021-91456-0>`_
+3. Feldgarden, M. et al. AMRFinderPlus and the Reference Gene Catalog facilitate examination of the genomic links among antimicrobial resistance, stress response, and virulence, *Scientific Reports* (2021). `<https://doi.org/10.1038/s41598-021-91456-0>`_
 
-Yassine, I. et al. ShigaPass: an in silico tool predicting *Shigella* serotypes from whole-genome sequencing assemblies, *Microbial Genomics* (2023). `<https://doi.org/10.1099/mgen.0.000961>`_
+4. Yassine, I. et al. ShigaPass: an in silico tool predicting *Shigella* serotypes from whole-genome sequencing assemblies, *Microbial Genomics* (2023). `<https://doi.org/10.1099/mgen.0.000961>`_
 
-Bessonov, K. et al. ECTyper: in silico *Escherichia coli* serotype and species prediction from raw and assembled whole-genome sequence data, *Microbial Genomics* (2021). `<https://doi.org/10.1099/mgen.0.000728>`_
+5. Bessonov, K. et al. ECTyper: in silico *Escherichia coli* serotype and species prediction from raw and assembled whole-genome sequence data, *Microbial Genomics* (2021). `<https://doi.org/10.1099/mgen.0.000728>`_
 
 
 
@@ -111,18 +111,18 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Added checks for ``D`` ompK36 loop 3 (L3) insertions
 * Added new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_ standard developed by the Public Health Alliance for Genomic Epidemiology (PHA4GE).
 * Added a module for Ciprofloxacin resistance prediction
-* Updated rmp typing to detect expression of the *rmp* locus
+* Updated *rmp* typing to detect expression of the *rmp* locus
 * Added new module for typing *peg-344* gene
 * Added new module for cgMLST and Lin codes
 * Added new module for typing *mrk* operon
 * Updated to use Kaptive v3, which has some changes to the names of output variables:
-  * ``K_locus_missing_genes``  has been renamed ``K_Missing_expected_genes`` 
-  * ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
+   ``K_locus_missing_genes``  has been renamed ``K_Missing_expected_genes`` 
+   ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
 * Updated assembly statistics module to use qualibact-v1.0 curated thresholds
 * Added new genome specification report compatible with the `PHA4GE Microbial Genotyping Data Specification <https://github.com/pha4ge/genotyping-specification>`_
 * Added new module for KoSC K and O locus typing 
 
-* Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, pks typing, AMR typing using AMRFinderPlus
+* Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, pks typing, AMR typing using AMRFinderPlus, typing of Group 2 and 3 CPS using Kaptive
 
 
 
