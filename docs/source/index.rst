@@ -19,7 +19,8 @@ Introducing Kleborate v3
 
 Kleborate was initially developed to type genome assemblies of *Klebsiella pneumoniae* and the *Klebsiella pneumoniae* species complex (KpSC). `Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ introduces a new modular structure, including new modules for typing the *Klebsiella oxytoca* species complex (KoSC) and *Escherichia coli*.
 
-Typing modules for the *Klebsiella pneumoniae* species complex cover:
+Typing modules for the *Klebsiella pneumoniae*\  species complex cover:
+----------
 
 * Species calling (e.g. *K. pneumoniae*\ , *K. quasipneumoniae*\ , *K. variicola*\ , etc.)
 * MLST, cgMLST, and LIN codes
@@ -37,14 +38,16 @@ For *K. pneumoniae* species complex, Kleborate v3 can reproduce the outputs of K
 (Note the command changed from Kleborate v2, the above is equivalent to running ``kleborate --all -o results.txt -a *.fasta``  with Kleborate v2 and includes all resistance and Kaptive-based typing)
 
 
-Typing modules for the *Klebsiella oxytoca* species complex cover:
+Typing modules for the *Klebsiella oxytoca*\  species complex cover:
+----------
 
 * Species calling (e.g. *K. oxytoca*\ , *K. michiganensis*\ , *K. grimontii*\ , etc.)
 * MLST
 * K (capsule) and O antigen (LPS) serotype prediction
 
 
-Typing modules for *E. coli* cover:
+Typing modules for *E. coli*\  cover:
+----------
 
 * Pathotyping, Shigella speciation, and phylogroup assignment
 * MLST (Achtman and Pasteur schemes), cgMLST, and LIN codes
@@ -59,52 +62,58 @@ Citations
 **For KpSC typing please cite the primary Kleborate paper**: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
 
 Depending on which typing results you use, you should also cite the corresponding tools/databases on which Kleborate relies:
-*K or O serotypes:* Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
-*cgMLST*: Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
+* **K or O serotypes:** Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
-4. Brisse, S. et al. Virulent clones of *Klebsiella pneumoniae*: Identification and evolutionary scenario based on genomic and phenotypic characterization, *PLoS ONE* (2009). `<https://doi.org/10.1371/journal.pone.0004982>`_
+* **MLST (7-locus) scheme:** Diancourt, L. et al. Multilocus sequence typing of *Klebsiella pneumoniae* nosocomial isolates, *Journal of Clinical Microbiology* (2005). `<https://doi.org/10.1128/JCM.43.8.4178-4182.2005>`_
 
-5. Diancourt, L. et al. Multilocus sequence typing of *Klebsiella pneumoniae* nosocomial isolates, *Journal of Clinical Microbiology* (2005). `<https://doi.org/10.1128/JCM.43.8.4178-4182.2005>`_
+* **cgMLST scheme:** Brisse, S. et al. Virulent clones of *Klebsiella pneumoniae*: Identification and evolutionary scenario based on genomic and phenotypic characterization, *PLoS ONE* (2009). `<https://doi.org/10.1371/journal.pone.0004982>`_
 
-6. Hennart, M. et al. A Dual Barcoding Approach to Bacterial Strain Nomenclature: Genomic Taxonomy of *Klebsiella pneumoniae* Strains, *Molecular Biology and Evolution* (2022). `<https://doi.org/10.1093/molbev/msac135>`_
+* **LIN code scheme:** Hennart, M. et al. A Dual Barcoding Approach to Bacterial Strain Nomenclature: Genomic Taxonomy of *Klebsiella pneumoniae* Strains, *Molecular Biology and Evolution* (2022). `<https://doi.org/10.1093/molbev/msac135>`_
 
-**For Kosc typing please cite**:
+* **cgMLST or LIN codes (software)**: Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
 
-1. Ashcroft, MM. et al. A capsule polysaccharide synthesis locus database for the *Klebsiella oxytoca* Species Complex, *bioRxiv* (2026). `<https://doi.org/10.64898/2026.07.16.739023>`_
+* **Yersiniabactin or colibactin (ICEKp):** Lam, MMC. et al. Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element *ICEKp* in *Klebsiella pneumoniae* populations. *Microbial Genomics* (2018). `<http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196>`_
 
-**For Escherichia typing please cite**:
+* **Aerobactin or salmochelin (virulence plasmid):** Lam, MMC. et al. Tracking key virulence loci encoding aerobactin and salmochelin siderophore synthesis in *Klebsiella pneumoniae*. *Genome Medicine* (2018). `<https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5>`_
 
-1. Wirth, T. et al. Sex and virulence in *Escherichia coli*: an evolutionary perspective, *Molecular Microbiology* (2006). `<https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_
+* **rmp types (lineages):** Lam, MMC. et al. Genomic and functional analysis of rmp locus variants in *Klebsiella pneumoniae*. *Genome Medicine* (2018). `<https://doi.org/10.1186/s13073-025-01461-5>`_
 
-2. Ingle, D. et al. Evolution of atypical enteropathogenic *E. coli* by repeated acquisition of LEE pathogenicity island variants, *Nature Microbiology* (2016). `<https://doi.org/10.1038/nmicrobiol.2015.10>`_
+* **rmp status (phase variation):** Stawarska, O. et al. Simple Sequence Repeats Mediate Phase Variation of the Mucoid Phenotype in Hypervirulent *Klebsiella pneumoniae*, *BioRxiv* (2025). `<https://doi.org/10.1101/2025.09.12.675794>`_
 
-3. Feldgarden, M. et al. AMRFinderPlus and the Reference Gene Catalog facilitate examination of the genomic links among antimicrobial resistance, stress response, and virulence, *Scientific Reports* (2021). `<https://doi.org/10.1038/s41598-021-91456-0>`_
+* **rmp status (promoter phase variation):** Stawarska, O. et al. Simple Sequence Repeats Mediate Phase Variation of the Mucoid Phenotype in Hypervirulent *Klebsiella pneumoniae*, *BioRxiv* (2025). `<https://doi.org/10.1101/2025.09.12.675794>`_
 
-4. Yassine, I. et al. ShigaPass: an in silico tool predicting *Shigella* serotypes from whole-genome sequencing assemblies, *Microbial Genomics* (2023). `<https://doi.org/10.1099/mgen.0.000961>`_
+* **rmp status (promoter ARG box):** Ryan, B. E., et al. Arginine regulates the mucoid phenotype of hypervirulent *Klebsiella pneumoniae*. *Nature Communications* (2025). `<https://doi.org/10.1038/s41467-025-61047-y>`_
 
-5. Bessonov, K. et al. ECTyper: in silico *Escherichia coli* serotype and species prediction from raw and assembled whole-genome sequence data, *Microbial Genomics* (2021). `<https://doi.org/10.1099/mgen.0.000728>`_
+**For KoSC typing please cite the following, depending on which results you use**:
 
+* **K or O serotyping (software):** Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
+* **K serotype database:** Ashcroft, MM. et al. A capsule polysaccharide synthesis locus database for the *Klebsiella oxytoca* Species Complex, *bioRxiv* (2026). `<https://doi.org/10.64898/2026.07.16.739023>`_
 
-The following papers provide more information on the component schemes and genotyping incorporated in Kleborate:
+* **MLST scheme:** Jolley et al. Open-access bacterial population genomics: BIGSdb software, the PubMLST.org website and their applications *Wellcome Open Res* (2018). `<https://doi.org/10.12688/wellcomeopenres.14826.1>`_
 
-..
-   
-   Yersiniabactin and colibactin (*ICEKp*):
-   Lam, MMC. et al. Genetic diversity, mobilisation and spread of the yersiniabactin-encoding mobile element *ICEKp* in *Klebsiella pneumoniae* populations. *Microbial Genomics* (2018). `Microbial Genomics <http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196>`_
+**For Escherichia typing please cite the following, depending on which results you use**:
 
-   Aerobactin and salmochelin:
-   Lam, MMC. et al. Tracking key virulence loci encoding aerobactin and salmochelin siderophore synthesis in *Klebsiella pneumoniae*. *Genome Medicine* (2018). `Genome Medicine <https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5>`_
+* **MLST (7-locus) scheme:** Wirth, T. et al. Sex and virulence in *Escherichia coli*: an evolutionary perspective, *Molecular Microbiology* (2006). `<https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_
 
-   Kaptive for capsule (K) serotyping:
-   Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
+* **cgMLST scheme:** Zhou, Z. et al. The EnteroBase user’s guide, with case studies on *Salmonella* transmissions, *Yersinia pestis* phylogeny and *Escherichia* core genomic diversity”, *Genome Research* (2020). `<https://doi.org/10.1101/gr.251678.119>`_
 
-   Kaptive for capsule (K) serotyping:
-   Wyres, KL. et al. Identification of *Klebsiella* capsule synthesis loci from whole genome data. *Microbial Genomics* (2016). `Microbial Genomics 2 <http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000102>`_
+* **LEE typing scheme:** Ingle, D. et al. Evolution of atypical enteropathogenic *E. coli* by repeated acquisition of LEE pathogenicity island variants, *Nature Microbiology* (2016). `<https://doi.org/10.1038/nmicrobiol.2015.10>`_
 
-   Kaptive for O antigen (LPS) serotyping:
-   Wick, RR et. al. Kaptive Web: user-friendly capsule and lipopolysaccharide serotype prediction for *Klebsiella* genomes. *Journal of Clinical Microbiology* (2018). `Journal of Clinical Microbiology <http://jcm.asm.org/content/56/6/e00197-18>`_
+* **AMR:** Feldgarden, M. et al. AMRFinderPlus and the Reference Gene Catalog facilitate examination of the genomic links among antimicrobial resistance, stress response, and virulence, *Scientific Reports* (2021). `<https://doi.org/10.1038/s41598-021-91456-0>`_
+
+* **Shigella serotypes:**  Yassine, I. et al. ShigaPass: an in silico tool predicting *Shigella* serotypes from whole-genome sequencing assemblies, *Microbial Genomics* (2023). `<https://doi.org/10.1099/mgen.0.000961>`_
+
+* **O:H serotypes:**  Bessonov, K. et al. ECTyper: in silico *Escherichia coli* serotype and species prediction from raw and assembled whole-genome sequence data, *Microbial Genomics* (2021). `<https://doi.org/10.1099/mgen.0.000728>`_
+
+* **K serotype database:**  Gladstone, RA. et al. Identification of transporter-dependent capsular loci associated with the invasive potential of *Escherichia coli*, *Nature Microbiology* (2026). `<https://doi.org/10.1038/s41564-026-02283-w>`_
+
+* **K serotyping (software):** Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
+
+* **stx typing:** Prasad, AB. et al. Algorithm and Software to Type Stx Operons Accurately from Assembled Genomic Sequence, *Microorganisms* (2026). `<https://doi.org/10.3390/microorganisms14081607>`_
+
+* **Phylogroups:** ClermonTyping
 
 
 Changes from v2
