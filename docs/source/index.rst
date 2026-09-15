@@ -56,6 +56,23 @@ Typing modules for *E. coli*\  cover:
 * AMR profiling (via AMRFinderPlus)
 
 
+Tutorial
+--------
+
+A step-by-step tutorial for Kleborate v3 is available at `kleborate-workshop <https://docs.google.com/document/d/1R61bQbBngpiDB2Gl_eXigePBVakYZEjy/edit>`_, covering:
+
+
+* Kleborate's features and their scientific rationale
+* How to run Kleborate 
+* Examples, illustrating how to run and interpret results
+
+
+License
+-------
+
+`GNU General Public License, version 3 <https://www.gnu.org/licenses/gpl-3.0.html>`_
+
+
 Citations
 ----------
 
@@ -99,8 +116,6 @@ Depending on which typing results you use, you should also cite the correspondin
 
 * **cgMLST scheme:** Zhou, Z. et al. The EnteroBase user’s guide, with case studies on *Salmonella* transmissions, *Yersinia pestis* phylogeny and *Escherichia* core genomic diversity”, *Genome Research* (2020). `<https://doi.org/10.1101/gr.251678.119>`_
 
-* **LEE typing scheme:** Ingle, D. et al. Evolution of atypical enteropathogenic *E. coli* by repeated acquisition of LEE pathogenicity island variants, *Nature Microbiology* (2016). `<https://doi.org/10.1038/nmicrobiol.2015.10>`_
-
 * **AMR:** Feldgarden, M. et al. AMRFinderPlus and the Reference Gene Catalog facilitate examination of the genomic links among antimicrobial resistance, stress response, and virulence, *Scientific Reports* (2021). `<https://doi.org/10.1038/s41598-021-91456-0>`_
 
 * **Shigella serotypes:**  Yassine, I. et al. ShigaPass: an in silico tool predicting *Shigella* serotypes from whole-genome sequencing assemblies, *Microbial Genomics* (2023). `<https://doi.org/10.1099/mgen.0.000961>`_
@@ -111,9 +126,11 @@ Depending on which typing results you use, you should also cite the correspondin
 
 * **K serotyping (software):** Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
+* **LEE typing scheme:** Ingle, D. et al. Evolution of atypical enteropathogenic *E. coli* by repeated acquisition of LEE pathogenicity island variants, *Nature Microbiology* (2016). `<https://doi.org/10.1038/nmicrobiol.2015.10>`_
+
 * **stx typing:** Prasad, AB. et al. Algorithm and Software to Type Stx Operons Accurately from Assembled Genomic Sequence, *Microorganisms* (2026). `<https://doi.org/10.3390/microorganisms14081607>`_
 
-* **Phylogroups:** ClermonTyping
+* **Phylogroups:** Waters, NR. et al. Easy phylotyping of *Escherichia coli* via the EzClermont web app and command-line tool, *Access Microbiology* (2020). `<https://doi.org/10.1099/acmi.0.000143>`_
 
 
 Changes from v2
@@ -144,18 +161,6 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
 * Added new modules for *Escherichia* species: pathotyping, typing of the LEE pathogenicity island, ClermonTyping, typing of stx types using StxTyper, O:H serotyping using ECTyper, pks typing, AMR typing using AMRFinderPlus, typing of Group 2 and 3 CPS using Kaptive
 
 
-
-Tutorial
---------
-
-A step-by-step tutorial for Kleborate v3 is available at `kleborate-workshop <https://docs.google.com/document/d/1R61bQbBngpiDB2Gl_eXigePBVakYZEjy/edit>`_, covering:
-
-
-* Kleborate's features and their scientific rationale
-* How to run Kleborate 
-* Examples, illustrating how to run and interpret results
-
-
 Public reports
 ----------------
 
@@ -166,16 +171,8 @@ Kleborate is also included in `Klebsiella Pathogenwatch <https://pathogen.watch/
 Contact us
 ----------
 
-Kleborate is under active development with many other Klebs genomic analysis tools and projects in progress (see `github.com/klebgenomics <https://github.com/klebgenomics>`_). 
+Kleborate is under active development with other *Klebsiella* & *E. coli* genomic analysis tools and projects in progress (see `github.com/klebgenomics <https://github.com/klebgenomics>`_ and `klebnet.org <https://klebnet.org>`_). 
 
 Please get in touch via the GitHub `issues tracker <https://github.com/klebgenomics/Kleborate/issues>`_ if you have any issues, questions or ideas.
 
 For more on our lab, including other software, see `http://holtlab.net <http://holtlab.net>`_
-
-License
--------
-
-`GNU General Public License, version 3 <https://www.gnu.org/licenses/gpl-3.0.html>`_
-
-
-
