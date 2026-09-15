@@ -17,41 +17,51 @@
 Introducing Kleborate v3
 ########################
 
-Kleborate was primarily developed to screen genome assemblies of *Klebsiella pneumoniae* and the *Klebsiella pneumoniae* species complex (KpSC) for:
+Kleborate was initially developed to type genome assemblies of *Klebsiella pneumoniae* and the *Klebsiella pneumoniae* species complex (KpSC). `Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ introduces a new modular structure, including new modules for typing the *Klebsiella oxytoca* species complex (KoSC) and *Escherichia coli*.
 
-* Species (e.g. *K. pneumoniae*\ , *K. quasipneumoniae*\ , *K. variicola*\ , etc.)
-* *K. pneumoniae* MLST sequence type
-* *ICEKp* associated virulence loci: yersiniabactin (*ybt*), colibactin (*clb*), salmochelin (*iro*), hypermucoidy (*rmpA*)
-* Virulence plasmid associated loci: salmochelin (\ *iro*\ ), aerobactin (\ *iuc*\ ), hypermucoidy (\ *rmpA*\ , *rmpA2*\ )
-* Antimicrobial resistance determinants: acquired genes, SNPs, gene truncations and intrinsic β-lactamases
-* K (capsule) and O antigen (LPS) serotype prediction, via *wzi* alleles and `Kaptive <https://github.com/klebgenomics/Kaptive>`_
+Typing modules for the *Klebsiella pneumoniae* species complex cover:
 
+* Species calling (e.g. *K. pneumoniae*\ , *K. quasipneumoniae*\ , *K. variicola*\ , etc.)
+* MLST, cgMLST, and LIN codes
+* *ICEKp1* and virulence plasmid-associated hypervirulence loci
+* Antimicrobial resistance determinants
+* K (capsule) and O antigen (LPS) serotype prediction
 
-`Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ includes a rewrite of the code to (i) replace the use of BLAST with minimap (faster and less buggy); and (ii) introduce a modular structure making it easy to add new typing modules, including for other species.
-
-
-For *K. pneumoniae* species complex, **Kleborate v3 can reproduce the outputs of Kleborate v2 by running the preset modules for KpSC via:**
+For *K. pneumoniae* species complex, Kleborate v3 can reproduce the outputs of Kleborate v2 by running the preset modules for KpSC via:
  
 
 .. code-block:: Python
 
    kleborate -a *.fasta -o kleborate_results -p kpsc --trim_headers
 
-(Note the command has changed from Kleborate v2, the above is equivalent to running ``kleborate --all -o results.txt -a *.fasta``  with Kleborate v2 and includes all resistance and Kaptive-based typing)
+(Note the command changed from Kleborate v2, the above is equivalent to running ``kleborate --all -o results.txt -a *.fasta``  with Kleborate v2 and includes all resistance and Kaptive-based typing)
 
-**New modules for other species are in development,** for now these include MLST schemes for *Klebsiella oxytoca* species complex and *Escherichia coli* (see the Modules page).
+
+Typing modules for the *Klebsiella oxytoca* species complex cover:
+
+* Species calling (e.g. *K. oxytoca*\ , *K. michiganensis*\ , *K. grimontii*\ , etc.)
+* MLST
+* K (capsule) and O antigen (LPS) serotype prediction
+
+
+Typing modules for *E. coli* cover:
+
+* Pathotyping, Shigella speciation, and phylogroup assignment
+* MLST (Achtman and Pasteur schemes), cgMLST, and LIN codes
+* K (capsule) and O:H serotype prediction
+* LEE and stx typing
+* AMR profiling (via AMRFinderPlus)
 
 
 Citations
 ----------
 
-**For kpsc typing please cite**:
+**For KpSC typing please cite the primary Kleborate paper**: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
 
-1. Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
+Depending on which typing results you use, you should also cite the corresponding tools/databases on which Kleborate relies:
+*K or O serotypes:* Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
-2. Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
-
-3. Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
+*cgMLST*: Bogaerts, B. et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes, *BMC Genomics* (2025). `<https://doi.org/10.1186/s12864-025-12324-z>`_
 
 4. Brisse, S. et al. Virulent clones of *Klebsiella pneumoniae*: Identification and evolutionary scenario based on genomic and phenotypic characterization, *PLoS ONE* (2009). `<https://doi.org/10.1371/journal.pone.0004982>`_
 
