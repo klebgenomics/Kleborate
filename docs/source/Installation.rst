@@ -56,6 +56,9 @@ Before running Kleborate, set up the reference databases required
 
 AMRFinderPlus Database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+NOTE: AMRFinderPlus is only used by the module ``-m escherichia__amr`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
+
 Download the latest AMRFinderPlus database:
 
 .. code-block:: bash
@@ -66,35 +69,37 @@ Download the latest AMRFinderPlus database:
 KpSC cgMLST Database (MiST)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``kpsc__cgmlst`` module performs core-genome MLST (cgMLST) allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_ and uses the **scgMLST629_S** scheme hosted on the Institut Pasteur BIGSdb instance.
+NOTE: KpSC cgMLST is only used by the module ``-m kpsc__cgmlst`` and preset ``-p kpsc``, so if you are not analysing *K. pneumoniae* species complex you don't need to do this step.
 
-This requires a local, indexed copy of the cgMLST scheme stored in kleborate module data directory. Please run the `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/development/kleborate/shared/setup_cgmlst.py>`_ script to download and index it:
+The ``kpsc__cgmlst`` module performs core-genome MLST (cgMLST) allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_ and uses the ``scgMLST629_S`` scheme hosted on the `Institut Pasteur BIGSdb instance <https://bigsdb.pasteur.fr/klebsiella/>`_.
+
+This requires a local, indexed copy of the cgMLST scheme to be stored in ``kleborate/modules/kpsc__cgmlst/data``. As the scheme is under license, we cannot distribute it with Kleborate, and you will need to download the latest version yourself. To simplify this, we have supplied the Python script `setup_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/development/kleborate/shared/setup_cgmlst.py>`_ download and index the scheme database:
 
 .. code-block:: bash
 
    python setup_cgmlst.py
 
 Prerequisites
-~~~~~~~~~~~~~~~~~~~~
-Before running the setup script, ensure the following tools are installed and available in your ``PATH``:
+--------------
+Before running the ``setup_cgmlst.py`` script, ensure the following tools are installed and available in your ``PATH``:
 
 * **MiST** (``mist``)
 * **bigsdb-downloader** (Required for authenticated Pasteur downloads: ``pip install bigsdb-downloader``)
 
 
 What the script does
-~~~~~~~~~~~~~~~~~~~~
-1. **Verifies Dependencies:** Confirms ``mist`` is accessible in your environment.
-2. Installs  ``bigsdb-downloader`` .
+--------------
+1. **Verifies Dependencies:** Confirms ``mist`` is accessible in your environment
+2. Installs ``bigsdb-downloader``
 3. Locates Kleborate data path (``kleborate/modules/kpsc__cgmlst/data``)
-4. Downloads the **scgMLST629_S** scheme from the Institut Pasteur BIGSdb instance:
+4. Downloads the ``scgMLST629_S`` scheme from the Institut Pasteur BIGSdb instance
    
   
 Download Modes
 --------------
 When running ``setup_cgmlst.py``, you will be prompted to select one of two download modes:
 
-1. **Standard download (Public)** Pulls scheme data without requiring login credentials.
+1. **Standard download (Public)** Pulls public scheme data (frozen on 2024-12-31) without requiring login credentials.
 2. **Latest Pasteur database (Authenticated)**
    Pulls the most up-to-date scheme data directly from Institut Pasteur and requires OAuth authentication. Uses the ``bigsdb_auth`` downloader with credentials stored in ``.bigsdb_tokens/``.
 
@@ -117,27 +122,29 @@ If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/acce
 
 Output Files
 ------------
-Upon completion, the following files will be downloaded inside the Kleborate data folder:
+Upon completion, the following files will be downloaded inside the target folder:
 
 * ``kleb_scgmlst_s/`` — Raw scheme FASTA alleles and ``profiles.tsv``.
 * ``kleb_scgmlst_s-index/`` — Indexed binary database used by ``mist`` during Kleborate runs.
 
 
 
-3. *E. coli* cgMLST Database (MiST)
+*E. coli* cgMLST Database (MiST)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The ``ecoli__cgmlst`` module performs core-genome MLST (cgMLST) allele uses the **Escherichia.cgMLSTv1** scheme hosted on EnteroBase.
+NOTE: E. coli cgMLST is only used by the module ``-m escherichia__cgmlst`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
 
-Run the ``setup_ecoli_cgmlst.py`` script to download and index the scheme:
+The ``escherichia__cgmlst`` module performs core-genome MLST (cgMLST) allele uses the **Escherichia.cgMLSTv1** scheme hosted on `EnteroBase <https://enterobase.warwick.ac.uk/species/index/ecoli>`_.
+
+Run the `setup_ecoli_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/development/kleborate/shared/setup_ecoli_cgmlst.py>`_ script to download and index the scheme:
 
 .. code-block:: bash
 
    python setup_ecoli_cgmlst.py
 
 Output Files
-~~~~~~~~~~~~
-The following files will be created inside ``ecoli__cgmlst/`` data folder:
+------------
+The following files will be created inside the ``kleborate/modules/ecoli__cgmlst/data`` folder:
 
 * ``ecoli_cgmlst_v1/`` — Raw scheme FASTA alleles and ``profiles.tsv``.
 * ``ecoli_cgmlst_v1-index/`` — Indexed binary database used by ``mist`` during allele calling.
@@ -145,16 +152,16 @@ The following files will be created inside ``ecoli__cgmlst/`` data folder:
 
 
 See also
---------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 * `BIGSdb_downloader Documentation <https://github.com/kjolley/BIGSdb_downloader>`_
 * `MiST Repository <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
-* `LINcodes <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
-* `Klebsiella LINcodes <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/Klebsiella-LINcodes-case-study>`_
+* `Inferring LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
+* `Inferring Klebsiella LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/Klebsiella-LINcodes-case-study>`_
 
 
 
 Test installation
-----------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To test that Kleborate is installed and working correctly, download the example genome assembly and run Kleborate using the  -p kpsc::
 
@@ -164,11 +171,13 @@ To test that Kleborate is installed and working correctly, download the example 
 If the installation is successful, the analysis should complete without errors and generate the expected output files.
 
 
-Additional test datasets are provided in::
+Additional *K. pneumoniae* test datasets are provided in::
 
    test/kpsc_test/data/
 
-You can use these datasets to further validate your installation
+You can use these datasets to further validate your installation::
+
+   kleborate -a test/kpsc_test/data/ -o kleborate_kpsc_test -p kpsc
 
 The generated output should match the corresponding reference files located in
 ``test/kpsc_test/example_output/``:
