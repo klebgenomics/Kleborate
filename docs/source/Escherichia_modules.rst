@@ -68,7 +68,7 @@ Output of the Achtman *E. coli* MLST module include the following columns:
 .. list-table::
    :header-rows: 0
 
-   * - ``ST``
+   * - ``ST_Achtman``
      - Sequence type
 
    * - ``adk``, ``fumC``, ``gyrB``, ``icd``, ``mdh``, ``purA``, ``recA``
@@ -80,7 +80,7 @@ Output of the Pasteur *E. coli* MLST module includes the following columns:
 .. list-table::
    :header-rows: 0
 
-   * - ``ST``
+   * - ``ST_Pasteur``
      - Sequence type.
 
    * - ``dinB``, ``icdA``, ``pabB``, ``polB``, ``putP``, ``trpA``, ``trpB``, ``uidA``
@@ -445,7 +445,7 @@ Typing of polyketide synthetase (pks) island
 
   -m escherichia__pks
 
-This module screens for the presence or absence of *clbB*, gene in the colibactin polyketide synthase (PKS) biosynthesis gene cluster, by aligning genome assemblies against `*clbB* reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_.
+This module screens for the presence or absence of *clbB*, gene in the colibactin polyketide synthase (PKS) biosynthesis gene cluster, by aligning genome assemblies against the *clbB* `reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_
 
 Parameters
 ++++++++++
