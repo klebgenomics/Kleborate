@@ -94,6 +94,6 @@ Summary of availabe modules and their output columns
    * - :ref:`escherichia__amr <escherichia__amr>`
      - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin, Methicillin, Other Classes
    * - :ref:`escherichia__cgMLST <escherichia__cgMLST>`
-     - cgST,LIN code,Sublineage,Clonal group
+     - cgST, LIN code, Sublineage, Clonal group
    * - :ref:`escherichia__kaptive <escherichia__kaptivet>`
-     - K_locus,K_type,K_locus_confidence,K_locus_problems,K_locus_identity,K_Missing_expected_genes
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes
