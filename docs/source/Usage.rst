@@ -6,9 +6,9 @@ Usage
 Input files
 -----------
 
-Genome assemblies in FASTA format (can be gzipped). 
+Genome assemblies in FASTA format, one per genome (can be gzipped, i.e. *.fasta.gz). 
 
-Can be either draft or completed assemblies (completed is better because it reduces the risk of fragmented genes/loci).
+These can be either draft or completed assemblies (completed is better because it reduces the risk of fragmented genes/loci), but there should be one genome per input FASTA file.
 
 
 Basic usage
@@ -30,7 +30,7 @@ Run with specified modules only, e.g. AMR typing for *K. pneumoniae* species com
 
 .. code-block:: Python
 
-   kleborate -a *.fasta -o kleborate_results -m klebsiella_pneumo_complex__amr
+   kleborate -a *.fasta -o kleborate_results -m kpsc__amr
 
 (A list of modules is available via ```kleborate --list_modules``` or `here <https://kleboratemodular.readthedocs.io/en/latest/modules.html>`_)
 
@@ -42,7 +42,7 @@ Run with preset modules for *K. oxytoca* species complex
    kleborate -a *.fasta -o kleborate_results -p kosc --trim_headers
 
 
-Run with preset modules for *E. coli* or other *Escherichia*, on gzipped assemblies:
+Run with preset modules for *E. coli*, *Shigella* or other *Escherichia*, on gzipped assemblies:
 
 .. code-block:: Python
 
@@ -60,7 +60,7 @@ Check available modules, check version, print help:
 Output files
 --------------------
 
-Output files are tab-delimited (.txt) files, named in the format: 
+Output files printed to ``outdir/`` are tab-delimited (.txt) files, named in the format: 
 
     klebsiella_pneumo_complex_output.txt - Main Kleborate results
 
@@ -68,7 +68,7 @@ Output files are tab-delimited (.txt) files, named in the format:
 
     klebsiella_pneumo_complex_genotype_spec.txt – Genotype results formatted according to the PHA4GE genotype specification format
 
-Columns included in each output file will depend on the modules that are run; essentially each module creates a set of results columns that are added to the output file for the relevant species/complex. By default, each column name is preprended with the name of the module that generated it. This can be turned off using --trim_headers when running kleborate, or these column headers can be stripped off later using the trim_headers.py script.
+Columns included in each output file will depend on the modules that are run; essentially each module creates a set of results columns that are added to the output file for the relevant species/complex. By default, each column name is preprended with the name of the module that generated it. This can be turned off using ``--trim_headers`` when running kleborate, or these column headers can be stripped off later using the ``trim_headers.py`` helper script.
 
 
 Parameters
@@ -99,13 +99,13 @@ Parameters
 .. list-table::
 
    * - kpsc
-     - *Klebsiella pnuemoniae* species complex
+     - *Klebsiella pneumoniae* species complex
 
    * - kosc
      - *Klebsiella oxytoca* species complex
                                         
    * - escherichia 
-     - *Escherichia* genus
+     - *Escherichia* genus, including Shigella
 
 ``--list_modules``         
     Print a list of all available modules and then quit (default: False)
