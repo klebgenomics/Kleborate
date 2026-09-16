@@ -171,11 +171,7 @@ To test that Kleborate is installed and working correctly, download the example 
 If the installation is successful, the analysis should complete without errors and generate the expected output files.
 
 
-Additional *K. pneumoniae* test datasets are provided in::
-
-   test/kpsc_test/data/
-
-You can use these datasets to further validate your installation::
+Additional *K. pneumoniae* test datasets are provided to further validate your installation::
 
    kleborate -a test/kpsc_test/data/ -o kleborate_kpsc_test -p kpsc
 
