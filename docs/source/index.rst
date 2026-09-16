@@ -17,7 +17,9 @@
 Introducing Kleborate v3
 ########################
 
-Kleborate was initially developed to type genome assemblies of *Klebsiella pneumoniae* and the *Klebsiella pneumoniae* species complex (KpSC). `Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ introduces a new modular structure, including new modules for typing the *Klebsiella oxytoca* species complex (KoSC) and *Escherichia coli*.
+Kleborate was initially developed to type genome assemblies of *Klebsiella pneumoniae* and the *Klebsiella pneumoniae* species complex (KpSC), see `Lam et al, 2021 <https://doi.org/10.1038/s41467-021-24448-3>`_. 
+
+`Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ introduces enhanced and expanded functionality for KpSC, plus new modules for typing the *Klebsiella oxytoca* species complex (KoSC) and *Escherichia coli*.
 
 Typing modules for the *Klebsiella pneumoniae*\  species complex cover:
 ----------
@@ -59,12 +61,13 @@ Typing modules for *E. coli*\  cover:
 Tutorial
 --------
 
-A step-by-step tutorial for Kleborate v3 is available at `kleborate-workshop <https://docs.google.com/document/d/1R61bQbBngpiDB2Gl_eXigePBVakYZEjy/edit>`_, covering:
-
+A step-by-step tutorial for Kleborate v3 is available `here <https://docs.google.com/document/d/1R61bQbBngpiDB2Gl_eXigePBVakYZEjy/edit>`_, covering:
 
 * Kleborate's features and their scientific rationale
 * How to run Kleborate 
 * Examples, illustrating how to run and interpret results
+
+Note this was developed for v3.0 and will be updated soon.
 
 
 License
@@ -76,9 +79,11 @@ License
 Citations
 ----------
 
-**For KpSC typing please cite the primary Kleborate paper**: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://www.nature.com/articles/s41467-021-24448-3>`_
+**The primary citation for Kleborate is**: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for *Klebsiella pneumoniae* and its related species complex, *Nature Communications* (2021). `<https://doi.org/10.1038/s41467-021-24448-3>`_
 
-Depending on which typing results you use, you should also cite the corresponding tools/databases on which Kleborate relies:
+Depending on which typing results you use, you should also cite the relevant third-party tools/databases on which Kleborate relies, as listed below.
+
+**For KpSC typing**:
 
 * **K or O serotypes:** Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
@@ -102,7 +107,9 @@ Depending on which typing results you use, you should also cite the correspondin
 
 * **rmp status (promoter ARG box):** Ryan, B. E., et al. Arginine regulates the mucoid phenotype of hypervirulent *Klebsiella pneumoniae*. *Nature Communications* (2025). `<https://doi.org/10.1038/s41467-025-61047-y>`_
 
-**For KoSC typing please cite the following, depending on which results you use**:
+* **Ciprofloxacin resistance prediction:** Tsang, KK. et al. Ciprofloxacin resistance in *Klebsiella pneumoniae*: phenotype prediction from genotype and global distribution of resistance determinants *BioRxiv* (2025). `<https://doi.org/10.1101/2025.09.24.678318>`_
+
+**For KoSC typing**:
 
 * **K or O serotyping (software):** Stanton, TD. et al. Fast and accurate in silico antigen typing with Kaptive 3, *Microbial Genomics* (2025). `<https://doi.org/10.1099/mgen.0.001428>`_
 
@@ -110,7 +117,7 @@ Depending on which typing results you use, you should also cite the correspondin
 
 * **MLST scheme:** Jolley et al. Open-access bacterial population genomics: BIGSdb software, the PubMLST.org website and their applications *Wellcome Open Res* (2018). `<https://doi.org/10.12688/wellcomeopenres.14826.1>`_
 
-**For Escherichia typing please cite the following, depending on which results you use**:
+**For Escherichia typing**:
 
 * **MLST (7-locus) scheme:** Wirth, T. et al. Sex and virulence in *Escherichia coli*: an evolutionary perspective, *Molecular Microbiology* (2006). `<https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_
 
