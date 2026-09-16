@@ -118,23 +118,27 @@ Kaptive results are output in the following columns:
 
    * - Column Name
      - Description
-   * - Best match locus
-     - The locus type which most closely matches the assembly.
-   * - Best match type
-     - The predicted serotype/phenotype of the assembly.
-   * - Match confidence
+   * - K_locus
+     - The K locus type which most closely matches the assembly.
+   * - K_type
+     - The predicted capsule serotype/phenotype of the assembly.
+   * - K_locus_confidence
      - Typeable or Untypeable.
-   * - Problems
-     - Characters indicating issues with the locus match (see problems).
-   * - Identity
-     - Weighted percent identity of the best matching locus to the assembly.
-   * - Coverage
-     - Weighted percent coverage of the best matching locus in the assembly.
-   * - Length discrepancy
-     - If the locus was found in a single piece, this is the difference between the locus length and the assembly length.
-   * - Expected genes in locus
-     - A fraction indicating how many of the genes in the best matching locus were found in the locus part of the assembly.
-   * - Expected genes in locus, details
-     - Gene names for the expected genes found in the locus part of the assembly.
-   * - Missing expected genes
-     - A string listing the gene names of expected genes that were not found.
+   * - K_locus_problems
+     - Characters indicating issues with the K locus match (see problems).
+   * - K_locus_identity
+     - Weighted percent identity of the best matching K locus to the assembly.
+   * - K_Missing_expected_genes
+     - A string listing the gene names of expected K locus genes that were not found.
+   * - O_locus
+     - The O locus type which most closely matches the assembly.
+   * - O_type
+     - The predicted O antigen serotype/phenotype of the assembly.
+   * - O_locus_confidence
+     - Typeable or Untypeable.
+   * - O_locus_problems
+     - Characters indicating issues with the O locus match (see problems).
+   * - O_locus_identity
+     - Weighted percent identity of the best matching O locus to the assembly.
+   * - O_Missing_expected_genes
+     - A string listing the gene names of expected O locus genes that were not found.
