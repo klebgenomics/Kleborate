@@ -11,7 +11,7 @@ Species detection
 ``-m enterobacterales__species``
 
 
-This module will attempt to identify the species of each input assembly. It does this by comparing the assembly using `Mash <https://mash.readthedocs.io/>`_ to a curated set of *Klebsiella* and other *Enterobacteriaceae* assemblies from NCBI, and reporting the species of the closest match. 
+This module will attempt to identify the species of each input assembly. It does this by comparing the assembly using `Mash <https://mash.readthedocs.io/>`_ to a curated set of *Klebsiella* and other *Enterobacteriaceae* assemblies from NCBI, and reporting the species of the closest match (see details in `this paper <https://doi.org/10.1038/s41467-021-24448-3>`_). 
 
 Parameters
 ++++++++++++++++++
@@ -37,11 +37,11 @@ Output of the species typing module is the following columns:
    * - species_match
      - Strength of the species call indicated as ``strong``\  (Mash distance ≤ 0.02) or ``weak``\  (Mash distance of > 0.02 and ≤ 0.04, may be novel or hybrid species)
 
-The quality and completeness of Kleborate results depends on the quality of the input genome assemblies. In general, you can expect good results from draft genomes assembled with tools like SPAdes from high-depth (>50x) Illumina data, however it is always possible that key genes subject to genotyping may be split across contigs, which can create problems for detecting and typing them accurately.
-
 
 Contig stats
 ------------
+
+The quality and completeness of Kleborate results depends on the quality of the input genome assemblies. In general, you can expect good results from draft genomes assembled with tools like SPAdes from high-depth (>50x) Illumina data, however it is always possible that key genes subject to genotyping may be split across contigs, which can create problems for detecting and typing them accurately. Therefore checking genome assembly quality metrics is important.
 
 .. _contig_stats:
 
@@ -49,14 +49,9 @@ Contig stats
 
    -m general__contig_stats
 
-This module takes ``enterobacterales__species`` as a prerequisite and  generates some basic assembly statistics to help users understand their typing results in the context of assembly quality, although we recommend users conduct more comprehensive QC themselves before typing genomes (e.g. screen for contamination, etc).
+This module generates some basic assembly statistics and compares them to the species-specific thresholds from `Qualibact <https://qualibact.org/species/>`_ to assess assembly quality (based on the species call reported by the module ``enterobacterales__species``, which is a prerequisite). The ``QC_warnings``\  column flags an assemblies that falls outside those specified thresholds, or if ambiguous bases (Ns) are detected in the sequence.
 
-The module reports a standard set of assembly quality metrics (see Outputs below).
-
-Kleborate uses species-specific thresholds from `Qualibact <https://qualibact.org/species/>`_ to assess assembly quality. The expected ranges for genome size, contig count, N50 and G+C content are stored in the ``species_specification.txt``\  in the module directory
-
-
-The ``QC_warnings``\  column flags an assemblies that falls outside those specified thresholds, or if ambiguous bases (Ns) are detected in the sequence.
+This module is included to help users understand their typing results in the context of assembly quality, although we recommend users conduct more comprehensive QC themselves before typing genomes (e.g. read-based analysis, screen for contamination, etc).
 
 Outputs
 +++++++
