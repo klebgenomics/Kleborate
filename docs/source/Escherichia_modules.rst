@@ -174,9 +174,9 @@ How it works
 
 This module classifies *E. coli* genomes into DEC pathotypes based on the presence or absence of virulence marker genes using a curated database `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ DB.  Input assemblies are aligned to the database using Minimap2, and Kleborate assigns pathotypes based on logic adapted from `EnteroBase <https://enterobase.readthedocs.io/en/latest/pipelines/backend-pipeline-phylotypes.html?highlight=pathovar/>`_.
 
-Additionally, Kleborate uses`ShigaPass <https://github.com/imanyass/ShigaPass>`_  to predict Shigella serotypes.
+The module also calls `ShigaPass <https://github.com/imanyass/ShigaPass>`_ to predict Shigella serotypes, and to differentiate *Shigella* from enteroinvasive *Escherichia coli* (EIEC).
 
-All reference sequences and marker definitions used by this module are included in the **/data**  directory of this module.
+The reference database used by this module is included in the **/data**  directory.
 
 
 *E. coli* Pathovar parameters
@@ -203,6 +203,9 @@ Minimum alignment percent coverage for pathotype (default: 80.0).
 
    * - ``Stx1``, ``Stx2``, ``ST``, ``LT``, ``eae``, ``ipaH``
      - Virulence markers
+
+
+Additionally, Kleborate includes a separate ``escherichia__vfdb`` module that screens *E. coli* genome assemblies against the `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ database (VFDB) to detect the presence or absence virulence marker genes.
 
 
 .. _escherichia__mlst_lee:
@@ -435,14 +438,14 @@ Outputs
 
 .. _escherichia__pks:
 
-pks typing
-^^^^^^^^^^
+Typing of polyketide synthetase (pks) island 
+----------------------------------------------
 
 .. code-block:: bash
 
   -m escherichia__pks
 
-This module checks for the presence/absence of the *clbB* gene (part of the colibactin polyketide biosynthesis gene cluster) by aligning genome assemblies against the `reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_.
+This module screens for the presence or absence of *clbB*, gene in the colibactin polyketide synthase (PKS) biosynthesis gene cluster, by aligning genome assemblies against `*clbB* reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_.
 
 Parameters
 ++++++++++
@@ -550,17 +553,17 @@ Results of the *Escherichia* AMR module are grouped by drug class:
 
 .. _escherichia__cgMLST:
 
-Escherichia cgMLST 
-----------------
+*Escherichia* cgMLST 
+------------------
 .. code-block:: Python
 
    -m escherichia__cgMLST
 
-This module performs cgMLST allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
+This module performs cgMLST and  LIN code typing using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
 
 
 cgMLST outputs
-
+++++++++++++++++++
 cgMLST results are output in the following columns:
 
 .. list-table::
@@ -585,14 +588,14 @@ cgMLST results are output in the following columns:
 
 .. _escherichia__kaptive:
 
-Typing of E. coli Group 2 and 3 CPS with Kaptive
------------------------------------------
+Typing of *E. coli* Group 2 and 3 CPS with Kaptive
+-------------------------------------------------
 
 .. code-block:: Python
 
    -m escherichia__kaptive
 
-This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
+This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to type *E. coli* group 2 and group 3 capsular (K) loci. See the `capsular K-typing database <https://github.com/rgladstone/EC-K-typing>`_ for more details.
 
 
 Kaptive parameters
@@ -601,8 +604,6 @@ Kaptive parameters
 ``--ecoli_kps``
 
 Group 2 + 3 CPS database 
-
-
 
 
 Kaptive outputs
@@ -615,24 +616,16 @@ Kaptive results are output in the following columns:
 
    * - Column Name
      - Description
-   * - Best match locus
+   * - K_locus
      - The locus type which most closely matches the assembly.
-   * - Best match type
+   * - K_type
      - The predicted serotype/phenotype of the assembly.
-   * - Match confidence
+   * - K_locus_confidence
      - Typeable or Untypeable.
-   * - Problems
+   * - K_locus_problems
      - Characters indicating issues with the locus match (see problems).
-   * - Identity
+   * - K_locus_identity
      - Weighted percent identity of the best matching locus to the assembly.
-   * - Coverage
-     - Weighted percent coverage of the best matching locus in the assembly.
-   * - Length discrepancy
-     - If the locus was found in a single piece, this is the difference between the locus length and the assembly length.
-   * - Expected genes in locus
-     - A fraction indicating how many of the genes in the best matching locus were found in the locus part of the assembly.
-   * - Expected genes in locus, details
-     - Gene names for the expected genes found in the locus part of the assembly.
-   * - Missing expected genes
-     - A string listing the gene names of expected genes that were not found.
+   * - K_Missing_expected_genes
+     - Missing expected genes in the locus
 
