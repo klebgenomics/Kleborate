@@ -14,9 +14,7 @@ Modules
    Escherichia_modules
 
 
-Kleborate v3 includes a range of modules for typing bacterial genomes, most of which are specific to a particular species or complex (*Klebsiella pneumoniae SC*, *Klebsiella oxytoca SC*, *Escherichia coli*). We therefore recommend specifying ``-p`` (*kpsc*, *kosc*, *escherichia*) or ``-m`` (list of modules to run based on the organism). This will run the species detection module first, and if the species matches that specified in --preset, the preset modules for that species will be run (if not, the species will be reported and the remaining fields will be blank). 
-
-
+Kleborate v3 includes a range of modules for typing bacterial genomes, most of which are specific to a particular species or complex (currently *Klebsiella pneumoniae* species complex, *Klebsiella oxytoca* species complex, *Escherichia coli/Shigella*). We therefore recommend specifying ``--preset`` (*kpsc*, *kosc*, *escherichia*) or ``--modules`` (list of modules to run based on the organism). This will run the species detection module first, and if the species matches the expected preset or module, the modules will be run (if a different species is called, Kleborate will report the species but no further typing will be conducted and the remaining fields will be blank).
 
 
 **Kleborate modules are divided into:**
@@ -24,7 +22,7 @@ Kleborate v3 includes a range of modules for typing bacterial genomes, most of w
 1. General Modules
 2. Modules for *Klebsiella pneumoniae* species complex
 3. Modules for *Klebsiella oxytoca* species complex
-4. Modules for *Escherichia* *coli* 
+4. Modules for *Escherichia coli/Shigella* 
 
 
 Summary of availabe modules and their output columns
@@ -41,7 +39,7 @@ Summary of availabe modules and their output columns
      - species, species_match
    * - :ref:`general__contig_stats <contig_stats>`
      - contig_count, N50, largest_contig, total_size, ambiguous_bases, QC_warnings
-   * - :ref:`kpsc__mlst <_kpsc_mlst>`
+   * - :ref:`kpsc__mlst <kpsc_mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
    * - :ref:`klebsiella__ybst <klebsiella__ybst>`
      - YbST, Yersiniabactin, ybtS, ybtX, ybtQ, ybtP, ybtA, irp2, irp1, ybtU, ybtT, ybtE, fyuA
