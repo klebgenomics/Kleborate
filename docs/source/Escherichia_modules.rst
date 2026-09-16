@@ -21,14 +21,12 @@ These modules will be deployed if the ``enterobacterales__species``\   module co
 
    -m escherichia__mlst_achtman, escherichia__mlst_pasteur
 
-Genomes identified as belonging to the *Escherichia* genus are subjected to MLST using Achtman 7-locus schemes.
-
-The Achtman scheme is hosted on `EnteroBase <https://enterobase.warwick.ac.uk/>`_.
+The Achtman scheme is hosted on `EnteroBase <https://enterobase.warwick.ac.uk/>`_ and described in `this paper <https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_.
 
 We also provide an option for users to run MLST using Pasteur scheme by running:
 ``-m escherichia__mlst_pasteur``
 
-The Pasteur scheme is described in the *Escherichia coli* Database maintained by the `Pasteur Institute <https://bigsdb.pasteur.fr/ecoli/>`_. For more information and references, `see BIGSdb <https://bigsdb.pasteur.fr/ecoli/references/>`_.
+The Pasteur scheme is hosted in the BIGSdb-Pasteur *Escherichia coli* `database <https://bigsdb.pasteur.fr/ecoli/>`_ and described in `this paper <https://doi.org/10.1186/1471-2164-9-560>`_.
 
 The genes included in each scheme are noted in the Outputs table below.
 
@@ -93,7 +91,7 @@ Notes
 
 * Kleborate attempts to report the closest matching ST if a precise match is not found.
 * Imprecise allele matches are indicated with a ``*``.
-* Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that differ from the ST reported. For example, ``258-1LV`` indicates a single-locus variant (SLV) of ST258, i.e. 6/7 loci match ST258.
+* Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that differ from the ST reported. For example, ``131-1LV`` indicates a single-locus variant (SLV) of ST131, i.e. 6/7 loci match ST131.
 
 
 .. _escherichia__pathovar:
