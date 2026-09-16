@@ -19,7 +19,7 @@ Introducing Kleborate v3
 
 Kleborate was initially developed to type genome assemblies of *Klebsiella pneumoniae* and the *Klebsiella pneumoniae* species complex (KpSC), see `Lam et al, 2021 <https://doi.org/10.1038/s41467-021-24448-3>`_. 
 
-`Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ introduces enhanced and expanded functionality for KpSC, plus new modules for typing the *Klebsiella oxytoca* species complex (KoSC) and *Escherichia coli*.
+`Kleborate v3 <https://github.com/klebgenomics/Kleborate>`_ introduces enhanced and expanded functionality for KpSC, plus new modules for typing the *Klebsiella oxytoca* species complex (KoSC) and *Escherichia coli/Shigella*.
 
 Typing modules for the *Klebsiella pneumoniae*\  species complex cover:
 ----------
@@ -48,7 +48,7 @@ Typing modules for the *Klebsiella oxytoca*\  species complex cover:
 * K (capsule) and O antigen (LPS) serotype prediction
 
 
-Typing modules for *E. coli*\  cover:
+Typing modules for *E. coli/Shigella*\  cover:
 ----------
 
 * Pathotyping, Shigella speciation, and phylogroup assignment
