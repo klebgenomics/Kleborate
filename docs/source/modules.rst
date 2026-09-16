@@ -68,7 +68,7 @@ Summary of availabe modules and their output columns
    * - :ref:`kpsc__wzi <kpsc__wzi>`
      - wzi allele
    * - :ref:`kpsc__kaptive <kpsc__kaptive>`
-     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, K_Database_name, K_Database_version, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes, O_Database_name, O_Database_version, Kaptive version
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes,O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes
    * - :ref:`kpsc__cgMLST <kpsc__cgMLST>`
      - cgST, LIN code, Sublineage, Clonal group
    * - :ref:`kpsc__mrk <kpsc__mrk>`
@@ -76,7 +76,7 @@ Summary of availabe modules and their output columns
    * - :ref:`kosc__mlst <kosc__mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
    * - :ref:`kosc__kaptive <kosc__kaptive>`
-     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, K_Database_name, K_Database_version, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes, O_Database_name, O_Database_version, Kaptive version
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes
    * - :ref:`escherichia__mlst_pasteur <escherichia__mlst_achtman>`
      - ST, dinB, icdA, pabB, polB, putP, trpA, trpB, uidA
    * - :ref:`escherichia__mlst_achtman <escherichia__mlst_achtman>`
@@ -93,3 +93,7 @@ Summary of availabe modules and their output columns
      - Clermont_type, Clermont_profile
    * - :ref:`escherichia__amr <escherichia__amr>`
      - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin, Methicillin, Other Classes
+   * - :ref:`escherichia__cgMLST <escherichia__cgMLST>`
+     - cgST,LIN code,Sublineage,Clonal group
+   * - :ref:`escherichia__kaptive <escherichia__kaptivet>`
+     - K_locus,K_type,K_locus_confidence,K_locus_problems,K_locus_identity,K_Missing_expected_genes
