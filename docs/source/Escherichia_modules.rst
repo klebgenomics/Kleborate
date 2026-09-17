@@ -103,7 +103,7 @@ Notes
 
    -m escherichia__pathovar
 
-*Escherichia coli* is broadly divided into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC). DEC encompasses several clinically relevant pathotypes: enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see paper <https://doi.org/10.3389/fcimb.2016.00141>`_. Additionally, *Shigella* is considered a DEC pathotype due to its genetic and pathogenetic similarity to EIEC, see `paper <https://doi.org/10.1128/mbio.00882-23>`_.
+*Escherichia coli* is broadly divided into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC). DEC encompasses several clinically relevant pathotypes: enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) see `paper <https://doi.org/10.3389/fcimb.2016.00141>`_. Additionally, *Shigella* is considered a DEC pathotype due to its genetic and pathogenetic similarity to EIEC, see `paper <https://doi.org/10.1128/mbio.00882-23>`_.
 
 The majority of DEC pathotypes are defined by specific virulence markers. However, for EAEC, DAEC and AIEC, the pathogenic role of proposed markers is not well established. 
 
@@ -178,7 +178,6 @@ The combination of marker genes detected are then used to classify genomes into 
 *E. coli* Pathovar parameters
 ++++++++++++++++++++++++++++++++++
 
- 
 ``--escherichia__pathovar_min_identity``
 
 Minimum alignment percent identity for pathotype (default: 90.0).
@@ -213,13 +212,13 @@ Typing the LEE pathogenicity island of *E. coli*
 
    -m escherichia__mlst_lee
 
-Locus of enterocyte effacement (LEE) is a ~40 kb chromosomal pathogenicity island composed of 41 core genes organized into five operons  `Elliot et al., 1998 <https://onlinelibrary.wiley.com/doi/10.1046/j.1365-2958.1998.00783.x>`_. It encodes an (i) outer membrane adhesive protein, known as intimin protein that encodes eae gene (ii) type III secretion system (T3SS), and (iii) translocated receptor (Tir) as well as translocons, chaperones, regulators and secreted effector proteins that are linked to virulence.
+Locus of enterocyte effacement (LEE) is a ~40 kb chromosomal pathogenicity island composed of 41 core genes organized into five operons  `Elliot et al., 1998 <https://onlinelibrary.wiley.com/doi/10.1046/j.1365-2958.1998.00783.x>`_. It encodes an (i) outer membrane adhesive protein, known as intimin protein and encoded by the _eae_ gene; (ii) type III secretion system (T3SS), and (iii) translocated receptor (Tir) as well as translocons, chaperones, regulators and secreted effector proteins that are linked to virulence.
 
-Kleborate includes a module for subtyping of the LEE pathogenicity island. Details of the LEE subtypes and lineages can be found in this `Nature Microbiology paper <https://www.nature.com/articles/nmicrobiol201510>`_.
+Kleborate includes a module for subtyping of the LEE pathogenicity island. Details of the the scheme, and the LEE subtypes and lineages it identifies, can be found in this `paper <https://doi.org/10.1038/nmicrobiol.2015.10>`_.
 
 The LEE typing database is based on analysis of >250 LEE-containing *E. coli* genomes and includes 7 loci (eae (intimin), tir, espA, espB, espD, espH, espZ). The data is provided as a MLST-style database, in which combinations of alleles are assigned to a LEE subtype, to facilitate a common nomenclature for LEE subtypes. Each sequence in the database represents a cluster of closely related alleles that have been assigned to the same locus type. The LEE scheme includes three distinct lineages: Lineage 1 consists of LEE subtypes 1-2; Lineage 2 consists of LEE subtypes 3-8; Lineage 3 consists of LEE subtypes 9-30.
 
-The reference sequences and  MLST-style profile definitions are included in the **/data**  directory of this module.
+The reference sequences and MLST-style profile definitions are included in the ``data/``  directory of this module.
 
 
 Parameters
@@ -274,9 +273,9 @@ Stxtyper
 
    -m escherichia__stxtyper
 
-Shiga toxins (Stxs) are key virulence factors of Stx-producing *Escherichia coli* (STEC). They are also found in *Shigella dysenteriae 1*. Stxs belong to the AB-type toxin family and are divided into two antigenically distinct groups: Stx1 and Stx2. Each group contains several variants/subtypes—six for Stx1 (a, b, c, d, e, f) and seven for Stx2 (a, b, c, d, e, f, and g) [`Yano et al., 2023 <https://www.nature.com/articles/s41598-023-32111-8>`_, `Melton-Celsa, 2014 <https://pmc.ncbi.nlm.nih.gov/articles/PMC4270005/>`_]. These toxins are encoded by lysogenic bacteriophages (Stx phage) and STEC strains may produce either single Stx subtype or a combination of subtypes.
+Shiga toxins (Stxs) are key virulence factors of Stx-producing *Escherichia coli* (STEC). They are also found in *Shigella dysenteriae 1*. Stxs belong to the AB-type toxin family and are divided into two antigenically distinct groups: Stx1 and Stx2. Each group contains several variants/subtypes—six for Stx1 (a, b, c, d, e, f) and seven for Stx2 (a, b, c, d, e, f, and g) (`Yano et al., 2023 <https://doi.org/10.1038/s41598-023-32111-8>`_, `Melton-Celsa, 2014 <https://doi.org/10.1128/microbiolspec.EHEC-0024-2013>`_). These toxins are encoded by lysogenic bacteriophages (Stx phage) and STEC strains may produce either single Stx subtype or a combination of subtypes.
 
-This module will run StxTyper to determine the stx type. See the `StxTyper documentation <https://github.com/ncbi/stxtyper>`_ for more details of how it works.
+This module will run `StxTyper <https://doi.org/10.3390/microorganisms14081607>` to determine the _stx_ type. See the `StxTyper documentation <https://github.com/ncbi/stxtyper>`_ for more details of how it works.
 
 
 StxTyper Outputs
@@ -351,7 +350,7 @@ H antigens
 H antigens (flagellar) are surface proteins composed of repeated molecules of the protein flagellin, which facilitate bacterial motility. These antigens are numbered from H1 to H56 (H13, H22, and H50 are not used) and are distinct from the O and K antigens. Flagellin is encoded by the fliC gene on the chromosomal locus or its homologues (non-fliC flagellin-coding genes such as flkA, fllA, and flmA). Of the 53 well known H antigen types, 44 are conferred by expression of the fliC gene,  the remaining 9 H types are  encoded by non-fliC flagellin genes. Specifically H3, H35, H36, H47,and H53 are encoded by flkA, H44 and H55 by fllA, H54 by flmA, and H17 by flnA.
 
 
-Kleborate uses ECTyper for in silico serotyping. See `ECTyper paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC8767331/>`_. for more details 
+Kleborate uses ECTyper for in silico serotyping. See `ECTyper paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC8767331/>`_ for more details.
 
 Outputs
 +++++++
@@ -408,7 +407,7 @@ ClermonTyping
 
 The *Escherichia* genus comprises several clades, including *Escherichia albertii*, *E. fergusonii*, five cryptic *Escherichia* clades (I–V) and *E. coli* sensu stricto. Within *E. coli*, strains can be further divided into seven main phylogroups: A, B1, B2, C, D, E and F. 
 
-Kleborate assigns genomes to these phylogroups and clades using `EzClermont tool <https://pmc.ncbi.nlm.nih.gov/articles/PMC7656184/>`_, which is based on in vitro PCR assay logic.
+Kleborate assigns Escherichia genomes to these clades and phylogroups using `EzClermont tool <https://doi.org/10.1099/acmi.0.000143>`_, which is based on *in vitro* PCR assay logic.
 
 
 Parameters
@@ -434,14 +433,14 @@ Outputs
 
 .. _escherichia__pks:
 
-Typing of polyketide synthetase (pks) island 
+Typing of polyketide synthetase (*pks*) island 
 ----------------------------------------------
 
 .. code-block:: bash
 
   -m escherichia__pks
 
-This module screens for the presence or absence of *clbB*, gene in the colibactin polyketide synthase (PKS) biosynthesis gene cluster, by aligning genome assemblies against the *clbB* `reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_
+This module screens for the presence or absence of *clbB*, gene in the colibactin polyketide synthase (PKS) biosynthesis gene cluster, by aligning genome assemblies against the *clbB* `reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_.
 
 Parameters
 ++++++++++
@@ -475,15 +474,15 @@ pks Outputs
    -m escherichia__amr
 
 
-This module screens input genomes for acquired antimicrobial resistance genes and known resistance-associated point mutations using the `AMRFinderPlus tool <https://www.nature.com/articles/s41598-021-91456-0/>`_ . Identified determinants are grouped by drug class.
+This module screens input genomes for acquired antimicrobial resistance genes and known resistance-associated point mutations using the `AMRFinderPlus tool <https://doi.org/10.1038/s41598-021-91456-0>`_. Identified determinants are grouped by drug class.
 
 
 AMR parameters
 ++++++++++++++++++
 
-``--organism`` 
+``--organism``
 
-Used to screen for point mutations in species-specific resistance markers.
+Used to screen for point mutations in species-specific resistance markers (default Escherichia coli).
 
 ``-t , --threads`` 
 
