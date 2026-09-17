@@ -372,6 +372,14 @@ The ``klebsiella__rmst`` module screens for *rmpADC* and will report a sequence 
 rmp status
 +++++++++++++++++++++++++++
 
+When a *rmp* locus is detected, Kleborate runs additional checks for phase variation and known *rmpA* promoter mutations, to provide additional information as to the likely expression status of the locus and its associated hypermucoidy phenotype.
+
+First we check for reversible (i.e. phase-variable) mutations in poly-nucleotide tracts within each open reading frame (ORF). If one is found, the corresponding gene field and the ``RmpADC_Status`` field is labelled as ``OFF``, based on `this paper <https://doi.org/10.1101/2025.09.12.675794>`. If all component ORFs are present and intact, the status is annotated as ``ON``, and if all component ORFs are present but one or more is ``OFF``, the status is annotated as ``OFF``. If any ORF is missing, the status is annotated as ``-`` and the ``RmpADC`` field is labelled ``(partial)``. The status of individual *rmp* genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). 
+
+Next we check the *rmpA* promoter, for reversible variation in the poly-T tract located 40 bp upstream of the start codon and for presence of the ARG box. If the poly tract length is less than 11T, the promoter and status fields are labelled as ``reduced`` to indicate reduced expression is expected, based on `this paper <https://doi.org/10.1101/2025.09.12.675794>`_. The label ``untypeable promoter`` indicates the length of the poly-T tract could not be determined (this usually means it is affected by a deletion or a contig break in the assembly). The label ``ARG-box lost`` indicates that the expected ARG box sequence (ATTGAATTTTTATTCATT) could not be identified within 150 bp upstream of *rmpA*, which may result in `dysregulation <https://doi.org/10.1038/s41467-025-61047-y>`. The presence/absence/truncation of *argR* is also reported, based on screening for the *argR* sequence of the KPPR1 reference genome.
+
+The *rmpA2* gene is homologous to *rmpA*, and the klebsiella__rmpa2 module screens for alleles of *rmpA2*.
+
 
 Note:
 ^^^^^^^^
