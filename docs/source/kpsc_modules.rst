@@ -125,6 +125,8 @@ Output of the KpSC MLST module is the following columns:
 * Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that disagree with the ST reported. So ``258-1LV`` indicates a single-locus variant (SLV) of ST258, i.e. 6/7 loci match ST258.
 
 
+.. _kpsc_virulence:
+
 KpSC virulence modules
 ----------------------
 
