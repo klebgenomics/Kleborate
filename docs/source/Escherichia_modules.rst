@@ -14,7 +14,7 @@ These modules will be deployed if the ``enterobacterales__species``\   module co
 
 .. _escherichia__mlst_pasteur:
 
-*E. coli* MLST
+MLST
 ------------
 
 .. code-block:: Python
@@ -33,7 +33,7 @@ The genes included in each scheme are noted in the Outputs table below.
 A copy of the MLST alleles and ST definitions used in each module is stored in the ``data/``  directory of the module.
 
 
-*E. coli* MLST parameters
+Parameters
 +++++++++++++++++++++++++++
 
 ``--escherichia_mlst_achtman_min_identity`` 
@@ -60,7 +60,7 @@ Minimum alignment percent coverage for Escherichia-Pasteur MLST (default: 80.0)
 
 Minimum number of exact allele matches required to call an ST (default: 4).
 
-*E. coli* MLST outputs
+Outputs
 ++++++++++++++++++++++
 
 Output of the Achtman *E. coli* MLST module include the following columns:
@@ -68,17 +68,23 @@ Output of the Achtman *E. coli* MLST module include the following columns:
 .. list-table::
    :header-rows: 0
 
+   * - **Column name**
+     - **Content**
+
    * - ``ST_Achtman``
      - Sequence type
 
    * - ``adk``, ``fumC``, ``gyrB``, ``icd``, ``mdh``, ``purA``, ``recA``
-     - Allele numbers for the Achtman scheme loci.
+     - Allele numbers for the Achtman scheme loci
 
 
 Output of the Pasteur *E. coli* MLST module includes the following columns:
 
 .. list-table::
    :header-rows: 0
+
+   * - **Column name**
+     - **Content**
 
    * - ``ST_Pasteur``
      - Sequence type.
@@ -94,9 +100,85 @@ Notes
 * Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that differ from the ST reported. For example, ``131-1LV`` indicates a single-locus variant (SLV) of ST131, i.e. 6/7 loci match ST131.
 
 
+.. _escherichia__cgMLST:
+
+cgMLST and LIN codes
+------------------
+
+.. code-block:: Python
+
+   -m escherichia__cgMLST
+
+This module performs cgMLST and  LIN code typing using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
+
+
+Outputs
+++++++++++++++++++
+cgMLST results are output in the following columns:
+
+.. list-table::
+   :header-rows: 1
+
+   * - **Column name**
+     - **Content**
+
+   * - cgST
+     - Best matching scgST
+
+   * - LIN code
+     - LIN code / Partial LINcode for input strain
+
+   * - Sublineage
+     - Sublineage for input strain
+
+   * - Clonal group
+     - Clonal group for input strain
+
+
+.. _escherichia__ezclermont:
+
+
+Phylgroups
+----------------------
+
+.. code-block:: Python
+
+   -m escherichia__ezclermont
+
+
+The *Escherichia* genus comprises several clades, including *Escherichia albertii*, *E. fergusonii*, five cryptic *Escherichia* clades (I–V) and *E. coli* sensu stricto. Within *E. coli*, strains can be further divided into seven main phylogroups: A, B1, B2, C, D, E and F. 
+
+Kleborate assigns Escherichia genomes to these clades and phylogroups using `EzClermont tool <https://doi.org/10.1099/acmi.0.000143>`_, which is based on *in vitro* PCR assay logic.
+
+
+Parameters
+++++++++++
+
+``--escherichia__ezclermont_min_length``
+
+Minimum contig length to consider. *Default:* ``500``
+
+
+Outputs
++++++++
+
+.. list-table:: 
+   :header-rows: 0
+
+   * - **Column name**
+     - **Content**
+
+   * - ``Clermont_type``
+     - Assigned phylogroup or clade.
+
+   * - ``Clermont_profile``
+     - Presence or absence pattern of PCR products.
+
+
+
 .. _escherichia__pathovar:
 
-*E. coli* Pathotyping
+Pathotyping
 ---------------------
 
 .. code-block:: Python
@@ -106,9 +188,6 @@ Notes
 *Escherichia coli* is broadly divided into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC). DEC encompasses several clinically relevant pathotypes: enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) see `paper <https://doi.org/10.3389/fcimb.2016.00141>`_. Additionally, *Shigella* is considered a DEC pathotype due to its genetic and pathogenetic similarity to EIEC, see `paper <https://doi.org/10.1128/mbio.00882-23>`_.
 
 The majority of DEC pathotypes are defined by specific virulence markers. However, for EAEC, DAEC and AIEC, the pathogenic role of proposed markers is not well established. 
-
-Pathotyping in Kleborate 
-++++++++++++++++++++++++++++++
 
 This module classifies *E. coli* genomes into DEC pathotypes based on the presence or absence of key virulence marker genes, determined by alignment with Minimap2 to reference sequences for key marker genes, extracted from the `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ database.
 
@@ -175,7 +254,7 @@ The combination of marker genes detected are then used to classify genomes into 
      - 
 
 
-*E. coli* Pathovar parameters
+Parameters
 ++++++++++++++++++++++++++++++++++
 
 ``--escherichia__pathovar_min_identity``
@@ -187,11 +266,14 @@ Minimum alignment percent identity for pathotype (default: 90.0).
 Minimum alignment percent coverage for pathotype (default: 80.0).
 
 
-*E. coli* Pathovar outputs
+Outputs
 ++++++++++++++++++++++++++++
 
 .. list-table:: 
    :header-rows: 0
+
+   * - **Column name**
+     - **Content**
 
    * - ``Pathotype``
      - Predicted pathotype
@@ -205,7 +287,7 @@ Additionally, Kleborate includes a separate ``escherichia__vfdb`` module that sc
 
 .. _escherichia__mlst_lee:
 
-Typing the LEE pathogenicity island of *E. coli*
+LEE pathogenicity island typing
 ----------------------------------------------
 
 .. code-block:: Python
@@ -237,13 +319,15 @@ Minimum alignment percent coverage for ``escherichia_mlst_LEE``. *Default:* ``80
 Minimum number of exact allele matches required to assign an ST. *Default:* ``3``
 
 
-*E. coli*  LEE MLST outputs
+Outputs
 ++++++++++++++++++++++++++++
 
 The output of the *E. coli* LEE MLST module includes the following columns:
 
-
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - ``LEE_ST``
      - Assigned LEE sequence type.
@@ -256,7 +340,7 @@ The output of the *E. coli* LEE MLST module includes the following columns:
      - Allele numbers for each LEE locus.
 
 Additional Notes
-----------------
+++++++++++++++++
 
 * Kleborate attempts to report the closest matching ST if an exact match is not found.
 * Imprecise allele matches are indicated with a ``*``.
@@ -265,8 +349,7 @@ Additional Notes
 
 .. _escherichia__stxtyper:
 
-
-Stxtyper
+Stx typing
 -----------
 
 .. code-block:: Python
@@ -278,7 +361,7 @@ Shiga toxins (Stxs) are key virulence factors of Stx-producing *Escherichia coli
 This module will run `StxTyper <https://doi.org/10.3390/microorganisms14081607>` to determine the _stx_ type. See the `StxTyper documentation <https://github.com/ncbi/stxtyper>`_ for more details of how it works.
 
 
-StxTyper Outputs
+Outputs
 +++++++++++++++++++++
 
 StxTyper results are output in the following columns:
@@ -286,8 +369,9 @@ StxTyper results are output in the following columns:
 .. list-table::
    :header-rows: 1
 
-   * - Column Name
-     - Description
+   * - **Column name**
+     - **Content**
+
    * - ``Stx_type``
      - The Shiga toxin type. If the operon is complete, the subtype will be reported (e.g., ``stx1a``). If the operon is incomplete or ambiguous, a broader designation is used: ``stx1``, ``stx2``, or simply ``stx`` if the algorithm cannot resolve at further.
    * - ``operon``
@@ -325,6 +409,40 @@ StxTyper results are output in the following columns:
    * - ``B_coverage``
      - Percentage of the B subunit reference sequence covered by the alignment.
 
+.. _escherichia__pks:
+
+Polyketide synthetase (colibactin) detection 
+----------------------------------------------
+
+.. code-block:: bash
+
+  -m escherichia__pks
+
+This module screens for the presence or absence of *clbB*, gene in the colibactin polyketide synthase (PKS) biosynthesis gene cluster, by aligning genome assemblies against the *clbB* `reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_.
+
+Parameters
+++++++++++
+
+``--escherichia__pks_min_identity``
+
+Minimum alignment percent identity for detecting *clbB* (default: 90.0)
+
+``--escherichia__pks_min_coverage``
+
+Minimum alignment percent coverage for detecting *clbB* (default: 80.0)
+
+
+Outputs
++++++++++++
+
+.. list-table::
+
+   * - **Column name**
+     - **Content**
+
+   * - clbB
+     - presence or absence of the gene
+
 
 .. _escherichia__ectyper:
 
@@ -337,18 +455,14 @@ StxTyper results are output in the following columns:
 
 *E. coli* serotypes are defined by combinations of O (lipopolysaccharide) and H (flagellar) antigens. Currently there are ~183 O-groups and 53 H-types that have been defined serologically `Ørskov and Ørskov 1984 <https://www.sciencedirect.com/science/article/abs/pii/S0580951708704471/>`_.
 
-
-O-antigen 
-++++++++++
+**O-antigen**
 
 The O-antigen is an integral component of the Lipopolysaccharide (LPS) found in the outer membrane of the bacteria. LPS comprises three components: lipid A, a core oligosaccharide, and the O-specific polysaccharide chain (O antigen).  The O-antigen domain exhibits significant variability consisting of 10 to 25 repeating oligosaccharide units, with each unit containing two to seven sugar residues `Liu et al., 2020 <https://pmc.ncbi.nlm.nih.gov/articles/PMC7685785/>`_. The genes responsible for synthesis of O-antigens are usually present as a gene cluster and are located between the two chromosomal housekeeping genes galF and gnd/ugd `Iguchi et al 2014 <https://pmc.ncbi.nlm.nih.gov/articles/PMC4379981/>`_. Major pathways involved in the assembly, synthesis and transport of O-antigen include, the Wzy pathway the Wzx/Wzy-dependent pathway, encoded by the wzx (O-antigen flippase) and wzy (O-antigen polymerase) genes, and the ABC transporter pathway, encoded by wzm and wzt. These genes are ideal biomarkers for predicting O antigen types.  
 
 
-H antigens 
-++++++++++
+**H antigens**
 
 H antigens (flagellar) are surface proteins composed of repeated molecules of the protein flagellin, which facilitate bacterial motility. These antigens are numbered from H1 to H56 (H13, H22, and H50 are not used) and are distinct from the O and K antigens. Flagellin is encoded by the fliC gene on the chromosomal locus or its homologues (non-fliC flagellin-coding genes such as flkA, fllA, and flmA). Of the 53 well known H antigen types, 44 are conferred by expression of the fliC gene,  the remaining 9 H types are  encoded by non-fliC flagellin genes. Specifically H3, H35, H36, H47,and H53 are encoded by flkA, H44 and H55 by fllA, H54 by flmA, and H17 by flnA.
-
 
 Kleborate uses ECTyper for in silico serotyping. See `ECTyper paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC8767331/>`_ for more details.
 
@@ -359,6 +473,9 @@ Outputs of the ECTyper module is the following columns:
 
 .. list-table:: 
    :header-rows: 0
+
+   * - **Column name**
+     - **Content**
 
    * - ``O-type``
      - Predicted O antigen.
@@ -394,197 +511,10 @@ Outputs of the ECTyper module is the following columns:
      - Additional messages related to QC status or other issues affecting serotype prediction.
 
 
-.. _escherichia__ezclermont:
-
-
-ClermonTyping
-----------------------
-
-.. code-block:: Python
-
-   -m escherichia__ezclermont
-
-
-The *Escherichia* genus comprises several clades, including *Escherichia albertii*, *E. fergusonii*, five cryptic *Escherichia* clades (I–V) and *E. coli* sensu stricto. Within *E. coli*, strains can be further divided into seven main phylogroups: A, B1, B2, C, D, E and F. 
-
-Kleborate assigns Escherichia genomes to these clades and phylogroups using `EzClermont tool <https://doi.org/10.1099/acmi.0.000143>`_, which is based on *in vitro* PCR assay logic.
-
-
-Parameters
-++++++++++
-
-``--escherichia__ezclermont_min_length``
-
-Minimum contig length to consider. *Default:* ``500``
-
-
-Outputs
-+++++++
-
-.. list-table:: 
-   :header-rows: 0
-
-   * - ``Clermont_type``
-     - Assigned phylogroup or clade.
-
-   * - ``Clermont_profile``
-     - Presence or absence pattern of PCR products.
-
-
-.. _escherichia__pks:
-
-Typing of polyketide synthetase (*pks*) island 
-----------------------------------------------
-
-.. code-block:: bash
-
-  -m escherichia__pks
-
-This module screens for the presence or absence of *clbB*, gene in the colibactin polyketide synthase (PKS) biosynthesis gene cluster, by aligning genome assemblies against the *clbB* `reference sequence <https://www.ncbi.nlm.nih.gov/nuccore/AM229678.1?from=41762&to=51382>`_.
-
-Parameters
-++++++++++
-
-``--escherichia__pks_min_identity``
-
-Minimum alignment percent identity for detecting *clbB* (default: 90.0)
-
-``--escherichia__pks_min_coverage``
-
-Minimum alignment percent coverage for detecting *clbB* (default: 80.0)
-
-
-pks Outputs
-+++++++++++
-
-.. list-table::
-
-   * - clbB
-     - presence or absence of the gene
-
-
-.. _escherichia__amr:
-
-
-*Escherichia* AMR
-------------------------
-
-.. code-block:: Python
-
-   -m escherichia__amr
-
-
-This module screens input genomes for acquired antimicrobial resistance genes and known resistance-associated point mutations using the `AMRFinderPlus tool <https://doi.org/10.1038/s41598-021-91456-0>`_. Identified determinants are grouped by drug class.
-
-
-AMR parameters
-++++++++++++++++++
-
-``--organism``
-
-Used to screen for point mutations in species-specific resistance markers (default Escherichia coli).
-
-``-t , --threads`` 
-
-Number of threads to use for alignment.
-
-
-AMR outputs
-++++++++++++++++++
-
-Results of the *Escherichia* AMR module are grouped by drug class:
-
-.. list-table::
-   :header-rows: 0
-
-   * - ``Aminoglycoside``
-     - Aminoglycoside resistance genes.
-
-   * - ``Fluoroquinolone``
-     - Fluoroquinolone resistance genes.
-
-   * - ``Fosfomycin``
-     - Fosfomycin resistance genes.
-
-   * - ``Sulfonamide``
-     - Sulfonamide resistance genes.
-
-   * - ``Tetracycline``
-     - Tetracycline resistance genes.
-
-   * - ``Glycopeptide``
-     - Glycopeptide resistance genes.
-
-   * - ``Colistin``
-     - Colistin resistance genes.
-
-   * - ``Phenicol``
-     - Phenicol resistance genes.
-
-   * - ``Macrolide``
-     - Macrolide resistance genes.
-
-   * - ``Rifamycin``
-     - Rifampin resistance genes.
-
-   * - ``Trimethoprim``
-     - Trimethoprim resistance genes.
-
-   * - ``BetaLactam``
-     - Beta-lactamase genes.
-
-   * - ``Carbapenem``
-     - Carbapenemase genes.
-
-   * - ``Cephalosporin``
-     - Third-generation Cephalosporin resistance genes.
-
-   * - ``Methicillin``
-     - Methicillin resistance genes.
-
-   * - ``Other Classes``
-     - Resistance genes in other antimicrobial categories.
-
-
-.. _escherichia__cgMLST:
-
-*Escherichia* cgMLST 
-------------------
-.. code-block:: Python
-
-   -m escherichia__cgMLST
-
-This module performs cgMLST and  LIN code typing using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
-
-
-cgMLST outputs
-++++++++++++++++++
-cgMLST results are output in the following columns:
-
-.. list-table::
-   :header-rows: 1
-
-   * - Column Name
-     - Description
-
-   * - cgST
-     - Best matching scgST
-
-   * - LIN code
-     - LIN code / Partial LINcode for input strain
-
-   * - Sublineage
-     - Sublineage for input strain
-
-   * - Clonal group
-     - Clonal group for input strain
-
-
-
 .. _escherichia__kaptive:
 
-Typing of *E. coli* Group 2 and 3 CPS with Kaptive
--------------------------------------------------
+Capsule (K) typing
+--------------
 
 .. code-block:: Python
 
@@ -593,7 +523,7 @@ Typing of *E. coli* Group 2 and 3 CPS with Kaptive
 This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to type *E. coli* group 2 and group 3 capsular (K) loci. See the `capsular K-typing database <https://github.com/rgladstone/EC-K-typing>`_ for more details.
 
 
-Kaptive parameters
+Parameters
 +++++++++++++++++++
 
 ``--ecoli_kps``
@@ -601,7 +531,7 @@ Kaptive parameters
 Group 2 + 3 CPS database 
 
 
-Kaptive outputs
+Outputs
 +++++++++++++++++
 
 Kaptive results are output in the following columns:
@@ -609,8 +539,8 @@ Kaptive results are output in the following columns:
 .. list-table::
    :header-rows: 1
 
-   * - Column Name
-     - Description
+   * - **Column name**
+     - **Content**
    * - K_locus
      - The locus type which most closely matches the assembly.
    * - K_type
@@ -624,3 +554,88 @@ Kaptive results are output in the following columns:
    * - K_Missing_expected_genes
      - Missing expected genes in the locus
 
+
+
+.. _escherichia__amr:
+
+
+Antimicrobial resistance
+------------------------
+
+.. code-block:: Python
+
+   -m escherichia__amr
+
+This module screens input genomes for acquired antimicrobial resistance genes and known resistance-associated point mutations using the `AMRFinderPlus tool <https://doi.org/10.1038/s41598-021-91456-0>`_. Identified determinants are grouped by drug class.
+
+
+Parameters
+++++++++++++++++++
+
+``--organism``
+
+Used to screen for point mutations in species-specific resistance markers (default Escherichia coli).
+
+``-t , --threads`` 
+
+Number of threads to use for alignment.
+
+
+Outputs
+++++++++++++++++++
+
+Results of the *Escherichia* AMR module are grouped by drug class:
+
+.. list-table::
+   :header-rows: 0
+
+   * - **Column name**
+     - **Markers assigned as NCBI class/subclass**
+
+   * - ``Aminoglycoside``
+     - AMINOGLYCOSIDE
+
+   * - ``Fluoroquinolone``
+     - FLUOROQUINOLONE, QUINOLONE
+
+   * - ``Fosfomycin``
+     - FOSFOMYCIN
+
+   * - ``Sulfonamide``
+     - QUINOLONE
+
+   * - ``Tetracycline``
+     - QUINOLONE
+
+   * - ``Glycopeptide``
+     - GLYCOPEPTIDE
+
+   * - ``Colistin``
+     - COLISTIN
+
+   * - ``Phenicol``
+     - PHENICOL
+
+   * - ``Macrolide``
+     - MACROLIDE
+
+   * - ``Rifamycin``
+     - RIFAMYCIN
+
+   * - ``Trimethoprim``
+     - TRIMETHOPRIM
+
+   * - ``BetaLactam``
+     - BETA-LACTAM, CEPHALOTHIN
+
+   * - ``Carbapenem``
+     - CARBAPENEM
+
+   * - ``Cephalosporin``
+     - CEPHALOSPORIN (note these can be assumed to be 3rd generation cephalosporins)
+
+   * - ``Methicillin``
+     - METHICILLIN
+
+   * - ``Other Classes``
+     - other CLASS values
