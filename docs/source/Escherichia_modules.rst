@@ -602,10 +602,10 @@ Results of the *Escherichia* AMR module are grouped by drug class:
      - FOSFOMYCIN
 
    * - ``Sulfonamide``
-     - QUINOLONE
+     - SULFONAMIDE
 
    * - ``Tetracycline``
-     - QUINOLONE
+     - TETRACYCLINE
 
    * - ``Glycopeptide``
      - GLYCOPEPTIDE
