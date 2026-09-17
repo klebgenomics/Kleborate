@@ -61,13 +61,13 @@ Typing modules for *E. coli/Shigella*\  cover:
 Tutorial
 --------
 
-A step-by-step tutorial for Kleborate v3 is available `here <https://docs.google.com/document/d/1R61bQbBngpiDB2Gl_eXigePBVakYZEjy/edit>`_, covering:
+A step-by-step tutorial for Kleborate v3.0 is available `here <https://docs.google.com/document/d/1R61bQbBngpiDB2Gl_eXigePBVakYZEjy/edit>`_, covering:
 
 * Kleborate's features and their scientific rationale
 * How to run Kleborate 
 * Examples, illustrating how to run and interpret results
 
-Note this was developed for v3.0 and will be updated soon.
+Note this was developed for v3.0 and will be updated soon to cover v3.3.
 
 
 License
