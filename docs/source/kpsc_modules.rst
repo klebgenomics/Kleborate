@@ -11,7 +11,6 @@ These modules will be run if the ``enterobacterales__species``\   module confirm
 
 We've included the phylogroup numbers in the table below for backwards compatibility with older literature, but these names are not used in the Kleborate output. See `this review <https://doi.org/10.1038/s41579-019-0315-1>`_ for an overview of the species complex. 
 
-
 .. figure:: _static/kleborate_species_tree.png
    :align: center
    :width: 90%
@@ -60,7 +59,7 @@ We've included the phylogroup numbers in the table below for backwards compatibi
 
 .. _kpsc_mlst:
 
-KpSC MLST
+MLST
 ---------
 
 .. code-block:: Python
@@ -69,7 +68,7 @@ KpSC MLST
 
 Genomes identified by Kleborate as belonging to the *K. pneumoniae* species complex are subjected to MLST using the 7-locus scheme described at the  *K. pneumoniae* `\Bacteria Isolate Genome Sequence Database hosted at the Pasteur Institute <https://bigsdb.pasteur.fr/klebsiella/>`_. Note that this scheme is not specific to *K. pneumoniae sensu stricto* but covers the whole species complex. 
 
-A copy of the MLST alleles and ST definitions is stored in the **/data** directory of this module.
+A copy of the MLST alleles and ST definitions is stored in the ``data/`` directory of this module.
 
 Rhinoscleromatis and Ozaenae
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -114,6 +113,9 @@ Output of the KpSC MLST module is the following columns:
 
 .. list-table::
 
+   * - **Column name**
+     - **Content**
+
    * - ST
      - sequence type
 
@@ -127,20 +129,23 @@ Output of the KpSC MLST module is the following columns:
 
 .. _kpsc_virulence:
 
-KpSC virulence modules
+Acquired virulence loci
 ----------------------
 
-Typing modules are available for the five key acquired virulence loci that are associated with invasive infections and are found at high prevalence among hypervirulent *K. pneumoniae* strains: the siderophores yersiniabactin (\ *ybt*\ ), aerobactin (\ *iuc*\ ) and salmochelin (\ *iro*\ ), the genotoxin colibactin (\ *clb*\ ), and the hypermucoidy locus *rmpADC*. Each of these loci comprises multiple genes and will only be reported if >50% of the genes are detected. 
+Typing modules are available for the five key acquired virulence loci that are associated with invasive infections and are found at high prevalence among hypervirulent *K. pneumoniae* strains: the siderophores yersiniabactin (\ *ybt*\ ), aerobactin (\ *iuc*\ ) and salmochelin (\ *iro*\ ), the genotoxin colibactin (\ *clb*\ ), and the hypermucoidy locus *rmp*. Each of these loci comprises multiple genes and will only be reported if >50% of the genes are detected. 
 
-There is also a module to screen for the alternative hypermucoidy marker gene *rmpA2*.
-
-For each module, if the target locus is detected, the typer will:
+For each of these modules, if the target locus is detected, the typer will:
 
 * Call a sequence type using the same logic as for 7-gene MLST
 * Report the phylogenetic lineage associated with each sequence type, as outlined below and detailed in the corresponding papers
 * Report the structural variant of the mobile genetic element that is usually associated with that phylogenetic lineage (for *ybt* and *rmpADC* only)
 
+For the *rmp* locus, additional typing is done to assess phase variation and the integrity of the *rmpA* promoter.
+
+There are also modules to check for presence/absence of the *rmpA2* and *peg-344* genes which are sometimes used as hypervirulence markers.
+
 The *ybt*\ , *clb*\ , *iuc*\ , *iro* and *rmpADC* locus-specific ST schemes, and *rmpA2* alleles, are defined in the *K. pneumoniae* `Bacterial Isolate Genome Sequence Database <https://bigsdb.pasteur.fr/klebsiella/>`_. 
+
 
 Notes on virulence allele reporting:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -162,6 +167,7 @@ Notes on virulence sequence type reporting:
 
 .. _klebsiella__ybst:
 .. _klebsiella__cbst:
+
 
 Yersiniabactin and colibactin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -200,6 +206,9 @@ Output of the ybst module is the following columns:
 
 .. list-table::
 
+   * - **Column name**
+     - **Content**
+
    * - Yersiniabactin
      - Lineage (ICEKp prediction)
 
@@ -232,6 +241,9 @@ cbst Outputs
 Output of the cbst module is the following columns:
 
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - Colibactin
      - Lineage
@@ -294,6 +306,9 @@ Output of the abst module is the following columns:
 
 .. list-table::
 
+   * - **Column name**
+     - **Content**
+
    * - Aerobactin
      - Lineage (plasmid prediction)
 
@@ -324,6 +339,8 @@ smst Outputs
 Output of the smst module is the following columns:
 
 .. list-table::
+   * - **Column name**
+     - **Content**
 
    * - Salmochelin
      - Lineage (plasmid prediction)
