@@ -23,14 +23,14 @@ These modules will be deployed if the ``enterobacterales__species``\   module co
 
 The Achtman scheme is hosted on `EnteroBase <https://enterobase.warwick.ac.uk/>`_ and described in `this paper <https://doi.org/10.1111/j.1365-2958.2006.05172.x>`_.
 
-We also provide an option for users to run MLST using Pasteur scheme by running:
+We also provide an option for users to run MLST using the Pasteur scheme by running:
 ``-m escherichia__mlst_pasteur``
 
 The Pasteur scheme is hosted in the BIGSdb-Pasteur *Escherichia coli* `database <https://bigsdb.pasteur.fr/ecoli/>`_ and described in `this paper <https://doi.org/10.1186/1471-2164-9-560>`_.
 
 The genes included in each scheme are noted in the Outputs table below.
 
-A copy of the MLST alleles and ST definitions used in each module is stored in the ``/data``  directory of the module.
+A copy of the MLST alleles and ST definitions used in each module is stored in the ``data/``  directory of the module.
 
 
 *E. coli* MLST parameters
@@ -87,7 +87,7 @@ Output of the Pasteur *E. coli* MLST module includes the following columns:
      - Allele numbers for the Pasteur scheme loci.
 
 Notes
------
++++++
 
 * Kleborate attempts to report the closest matching ST if a precise match is not found.
 * Imprecise allele matches are indicated with a ``*``.
@@ -103,80 +103,76 @@ Notes
 
    -m escherichia__pathovar
 
-*Escherichia coli* is broadly divided into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC) `see paper <https://pmc.ncbi.nlm.nih.gov/articles/PMC5156508/>`_. DEC encompasses several clinically relevant pathotypes: enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see <https://pmc.ncbi.nlm.nih.gov/articles/PMC5114240/>`_ paper. Additionally, *Shigella* is considered a DEC pathotype due to its genetic and pathogenetic similarity to EIEC.
+*Escherichia coli* is broadly divided into 2 groups: intestinal diarrheagenic *E. coli* (DEC), and extra-intestinal *E. coli* (ExPEC). DEC encompasses several clinically relevant pathotypes: enteropathogenic *E. coli* (EPEC), enterotoxigenic *E. coli* (ETEC), enterohaemorrhagic *E. coli* (EHEC), Shiga toxin-producing *E. coli* (STEC), enteroaggregative *E. coli* (EAEC), enteroinvasive *E. coli* (EIEC), and diffusely adherent *E. coli* (DAEC) `see paper <https://doi.org/10.3389/fcimb.2016.00141>`_. Additionally, *Shigella* is considered a DEC pathotype due to its genetic and pathogenetic similarity to EIEC, see `paper <https://doi.org/10.1128/mbio.00882-23>`_.
 
 The majority of DEC pathotypes are defined by specific virulence markers. However, for EAEC, DAEC and AIEC, the pathogenic role of proposed markers is not well established. 
 
-Virulence markers of diarrheagenic *E. coli* 
-++++++++++++++++++++++++++++++++++++++++++++++
+Pathotyping in Kleborate 
+++++++++++++++++++++++++++++++
+
+This module classifies *E. coli* genomes into DEC pathotypes based on the presence or absence of key virulence marker genes, determined by alignment with Minimap2 to reference sequences for key marker genes, extracted from the `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ database.
+
+Marker genes considered are:
+
+.. list-table:: 
+   :header-rows: 1
+
+   * - **Gene**
+     - **Marker of**
+
+   * - *ipaH*
+     - pINV plasmid shared by Shigella and EIEC
+
+   * - *sta1* and *ltcA*
+     - ST, heat-stable enterotoxin and LT, heat-labile enterotoxin, characteristic of ETEC
+   
+   * - *stx1A*, *stx1B*, *stx2A*, *stx2B*
+     - shiga-toxins Stx1 and Stx2
+
+   * - *bfpA*
+     - *bfp* adhesin characteristic of EPEC
+
+   * - *eae*
+     - intimin, characteristic of EPEC and EHEC
+
+The module also calls `ShigaPass <https://github.com/imanyass/ShigaPass>`_ to predict Shigella serotypes, and to differentiate *Shigella* from enteroinvasive *Escherichia coli* (EIEC).
+
+The combination of marker genes detected are then used to classify genomes into pathotypes, using logic adapted from `EnteroBase <https://enterobase.readthedocs.io/en/latest/pipelines/backend-pipeline-phylotypes.html?highlight=pathovar/>`_ as follows:
 
 .. list-table:: 
    :header-rows: 1
 
    * - **Pathotype**
-     - **Defining marker**
-     - **Virulence determinants**
-     - **Location of determinants**
-     - **PCR Diagnostic targets**
-     - **Other diagnostic targets**
+     - **Marker/s Present**
+     - **Marker/s Absent**
 
-   * - EPEC
-     - LEE pathogenicity island
-     - LEE pathogenicity island
-     - Pathogenicity island
-     - ``eae``
-     - ``bfpA``
-
-   * - EIEC/*Shigella*
+   * - EIEC
      - pINV
-     - pINV
-     - Plasmid
-     - ``ipaH``
-     - Other ``ipa`` genes
+     - ST and LT, Shigella serotypes
 
    * - ETEC
      - ST or LT
-     - ST or LT\nPlus colonisation factors
-     - Plasmid; transposon
-     - ``elt``, ``est``
-     - `-`
+     - pINV
+
+   * - STEC
+     - Stx1 or Stx2
+     - intimin
 
    * - EHEC
-     - Shiga toxin
-     - Stx1 and/or Stx2
-     - Prophages
-     - ``stx1``, ``stx2``
-     - ``eae``, ``ehxA``
+     - Stx1 or Stx2, and intimin
+     - 
 
-   * - EAEC
-     - pAA; aggregative adhesion
-     - Not known
-     - Plasmid
-     - ``aggR``, ``aatA``, ``aaiC``
-     - `-`
+   * - EPEC
+     - intimin and bfp
+     - Stx1 and Stx2
 
-   * - DAEC
-     - Afa/ Dr adhesins
-     - Not known
-     - Not known
-     - ``afa/Dr`` adhesins
-     - `-`
+   * - aEPEC
+     - intimin
+     - Stx1 and Stx2 and bfp
 
-   * - AIEC
-     - Adherent-invasive phenotype
-     - Not known
-     - Not known
-     - none
-     - `-`
-
-How it works
-+++++++++++++
-
-This module classifies *E. coli* genomes into DEC pathotypes based on the presence or absence of virulence marker genes using a curated database `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ DB.  Input assemblies are aligned to the database using Minimap2, and Kleborate assigns pathotypes based on logic adapted from `EnteroBase <https://enterobase.readthedocs.io/en/latest/pipelines/backend-pipeline-phylotypes.html?highlight=pathovar/>`_.
-
-The module also calls `ShigaPass <https://github.com/imanyass/ShigaPass>`_ to predict Shigella serotypes, and to differentiate *Shigella* from enteroinvasive *Escherichia coli* (EIEC).
-
-The reference database used by this module is included in the **/data**  directory.
+   * - Shigella
+     - Shigella serotypes
+     - 
 
 
 *E. coli* Pathovar parameters
@@ -205,7 +201,7 @@ Minimum alignment percent coverage for pathotype (default: 80.0).
      - Virulence markers
 
 
-Additionally, Kleborate includes a separate ``escherichia__vfdb`` module that screens *E. coli* genome assemblies against the `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ database (VFDB) to detect the presence or absence virulence marker genes.
+Additionally, Kleborate includes a separate ``escherichia__vfdb`` module that screens *E. coli* genome assemblies against all markers in the `VirulenceFinder <https://cge.food.dtu.dk/services/VirulenceFinder/>`_ database (VFDB).
 
 
 .. _escherichia__mlst_lee:
