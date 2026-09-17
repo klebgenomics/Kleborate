@@ -71,7 +71,7 @@ Genomes identified by Kleborate as belonging to the *K. pneumoniae* species comp
 A copy of the MLST alleles and ST definitions is stored in the ``data/`` directory of this module.
 
 Rhinoscleromatis and Ozaenae
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+++++++++++
 
 The *K. pneumoniae* clonal group CG67 is known as *K. pneumoniae* subsp. *rhinoscleromatis* because it causes rhinoscleroma (chronic granulomatous infection of the nose and upper airways), and clonal group CG91 is known as *K. pneumoniae* subsp. *ozaenae* as it can cause ozena (atrophic rhinitis). To alert users to this, when STs belonging to these clonal groups are detected by Kleborate this is flagged in the ST column, e.g. 'ST67 (subsp. rhinoscleromatis)' or 'ST97 (subsp. ozaenae)'. 
 
@@ -150,7 +150,7 @@ The *ybt*\ , *clb*\ , *iuc*\ , *iro* and *rmpADC* locus-specific ST schemes, and
 Notes on virulence allele reporting:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Virulence alleles are treated in the same way as [MLST] alleles:
+Virulence alleles are treated in the same way as MLST alleles:
 
 * In order to consider a Minimap2 hit, it must exceed both 80% identity and 40% coverage (adjustable via the --min_spurious_identity and --min_spurious_coverage options).
 * Hits that fail to meet 90% identity and 80% coverage (adjustable via the ``--min_identity`` and ``--min_coverage`` options) are reported in the ``spurious_virulence_hits`` column but not used for sequence typing.
@@ -180,7 +180,7 @@ We previously explored the diversity of the *K. pneumoniae* integrative conjugat
 
 Note that while ICE *Kp1* is occasionally found in other species within the KpSC, and even in other genera of Enterobacteriaceae (see `original paper <http://mgen.microbiologyresearch.org/content/journal/mgen/10.1099/mgen.0.000196>`_\ ), most of the known variation included in the database is derived from *K. pneumoniae*.
 
-The allele databases and schemes were last updated in April 2024. The number of ybt lineages is now 28, and the number of ICE*Kp structural variants is 22.
+The allele databases and schemes were last updated in April 2024. The number of *ybt lineages is now 28, and the number of ICE*Kp* structural variants is 22.
 
 
 ybst Parameters
@@ -363,25 +363,15 @@ Hypermucoidy loci
 
    -m klebsiella__rmst, klebsiella__rmpa2
 
-The *rmpA* locus is associated with the hypermucoidy phenotype that is a virulence feature that is often observed in hypervirulent *K. pneumoniae* strains. Recent work has revealed that *rmpA* serves as a transcriptional regulator for the *rmpD* and *rmpC* genes, and together these genes comprise the *rmpADC* (or *rmp*\ ) locus. *rmpC* is involved in the upregulation of capsule expression while *rmpD* drives hypermucoviscosity (see the paper on `rmpC <https://mbio.asm.org/content/10/2/e00089-19>`_ and this one on `rmpD <https://mbio.asm.org/content/11/5/e01750-20>`_ for more information.) 
+The *rmpADC* locus is associated with the hypermucoidy phenotype that is a virulence feature that is often observed in hypervirulent *K. pneumoniae* strains. *rmpA* serves as a transcriptional regulator for the *rmpD* and *rmpC* genes, and together these  comprise the *rmpADC* (or *rmp*\ ) locus. *rmpC* is involved in the upregulation of capsule expression while *rmpD* drives hypermucoviscosity (see the paper on `rmpC <https://mbio.asm.org/content/10/2/e00089-19>`_ and this one on `rmpD <https://mbio.asm.org/content/11/5/e01750-20>`_ for more information.) 
 
-In light of this information, we screened and extracted the *rmpA*\ , *rmpD* and *rmpC* sequences from the 2733 genomes included in the aerobactin and salmochelin study, and generated a RmST typing scheme. We observed four distinct *rmp* lineages, which were associated with the KpVP-1 (\ *rmp 1*\ ), KpVP-2 (\ *rmp 2*\ ), *iuc2A* virulence plasmids (\ *rmp 2A*\ ), ICE *Kp1* (rmp 3) and the *rmp4* lineage which is associated with *K. pneumoniae* CG67 `Lam et al., 2024 BioRxiv <https://www.biorxiv.org/content/10.1101/2024.05.28.596137v1/>`_
+To develop a typing scheme for the *rmp* locus we screened and extracted the *rmpA*\ , *rmpD* and *rmpC* sequences from 14,000 genomes, and generated a RmST typing scheme. We observed four distinct *rmp* lineages, which were associated with the KpVP-1 (\ *rmp 1*\ ), KpVP-2 (\ *rmp 2*\ ), *iuc2A* virulence plasmids (\ *rmp 2A*\ ) and ICE *Kp1* (\ *rmp*\ 3), and the *rmp 4* lineage which is associated with *K. pneumoniae* CG67 (`Lam et al., 2025 <https://doi.org/10.1186/s13073-025-01461-5>`_).
 
-The klebsiella__rmst module screens for *rmpADC* and will report a sequence type, along with the associated lineage and mobile genetic element.
+The ``klebsiella__rmst`` module screens for *rmpADC* and will report a sequence type (RmST), along with the associated gene alleles, lineage assignment, and associated mobile genetic element.
 
-Expression of the rmp locus
-++++++++++++++++++++++++++++++++++++
+rmp status
++++++++++++++++++++++++++++
 
-When a *rmp* locus is detected, Kleborate checks the status of each loci to determine whether it is *ON* (wildtype, corresponding to normal expression), *OFF* (defined as disrupted expression that is reversible to ON via a change in poly-tract length) or irreversibly disrupted. The expression status of each loci is then combined to assign an overall rmp locus status, as follows. If all component loci are present and *ON*, the ‘rmp locus status’ is annotated as *Phase ON*. If all components are present but one or more is *OFF*, the status is annotated as *Phase OFF*. If any components are missing, the status is annotated as “-” (and the RmpADC field has “(partial)” appended to it, to indicate the locus sequence is incomplete). The status of individual *rmp* genes are determined by assessing whether the detected allele sequence encodes a protein >95% of the expected length (ON), and if not then if adding one or two nucleotides to the poly tract restores the encoded protein to >95% of the expected length (OFF, i.e. reversible to ON) or does not restore it (<95%, protein irreversibly truncated). The status of the promoter is assessed by determining the length of the poly-T tract located 40 bp upstream of the rmpA start codon. If poly tract length is (11T) or greater, the promoter is annotated as ON, otherwise it is annotated as reduced expression.
-
-Detection of argR gene and ARG box
-++++++++++++++++++++++++++++++++++++
-
-The module also checks for presence of the *argR* gene in the genomes, and conservation of the *ARG box* in the *rmpA* promoter. The *argR* gene is screened via alignment against the *K. pneumoniae* strain *KPPR1* reference strain. Where a hit is detected, its nucleotide sequence is translated and the length of the encoded protein determined. Full-length genes are reported as ‘present’,protein sequences with a coverage <100% compared with the reference ArgR encoded by KPPR1 are reported as ‘truncated-X%’ (‘X’ indicates the percent coverage). If there is no hit, the value returned is ‘-’. The ARG box is checked by searching for an exact match to the reference sequence string (ATTGAATTTTTATTCATT) from KPPR1, within 150 bp upstream of rmpA. If this is not found, the annotation ‘ARG box lost’ is added to the ‘rmpA_promoter’ field.
-
-
-
-The *rmpA2* gene is homologous to *rmpA*, and the klebsiella__rmpa2 module screens for alleles of *rmpA2*.
 
 Note:
 ^^^^^^^^
@@ -389,8 +379,101 @@ Note:
 * Alleles for each gene are sourced from the `BIGSdb-pasteur <https://bigsdb.pasteur.fr/klebsiella/>`_\ , while additional *rmpA* alleles have also been added to Kleborate.
 * The *rmpA* and *rmpA2* genes share ~83% nucleotide identity so are easily distinguished.
 * Unique (non-overlapping) nucleotide Minimap2 hits with >95% identity and >50% coverage are reported. Note multiple hits to the same gene are reported if found. E.g. the NTUH-K2044 genome carries *rmpA* in the virulence plasmid and also in ICE *Kp1* , which is reported in the *rmpA* column as ``rmpA_11(ICEKp1),rmpA_2(KpVP-1)``.
-* As with the other virulence genes, truncations in the *rmpA* and *rmpA2* genes are expressed as a percentage of the amino acid length from the start codon, e.g. ``rmpA_5-54%`` indicates the RmpA protein is truncated after 54% length of the intact amino acid sequence. These truncations appear to be common, due to insertions and deletions within a poly-G tract, and almost certainly result in loss of protein function.
+* As with the other virulence genes, truncations in the *rmpA* and *rmpA2* genes are expressed as a percentage of the amino acid length from the start codon, e.g. ``rmpA_5-54%`` indicates the RmpA protein is truncated after 54% length of the intact amino acid sequence.
 
+**Examples of rmp output:**
+
+.. list-table::
+
+   * - **RmST**
+     - **RmpADC**
+     - **RmpADC_status**
+     - **rmpA**
+     - **rmpD**
+     - **rmpC**
+     - **rmpA_promoter**
+     - **argR**
+
+   * - 26
+     - rmp 1; KpVP-1
+     - ON
+     - 2
+     - 2
+     - 2
+     - 11T
+     - present
+
+   * - 26
+     - rmp 1; KpVP-1
+     - ON (ARG box lost)
+     - 2
+     - 2
+     - 2
+     - 12T (ARG-box lost)
+     - present
+
+   * - 26
+     - rmp 1; KpVP-1
+     - ON (reduced)
+     - 2
+     - 2
+     - 2
+     - 10T (reduced expression)
+     - present
+
+   * - 147
+     - rmp 1; KpVP-1
+     - ON (untypable promoter)
+     - 27
+     - 2
+     - 2
+     - untypable
+     - present
+
+   * - 26-1LV
+     - rmp 1; KpVP-1 (partial)
+     - OFF (untypable promoter, ARG box lost)
+     - 2*-0% (OFF)
+     - 2
+     - 2
+     - untypable (ARG-box lost)
+     - present
+
+   * - 7
+     - rmp 2; KpVP-2
+     - OFF (reduced)
+     - 3
+     - 6
+     - 5 (OFF)
+     - 10T (reduced expression)
+     - present
+
+   * - 2
+     - rmp 2; KpVP-2
+     - OFF
+     - 9
+     - 32
+     - 5 (OFF)
+     - 11T
+     - present
+
+   * - 55
+     - rmp 1; KpVP-1 (partial)
+     - OFF
+     - 4*-47% (OFF)
+     - 4
+     - 2
+     - 11T
+     - present
+
+   * - 149-1LV
+     - rmp 1; KpVP-1 (partial)
+     - OFF (ARG box lost)
+     - 22*-54% (OFF)
+     - 2
+     - 2
+     - 12T (ARG-box lost)
+     - present
 
 rmst Parameters
 ++++++++++++++++++
@@ -432,7 +515,6 @@ Output of the rmst module is the following columns:
 
    * - argR
      - Presence of argR gene
-
 
 
 rmpA2 Parameters
