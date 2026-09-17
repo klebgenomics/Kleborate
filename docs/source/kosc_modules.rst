@@ -8,7 +8,12 @@ Modules for *Klebsiella oxytoca* species complex
 
    --preset kosc
 
-These modules will be run if the ``enterobacterales__species``\   module confirms the input assembly as a member of the *K. oxytoca* species complex (KpSC) labelled in the tree above, and listed in the table below. 
+.. figure:: _static/kleborate_species_tree.png
+   :align: center
+   :width: 90%
+   :alt: Klebsiella species tree
+
+These modules will be run if the ``enterobacterales__species``\   module confirms the input assembly as a member of the *K. oxytoca* species complex (KoSC) labelled in the tree above, and listed in the table below. 
 
 .. list-table::
 
@@ -26,7 +31,7 @@ These modules will be run if the ``enterobacterales__species``\   module confirm
 
 
 
-KoSC MLST
+MLST
 ---------
 
 .. code-block:: Python
@@ -35,10 +40,10 @@ KoSC MLST
 
 Genomes identified as belonging to the *K. oxytoca* species complex are subjected to MLST using the 7-locus scheme described at the  *K. oxytoca* `\at PubMLST <https://pubmlst.org/organisms/klebsiella-oxytoca>`_.
 
-A copy of the MLST alleles and ST definitions is stored in the /data directory of this module.
+A copy of the MLST alleles and ST definitions is stored in the ``data/`` directory of this module.
 
 
-KoSC MLST parameters
+Parameters
 +++++++++++++++++++++++
 
 ``--klebsiella_oxytoca_complex__mlst_min_identity`` 
@@ -54,12 +59,15 @@ Minimum alignment percent coverage for klebsiella_oxytoca_complex MLST (default:
 At least this many exact matches are required to call an ST (default: 3)
 
 
-KoSC MLST outputs
+Outputs
 ++++++++++++++++++++
 
 Output of the KoSC MLST module is the following columns:
 
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - ST
      - sequence type
@@ -72,7 +80,7 @@ Output of the KoSC MLST module is the following columns:
 * Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that disagree with the ST reported. So ``258-1LV`` indicates a single-locus variant (SLV) of ST258, i.e. 6/7 loci match ST258.
 
 
-KoSC virulence typing
+Virulence typing
 ---------------------
 Genomes identified as belonging to the *K. oxytoca* species complex are subjected to typing for yersiniabactin, colibactin, aerobactin, salmochelin and rmp loci, using the following modules:
 
@@ -80,12 +88,12 @@ Genomes identified as belonging to the *K. oxytoca* species complex are subjecte
 
    -m klebsiella__ybst, klebsiella__cbst, klebsiella__abst, klebsiella__smst, klebsiella__rmst
 
-These modules were primarily designed for typing of *K. pneumoniae* species complex, and the databases are populated from variation detected in KpSC genomes. However they can appear in KoSC genomes and so typing is included in the KoSC preset.
+These modules were primarily designed for typing of *K. pneumoniae* species complex, and the databases are populated from variation detected in KpSC genomes (see details on the KpSC modules page :ref:`here <kpsc_virulence>`). However they can appear in KoSC genomes and so typing is included in the KoSC preset. A more focused database capturing variation across KoSC is planned.
 
 
 .. _kosc__kaptive:
 
-KoSC K and O locus typing with Kaptive
+K and O locus typing
 -----------------------------------------
 
 .. code-block:: Python
@@ -95,7 +103,7 @@ KoSC K and O locus typing with Kaptive
 This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
 
 
-Kaptive parameters
+Parameters
 +++++++++++++++++++
 
 ``-kosc_k``
@@ -104,20 +112,19 @@ Kaptive database for Kosc K-locus typing
 
 ``-kosc_o``
 
-Kaptive database for Kosc o-locus typing
+Kaptive database for Kosc O-locus typing
 
 
 
-Kaptive outputs
+Outputs
 +++++++++++++++++
 
 Kaptive results are output in the following columns:
 
 .. list-table::
    :header-rows: 1
-
-   * - Column Name
-     - Description
+   * - **Column name**
+     - **Content**
    * - K_locus
      - The K locus type which most closely matches the assembly.
    * - K_type
