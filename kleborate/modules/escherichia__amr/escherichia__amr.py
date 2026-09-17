@@ -76,7 +76,7 @@ def check_external_programs():
 def categorize_class(class_name):
     """
     Categorize the AMR determinants into classes.
-    Betalacm are classified based on sub-class
+    Betalactams are classified based on sub-class
     """
     class_name = class_name.strip().upper()
 
