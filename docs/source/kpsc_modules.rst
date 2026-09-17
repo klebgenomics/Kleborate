@@ -9,7 +9,7 @@ Modules for *Klebsiella pneumoniae* species complex
 
 These modules will be run if the ``enterobacterales__species``\   module confirms the input assembly as a member of the *K. pneumoniae* species complex (KpSC) labelled in the tree below. 
 
-We've included the phylogroup numbers in the table below for backwards compatibility with older literature, but these names are not used in the Kleborate output. See `this review <https://www.nature.com/articles/s41579-019-0315-1>`_ for an overview of the species complex. 
+We've included the phylogroup numbers in the table below for backwards compatibility with older literature, but these names are not used in the Kleborate output. See `this review <https://doi.org/10.1038/s41579-019-0315-1>`_ for an overview of the species complex. 
 
 
 .. figure:: _static/kleborate_species_tree.png
