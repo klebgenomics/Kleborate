@@ -592,50 +592,50 @@ Results of the *Escherichia* AMR module are grouped by drug class:
    * - **Column name**
      - **Markers assigned as NCBI class/subclass**
 
-   * - ``Aminoglycoside``
+   * - ``Penicillins``
+     - BETA-LACTAM, CEPHALOTHIN
+
+   * - ``Carbapenems``
+     - CARBAPENEM
+
+   * - ``ESBL``
+     - CEPHALOSPORIN (note these can be assumed to be 3rd generation cephalosporins)
+
+   * - ``Beta-lactamase inhibitor``
+     - TANIBORBACTAM, AMOXICILLIN-CLAVULANIC ACID, PIPERACILLIN-TAZOBACTAM, TICARCILLIN-CLAVULANIC ACID, SULBACTAM-DURLOBACTAM, CEFTAZIDIME-AVIBACTAM, TAZOBACTAM
+
+   * - ``Aminoglycosides``
      - AMINOGLYCOSIDE
 
-   * - ``Fluoroquinolone``
+   * - ``Quinolones``
      - FLUOROQUINOLONE, QUINOLONE
 
    * - ``Fosfomycin``
      - FOSFOMYCIN
 
-   * - ``Sulfonamide``
-     - SULFONAMIDE
-
-   * - ``Tetracycline``
-     - TETRACYCLINE
-
-   * - ``Glycopeptide``
-     - GLYCOPEPTIDE
-
    * - ``Colistin``
      - COLISTIN
 
-   * - ``Phenicol``
+   * - ``Phenicols``
      - PHENICOL
 
-   * - ``Macrolide``
+   * - ``Macrolides``
      - MACROLIDE
 
    * - ``Rifamycin``
      - RIFAMYCIN
 
+   * - ``Sulfonamides``
+     - SULFONAMIDE
+
+   * - ``Tetracyclines``
+     - TETRACYCLINE
+
+   * - ``Tigecycline``
+     - TIGECYCLINE
+
    * - ``Trimethoprim``
      - TRIMETHOPRIM
-
-   * - ``BetaLactam``
-     - BETA-LACTAM, CEPHALOTHIN
-
-   * - ``Carbapenem``
-     - CARBAPENEM
-
-   * - ``Cephalosporin``
-     - CEPHALOSPORIN (note these can be assumed to be 3rd generation cephalosporins)
-
-   * - ``Methicillin``
-     - METHICILLIN
 
    * - ``Other Classes``
      - other CLASS values
