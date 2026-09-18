@@ -28,3 +28,4 @@ If you use the Kaptive calls for K and O locus typing please cite: Stanton  et a
 If you use the cgMLST and LIN code calls, please cite the paper: Bogaerts et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes. BMC Genomics (2025). https://doi.org/10.1186/s12864-025-12324-z
 
 
+For a full list of acknowledgments and citations for third-party tools and databases used by Kleborate, please see the [Docs](https://kleborate.readthedocs.io/en/latest/).
