@@ -13,7 +13,7 @@ We've included the phylogroup numbers in the table below for backwards compatibi
 
 .. figure:: _static/kleborate_species_tree.png
    :align: center
-   :width: 90%
+   :width: 80%
    :alt: Klebsiella species tree
 
 .. list-table::
@@ -149,8 +149,8 @@ There are also modules to check for presence/absence of the *rmpA2* and *peg-344
 
 The *ybt*\ , *clb*\ , *iuc*\ , *iro* and *rmpADC* locus-specific ST schemes, and *rmpA2* alleles, are defined in the *K. pneumoniae* `Bacterial Isolate Genome Sequence Database <https://bigsdb.pasteur.fr/klebsiella/>`_. 
 
-Notes on virulence allele reporting:
-++++++++++
+**Notes on virulence allele reporting:**
+
 
 Virulence alleles are treated in the same way as MLST alleles:
 
@@ -160,8 +160,7 @@ Virulence alleles are treated in the same way as MLST alleles:
 * Kleborate will next translate the hit into amino acid sequence and look for truncations (expressed as % amino acid length from the start codon). If the result is less than 90%, it is added to the result (e.g. ``15*-42%``\ ).
 
 
-Notes on virulence sequence type reporting:
-++++++++++
+**Notes on virulence sequence type reporting:**
 
 * Virulence locus STs are only reported if >50% of the genes in a locus are detected (e.g. at least 6 of the 11 *ybt* locus genes are required to report a *ybt* ST).
 * If <50% of the genes in a locus are detected, Kleborate reports the ST as ``0`` and the lineage as ``-``.
@@ -175,7 +174,7 @@ Notes on virulence sequence type reporting:
 
 
 Yersiniabactin and colibactin
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++++++++++++++++++++++++++++++
 
 .. code-block:: Python
 
@@ -189,7 +188,7 @@ The allele databases and schemes were last updated in April 2024. The number of 
 
 
 ybst Parameters
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 ``--klebsiella__ybst_min_identity``
 
@@ -205,7 +204,7 @@ At least this many exact matches are required to call an ST (default: 6)
 
 
 ybst Outputs
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 Output of the ybst module is the following columns:
 
@@ -225,7 +224,7 @@ Output of the ybst module is the following columns:
 
 
 cbst Parameters
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 ``--klebsiella__cbst_min_identity``
 
@@ -241,7 +240,7 @@ At least this many exact matches are required to call an ST (default: 8)
 
 
 cbst Outputs
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 Output of the cbst module is the following columns:
 
@@ -265,7 +264,7 @@ Output of the cbst module is the following columns:
 .. _klebsiella__smst:
 
 Aerobactin and salmochelin
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+++++++++++++++++++++++++++
 
 .. code-block:: Python
 
@@ -289,7 +288,7 @@ In Kleborate version 2.2.0 and earlier, the majority of *iucA* alleles had a seq
 The allele databases and schemes were last updated in April 2024. 
 
 abst Parameters
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 ``--klebsiella__abst_min_identity``
 
@@ -305,7 +304,7 @@ At least this many exact matches are required to call an ST (default: 3)
 
 
 abst Outputs
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 Output of the abst module is the following columns:
 
@@ -324,7 +323,7 @@ Output of the abst module is the following columns:
      - allele number (iuc locus)
 
 smst Parameters
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 ``--klebsiella__smst_min_identity``
 
@@ -339,7 +338,7 @@ Minimum alignment percent coverage for salmochelin MLST (default: 80.0)
 At least this many exact matches are required to call an ST (default: 2)
 
 smst Outputs
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 Output of the smst module is the following columns:
 
@@ -363,7 +362,7 @@ Output of the smst module is the following columns:
 
 
 Hypermucoidy loci
-^^^^^^^^^^^^^^^^^^
++++++++++++++++++
 
 .. code-block:: Python
 
@@ -376,7 +375,7 @@ To develop a typing scheme for the *rmp* locus we screened and extracted the *rm
 The ``klebsiella__rmst`` module screens for *rmpADC* and will report a sequence type (RmST), along with the associated gene alleles, lineage assignment, and associated mobile genetic element.
 
 rmp status
-+++++++++++++++++++++++++++
+^^^^^^^^^^
 
 When a *rmp* locus is detected, Kleborate runs additional checks for phase variation and known *rmpA* promoter mutations, to provide additional information as to the likely expression status of the locus and its associated hypermucoidy phenotype.
 
@@ -387,8 +386,7 @@ Next we check the *rmpA* promoter, for reversible variation in the poly-T tract 
 The *rmpA2* gene is homologous to *rmpA*, and the klebsiella__rmpa2 module screens for alleles of *rmpA2*.
 
 
-Note:
-+++++
+**Note:**
 
 * Alleles for each gene are sourced from the `BIGSdb-pasteur <https://bigsdb.pasteur.fr/klebsiella/>`_\ , while additional *rmpA* alleles have also been added to Kleborate.
 * The *rmpA* and *rmpA2* genes share ~83% nucleotide identity so are easily distinguished.
@@ -491,7 +489,7 @@ Note:
 
 
 rmst Parameters
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 ``--klebsiella__rmst_min_identity`` 
 
@@ -507,11 +505,14 @@ At least this many exact matches are required to call an ST (default: 2)
 
 
 rmst Outputs
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 Output of the rmst module is the following columns:
 
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - RmST
      - Sequence type
@@ -533,7 +534,7 @@ Output of the rmst module is the following columns:
 
 
 rmpA2 Parameters
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 ``--klebsiella__rmpa2_min_identity`` 
 
@@ -545,11 +546,14 @@ Minimum alignment percent coverage for rmpA2 alleles (default: 80.0)
 
 
 rmpA2 Outputs
-++++++++++++++++++
+^^^^^^^^^^^^^^^
 
 Output of the rmst module is the following columns:
 
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - rmpA2
      - best matching allele
@@ -559,7 +563,7 @@ Output of the rmst module is the following columns:
 .. _kpsc__virulence_score:
 
 Virulence score
-^^^^^^^^^^^^^^^^^^
++++++++++++++++
 
 .. code-block:: Python
 
@@ -589,18 +593,21 @@ This module takes ``klebsiella__abst``, ``klebsiella__cbst``, ``klebsiella__ybst
 
 
 
-Virulence score outputs
-+++++++++++++++++++++++
+Outputs
+^^^^^^^^^^^^^^^
 
 Virulence score is output in the following column:
 
 .. list-table::
 
+   * - **Column name**
+     - **Content**
+
    * - virulence_score
      - Score of 0-5, as defined above
 
 Peg-344 typing
-^^^^^^^^^^^^^^
+++++++++++++++
 
 .. code-block:: Python
   -m klebsiella__peg-344
@@ -608,7 +615,7 @@ Peg-344 typing
 This module checks for presence/absence of *peg-344* gene by aligning the genomes against *NTUH-K2044* reference sequence (protein BAH65947.1)
 
 Parameters
-++++++++++
+^^^^^^^^^^^^^^^
 
 ``--klebsiella__peg-344_min_identity``
 
@@ -624,13 +631,18 @@ Minimum alignment percent coverage for detecting *peg-344* gene (default: 80.0)
 * If the full protein length is found, the gene is reported as present
 
 
-peg-344 Outputs
-++++++++++++++++++
+Outputs
+^^^^^^^^^^^^^^^
 
 .. list-table::
 
+   * - **Column name**
+     - **Content**
+
    * - peg-344
      - present or truncated
+
+
 
 .. _kpsc__amr:
 
@@ -682,8 +694,8 @@ Kleborate will report all of the SHV alleles it detects and separate them into c
 The specific mutations, and assignment of alleles to class, is detailed in this preprint from KlebNET-GSP: `Tsang et al, 2024 Microbial genomics <https://doi.org/10.1099/mgen.0.001294>`_.
 
 
-Additional chromosomal mutations associated with AMR
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Chromosomal mutations
++++++++++++++++++++++
 
 * Fluoroquinolone resistance mutations: GyrA 83 & 87 and ParC 80 & 84. These appear in the ``Flq_mutations`` column.
 * Colistin resistance due to truncation or loss of core genes MgrB or PmrB. If these genes are missing or truncated, this information will be reported in the 'Col_mutations' column (truncations are expressed as % amino acid length from the start codon, if there is a mutation in the start codon this is indicated as ``p.(Met1?)`` to flag that the gene is present but may not be translated correctly). Note if MgrB and PmrB are present and not truncated then nothing about them will be reported in the 'Col' column.
@@ -693,8 +705,8 @@ Additional chromosomal mutations associated with AMR
 Note these do not count towards acquired resistance gene counts, but do count towards drug classes (with the exception of Omp mutations, whose spectrum of effects depends on the presence of acquired beta-lactamases and thus their impact on specific beta-lactam drug classes is hard to predict).
 
 
-AMR parameters
-++++++++++++++++++++++++++++++++++++++
+Parameters
+^^^^^^^^^^^^^^^
 
 ``--kpsc__amr_min_identity`` 
 
@@ -712,13 +724,16 @@ Minimum alignment percent identity for kpsc Amr spurious results (default: 80.0)
 
 Minimum alignment percent coverage for kpsc Amr spurious results (default: 40.0)
 
-AMR outputs
-++++++++++++++++++++++++++++++++++++++
+Outputs
+^^^^^^^
 
-Results of the KpSC AMR module are grouped by drug class (according to the `ARG-Annot <https://www.ncbi.nlm.nih.gov/pubmed/24145532>`_ DB), with beta-lactamases further broken down into Lahey classes (now maintained at `BLDB <http://www.bldb.eu/>`_\ ), as follows:
+In the main Kleborate output file, the results of the KpSC AMR module are grouped by drug class (according to the `ARG-Annot <https://www.ncbi.nlm.nih.gov/pubmed/24145532>`_ DB), with beta-lactamases further broken down into Lahey classes (now maintained at `BLDB <http://www.bldb.eu/>`_\ ), as follows:
 
 
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - AGly_acquired
      - aminoglycoside resistance genes
@@ -790,107 +805,15 @@ Results of the KpSC AMR module are grouped by drug class (according to the `ARG-
      - list of acquired resistance genes detected below the identity or coverage thresholds (default <90% identity or <80% nucleotide coverage)
 
 
+hAMRonization report
+^^^^^^^^^^^^^
 
-Additionally, we provide a new AMR genotyping report compatible with the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_. standard developed by the `Public Health Alliance for Genomic Epidemiology (PHA4GE) <https://www.biorxiv.org/content/10.1101/2024.03.07.583950v1>`_, thus improving the interoperability of Kleborate AMR results. 
-
-
-hAMRonization report for Kleborate
-++++++++++++++++++++++++++++++++++
-
-.. list-table::
-
-   * - Input File Name
-     - The name of the file containing the sequence data to be analysed
-
-   * - Gene Symbol
-     - The short name of a gene
-
-   * - Gene Name
-     - Short name of a gene
-
-   * - Nucleotide mutation
-     - Nucleotide sequence change(s) detected in the sequence being analyzed compared to a reference
-
-   * - Amino acid mutation
-     - The amino acid sequence change(s) detected in the sequence being analyzed compared to a reference
-
-   * - Genetic Variation Type
-     - The class of genetic variation detected
-
-   * - Drug Class
-     - Set of antibiotic molecule
-
-   * - Input Sequence ID
-     - An identifier of molecular sequence(s) or entries from a molecular sequence database
-
-   * - Input Gene Length
-     - The length (number of positions) of a target gene sequence submitted by a user
-
-   * - Input Gene Start
-     - The position of the first nucleotide in a gene sequence being analyzed (input gene sequence)
-
-   * - Input Gene Stop
-     - The position of the last nucleotide in a gene sequence being analyzed (input gene sequence)
-
-   * - Reference Gene Length
-     - The length (number of positions) of a gene reference sequence retrieved from a database
-
-   * - Reference Gene Start
-     - The position of the first nucleotide in a reference gene sequence (sequence being used for comparison)
-
-   * - Reference Gene Stop
-     - The position of the last nucleotide in a reference gene sequence (sequence being used for comparison)
-
-   * - Sequence Identity
-     - Sequence identity is the number (%) of matches (identical characters) in positions from an alignment of two molecular sequences
-
-   * - Coverage (percentage)
-     - The percentage of the reference sequence covered by the sequence of interest
-
-   * - Reference Accession
-     - An identifier that specifies an individual sequence record in a public sequence repository
-
-   * - Strand Orientation
-     - The orientation of a genomic element on the double-stranded molecule
-
-   * - Analysis Software Name
-     - A name of a computer package, application used for the analysis of data
-
-   * - Analysis Software Version
-     - The version of software used to analyze data
-
-   * - Reference Database Name
-     - An identifier of a biological or bioinformatics database
-
-   * - Reference Database Version
-     - The version of the database containing the reference sequences used for analysis
-
-   * - Input Protein Length
-     - The length (number of positions) of a protein target sequence submitted by a user
-
-   * - Reference Protein Length
-     - The length (number of positions) of a protein reference sequence retrieved from a database
-
-   * - Input Protein start
-     - The position of the first amino acid in the sequence being analyzed
-
-   * - Reference Protein start
-     - The position of the first amino acid in a reference sequence
-
-   * - Input Protein Stop
-     - The position of the last amino acid in the sequence being analyzed
-
-   * - Reference Protein Start
-     - The position of the first amino acid in a reference sequence
-
-   * - Reference Protein Stop
-     - The position of the last amino acid in a reference sequence
-
+Additionally, we provide a new AMR genotyping report in the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_ format developed by the `Public Health Alliance for Genomic Epidemiology (PHA4GE) <https://www.biorxiv.org/content/10.1101/2024.03.07.583950v1>`_, to improve the interoperability of Kleborate AMR results. This is provided in an additional output file, in long form with one row per genome + variant (in contrast to the main Kleborate table which has one row per genome).
 
 .. _Resistance scores and counts:
 
 Resistance scores and counts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+++++++++++++++++++++++++++++
 
 Running the KpSC AMR module automatically runs additional modules for generating counts of resistance genes and drug classes, and calculating a resistance score. These modules take  ``kpsc__amr`` as a prerequisite and can be specified manually as follows:
 
@@ -900,9 +823,9 @@ Running the KpSC AMR module automatically runs additional modules for generating
 
 
 Resistance score
-++++++++++++++++++++++
+^^^^^^^^^^^^^^^^
 
-This module calculates a resistance score, which ranges from 0 to 3 as follows
+The ``kpsc__resistance_score`` module calculates a resistance score, which ranges from 0 to 3 as follows
 
 .. list-table::
 
@@ -919,10 +842,10 @@ This module calculates a resistance score, which ranges from 0 to 3 as follows
      - Carbapenemase with colistin resistance (regardless of ESBL genes or OmpK mutations)
 
 
-Resistance gene counts and drug class counts
-+++++++++++++++++++++++++++++++++++++++++++++
+Resistance counts
+^^^^^^^^^^^^^^^^^
 
-This module quantifies how many acquired resistance genes are present and how many drug classes (in *addition* to ampicillin to which KpSC are intrinsically resistant) have at least one resistance determinant detected (i.e. ignoring genes recorded in the Bla_chr and Bla_acquired columns). 
+The ``kpsc__resistance_gene_count`` module quantifies how many acquired resistance genes are present, and the ``kpsc__resistance_class_count`` module quantifies how many drug classes (in *addition* to ampicillin, to which KpSC are intrinsically resistant) have at least one resistance determinant detected (i.e. ignoring genes recorded in the Bla_chr and Bla_acquired columns). 
 
 A few things to note:
 
@@ -932,12 +855,15 @@ A few things to note:
 * Note that since a drug class can have multiple resistance determinants, the gene count is typically higher than the class count.
 
 
-Resistance scores and counts outputs
-++++++++++++++++++++++++++++++++++++++
+Outputs
+^^^^^^^
 
 Resistance scores and counts are output in the following columns:
 
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - resistance_score
      - Score of 0-3, as defined above
@@ -951,10 +877,8 @@ Resistance scores and counts are output in the following columns:
 
 .. _kpsc__cipro_prediction:
 
-
 Ciprofloxacin resistance prediction
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
++++++++++++++++++++++++++++++++++++
 
 .. code-block:: Python
 
@@ -966,12 +890,11 @@ Ciprofloxacin resistance prediction is performed based on assigning the genome t
 (ii) number of plasmid-mediated quinolone resistance (PMQR) genes (i.e., *qep* and *qnr* genes); and 
 (iii) the presence or absence of *aac(6`)-Ib-cr*. 
  
-
 Each genotype profile is associated with a ciprofloxacin phenotype, in the form of a categorical assignment (wildtype S, nonwildtype I, nonwildtype R) and a minimum inhibitory concentration (MIC).
 
 The association of each genotype profile with a phenotype is based on analysis of ~13 thousand genomes, by the `KlebNET-GSP AMR Genotype-Phenotype Group <https://klebnet.org/amrgenopheno/>`_, and the strength of the evidence from this data set is indicated in the **Positive predictive value** and **MIC** columns. The positive predictive value of the genotype profile is expressed as the raw number of genomes with that genotype, and the number of those which possess the associated phenotype. The **MIC** column indicates the median MIC value, and interquartile range of all MIC values, for isolates with this genotype profile.
 
-The development and validation of the ciprofloxacin resistance prediction classifier is detailed in this preprint: `preprint link here once available`. 
+The development and validation of the ciprofloxacin resistance prediction classifier is detailed in this `paper <https://doi.org/10.1101/2025.09.24.678318>`_. 
 
 .. list-table::
 
@@ -1031,6 +954,9 @@ Results of the ciprofloxacin resistance prediction are reported in Kleborate wit
 
 .. list-table::
 
+   * - **Column name**
+     - **Content**
+
    * - Ciprofloxacin_prediction
      - Indicates the categorical phenotype prediction for this genome (wildtype S, nonwildtype I, nonwildtype R)
 
@@ -1044,11 +970,14 @@ Results of the ciprofloxacin resistance prediction are reported in Kleborate wit
      - Indicates the MIC distribution observed for the genotype profile in **Ciprofloxacin_profile**, in the form of median value and interquartile range, based on the KlebNET-GSP AMR Genotype-Phenotype Group data enumerated in the **Ciprofloxacin_profile_support** column.
 
 
+Serotyping
+----------
+
 .. _kpsc__kaptive:
 
 
-KpSC K and O locus typing with Kaptive
------------------------------------------
+K and O locus typing
+++++++++++++++++++++
 
 .. code-block:: Python
 
@@ -1057,7 +986,7 @@ KpSC K and O locus typing with Kaptive
 This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
 
 Parameters
-+++++++++
+^^^^^^^^^^
 
 ``--kpsc_k``
 Kaptive database for K-locus typing
@@ -1069,15 +998,15 @@ Kaptive database for O-locus typing
 
 
 Outputs
-+++++++++
+^^^^^^^^^^
 
 Kaptive results are output in the following columns:
 
 .. list-table::
    :header-rows: 1
 
-   * - Column Name
-     - Description
+   * - **Column name**
+     - **Content**
    * - K_locus
      - The K locus type which most closely matches the assembly.
    * - K_type
@@ -1108,8 +1037,8 @@ Kaptive results are output in the following columns:
 .. _kpsc__wzi:
 
 
-KpSC Wzi typing for K antigen prediction
------------------------------------------
+Wzi typing
+++++++++++
 
 .. code-block:: Python
 
@@ -1119,12 +1048,15 @@ This module reports the closest match amongst the *wzi* alleles in the `BIGSdb <
 
 The *wzi* allele can provide a handy way of spotting the hypervirulence-associated capsule types (wzi=K1, wzi2=K2, wzi5=K5); or spotting capsule switching within clones, e.g. you can tell which ST258 lineage you have from the _wzi_ type (wzi154: the main lineage II; wzi29: recombinant lineage I; others: probably other recombinant lineages). But the K locus predictions from the Kaptive module are more specific and reliable.
 
-Wzi outputs
-+++++++++++++++
+Outputs
+^^^^^^^
 
 Wzi typing results are output in the following columns:
 
 .. list-table::
+
+   * - **Column name**
+     - **Content**
 
    * - wzi
      - wzi allele
@@ -1142,7 +1074,7 @@ KpSC cgMLST
 
    -m kpsc__cgmlst
 
-This module performs cgMLST allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
+This module performs cgMLST using the `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool, to type against the `KpSC cgMLST scheme <https://doi.org/10.1371/journal.pone.0004982>`_ hosted by BIGSdb-Pasteur. LIN codes are inferred from the cgSTs, and are used to report sublineage (SL) and clonal group (CG) designations, see `this paper <https://doi.org/10.1093/molbev/msac135>` for details of the scheme and `this PLoS Biology article <https://doi.org/10.1371/journal.pbio.3003781>`_ for more information and examples on LIN codes as nomenclature for bacterial lineages.
 
 
 Outputs
@@ -1153,8 +1085,8 @@ cgMLST results are output in the following columns:
 .. list-table::
    :header-rows: 1
 
-   * - Column Name
-     - Description
+   * - **Column name**
+     - **Content**
 
    * - cgST
      - Best matching scgST
@@ -1163,17 +1095,17 @@ cgMLST results are output in the following columns:
      - LIN code / Partial LINcode for input strain
 
    * - Sublineage
-     - Sublineage for input strain
+     - Sublineage for input strain (based on the first 3 positions of the LIN code)
 
    * - Clonal group
-     - Clonal group for input strain
+     - Clonal group for input strain (based on the first 4 positions of the LIN code)
 
 
 .. _kpsc__mrk:
 
-KpSC mrk
--------------------------------------
-This module performs MLST typing of KpSC *mrk* operon.
+mrk operon
+--------
+This module performs MLST typing of the KpSC type-3 fimbrial operon, *mrk*, using the ``mrk`` scheme hosted at `BIGSdb-Pasteur <https://bigsdb.pasteur.fr/klebsiella/>`_. This is a core gene cluster in KpSC, the module is provided to confirm presence/absence/disruption and to type allelic variation within the component genes. (Note this scheme is based on all genomes in BIGSdb as of early 2026, it is still undergoing development and a publication describing it is in preparation.)
 
 
 .. code-block:: Python
@@ -1182,7 +1114,7 @@ This module performs MLST typing of KpSC *mrk* operon.
 
 
 Parameters
-+++++++
+++++++++++
 
 ``--kpsc__mrk_min_identity``
 
@@ -1204,7 +1136,10 @@ Output of the KpSC mrk module is the following columns:
 
 .. list-table::
 
-   * - ST
+   * - **Column name**
+     - **Content**
+
+   * - mrkST
      - sequence type
 
    * - mrkA, mrkB, mrkC, mrkD, mrkF, mrkH, mrkI, mrkJ
