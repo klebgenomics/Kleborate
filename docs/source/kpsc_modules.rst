@@ -57,6 +57,8 @@ We've included the phylogroup numbers in the table below for backwards compatibi
 
 :sup:`b` alternative (older) Kp phylogroup numbers as described in `Brisse et al. 2001 <https://ijs.microbiologyresearch.org/content/journal/ijsem/10.1099/00207713-51-3-915#tab2>`_ and `Fevre et al. 2005 <https://aac.asm.org/content/49/12/5149>`_ prior to the identification of *K. variicola* subsp *tropica*\ , *K. quasivariicola* and *K. africana*.
 
+
+     
 .. _kpsc_mlst:
 
 MLST
@@ -127,6 +129,7 @@ Output of the KpSC MLST module is the following columns:
 * Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that disagree with the ST reported. So ``258-1LV`` indicates a single-locus variant (SLV) of ST258, i.e. 6/7 loci match ST258.
 
 
+
 .. _kpsc_virulence:
 
 Acquired virulence loci
@@ -146,9 +149,8 @@ There are also modules to check for presence/absence of the *rmpA2* and *peg-344
 
 The *ybt*\ , *clb*\ , *iuc*\ , *iro* and *rmpADC* locus-specific ST schemes, and *rmpA2* alleles, are defined in the *K. pneumoniae* `Bacterial Isolate Genome Sequence Database <https://bigsdb.pasteur.fr/klebsiella/>`_. 
 
-
 Notes on virulence allele reporting:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++
 
 Virulence alleles are treated in the same way as MLST alleles:
 
@@ -157,13 +159,16 @@ Virulence alleles are treated in the same way as MLST alleles:
 * Imperfect hits (either <100% identity or <100% coverage) are reported with a ``*``. E.g. ``15*`` means that no perfect match was found but the closest match is allele 15.
 * Kleborate will next translate the hit into amino acid sequence and look for truncations (expressed as % amino acid length from the start codon). If the result is less than 90%, it is added to the result (e.g. ``15*-42%``\ ).
 
+
 Notes on virulence sequence type reporting:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++
 
 * Virulence locus STs are only reported if >50% of the genes in a locus are detected (e.g. at least 6 of the 11 *ybt* locus genes are required to report a *ybt* ST).
 * If <50% of the genes in a locus are detected, Kleborate reports the ST as ``0`` and the lineage as ``-``.
 * If <100% but >50% of the genes in a locus are detected, Kleborate will report the locus as (incomplete), along with the closest matching ST and its corresponding phylogenetic lineage. E.g. if only 7 of the 11 *ybt* genes are detected, this will be reported as ``ybtX; ICEKpX (incomplete)``.
 * For genomes with multiple copies of a virulence locus (e.g. a strain that carries ICE *Kp1* and the KpVP-1 plasmid will have two copies of *iro* and *rmp*\ ), Kleborate will report and assign a ST or closest matching ST to each of these virulence loci provided that the locus is relatively intact in the genome (i.e. >50% of the genes in a locus are present on a single contig) and according to the above criteria.  
+
+
 
 .. _klebsiella__ybst:
 .. _klebsiella__cbst:
@@ -254,6 +259,7 @@ Output of the cbst module is the following columns:
    * - clbA, clbB, clbC, clbD, clbE, clbF, clbG, clbH, clbI, clbL, clbM, clbN, clbO, clbP, clbQ
      - allele number (clb / pks locus)
 
+
 .. _klebsiella__abst:
 
 .. _klebsiella__smst:
@@ -273,8 +279,7 @@ We further explored the genetic diversity of the aerobactin (\ *iuc*\ ) and salm
 * The lineages *iuc2A*\ , *iuc3* and *iro4* were associated with other novel FIBk plasmids that had not been previously described in *K. pneumoniae*\ , but sequences for which are included in `the paper <https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-018-0587-5>`_. 
 * The salmochelin locus present in ICE *Kp1* constitutes its own lineage *iro3*\ , and the aerobactin locus present in the chromosome of ST67 *K. pneumoniae* subsp *rhinoscleromatis* strains constitutes its own lineage *iuc4*. 
 
-Note on *iucA* sequence update:
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Note on iucA sequence update:**
 
 In Kleborate version 2.2.0 and earlier, the majority of *iucA* alleles had a sequence length of 1791 bp, with the exception being those associated with lineage *iuc 5* which have a length of 1725 bp. Related to this, *iucA* in genomes with *iuc 3* encoded a premature stop codon resulting in a significantly truncated and presumably non-functional IucA protein (i.e. at 2% length of the intact amino acid sequence), despite experimental evidence showing siderophore activity in *iuc 3*\ + isolates. In light of this evidence, the sequences of *iucA* genes with the longer ~1791 bp length were updated to ~1725 bp by removing the first 66 bp. These changes are captured in Kleborate version 2.3.0 onwards, and address the truncation issue in *iuc 3*\ + genomes. The following *iucA* alleles and AbST profiles have also been retired due to sequence redundancy following the update:
 
@@ -356,6 +361,7 @@ Output of the smst module is the following columns:
 .. _klebsiella__rmpa2:
 
 
+
 Hypermucoidy loci
 ^^^^^^^^^^^^^^^^^^
 
@@ -382,7 +388,7 @@ The *rmpA2* gene is homologous to *rmpA*, and the klebsiella__rmpa2 module scree
 
 
 Note:
-^^^^^^^^
++++++
 
 * Alleles for each gene are sourced from the `BIGSdb-pasteur <https://bigsdb.pasteur.fr/klebsiella/>`_\ , while additional *rmpA* alleles have also been added to Kleborate.
 * The *rmpA* and *rmpA2* genes share ~83% nucleotide identity so are easily distinguished.
@@ -482,6 +488,7 @@ Note:
      - 2
      - 12T (ARG-box lost)
      - present
+
 
 rmst Parameters
 ++++++++++++++++++
@@ -583,7 +590,7 @@ This module takes ``klebsiella__abst``, ``klebsiella__cbst``, ``klebsiella__ybst
 
 
 Virulence score outputs
-++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++
 
 Virulence score is output in the following column:
 
@@ -592,10 +599,8 @@ Virulence score is output in the following column:
    * - virulence_score
      - Score of 0-5, as defined above
 
-
-
 Peg-344 typing
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
 .. code-block:: Python
   -m klebsiella__peg-344
@@ -627,7 +632,6 @@ peg-344 Outputs
    * - peg-344
      - present or truncated
 
-
 .. _kpsc__amr:
 
 
@@ -635,11 +639,13 @@ KpSC AMR
 --------
 
 .. code-block:: Python
-
    -m kpsc__amr
 
+
 Acquired AMR genes
-^^^^^^^^^^^^^^^^^^
+++++++++++++++++++
+
+This module screens input genomes against a curated version of the `CARD database <https://card.mcmaster.ca/>`_ of acquired resistance gene alleles (see the following `spreadsheet <https://figshare.com/articles/dataset/CARD_v3_0_8_AMR_database_curation_for_Kleborate/13256759>`_ for details on curation), and groups these by drug class for reporting purposes. The chromosomal *fosA* and *oqxAB* genes that are intrinsic to all KpSC are not reported and usually do not confer fosfomycin/fluoroquinolone resistance in these species.
 
 This module screens input genomes against a curated version of the `CARD database <https://card.mcmaster.ca/>`_ of acquired resistance gene alleles (see the following `spreadsheet <https://figshare.com/articles/dataset/CARD_v3_0_8_AMR_database_curation_for_Kleborate/13256759>`_ for details on curation), and groups these by drug class for reporting purposes. The chromosomal *fosA* and *oqxAB* genes that are intrinsic to all KpSC are not reported and usually do not confer fosfomycin/fluoroquinolone resistance in these species.
 
@@ -1050,8 +1056,8 @@ KpSC K and O locus typing with Kaptive
 
 This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3 tool to identify capsule (K) and O antigen loci. See the Kaptive `documentation <https://klebgenomics.github.io/Kaptive/index.html>`_ for more details of how Kaptive works, tutorials, and citations.
 
-Kaptive parameters
-^^^^^^^^^^^^^^^^^^^^
+Parameters
++++++++++
 
 ``--kpsc_k``
 Kaptive database for K-locus typing
@@ -1062,8 +1068,8 @@ Kaptive database for O-locus typing
 
 
 
-Kaptive outputs
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Outputs
++++++++++
 
 Kaptive results are output in the following columns:
 
@@ -1098,6 +1104,7 @@ Kaptive results are output in the following columns:
      - A string listing the gene names of expected O locus genes that were not found.
 
 
+
 .. _kpsc__wzi:
 
 
@@ -1126,6 +1133,7 @@ Wzi typing results are output in the following columns:
      - K locus typically associated with this wzi allele
 
 
+
 .. _kpsc__cgMLST:
 
 KpSC cgMLST 
@@ -1137,8 +1145,8 @@ KpSC cgMLST
 This module performs cgMLST allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
 
 
-cgMLST outputs
-^^^^^^^^^^^^^^^^^^^^
+Outputs
+++++++
 
 cgMLST results are output in the following columns:
 
@@ -1173,9 +1181,8 @@ This module performs MLST typing of KpSC *mrk* operon.
    -m kpsc__mrk
 
 
-
 Parameters
-^^^^^^^^^^^^^^^^^^^^^
++++++++
 
 ``--kpsc__mrk_min_identity``
 
@@ -1191,7 +1198,7 @@ At least this many exact matches are required to call an ST (default: 4)
 
 
 Outputs
-^^^^^^^^^^^^^^^^^^^^^
++++++++
 
 Output of the KpSC mrk module is the following columns:
 
@@ -1206,4 +1213,3 @@ Output of the KpSC mrk module is the following columns:
 * Kleborate reports the closest matching ST if a precise match is not found.
 * Imprecise allele matches are indicated with a ``*``.
 * Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that disagree with the ST reported.
-     
