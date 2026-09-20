@@ -150,6 +150,31 @@ The following files will be created inside the ``kleborate/modules/ecoli__cgmlst
 * ``ecoli_cgmlst_v1-index/`` — Indexed binary database used by ``mist`` during allele calling.
 
 
+EnteroBase API Token (required for LIN codes)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+EnteroBase schemes do not include LIN codes in the downloaded profiles file. To retrieve the LIN code for a matched cgST, this module queries EnteroBase's API token
+
+Please request API access to the EnteroBase E. coli database at https://enterobase.warwick.ac.uk/
+Once, you have obtained the token run; 
+
+.. code-block:: bash
+
+   echo 'YOUR_TOKEN' > ./enterobase_token
+   chmod 600 ./enterobase_token
+
+When running the module pass the ``--ecoli_entero_token`` path
+
+
+.. code-block:: bash
+
+     kleborate \
+     -a *.fasta \
+     -o kleborate_results \
+     -m escherichia__cgmlst \
+     --trim_headers \
+     --ecoli_entero_token ./enterobase_token
+
 
 See also
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
