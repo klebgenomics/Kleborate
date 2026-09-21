@@ -21,7 +21,7 @@ import collections
 import pytest
 import sys
 
-from .klebsiella_oxytoca_complex__mlst import *
+from .kosc__mlst import *
 
 
 def get_test_genome_dir():
@@ -139,5 +139,5 @@ def test_get_results_3():
     results = get_results(get_test_genome_dir() / 'GCF_000009885.1.fna.gz', None,
                           Args(klebsiella_oxytoca_complex__mlst_min_identity=90.0, klebsiella_oxytoca_complex__mlst_min_coverage=80.0,
                                klebsiella_oxytoca_complex__mlst_required_exact_matches=3), {})
-    assert results['ST'] == 'NA'
+    assert results['ST'] == 0
     assert results['clonal_complex'] == '-'

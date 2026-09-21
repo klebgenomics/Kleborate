@@ -18,9 +18,13 @@ details. You should have received a copy of the GNU General Public License along
 not, see <https://www.gnu.org/licenses/>.
 """
 
+import pathlib
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+
 
 from kleborate.shared.multi_mlst import *
-from kleborate.shared.alignment import Alignment
+from test_alignment import create_alignment as Alignment
 
 
 def test_cluster_hits_by_contig_1():

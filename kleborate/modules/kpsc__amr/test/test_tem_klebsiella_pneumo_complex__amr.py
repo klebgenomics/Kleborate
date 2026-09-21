@@ -5,9 +5,9 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2024 Kat Holt
-Copyright 2024 Ryan Wick (rrwick@gmail.com)
-Copyright 2024 (gathonimaranga@gmail.com)
+Copyright 2026 Kat Holt
+Copyright 2026 Ryan Wick (rrwick@gmail.com)
+Copyright 2026 (gathonimaranga@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -26,7 +26,7 @@ import pathlib
 
 
 from kleborate.shared.resMinimap import read_class_file, get_res_headers, resminimap_assembly
-from kleborate.modules.klebsiella_pneumo_complex__amr.klebsiella_pneumo_complex__amr import get_headers, get_results
+from kleborate.modules.kpsc__amr.kpsc__amr import get_headers, get_results
 
 def get_test_genome_dir():
     return pathlib.Path(__file__).parents[4] / 'test' / 'test_res_tem' 
@@ -38,9 +38,8 @@ def test_get_results_1():
     on the wrong strand. This test sequence was coming up as "TEM-15^" from a wrong strand match
     until we fixed the bug (only checking the forward strand).
     """
-    Args = collections.namedtuple('Args', ['klebsiella_pneumo_complex__amr_min_identity', 'klebsiella_pneumo_complex__amr_min_coverage','klebsiella_pneumo_complex__amr_min_spurious_identity', 'klebsiella_pneumo_complex__amr_min_spurious_coverage'])
+    Args = collections.namedtuple('Args', ['kpsc__amr_min_identity', 'kpsc__amr_min_coverage', 'kpsc__amr_min_spurious_identity', 'kpsc__amr_min_spurious_coverage'])
     results = get_results(get_test_genome_dir() / 'tem.fasta', None,
-                          Args(klebsiella_pneumo_complex__amr_min_identity=90.0, klebsiella_pneumo_complex__amr_min_coverage=80.0, klebsiella_pneumo_complex__amr_min_spurious_identity=80.0, klebsiella_pneumo_complex__amr_min_spurious_coverage=40.0), {})
+                          Args(kpsc__amr_min_identity=90.0, kpsc__amr_min_coverage=80.0, kpsc__amr_min_spurious_identity=80.0, kpsc__amr_min_spurious_coverage=40.0), {})
     assert results['Bla_ESBL_acquired'] == '-'
-    assert results['Bla_acquired'] == 'TEM-1^'
-
+    assert results['Bla_acquired'] == ['TEM-1^']

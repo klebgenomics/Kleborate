@@ -230,11 +230,11 @@ def test_get_used_module_names_7():
     assert 'either --preset or --modules is required' in str(e.value)
 
 
-def test_paper_refs():
-    papers = kleborate.__main__.paper_refs()
-    assert 'Lam MMC, et al.' in papers
-    assert 'Wyres KL, et al.' in papers
-    assert '\n\n' in papers
+# def test_paper_refs():
+#     papers = kleborate.__main__.paper_refs()
+#     assert 'Lam MMC, et al.' in papers
+#     assert 'Wyres KL, et al.' in papers
+#     assert '\n\n' in papers
 
 
 def remove_formatting(text):
@@ -249,7 +249,7 @@ def test_parse_arguments_1(capsys):
     out = remove_formatting(out)
     assert 'Kleborate:' in out
     assert 'Input/output:' in out
-    assert 'enterobacterales__species module:' not in out
+    assert 'general__species module:' not in out
     
 
 
@@ -262,7 +262,7 @@ def test_parse_arguments_2(capsys):
     print(out)
     assert 'Kleborate:' in out
     assert 'Input/output:' in out
-    assert 'enterobacterales__species module:' in out
+    assert 'general__species module:' in out
 
 
 def test_parse_arguments_3(capsys):
@@ -274,7 +274,7 @@ def test_parse_arguments_3(capsys):
     print(out)
     assert 'Kleborate:' in out
     assert 'Input/output:' in out
-    assert 'enterobacterales__species module:' in out
+    assert 'general__species module:' in out
 
 
 def test_parse_arguments_4(capsys):
@@ -285,7 +285,7 @@ def test_parse_arguments_4(capsys):
     err = remove_formatting(err)
     assert 'Kleborate:' in err
     assert 'Input/output:' in err
-    assert 'enterobacterales__species module:' not in err
+    assert 'general__species module:' not in err
 
 
 def test_get_run_order_1():

@@ -17,7 +17,7 @@ details. You should have received a copy of the GNU General Public License along
 not, see <https://www.gnu.org/licenses/>.
 """
 
-from .klebsiella_pneumo_complex__virulence_score import *
+from .kpsc__virulence_score import *
 
 
 def test_prerequisite_modules():
@@ -33,121 +33,183 @@ def test_empty_functions():
 
 def test_get_results_1():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
         'klebsiella__ybst__YbST': 0,
         'klebsiella__abst__AbST': 0,
-        'klebsiella__cbst__CbST': 0
+        'klebsiella__cbst__CbST': 0,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': '-',
+        'klebsiella__abst__Aerobactin': '-',
+        'klebsiella__cbst__Colibactin': '-',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '0'
-    assert result['spurious_virulence_hits'] == '-'
+
 
 def test_get_results_2():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
-        'klebsiella__ybst__YbST': 1,  
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
+        'klebsiella__ybst__YbST': 1,
         'klebsiella__abst__AbST': 0,
-        'klebsiella__cbst__CbST': 0
+        'klebsiella__cbst__CbST': 0,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': 'ybt 1',
+        'klebsiella__abst__Aerobactin': '-',
+        'klebsiella__cbst__Colibactin': '-',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '1'
-    assert result['spurious_virulence_hits'] == '-'
+
 
 def test_get_results_3():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
         'klebsiella__ybst__YbST': 0,
         'klebsiella__abst__AbST': 0,
-        'klebsiella__cbst__CbST': 1  
+        'klebsiella__cbst__CbST': 1,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': '-',
+        'klebsiella__abst__Aerobactin': '-',
+        'klebsiella__cbst__Colibactin': 'clb 1',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '2'
-    assert result['spurious_virulence_hits'] == '-'
 
 
 def test_get_results_4():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
-        'klebsiella__ybst__YbST': 1,  
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
+        'klebsiella__ybst__YbST': 1,
         'klebsiella__abst__AbST': 0,
-        'klebsiella__cbst__CbST': 1  
+        'klebsiella__cbst__CbST': 1,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': 'ybt 1',
+        'klebsiella__abst__Aerobactin': '-',
+        'klebsiella__cbst__Colibactin': 'clb 1',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '2'
-    assert result['spurious_virulence_hits'] == '-'
+
 
 def test_get_results_5():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
         'klebsiella__ybst__YbST': 0,
-        'klebsiella__abst__AbST': 1,  
-        'klebsiella__cbst__CbST': 0
+        'klebsiella__abst__AbST': 1,
+        'klebsiella__cbst__CbST': 0,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': '-',
+        'klebsiella__abst__Aerobactin': 'iuc 1',
+        'klebsiella__cbst__Colibactin': '-',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '3'
-    assert result['spurious_virulence_hits'] == '-'
+
 
 def test_get_results_6():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
-        'klebsiella__ybst__YbST': 1,  
-        'klebsiella__abst__AbST': 1,  
-        'klebsiella__cbst__CbST': 0
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
+        'klebsiella__ybst__YbST': 1,
+        'klebsiella__abst__AbST': 1,
+        'klebsiella__cbst__CbST': 0,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': 'ybt 1',
+        'klebsiella__abst__Aerobactin': 'iuc 1',
+        'klebsiella__cbst__Colibactin': '-',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '4'
-    assert result['spurious_virulence_hits'] == '-'
+
 
 def test_get_results_7():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
         'klebsiella__ybst__YbST': 0,
-        'klebsiella__abst__AbST': 1,  
-        'klebsiella__cbst__CbST': 1  
+        'klebsiella__abst__AbST': 1,
+        'klebsiella__cbst__CbST': 1,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': '-',
+        'klebsiella__abst__Aerobactin': 'iuc 1',
+        'klebsiella__cbst__Colibactin': 'clb 1',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '5'
-    assert result['spurious_virulence_hits'] == '-'
+
 
 def test_get_results_8():
     previous_results = {
-        'klebsiella__ybst__spurious_ybt_hits': '-',
-        'klebsiella__abst__spurious_abst_hits': '-',
-        'klebsiella__cbst__spurious_clb_hits': '-',
-        'klebsiella__rmst__spurious_rmst_hits': '-',
-        'klebsiella__smst__spurious_smst_hits': '-',
-        'klebsiella__ybst__YbST': 1,  
-        'klebsiella__abst__AbST': 1,  
-        'klebsiella__cbst__CbST': 1  
+        'klebsiella__ybst__spurious_YbST': '-',
+        'klebsiella__abst__spurious_AbST': '-',
+        'klebsiella__cbst__spurious_CbST': '-',
+        'klebsiella__rmst__spurious_RmST': '-',
+        'klebsiella__smst__spurious_SmST': '-',
+        'klebsiella__ybst__YbST': 1,
+        'klebsiella__abst__AbST': 1,
+        'klebsiella__cbst__CbST': 1,
+        'klebsiella__smst__SmST': 0,
+        'klebsiella__rmst__RmST': 0,
+        'klebsiella__ybst__Yersiniabactin': 'ybt 1',
+        'klebsiella__abst__Aerobactin': 'iuc 1',
+        'klebsiella__cbst__Colibactin': 'clb 1',
+        'klebsiella__smst__Salmochelin': '-',
+        'klebsiella__rmst__RmpADC': '-',
+        'klebsiella__rmst__RmpADC_status': '-'
     }
     result = get_results(None, None, None, previous_results)
     assert result['virulence_score'] == '5'
-    assert result['spurious_virulence_hits'] == '-'

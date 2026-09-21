@@ -28,7 +28,7 @@ def get_file_dir():
 
 
 def test_prerequisite_modules():
-    assert prerequisite_modules() == ['enterobacterales__species']
+    assert prerequisite_modules() == ['general__species']
 
 
 def test_get_headers():
@@ -45,119 +45,126 @@ def test_empty_functions():
 
 
 def test_count_1():
-    contig_count, _, _, _, _ = get_contig_stats(get_file_dir() / 'test_1.fasta')
+    contig_count, _, _, _, _, *rest = get_contig_stats(get_file_dir() / 'test_1.fasta')
     assert contig_count == 4
 
 
 def test_count_2():
-    contig_count, _, _, _, _ = get_contig_stats(get_file_dir() / 'test_2.fasta')
+    contig_count, _, _, _, _, *rest = get_contig_stats(get_file_dir() / 'test_2.fasta')
     assert contig_count == 3
 
 
 def test_n50_1():
-    _, N50, _, _, _ = get_contig_stats(get_file_dir() / 'test_1.fasta')
+    _, N50, _, _, _, *rest = get_contig_stats(get_file_dir() / 'test_1.fasta')
     assert N50 == 40
 
 
 def test_n50_2():
-    _, N50, _, _, _ = get_contig_stats(get_file_dir() / 'test_2.fasta')
+    _, N50, _, _, _, *rest = get_contig_stats(get_file_dir() / 'test_2.fasta')
     assert N50 == 200
 
 
 def test_longest_1():
-    _, _, longest_contig, _, _ = get_contig_stats(get_file_dir() / 'test_1.fasta')
+    _, _, longest_contig, _, _, *rest = get_contig_stats(get_file_dir() / 'test_1.fasta')
     assert longest_contig == 45
 
 
 def test_longest_2():
-    _, _, longest_contig, _, _ = get_contig_stats(get_file_dir() / 'test_2.fasta')
+    _, _, longest_contig, _, _, *rest = get_contig_stats(get_file_dir() / 'test_2.fasta')
     assert longest_contig == 200
 
 
 def test_ambiguous_bases_1():
-    _, _, _, _, ambiguous = get_contig_stats(get_file_dir() / 'test_1.fasta')
+    _, _, _, _, ambiguous, *rest = get_contig_stats(get_file_dir() / 'test_1.fasta')
     assert ambiguous == 'no'
 
 
 def test_ambiguous_bases_2():
-    _, _, _, _, ambiguous = get_contig_stats(get_file_dir() / 'test_2.fasta')
+    _, _, _, _, ambiguous, *rest = get_contig_stats(get_file_dir() / 'test_2.fasta')
     assert ambiguous == 'yes (1)'
 
 
 def test_ambiguous_bases_3():
-    _, _, _, _, ambiguous = get_contig_stats(get_file_dir() / 'test_3.fasta')
+    _, _, _, _, ambiguous, *rest = get_contig_stats(get_file_dir() / 'test_3.fasta')
     assert ambiguous == 'no'
 
 
 def test_ambiguous_bases_4():
-    _, _, _, _, ambiguous = get_contig_stats(get_file_dir() / 'test_4.fasta')
+    _, _, _, _, ambiguous, *rest = get_contig_stats(get_file_dir() / 'test_4.fasta')
     assert ambiguous == 'yes (4)'
 
 
 def test_total_size_1():
-    _, _, _, total_size, _ = get_contig_stats(get_file_dir() / 'test_1.fasta')
+    _, _, _, total_size, _, *rest = get_contig_stats(get_file_dir() / 'test_1.fasta')
     assert total_size == 115
 
 
 def test_total_size_2():
-    _, _, _, total_size, _ = get_contig_stats(get_file_dir() / 'test_2.fasta')
+    _, _, _, total_size, _, *rest = get_contig_stats(get_file_dir() / 'test_2.fasta')
     assert total_size == 260
 
 
 def test_total_size_3():
-    _, _, _, total_size, _ = get_contig_stats(get_file_dir() / 'test_3.fasta')
+    _, _, _, total_size, _, *rest = get_contig_stats(get_file_dir() / 'test_3.fasta')
     assert total_size == 260
 
 
 def test_total_size_4():
-    _, _, _, total_size, _ = get_contig_stats(get_file_dir() / 'test_4.fasta')
+    _, _, _, total_size, _, *rest = get_contig_stats(get_file_dir() / 'test_4.fasta')
     assert total_size == 260
 
 
 def test_qc_warnings_1():
-    # Define the species specifications for the test
     species_specification_dict = {
         'Klebsiella pneumoniae': {
             'min_genome_size': 5000000,
-            'max_genome_size': 6500000
+            'max_genome_size': 6500000,
+            'min_N50': 10000,
+            'min_GC_Content': 50.0,
+            'max_GC_Content': 60.0
         }
     }
     
     previous_results = {
-        'enterobacterales__species__species': 'Klebsiella pneumoniae'
+        'general__species__species': 'Klebsiella pneumoniae'
     }
     
-    # A perfectly nice assembly - yields no warnings.
     warnings = get_qc_warnings(
-        total_size=5000000,  # Total size within acceptable range
-        N50=20000,        
-        ambiguous_bases='no',  # No ambiguous bases
-        species=previous_results['enterobacterales__species__species'],
-        species_specification_dict=species_specification_dict
+        total_size=5000000,
+        N50=20000,
+        contig_count=10,
+        gc_content=55.0,
+        ambiguous_bases='no',
+        species=previous_results['general__species__species'],
+        species_spec_dict=species_specification_dict
     )
     
     assert warnings == '-'
 
+
 def test_qc_warnings_2():
-    # Define the species specifications for the test
     species_specification_dict = {
         'Klebsiella pneumoniae': {
             'min_genome_size': 5000000,
-            'max_genome_size': 6500000
+            'max_genome_size': 6500000,
+            'min_N50': 10000,
+            'min_GC_Content': 50.0,
+            'max_GC_Content': 60.0
         }
     }
     
     previous_results = {
-        'enterobacterales__species__species': 'Klebsiella pneumoniae'
+        'general__species__species': 'Klebsiella pneumoniae'
     }
     
-    # Small N50 test case with all required arguments
     warnings = get_qc_warnings(
-        total_size=5000000,  
-        N50=500,          
-        ambiguous_bases='no', 
-        species=previous_results['enterobacterales__species__species'],
-        species_specification_dict=species_specification_dict
+        total_size=5000000,
+        N50=500,
+        contig_count=10,
+        gc_content=55.0,
+        ambiguous_bases='no',
+        species=previous_results['general__species__species'],
+        species_spec_dict=species_specification_dict
     )
     
     assert warnings == 'N50'
@@ -165,10 +172,10 @@ def test_qc_warnings_2():
 
 def test_empty_file_1():
     previous_results = {
-        'enterobacterales__species__species': 'Klebsiella pneumoniae'
+        'general__species__species': 'Klebsiella pneumoniae'
     }
-    contig_count, N50, longest_contig, total_size, ambiguous = \
-    get_contig_stats(get_file_dir() / 'empty.fasta')
+    contig_count, N50, longest_contig, total_size, ambiguous, *rest = \
+        get_contig_stats(get_file_dir() / 'empty.fasta')
     assert contig_count == 0
     assert N50 == 0
     assert longest_contig == 0
@@ -179,13 +186,12 @@ def test_empty_file_1():
 def test_get_results():
     # Final results are all in string format.
     previous_results = {
-        'enterobacterales__species__species': 'Klebsiella pneumoniae'
+        'general__species__species': 'Klebsiella pneumoniae'
     }
-    # results = get_results(get_file_dir() / 'test_1.fasta', None, None, {})
     results = get_results(get_file_dir() / 'test_1.fasta', None, None, previous_results)
     assert results['contig_count'] == '4'
     assert results['N50'] == '40'
     assert results['largest_contig'] == '45'
     assert results['total_size'] == '115'
     assert results['ambiguous_bases'] == 'no'
-    assert results['QC_warnings'] == 'total_size,N50'
+    assert results['QC_warnings'] == 'total_size,N50,GC_content'

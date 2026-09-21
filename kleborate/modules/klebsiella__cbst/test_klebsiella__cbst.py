@@ -18,6 +18,7 @@ not, see <https://www.gnu.org/licenses/>.
 """
 
 import collections
+import pathlib
 import pytest
 import sys
 
@@ -35,53 +36,60 @@ def test_prerequisite_modules():
 def test_check_cli_options_1():
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
                                            'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     check_cli_options(Args(klebsiella__cbst_min_identity=90.0, klebsiella__cbst_min_coverage=90.0,
                            klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
-                           klebsiella__cbst_required_exact_matches=3))
-
+                           klebsiella__cbst_required_exact_matches=3, klebsiella__cbst_min_gene_count=8))
 
 
 def test_check_cli_options_2():
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__cbst_min_identity=0.90, klebsiella__cbst_min_coverage=90.0,
-                               klebsiella__cbst_required_exact_matches=3))
+                               klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
+                               klebsiella__cbst_required_exact_matches=3, klebsiella__cbst_min_gene_count=8))
 
 
 def test_check_cli_options_3():
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__cbst_min_identity=-90.0, klebsiella__cbst_min_coverage=0.90,
-                               klebsiella__cbst_required_exact_matches=3))
+                               klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
+                               klebsiella__cbst_required_exact_matches=3, klebsiella__cbst_min_gene_count=8))
 
 
 def test_check_cli_options_4():
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__cbst_min_identity=-10.0, klebsiella__cbst_min_coverage=90.0,
-                               klebsiella__cbst_required_exact_matches=3))
+                               klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
+                               klebsiella__cbst_required_exact_matches=3, klebsiella__cbst_min_gene_count=8))
 
 
 def test_check_cli_options_5():
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__cbst_min_identity=90.0, klebsiella__cbst_min_coverage=120.0,
-                               klebsiella__cbst_required_exact_matches=3))
+                               klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
+                               klebsiella__cbst_required_exact_matches=3, klebsiella__cbst_min_gene_count=8))
 
 
 def test_check_cli_options_6():
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
                                            'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     with pytest.raises(SystemExit):
         check_cli_options(Args(klebsiella__cbst_min_identity=90.0, klebsiella__cbst_min_coverage=90.0,
                                klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
-                               klebsiella__cbst_required_exact_matches=-2))
+                               klebsiella__cbst_required_exact_matches=-2, klebsiella__cbst_min_gene_count=8))
 
 
 def test_check_external_programs_success(mocker):
@@ -105,11 +113,11 @@ def test_check_external_programs_import_error(mocker):
 def test_get_results_1():
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
                                            'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     results = get_results(get_test_genome_dir() / 'GCF_000968155.1.fna.gz', None,
                           Args(klebsiella__cbst_min_identity=90.0, klebsiella__cbst_min_coverage=80.0,
                                klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
-                               klebsiella__cbst_required_exact_matches=3), {})
+                               klebsiella__cbst_required_exact_matches=7, klebsiella__cbst_min_gene_count=8), {})
 
     assert results['CbST'] == '9'
     assert results['Colibactin'] == 'clb 1'
@@ -131,14 +139,14 @@ def test_get_results_1():
 
 
 def test_get_results_2():
-    # Tests an E. coli without the iro locus, so no ST should be assigned.
+    # Tests an E. coli without the colibactin locus, so no ST should be assigned.
     Args = collections.namedtuple('Args', ['klebsiella__cbst_min_identity', 'klebsiella__cbst_min_coverage',
                                            'klebsiella__cbst_min_spurious_identity', 'klebsiella__cbst_min_spurious_coverage',
-                                           'klebsiella__cbst_required_exact_matches'])
+                                           'klebsiella__cbst_required_exact_matches', 'klebsiella__cbst_min_gene_count'])
     results = get_results(get_test_genome_dir() / 'GCF_000008865.2.fna.gz', None,
                           Args(klebsiella__cbst_min_identity=90.0, klebsiella__cbst_min_coverage=80.0,
                                klebsiella__cbst_min_spurious_identity=80.0, klebsiella__cbst_min_spurious_coverage=40.0,
-                               klebsiella__cbst_required_exact_matches=3), {})
+                               klebsiella__cbst_required_exact_matches=7, klebsiella__cbst_min_gene_count=8), {})
 
     assert results['CbST'] == 0
     assert results['Colibactin'] == '-'

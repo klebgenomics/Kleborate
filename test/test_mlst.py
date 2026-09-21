@@ -5,8 +5,8 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2026 Kat Holt
-Copyright 2026 Ryan Wick (rrwick@gmail.com)
+Copyright 2026 mary maranga
+
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -19,10 +19,12 @@ not, see <https://www.gnu.org/licenses/>.
 """
 
 import pathlib
+import sys
 import tempfile
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
 
 from kleborate.shared.mlst import *
-from kleborate.shared.alignment import Alignment
+from test_alignment import create_alignment as Alignment
 
 
 def test_load_st_profiles_1():
