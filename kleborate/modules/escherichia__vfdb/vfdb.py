@@ -28,7 +28,7 @@ def extract_fasta_headers(fasta_file_path):
     return headers
 
 
-def map_virulence_factors(assembly, minimap2_index, ref_file, min_identity, min_coverage):
+def map_virulence_factors(assembly, ref_index, ref_file, min_identity, min_coverage):
     """
     Aligns assembled genomes to the virulence alleles and reports presence/absence.
 

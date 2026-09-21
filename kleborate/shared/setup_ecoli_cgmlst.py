@@ -2,11 +2,37 @@ import sys
 import shutil
 import subprocess
 import pathlib
+import argparse
 import warnings
 warnings.filterwarnings("ignore")
 
+# EnteroBase E. coli cgMLST v1 scheme
+SCHEME_URL = "https://enterobase.warwick.ac.uk/schemes/Escherichia.cgMLSTv1/"
+
+
+def get_paths():
+    """Locate the Kleborate package's ecoli_cgmlst data directory."""
+    try:
+        import kleborate
+
+        target_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'ecoli__cgmlst' / 'data'
+        return target_dir
+    except ImportError as e:
+        print(f"Error: Missing dependency. {e}")
+        sys.exit(1)
+
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="E. coli cgMLST Database Setup (EnteroBase)"
+    )
+    parser.add_argument(
+        "--url", default=SCHEME_URL,
+        help=f"EnteroBase scheme URL (default: {SCHEME_URL})"
+    )
+    args = parser.parse_args()
+    scheme_url = args.url
+
     print("E. coli cgMLST Database Setup (EnteroBase)")
     print("==========================================")
 
@@ -14,10 +40,8 @@ def main():
         print("Error: 'mist' not found.")
         sys.exit(1)
 
-    # Use the current working directory
-    cwd = pathlib.Path.cwd()
+    target_dir = get_paths()
 
-    target_dir = cwd / "ecoli_cgmlst"
     raw_download_path = target_dir / "ecoli_cgmlst_v1"
     index_path = target_dir / "ecoli_cgmlst_v1-index"
 
@@ -28,7 +52,6 @@ def main():
         else:
             print("Setup cancelled."); sys.exit(0)
     target_dir.mkdir(parents=True, exist_ok=True)
-
 
     download_cmd = [
         "mist", "download",

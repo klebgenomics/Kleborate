@@ -114,8 +114,8 @@ def minimap_against_all(assembly, ref_index, ref_file, gene_info, min_coverage, 
     """
     This function takes:
     * assembly:  assembly in FASTA format
-    * ref_file: a path for a CARD reference in FASTA format
-    * ref_index: a path for the assembly's minimap2 index (for faster alignment) (optional)
+    * ref_file: a path for a reference in FASTA format
+    * ref_index: a path for the assembly's index (for faster alignment) (optional)
     * min_identity: hits with a lower percent identity than this are discarded
     
     This function returns:

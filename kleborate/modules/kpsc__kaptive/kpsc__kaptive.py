@@ -56,23 +56,19 @@ def add_cli_options(parser):
     return group
 
 
+
 def load_or_install_db(db_input):
     """Loads/downloads a Kaptive database"""
     if isinstance(db_input, Database):
         return db_input
-    
+
     db_str = str(db_input)
-    
+
     if os.path.exists(db_str):
         return Database.load(db_str)
 
     db_mgr = DatabaseManager()
-    
-    db_obj = db_mgr.get(db_str)
-    
-    if isinstance(db_obj, Database):
-        return db_obj
-    return Database.load(db_obj)
+    return db_mgr.get(db_str)
 
 
 

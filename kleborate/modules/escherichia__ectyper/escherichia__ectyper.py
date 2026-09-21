@@ -83,10 +83,6 @@ def run_ectyper(input_fasta, output_dir, quiet,cores) :
     Parameters:
         input_fasta (str): Path to the input FASTA file.
         output_dir (str): Directory where ectyper will write its output.
-    
-
-    Raises:
-        subprocess.CalledProcessError: if ectyper exits with non-zero.
     """
 
 

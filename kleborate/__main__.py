@@ -31,7 +31,7 @@ from typing import Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import partial
 from .shared.help_formatter import MyParser, MyHelpFormatter
-from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_exclude_headers, KLEBSIELLA_TYPING_SPEC
+from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_spec_headers, KLEBSIELLA_TYPING_SPEC
 from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
 from rammappy import Index
 
@@ -42,8 +42,11 @@ def parse_arguments(args, all_module_names, modules):
     This function does the CLI argument parsing for Kleborate. Module-specific arguments are added
     by each module's add_cli_options function.
     """
+
     parser = MyParser(description='Kleborate: a tool for characterising virulence and resistance '
-                                  'in pathogen assemblies',
+                                  'in pathogen assemblies of Klebsiella pneumoniae and the Klebsiella '
+                                  'pneumoniae species complex (KpSC), Klebsiella oxytoca species complex (KoSC) '
+                                  'and Escherichia coli/Shigella',
                       formatter_class=MyHelpFormatter, add_help=False, epilog=paper_refs())
 
     if '--helpall' in args or '--allhelp' in args or '--all_help' in args:
@@ -69,7 +72,7 @@ def parse_arguments(args, all_module_names, modules):
     
     perf_args.add_argument('-t', '--threads', type=check_cpus,
                            default=check_cpus(),
-                           help='Number of alignment threads or 0 for all available (default: 0)')
+                           help='Number of threads')
 
     module_args = parser.add_argument_group('Modules')
     module_args.add_argument('--list_modules', action='store_true',
@@ -154,7 +157,6 @@ def main():
         with tempfile.TemporaryDirectory() as temp_dir:
             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
             ref_index = build_index(assembly, unzipped_assembly)
-            # minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
             results = {'strain': get_strain_name(assembly)}
 
             pass_check = True # default, assume no check and run all modules
@@ -199,9 +201,9 @@ def main():
                 output_results(filtered_headers, stdout_headers, output_file, filtered_results, args.trim_headers)
 
             else:
-                species = results.get('enterobacterales__species__species', None)
+                species = results.get('general__species__species', None)
                 if species and is_kp_complex({'species': species}):
-                    # --- CONDITIONALLY WRITE HAMRONIZATION FILE ---
+                    # --- WRITE HAMRONIZATION FILE ---
                     if not args.no_hamronization:
                         harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
                         output_results_klebsiella_pneumo_complex_hAMRonization(
@@ -218,7 +220,7 @@ def main():
                         if (not header.startswith('kpsc__amr') or
                         header.split('__')[-1] in res_headers) and
                         (not header.startswith('kpsc__kaptive') or
-                        header.split('__')[-1] not in kaptive_exclude_headers)
+                        header.split('__')[-1] not in kaptive_spec_headers)
                     ]
                     filtered_results = {header: results.get(header, "-") for header in selective_headers}
                     output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
@@ -257,6 +259,7 @@ def main():
 
 
 
+
 def print_modules(args, all_module_names, modules):
     if args.list_modules:
         print()
@@ -264,7 +267,6 @@ def print_modules(args, all_module_names, modules):
         print('-------------------------------')
         terminal_width = shutil.get_terminal_size().columns
         end_formatting, bold = '\033[0m', '\033[1;97m'
-        # end_formatting, bold = '\033[0m', '\033[1m'
         for m in all_module_names:
             description = modules[m].description()
             text = f'{bold}{m}{end_formatting}: {description}'
@@ -276,9 +278,10 @@ def print_modules(args, all_module_names, modules):
 
 
 
+
 def get_presets():
     kpsc_modules = {
-        'check': [('enterobacterales__species', 'is_kp_complex')],
+        'check': [('general__species', 'is_kp_complex')],
         'pass': [
             'general__contig_stats','kpsc__mlst',
             'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst', 'kpsc__virulence_score',
@@ -288,19 +291,19 @@ def get_presets():
     }
 
     kosc_modules = {
-        'check': [('enterobacterales__species', 'is_ko_complex')],
+        'check': [('general__species', 'is_ko_complex')],
         'pass': [
             'general__contig_stats',
-            'kosc__mlst', 'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst','klebsiella__rmpa2', 'kosc__kaptive'
+            'kosc__mlst', 'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'kosc__kaptive'
         ]
     }
 
     escherichia_modules = {
-        'check': [('enterobacterales__species', 'is_escherichia')],
+        'check': [('general__species', 'is_escherichia')],
         'pass': [
             'general__contig_stats',
             'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee','escherichia__pks', 'escherichia__ezclermont','escherichia__stxtyper','escherichia__ectyper', 'escherichia__amr',
-            'escherichia__kaptive', 'escherichia__vfdb'
+            'escherichia__kaptive', 'escherichia__cgmlst','escherichia__vfdb'
         ]
     }
 
@@ -309,6 +312,7 @@ def get_presets():
         'kosc': kosc_modules,
         'escherichia': escherichia_modules
     }
+
 
 
 
@@ -345,7 +349,7 @@ def get_used_module_names(args, all_module_names, presets):
         if args.preset == 'escherichia' and args.modules is None:
             pass_modules = [
                 module for module in pass_modules 
-                if module not in ('escherichia__mlst_pasteur', 'escherichia__vfdb')
+                if module not in ('escherichia__mlst_pasteur', 'escherichia__vfdb', 'escherichia__cgmlst')
             ]
 
         module_names += check_modules + pass_modules  # Combine check and pass modules for the overall list
@@ -358,7 +362,6 @@ def get_used_module_names(args, all_module_names, presets):
                 module_names.append(m)
 
     return module_names, check_modules, pass_modules
-
 
 
 def get_all_module_names():
@@ -502,21 +505,6 @@ def build_index(assembly, unzipped_assembly):
     return Index.build([(name.encode(), seq.encode()) for name, seq in ref_seqs_list])
 
 
-# def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir):
-#     """
-#     A lot of the modules use minimap2 alignment, so pre-building the index for this assembly once
-#     can save a bit of time.
-#     """
-#     if 'minimap2' not in external_programs:
-#         return None
-#     minimap2_index = (pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.mmi')).resolve()
-#     command = ['minimap2', '-d', minimap2_index, unzipped_assembly]
-#     p = subprocess.run(command, capture_output=True, text=True)
-#     if p.returncode != 0:
-#         sys.exit(f'\nError: minimap2 failed to index sample {assembly}:\n{p.stderr}')
-#     return minimap2_index
-
-
 
 def decompress_file(in_file, out_file):
     with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
@@ -638,7 +626,7 @@ def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_
                         if set_mutation:
                             v = strip_mutation_from_accession(row, v, g)
                         else:
-                            v = strip_mutation_from_accession({}, v, g)  # discard mutations for non-matching
+                            v = strip_mutation_from_accession({}, v, g) 
                     else:
                         v = strip_mutation_from_accession({}, v, g)
             else:
@@ -734,8 +722,7 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
     """
     # Print results to the terminal using stdout_headers
     print('\t'.join([
-        str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
-        # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
+        str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list) 
         else ";".join(map(str, results.get(x, "-")))
         for x in stdout_headers
     ]))
@@ -751,7 +738,6 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
                 o.write('\t'.join(headers_to_write) + '\n')
             o.write('\t'.join([
                 str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
-                # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
                 else ";".join(map(str, results.get(x, "-")))
                 for x in full_headers
             ]) + '\n')
@@ -789,13 +775,11 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
         confidence_value = ""
         phenotype_value = "" 
         
-        # Static defaults from spec
         db_name = meta.get("genotyping_database_name", "")
         db_version = meta.get("genotyping_database_version", "")
         
         target_phenotype_header = meta.get("genotype_predicted_phenotype")
 
-        # Prefix for fields like 'K_locus' -> 'k' or 'O_locus' -> 'o'
         prefix = genotype_field.split("_")[0].lower()
 
         #  Subspecies 
@@ -825,7 +809,6 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
                 if target_phenotype_header and trimmed_key == target_phenotype_header:
                     phenotype_value = res_val
 
-                # Capture 'Database name' from results if empty in typing_spec
                 if not db_name and normalized_key in (
                     "database_name",
                     f"{genotype_field.lower()}_database_name",
@@ -837,7 +820,6 @@ def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=No
                 ):
                     db_name = res_val
 
-                # Capture 'Database version' from results if empty in typing_spec
                 if not db_version and normalized_key in (
                     "database_version",
                     f"{genotype_field.lower()}_database_version",

@@ -30,7 +30,7 @@ def description():
 
 
 def prerequisite_modules():
-    return ['enterobacterales__species']
+    return ['general__species']
 
 
 def get_headers():
@@ -96,6 +96,7 @@ def check_cli_options(args):
     if args.escherichia__pathovar_min_coverage <= 50.0 or args.escherichia__pathovar_min_coverage >= 100.0:
         sys.exit('Error: --escherichia__pathovar_min_coverage must be between 50.0 and 100.0')
 
+
 def check_external_programs():
     try:
         import rammappy
@@ -103,12 +104,16 @@ def check_external_programs():
         sys.exit('Error: could not import rammappy')
     return ['rammappy']
 
+
+
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
+
 def args_get(args, name, default=None):
     return getattr(args, name, default) if hasattr(args, name) else default
+
 
 
 def run_shigapass_for_single_assembly(assembly: str, args) -> str:
@@ -248,7 +253,7 @@ def get_results(assembly, ref_index, args, previous_results):
 
     ref_file = data_dir() / 'virulence_ecoli.fsa'
 
-    species = previous_results.get('enterobacterales__species__species', '').strip()
+    species = previous_results.get('general__species__species', '').strip()
     pathotype_species = ['Escherichia coli / Shigella']
 
     if species not in pathotype_species:
@@ -256,7 +261,6 @@ def get_results(assembly, ref_index, args, previous_results):
         result_dict['Pathotype'] = '-'
         return result_dict
 
-    # Pathovar calling via minimap2
     pathovar, virulence_markers = minimap_pathovar(
         assembly,
         ref_index,

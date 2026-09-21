@@ -7,14 +7,12 @@ def get_kleborate_mlst_path():
     """Locate the target Kleborate MLST data directory."""
     try:
         import kleborate
-        # Targets the kpsc__mlst folder directly as requested
         return pathlib.Path(kleborate.__file__).parent / 'modules' / 'kpsc__mlst' / 'data'
     except ImportError:
         print("[ERROR] Kleborate is not installed in this Python environment.")
         sys.exit(1)
 
 def format_fasta_to_single_line(fasta_path):
-    """Natively formats a FASTA file so each sequence is on a single line."""
     lines = []
     current_seq = []
     
@@ -44,7 +42,6 @@ def main():
     print("Kleborate MLST Scheme Manual Downloader")
     print("=======================================")
 
-    # 1. Resolve and create the path
     target_dir = get_kleborate_mlst_path()
     
     if target_dir.exists():
@@ -69,14 +66,12 @@ def main():
         "tonB.fasta": "https://bigsdb.pasteur.fr/api/db/pubmlst_klebsiella_seqdef/loci/tonB/alleles_fasta"
     }
 
-    # 3. Execute downloads and formatting
     for filename, url in downloads.items():
         output_file = target_dir / filename
         print(f"Downloading: {filename}...")
         try:
             urllib.request.urlretrieve(url, output_file)
             
-            # If it's a fasta file, re-format to single line (mimics your seqtk snippet)
             if filename.endswith(".fasta"):
                 format_fasta_to_single_line(output_file)
                 

@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga
+Copyright 2026 Mary Maranga
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -140,7 +140,6 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     if omega_loop_raw_seq == 'RWETELNEALPGDARD':  # if it's the same as SHV-1
         omega_loop_seq = None
     else:
-        # omega_loop_seq = f"164_179={omega_loop_raw_seq}"
         omega_loop_seq = [f"164_179={omega_loop_raw_seq}", hit_data.copy()]
 
 
@@ -150,7 +149,6 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
                      pos_175_mut, pos_176_mut, pos_177_mut, pos_178_mut, pos_179_mut, pos_234_mut,
                      pos_235_mut, pos_238_mut, pos_240_mut]
                      
-    # shv_mutations = [m for m in shv_mutations if m]
 
     shv_mutations = [[m, hit_data] for m in shv_mutations if m]
 
@@ -164,21 +162,22 @@ def check_for_shv_mutations(hit, hit_allele, bla_class, exact_match):
     return new_bla_class, shv_mutations, class_changing_mutations, omega_loop_seq
 
 
+
 def get_mut(ref_aligned, hit_aligned, ref_pos, ambler_pos, ref_aa):
     """
     Identifies and formats a mutation at a given position in the alignment.
 
     Parameters:
         ref_pos (int): 0-based index into the ungapped reference sequence.
-        ambler_pos (int): 1-based Ambler position for human-readable reporting.
+        ambler_pos (int): 1-based Ambler position
         ref_aa (str): Expected amino acid in the reference at this position.
 
     Returns:
         tuple: (mutation_str, hit_aa)
             - mutation_str: e.g., "SHV:p.S35Q" or "" if no mutation
-            - hit_aa: the amino acid from the aligned hit
+            - hit_aa: amino acid from the aligned hit
     """
-    gene_name = "SHV"  # Hardcoded gene name for mutation reporting
+    gene_name = "SHV"  
 
     ref_no_gaps, hit_no_gaps = [], []
     for a, b in zip(ref_aligned, hit_aligned):
@@ -192,7 +191,6 @@ def get_mut(ref_aligned, hit_aligned, ref_pos, ambler_pos, ref_aa):
     hit_aa = hit_no_gaps[ref_pos]
 
     if ref_aa != hit_aa and hit_aa != '-':
-        # Changed to use single-letter codes directly
         mutation_notation = f'{gene_name}:p.{ref_aa}{ambler_pos}{hit_aa}'
     else:
         mutation_notation = ''

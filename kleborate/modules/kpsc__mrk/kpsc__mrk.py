@@ -20,7 +20,7 @@ from ...shared.mlst import mlst
 
 
 def description():
-    return 'MLST scheme for the mrk operon'
+    return 'MLST scheme for kpsc mrk operon'
 
 
 

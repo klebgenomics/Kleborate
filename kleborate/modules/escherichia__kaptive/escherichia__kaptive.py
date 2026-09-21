@@ -36,10 +36,7 @@ def prerequisite_modules():
 def get_headers():
     full_headers = [
         'K_locus', 'K_type', 'K_locus_confidence', 'K_locus_problems', 'K_locus_identity',
-        'K_Missing_expected_genes', 'K_Database_name', 'K_Database_version',
-        'O_locus', 'O_type', 'O_locus_confidence', 'O_locus_problems', 
-        'O_locus_identity', 'O_Missing_expected_genes', 'O_Database_name', 'O_Database_version',
-        'Kaptive version'
+        'K_Missing_expected_genes' 
     ]
     stdout_headers = []
     return full_headers, stdout_headers
@@ -58,23 +55,17 @@ def load_or_install_db(db_input):
     """Loads/downloads a Kaptive database"""
     if isinstance(db_input, Database):
         return db_input
-    
+
     db_str = str(db_input)
-    
+
     if os.path.exists(db_str):
         return Database.load(db_str)
 
     db_mgr = DatabaseManager()
-    
-    db_obj = db_mgr.get(db_str)
-    
-    if isinstance(db_obj, Database):
-        return db_obj
-    return Database.load(db_obj)
+    return db_mgr.get(db_str)
 
 
 def check_cli_options(args):
-    # Reads from module-specific args namespace
     args.k_db = load_or_install_db(args.ecoli_kps_db)
 
     args.k_typer = Serotyper(args.k_db)
@@ -96,9 +87,6 @@ def extract_fields(prefix, result, full_headers):
     fields[f'{prefix}_locus_problems'] = result.problems.to_symbols().decode('utf-8')
     fields[f'{prefix}_locus_identity'] = '%.2f%%' % result.percent_identity
     fields[f'{prefix}_Missing_expected_genes'] = ';'.join(result.missing_expected_genes)
-    fields[f'{prefix}_Database_name'] = result.database_name
-    fields[f'{prefix}_Database_version'] = result.database_version
-    fields['Kaptive version'] = result.kaptive_version
 
     for h in fields.keys():
         if h not in full_headers:

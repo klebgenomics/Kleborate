@@ -176,8 +176,6 @@ def get_results(assembly, ref_index, args, previous_results):
         args.kpsc__amr_min_spurious_identity
     )
 
-    # print(res_hits)
-
     # --- software and database metadata ---
     res_hits['Analysis Software Name'] = 'Kleborate'
     res_hits['Analysis Software Version'] = get_version()

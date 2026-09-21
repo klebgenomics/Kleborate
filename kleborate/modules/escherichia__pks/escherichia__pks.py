@@ -99,8 +99,6 @@ def get_results(assembly, ref_index, args, previous_results):
         args.escherichia__pks_min_identity,
         args.escherichia__pks_min_coverage
     )
-
-    # Safely handle empty string or None, though pks_minimap will defaults to '-'
     if not result or result == '':
         return {'clbB': '-'}
     

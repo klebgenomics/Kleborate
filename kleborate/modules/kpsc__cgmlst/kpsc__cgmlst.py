@@ -49,7 +49,7 @@ def check_external_programs():
     db_path = data_dir() / "kleb_scgmlst_s-index"
     if not db_path.exists() or not any(db_path.iterdir()):
         sys.exit(
-            'Error: MiST cgMLST/LIN code database not found at '
+            'Error: MiST cgMLST/LIN database not found at '
             f'{db_path}\n'
             'This database is downloaded separately during setup and is not '
             'installed automatically by pip/conda.\n'
@@ -104,7 +104,7 @@ def extract_lincode_from_stdout(stdout):
 
 def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
     """
-    Runs MiST and mist_to_partial_lincode.py to extract LINcodes for an assembly, extracts the cgST and Lincode
+    Runs MiST and mist_to_partial_lincode.py and extracts the cgST and Lincode
 
     """
     if not db_path.exists() or not any(db_path.iterdir()):

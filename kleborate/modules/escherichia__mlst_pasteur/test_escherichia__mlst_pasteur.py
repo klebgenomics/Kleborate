@@ -119,7 +119,7 @@ def test_get_results_1():
                                escherichia_mlst_pasteur_min_coverage=80.0,
                                escherichia_mlst_pasteur_required_exact_matches=3), {})
 
-    assert results['ST'] == 'ST262'
+    assert results['ST_Pasteur'] == 'ST262'
     assert results['dinB'] == '8'
     assert results['icdA'] == '118'
     assert results['pabB'] == '7'
@@ -138,7 +138,7 @@ def test_get_results_2():
                           Args(escherichia_mlst_pasteur_min_identity=90.0,
                                escherichia_mlst_pasteur_min_coverage=80.0,
                                escherichia_mlst_pasteur_required_exact_matches=3), {})
-    assert results['ST'] == 'ST296'
+    assert results['ST_Pasteur'] == 'ST296'
     assert results['dinB'] == '68'
     assert results['icdA'] == '110'
     assert results['pabB'] == '91'
@@ -158,4 +158,4 @@ def test_get_results_3():
                           Args(escherichia_mlst_pasteur_min_identity=90.0,
                                escherichia_mlst_pasteur_min_coverage=80.0,
                                escherichia_mlst_pasteur_required_exact_matches=3), {})
-    assert results['ST'] == 'NA'
+    assert results['ST_Pasteur'] == 'NA'

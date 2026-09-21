@@ -1,5 +1,5 @@
 """
-Copyright 2026 Mary Maranga (gathonimaranga@gmail.com) Ryan Wick
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com), Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -41,8 +41,8 @@ class Alignment(object):
     """
     Defines an alignment object from a rammappy Mapping result.
 
-    rammappy's Mapping does not carry the query name/length (they're
-    implicit in the aligner.map() call), so they will be passed in explicitly.
+    # rammappy's Mapping has no query name/length field — these come from
+    # the aligner.map(), so we pass them in explicitly.
     """
 
     def __init__(self, mapping, query_name, query_length, query_seqs=None, ref_index=None):
@@ -105,13 +105,14 @@ class Alignment(object):
                 self.query_end - self.query_start == self.query_length)
 
 
+
 def align_query_to_ref(query_filename, ref_filename, ref_index=None, preset='map-ont',
                         min_identity=None, min_query_coverage=None):
     """
     Runs rammappy on two sequence files (FASTA or FASTQ) and returns an Alignment object.
 
     Optional arguments:
-    * ref_index: a pre-built rammappy Index object for the reference
+    * ref_index: a pre-built rammappy Index for the reference
                  If provided, this saves the time ofre-indexing 
                  (and re-parsing the reference FASTA) on every
                  call.
@@ -156,6 +157,8 @@ def align_query_to_ref(query_filename, ref_filename, ref_index=None, preset='map
     return alignments
 
 
+
+
 def get_expanded_cigar(cigar):
     """
     Takes in a normal CIGAR string and returns an expanded version.
@@ -168,6 +171,7 @@ def get_expanded_cigar(cigar):
         letter = p[-1]
         expanded_cigar.append(letter * size)
     return ''.join(expanded_cigar)
+
 
 
 def hits_overlap(a, b):

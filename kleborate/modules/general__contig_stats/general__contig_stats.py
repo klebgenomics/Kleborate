@@ -25,7 +25,7 @@ def description():
 
 
 def prerequisite_modules():
-    return ['enterobacterales__species']
+    return ['general__species']
 
 
 def get_headers():
@@ -53,7 +53,7 @@ def data_dir():
 def get_results(assembly, ref_index, args, previous_results):
     species_file = data_dir() / 'species_specification.txt'
     species_specification_dict = load_species_specifications(species_file)
-    species = previous_results['enterobacterales__species__species']
+    species = previous_results['general__species__species']
     
     # Calculate stats
     contig_count, n50, longest_contig, total_size, ambig, gc = get_contig_stats(assembly)

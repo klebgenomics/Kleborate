@@ -63,7 +63,7 @@ def check_cli_options(args):
         sys.exit('Error: --klebsiella__smst_min_spurious_coverage must be between 30.0 and 100.0')
     if args.klebsiella__smst_required_exact_matches < 0:
         sys.exit('Error: --klebsiella__smst_required_exact_matches must be a positive integer')
-    if args.klebsiella__abst_min_gene_count < 0:
+    if args.klebsiella__smst_min_gene_count < 0:
         sys.exit('Error: --klebsiella__smst_min_gene_count must be a positive integer')
 
 
