@@ -1,0 +1,70 @@
+{
+    "plasmidfinder": {
+        "results": {
+            "Enterobacteriaceae": {
+                "enterobacteriaceae": {
+                    "NODE_16_length_127042_cov_6.254910:85572..85799:IncFII_1_pKP91_CP000966:94.816784": {
+                        "accession": "CP000966",
+                        "contig_name": "NODE_16_length_127042_cov_6.254910",
+                        "coverage": 98.7,
+                        "hit_id": "NODE_16_length_127042_cov_6.254910:85572..85799:IncFII_1_pKP91_CP000966:94.816784",
+                        "HSP_length": 229,
+                        "identity": 96.07,
+                        "note": "pKP91",
+                        "plasmid": "IncFII",
+                        "position_in_ref": "3..230",
+                        "positions_in_contig": "85572..85799",
+                        "template_length": 230
+                    },
+                    "NODE_22_length_46613_cov_6.390614:12920..13479:IncFIB(K)_1_Kpn3_JN233704:98.928571": {
+                        "accession": "JN233704",
+                        "contig_name": "NODE_22_length_46613_cov_6.390614",
+                        "coverage": 100.0,
+                        "hit_id": "NODE_22_length_46613_cov_6.390614:12920..13479:IncFIB(K)_1_Kpn3_JN233704:98.928571",
+                        "HSP_length": 560,
+                        "identity": 98.93,
+                        "note": "Kpn3",
+                        "plasmid": "IncFIB(K)",
+                        "position_in_ref": "1..560",
+                        "positions_in_contig": "12920..13479",
+                        "template_length": 560
+                    },
+                    "NODE_31_length_4191_cov_20.113881:262..543:Col440II_1__CP023921.1:99.645390": {
+                        "accession": "CP023921.1",
+                        "contig_name": "NODE_31_length_4191_cov_20.113881",
+                        "coverage": 100.0,
+                        "hit_id": "NODE_31_length_4191_cov_20.113881:262..543:Col440II_1__CP023921.1:99.645390",
+                        "HSP_length": 282,
+                        "identity": 99.65,
+                        "note": "",
+                        "plasmid": "Col440II",
+                        "position_in_ref": "1..282",
+                        "positions_in_contig": "262..543",
+                        "template_length": 282
+                    }
+                }
+            },
+            "Gram Positive": {
+                "Inc18": "No hit found",
+                "NT_Rep": "No hit found",
+                "Rep_trans": "No hit found",
+                "Rep1": "No hit found",
+                "Rep2": "No hit found",
+                "Rep3": "No hit found",
+                "RepA_N": "No hit found",
+                "RepL": "No hit found"
+            }
+        },
+        "run_info": {
+            "date": "dd.mm.yyyy",
+            "time": "hh:mm:ss"
+        },
+        "user_input": {
+            "file_format": "fasta",
+            "filename(s)": [
+                "/kleborate/modules/general__plasmidfinder/test_files/ERR1305849.fasta"
+            ],
+            "method": "blast"
+        }
+    }
+}
