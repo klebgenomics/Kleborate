@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga (gathonimaranga@gmailcom)
+Copyright 2026 Mary Maranga (gathonimaranga@gmailcom)
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -45,12 +45,6 @@ def add_cli_options(parser):
     """
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
-    
-    # group.add_argument(
-    #     '-n', '--nucleotide', required=True,
-    #     help="Assembled nucleotide sequence to search in FASTA format."
-
-    # )
 
     return group
 
@@ -137,7 +131,7 @@ def parse_stxtyper_output(output, headers, all_headers):
 
 
 
-def get_results(assembly, index, previous_results, args):
+def get_results(assembly, ref_index, previous_results, args):
     """
     Runs STXTyper for a single assembly and parses the output.
     Returns a dict mapping each header to a semicolon-separated string.
@@ -147,8 +141,6 @@ def get_results(assembly, index, previous_results, args):
     raw_output = run_stxtyper(
         nucleotide_file=assembly
     )
-
-    # print(raw_output)
 
     if raw_output:
         results = parse_stxtyper_output(raw_output, full_headers, all_headers)

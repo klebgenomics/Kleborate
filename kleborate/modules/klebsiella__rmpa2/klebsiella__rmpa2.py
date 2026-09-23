@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Kat Holt, Mary Maranga, Ryan Wick
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -54,21 +54,24 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
+
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     ref_file = data_dir() / 'rmpA2.fasta'
     rmpa2_allele = rmpa2_minimap(
         ref_file, 
         assembly,
-        minimap2_index,
+        ref_index,
         args.klebsiella__rmpa2_min_coverage, 
         args.klebsiella__rmpa2_min_identity)
 

@@ -3,7 +3,7 @@ This file carries out multi-MLST functions: similar to the regular MLST (found i
 allowing for multiple STs per genome. This is useful for some virulence loci which can appear more
 than once per genome (e.g. on the chromosome and on a plasmid).
 
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Mary Maranga
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -14,12 +14,16 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
 details. You should have received a copy of the GNU General Public License along with Kleborate. If
 not, see <https://www.gnu.org/licenses/>.
 """
-
-from .alignment import align_query_to_ref
+import ast
+import re
+from .alignment import align_query_to_ref,truncation_check, cull_redundant_hits
 from .mlst import load_st_profiles, run_single_mlst
-from .alignment import truncation_check
+from Bio.Seq import Seq
+from Bio.Data.CodonTable import TranslationError
+from .misc import load_fasta, reverse_complement
 
-def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
+
+def multi_mlst(assembly_path, ref_index, profiles_path, allele_paths, gene_names, extra_info,
                min_identity, min_coverage, required_exact_matches, check_for_truncation=False,
                report_incomplete=False, min_spurious_identity=None, min_spurious_coverage=None,
                unknown_group_name=None, min_gene_count=None):
@@ -32,14 +36,14 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
     
     if min_spurious_coverage is not None:
         hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
-                                               ref_index=minimap2_index, min_identity=min_spurious_identity,
+                                               ref_index=ref_index, min_identity=min_spurious_identity,
                                                min_query_coverage=min_spurious_coverage) for g in gene_names}
 
         spurious_hits = {g: [h for h in hits_per_gene[g] 
                              if h.query_cov < min_coverage and h.percent_identity < min_identity] for g in gene_names}
     else:
         hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
-                                               ref_index=minimap2_index, min_identity=min_identity,
+                                               ref_index=ref_index , min_identity=min_identity,
                                                min_query_coverage=min_coverage) for g in gene_names}
         spurious_hits = None
 
@@ -58,7 +62,7 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
         # Apply the unknown group logic here for single-contig cases
         return run_single_mlst(
             profiles, hits_per_gene, gene_names, required_exact_matches, check_for_truncation, 
-            report_incomplete, unknown_group_name, min_gene_count), spurious_hits
+            report_incomplete, unknown_group_name, min_gene_count), spurious_hits, hits_per_gene
 
     # If more than one contig has the full set of genes, then this is treated as a multi-MLST case,
     # where each full-set contig gets an MLST call.
@@ -68,38 +72,8 @@ def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_
             profiles, hits_by_contig[contig], gene_names, required_exact_matches, check_for_truncation,
             report_incomplete, unknown_group_name, min_gene_count)
          
-    return combine_results(full_set_contigs, contig_results, gene_names), spurious_hits
+    return combine_results(full_set_contigs, contig_results, gene_names), spurious_hits, hits_per_gene
 
-
-# def multi_mlst(assembly_path, minimap2_index, profiles_path, allele_paths, gene_names, extra_info,
-#                min_identity, min_coverage, required_exact_matches, check_for_truncation=False,
-#                report_incomplete=False):
-#     """
-#     This function takes and returns the same things as the mlst function in mlst.py. However, it
-#     will look for cases where multiple contigs have hits for the full set of MLST genes, and in
-#     that case, MLST is run on each of them. Otherwise, it behaves like normal MLST.
-#     """
-#     profiles = load_st_profiles(profiles_path, gene_names, extra_info)
-#     hits_per_gene = {g: align_query_to_ref(allele_paths[g], assembly_path,
-#                                            ref_index=minimap2_index, min_identity=min_identity,
-#                                            min_query_coverage=min_coverage) for g in gene_names}
-#     hits_by_contig = cluster_hits_by_contig(hits_per_gene, gene_names)
-#     full_set_contigs = find_full_set_contigs(hits_by_contig)
-
-#     # If zero or one contigs have the full set of genes, then this is treated as a non-multi-MLST
-#     # case, i.e. the same as regular MLST.
-#     if len(full_set_contigs) < 2:
-#         return run_single_mlst(profiles, hits_per_gene, gene_names, required_exact_matches,
-#                                check_for_truncation, report_incomplete)
-
-#     # If more than one contig has the full set of genes, then this is treated as a multi-MLST case,
-#     # where each full-set contig gets an MLST call.
-#     contig_results = {}
-#     for contig in full_set_contigs:
-#         contig_results[contig] = run_single_mlst(profiles, hits_by_contig[contig], gene_names,
-#                                                  required_exact_matches, check_for_truncation,
-#                                                  report_incomplete)
-#     return combine_results(full_set_contigs, contig_results, gene_names)
 
 
 def cluster_hits_by_contig(hits_per_gene, gene_names):
@@ -167,6 +141,7 @@ def get_allele_and_locus(hit):
         locus = hit.query_name.split('_')[0]
     return allele, locus
 
+
 def process_spurious_hits(hits):
     hit_strings = []
     for hit in hits:
@@ -177,3 +152,4 @@ def process_spurious_hits(hits):
         allele += truncation_check(hit)[0]
         hit_strings.append(allele)
     return hit_strings
+

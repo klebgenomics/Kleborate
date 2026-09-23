@@ -1,6 +1,5 @@
-
 """
-Copyright 2025 Mary Maranga (gathonimaranga@gmail.com)
+Copyright 2026 Mary Maranga (gathonimaranga@gmail.com)
 https://github.com/klebgenomics/Kleborate
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -25,8 +24,6 @@ from Bio import SeqIO
 from Bio.SeqRecord import SeqRecord
 import subprocess
 import re
-
-# from . import run
 
 
 def description():
@@ -84,38 +81,37 @@ def run_ezclermont(input_fasta, min_length):
     
     try:
         result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, text=True)
-        output = result.stdout or result.stderr
+        output = f"{result.stdout or ''}\n{result.stderr or ''}"
         return output
     except subprocess.CalledProcessError as e:
-        output = e.stderr
+        output = f"{e.stdout or ''}\n{e.stderr or ''}"
         if "Clermont type:" in output or "Results" in output:
             return output
         print(f"Error occurred: {e}")
         return None
 
 
-
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     min_length = args.escherichia__ezclermont_min_length
     output = run_ezclermont(assembly, min_length)
     if not output:
         return {"Clermont_type": '', "Clermont_profile": ''}
 
-    # Extract Clermont type
-    type_match = re.search(r'Clermont type:\s*([A-Za-z0-9]+)', output)
-    clermont_type = type_match.group(1) if type_match else ''
+    clean_output = re.sub(r'\x1b\[[0-9;]*[a-zA-Z]', '', output)
 
-    # Extract Clermont profile
+    type_match = re.search(r'Clermont type:\s*([^\n\r]+)', clean_output, re.IGNORECASE)
+    clermont_type = type_match.group(1).strip() if type_match else ''
+
     markers = ['TspE4', 'arpA', 'chu', 'yjaA']
     profile_lines = []
     for marker in markers:
-        m = re.search(rf'{marker}:\s*[+-]', output)
+        m = re.search(rf'{marker}\w*:\s*([+-])', clean_output, re.IGNORECASE)
         if m:
-            profile_lines.append(m.group(0))
+            profile_lines.append(f"{marker}: {m.group(1)}")
+            
     clermont_profile = '; '.join(profile_lines)
 
-    results = {
+    return {
         "Clermont_type": clermont_type,
         "Clermont_profile": clermont_profile
     }
-    return results

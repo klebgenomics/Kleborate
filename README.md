@@ -7,7 +7,6 @@ Kleborate was primarily developed to screen genome assemblies of _Klebsiella pne
 * ICEKp associated virulence loci: yersiniabactin (_ybt_), colibactin (_clb_), salmochelin (_iro_), hypermucoidy (_rmp_)
 * Virulence plasmid associated loci: salmochelin (_iro_), aerobactin (_iuc_), hypermucoidy (_rmp_, _rmpA2_)
 * Antimicrobial resistance determinants: acquired genes, SNPs, gene truncations and intrinsic β-lactamases
-* Prediction of phenotypic resistance to ciprofloxacin
 * K (capsule) and O antigen (LPS) serotype prediction, via _wzi_ alleles and [Kaptive](https://github.com/klebgenomics/Kaptive)
 
 Kleborate v3 includes a rewrite of the code to (i) replace the use of BLAST with [minimap2](https://lh3.github.io/minimap2/minimap2.html) (faster and less buggy); and (ii) introduce a modular structure making it easy to add new typing modules, including for other species. Currently, functionality for other species is limited to MLST for _Klebsiella oxytoca_ species complex and _Escherichia coli_ but more is in development.
@@ -20,10 +19,13 @@ For information on how to install and run Kleborate v3, please visit the [Docs](
 
 **Citation**
 
-If you use Kleborate, please cite the paper: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for _Klebsiella pneumoniae_ and its related species complex, Nature Communications (2021). [https://doi.org/10.1038/s41467-021-24448-3](https://doi.org/10.1038/s41467-021-24448-3)
+If you use Kleborate, please cite the paper: Lam, MMC. et al. A genomic surveillance framework and genotyping tool for Klebsiella pneumoniae and its related species complex, Nature Communications (2021). https://doi.org/10.1038/s41467-021-24448-3
 
-If you use the Kaptive calls for K and O locus typing please also cite: Wyres, KL. et al. Identification of _Klebsiella_ capsule synthesis loci from whole genome data. Microbial Genomics (2016). [https://doi.org/10.1099/mgen.0.000102](https://doi.org/10.1099/mgen.0.000102)
 
-If you use the ciprofloxacin resistance predictions, please cite the paper: Tsang et al. Ciprofloxacin resistance in _Klebsiella pneumoniae_: phenotype prediction from genotype and global distribution of resistance determinants. BioRxiv (2025). [https://doi.org/10.1101/2025.09.24.678318](https://doi.org/10.1101/2025.09.24.678318)
+If you use the Kaptive calls for K and O locus typing please cite: Stanton  et al. Fast and accurate in silico antigen typing with Kaptive 3. Microbial Genomics (2025). https://doi.org/10.1099/mgen.0.000102
 
-[![DOI](https://zenodo.org/badge/76227387.svg)](https://doi.org/10.5281/zenodo.5220058)
+
+If you use the cgMLST and LIN code calls, please cite the paper: Bogaerts et al. MiST: rapid, accurate and flexible (core-genome) multi-locus sequence typing (MLST) allele calling from draft genomes. BMC Genomics (2025). https://doi.org/10.1186/s12864-025-12324-z
+
+
+For a full list of acknowledgments and citations for third-party tools and databases used by Kleborate, please see the [Docs](https://kleborate.readthedocs.io/en/latest/).

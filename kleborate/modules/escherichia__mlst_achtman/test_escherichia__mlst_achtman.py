@@ -5,7 +5,7 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2025 Kat Holt, Ryan Wick 
+Copyright 2026 Kat Holt, Ryan Wick 
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -19,6 +19,7 @@ not, see <https://www.gnu.org/licenses/>.
 
 import collections
 import pytest
+import sys
 
 from .escherichia__mlst_achtman import *
 
@@ -90,23 +91,22 @@ def test_check_cli_options_6():
                                escherichia_mlst_achtman_required_exact_matches=-2))
 
 
-def test_check_external_programs_1(mocker):
-    # Tests the good case where minimap2 is found.
-    mocker.patch(
-        'shutil.which',
-        side_effect=lambda x: {'minimap2': '/usr/bin/minimap2'}[x],
-    )
-    assert check_external_programs() == ['minimap2']
+def test_check_external_programs_success(mocker):
+    # Tests the good case where rammappy is successfully imported.
+    mock_module = mocker.MagicMock()
+    mocker.patch.dict(sys.modules, {'rammappy': mock_module})
+
+    assert check_external_programs() == ['rammappy']
 
 
-def test_check_external_programs_2(mocker):
-    # Tests the bad case where minimap2 is missing.
-    mocker.patch(
-        'shutil.which',
-        side_effect=lambda x: {'minimap2': None}[x],
-    )
-    with pytest.raises(SystemExit):
+def test_check_external_programs_import_error(mocker):
+    # Tests the bad case where rammappy cannot be imported.
+    mocker.patch.dict(sys.modules, {'rammappy': None})
+
+    with pytest.raises(SystemExit) as exc_info:
         check_external_programs()
+
+    assert 'Error: could not import rammappy' in str(exc_info.value)
 
 
 def test_get_results_1():
@@ -117,7 +117,7 @@ def test_get_results_1():
                           Args(escherichia_mlst_achtman_min_identity=90.0,
                                escherichia_mlst_achtman_min_coverage=80.0,
                                escherichia_mlst_achtman_required_exact_matches=3), {})
-    assert results['ST'] == 'ST10'
+    assert results['ST_Achtman'] == 'ST10'
     assert results['clonal_complex'] == 'ST10 Cplx'
     assert results['adk'] == '10'
     assert results['fumC'] == '11'
@@ -136,7 +136,7 @@ def test_get_results_2():
                           Args(escherichia_mlst_achtman_min_identity=90.0,
                                escherichia_mlst_achtman_min_coverage=80.0,
                                escherichia_mlst_achtman_required_exact_matches=3), {})
-    assert results['ST'] == 'ST11'
+    assert results['ST_Achtman'] == 'ST11'
     assert results['clonal_complex'] == 'ST11 Cplx'
     assert results['adk'] == '12'
     assert results['fumC'] == '12'
@@ -156,5 +156,5 @@ def test_get_results_3():
                           Args(escherichia_mlst_achtman_min_identity=90.0,
                                escherichia_mlst_achtman_min_coverage=80.0,
                                escherichia_mlst_achtman_required_exact_matches=3), {})
-    assert results['ST'] == 'NA'
+    assert results['ST_Achtman'] == 'NA'
     assert results['clonal_complex'] == '-'

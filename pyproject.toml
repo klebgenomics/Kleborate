@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kleborate"
-version = "3.2.4"
+version = "3.3.0b1"
 description = "Kleborate: a tool for typing and screening pathogen genome assemblies"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
     "Intended Audience :: Science/Research"
 ]
-dependencies = ["biopython","numpy","dna_features_viewer","kaptive","mash"]
+dependencies = ["biopython","numpy<2.0.0","kaptive","rammappy"]
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-mock"]  # needed for running automated tests
@@ -41,4 +41,4 @@ include = ["kleborate", "kleborate.shared", "kleborate.modules", "kleborate.modu
 exclude = ["kleborate.modules.template"]
 
 [tool.setuptools.package-data]
-"*" = ["data/*"]  # modules include data directories which need to be installed as well
+"*" = ["data/*"]  # many modules include data directories which need to be installed as well

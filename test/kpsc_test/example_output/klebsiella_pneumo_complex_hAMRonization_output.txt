@@ -1,0 +1,106 @@
+Input File Name	Gene Symbol	Gene Name	Nucleotide mutation	Amino acid mutation	Genetic Variation Type	Drug Class	Input Sequence ID	Input Gene Length	Input Gene Start	Input Gene Stop	Reference Gene Length	Reference Gene Start	Reference Gene Stop	Sequence Identity	Coverage	Reference Accession	Strand Orientation	Analysis Software Name	Analysis Software Version	Reference Database Name	Reference Database Version	Input Protein Length	Reference Protein Length	Input Protein Start	Input Protein Stop	Reference Protein Start	Reference Protein Stop
+007_S09	aac(6)-Ib3	aac(6)-Ib3			Gene presence detected	aminoglycoside antibiotic	assembly_contig_237	654	67	621	555	1	555	99.64	100.00	NG_051438.1:20-574	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	catA1	catA1			Gene presence detected	phenicol antibiotic	assembly_contig_211	1493	223	882	660	1	660	99.85	100.00	NG_047582.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	dfrA30	dfrA30			Gene presence detected	trimethoprim antibiotic	assembly_contig_224	940	212	685	474	1	474	99.58	100.00	NG_047727.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	TEM-1	TEM-1			Gene presence detected	penicillin beta-lactam	assembly_contig_202	1745	37	897	861	1	861	99.88	100.00	AY263331.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	OXA-1	OXA-1			Gene presence detected	penicillin beta-lactam	assembly_contig_213	1474	65	895	831	1	831	100.00	100.00	NG_049392.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	OXA-2	OXA-2			Gene presence detected	penicillin beta-lactam	assembly_contig_223	940	98	925	828	1	828	100.00	100.00	NG_049496.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	CTX-M-2	CTX-M-2			Gene presence detected	third-generation cephalosporin	assembly_contig_166	4341	1046	1921	876	1	876	100.00	100.00	NG_048968.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	NDM-1	NDM-1			Gene presence detected	carbapenem	assembly_contig_156	5363	4188	5000	813	1	813	100.00	100.00	NG_049326.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	SHV-11	SHV-11			Gene presence detected	penicillin beta-lactam	assembly_contig_33	56676	27911	28771	861	1	861	100.00	100.00	CP168408.1:2797577-2798437	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	sul1.v2	sul1.v2			Gene presence detected	sulfonamide antibiotic	assembly_contig_233	694	1	635	840	1	635	100.00	75.60	NG_048081.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	aac(3)-IIa.v1	aac(3)-IIa.v1			Gene presence detected	aminoglycoside antibiotic	assembly_contig_225	913	1	639	861	223	861	100.00	74.22	NG_047244.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	aac(3)-IId	aac(3)-IId			Gene presence detected	aminoglycoside antibiotic	assembly_contig_205	1685	1	639	861	223	861	99.84	74.22	EU022314.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	catB3.v1	catB3.v1			Gene presence detected	phenicol antibiotic	assembly_contig_213	1474	1033	1474	633	1	442	100.00	69.83	NG_047605.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	blaSHV	blaSHV		p.L35Q	Protein variant detected	penicillin beta-lactam	assembly_contig_33	56676	27911	28771	861	1	861	100.00	100.00	CP067381.1:82914-84074	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	ompK36	ompK36		p.134_135insGD	Inactivating mutation detected	-	assembly_contig_11	96727	33833	34942	1104	1	1104	99.46	100.54	NC_016845.1:3727882-3728985	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	ompK35	ompK35		p.R115VfsTer30	Inactivating mutation detected	-	assembly_contig_14	91113	88694	89772	1080	1	1080	99.91	40.11	-	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	mgrB	mgrB	c.T72del		Inactivating mutation detected	peptide antibiotic	assembly_contig_101	18945	18872	18945	144	1	74	100.00	51.06	NC_016845.1:3337154-3337297	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	pmrB	pmrB		p.R94AfsTer32	Inactivating mutation detected	peptide antibiotic	assembly_contig_19	78336	67548	68644	1098	1	1098	99.54	34.25	NC_016845.1:1694393-1695491	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+007_S09	gyrA	gyrA		p.S83I	Protein variant detected	fluoroquinolone antibiotic	assembly_contig_11	96727	44326	44686	360	1	360	99.44	100.00	HM560971.1:119269-119072	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+007_S09	parC	parC		p.S80I	Protein variant detected	fluoroquinolone antibiotic	assembly_contig_10	96805	29927	30287	360	1	360	99.72	100.00	HM560971.1:119269-119072	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+2024187392	strB.v1	strB.v1			Gene presence detected	aminoglycoside antibiotic	45_pilon	15773	13554	14390	837	1	837	100.00	100.00	NG_047464.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	aph(3)-Ia.v1	aph(3)-Ia.v1			Gene presence detected	aminoglycoside antibiotic	94_pilon	1056	67	882	816	1	816	99.75	100.00	CP157740.1:12584-13348	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	aph(3)-Ib.v1	aph(3)-Ib.v1			Gene presence detected	aminoglycoside antibiotic	45_pilon	15773	14390	15193	804	1	804	99.88	100.00	NG_047413.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	aadA1.v2	aadA1.v2			Gene presence detected	aminoglycoside antibiotic	74_pilon	2416	659	1447	789	1	789	100.00	100.00	NG_047327.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	aph(3)-VI	aph(3)-VI			Gene presence detected	aminoglycoside antibiotic	48_pilon	12362	5950	6729	780	1	780	100.00	100.00	NG_051730.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	armA	armA			Gene presence detected	aminoglycoside antibiotic	57_pilon	7423	6437	7210	774	1	774	100.00	100.00	NG_047476.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	aac(6)-Ib-AKT	aac(6)-Ib-AKT			Gene presence detected	aminoglycoside antibiotic	74_pilon	2416	35	589	555	1	555	100.00	100.00	NG_056043.1:5-559	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	qnrS1	qnrS1			Gene presence detected	Fluoroquinolone antibiotic	48_pilon	12362	1416	2072	657	1	657	100.00	100.00	NG_050543.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	msrE	msrE			Gene presence detected	macrolide antibiotic	57_pilon	7423	2663	4138	1476	1	1476	100.00	100.00	NG_048007.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	mrx	mrx			Gene presence detected	macrolide antibiotic	66_pilon	4017	973	2211	1239	1	1239	100.00	100.00	LC613143.1:28805-30043	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	mphA	mphA			Gene presence detected	macrolide antibiotic	66_pilon	4017	71	976	906	1	906	100.00	100.00	NG_047985.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	mphE.v2	mphE.v2			Gene presence detected	macrolide antibiotic	57_pilon	7423	1723	2607	885	1	885	100.00	100.00	NG_064660.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	sul1	sul1			Gene presence detected	sulfonamide antibiotic	85_pilon	1489	312	1151	840	1	840	100.00	100.00	NG_048082.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	sul2	sul2			Gene presence detected	sulfonamide antibiotic	60_pilon	5091	3808	4623	816	1	816	100.00	100.00	NG_051852.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	tet(A).v1	tet(A).v1			Gene presence detected	tetracycline antibiotic	64_pilon	4106	901	2100	1200	1	1200	100.00	100.00	NG_048154.1:101-1300	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	dfrA5	dfrA5			Gene presence detected	trimethoprim antibiotic	81_pilon	1897	1351	1824	474	1	474	100.00	100.00	NG_051699.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	CTX-M-15	CTX-M-15			Gene presence detected	third-generation cephalosporin	80_pilon	1902	981	1856	876	1	876	100.00	100.00	NG_048935.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	CTX-M-14	CTX-M-14			Gene presence detected	third-generation cephalosporin	88_pilon	1256	341	1216	876	1	876	99.89	100.00	NG_048929.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	NDM-5	NDM-5			Gene presence detected	carbapenem	48_pilon	12362	9162	9974	813	1	813	100.00	100.00	NG_049337.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	OXA-48	OXA-48			Gene presence detected	carbapenem	84_pilon	1610	26	823	798	1	798	100.00	100.00	NG_049762.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	SHV-1	SHV-1			Gene presence detected	penicillin beta-lactam	14_pilon	148667	119862	120722	861	1	861	100.00	100.00	CP165807.1:2737916-2738776	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	OXA-9.v1	OXA-9.v1			Gene presence detected	penicillin beta-lactam	74_pilon	2416	1492	2331	840	1	840	99.88	100.00	CP067618.1:18845-19684	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	TEM-135.v1	TEM-135.v1			Gene presence detected	penicillin beta-lactam	96_pilon	991	2	844	861	19	861	99.88	97.91	CP117718.1:71328-72188	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	catA1	catA1			Gene presence detected	phenicol antibiotic	93_pilon	1119	670	1119	660	211	660	99.78	68.18	NG_047582.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	ompK36	ompK36		p.135_136insD	Inactivating mutation detected	-	2_pilon	438666	240738	241859	1104	1	1104	92.38	101.63	NC_016845.1:3727882-3728985	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	ompK35	ompK35	c.T106del		Inactivating mutation detected	-	22_pilon	93665	2	106	1080	1	105	100.00	9.75	-	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	mgrB	mgrB	c.T50del		Inactivating mutation detected	peptide antibiotic	11_pilon	174550	2	50	144	1	49	100.00	34.04	NC_016845.1:3337154-3337297	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+2024187392	gyrA	gyrA		p.S83F	Protein variant detected	fluoroquinolone antibiotic	2_pilon	438666	230990	231350	360	1	360	99.44	100.00	HM560971.1:119269-119072	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+2024187392	gyrA	gyrA		p.D87N	Protein variant detected	fluoroquinolone antibiotic	2_pilon	438666	230990	231350	360	1	360	99.44	100.00	HM560971.1:119269-119072	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+2024187392	parC	parC		p.S80I	Protein variant detected	fluoroquinolone antibiotic	24_pilon	87413	57118	57478	360	1	360	99.72	100.00	HM560971.1:119269-119072	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+SRR33580217	SHV-11	SHV-11			Gene presence detected	penicillin beta-lactam	1	1055808	375169	376029	861	1	861	99.88	100.00	CP168408.1:2797577-2798437	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR33580217	blaSHV	blaSHV		p.L35Q	Protein variant detected	penicillin beta-lactam	1	1055808	375169	376029	861	1	861	99.88	100.00	CP067381.1:82914-84074	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR33580216	SHV-11	SHV-11			Gene presence detected	penicillin beta-lactam	1	539719	246594	247454	861	1	861	99.88	100.00	CP168408.1:2797577-2798437	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR33580216	blaSHV	blaSHV		p.L35Q	Protein variant detected	penicillin beta-lactam	1	539719	246594	247454	861	1	861	99.88	100.00	CP067381.1:82914-84074	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	aph(3)-Ia.v1	aph(3)-Ia.v1			Gene presence detected	aminoglycoside antibiotic	139	1042	88	903	816	1	816	99.88	100.00	CP157740.1:12584-13348	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	aadA2.v1	aadA2.v1			Gene presence detected	aminoglycoside antibiotic	89	4753	2301	3092	792	1	792	100.00	100.00	NG_047343.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	aac(6)-Ib-cr5	aac(6)-Ib-cr5			Gene presence detected	aminoglycoside antibiotic	113	2188	1541	2095	555	1	555	99.82	100.00	NG_051711.1:101-655	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	aac(6)-Ib-cr5	aac(6)-Ib-cr5			Gene presence detected	Fluoroquinolone antibiotic	113	2188	1541	2095	555	1	555	99.82	100.00	NG_051711.1:101-655	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	mrx	mrx			Gene presence detected	macrolide antibiotic	83	5960	3749	4987	1239	1	1239	100.00	100.00	LC613143.1:28805-30043	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	mphA	mphA			Gene presence detected	macrolide antibiotic	83	5960	4984	5889	906	1	906	100.00	100.00	NG_047985.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	sul1	sul1			Gene presence detected	sulfonamide antibiotic	89	4753	3597	4436	840	1	840	100.00	100.00	NG_048082.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	tet(D)	tet(D)			Gene presence detected	tetracycline antibiotic	97	3526	1642	2826	1185	1	1185	100.00	100.00	NG_051690.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	dfrA12	dfrA12			Gene presence detected	trimethoprim antibiotic	89	4753	1396	1893	498	1	498	100.00	100.00	NG_047689.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	TEM-1	TEM-1			Gene presence detected	penicillin beta-lactam	101	2693	148	1008	861	1	861	99.77	100.00	AY263331.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	OXA-1	OXA-1			Gene presence detected	penicillin beta-lactam	113	2188	580	1410	831	1	831	100.00	100.00	NG_049392.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	CTX-M-15	CTX-M-15			Gene presence detected	third-generation cephalosporin	92	4288	1701	2576	876	1	876	100.00	100.00	NG_048935.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	SHV-5	SHV-5			Gene presence detected	third-generation cephalosporin	3	232195	203475	204335	861	1	861	100.00	100.00	NG_050087.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	KPC-2	KPC-2			Gene presence detected	carbapenem	62	17724	11109	11990	882	1	882	100.00	100.00	NG_049253.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	OXA-9.v1	OXA-9.v1			Gene presence detected	penicillin beta-lactam	101	2693	1708	2547	840	1	840	99.88	100.00	CP067618.1:18845-19684	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	catB3.v1	catB3.v1			Gene presence detected	phenicol antibiotic	113	2188	1	442	633	1	442	100.00	69.83	NG_047605.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	blaSHV	blaSHV		p.G238S	Gene presence detected	third-generation cephalosporin	3	232195	203475	204335	861	1	861	100.00	100.00	NG_050087.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	blaSHV	blaSHV		p.E240K	Gene presence detected	third-generation cephalosporin	3	232195	203475	204335	861	1	861	100.00	100.00	NG_050087.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	ompK36	ompK36	c.25C>T		Nucleotide variant detected	-	2	276505	127569	128687	1104	1	1104	92.44	101.36	NC_016845.1:3727882-3728985	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	mgrB	mgrB		p.K43Ter	Inactivating mutation detected	peptide antibiotic	5	193631	83176	83319	144	1	144	99.31	89.36	NC_016845.1:3337154-3337297	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+SRR5386028	gyrA	gyrA		p.S83F	Protein variant detected	fluoroquinolone antibiotic	2	276505	117822	118182	360	1	360	99.44	100.00	HM560971.1:119269-119072	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+SRR5386028	gyrA	gyrA		p.D87N	Protein variant detected	fluoroquinolone antibiotic	2	276505	117822	118182	360	1	360	99.44	100.00	HM560971.1:119269-119072	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+SRR5386028	parC	parC		p.S80I	Protein variant detected	fluoroquinolone antibiotic	7	156589	145285	145645	360	1	360	99.72	100.00	HM560971.1:119269-119072	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+ERR14097885	aph(3)-Ia.v1	aph(3)-Ia.v1			Gene presence detected	aminoglycoside antibiotic	76	1051	67	882	816	1	816	99.75	100.00	CP157740.1:12584-13348	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	aadA1.v2	aadA1.v2			Gene presence detected	aminoglycoside antibiotic	62	2006	136	924	789	1	789	100.00	100.00	NG_047327.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	aph(3)-VI	aph(3)-VI			Gene presence detected	aminoglycoside antibiotic	44	7811	1083	1862	780	1	780	100.00	100.00	NG_051730.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	armA	armA			Gene presence detected	aminoglycoside antibiotic	45	7423	6437	7210	774	1	774	100.00	100.00	NG_047476.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	qnrS1	qnrS1			Gene presence detected	Fluoroquinolone antibiotic	44	7811	5740	6396	657	1	657	100.00	100.00	NG_050543.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	msrE	msrE			Gene presence detected	macrolide antibiotic	45	7423	2663	4138	1476	1	1476	100.00	100.00	NG_048007.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	mrx	mrx			Gene presence detected	macrolide antibiotic	46	5939	3731	4969	1239	1	1239	99.92	100.00	LC613143.1:28805-30043	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	mphA	mphA			Gene presence detected	macrolide antibiotic	46	5939	4966	5871	906	1	906	100.00	100.00	NG_047985.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	mphE.v2	mphE.v2			Gene presence detected	macrolide antibiotic	45	7423	1723	2607	885	1	885	100.00	100.00	NG_064660.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	catB3.v2	catB3.v2			Gene presence detected	phenicol antibiotic	57	2443	1165	1797	633	1	633	100.00	100.00	NG_047604.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	arr-3	arr-3			Gene presence detected	rifamycin antibiotic	57	2443	1882	2334	453	1	453	100.00	100.00	NG_048581.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	sul1	sul1			Gene presence detected	sulfonamide antibiotic	67	1611	318	1157	840	1	840	100.00	100.00	NG_048082.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	sul2	sul2			Gene presence detected	sulfonamide antibiotic	48	5101	3806	4621	816	1	816	100.00	100.00	NG_051852.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	dfrA5	dfrA5			Gene presence detected	trimethoprim antibiotic	85	560	71	544	474	1	474	100.00	100.00	NG_051699.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	dfrA50	dfrA50			Gene presence detected	trimethoprim antibiotic	17	112548	12768	13244	477	1	477	98.95	100.00	NG_242637.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	OXA-9.v1	OXA-9.v1			Gene presence detected	penicillin beta-lactam	62	2006	969	1808	840	1	840	100.00	100.00	CP067618.1:18845-19684	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	OXA-1	OXA-1			Gene presence detected	penicillin beta-lactam	57	2443	197	1027	831	1	831	100.00	100.00	NG_049392.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	CTX-M-15	CTX-M-15			Gene presence detected	third-generation cephalosporin	59	2170	981	1856	876	1	876	100.00	100.00	NG_048935.1	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	NDM-5	NDM-5			Gene presence detected	carbapenem	54	3392	192	1004	813	1	813	100.00	100.00	NG_049337.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	SHV-11	SHV-11			Gene presence detected	penicillin beta-lactam	3	391795	276306	277166	861	1	861	99.88	100.00	CP168408.1:2797577-2798437	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	TEM-150	TEM-150			Gene presence detected	penicillin beta-lactam	43	8581	1	842	861	20	861	99.88	97.79	NG_050194.1	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	aac(6)-Ib-AKT.v3	aac(6)-Ib-AKT.v3			Gene presence detected	aminoglycoside antibiotic	87	521	1	489	555	1	489	100.00	88.11	NG_052418.1:101-655	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	blaSHV	blaSHV		p.L35Q	Protein variant detected	penicillin beta-lactam	3	391795	276306	277166	861	1	861	99.88	100.00	CP067381.1:82914-84074	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	ompK36	ompK36		p.134_135insGD	Inactivating mutation detected	-	11	198590	122632	123741	1104	1	1104	98.83	100.54	NC_016845.1:3727882-3728985	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	ompK35	ompK35		p.R60LfsTer31	Inactivating mutation detected	-	6	348123	178574	179660	1080	1	1080	99.26	25.07	-	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	pmrB	pmrB	c.G445del		Inactivating mutation detected	peptide antibiotic	6	348123	91	534	1098	1	444	99.55	40.55	NC_016845.1:1694393-1695491	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0						
+ERR14097885	gyrA	gyrA		p.S83I	Protein variant detected	fluoroquinolone antibiotic	11	198590	112885	113245	360	1	360	99.44	100.00	HM560971.1:119269-119072	+	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120
+ERR14097885	parC	parC		p.S80I	Protein variant detected	fluoroquinolone antibiotic	19	103230	72931	73291	360	1	360	99.44	100.00	HM560971.1:119269-119072	-	Kleborate	3.2.4	Kleborate_AMRdb	3.3.0	120	120	1	120	1	120

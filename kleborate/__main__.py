@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga
+Copyright 2026 Mary Maranga
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -13,6 +13,7 @@ not, see <https://www.gnu.org/licenses/>.
 
 import argparse
 import graphlib
+import threading
 import gzip
 import importlib
 import importlib.metadata
@@ -26,10 +27,14 @@ import tempfile
 import textwrap
 import uuid
 from glob import glob
-
+from typing import Any
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import partial
 from .shared.help_formatter import MyParser, MyHelpFormatter
-from .shared.misc import get_compression_type, load_fasta,reverse_complement
+from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_spec_headers, KLEBSIELLA_TYPING_SPEC
 from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
+from rammappy import Index
+
 
 
 def parse_arguments(args, all_module_names, modules):
@@ -37,8 +42,11 @@ def parse_arguments(args, all_module_names, modules):
     This function does the CLI argument parsing for Kleborate. Module-specific arguments are added
     by each module's add_cli_options function.
     """
+
     parser = MyParser(description='Kleborate: a tool for characterising virulence and resistance '
-                                  'in pathogen assemblies',
+                                  'in pathogen assemblies of Klebsiella pneumoniae and the Klebsiella '
+                                  'pneumoniae species complex (KpSC), Klebsiella oxytoca species complex (KoSC) '
+                                  'and Escherichia coli/Shigella',
                       formatter_class=MyHelpFormatter, add_help=False, epilog=paper_refs())
 
     if '--helpall' in args or '--allhelp' in args or '--all_help' in args:
@@ -47,15 +55,24 @@ def parse_arguments(args, all_module_names, modules):
     io_args = parser.add_argument_group('Input/output')
     io_args.add_argument('-a', '--assemblies', nargs='+', type=str,
                          help='FASTA file(s) for assemblies')
-
     io_args.add_argument('-o', '--outdir', type=str,
                          help='Directory for storing output files')
-
     io_args.add_argument('-r', '--resume', action='store_true',
                          help='append the output files')
-
     io_args.add_argument('--trim_headers', action='store_true',
                          help='Trim headers in the output files')
+
+    # turn off extra outputs
+    io_args.add_argument('--no_hamronization', action='store_true',
+                         help='Disable generation of the hAMRonization output file')
+    io_args.add_argument('--no_genotype_spec', action='store_true',
+                         help='Disable generation of the genotype spec output file')
+
+    perf_args = parser.add_argument_group('Performance')
+    
+    perf_args.add_argument('-t', '--threads', type=check_cpus,
+                           default=check_cpus(),
+                           help='Number of threads')
 
     module_args = parser.add_argument_group('Modules')
     module_args.add_argument('--list_modules', action='store_true',
@@ -90,6 +107,7 @@ def parse_arguments(args, all_module_names, modules):
     return parser.parse_args(args)
 
 
+
 def main():
     all_module_names, modules = import_modules()
     args = parse_arguments(sys.argv[1:], all_module_names, modules)
@@ -116,12 +134,16 @@ def main():
         module_name = args.modules.split(',')[0]
         out_files_suffixes = [f'{module_name}_output.txt']
     else:
-        out_files_suffixes = [
-            'klebsiella_pneumo_complex_output.txt',
-            'klebsiella_pneumo_complex_hAMRonization_output.txt',
+        out_files_suffixes = ['klebsiella_pneumo_complex_output.txt']
+        if not args.no_hamronization:
+            out_files_suffixes.append('klebsiella_pneumo_complex_hAMRonization_output.txt')
+        if not args.no_genotype_spec:
+            out_files_suffixes.append('klebsiella_pneumo_complex_genotype_spec.txt')
+        out_files_suffixes.extend([
             'klebsiella_oxytoca_complex_output.txt',
             'escherichia_output.txt'
-        ]
+        ])
+        
 
     if not args.resume:
         for suffix in out_files_suffixes:
@@ -130,18 +152,19 @@ def main():
 
     for assembly in args.assemblies:
         check_assembly(assembly)
-
+    
+    def process_assembly(assembly):
         with tempfile.TemporaryDirectory() as temp_dir:
             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
-            minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
+            ref_index = build_index(assembly, unzipped_assembly)
             results = {'strain': get_strain_name(assembly)}
 
-            pass_check = True  # default, assume no check and run all modules
+            pass_check = True # default, assume no check and run all modules
             if args.preset and len(check_module_list) > 0:
                 for module, check in presets[args.preset]['check']:
                     try:
                         module_results = modules[module].get_results(
-                            unzipped_assembly, minimap2_index, args, results
+                            unzipped_assembly, ref_index, args, results
                         )
                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
                         check_function = globals()[check]
@@ -150,17 +173,16 @@ def main():
                             pass_check = False
                             print(f"Assembly {assembly} failed in check {check}.")
                             break
-
                     except Exception as e:
                         print(f"Error encountered while processing {assembly} with {module}: {e}.")
                         pass_check = False
                         break
-
+            
             if pass_check:
                 for module in module_run_order:
                     if module not in preset_check_modules:
                         module_results = modules[module].get_results(
-                            unzipped_assembly, minimap2_index, args, results
+                            unzipped_assembly, ref_index, args, results
                         )
                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
             else:
@@ -170,6 +192,8 @@ def main():
                         for header in module_headers:
                             results[header] = 'Not Tested'
 
+            if args.preset and not pass_check:
+                return
             if args.modules:
                 module_name = args.modules.split(',')[0]
                 outfile_suffix = f'{module_name}_output.txt'
@@ -177,24 +201,31 @@ def main():
                 filtered_headers = [h for h in full_headers if h.split('__')[-1] not in annotation_fields]
                 filtered_results = {k: v for k, v in results.items() if k in filtered_headers}
                 output_results(filtered_headers, stdout_headers, output_file, filtered_results, args.trim_headers)
+
             else:
-                species = results.get('enterobacterales__species__species', None)
+                species = results.get('general__species__species', None)
                 if species and is_kp_complex({'species': species}):
-                    harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
+                    # --- WRITE HAMRONIZATION FILE ---
+                    if not args.no_hamronization:
+                        harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
+                        output_results_klebsiella_pneumo_complex_hAMRonization(
+                            full_headers, stdout_headers, harmonization_file, results, args.trim_headers
+                        )
+                    
+                    if not args.no_genotype_spec:
+                        genotype_spec_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_genotype_spec.txt')
+                        output_klebsiella_pneumo_complex_typingspec(genotype_spec_file, results)
+
                     klebsiella_pneumo_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_output.txt')
-
-                    output_results_klebsiella_pneumo_complex_hAMRonization(
-                        full_headers, stdout_headers, harmonization_file, results, args.trim_headers
-                    )
-
                     selective_headers = [
                         header for header in full_headers
-                        if not header.startswith('klebsiella_pneumo_complex__amr') or
-                        header.split('__')[-1] in res_headers
+                        if (not header.startswith('kpsc__amr') or
+                        header.split('__')[-1] in res_headers) and
+                        (not header.startswith('kpsc__kaptive') or
+                        header.split('__')[-1] not in kaptive_spec_headers)
                     ]
                     filtered_results = {header: results.get(header, "-") for header in selective_headers}
                     output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
-
                 else:
                     if species and is_ko_complex({'species': species}):
                         outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
@@ -202,126 +233,31 @@ def main():
                         outfile_suffix = 'escherichia_output.txt'
                     else:
                         print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
-                        continue
+                        return
 
                     output_file = os.path.join(args.outdir, outfile_suffix)
                     output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
 
-
-# def main():
-#     all_module_names, modules = import_modules()
-#     args = parse_arguments(sys.argv[1:], all_module_names, modules)
-#     print_modules(args, all_module_names, modules)
-
-#     module_names, check_module_list, pass_modules = get_used_module_names(args, all_module_names, get_presets())
-
-#     preset_check_modules = []
-#     if args.preset:
-#         presets = get_presets()
-#         preset_check_modules = [module for module, _ in presets[args.preset]['check']]
-
-#     module_names, module_run_order, external_programs = check_modules(args, modules, module_names, check_module_list, pass_modules)
-
-#     full_headers, stdout_headers = get_headers(module_names, modules)
-#     print('\t'.join([h.split('__')[-1] for h in stdout_headers]))
-
-#     if not os.path.exists(args.outdir):
-#         os.makedirs(args.outdir)
-
-#     # If the resume flag is not set, remove existing output files
-#     if args.modules:
-#         module_name = args.modules.split(',')[0]
-#         out_files_suffixes = [f'{module_name}_output.txt']
-#     else:
-#         out_files_suffixes = [
-#             'klebsiella_pneumo_complex_output.txt',
-#             'klebsiella_pneumo_complex_hAMRonization_output.txt',
-#             'klebsiella_oxytoca_complex_output.txt',
-#             'escherichia_output.txt'
-#         ]
-
-#     if not args.resume:
-#         for suffix in out_files_suffixes:
-#             for file in glob(f'{args.outdir}/*{suffix}'):
-#                 os.remove(file)
-
-#     for assembly in args.assemblies:
-#         check_assembly(assembly)
-
-#         with tempfile.TemporaryDirectory() as temp_dir:
-#             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
-#             minimap2_index = build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir)
-#             results = {'strain': get_strain_name(assembly)}
-
-#             pass_check = True  # default, assume no check and run all modules
-#             # if we have 'check' modules in the preset, run these
-#             if args.preset and len(check_module_list) > 0:
-#                 for module, check in presets[args.preset]['check']:
-#                     try:
-#                         module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
-
-#                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
-#                         check_function = globals()[check]
-
-#                         if not check_function(module_results):
-#                             pass_check = False
-#                             print(f"Assembly {assembly} failed in check {check}.")
-#                             break # Exit the for loop since this assembly failed the check
-
-#                     except Exception as e:
-#                         print(f"Error encountered while processing {assembly} with {module}: {e}.")
-#                         pass_check = False
-#                         break
-
-#             # proceed through all other modules
-#             if pass_check:
-#                 for module in module_run_order:
-#                     if module not in preset_check_modules:
-#                         module_results = modules[module].get_results(unzipped_assembly, minimap2_index, args, results)
-#                         results.update({f'{module}__{header}': result for header, result in module_results.items()})
-#             else:
-#                 # Populate results with "Not Tested" for modules that did not run
-#                 for module in module_run_order:
-#                     if module not in preset_check_modules:
-#                         module_headers = [header for header in full_headers if header.startswith(module)]
-#                         for header in module_headers:
-#                             results[header] = 'Not Tested'
-
-#             species = results.get('enterobacterales__species__species', None)
-#             if species and is_kp_complex({'species': species}):
-#                 harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
-#                 klebsiella_pneumo_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_output.txt')
-
-#                 # Write all results for harmonization file with required processing
-#                 output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, harmonization_file, results, args.trim_headers)
-
-
-#                 # Select headers for klebsiella_pneumo_complex_output.txt
-#                 selective_headers = [
-#                     header for header in full_headers 
-#                     if not header.startswith('klebsiella_pneumo_complex__amr') or 
-#                     header.split('__')[-1] in res_headers
-#                 ]
-
-#                 # Filter the results directly based on selective headers
-#                 filtered_results = {header: results.get(header, "-") for header in selective_headers}
-
-#                 # Output filtered results
-#                 output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
-
-#             else:
-#                 if species and is_ko_complex({'species': species}):
-#                     outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
-#                 elif species and is_escherichia({'species': species}):
-#                     outfile_suffix = 'escherichia_output.txt'
-#                 else:
-#                     print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
-#                     continue
-
-#                 output_file = os.path.join(args.outdir, outfile_suffix)
-#                 output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
-
-
+    
+    executor = None
+    try:
+        executor = ThreadPoolExecutor(max_workers=args.threads)
+        futures = [executor.submit(process_assembly, assembly) for assembly in args.assemblies]
+        for future in as_completed(futures):
+            try:
+                future.result()
+            except Exception as e:
+                import traceback
+                print(f"An exception occurred during processing: {e}", flush=True)
+                traceback.print_exc()
+    except KeyboardInterrupt:
+        try:
+            if executor is not None:
+                executor.shutdown(wait=False, cancel_futures=True)
+        finally:
+            os._exit(130)
+    else:
+        executor.shutdown(wait=True)
 
 
 
@@ -332,7 +268,7 @@ def print_modules(args, all_module_names, modules):
         print('Available modules for Kleborate')
         print('-------------------------------')
         terminal_width = shutil.get_terminal_size().columns
-        end_formatting, bold = '\033[0m', '\033[1m'
+        end_formatting, bold = '\033[0m', '\033[1;97m'
         for m in all_module_names:
             description = modules[m].description()
             text = f'{bold}{m}{end_formatting}: {description}'
@@ -344,30 +280,32 @@ def print_modules(args, all_module_names, modules):
 
 
 
+
 def get_presets():
     kpsc_modules = {
-        'check': [('enterobacterales__species', 'is_kp_complex')],
+        'check': [('general__species', 'is_kp_complex')],
         'pass': [
-            'general__contig_stats','klebsiella_pneumo_complex__mlst',
-            'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst', 'klebsiella_pneumo_complex__virulence_score',
-            'klebsiella__rmpa2','klebsiella_pneumo_complex__amr', 'klebsiella_pneumo_complex__resistance_score', 'klebsiella_pneumo_complex__resistance_class_count',
-            'klebsiella_pneumo_complex__resistance_gene_count', 'klebsiella_pneumo_complex__cipro_prediction', 'klebsiella_pneumo_complex__wzi','klebsiella_pneumo_complex__kaptive'
+            'general__contig_stats','kpsc__mlst',
+            'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst', 'kpsc__virulence_score',
+            'klebsiella__rmpa2','klebsiella__peg-344','kpsc__amr', 'kpsc__resistance_score', 'kpsc__resistance_class_count',
+            'kpsc__resistance_gene_count', 'kpsc__cipro_prediction', 'kpsc__wzi','kpsc__kaptive', 'kpsc__cgmlst', 'kpsc__mrk'
         ]
     }
 
     kosc_modules = {
-        'check': [('enterobacterales__species', 'is_ko_complex')],
+        'check': [('general__species', 'is_ko_complex')],
         'pass': [
             'general__contig_stats',
-            'klebsiella_oxytoca_complex__mlst', 'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'klebsiella__rmst','klebsiella__rmpa2'
+            'kosc__mlst', 'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'kosc__kaptive'
         ]
     }
 
     escherichia_modules = {
-        'check': [('enterobacterales__species', 'is_escherichia')],
+        'check': [('general__species', 'is_escherichia')],
         'pass': [
             'general__contig_stats',
-            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee', 'escherichia__ezclermont','escherichia__stxtyper', 'escherichia__ectyper', 'escherichia__amr'
+            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee','escherichia__pks', 'escherichia__ezclermont','escherichia__stxtyper','escherichia__ectyper', 'escherichia__amr',
+            'escherichia__kaptive', 'escherichia__cgmlst','escherichia__vfdb'
         ]
     }
 
@@ -376,6 +314,8 @@ def get_presets():
         'kosc': kosc_modules,
         'escherichia': escherichia_modules
     }
+
+
 
 
 def add_module_cli_arguments(parser, args, all_module_names, modules):
@@ -391,6 +331,7 @@ def add_module_cli_arguments(parser, args, all_module_names, modules):
                 a.help = argparse.SUPPRESS
 
 
+
 def get_used_module_names(args, all_module_names, presets): 
     if args.preset is None and args.modules is None:
         sys.exit('Error: either --preset or --modules is required')
@@ -404,12 +345,14 @@ def get_used_module_names(args, all_module_names, presets):
         if args.preset not in presets:
             sys.exit(f'Error: {args.preset} is not a valid preset')
 
-        # Assuming presets[args.preset] is a dictionary with 'check' and 'pass' keys
         check_modules = [module[0] for module in presets[args.preset].get('check', [])]  # Extract module names from check modules
-        pass_modules = presets[args.preset].get('pass', [])  # Directly assign pass modules
+        pass_modules = presets[args.preset].get('pass', []) 
 
         if args.preset == 'escherichia' and args.modules is None:
-            pass_modules = [module for module in pass_modules if module != 'escherichia__mlst_pasteur']
+            pass_modules = [
+                module for module in pass_modules 
+                if module not in ('escherichia__mlst_pasteur', 'escherichia__vfdb', 'escherichia__cgmlst')
+            ]
 
         module_names += check_modules + pass_modules  # Combine check and pass modules for the overall list
 
@@ -443,6 +386,7 @@ def get_all_module_names():
     return sorted(module_names)
 
 
+
 def get_strain_name(full_path):
     filename = os.path.split(full_path)[1]
     if filename.endswith('_temp_decompress.fasta'):
@@ -450,7 +394,8 @@ def get_strain_name(full_path):
     if filename.endswith('.gz'):
         filename = filename[:-3]
     return os.path.splitext(filename)[0]
-    
+   
+
 
 def import_modules():
     """
@@ -461,6 +406,7 @@ def import_modules():
     for m in all_module_names:
         modules[m] = importlib.import_module(f'..modules.{m}.{m}', __name__)
     return all_module_names, modules
+
 
 
 def check_modules(args, modules, module_names, preset_check_modules, preset_pass_modules):
@@ -491,12 +437,14 @@ def check_modules(args, modules, module_names, preset_check_modules, preset_pass
     return module_names, get_run_order(dependency_graph), sorted(all_external_programs)
 
 
+
 def get_run_order(dependency_graph):
     try:
         ts = graphlib.TopologicalSorter(dependency_graph)
         return list(ts.static_order())
     except graphlib.CycleError:
         sys.exit('Error: module dependency graph contains a cycle')
+
 
 
 def check_assembly(assembly):
@@ -514,6 +462,7 @@ def check_assembly(assembly):
     for _, seq in fasta:
         if len(seq) == 0:
             sys.exit('Error: invalid FASTA file (contains a zero-length sequence): ' + assembly)
+
 
 
 def get_headers(module_names, modules):
@@ -537,6 +486,7 @@ def get_headers(module_names, modules):
     return full_headers, stdout_headers
 
 
+
 def gunzip_assembly_if_necessary(assembly, temp_dir):
     if get_compression_type(assembly) == 'gz':
         unzipped_assembly = pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.fasta')
@@ -546,25 +496,49 @@ def gunzip_assembly_if_necessary(assembly, temp_dir):
         return assembly
 
 
-def build_minimap2_index(assembly, unzipped_assembly, external_programs, temp_dir):
+def build_index(assembly, unzipped_assembly):
     """
-    A lot of the modules use minimap2 alignment, so pre-building the index for this assembly once
-    can save a bit of time.
+    Builds a rammappy Index for this assembly once.
+
+    Returns a rammappy Index object -- this replaces the old
+    build_minimap2_index().
     """
-    if 'minimap2' not in external_programs:
-        return None
-    minimap2_index = (pathlib.Path(temp_dir) / (uuid.uuid4().hex + '.mmi')).resolve()
-    command = ['minimap2', '-d', minimap2_index, unzipped_assembly]
-    p = subprocess.run(command, capture_output=True, text=True)
-    if p.returncode != 0:
-        sys.exit(f'\nError: minimap2 failed to index sample {assembly}:\n{p.stderr}')
-    return minimap2_index
+    ref_seqs_list = load_fasta(unzipped_assembly)
+    return Index.build([(name.encode(), seq.encode()) for name, seq in ref_seqs_list])
+
 
 
 def decompress_file(in_file, out_file):
     with gzip.GzipFile(in_file, 'rb') as i, open(out_file, 'wb') as o:
         s = i.read()
         o.write(s)
+
+
+
+MAX_CPUS = 32
+def check_cpus(cpus: Any = None, max_cpus: int = MAX_CPUS, verbose: bool = False) -> int:
+    avail_cpus = os.cpu_count() or max_cpus
+
+    if isinstance(cpus, str):
+        cpus = int(cpus.strip()) if cpus.strip().isdigit() else 0
+    elif isinstance(cpus, (int, float)):
+        cpus = int(cpus)
+    elif cpus is None:
+        cpus = 0
+    else:
+        cpus = 0
+
+    if cpus <= 0:
+        cpus = avail_cpus
+
+    cpus = max(1, min(cpus, avail_cpus, max_cpus))
+
+    if verbose:
+        print(f"Using cpus={cpus}")
+
+    return cpus
+
+
 
 
 def output_headers(full_headers, stdout_headers, outfile):
@@ -579,179 +553,168 @@ def output_headers(full_headers, stdout_headers, outfile):
         o.write('\t'.join(trimmed_full_headers))
 
 
-res_headers = [
-    'AGly_acquired', 'Col_acquired', 'Fcyn_acquired', 'Flq_acquired', 'Gly_acquired', 
-    'MLS_acquired', 'Phe_acquired', 'Rif_acquired', 'Sul_acquired', 'Tet_acquired', 
-    'Tgc_acquired', 'Tmt_acquired', 'Bla_acquired', 'Bla_inhR_acquired', 'Bla_ESBL_acquired', 
-    'Bla_ESBL_inhR_acquired', 'Bla_Carb_acquired', 'Bla_chr', 'SHV_mutations', 
-    'Omp_mutations', 'Col_mutations', 'Flq_mutations', 'truncated_resistance_hits', 
-    'spurious_resistance_hits'
-]
 
-
-annotation_fields = [
-        'Genetic_variation_type','Drug_class','Input_sequence_ID','Input_gene_length', 'Input_gene_start', 'Input_gene_stop', 'Reference_gene_length',
-        'Reference_gene_start', 'Reference_gene_stop', 'Sequence_identity', 'Coverage','Reference_accession','Strand_orientation',
-        'Software_name', 'Software_version', 'Reference_database_name',
-        'Reference_database_version','Input_protein_length','Reference_protein_length','Input_protein_start', 'Input_protein_stop','Antimicrobial_agent', 
-        'Coverage_depth', 'Coverage_ratio','Predicted_phenotype','predicted_phenotype_confidence_level', 
-        'Reference_protein_start', 'Reference_protein_stop','Resistance_mechanism'
-]
-
-
+file_lock = threading.Lock()
 def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, outfile, results, trim_headers=False):
-    # Rename strain to Input_file_name
     input_file_name = results['strain']
+    prefix = 'kpsc__amr__'
 
-    mutation_variant_headers = [
-        'SHV_mutations', 'Omp_mutations', 'Col_mutations', 'Flq_mutations'
-    ]
-
+    mutation_variant_headers = ['SHV_mutations', 'Omp_mutations', 'Col_mutations', 'Flq_mutations']
     acquired_res_headers = [h for h in res_headers if h not in mutation_variant_headers]
 
-    prefix = 'klebsiella_pneumo_complex__amr__'
+    software_name    = results[prefix + 'Analysis Software Name']
+    software_version = results[prefix + 'Analysis Software Version']
+    db_name          = results[prefix + 'Reference Database Name']
+    db_version       = results[prefix + 'Reference Database Version']
 
     def clean(val):
-    # strip any “-digits%” suffix
         val = re.sub(r'-\d+%$', '', val)
         return val.translate(str.maketrans('', '', '^*?')).strip()
 
-    # Parse: build a dict of {field: [list of entries]}
-    parsed = {}
-    for k, v in results.items():
-        if isinstance(v, list) and v:
-            val = v[0]
-            if isinstance(val, str) and val != '-':
-                parsed[k] = [clean(x) for x in val.split(';')]
+    def get_base_gene(val):
+        val = clean(val)
+        val = val.split(':')[0] if ':' in val else val
+        val = val.split('-')[0] if '-' in val else val
+        return val.lower()
+
+    def parse_results():
+        parsed = {}
+        for k, v in results.items():
+            if isinstance(v, list) and v:
+                val = v[0]
+                parsed[k] = [clean(x) for x in val.split(';')] if isinstance(val, str) and val != '-' else []
             else:
                 parsed[k] = []
-        else:
-            parsed[k] = []
+        return parsed
 
+    def base_row(gene_symbol):
+        return {
+            'Input File Name':          input_file_name,
+            'Gene Symbol':              gene_symbol,
+            'Gene Name':                gene_symbol, 
+            'Nucleotide mutation':      '',
+            'Amino acid mutation':      '',
+            'Analysis Software Name':   software_name,
+            'Analysis Software Version': software_version,
+            'Reference Database Name':  db_name,
+            'Reference Database Version': db_version,
+        }
+
+    def strip_mutation_from_accession(row, v, g):
+        """Strips leading mutation prefix from accession value and populates mutation fields."""
+        if v.startswith('c.'):
+            row['Nucleotide mutation'] = v.split(':', 1)[0]
+            v = v.split(':', 1)[1]
+        elif v.startswith('p.'):
+            v = v.split(':', 1)[1]
+        elif v.startswith('del:'):
+            row['Nucleotide mutation'] = 'del'
+            v = v.split(':', 1)[1]
+        elif ':' in v:
+            pfx = v.split(':', 1)[0]
+            if 'c.' in pfx or 'del' in pfx or 'del' in g:
+                row['Nucleotide mutation'] = pfx
+                v = ':'.join(v.split(':')[1:])
+        return v
+
+    def match_annotation(field, ann_values, match_fn, row, set_mutation):
+        """Returns the matched annotation value for a given field."""
+        for item in ann_values:
+            if ':' in item:
+                idx = item.find(':') if field == 'Reference Accession' else item.rfind(':')
+                g, v = item[:idx], item[idx+1:]
+                if field == 'Reference Accession':
+                    if match_fn(g):
+                        if set_mutation:
+                            v = strip_mutation_from_accession(row, v, g)
+                        else:
+                            v = strip_mutation_from_accession({}, v, g) 
+                    else:
+                        v = strip_mutation_from_accession({}, v, g)
+            else:
+                g = v = item
+
+            if match_fn(g):
+                return v
+        return ''
+
+    parsed = parse_results()
     rows = []
 
-    software_name = results['klebsiella_pneumo_complex__amr__Software_name']
-    software_version = results['klebsiella_pneumo_complex__amr__Software_version']
-    db_name = results['klebsiella_pneumo_complex__amr__Reference_database_name']
-    db_version = results['klebsiella_pneumo_complex__amr__Reference_database_version']
-
+    global_software_fields = {
+        'Analysis Software Name', 'Analysis Software Version', 
+        'Reference Database Name', 'Reference Database Version'
+    }
 
     # ----- ACQUIRED GENES -----
+
     for header in acquired_res_headers:
-        key = prefix + header
-        variants = parsed.get(key, [])
-        for variant in variants:
+        for variant in parsed.get(prefix + header, []):
             if not variant or variant == '-':
                 continue
 
-            row = {
-                'Input_file_name': input_file_name,
-                'Gene_symbol': variant,
-                'Mutation': '-',
-                'Software_name': software_name,
-                'Software_version': software_version,
-                'Reference_database_name': db_name,
-                'Reference_database_version': db_version
-            }
+            row = base_row(variant)
+            var_clean = clean(variant).split(':')[0].lower()  
 
-            # set annottaion field for each variant
             for field in annotation_fields:
-                ann_key = prefix + field
-                ann_values = parsed.get(ann_key, [])
-                matched_val = '-'
-                for item in ann_values:
-                    # Custom parsing for Reference_accession to handle nested colons
-                    if field == 'Reference_accession' and 'ARO:' in item:
-                        idx = item.find('ARO:')
-                        g = item[:idx-1]
-                        v = item[idx:]
-                    else:
-                        if ':' in item:
-                            idx = item.rfind(':')
-                            g = item[:idx]
-                            v = item[idx+1:]
-                        else:
-                            g = item
-                            v = item
-                    if clean(g) == variant:
-                        matched_val = v
-                        break
-                row[field] = matched_val
+                if field in global_software_fields:
+                    continue  
+                
+                ann_values = parsed.get(prefix + field, [])
+                match_fn = lambda g, vc=var_clean: clean(g).split(':')[0].lower() == vc
+                row[field] = match_annotation(field, ann_values, match_fn, row, set_mutation=True)
 
             if header == 'Flq_acquired':
-                row['Drug_class'] = 'Fluoroquinolone antibiotic'
+                row['Drug Class'] = 'Fluoroquinolone antibiotic'
 
             rows.append(row)
 
-    # ----- MUTATIONS-----
+    # ----- MUTATIONS -----
     for header in mutation_variant_headers:
-        key = prefix + header
-        variants = parsed.get(key, [])
-        for variant in variants:
+        for variant in parsed.get(prefix + header, []):
             if not variant or variant == '-':
                 continue
 
-            # Extract gene symbol and mutation after first colon
             if ':' in variant:
-                Gene_symbol, mutation = variant.split(':', 1)
+                search_symbol, mutation = variant.split(':', 1)
             elif '-' in variant:
-                Gene_symbol = variant.split('-')[0]
+                search_symbol = variant.split('-')[0]
                 mutation = variant
             else:
-                Gene_symbol = variant
-                mutation = variant
+                search_symbol = mutation = variant
 
-            row = {
-                'Input_file_name': input_file_name,
-                'Gene_symbol': Gene_symbol,
-                'Mutation': mutation,
-                'Software_name': software_name,
-                'Software_version': software_version,
-                'Reference_database_name': db_name,
-                'Reference_database_version': db_version
-            }
+            gene_symbol = ('bla' + search_symbol
+                           if search_symbol.startswith('SHV') and not search_symbol.startswith('bla')
+                           else search_symbol)
 
-            # add annotation field for each variant
+            row = base_row(gene_symbol)
+            if mutation.startswith('p.'):
+                row['Amino acid mutation']  = mutation
+            elif mutation.startswith('c.'):
+                row['Nucleotide mutation']  = mutation
+            elif mutation == 'del':
+                row['Nucleotide mutation']  = 'del'
+
             for field in annotation_fields:
-                ann_key = prefix + field
-                ann_values = parsed.get(ann_key, [])
-                matched_val = '-'
-                for item in ann_values:
-                    if field == 'Reference_accession' and 'ARO:' in item:
-                        idx = item.find('ARO:')
-                        g = item[:idx-1]
-                        v = item[idx:]
-                    else:
-                        if ':' in item:
-                            idx = item.rfind(':')
-                            g = item[:idx]
-                            v = item[idx+1:]
-                        else:
-                            g = item
-                            v = item
-                    if clean(g) == variant:
-                        matched_val = v
-                        break
-                row[field] = matched_val
+                if field in global_software_fields:
+                    continue  
+
+                ann_values = parsed.get(prefix + field, [])
+                match_fn = lambda g, ss=search_symbol: get_base_gene(g) == get_base_gene(ss)
+                row[field] = match_annotation(field, ann_values, match_fn, row, set_mutation=True)
+
             rows.append(row)
 
-    # set software and database information
-    for row in rows:
-        if row['Software_name'] in ['-', ''] or row['Software_version'] in ['-', ''] \
-           or row['Reference_database_name'] in ['-', ''] or row['Reference_database_version'] in ['-', '']:
-            row['Software_name'] = software_name
-            row['Software_version'] = software_version
-            row['Reference_database_name'] = db_name
-            row['Reference_database_version'] = db_version
+    # ----- WRITE OUTPUT -----
+    headers = ['Input File Name', 'Gene Symbol', 'Gene Name', 'Nucleotide mutation', 'Amino acid mutation'] + annotation_fields
 
-    headers = ['Input_file_name', 'Gene_symbol', 'Mutation'] + annotation_fields
+    with file_lock:
+        with open(outfile, 'at') as f:
+            if f.tell() == 0:
+                f.write('\t'.join(headers) + '\n')
+            for row in rows:
+                f.write('\t'.join(str(row.get(h, '')).strip("[]").replace("'", "") for h in headers) + '\n')
 
-    with open(outfile, 'a') as f:
-        # Only write headers if the file is empty
-        if f.tell() == 0:
-            f.write('\t'.join(headers) + '\n')
-        for row in rows:
-            f.write('\t'.join([str(row.get(h, '-')).strip("[]").replace("'", "") for h in headers]) + '\n')
 
 
 def output_results(full_headers, stdout_headers, outfile, results, trim_headers=False):
@@ -761,8 +724,7 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
     """
     # Print results to the terminal using stdout_headers
     print('\t'.join([
-        str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
-        # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
+        str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list) 
         else ";".join(map(str, results.get(x, "-")))
         for x in stdout_headers
     ]))
@@ -772,21 +734,135 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
     if trim_headers:
         headers_to_write = [h.split('__')[-1] for h in full_headers]
 
-    # Write results to the output file
-    with open(outfile, 'at') as o:
-        if o.tell() == 0:  # Write headers if file is empty
-            o.write('\t'.join(headers_to_write) + '\n')
-        o.write('\t'.join([
-            str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
-            # str(results.get(x, "-")).strip("[]'\"") if not isinstance(results.get(x, "-"), list) 
-            else ";".join(map(str, results.get(x, "-")))
-            for x in full_headers
-        ]) + '\n')
+    with file_lock:
+        with open(outfile, 'at') as o:
+            if o.tell() == 0:  
+                o.write('\t'.join(headers_to_write) + '\n')
+            o.write('\t'.join([
+                str(results.get(x, "-")).strip("'\"") if not isinstance(results.get(x, "-"), list)
+                else ";".join(map(str, results.get(x, "-")))
+                for x in full_headers
+            ]) + '\n')
 
     # Check for any headers in results that are not in full_headers
     for h in results.keys():
         if h not in full_headers:
             sys.exit(f'Error: results contained a value ({h}) that is not covered by the output headers')
+
+
+
+
+def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=None):
+    if typing_spec is None:
+        typing_spec = KLEBSIELLA_TYPING_SPEC
+
+    sample = results.get("strain", "")
+    
+    confidence_map = {
+        "species": "species_match",
+        "K_locus": "K_locus_confidence",
+        "O_locus": "O_locus_confidence"
+    }
+
+    header = [
+        "sample", "genotyping_method", "genotyping_schema_taxon",
+        "genotyping_database_name", "genotyping_database_version",
+        "genotyping_schema_name", "genotyping_software_name",
+        "genotyping_software_version", "genotype", "genotype_confidence_value", "genotype_predicted_phenotype"
+    ]
+
+    rows = []
+    for genotype_field, meta in typing_spec.items():
+        genotype_value = ""
+        confidence_value = ""
+        phenotype_value = "" 
+        
+        db_name = meta.get("genotyping_database_name", "")
+        db_version = meta.get("genotyping_database_version", "")
+        
+        target_phenotype_header = meta.get("genotype_predicted_phenotype")
+
+        prefix = genotype_field.split("_")[0].lower()
+
+        #  Subspecies 
+        if genotype_field == "subspecies":
+            st_raw = ""
+            for res_key, res_val in results.items():
+                if res_key.split('__')[-1] == "ST":
+                    st_raw = res_val
+                    break
+            
+            match = re.search(r'\((subsp\.[^)]+)\)', str(st_raw))
+            if match:
+                genotype_value = match.group(1)
+            else:
+                continue 
+        else:
+            for res_key, res_val in results.items():
+                trimmed_key = res_key.split('__')[-1]
+                normalized_key = trimmed_key.strip().lower().replace(" ", "_")
+                
+                if trimmed_key == genotype_field:
+                    genotype_value = res_val
+
+                if genotype_field in confidence_map and trimmed_key == confidence_map[genotype_field]:
+                    confidence_value = res_val
+                
+                if target_phenotype_header and trimmed_key == target_phenotype_header:
+                    phenotype_value = res_val
+
+                if not db_name and normalized_key in (
+                    "database_name",
+                    f"{genotype_field.lower()}_database_name",
+                    f"{genotype_field.lower()}_database",
+                    f"{genotype_field.lower()}_db",
+                    f"{prefix}_database_name",
+                    f"{prefix}_database",
+                    f"{prefix}_db"
+                ):
+                    db_name = res_val
+
+                if not db_version and normalized_key in (
+                    "database_version",
+                    f"{genotype_field.lower()}_database_version",
+                    f"{genotype_field.lower()}_version",
+                    f"{genotype_field.lower()}_db_version",
+                    f"{prefix}_database_version",
+                    f"{prefix}_version",
+                    f"{prefix}_db_version"
+                ):
+                    db_version = res_val
+
+            if genotype_field == "ST":
+                genotype_value = re.sub(r'\s*\(subsp\.[^)]+\)', '', str(genotype_value))
+
+        if genotype_value and genotype_value != "-":
+            row = {
+                "sample": sample,
+                "genotyping_method": meta.get("genotyping_method", ""),
+                "genotyping_schema_taxon": meta.get("genotyping_schema_taxon", ""),
+                "genotyping_database_name": db_name if db_name and db_name != "-" else "",
+                "genotyping_database_version": db_version if db_version and db_version != "-" else "",
+                "genotyping_schema_name": meta.get("genotyping_schema_name", ""),
+                "genotyping_software_name": meta.get("genotyping_software_name", ""),
+                "genotyping_software_version": meta.get("genotyping_software_version", ""),
+                "genotype": genotype_value,
+                "genotype_confidence_value": confidence_value if confidence_value != "-" else "",
+                "genotype_predicted_phenotype": phenotype_value if phenotype_value != "-" else ""
+            }
+            rows.append(row)
+
+    if rows:
+        with file_lock:
+            with open(outfile, "at") as o:
+                if o.tell() == 0:
+                    o.write("\t".join(header) + "\n")
+                
+                for row in rows:
+                    line = "\t".join(str(row.get(col, "")) for col in header)
+                    o.write(line + "\n")
+
+                    
 
 def paper_refs():
     """
@@ -797,14 +873,15 @@ def paper_refs():
            'Lam MMC, et al. A genomic surveillance framework and genotyping tool for Klebsiella ' \
            'pneumoniae and its related species complex. Nature Communications. 2021. ' \
            'doi:10.1038/s41467-021-24448-3.\n\n' \
-           'If you turn on the Kaptive option for full K and O typing, please also cite:\n' \
-           'Wyres KL, et al. Identification of Klebsiella capsule synthesis loci from whole ' \
-           'genome data. Microbial Genomics. 2016. doi:10.1099/mgen.0.000102.'
+           'If you use Kaptive for full K and O typing, please also cite:\n' \
+           'Stanton TD, et al.  Fast and accurate in silico antigen typing with Kaptive 3 ' \
+           'Microbial Genomics. 2025. doi: 10.1099/mgen.0.001428.'
     wrapped_text = ''
     for line in text.split('\n'):
         wrapped_text += '\n'.join(textwrap.wrap(line, width=terminal_width - 1))
         wrapped_text += '\n'
     return 'R|' + wrapped_text
+
 
 
 def get_version():

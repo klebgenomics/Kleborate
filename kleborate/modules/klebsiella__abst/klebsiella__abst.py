@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026  Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ def prerequisite_modules():
 
 
 def get_headers():
-    full_headers = ['AbST', 'Aerobactin', 'iucA', 'iucB', 'iucC', 'iucD', 'iutA', 'spurious_abst_hits']
+    full_headers = ['AbST', 'Aerobactin', 'iucA', 'iucB', 'iucC', 'iucD', 'iutA', 'spurious_AbST']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -68,21 +68,23 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     genes = ['iucA', 'iucB', 'iucC', 'iucD', 'iutA']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
     
-    results, spurious_hits  = multi_mlst(assembly, minimap2_index, profiles, alleles, genes,
+    results, spurious_hits,_  = multi_mlst(assembly, ref_index, profiles, alleles, genes,
                                       'iuc_lineage', args.klebsiella__abst_min_identity,
                                       args.klebsiella__abst_min_coverage, args.klebsiella__abst_required_exact_matches,
                                       check_for_truncation=True, report_incomplete=True, 
@@ -105,7 +107,4 @@ def get_results(assembly, minimap2_index, args, previous_results):
     return {'AbST': st, 'Aerobactin': lineage,
             'iucA': alleles['iucA'], 'iucB': alleles['iucB'], 'iucC': alleles['iucC'],
             'iucD': alleles['iucD'], 'iutA': alleles['iutA'],
-            'spurious_abst_hits':spurious_virulence_hits}
-
-
-    
+            'spurious_AbST':spurious_virulence_hits}

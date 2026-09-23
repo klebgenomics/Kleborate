@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ def prerequisite_modules():
 
 def get_headers():
     full_headers = ['YbST', 'Yersiniabactin', 'ybtS', 'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1',
-                    'ybtU', 'ybtT', 'ybtE', 'fyuA', 'spurious_ybt_hits']
+                    'ybtU', 'ybtT', 'ybtE', 'fyuA', 'spurious_YbST']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -70,21 +70,23 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     genes = ['ybtS', 'ybtX', 'ybtQ', 'ybtP', 'ybtA', 'irp2', 'irp1', 'ybtU', 'ybtT', 'ybtE', 'fyuA']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
 
-    results, spurious_hits = multi_mlst(assembly, minimap2_index, profiles, alleles, genes,
+    results, spurious_hits,_ = multi_mlst(assembly, ref_index, profiles, alleles, genes,
                                       'lineage_ICE', args.klebsiella__ybst_min_identity,
                                       args.klebsiella__ybst_min_coverage, args.klebsiella__ybst_required_exact_matches,
                                       check_for_truncation=True, report_incomplete=True, 
@@ -109,4 +111,4 @@ def get_results(assembly, minimap2_index, args, previous_results):
             'ybtP': alleles['ybtP'], 'ybtA': alleles['ybtA'], 'irp2': alleles['irp2'],
             'irp1': alleles['irp1'], 'ybtU': alleles['ybtU'], 'ybtT': alleles['ybtT'],
             'ybtE': alleles['ybtE'], 'fyuA': alleles['fyuA'],
-            'spurious_ybt_hits':spurious_virulence_hits}
+            'spurious_YbST':spurious_virulence_hits}

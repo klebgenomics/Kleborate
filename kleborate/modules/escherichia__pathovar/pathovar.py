@@ -1,5 +1,5 @@
 """
-Copyright 2025 Mary Maranga (gathonimaranga@gmailcom)
+Copyright 2026 Mary Maranga (gathonimaranga@gmailcom)
 https://github.com/klebgenomics/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -14,14 +14,14 @@ not, see <https://www.gnu.org/licenses/>.
 from ...shared.alignment import align_query_to_ref, cull_redundant_hits
 
 
-def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_coverage):
+def minimap_pathovar(assembly, ref_index, ref_file, min_identity, min_coverage):
     """
     Aligns assembled genomes to the virulence alleles and classifies the pathotype.
 
     Parameters:
     - assembly: Assembly in FASTA format.
     - ref_file: Virulence factors in FASTA format.
-    - minimap2_index: Path to the assembly's minimap2 index for faster alignment (optional).
+    - ref_index: Path to the assembly's index for faster alignment (optional).
     - min_coverage: Minimum query coverage for alignment.
     - min_identity: Minimum identity percentage for alignment.
 
@@ -32,7 +32,7 @@ def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_cover
     alignment_hits = align_query_to_ref(
         ref_file,
         assembly,
-        ref_index=minimap2_index,
+        ref_index=ref_index,
         min_identity=min_identity,
         min_query_coverage=min_coverage
     )
@@ -54,6 +54,7 @@ def minimap_pathovar(assembly, minimap2_index, ref_file, min_identity, min_cover
 
 
 
+
 # Define the virulence factors map
 virulence_factors_map = {
     'ltcA': {'name': 'LT', 'headers': []},
@@ -63,6 +64,7 @@ virulence_factors_map = {
     'stx2A': {'name': 'Stx2', 'headers': []},
     'stx2B': {'name': 'Stx2', 'headers': []},
     'eae': {'name': 'eae', 'headers': []},
+    'bfpA': {'name': 'bfpA', 'headers': []},
     'ipaH': {'name': 'ipaH', 'headers': []},
  }
 
@@ -113,6 +115,7 @@ def identify_virulence_factors(alignment_hits, virulence_factors_map):
         'Stx1': '-',
         'Stx2': '-',
         'eae': '-',
+        'bfpA': '-'
     }
     virulence_markers = {}
 
@@ -167,8 +170,10 @@ def classify_pathovar(virulence_factors):
             pathovar = pathovar + ('/' if len(pathovar) else '') + 'STEC'
     elif virulence_factors['eae'] == '+':
         # eae without Stx is classified as EPEC
-        pathovar = pathovar + ('/' if len(pathovar) else '') + 'EPEC'
-
+        if virulence_factors.get('bfpA') == '+':
+            pathovar += ('/' if pathovar else '') + 'EPEC'
+        else:
+            pathovar += ('/' if pathovar else '') + 'aEPEC'
     if len(pathovar):
         pathovar = pathovar
     else:

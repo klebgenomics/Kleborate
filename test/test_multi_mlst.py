@@ -5,8 +5,8 @@ This file contains tests for Kleborate. To run all tests, go the repo's root dir
 To get code coverage stats:
   coverage run --source . -m pytest && coverage report -m
 
-Copyright 2023 Kat Holt
-Copyright 2023 Ryan Wick (rrwick@gmail.com)
+Copyright 2026 Kat Holt
+Copyright 2026 Ryan Wick (rrwick@gmail.com)
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -18,9 +18,13 @@ details. You should have received a copy of the GNU General Public License along
 not, see <https://www.gnu.org/licenses/>.
 """
 
+import pathlib
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
+
 
 from kleborate.shared.multi_mlst import *
-from kleborate.shared.alignment import Alignment
+from test_alignment import create_alignment as Alignment
 
 
 def test_cluster_hits_by_contig_1():

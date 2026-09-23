@@ -14,9 +14,7 @@ Modules
    Escherichia_modules
 
 
-Kleborate v3 includes a range of modules for typing bacterial genomes, most of which are specific to a particular species or complex (*Klebsiella pneumoniae SC*, *Klebsiella oxytoca SC*, *Escherichia coli*). We therefore recommend specifying ``-p`` (*kpsc*, *kosc*, *escherichia*) or ``-m`` (list of modules to run based on the organism). This will run the species detection module first, and if the species matches that specified in --preset, the preset modules for that species will be run (if not, the species will be reported and the remaining fields will be blank). 
-
-
+Kleborate v3 includes a range of modules for typing bacterial genomes, most of which are specific to a particular species or complex (currently *Klebsiella pneumoniae* species complex, *Klebsiella oxytoca* species complex, *Escherichia coli/Shigella*). We therefore recommend specifying ``--preset`` (*kpsc*, *kosc*, *escherichia*) or ``--modules`` (list of modules to run based on the organism). This will run the species detection module first, and if the species matches the expected preset or module, the modules will be run (if a different species is called, Kleborate will report the species but no further typing will be conducted and the remaining fields will be blank).
 
 
 **Kleborate modules are divided into:**
@@ -24,7 +22,7 @@ Kleborate v3 includes a range of modules for typing bacterial genomes, most of w
 1. General Modules
 2. Modules for *Klebsiella pneumoniae* species complex
 3. Modules for *Klebsiella oxytoca* species complex
-4. Modules for *Escherichia* *coli* 
+4. Modules for *Escherichia coli/Shigella* 
 
 
 Summary of availabe modules and their output columns
@@ -41,7 +39,7 @@ Summary of availabe modules and their output columns
      - species, species_match
    * - :ref:`general__contig_stats <contig_stats>`
      - contig_count, N50, largest_contig, total_size, ambiguous_bases, QC_warnings
-   * - :ref:`klebsiella_pneumo_complex__mlst <klebsiella_pneumo_complex_mlst>`
+   * - :ref:`kpsc__mlst <kpsc_mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
    * - :ref:`klebsiella__ybst <klebsiella__ybst>`
      - YbST, Yersiniabactin, ybtS, ybtX, ybtQ, ybtP, ybtA, irp2, irp1, ybtU, ybtT, ybtE, fyuA
@@ -55,24 +53,30 @@ Summary of availabe modules and their output columns
      - RmST, RmpADC, rmpA, rmpD, rmpC
    * - :ref:`klebsiella__rmpa2 <klebsiella__rmpa2>`
      - rmpA2
-   * - :ref:`klebsiella_pneumo_complex__virulence_score <klebsiella_pneumo_complex__virulence_score>`
+   * - :ref:`kpsc__virulence_score <kpsc__virulence_score>`
      - virulence_score (Score of 0-5)
-   * - :ref:`klebsiella_pneumo_complex__amr <klebsiella_pneumo_complex__amr>`
+   * - :ref:`kpsc__amr <kpsc__amr>`
      - AGly_acquired, Col_acquired, Fcyn_acquired, Flq_acquired, Gly_acquired, MLS_acquired, Phe_acquired, Rif_acquired, Sul_acquired, Tet_acquired, Tgc_acquired, Tmt_acquired, Bla_acquired, Bla_ESBL_acquired, Bla_ESBL_inhR_acquired, Bla_Carb_acquired, Bla_chr, SHV_mutations, Omp_mutations, Col_mutations, Flq_mutations, truncated_resistance_hits, spurious_resistance_hits
-   * - :ref:`klebsiella_pneumo_complex__resistance_score <Resistance scores and counts>`
+   * - :ref:`kpsc__resistance_score <Resistance scores and counts>`
      - resistance_score (Score of 0-3)
-   * - :ref:`klebsiella_pneumo_complex__resistance_gene_count <Resistance scores and counts>`
+   * - :ref:`kpsc__resistance_gene_count <Resistance scores and counts>`
      - num_resistance_genes
-   * - :ref:`klebsiella_pneumo_complex__resistance_class_count <Resistance scores and counts>`
+   * - :ref:`kpsc__resistance_class_count <Resistance scores and counts>`
      - num_resistance_classes
-   * - :ref:`klebsiella_pneumo_complex__cipro_prediction <klebsiella_pneumo_complex__cipro_prediction>`
+   * - :ref:`kpsc__cipro_prediction <kpsc__cipro_prediction>`
      - Ciprofloxacin_prediction, Ciprofloxacin_profile, Ciprofloxacin_profile_support, Ciprofloxacin_MIC_prediction
-   * - :ref:`klebsiella_pneumo_complex__wzi <klebsiella_pneumo_complex__wzi>`
+   * - :ref:`kpsc__wzi <kpsc__wzi>`
      - wzi allele
-   * - :ref:`klebsiella_pneumo_complex__kaptive <klebsiella_pneumo_complex__kaptive>`
-     - Best match locus, Best match type, Match confidence, Problems, Identity, Coverage, Length discrepancy, Expected genes in locus, details, Missing expected gene
-   * - :ref:`klebsiella_oxytoca_complex__mlst <klebsiella_oxytoca_complex__mlst>`
+   * - :ref:`kpsc__kaptive <kpsc__kaptive>`
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes,O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes
+   * - :ref:`kpsc__cgMLST <kpsc__cgMLST>`
+     - cgST, LIN code, Sublineage, Clonal group
+   * - :ref:`kpsc__mrk <kpsc__mrk>`
+     - mrkST, mrkA, mrkB, mrkC, mrkD, mrkF, mrkH, mrkI, mrkJ
+   * - :ref:`kosc__mlst <kosc__mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
+   * - :ref:`kosc__kaptive <kosc__kaptive>`
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes
    * - :ref:`escherichia__mlst_pasteur <escherichia__mlst_achtman>`
      - ST, dinB, icdA, pabB, polB, putP, trpA, trpB, uidA
    * - :ref:`escherichia__mlst_achtman <escherichia__mlst_achtman>`
@@ -88,15 +92,8 @@ Summary of availabe modules and their output columns
    * - :ref:`escherichia__ezclermont <escherichia__ezclermont>`
      - Clermont_type, Clermont_profile
    * - :ref:`escherichia__amr <escherichia__amr>`
-     - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin,    Methicillin, Other Classes
-
-
-
-
-
-
-
-
-
-
-
+     - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin, Methicillin, Other Classes
+   * - :ref:`escherichia__cgMLST <escherichia__cgMLST>`
+     - cgST, LIN code, Sublineage, Clonal group
+   * - :ref:`escherichia__kaptive <escherichia__kaptive>`
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes

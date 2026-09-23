@@ -1,7 +1,7 @@
 """
 This module contains some subclasses for customising Kleborate's help text formatting.
 
-Copyright 2025 Kat Holt, Ryan Wick 
+Copyright 2026 Kat Holt, Ryan Wick 
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify

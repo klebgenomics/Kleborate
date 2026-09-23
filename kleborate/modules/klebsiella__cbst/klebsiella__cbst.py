@@ -1,5 +1,5 @@
 """
-Copyright 2025 Kat Holt, Mary Maranga, Ryan Wick
+Copyright 2026 Mary Maranga, Ryan Wick
 https://github.com/katholt/Kleborate/
 
 This file is part of Kleborate. Kleborate is free software: you can redistribute it and/or modify
@@ -30,7 +30,7 @@ def prerequisite_modules():
 
 def get_headers():
     full_headers = ['CbST', 'Colibactin', 'clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG',
-                    'clbH', 'clbI', 'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ', 'spurious_clb_hits']
+                    'clbH', 'clbI', 'clbL', 'clbM', 'clbN', 'clbO', 'clbP', 'clbQ', 'spurious_CbST']
     stdout_headers = []
     return full_headers, stdout_headers
 
@@ -69,22 +69,24 @@ def check_cli_options(args):
 
 
 def check_external_programs():
-    if not shutil.which('minimap2'):
-        sys.exit('Error: could not find minimap2')
-    return ['minimap2']
+    try:
+        import rammappy
+    except ImportError:
+        sys.exit('Error: could not import rammappy')
+    return ['rammappy']
 
 
 def data_dir():
     return pathlib.Path(__file__).parents[0] / 'data'
 
 
-def get_results(assembly, minimap2_index, args, previous_results):
+def get_results(assembly, ref_index, args, previous_results):
     genes = ['clbA', 'clbB', 'clbC', 'clbD', 'clbE', 'clbF', 'clbG', 'clbH', 'clbI', 'clbL',
              'clbM', 'clbN', 'clbO', 'clbP', 'clbQ']
     profiles = data_dir() / 'profiles.tsv'
     alleles = {gene: data_dir() / f'{gene}.fasta' for gene in genes}
     
-    results, spurious_hits  = multi_mlst(assembly, minimap2_index, profiles, alleles, genes,
+    results, spurious_hits,_  = multi_mlst(assembly, ref_index, profiles, alleles, genes,
                                       'clb_lineage', args.klebsiella__cbst_min_identity,
                                       args.klebsiella__cbst_min_coverage, args.klebsiella__cbst_required_exact_matches,
                                       check_for_truncation=True, report_incomplete=True,
@@ -109,7 +111,4 @@ def get_results(assembly, minimap2_index, args, previous_results):
             'clbG': alleles['clbG'], 'clbH': alleles['clbH'], 'clbI': alleles['clbI'],
             'clbL': alleles['clbL'], 'clbM': alleles['clbM'], 'clbN': alleles['clbN'],
             'clbO': alleles['clbO'], 'clbP': alleles['clbP'], 'clbQ': alleles['clbQ'],
-            'spurious_clb_hits':spurious_virulence_hits}
-
-
-    
+            'spurious_CbST':spurious_virulence_hits}
