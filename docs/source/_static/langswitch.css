@@ -1,0 +1,26 @@
+.kb-lang-switch {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: centre;
+}
+
+.kb-lang-btn {
+  display: inline-flex;
+  align-items: centre;
+  justify-content: centre;
+  padding: 2px;
+  border-radius: 999px;
+  border: 1px solid var(--pst-color-border);
+  text-decoration: none;
+}
+
+.kb-lang-btn img {
+  height: 22px;
+  width: auto;
+  display: block;
+  border-radius: 3px;
+}
+
+.kb-lang-btn.active {
+  border-color: var(--pst-color-primary);
+}

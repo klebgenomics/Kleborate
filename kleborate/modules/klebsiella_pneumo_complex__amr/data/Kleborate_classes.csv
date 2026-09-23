@@ -1,0 +1,20 @@
+class,bla_class,n,CARD_class,ARO_class
+AGly,NA,209,aminoglycoside antibiotic,ARO:0000016
+Bla,Bla,833,penicillin beta-lactam,ARO:3000008
+Bla,Bla_Carb,620,carbapenem,ARO:0000020
+Bla,Bla_ESBL,540,third-generation cephalosporin,ARO:3009107
+Bla,Bla_ESBL_inhR,23,third-generation cephalosporin + beta-lactamase inhibitor,ARO:3009107;ARO:3000042
+Bla,Bla_chr,223,penicillin beta-lactam,ARO:3000008
+Bla,Bla_inhR,40,penicillin beta-lactam + beta-lactamase inhibitor,ARO:3000008;ARO:3000042
+Bla,NA,28,penicillin beta-lactam,ARO:3000008
+Col,NA,83,peptide antibiotic,ARO:3000053
+Fcyn,NA,23,phosphonic acid antibiotic,ARO:3007149
+Flq,NA,109,fluoroquinolone antibiotic,ARO:0000001
+Gly,NA,73,Glycopeptide antibiotic,ARO:3000081
+MLS,NA,129,Macrolide antibiotic,ARO:0000000
+Phe,NA,49,phenicol antibiotic,ARO:3000387
+Rif,NA,9,Rifamycin antibiotic,ARO:3000157
+Sul,NA,4,sulfonamide antibiotic,ARO:3000282
+Tet,NA,70,Tetracycline antibiotic,ARO:3000050
+Tgc,NA,8,Tetracycline antibiotic,ARO:3000050
+Tmt,NA,62,Diaminopyrimidine antibiotic,ARO:3000171
