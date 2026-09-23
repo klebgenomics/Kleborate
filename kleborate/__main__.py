@@ -192,6 +192,8 @@ def main():
                         for header in module_headers:
                             results[header] = 'Not Tested'
 
+            if args.preset and not pass_check:
+                return
             if args.modules:
                 module_name = args.modules.split(',')[0]
                 outfile_suffix = f'{module_name}_output.txt'
