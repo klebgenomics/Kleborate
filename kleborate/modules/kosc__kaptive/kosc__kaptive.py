@@ -34,10 +34,8 @@ def prerequisite_modules():
 def get_headers():
     full_headers = [
         'K_locus', 'K_type', 'K_locus_confidence', 'K_locus_problems', 'K_locus_identity',
-        'K_Missing_expected_genes', 'K_Database_name', 'K_Database_version',
-        'O_locus', 'O_type', 'O_locus_confidence', 'O_locus_problems', 
-        'O_locus_identity', 'O_Missing_expected_genes', 'O_Database_name', 'O_Database_version',
-        'Kaptive version'
+        'K_Missing_expected_genes','O_locus', 'O_type', 'O_locus_confidence', 'O_locus_problems', 
+        'O_locus_identity', 'O_Missing_expected_genes'
     ]
     stdout_headers = []
     return full_headers, stdout_headers
@@ -91,9 +89,6 @@ def extract_fields(prefix, result, full_headers):
     fields[f'{prefix}_locus_problems'] = result.problems.to_symbols().decode('utf-8')
     fields[f'{prefix}_locus_identity'] = '%.2f%%' % result.percent_identity
     fields[f'{prefix}_Missing_expected_genes'] = ';'.join(result.missing_expected_genes)
-    fields[f'{prefix}_Database_name'] = result.database_name
-    fields[f'{prefix}_Database_version'] = result.database_version
-    fields['Kaptive version'] = result.kaptive_version
 
     for h in fields.keys():
         if h not in full_headers:
