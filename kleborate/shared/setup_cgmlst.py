@@ -158,20 +158,24 @@ def main():
     target_dir, mist_res_dir = get_paths()
     patch_mist_resource(mist_res_dir)
 
-    if target_dir.exists():
-        resp = input(f"Overwrite existing data at {target_dir}? (y/n): ").lower()
-        if resp == 'y':
-            shutil.rmtree(target_dir)
-        else:
-            print("Setup cancelled."); sys.exit(0)
-    target_dir.mkdir(parents=True, exist_ok=True)
-
-    print("\n1) Standard download\n2) Latest Pasteur (With authentication)")
-    mode = input("Select (1 or 2): ")
-
     scheme_url = "https://bigsdb.pasteur.fr/api/db/pubmlst_klebsiella_seqdef/schemes/18"
     raw_download_path = target_dir / "kleb_scgmlst_s"
     index_path = target_dir / "kleb_scgmlst_s-index"
+
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    # Only clear the specific download/index outputs this run will regenerate —
+    # leave anything else already in target_dir (e.g. helper scripts) untouched.
+    for path in (raw_download_path, index_path):
+        if path.exists():
+            print(f"\n[INFO] Removing existing {path.name} to refresh it.")
+            if path.is_dir():
+                shutil.rmtree(path)
+            else:
+                path.unlink()
+
+    print("\n1) Standard download\n2) Latest Pasteur (With authentication)")
+    mode = input("Select (1 or 2): ")
 
     download_env = None
 
@@ -213,4 +217,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
