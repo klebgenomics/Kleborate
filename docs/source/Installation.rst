@@ -27,16 +27,19 @@ Install Kleborate
 Create a conda environment containing Kleborate dependancies::
 
 
-   conda create -n klebsiella_analysis -c bioconda -c conda-forge \
-       python=3.11 \
-       minimap2 \
-       mash \
-       mist_typing \
-       ezclermont \
-       ectyper \
-       stxtyper \
-       shigapass \
-       ncbi-amrfinderplus -y
+conda create -n klebsiella_analysis \
+    -c conda-forge \
+    -c bioconda \
+    --strict-channel-priority \
+    python=3.11 \
+    minimap2 \
+    mash \
+    mist_typing \
+    ezclermont \
+    ectyper \
+    ncbi-stxtyper \
+    shigapass \
+    ncbi-amrfinderplus -y
 
    
 
