@@ -11,6 +11,7 @@ details. You should have received a copy of the GNU General Public License along
 not, see <https://www.gnu.org/licenses/>.
 """
 
+import functools
 import gzip
 import sys
 import subprocess
@@ -92,26 +93,45 @@ def reverse_complement(seq):
     return ''.join([complement_base(x) for x in seq][::-1])
 
 
-
-# get tool versions for genome spec file
-def get_tool_version(command):
+def get_tool_version(command, timeout=10):
     try:
-        proc = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        proc = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                              stdin=subprocess.DEVNULL, text=True, timeout=timeout)
         output = proc.stdout + proc.stderr
         match = re.search(r'(\d+\.\d+(\.\d+)?)', output)
         return match.group(1) if match else "Unknown"
     except FileNotFoundError:
         return "Not Installed"
+    except subprocess.TimeoutExpired:
+        return "Unknown"
 
+
+@functools.lru_cache(maxsize=1)
+def get_own_version():
+    """
+    Returns Kleborate's version
+    """
+    pyproject = pathlib.Path(__file__).parents[1] / 'pyproject.toml'
+    if pyproject.is_file():
+        with open(pyproject, 'rt') as f:
+            pyproject_text = f.read()
+        if 'name = "kleborate"' in pyproject_text:
+            match = re.search(r'version = "(\d+\.\d+\.\d+)"', pyproject_text)
+            if match:
+                return match.group(1)
+
+    try:
+        from importlib import metadata
+    except ImportError:
+        import importlib_metadata as metadata
+    try:
+        return metadata.version('kleborate')
+    except metadata.PackageNotFoundError:
+        return "Unknown"
 
 
 def get_mlst_db_version():
-    try:
-        import kleborate
-    except ImportError:
-        return None
-
-    data_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'kpsc__mlst' / 'data'
+    data_dir = pathlib.Path(__file__).parents[1] / 'modules' / 'kpsc__mlst' / 'data'
     if not data_dir.is_dir():
         return None
 
@@ -122,22 +142,15 @@ def get_mlst_db_version():
         return None
 
     db_files = fasta_files + [profiles_file]
-    
+
     return max(
         datetime.datetime.fromtimestamp(f.stat().st_mtime).strftime('%Y-%m-%d')
         for f in db_files
     )
 
 
-
 def get_cgmlst_db_version():
-
-    try:
-        import kleborate
-    except ImportError:
-        return None
-
-    data_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'kpsc__cgmlst' / 'data'
+    data_dir = pathlib.Path(__file__).parents[1] / 'modules' / 'kpsc__cgmlst' / 'data'
     if not data_dir.is_dir():
         return None
 
@@ -151,110 +164,113 @@ def get_cgmlst_db_version():
     )
 
 
+@functools.lru_cache(maxsize=1)
+def get_klebsiella_typing_spec():
+    kleborate_version = get_own_version()
 
-KLEBSIELLA_TYPING_SPEC = {
-    "species": {
-        "genotyping_method": "In silico species detection",
-        "genotyping_schema_taxon": "Enterobacterales [NCBITaxon:91347]",
-        "genotyping_database_name": "kleborate_enterobacterales__species",
-        "genotyping_database_version": get_tool_version(['kleborate', '--version']),
-        "genotyping_schema_name": "enterobacterales__species",
-        "genotyping_software_name": "Kleborate",
-        "genotyping_software_version": get_tool_version(['kleborate', '--version'])
-    },  
+    return {
+        "species": {
+            "genotyping_method": "In silico species detection",
+            "genotyping_schema_taxon": "Enterobacterales [NCBITaxon:91347]",
+            "genotyping_database_name": "kleborate_enterobacterales__species",
+            "genotyping_database_version": kleborate_version,
+            "genotyping_schema_name": "enterobacterales__species",
+            "genotyping_software_name": "Kleborate",
+            "genotyping_software_version": kleborate_version
+        },
 
-    "ST": {
-        "genotyping_method": "MLST",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": "2024-12-31",
-        "genotyping_schema_name": "MLST",
-        "genotyping_software_name": "Kleborate",
-        "genotyping_software_version": get_tool_version(['kleborate', '--version'])
-    },
+        "ST": {
+            "genotyping_method": "MLST",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+            "genotyping_database_version": "2024-12-31",
+            "genotyping_schema_name": "MLST",
+            "genotyping_software_name": "Kleborate",
+            "genotyping_software_version": kleborate_version
+        },
 
-    "subspecies": {
-        "genotyping_method": "In silico subspecies detection",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": "2024-12-31",
-        "genotyping_schema_name": "MLST",
-        "genotyping_software_name": "Kleborate",
-        "genotyping_software_version": get_tool_version(['kleborate', '--version']),
-        "genotyping_details": "subspecies call based on MLST"
-    },
+        "subspecies": {
+            "genotyping_method": "In silico subspecies detection",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+            "genotyping_database_version": "2024-12-31",
+            "genotyping_schema_name": "MLST",
+            "genotyping_software_name": "Kleborate",
+            "genotyping_software_version": kleborate_version,
+            "genotyping_details": "subspecies call based on MLST"
+        },
 
-    "K_locus": {
-        "genotyping_method": "In silico serotyping",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]", 
-        "genotyping_database_name": "",
-        "genotyping_database_version": "",
-        "genotyping_schema_name": "-",
-        "genotyping_software_name": "Kaptive",
-        "genotyping_software_version": get_tool_version(['kaptive', '--version']),
-        "genotype_predicted_phenotype": "K_type"
-    },
+        "K_locus": {
+            "genotyping_method": "In silico serotyping",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "",
+            "genotyping_database_version": "",
+            "genotyping_schema_name": "-",
+            "genotyping_software_name": "Kaptive",
+            "genotyping_software_version": get_tool_version(['kaptive', '--version']),
+            "genotype_predicted_phenotype": "K_type"
+        },
 
-    "O_locus": {
-        "genotyping_method": "In silico serotyping",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "", 
-        "genotyping_database_version": "",
-        "genotyping_schema_name": "-",
-        "genotyping_software_name": "Kaptive",
-        "genotyping_software_version": get_tool_version(['kaptive', '--version']),
-        "genotype_predicted_phenotype": "O_type"
-    },
+        "O_locus": {
+            "genotyping_method": "In silico serotyping",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "",
+            "genotyping_database_version": "",
+            "genotyping_schema_name": "-",
+            "genotyping_software_name": "Kaptive",
+            "genotyping_software_version": get_tool_version(['kaptive', '--version']),
+            "genotype_predicted_phenotype": "O_type"
+        },
 
-    "cgST": {
-        "genotyping_method": "cgMLST",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_schema_name": "scgMLST629_S",
-        "genotyping_software_name": "MiST",
-        "genotyping_software_version": get_tool_version(['mist', '--version'])
-    },
+        "cgST": {
+            "genotyping_method": "cgMLST",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+            "genotyping_database_version": get_cgmlst_db_version(),
+            "genotyping_schema_name": "scgMLST629_S",
+            "genotyping_software_name": "MiST",
+            "genotyping_software_version": get_tool_version(['mist', '--version'])
+        },
 
-    "LIN code": {
-        "genotyping_method": "LIN code",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_schema_name": "scgMLST629_S",
-        "genotyping_software_name": "MiST",
-        "genotyping_software_version": get_tool_version(['mist', '--version'])
-    },
+        "LIN code": {
+            "genotyping_method": "LIN code",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+            "genotyping_database_version": get_cgmlst_db_version(),
+            "genotyping_schema_name": "scgMLST629_S",
+            "genotyping_software_name": "MiST",
+            "genotyping_software_version": get_tool_version(['mist', '--version'])
+        },
 
-    "Sublineage": {
-        "genotyping_method": "LIN code",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_schema_name": "scgMLST629_S",
-        "genotyping_software_name": "MiST",
-        "genotyping_software_version": get_tool_version(['mist', '--version'])
-    },
+        "Sublineage": {
+            "genotyping_method": "LIN code",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+            "genotyping_database_version": get_cgmlst_db_version(),
+            "genotyping_schema_name": "scgMLST629_S",
+            "genotyping_software_name": "MiST",
+            "genotyping_software_version": get_tool_version(['mist', '--version'])
+        },
 
-    "Clonal group": {
-        "genotyping_method": "LIN code",
-        "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
-        "genotyping_database_name": "pubmlst_klebsiella_seqdef",
-        "genotyping_database_version": get_cgmlst_db_version(),
-        "genotyping_schema_name": "scgMLST629_S",
-        "genotyping_software_name": "MiST",
-        "genotyping_software_version": get_tool_version(['mist', '--version'])
+        "Clonal group": {
+            "genotyping_method": "LIN code",
+            "genotyping_schema_taxon": "Klebsiella pneumoniae species complex [NCBITaxon:3390273]",
+            "genotyping_database_name": "pubmlst_klebsiella_seqdef",
+            "genotyping_database_version": get_cgmlst_db_version(),
+            "genotyping_schema_name": "scgMLST629_S",
+            "genotyping_software_name": "MiST",
+            "genotyping_software_version": get_tool_version(['mist', '--version'])
+        }
     }
-}
 
 
 # HaRmronization headers
 res_headers = [
-    'AGly_acquired', 'Col_acquired', 'Fcyn_acquired', 'Flq_acquired', 'Gly_acquired', 
-    'MLS_acquired', 'Phe_acquired', 'Rif_acquired', 'Sul_acquired', 'Tet_acquired', 
-    'Tgc_acquired', 'Tmt_acquired', 'Bla_acquired', 'Bla_inhR_acquired', 'Bla_ESBL_acquired', 
-    'Bla_ESBL_inhR_acquired', 'Bla_Carb_acquired', 'Bla_chr', 'SHV_mutations', 
-    'Omp_mutations', 'Col_mutations', 'Flq_mutations', 'truncated_resistance_hits', 
+    'AGly_acquired', 'Col_acquired', 'Fcyn_acquired', 'Flq_acquired', 'Gly_acquired',
+    'MLS_acquired', 'Phe_acquired', 'Rif_acquired', 'Sul_acquired', 'Tet_acquired',
+    'Tgc_acquired', 'Tmt_acquired', 'Bla_acquired', 'Bla_inhR_acquired', 'Bla_ESBL_acquired',
+    'Bla_ESBL_inhR_acquired', 'Bla_Carb_acquired', 'Bla_chr', 'SHV_mutations',
+    'Omp_mutations', 'Col_mutations', 'Flq_mutations', 'truncated_resistance_hits',
     'spurious_resistance_hits'
 ]
 

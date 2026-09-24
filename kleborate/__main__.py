@@ -31,7 +31,7 @@ from typing import Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import partial
 from .shared.help_formatter import MyParser, MyHelpFormatter
-from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_spec_headers, KLEBSIELLA_TYPING_SPEC
+from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_spec_headers, get_klebsiella_typing_spec
 from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
 from rammappy import Index
 
@@ -71,8 +71,8 @@ def parse_arguments(args, all_module_names, modules):
     perf_args = parser.add_argument_group('Performance')
     
     perf_args.add_argument('-t', '--threads', type=check_cpus,
-                           default=check_cpus(),
-                           help='Number of threads')
+                           default=1,
+                           help='Number of threads (default: 1)')
 
     module_args = parser.add_argument_group('Modules')
     module_args.add_argument('--list_modules', action='store_true',
@@ -517,19 +517,18 @@ def decompress_file(in_file, out_file):
 
 MAX_CPUS = 32
 def check_cpus(cpus: Any = None, max_cpus: int = MAX_CPUS, verbose: bool = False) -> int:
-    avail_cpus = os.cpu_count() or max_cpus
+    avail_cpus = os.cpu_count() or 1
 
     if isinstance(cpus, str):
         cpus = int(cpus.strip()) if cpus.strip().isdigit() else 0
     elif isinstance(cpus, (int, float)):
         cpus = int(cpus)
-    elif cpus is None:
-        cpus = 0
     else:
         cpus = 0
 
+    # If the user did not specify -t, default safely to 1 thread instead of all cores
     if cpus <= 0:
-        cpus = avail_cpus
+        cpus = 1
 
     cpus = max(1, min(cpus, avail_cpus, max_cpus))
 
@@ -754,7 +753,7 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
 
 def output_klebsiella_pneumo_complex_typingspec(outfile, results, typing_spec=None):
     if typing_spec is None:
-        typing_spec = KLEBSIELLA_TYPING_SPEC
+        typing_spec = get_klebsiella_typing_spec()
 
     sample = results.get("strain", "")
     
