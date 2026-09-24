@@ -7,8 +7,9 @@ name = "kleborate"
 version = "3.3.0b1"
 description = "Kleborate: a tool for typing and screening pathogen genome assemblies"
 readme = "README.md"
-requires-python = ">=3.9"
-license = {file = "LICENSE"}
+requires-python = ">=3.11"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
 authors = [
     {name = "Mary Maranga", email = "gathonimaranga@gmail.com"},
     {name = "Ryan Wick", email = "rrwick@gmail.com"},
@@ -16,13 +17,12 @@ authors = [
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     "Programming Language :: Python :: 3",
     "Topic :: Scientific/Engineering :: Bio-Informatics",
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
     "Intended Audience :: Science/Research"
 ]
-dependencies = ["biopython<=1.85","numpy<2.0.0","kaptive","rammappy"]
+dependencies = ["biopython<=1.85","numpy>=1.26.0","kaptive","rammappy"]
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-mock"]  # needed for running automated tests
