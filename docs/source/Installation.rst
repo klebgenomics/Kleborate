@@ -24,24 +24,25 @@ Kleborate requires the following software and libraries to be installed and avai
 Install Kleborate 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Create a conda environment containing Kleborate dependancies::
+Create a conda environment containing Kleborate dependencies::
+
+    conda create -n klebsiella_analysis --solver=libmamba \
+        -c conda-forge \
+        -c bioconda \
+        python=3.11 \
+        biopython=1.81 \
+        beautifulsoup4 \
+        numba \
+        minimap2 \
+        mash \
+        mist_typing \
+        ezclermont \
+        ectyper \
+        ncbi-stxtyper \
+        shigapass \
+        ncbi-amrfinderplus -y
 
 
-conda create -n klebsiella_analysis \
-    -c conda-forge \
-    -c bioconda \
-    --strict-channel-priority \
-    python=3.11 \
-    minimap2 \
-    mash \
-    mist_typing \
-    ezclermont \
-    ectyper \
-    ncbi-stxtyper \
-    shigapass \
-    ncbi-amrfinderplus -y
-
-   
 
 Activate the environment and install kleborate (and Kaptive) using pip::
 
