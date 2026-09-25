@@ -47,11 +47,11 @@ Create a conda environment containing Kleborate dependencies::
 Activate the environment and install kleborate (and Kaptive) using pip::
 
     conda activate klebsiella_analysis
-    pip install kleborate
+    pip install kleborate==3.3.0b1
 
 Or Bioconda::
 
-    conda install -c bioconda kleborate
+    conda install -c bioconda kleborate=3.3.0b1
     pip install rammappy
 
 Database set up
@@ -137,6 +137,10 @@ Upon completion, the following files will be downloaded inside the target folder
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 NOTE: E. coli cgMLST is only used by the module ``-m escherichia__cgmlst`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
+
+.. note::
+
+   In this beta release, *E. coli* cgMLST is provided as an optional module and is **not** included in the default ``-p escherichia`` preset. To run it, specify ``-m escherichia__cgmlst``.
 
 The ``escherichia__cgmlst`` module performs core-genome MLST (cgMLST) allele uses the **Escherichia.cgMLSTv1** scheme hosted on `EnteroBase <https://enterobase.warwick.ac.uk/species/index/ecoli>`_.
 
