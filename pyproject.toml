@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Medical Science Apps.",
     "Intended Audience :: Science/Research"
 ]
-dependencies = ["biopython<=1.85","numpy>=1.26.0","kaptive","rammappy"]
+dependencies = ["biopython==1.81","numpy>=1.26.0","kaptive","rammappy"]
 
 [project.optional-dependencies]
 test = ["pytest", "pytest-mock"]  # needed for running automated tests
