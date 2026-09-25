@@ -11,16 +11,16 @@ details. You should have received a copy of the GNU General Public License along
 not, see <https://www.gnu.org/licenses/>.
 """
 
+import csv
 import os
 import pathlib
 import shutil
-import sys
-import csv
-import tempfile
+import stat
 import subprocess
+import sys
+import tempfile
 from pathlib import Path
 from typing import Dict, Tuple
-from typing import Dict
 
 from .pathovar import minimap_pathovar
 
@@ -39,13 +39,25 @@ def get_headers():
     return full_headers, stdout_headers
 
 
+def data_dir():
+    return pathlib.Path(__file__).parents[0] / 'data'
+
+
 def add_cli_options(parser):
     module_name = os.path.basename(__file__)[:-3]
     group = parser.add_argument_group(f'{module_name} module')
-    group.add_argument('--escherichia__pathovar_min_identity', type=float, default=90.0,
-                       help='Minimum alignment percent identity for detecting virulence factors')
-    group.add_argument('--escherichia__pathovar_min_coverage', type=float, default=80.0,
-                       help='Minimum alignment percent coverage for detecting virulence factors')
+    group.add_argument(
+        '--escherichia__pathovar_min_identity',
+        type=float,
+        default=90.0,
+        help='Minimum alignment percent identity for detecting virulence factors'
+    )
+    group.add_argument(
+        '--escherichia__pathovar_min_coverage',
+        type=float,
+        default=80.0,
+        help='Minimum alignment percent coverage for detecting virulence factors'
+    )
 
     # ShigaPass integration
     default_shigapass_dir = data_dir()
@@ -84,7 +96,6 @@ def add_cli_options(parser):
     return group
 
 
-
 def check_cli_options(args):
     if args.escherichia__pathovar_min_identity <= 50.0 or args.escherichia__pathovar_min_identity >= 100.0:
         sys.exit('Error: --escherichia__pathovar_min_identity must be between 50.0 and 100.0')
@@ -100,27 +111,19 @@ def check_external_programs():
     return ['rammappy']
 
 
-
-def data_dir():
-    return pathlib.Path(__file__).parents[0] / 'data'
-
-
-
 def args_get(args, name, default=None):
     return getattr(args, name, default) if hasattr(args, name) else default
-
 
 
 def _blast_db_missing(db_dir: Path) -> bool:
     index_exts = ('.nin', '.nhr', '.nsq', '.ndb', '.not', '.ntf', '.nto')
     fastas = list(db_dir.rglob('*.fasta'))
     if not fastas:
-        return True  # nothing there at all -> treat as missing
+        return True
     for fasta in fastas:
         if not any(fasta.with_suffix(ext).exists() for ext in index_exts):
             return True
     return False
-
 
 
 def _shigapass_needs_init(db_dir: Path) -> bool:
@@ -130,45 +133,66 @@ def _shigapass_needs_init(db_dir: Path) -> bool:
     return _blast_db_missing(db_dir)
 
 
+def _get_clean_sample_name(assembly_path: Path) -> str:
+    """
+    Strips compound extensions like .fasta.gz, .fa.gz to match ShigaPass's internal naming.
+    """
+    name = assembly_path.name
+    extensions = ('.fasta.gz', '.fa.gz', '.fna.gz', '.fasta', '.fa', '.fna', '.gz')
+    for ext in extensions:
+        if name.endswith(ext):
+            return name[:-len(ext)]
+    return assembly_path.stem
+
 
 def run_shigapass_for_single_assembly(assembly: str, args) -> str:
     """
     Run ShigaPass for a single assembly.
     """
     assembly_path = Path(assembly).expanduser().resolve()
-    sample = assembly_path.stem
+    sample = _get_clean_sample_name(assembly_path)
 
     if not assembly_path.exists():
         return '-'
 
-    # Base directory
+    # 1. Locate ShigaPass script (CLI argument -> PATH/Conda -> package data dir)
     base_dir = Path(args_get(args, 'shigapass_dir', data_dir())).expanduser().resolve()
-
     script_candidates = [
         base_dir / 'ShigaPass.sh',
         base_dir / 'SCRIPT' / 'ShigaPass.sh',
     ]
-    shigapass_sh = next((p for p in script_candidates if p.exists()), script_candidates[0])
+    shigapass_sh = next((p for p in script_candidates if p.is_file()), None)
 
+    if not shigapass_sh:
+        system_shigapass = shutil.which('ShigaPass.sh') or shutil.which('shigapass')
+        if system_shigapass:
+            shigapass_sh = Path(system_shigapass).resolve()
+
+    if not shigapass_sh or not shigapass_sh.exists():
+        return '-'
+
+    # 2. Locate Database directory (CLI argument -> Conda share -> relative to script -> package data dir)
+    conda_prefix = Path(os.environ.get('CONDA_PREFIX', sys.prefix))
     db_dir_arg = args_get(args, 'shigapass_db_dir', None)
-    if db_dir_arg:
+
+    if db_dir_arg and Path(db_dir_arg).expanduser().resolve().exists():
         db_dir = Path(db_dir_arg).expanduser().resolve()
     else:
         db_candidates = [
             base_dir / 'ShigaPass_DataBases',
             base_dir / 'SCRIPT' / 'ShigaPass_DataBases',
             shigapass_sh.parent / 'ShigaPass_DataBases',
+            conda_prefix / 'share' / 'shigapass' / 'ShigaPass_DataBases',
+            data_dir() / 'ShigaPass_DataBases',
         ]
-        db_dir = next((p for p in db_candidates if p.exists()), db_candidates[0])
+        db_dir = next((p for p in db_candidates if p.is_dir()), None)
+
+    if not db_dir or not db_dir.exists():
+        return '-'
 
     threads = int(args_get(args, 'shigapass_threads', 2))
     keep = bool(args_get(args, 'shigapass_keep', False))
     outdir_base = args_get(args, 'shigapass_outdir_base', 'ShigaPass_Results')
-
-    if not shigapass_sh.exists():
-        return '-'
-    if not db_dir.exists():
-        return '-'
     use_u = _shigapass_needs_init(db_dir)
 
     with tempfile.TemporaryDirectory(prefix='shigapass_') as tmpd:
@@ -177,7 +201,6 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
         lst = tmpd / 'assemblies.txt'
         lst.write_text(str(assembly_path) + '\n', encoding='utf-8')
 
-        # Output directory inside the temporary directory, per sample
         outdir = tmpd / f'{outdir_base}_{sample}'
         outdir.mkdir(parents=True, exist_ok=True)
 
@@ -193,8 +216,13 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
         if use_u:
             cmd.append('-u')
 
-        # If script is not executable, run through bash
+        # Ensure executable permissions
         if not os.access(shigapass_sh, os.X_OK):
+            try:
+                current_mode = shigapass_sh.stat().st_mode
+                shigapass_sh.chmod(current_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+            except OSError:
+                pass
             cmd = ['bash'] + cmd
 
         result = subprocess.run(cmd, capture_output=True, text=True)
@@ -225,12 +253,13 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
                 for row in reader:
                     if not row:
                         continue
-                    if row[pos['Name']] == sample:
+                    # Match clean sample stem or uncompressed stem
+                    row_name = row[pos['Name']].strip()
+                    if row_name == sample or row_name == assembly_path.stem:
                         value = row[pos['Predicted_Serotype']].strip()
                         return value or '-'
         except Exception:
             return '-'
-
 
     return '-'
 
@@ -241,6 +270,7 @@ SEROTYPE_MAPPING = {
     'SF': 'Shigella flexneri',
     'SS': 'Shigella sonnei'
 }
+
 
 def map_shigapass_serotype(serotype):
     """
@@ -255,17 +285,16 @@ def map_shigapass_serotype(serotype):
             species_code += char
         else:
             break
-            
+
     if species_code in SEROTYPE_MAPPING:
         mapped_name = SEROTYPE_MAPPING[species_code]
         suffix = serotype[len(species_code):].strip()
-        
+
         if suffix:
             return f"{mapped_name} {suffix}"
         return mapped_name
-    
-    return serotype
 
+    return serotype
 
 
 def get_results(assembly, ref_index, args, previous_results):
@@ -291,7 +320,6 @@ def get_results(assembly, ref_index, args, previous_results):
     predicted_serotype_raw = run_shigapass_for_single_assembly(assembly, args)
     predicted_serotype = map_shigapass_serotype(predicted_serotype_raw)
 
-    # markers
     result_dict = {header: '-' for header in full_headers}
     for marker, marker_hits in virulence_markers.items():
         if marker in result_dict:
