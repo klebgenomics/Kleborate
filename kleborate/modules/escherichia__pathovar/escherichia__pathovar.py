@@ -75,11 +75,6 @@ def add_cli_options(parser):
         help='Keep ShigaPass intermediate directories (-k)'
     )
     group.add_argument(
-        '--shigapass_init_db',
-        action='store_true',
-        help='Initialise BLAST databases once on first run (-u)'
-    )
-    group.add_argument(
         '--shigapass_outdir_base',
         type=str,
         default='ShigaPass_Results',
@@ -116,6 +111,26 @@ def args_get(args, name, default=None):
 
 
 
+def _blast_db_missing(db_dir: Path) -> bool:
+    index_exts = ('.nin', '.nhr', '.nsq', '.ndb', '.not', '.ntf', '.nto')
+    fastas = list(db_dir.rglob('*.fasta'))
+    if not fastas:
+        return True  # nothing there at all -> treat as missing
+    for fasta in fastas:
+        if not any(fasta.with_suffix(ext).exists() for ext in index_exts):
+            return True
+    return False
+
+
+
+def _shigapass_needs_init(db_dir: Path) -> bool:
+    marker = db_dir / '.shigapass_indexed'
+    if marker.exists():
+        return False
+    return _blast_db_missing(db_dir)
+
+
+
 def run_shigapass_for_single_assembly(assembly: str, args) -> str:
     """
     Run ShigaPass for a single assembly.
@@ -148,19 +163,13 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
 
     threads = int(args_get(args, 'shigapass_threads', 2))
     keep = bool(args_get(args, 'shigapass_keep', False))
-    init_db = bool(args_get(args, 'shigapass_init_db', False))
     outdir_base = args_get(args, 'shigapass_outdir_base', 'ShigaPass_Results')
 
     if not shigapass_sh.exists():
         return '-'
     if not db_dir.exists():
         return '-'
-
-    # Call -u only once per process
-    use_u = False
-    if init_db and not getattr(args, '_shigapass_init_done', False):
-        use_u = True
-        setattr(args, '_shigapass_init_done', True)
+    use_u = _shigapass_needs_init(db_dir)
 
     with tempfile.TemporaryDirectory(prefix='shigapass_') as tmpd:
         tmpd = Path(tmpd)
@@ -189,6 +198,17 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
             cmd = ['bash'] + cmd
 
         result = subprocess.run(cmd, capture_output=True, text=True)
+
+        if result.returncode != 0:
+            print(f'Warning: ShigaPass failed for {sample} (exit {result.returncode}): '
+                  f'{result.stderr.strip()}', file=sys.stderr)
+            return '-'
+
+        if use_u:
+            try:
+                (db_dir / '.shigapass_indexed').touch()
+            except OSError:
+                pass
 
         summary = outdir / 'ShigaPass_summary.csv'
         if not summary.exists():
@@ -268,7 +288,6 @@ def get_results(assembly, ref_index, args, previous_results):
         args.escherichia__pathovar_min_identity,
         args.escherichia__pathovar_min_coverage
     )
-
     predicted_serotype_raw = run_shigapass_for_single_assembly(assembly, args)
     predicted_serotype = map_shigapass_serotype(predicted_serotype_raw)
 
@@ -286,11 +305,3 @@ def get_results(assembly, ref_index, args, previous_results):
         result_dict['Pathotype'] = '-'
 
     return result_dict
-
-
-
-
-
-
-
-
