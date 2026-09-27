@@ -49,11 +49,6 @@ Activate the environment and install kleborate (and Kaptive) using pip::
     conda activate klebsiella_analysis
     pip install kleborate==3.3.0b1
 
-Or Bioconda::
-
-    conda install -c bioconda kleborate=3.3.0b1
-    pip install rammappy
-
 Database set up
 ============================
 Before running Kleborate, set up the reference databases required
