@@ -128,17 +128,11 @@ cgMLST results are output in the following columns:
    * - LIN code
      - LIN code / Partial LINcode for input strain
 
-   * - Sublineage
-     - Sublineage for input strain
-
-   * - Clonal group
-     - Clonal group for input strain
-
 
 .. _escherichia__ezclermont:
 
 
-Phylgroups
+Phylogroups
 ----------------------
 
 .. code-block:: Python
@@ -446,7 +440,7 @@ Outputs
 
 .. _escherichia__ectyper:
 
-*E. coli* O:H serotyping
+O:H serotyping
 ----------------------
 
 .. code-block:: Python

@@ -69,7 +69,7 @@ Summary of availabe modules and their output columns
      - wzi allele
    * - :ref:`kpsc__kaptive <kpsc__kaptive>`
      - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes,O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes
-   * - :ref:`kpsc__cgMLST <kpsc__cgMLST>`
+   * - :ref:`kpsc__cgmlst <kpsc__cgmlst>`
      - cgST, LIN code, Sublineage, Clonal group
    * - :ref:`kpsc__mrk <kpsc__mrk>`
      - mrkST, mrkA, mrkB, mrkC, mrkD, mrkF, mrkH, mrkI, mrkJ
