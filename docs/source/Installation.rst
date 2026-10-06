@@ -22,7 +22,7 @@ Kleborate requires the following software and libraries to be installed and avai
 
 
 Install Kleborate 
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================
 
 Create a conda environment containing Kleborate dependencies::
 
@@ -55,13 +55,11 @@ Activate the environment and install kleborate (and Kaptive) using pip::
 Quick Installation Check
 ============================
 
+Download *K. pneumoniae* genome and run kpsc__mlst module
 .. code-block:: bash
 
-    # 1. Download reference K. pneumoniae genome
     wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/813/595/GCF_002813595.1_ASM281359v1/GCF_002813595.1_ASM281359v1_genomic.fna.gz
-
-    # 2. Run kpsc MLST test
-    kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -m klebsiella_pneumo_complex__mlst --trim_headers
+    kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -m kpsc__mlst --trim_headers
 
 
 Database set up
@@ -84,7 +82,7 @@ This requires a local, indexed copy of the cgMLST scheme to be stored in ``klebo
 
 .. note::
 
-    **Expected Duration:** Downloading and indexing the hundreds of scheme loci and profile definitions can take time depending on your internet bandwidth, server load, and local CPU speed.
+    Downloading profiles can take a long time due to the large number of entries.
 
 Prerequisites
 --------------
@@ -95,7 +93,7 @@ Before running the ``setup_cgmlst.py`` script, ensure the following tools are in
 
 
 What the script does
---------------
+--------------------
 1. **Verifies Dependencies:** Confirms ``mist`` is accessible in your environment
 2. Installs ``bigsdb-downloader``
 3. Locates Kleborate data path (``kleborate/modules/kpsc__cgmlst/data``)
@@ -135,13 +133,6 @@ Upon completion, the following files will be downloaded inside the target folder
 * ``kleb_scgmlst_s/`` — Raw scheme FASTA alleles and ``profiles.tsv``.
 * ``kleb_scgmlst_s-index/`` — Indexed binary database used by ``mist`` during Kleborate runs.
 
-See also
-------------
-* `BIGSdb_downloader Documentation <https://github.com/kjolley/BIGSdb_downloader>`_
-* `MiST Repository <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
-* `Inferring LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
-* `Inferring Klebsiella LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/Klebsiella-LINcodes-case-study>`_
-
 
 
 Test KpSC cgMLST Install
@@ -164,7 +155,7 @@ Download the latest AMRFinderPlus database:
 
    amrfinder -u
 
-Verify the installation and database
+Verify the Installation and Database
 -------------------------------------
 
 .. code-block:: bash
@@ -225,16 +216,13 @@ When running the module pass the ``--ecoli_entero_token`` path
      --ecoli_entero_token ./enterobase_token
 
 
-<<<<<<< HEAD
 Test *E. coli* cgMLST
 ---------------------
 
+Download *E. coli* genome and test cgMLST module
 .. code-block:: bash
 
-    # 1. Download test E. coli genome
     wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/559/655/GCA_001559655.1_ASM155965v1/GCA_001559655.1_ASM155965v1_genomic.fna.gz
-
-    # 2. Run cgMLST module test
     kleborate -a GCA_001559655.1_ASM155965v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers
 
 
@@ -243,10 +231,7 @@ Validation Tests
 
 kpsc Preset Test
 ~~~~~~~~~~~~~~~~~~~~~
-=======
-Test installation
-==================
->>>>>>> origin/main
+
 
 To test that Kleborate is installed and working correctly, download the example genome assembly and run Kleborate using the  -p kpsc::
 

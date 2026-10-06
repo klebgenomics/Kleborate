@@ -653,13 +653,13 @@ KpSC AMR
 AMR variant detection
 +++++++++++++++++++++
 
-.. code-block:: Python
+.. code-block:: python
+
    -m kpsc__amr
 
 
 Acquired genes
 ^^^^^^^^^^^^^^
-
 This module screens input genomes against a curated version of the `CARD database <https://card.mcmaster.ca/>`_ and the `NCBI Reference Gene Catalog <https://www.ncbi.nlm.nih.gov/pathogens/refgene/>`_ of acquired resistance gene alleles (see the following `spreadsheet <https://figshare.com/articles/dataset/CARD_v3_0_8_AMR_database_curation_for_Kleborate/13256759>`_ for details on curation), and groups these by drug class for reporting purposes. The chromosomal *fosA* and *oqxAB* genes that are intrinsic to all KpSC are not reported and usually do not confer fosfomycin/fluoroquinolone resistance in these species.
 
 Kleborate has logic to choose the best allele hit, annotate that hit with extra information and place it in an approprirate column in the output.
@@ -974,11 +974,10 @@ Results of the ciprofloxacin resistance prediction are reported in Kleborate wit
      - Indicates the MIC distribution observed for the genotype profile in **Ciprofloxacin_profile**, in the form of median value and interquartile range, based on the KlebNET-GSP AMR Genotype-Phenotype Group data enumerated in the **Ciprofloxacin_profile_support** column.
 
 
-Serotyping
-----------
-
 .. _kpsc__kaptive:
 
+Serotyping
+----------
 
 K and O locus typing
 ++++++++++++++++++++
