@@ -116,6 +116,7 @@ If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/acce
 
 1. **Obtain API Client Credentials:**
    Register for database access via the `Institut Pasteur BIGSdb Portal <https://bigsdb.pasteur.fr/cgi-bin/bigsdb/bigsdb.pl>`_.
+
    * Request an OAuth Client Key and Secret by emailing ``bigsdb@pasteur.fr``.
 
 2. **Run Authentication via the Setup Script and input API Keys:**
@@ -133,6 +134,13 @@ Upon completion, the following files will be downloaded inside the target folder
 
 * ``kleb_scgmlst_s/`` — Raw scheme FASTA alleles and ``profiles.tsv``.
 * ``kleb_scgmlst_s-index/`` — Indexed binary database used by ``mist`` during Kleborate runs.
+
+See also
+------------
+* `BIGSdb_downloader Documentation <https://github.com/kjolley/BIGSdb_downloader>`_
+* `MiST Repository <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
+* `Inferring LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
+* `Inferring Klebsiella LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/Klebsiella-LINcodes-case-study>`_
 
 
 
@@ -191,8 +199,8 @@ The following files will be created inside the ``kleborate/modules/ecoli__cgmlst
 * ``ecoli_cgmlst_v1-index/`` — Indexed binary database used by ``mist`` during allele calling.
 
 
-EnteroBase API Token (required for LIN codes)
----------------------------------------------
+EnteroBase API Token (required for *E. coli* LIN codes)
+-------------------------------------------------------
 
 EnteroBase schemes do not include LIN codes in the downloaded profiles file. To retrieve the LIN code for a matched cgST, this module queries EnteroBase's API token
 
@@ -217,6 +225,7 @@ When running the module pass the ``--ecoli_entero_token`` path
      --ecoli_entero_token ./enterobase_token
 
 
+<<<<<<< HEAD
 Test *E. coli* cgMLST
 ---------------------
 
@@ -234,6 +243,10 @@ Validation Tests
 
 kpsc Preset Test
 ~~~~~~~~~~~~~~~~~~~~~
+=======
+Test installation
+==================
+>>>>>>> origin/main
 
 To test that Kleborate is installed and working correctly, download the example genome assembly and run Kleborate using the  -p kpsc::
 
