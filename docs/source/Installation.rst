@@ -49,20 +49,24 @@ Activate the environment and install kleborate (and Kaptive) using pip::
     conda activate klebsiella_analysis
     pip install kleborate==3.3.0b1
 
-Database set up
+
+
+
+Quick Installation Check
 ============================
-Before running Kleborate, set up the reference databases required
-
-AMRFinderPlus Database
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-NOTE: AMRFinderPlus is only used by the module ``-m escherichia__amr`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
-
-Download the latest AMRFinderPlus database:
 
 .. code-block:: bash
 
-   amrfinder -u
+    # 1. Download reference K. pneumoniae genome
+    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/813/595/GCF_002813595.1_ASM281359v1/GCF_002813595.1_ASM281359v1_genomic.fna.gz
+
+    # 2. Run kpsc MLST test
+    kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -m klebsiella_pneumo_complex__mlst --trim_headers
+
+
+Database set up
+============================
+Before running Kleborate, set up the reference databases required
 
 
 KpSC cgMLST Database (MiST)
@@ -77,6 +81,10 @@ This requires a local, indexed copy of the cgMLST scheme to be stored in ``klebo
 .. code-block:: bash
 
    python setup_cgmlst.py
+
+.. note::
+
+    **Expected Duration:** Downloading and indexing the hundreds of scheme loci and profile definitions can take time depending on your internet bandwidth, server load, and local CPU speed.
 
 Prerequisites
 --------------
@@ -136,8 +144,38 @@ See also
 
 
 
+Test KpSC cgMLST Install
+------------------------
+
+.. code-block:: bash
+
+    kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test_cgmlst -m kpsc__cgmlst --trim_headers
+
+
+
+AMRFinderPlus Database
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+NOTE: AMRFinderPlus is only used by the module ``-m escherichia__amr`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
+
+Download the latest AMRFinderPlus database:
+
+.. code-block:: bash
+
+   amrfinder -u
+
+Verify the installation and database
+-------------------------------------
+
+.. code-block:: bash
+
+   # Check the software and database versions
+   amrfinder --version
+   amrfinder -l
+
+
 *E. coli* cgMLST Database (MiST)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 NOTE: E. coli cgMLST is only used by the module ``-m escherichia__cgmlst`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
 
@@ -162,7 +200,7 @@ The following files will be created inside the ``kleborate/modules/ecoli__cgmlst
 
 
 EnteroBase API Token (required for *E. coli* LIN codes)
-------------
+-------------------------------------------------------
 
 EnteroBase schemes do not include LIN codes in the downloaded profiles file. To retrieve the LIN code for a matched cgST, this module queries EnteroBase's API token
 
@@ -187,20 +225,42 @@ When running the module pass the ``--ecoli_entero_token`` path
      --ecoli_entero_token ./enterobase_token
 
 
+<<<<<<< HEAD
+Test *E. coli* cgMLST
+---------------------
+
+.. code-block:: bash
+
+    # 1. Download test E. coli genome
+    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/559/655/GCA_001559655.1_ASM155965v1/GCA_001559655.1_ASM155965v1_genomic.fna.gz
+
+    # 2. Run cgMLST module test
+    kleborate -a GCA_001559655.1_ASM155965v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers
+
+
+Validation Tests
+==============================
+
+kpsc Preset Test
+~~~~~~~~~~~~~~~~~~~~~
+=======
 Test installation
 ==================
+>>>>>>> origin/main
 
 To test that Kleborate is installed and working correctly, download the example genome assembly and run Kleborate using the  -p kpsc::
 
    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/002/813/595/GCF_002813595.1_ASM281359v1/GCF_002813595.1_ASM281359v1_genomic.fna.gz
-   kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -p kpsc
+   kleborate -a GCF_002813595.1_ASM281359v1_genomic.fna.gz -o kleborate_test -p kpsc --trim_headers
 
 If the installation is successful, the analysis should complete without errors and generate the expected output files.
 
+Additional tests
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Additional *K. pneumoniae* test datasets are provided to further validate your installation::
 
-   kleborate -a test/kpsc_test/data/ -o kleborate_kpsc_test -p kpsc
+   kleborate -a test/kpsc_test/data/*.fasta.gz -o kleborate_kpsc_test -p kpsc --trim_headers
 
 The generated output should match the corresponding reference files located in
 ``test/kpsc_test/example_output/``:
@@ -227,4 +287,11 @@ The generated output should match the corresponding reference files located in
    :delim: tab
    :header-rows: 1
 
-   
+
+
+See also
+========
+- `BIGSdb_downloader Documentation <https://github.com/kjolley/BIGSdb_downloader>`_
+- `MiST Repository <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
+- `Inferring LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/lincodes>`_
+- `Inferring Klebsiella LIN codes with MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST/wiki/Klebsiella-LINcodes-case-study>`_

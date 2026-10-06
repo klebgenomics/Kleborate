@@ -650,16 +650,17 @@ Outputs
 KpSC AMR
 --------
 
+AMR variant detection
++++++++++++++++++++++
+
 .. code-block:: Python
    -m kpsc__amr
 
 
-Acquired AMR genes
-++++++++++++++++++
+Acquired genes
+^^^^^^^^^^^^^^
 
-This module screens input genomes against a curated version of the `CARD database <https://card.mcmaster.ca/>`_ of acquired resistance gene alleles (see the following `spreadsheet <https://figshare.com/articles/dataset/CARD_v3_0_8_AMR_database_curation_for_Kleborate/13256759>`_ for details on curation), and groups these by drug class for reporting purposes. The chromosomal *fosA* and *oqxAB* genes that are intrinsic to all KpSC are not reported and usually do not confer fosfomycin/fluoroquinolone resistance in these species.
-
-This module screens input genomes against a curated version of the `CARD database <https://card.mcmaster.ca/>`_ of acquired resistance gene alleles (see the following `spreadsheet <https://figshare.com/articles/dataset/CARD_v3_0_8_AMR_database_curation_for_Kleborate/13256759>`_ for details on curation), and groups these by drug class for reporting purposes. The chromosomal *fosA* and *oqxAB* genes that are intrinsic to all KpSC are not reported and usually do not confer fosfomycin/fluoroquinolone resistance in these species.
+This module screens input genomes against a curated version of the `CARD database <https://card.mcmaster.ca/>`_ and the `NCBI Reference Gene Catalog <https://www.ncbi.nlm.nih.gov/pathogens/refgene/>`_ of acquired resistance gene alleles (see the following `spreadsheet <https://figshare.com/articles/dataset/CARD_v3_0_8_AMR_database_curation_for_Kleborate/13256759>`_ for details on curation), and groups these by drug class for reporting purposes. The chromosomal *fosA* and *oqxAB* genes that are intrinsic to all KpSC are not reported and usually do not confer fosfomycin/fluoroquinolone resistance in these species.
 
 Kleborate has logic to choose the best allele hit, annotate that hit with extra information and place it in an approprirate column in the output.
 
@@ -682,7 +683,7 @@ And here is the logic in more detail:
 Note that Kleborate reports resistance results for all antimicrobial classes with confidently attributable resistance mechanisms in KpSC. Not all of these are actually used clinically for treatment of KpSC infections (e.g. MLS, Rif) but they are still reported as the presence of acquired resistance determinants to these classes is of interest to researchers for other reasons (e.g. these genes can be useful markers of MGEs and MGE spread; there is potential for use of these drugs against other organisms to select for KpSC in co-infected patients or in the environment). For an overview of antimicrobial resistance and consensus definitions of multidrug resistance (MDR), extensive drug resistance (XDR) and pan drug resistance in Enterobacteriaceae, see `Magiorakos 2012 <https://www.clinicalmicrobiologyandinfection.com/article/S1198-743X(1461632-3/fulltext>`_\ 
 
 SHV beta-lactamases
-^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~
 
 All KpSC carry a core chromosomal beta-lactamase gene (SHV in *K. pneumoniae*\ , LEN in *K. variicola*\ , OKP in *K. quasipneumoniae*\ ) that confers clinically significant resistance to ampicillin. Some KpSC also carry acquired mobile SHV alleles, which can confer additional inhibitor resistance and/or resistance to extended spectrum beta-lactams.
 
@@ -691,11 +692,11 @@ Kleborate will report all of the SHV alleles it detects and separate them into c
 * SHV alleles associated with ampicillin resistance only, will be reported in the ``Bla_chr`` column because they are assumed to represent the chromosomal allele. These genes are not included in the count of acquired resistance genes or drug classes.
 * Other SHV alleles e.g. those predicted to encode ESBLs (extended-spectrum beta-lactamases) or beta-lactamases with inhibitor resistance will be reported in the relevant ``Bla_ESBL_acquired`` or ``Bla_inhR_acquired`` columns etc (see below), because these SHV alleles are almost always carried on plasmids. (However it is possible to have a mutation in a chromosomal SHV gene that gives a match to an ESBL allele, which would also be reported in the ``Bla_ESBL_acquired`` column and counted as an acquired gene because it is very hard to tell the difference without manual exploration of the genetic context.)
 
-The specific mutations, and assignment of alleles to class, is detailed in this preprint from KlebNET-GSP: `Tsang et al, 2024 Microbial genomics <https://doi.org/10.1099/mgen.0.001294>`_.
+The specific mutations, and assignment of alleles to class, is detailed in this paper from the `KlebNET-GSP AMR Genotype-Phenotype Group <https://klebnet.org/amrgenopheno/>`_: `Tsang, et al., 2024 Microbial genomics <https://doi.org/10.1099/mgen.0.001294>`_.
 
 
 Chromosomal mutations
-+++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^
 
 * Fluoroquinolone resistance mutations: GyrA 83 & 87 and ParC 80 & 84. These appear in the ``Flq_mutations`` column.
 * Colistin resistance due to truncation or loss of core genes MgrB or PmrB. If these genes are missing or truncated, this information will be reported in the 'Col_mutations' column (truncations are expressed as % amino acid length from the start codon, if there is a mutation in the start codon this is indicated as ``p.(Met1?)`` to flag that the gene is present but may not be translated correctly). Note if MgrB and PmrB are present and not truncated then nothing about them will be reported in the 'Col' column.
@@ -723,6 +724,7 @@ Minimum alignment percent identity for kpsc Amr spurious results (default: 80.0)
 ``--kpsc__amr_min_spurious_coverage`` 
 
 Minimum alignment percent coverage for kpsc Amr spurious results (default: 40.0)
+
 
 Outputs
 ^^^^^^^
@@ -806,7 +808,7 @@ In the main Kleborate output file, the results of the KpSC AMR module are groupe
 
 
 hAMRonization report
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 Additionally, we provide a new AMR genotyping report in the `hAMRonization <https://github.com/pha4ge/hAMRonization/blob/master/schema/PHA4GE%20AMR%20Gene%20%26%20Variant%20Specification.csv>`_ format developed by the `Public Health Alliance for Genomic Epidemiology (PHA4GE) <https://www.biorxiv.org/content/10.1101/2024.03.07.583950v1>`_, to improve the interoperability of Kleborate AMR results. This is provided in an additional output file, in long form with one row per genome + variant (in contrast to the main Kleborate table which has one row per genome).
 
@@ -948,6 +950,8 @@ The development and validation of the ciprofloxacin resistance prediction classi
 * Note that *aac(6`)-Ib-cr* is reported in the AGly_acquired and Flq_acquired columns.
 
 
+Outputs
+^^^^^^^
 
 Results of the ciprofloxacin resistance prediction are reported in Kleborate with four additional columns: 
 
@@ -988,12 +992,11 @@ This module will run the `Kaptive <https://github.com/klebgenomics/kaptive>`_ v3
 Parameters
 ^^^^^^^^^^
 
-``--kpsc_k``
-Kaptive database for K-locus typing
+``--kpsc-k-db``
+  Kaptive database for K-locus typing (default: ``kpsc_k``).
 
-
-``--kpsc_o``
-Kaptive database for O-locus typing
+``--kpsc-o-db``
+  Kaptive database for O-locus typing (default: ``kpsc_o``).
 
 
 
@@ -1066,7 +1069,7 @@ Wzi typing results are output in the following columns:
 
 
 
-.. _kpsc__cgMLST:
+.. _kpsc__cgmlst:
 
 KpSC cgMLST 
 ----------------
@@ -1074,7 +1077,8 @@ KpSC cgMLST
 
    -m kpsc__cgmlst
 
-This module performs cgMLST using the `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool, to type against the `KpSC cgMLST scheme <https://doi.org/10.1371/journal.pone.0004982>`_ hosted by BIGSdb-Pasteur. LIN codes are inferred from the cgSTs, and are used to report sublineage (SL) and clonal group (CG) designations, see `this paper <https://doi.org/10.1093/molbev/msac135>` for details of the scheme and `this PLoS Biology article <https://doi.org/10.1371/journal.pbio.3003781>`_ for more information and examples on LIN codes as nomenclature for bacterial lineages.
+
+This module performs cgMLST using the `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_ tool, to type against the `KpSC cgMLST scheme <https://doi.org/10.1371/journal.pone.0004982>`_ hosted by BIGSdb-Pasteur. LIN codes are inferred from the cgSTs, and are used to report sublineage (SL) and clonal group (CG) designations, see `this paper <https://doi.org/10.1093/molbev/msac135>`_ for details of the scheme and `this PLoS Biology article <https://doi.org/10.1371/journal.pbio.3003781>`_ for more information and examples on LIN codes as nomenclature for bacterial lineages.
 
 
 Outputs
