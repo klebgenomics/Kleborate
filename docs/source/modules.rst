@@ -81,19 +81,21 @@ Summary of availabe modules and their output columns
      - ST, dinB, icdA, pabB, polB, putP, trpA, trpB, uidA
    * - :ref:`escherichia__mlst_achtman <escherichia__mlst_achtman>`
      - ST, adk, fumC, gyrB, icd, mdh, purA, recA
+   * - :ref:`escherichia__cgMLST <escherichia__cgMLST>`
+     - cgST, LIN code
+   * - :ref:`escherichia__ezclermont <escherichia__ezclermont>`
+     - Clermont_type, Clermont_profile
    * - :ref:`escherichia__pathovar <escherichia__pathovar>`
      - Pathotype, Stx1, Stx2, ST, LT, eae, ipaH
    * - :ref:`escherichia__mlst_lee <escherichia__mlst_lee>`
      - LEE_ST, LEE_lineage, LEE_eae, LEE_tir, LEE_espA, LEE_espB, LEE_espD, LEE_espH, LEE_espZ
    * - :ref:`escherichia__stxtyper <escherichia__stxtyper>`
      - Stx_type, operon, identity, target_start, target_stop, target_strand, A_reference 'A_identity, A_reference_subtype, A_coverage,B_reference, B_reference_subtype, B_identity, B_coverage
+   * - :ref:`escherichia__pks <_escherichia__pks>`
+     - clbB
    * - :ref:`escherichia__ectyper <escherichia__ectyper>`
      - O-type, H-type, Serotype, QC, Evidence, GeneScores, AllelesKeys, GeneIdentities(%), GeneCoverages(%), GeneLengths, Warnings
-   * - :ref:`escherichia__ezclermont <escherichia__ezclermont>`
-     - Clermont_type, Clermont_profile
-   * - :ref:`escherichia__amr <escherichia__amr>`
-     - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin, Methicillin, Other Classes
-   * - :ref:`escherichia__cgMLST <escherichia__cgMLST>`
-     - cgST, LIN code
    * - :ref:`escherichia__kaptive <escherichia__kaptive>`
      - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes
+   * - :ref:`escherichia__amr <escherichia__amr>`
+     - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin, Methicillin, Other Classes
