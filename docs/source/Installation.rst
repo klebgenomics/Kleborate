@@ -224,8 +224,8 @@ Download *E. coli* genome and test cgMLST module
 
 .. code-block:: bash
 
-   wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/559/655/GCA_001559655.1_ASM155965v1/GCA_001559655.1_ASM155965v1_genomic.fna.gz
-   kleborate -a GCA_001559655.1_ASM155965v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers
+   wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/285/655/GCF_000285655.3_EC958.v1/GCF_000285655.3_EC958.v1_genomic.fna.gz
+   kleborate -a GCF_000285655.3_EC958.v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers --ecoli_entero_token ./enterobase_token
 
 
 Validation tests
