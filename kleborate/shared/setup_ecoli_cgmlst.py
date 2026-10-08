@@ -41,17 +41,21 @@ def main():
         sys.exit(1)
 
     target_dir = get_paths()
+    target_dir.mkdir(parents=True, exist_ok=True)
 
     raw_download_path = target_dir / "ecoli_cgmlst_v1"
     index_path = target_dir / "ecoli_cgmlst_v1-index"
 
-    if target_dir.exists():
-        resp = input(f"Overwrite existing data at {target_dir}? (y/n): ").lower()
-        if resp == 'y':
-            shutil.rmtree(target_dir)
+    if raw_download_path.exists() or index_path.exists():
+        resp = input(f"Overwrite existing data at {target_dir}? (y/n): ").strip().lower()
+        if resp == "y":
+            remove_path(raw_download_path)
+            remove_path(index_path)
+        else:
+            print("Setup cancelled.")
+            sys.exit(0)
         else:
             print("Setup cancelled."); sys.exit(0)
-    target_dir.mkdir(parents=True, exist_ok=True)
 
     download_cmd = [
         "mist", "download",
