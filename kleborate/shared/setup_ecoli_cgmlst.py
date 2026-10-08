@@ -6,7 +6,7 @@ import argparse
 import warnings
 warnings.filterwarnings("ignore")
 
-# EnteroBase E. coli cgMLST v1 scheme
+# EnteroBase E. coli cgMLSTv1 scheme
 SCHEME_URL = "https://enterobase.warwick.ac.uk/schemes/Escherichia.cgMLSTv1/"
 
 
