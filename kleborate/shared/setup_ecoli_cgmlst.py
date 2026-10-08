@@ -52,9 +52,6 @@ def main():
             remove_path(raw_download_path)
             remove_path(index_path)
         else:
-            print("Setup cancelled.")
-            sys.exit(0)
-        else:
             print("Setup cancelled."); sys.exit(0)
 
     download_cmd = [
