@@ -997,6 +997,11 @@ Parameters
 ``--kpsc-o-db``
   Kaptive database for O-locus typing (default: ``kpsc_o``).
 
+Kaptive databases
+^^^^^^^^^^^^^^^^^
+
+The default K and O locus databases (``kpsc_k`` and ``kpsc_o``) are managed automatically by Kleborate. You do not need to download databases separately to run this module.
+Kleborate checks for and fetches the latest versions via Kaptive's database manager.
 
 
 Outputs
