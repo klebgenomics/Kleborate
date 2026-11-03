@@ -38,7 +38,6 @@ Create a conda environment containing Kleborate dependencies::
         mist_typing \
         ezclermont \
         ectyper \
-        ncbi-stxtyper \
         shigapass \
         ncbi-amrfinderplus -y
 
@@ -198,12 +197,14 @@ EnteroBase schemes do not include LIN codes in the downloaded profiles file. To 
 Please request API access to the EnteroBase E. coli database at https://enterobase.warwick.ac.uk/
 Once, you have obtained the token run; 
 
+Save your EnteroBase token once in your home directory
+
 .. code-block:: bash
 
-   echo 'YOUR_TOKEN' > ./enterobase_token
-   chmod 600 ./enterobase_token
+   echo 'YOUR_TOKEN' > ~/.enterobase_token
+   chmod 600 ~/.enterobase_token
 
-When running the module pass the ``--ecoli_entero_token`` path
+Run the cgmlst module
 
 
 .. code-block:: bash
@@ -213,7 +214,6 @@ When running the module pass the ``--ecoli_entero_token`` path
      -o kleborate_results \
      -m escherichia__cgmlst \
      --trim_headers \
-     --ecoli_entero_token ./enterobase_token
 
 
 Test *E. coli* cgMLST

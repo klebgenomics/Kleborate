@@ -341,68 +341,6 @@ Additional Notes
 * Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that disagree with the ST reported. For example, ``ST10-3LV`` indicates a three-locus variant (SLV) of ST10 (i.e. 4/7 loci match ST10).
 
 
-.. _escherichia__stxtyper:
-
-Stx typing
------------
-
-.. code-block:: Python
-
-   -m escherichia__stxtyper
-
-Shiga toxins (Stxs) are key virulence factors of Stx-producing *Escherichia coli* (STEC). They are also found in *Shigella dysenteriae 1*. Stxs belong to the AB-type toxin family and are divided into two antigenically distinct groups: Stx1 and Stx2. Each group contains several variants/subtypes—six for Stx1 (a, b, c, d, e, f) and seven for Stx2 (a, b, c, d, e, f, and g) (`Yano et al., 2023 <https://doi.org/10.1038/s41598-023-32111-8>`_, `Melton-Celsa, 2014 <https://doi.org/10.1128/microbiolspec.EHEC-0024-2013>`_). These toxins are encoded by lysogenic bacteriophages (Stx phage) and STEC strains may produce either single Stx subtype or a combination of subtypes.
-
-This module will run `StxTyper <https://doi.org/10.3390/microorganisms14081607>` to determine the _stx_ type. See the `StxTyper documentation <https://github.com/ncbi/stxtyper>`_ for more details of how it works.
-
-
-Outputs
-+++++++++++++++++++++
-
-StxTyper results are output in the following columns:
-
-.. list-table::
-   :header-rows: 1
-
-   * - **Column name**
-     - **Content**
-
-   * - ``Stx_type``
-     - The Shiga toxin type. If the operon is complete, the subtype will be reported (e.g., ``stx1a``). If the operon is incomplete or ambiguous, a broader designation is used: ``stx1``, ``stx2``, or simply ``stx`` if the algorithm cannot resolve at further.
-   * - ``operon``
-     - Status the operon detected. Possible values:
-       ``COMPLETE`` – Full operon found.  
-       ``PARTIAL`` – Operon incomplete.  
-       ``PARTIAL_CONTIG_END`` – Partial operon likely truncated at contig boundary.  
-       ``EXTENDED`` – Coding sequence extends beyond the reference stop codon for one or both subunits.  
-       ``INTERNAL_STOP`` – A subunit contains a nonsense mutation.  
-       ``FRAMESHIFT`` – Indel detected in coding sequence.  
-       ``AMBIGUOUS`` – Ambiguous base(s) found in the sequence.  
-       ``COMPLETE_NOVEL`` – Full-length operon that cannot be typed.
-   * - ``identity``
-     - Percent identity for both A and B subunits.
-   * - ``target_start``
-     - Start position of the alignment.
-   * - ``target_stop``
-     - End position of the alignment.
-   * - ``target_strand``
-     - Strand orientation of the target sequence.
-   * - ``A_reference``
-     - Closest reference protein for the A subunit.
-   * - ``A_identity``
-     - Percent identity to the reference for the A subunit.
-   * - ``A_reference_subtype``
-     - Subtype assigned to the reference sequence for the A subunit.
-   * - ``A_coverage``
-     - Percentage of the A subunit reference sequence covered by the alignment.
-   * - ``B_reference``
-     - Closest reference protein for the B subunit.
-   * - ``B_reference_subtype``
-     - Subtype assigned to the reference sequence for the B subunit.
-   * - ``B_identity``
-     - Percent identity to the reference for the B subunit.
-   * - ``B_coverage``
-     - Percentage of the B subunit reference sequence covered by the alignment.
-
 .. _escherichia__pks:
 
 Polyketide synthetase (colibactin) detection 
@@ -547,6 +485,12 @@ Kaptive results are output in the following columns:
      - Weighted percent identity of the best matching locus to the assembly.
    * - K_Missing_expected_genes
      - Missing expected genes in the locus
+   * - K_Truncated genes, details
+     - Truncated genes
+   * - K_Extra genes, details
+     - Extra genes found in the locus
+   * - Kaptive version
+     - Version of Kaptive
 
 
 
@@ -633,3 +577,9 @@ Results of the *Escherichia* AMR module are grouped by drug class:
 
    * - ``Other Classes``
      - other CLASS values
+
+   * - ``Stx_type``
+     - The stx type
+
+   * - ``Operon``
+     - status the operon was found to be (COMPLETE, PARTIAL etc)

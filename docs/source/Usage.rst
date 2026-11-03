@@ -20,9 +20,21 @@ Run with preset modules for *K. pneumoniae* species complex (KpSC), which reprod
 
    kleborate -a *.fasta.gz -o kleborate_results -p kpsc --trim_headers
 
+To include core genome MLST (cgMLST) profiling alongside the standard KpSC modules, use the ``kpsc_all`` preset:
+
+.. code-block:: bash
+
+   kleborate -a *.fasta.gz -o kleborate_results -p kpsc_all --trim_headers
+
 - ``-a *.fasta.gz``: Specifies the input files (assemblies) to be analyzed (.fasta or .fasta.gz).
 - ``-o``: Specifies the directory where the output files will be saved (one output file per species/complex detected).
-- ``-p``: Specifies the preset modules to run (kpsc, kosc, escherichia).
+
+- ``-p``: Specifies the preset modules to run:
+  
+  - ``kpsc``: Standard KpSC modules (matches Kleborate v2 behavior; excludes ``kpsc__cgmlst``).
+  - ``kpsc_all``: Full KpSC analysis including ``kpsc__cgmlst``.
+  - ``kosc``: Modules for *K. oxytoca* species complex.
+  - ``escherichia``: Modules for *Escherichia* species.
 - ``--trim_headers``: Trim module names from column headers in the output.
 
 

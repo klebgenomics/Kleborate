@@ -115,7 +115,7 @@ def args_get(args, name, default=None):
     return getattr(args, name, default) if hasattr(args, name) else default
 
 
-def _blast_db_missing(db_dir: Path) -> bool:
+def blast_db_missing(db_dir: Path) -> bool:
     index_exts = ('.nin', '.nhr', '.nsq', '.ndb', '.not', '.ntf', '.nto')
     fastas = list(db_dir.rglob('*.fasta'))
     if not fastas:
@@ -126,14 +126,14 @@ def _blast_db_missing(db_dir: Path) -> bool:
     return False
 
 
-def _shigapass_needs_init(db_dir: Path) -> bool:
+def shigapass_needs_init(db_dir: Path):
     marker = db_dir / '.shigapass_indexed'
     if marker.exists():
         return False
-    return _blast_db_missing(db_dir)
+    return blast_db_missing(db_dir)
 
 
-def _get_clean_sample_name(assembly_path: Path) -> str:
+def get_clean_sample_name(assembly_path: Path):
     """
     Strips compound extensions like .fasta.gz, .fa.gz to match ShigaPass's internal naming.
     """
@@ -145,17 +145,18 @@ def _get_clean_sample_name(assembly_path: Path) -> str:
     return assembly_path.stem
 
 
-def run_shigapass_for_single_assembly(assembly: str, args) -> str:
+def run_shigapass_for_single_assembly(assembly: str, args) -> Tuple[str, str]:
     """
     Run ShigaPass for a single assembly.
+    Returns (Predicted_Serotype, Predicted_FlexSerotype).
     """
     assembly_path = Path(assembly).expanduser().resolve()
-    sample = _get_clean_sample_name(assembly_path)
+    sample = get_clean_sample_name(assembly_path)
 
     if not assembly_path.exists():
-        return '-'
+        return '-', '-'
 
-    # 1. Locate ShigaPass script (CLI argument -> PATH/Conda -> package data dir)
+    # Locate ShigaPass script
     base_dir = Path(args_get(args, 'shigapass_dir', data_dir())).expanduser().resolve()
     script_candidates = [
         base_dir / 'ShigaPass.sh',
@@ -169,9 +170,9 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
             shigapass_sh = Path(system_shigapass).resolve()
 
     if not shigapass_sh or not shigapass_sh.exists():
-        return '-'
+        return '-', '-'
 
-    # 2. Locate Database directory (CLI argument -> Conda share -> relative to script -> package data dir)
+    # Database directory
     conda_prefix = Path(os.environ.get('CONDA_PREFIX', sys.prefix))
     db_dir_arg = args_get(args, 'shigapass_db_dir', None)
 
@@ -188,12 +189,12 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
         db_dir = next((p for p in db_candidates if p.is_dir()), None)
 
     if not db_dir or not db_dir.exists():
-        return '-'
+        return '-', '-'
 
     threads = int(args_get(args, 'shigapass_threads', 2))
     keep = bool(args_get(args, 'shigapass_keep', False))
     outdir_base = args_get(args, 'shigapass_outdir_base', 'ShigaPass_Results')
-    use_u = _shigapass_needs_init(db_dir)
+    use_u = shigapass_needs_init(db_dir)
 
     with tempfile.TemporaryDirectory(prefix='shigapass_') as tmpd:
         tmpd = Path(tmpd)
@@ -230,7 +231,7 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
         if result.returncode != 0:
             print(f'Warning: ShigaPass failed for {sample} (exit {result.returncode}): '
                   f'{result.stderr.strip()}', file=sys.stderr)
-            return '-'
+            return '-', '-'
 
         if use_u:
             try:
@@ -240,15 +241,15 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
 
         summary = outdir / 'ShigaPass_summary.csv'
         if not summary.exists():
-            return '-'
+            return '-', '-'
 
         try:
             with summary.open('r', encoding='utf-8', newline='') as fh:
                 reader = csv.reader(fh, delimiter=';')
-                header = next(reader, [])
+                header = [h.strip() for h in next(reader, [])]
                 pos = {name: i for i, name in enumerate(header)}
                 if 'Name' not in pos or 'Predicted_Serotype' not in pos:
-                    return '-'
+                    return '-', '-'
 
                 for row in reader:
                     if not row:
@@ -256,12 +257,16 @@ def run_shigapass_for_single_assembly(assembly: str, args) -> str:
                     # Match clean sample stem or uncompressed stem
                     row_name = row[pos['Name']].strip()
                     if row_name == sample or row_name == assembly_path.stem:
-                        value = row[pos['Predicted_Serotype']].strip()
-                        return value or '-'
+                        serotype = row[pos['Predicted_Serotype']].strip() or '-'
+                        flex = '-'
+                        flex_idx = pos.get('Predicted_FlexSerotype')
+                        if flex_idx is not None and flex_idx < len(row):
+                            flex = row[flex_idx].strip() or '-'
+                        return serotype, flex
         except Exception:
-            return '-'
+            return '-', '-'
 
-    return '-'
+    return '-', '-'
 
 
 SEROTYPE_MAPPING = {
@@ -272,12 +277,17 @@ SEROTYPE_MAPPING = {
 }
 
 
-def map_shigapass_serotype(serotype):
+def map_shigapass_serotype(serotype, flex_serotype='-'):
     """
-    Maps ShigaPass serotype (e.g., 'SB2', 'SF1-5') to its full species name
+    Maps ShigaPass serotype (e.g., 'SB2', 'SF1-5') to its full species name.
+    For SF1-5, appends Predicted_FlexSerotype.
     """
     if not serotype or serotype == '-' or "Not Shigella" in serotype:
         return '-'
+
+    if serotype.strip() == 'SF1-5':
+        if flex_serotype and flex_serotype not in ('-', 'ND', 'NA'):
+            return f"{SEROTYPE_MAPPING['SF']} {flex_serotype}"
 
     species_code = ''
     for char in serotype:
@@ -317,8 +327,8 @@ def get_results(assembly, ref_index, args, previous_results):
         args.escherichia__pathovar_min_identity,
         args.escherichia__pathovar_min_coverage
     )
-    predicted_serotype_raw = run_shigapass_for_single_assembly(assembly, args)
-    predicted_serotype = map_shigapass_serotype(predicted_serotype_raw)
+    predicted_serotype_raw, predicted_flex_serotype = run_shigapass_for_single_assembly(assembly, args)
+    predicted_serotype = map_shigapass_serotype(predicted_serotype_raw, predicted_flex_serotype)
 
     result_dict = {header: '-' for header in full_headers}
     for marker, marker_hits in virulence_markers.items():

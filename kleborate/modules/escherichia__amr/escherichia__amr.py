@@ -1,4 +1,3 @@
-
 """
 Copyright 2026 Mary Maranga (gathonimaranga@gmail.com)
 https://github.com/klebgenomics/Kleborate/
@@ -13,16 +12,21 @@ not, see <https://www.gnu.org/licenses/>.
 """
 
 import os
+import re
 import sys
 import shutil
-from pathlib import Path
-import pandas as pd
-from collections import defaultdict
+import tempfile
 import subprocess
+import warnings
+from pathlib import Path
+from collections import defaultdict
+import pandas as pd
+from functools import lru_cache
+warnings.filterwarnings('ignore', message=r'Skipping \d+ records with INTERNAL_STOP', category=UserWarning)
 
 
 def description():
-    return 'Antimicrobial resistance (AMR) gene detection using AMRFinderPlus'
+    return 'Antimicrobial resistance (AMR) gene detection using AMRFinderPlus and hAMRonization'
 
 
 def prerequisite_modules():
@@ -36,9 +40,8 @@ def get_headers():
     full_headers = [
         'Aminoglycosides', 'Quinolones', 'Fosfomycin', 'Sulfonamides', 'Tetracyclines',
         'Colistin', 'Phenicols', 'Macrolides', 'Rifamycin', 'Tigecycline',
-        'Trimethoprim', 'Penicillins', 'Beta-lactamase inhibitor', 'Carbapenems', 'ESBL',
-        'Bla+Inhibitor', 'Carb+Inhibitor', 'ESBL+Inhibitor',
-        'Other Classes'
+        'Trimethoprim', 'Penicillins', 'Bla_acquired', 'Beta-lactamase inhibitor',
+        'Carbapenems', 'ESBL', 'Other Classes', 'Stx_type', 'Operon'
     ]
     stdout_headers = []
     return full_headers, stdout_headers
@@ -60,15 +63,40 @@ def add_cli_options(parser):
 def check_cli_options(args):
     if not shutil.which('amrfinder'):
         sys.exit('Error: AMRFinderPlus is not installed or not in PATH.')
+    if not getattr(args, 'no_hamronization', False):
+        try:
+            import hAMRonization
+        except ImportError:
+            sys.exit('Error: hAMRonization Python package is not installed.')
 
 
 def check_external_programs():
     """
     Ensure the required external programs are available.
     """
+    programs = ['amrfinder']
     if not shutil.which('amrfinder'):
         sys.exit('Error: could not find AMRFinderPlus executable.')
-    return ['amrfinder']
+    if shutil.which('hamronize'):
+        programs.append('hamronize')
+    return programs
+
+
+
+@lru_cache(maxsize=1)
+def get_amrfinder_versions():
+    """Return (software_version, database_version) from `amrfinder -V`."""
+    out = subprocess.run(
+        ["amrfinder", "-V"],
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        text=True, check=True,
+    ).stdout
+
+    sw = re.search(r'Software version:\s*(\S+)', out)
+    db = re.search(r'Database version:\s*(\S+)', out)
+    if not (sw and db):
+        raise RuntimeError(f"Could not parse AMRFinderPlus versions from:\n{out}")
+    return sw.group(1), db.group(1)
 
 
 def categorize_class(class_name):
@@ -99,21 +127,10 @@ def categorize_class(class_name):
     return class_map.get(class_name, 'Other Classes')
 
 
-combined_category = {
-    'Carbapenems': 'Carb+Inhibitor',
-    'ESBL': 'ESBL+Inhibitor',
-    'Penicillins': 'Bla+Inhibitor',
-}
-
 
 def run_amrfinder(input_fasta, organism):
     """
     run AMRFinder
-    Parameters:
-        input_fasta (str): Path to the input FASTA file.
-        organ organism (str): The organism name.
-    Returns:
-        str: output from the AMRFinderPlus.
     """
     command = [
         "amrfinder",
@@ -126,17 +143,79 @@ def run_amrfinder(input_fasta, organism):
         result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True, text=True)
         return result.stdout
     except subprocess.CalledProcessError as e:
-        print(f"Error occurred: {e}")
+        print(f"Error occurred running AMRFinderPlus: {e}")
         return None
 
 
-# header columns for the AMRFinder
-headers = [
-    'Protein id', 'Contig id', 'Start', 'Stop', 'Strand', 'Element symbol', 'Element name', 
-    'Scope', 'Type', 'Subtype', 'Class', 'Subclass', 'Method', 'Target length', 'Reference sequence length', 
-    '% Coverage of reference', '% Identity to reference', 'Alignment length', 'Closest reference accession', 
-    'Closest reference name', 'HMM accession', 'HMM description', 'Hierarchy node'
-]
+def filter_amr_only(raw_amrfinder_output):
+    """
+    Drop the STRESS, VIRULENCE and other element types from --plus option
+    """
+    lines = [line for line in raw_amrfinder_output.splitlines() if line.strip()]
+    if not lines:
+        return ""
+
+    header = lines[0].split("\t")
+    if "Type" not in header:
+        return raw_amrfinder_output
+
+    type_idx = header.index("Type")
+    kept = [lines[0]]
+    for line in lines[1:]:
+        columns = line.split("\t")
+        if len(columns) > type_idx and columns[type_idx].strip() == "AMR":
+            kept.append(line)
+
+    if len(kept) == 1:  # header only
+        return ""
+    return "\n".join(kept) + "\n"
+
+
+def run_hamronize(raw_amrfinder_output, input_fasta_path, input_name=None):
+    """
+    Run hAMRonization (Python API) on the AMRFinderPlus output.
+    Returns the hAMRonized report.
+    """
+    if not raw_amrfinder_output or not raw_amrfinder_output.strip():
+        return ""
+
+    # Filter out non-AMR rows (stress response, virulence, etc.) before hAMRonization
+    raw_amrfinder_output = filter_amr_only(raw_amrfinder_output)
+    if not raw_amrfinder_output:
+        return ""
+
+    import hAMRonization
+
+    sw_ver, db_ver = get_amrfinder_versions()
+    input_file_name = input_name or Path(input_fasta_path).name
+
+    metadata = {
+        "analysis_software_version": sw_ver,
+        "reference_database_version": db_ver,
+        "input_file_name": input_file_name,
+    }
+
+    # hAMRonization.parse needs a file path, so write the AMRFinderPlus output to a temp file
+    with tempfile.NamedTemporaryFile(mode='w+', delete=False, suffix='.tsv') as temp_amr_tsv:
+        temp_amr_tsv.write(raw_amrfinder_output)
+        temp_amr_path = temp_amr_tsv.name
+    temp_out_path = temp_amr_path + '.hamronized.tsv'
+
+    try:
+        parsed_report = hAMRonization.parse(temp_amr_path, metadata, "amrfinderplus")
+        parsed_report.write(output_location=temp_out_path)
+        if os.path.exists(temp_out_path):
+            with open(temp_out_path) as f:
+                return f.read()
+        return ""
+    except Exception as e:
+        print(f"Error occurred running hAMRonization: {e}")
+        return ""
+    finally:
+        for p in (temp_amr_path, temp_out_path):
+            if os.path.exists(p):
+                os.remove(p)
+
 
 
 def parse_amrfinder_results(output, split_map=None):
@@ -154,26 +233,50 @@ def parse_amrfinder_results(output, split_map=None):
         columns = line.strip().split("\t")
         result_dict = dict(zip(file_headers, columns))
 
-        if result_dict.get('Type') != 'AMR':
+        # stx operon rows
+        if (result_dict.get('Type') == 'VIRULENCE'
+                and result_dict.get('Class', '').strip().upper().startswith('STX')
+                and result_dict.get('Element symbol', '').strip().lower().endswith('_operon')):
+            stx_symbol = result_dict.get('Element symbol', '').strip()
+            operon_method = result_dict.get('Method', '').strip()
+            if results['Stx_type'] == '-':
+                results['Stx_type'] = stx_symbol
+                results['Operon'] = operon_method
+            else:
+                if stx_symbol not in results['Stx_type'].split(';'):
+                    results['Stx_type'] += ';' + stx_symbol
+                    results['Operon'] += ';' + operon_method
             continue
 
+        if result_dict.get('Type') != 'AMR':
+            continue
 
         raw_class = result_dict.get('Class', 'Other Classes').strip()
         subclass_name = result_dict.get('Subclass', '').strip()
         element_symbol = result_dict.get('Element symbol', '').strip()
+        subtype = result_dict.get('Subtype', '').strip().upper()
+        identity = result_dict.get('% Identity to reference', '').strip()
+        coverage = result_dict.get('% Coverage of reference', '').strip()
 
         if element_symbol == 'blaEC':
             continue
+
+        # annotate genes based on identity and coverage thresholds
+        if subtype == 'AMR':
+            if coverage and float(coverage) < 100.0:
+                element_symbol += '?'
+            if identity and float(identity) < 100.0:
+                element_symbol += '*'
 
         # Split class string by "/" to handle multi-class entries (e.g. AMINOGLYCOSIDE/QUINOLONE)
         class_parts = [part.strip() for part in raw_class.split('/') if part.strip()]
 
         for class_part in class_parts:
             class_upper = class_part.upper()
-
             categories = []
             if class_upper == 'BETA-LACTAM':
                 subclass_map = {
+                    'BETA-LACTAM': 'Penicillins',
                     'CARBAPENEM': 'Carbapenems',
                     'CEPHALOSPORIN': 'ESBL',
                     'TANIBORBACTAM': 'Beta-lactamase inhibitor',
@@ -184,29 +287,23 @@ def parse_amrfinder_results(output, split_map=None):
                     'CEFTAZIDIME-AVIBACTAM': 'Beta-lactamase inhibitor',
                     'TAZOBACTAM': 'Beta-lactamase inhibitor'
                 }
-                
-                # Split subclass string by "/" to handle combined subclasses (e.g. CARBAPENEM/TANIBORBACTAM)
+
                 subclass_parts = [part.strip().upper() for part in subclass_name.split('/') if part.strip()]
-                
                 for sc in subclass_parts:
                     if sc in subclass_map:
                         cat = subclass_map[sc]
                         if cat not in categories:
                             categories.append(cat)
-                
-                # Default to Penicillins
+
                 if not categories:
                     categories.append('Penicillins')
-
-                
-                # combination column (Carb+Inhibitor / ESBL+Inhibitor / Bla+Inhibitor)
-                if 'Beta-lactamase inhibitor' in categories and len(categories) > 1:
-                    other_cats = [c for c in categories if c != 'Beta-lactamase inhibitor']
-                    categories = [combined_category.get(oc, oc) for oc in other_cats]
             else:
                 categories.append(categorize_class(class_upper))
 
             for category in categories:
+                if category == 'Penicillins' and subtype != 'POINT':
+                    category = 'Bla_acquired'
+
                 if category == 'Other Classes':
                     results['Other Classes'].append((class_part.title(), element_symbol))
                 elif category in results:
@@ -228,6 +325,8 @@ def parse_amrfinder_results(output, split_map=None):
                 results[category] = ";".join(f"{cls}:{';'.join(genes)}" for cls, genes in grouped_classes.items())
             else:
                 results[category] = '-'
+        elif category in ('Stx_type', 'Operon'):
+            continue
         else:
             if value != '-':
                 value = value.replace(" ", "").replace(";", "").replace(",", ";")
@@ -236,10 +335,32 @@ def parse_amrfinder_results(output, split_map=None):
     return results
 
 
-def get_results(assembly, ref_index, previous_results, args):
+def get_results(assembly, ref_index, args, previous_results=None):
     organism = "Escherichia"
     raw_output = run_amrfinder(assembly, organism)
     if raw_output:
+        # Parse the full output (needs the VIRULENCE rows for Stx_type / Operon)
         results = parse_amrfinder_results(raw_output)
+        
+        # Store raw output
+        results['amrfinder_raw_output'] = raw_output
+
+        if not getattr(args, 'no_hamronization', False):
+            # run_hamronize filters to Type == AMR
+            strain_name = (previous_results or {}).get('strain')
+            results['hamronization_output'] = run_hamronize(raw_output, assembly, strain_name)
         return results
     return {}
+
+# def get_results(assembly, ref_index, args, previous_results=None):
+#     organism = "Escherichia"
+#     raw_output = run_amrfinder(assembly, organism)
+#     if raw_output:
+#         # Parse the full output (needs the VIRULENCE rows for Stx_type / Operon)
+#         results = parse_amrfinder_results(raw_output)
+#         if not getattr(args, 'no_hamronization', False):
+#             # run_hamronize filters to Type == AMR internally
+#             strain_name = (previous_results or {}).get('strain')
+#             results['hamronization_output'] = run_hamronize(raw_output, assembly, strain_name)
+#         return results
+#     return {}

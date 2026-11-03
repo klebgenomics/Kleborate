@@ -15,7 +15,7 @@ def get_paths():
     try:
         import kleborate
 
-        target_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'ecoli__cgmlst' / 'data'
+        target_dir = pathlib.Path(kleborate.__file__).parent / 'modules' / 'escherichia__cgmlst' / 'data'
         return target_dir
     except ImportError as e:
         print(f"Error: Missing dependency. {e}")

@@ -31,7 +31,7 @@ from typing import Any
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import partial
 from .shared.help_formatter import MyParser, MyHelpFormatter
-from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_spec_headers, get_klebsiella_typing_spec
+from .shared.misc import get_compression_type, load_fasta,reverse_complement,res_headers, annotation_fields, kaptive_spec_headers, get_klebsiella_typing_spec, filter_fosa_oqx_alleles
 from .shared.species_defs import is_kp_complex, is_ko_complex, is_escherichia
 from rammappy import Index
 
@@ -64,9 +64,14 @@ def parse_arguments(args, all_module_names, modules):
 
     # turn off extra outputs
     io_args.add_argument('--no_hamronization', action='store_true',
-                         help='Disable generation of the hAMRonization output file')
+                         help='Disable generation of the kpsc hAMRonization output file')
     io_args.add_argument('--no_genotype_spec', action='store_true',
                          help='Disable generation of the genotype spec output file')
+
+    # OPT-IN parameter: Disabled by default
+    io_args.add_argument('--save_raw_amrfinder', action='store_true', default=False,
+                         help='Enable generation of the E. coli raw AMRFinderPlus output table (default: %(default)s)')
+
 
     perf_args = parser.add_argument_group('Performance')
     
@@ -107,7 +112,6 @@ def parse_arguments(args, all_module_names, modules):
     return parser.parse_args(args)
 
 
-
 def main():
     all_module_names, modules = import_modules()
     args = parse_arguments(sys.argv[1:], all_module_names, modules)
@@ -133,17 +137,31 @@ def main():
     if args.modules:
         module_name = args.modules.split(',')[0]
         out_files_suffixes = [f'{module_name}_output.txt']
+        selected_mods = [m.strip() for m in args.modules.split(',')]
+        # hamronization reports
+        if 'kpsc__amr' in selected_mods and not args.no_hamronization:
+            out_files_suffixes.append('klebsiella_pneumo_complex_hAMRonization_output.txt')
+        if 'kosc__amr' in selected_mods and not args.no_hamronization:
+            out_files_suffixes.append('klebsiella_oxytoca_complex_hAMRonization_output.txt')
+        if 'escherichia__amr' in selected_mods and not args.no_hamronization:
+            out_files_suffixes.append('escherichia_hAMRonization_output.txt')
+        if 'escherichia__amr' in selected_mods and args.save_raw_amrfinder:
+            out_files_suffixes.append('escherichia_amrfinder_output.txt')
     else:
         out_files_suffixes = ['klebsiella_pneumo_complex_output.txt']
         if not args.no_hamronization:
             out_files_suffixes.append('klebsiella_pneumo_complex_hAMRonization_output.txt')
+            out_files_suffixes.append('klebsiella_oxytoca_complex_hAMRonization_output.txt')
+            out_files_suffixes.append('escherichia_hAMRonization_output.txt')
         if not args.no_genotype_spec:
             out_files_suffixes.append('klebsiella_pneumo_complex_genotype_spec.txt')
         out_files_suffixes.extend([
             'klebsiella_oxytoca_complex_output.txt',
             'escherichia_output.txt'
         ])
-        
+        # generate raw amrfinder output
+        if args.save_raw_amrfinder:
+            out_files_suffixes.append('escherichia_amrfinder_output.txt')
 
     if not args.resume:
         for suffix in out_files_suffixes:
@@ -152,14 +170,14 @@ def main():
 
     for assembly in args.assemblies:
         check_assembly(assembly)
-    
+
     def process_assembly(assembly):
         with tempfile.TemporaryDirectory() as temp_dir:
             unzipped_assembly = gunzip_assembly_if_necessary(assembly, temp_dir)
             ref_index = build_index(assembly, unzipped_assembly)
             results = {'strain': get_strain_name(assembly)}
 
-            pass_check = True # default, assume no check and run all modules
+            pass_check = True  # default, assume no check and run all modules
             if args.preset and len(check_module_list) > 0:
                 for module, check in presets[args.preset]['check']:
                     try:
@@ -177,7 +195,7 @@ def main():
                         print(f"Error encountered while processing {assembly} with {module}: {e}.")
                         pass_check = False
                         break
-            
+
             if pass_check:
                 for module in module_run_order:
                     if module not in preset_check_modules:
@@ -192,27 +210,57 @@ def main():
                         for header in module_headers:
                             results[header] = 'Not Tested'
 
-            if args.preset and not pass_check:
-                return
             if args.modules:
                 module_name = args.modules.split(',')[0]
                 outfile_suffix = f'{module_name}_output.txt'
                 output_file = os.path.join(args.outdir, outfile_suffix)
                 filtered_headers = [h for h in full_headers if h.split('__')[-1] not in annotation_fields]
-                filtered_results = {k: v for k, v in results.items() if k in filtered_headers}
+                
+
+                filtered_results = {}
+                for k in filtered_headers:
+                    val = results.get(k, "-")
+                    if k.startswith('kpsc__amr') or k.split('__')[-1] in res_headers:
+                        val = filter_fosa_oqx_alleles(val)
+                    filtered_results[k] = val
+
                 output_results(filtered_headers, stdout_headers, output_file, filtered_results, args.trim_headers)
+
+                # --- WRITE HAMRONIZATION FILE WHEN kpsc__amr, kosc__amr, OR escherichia__amr IS SPECIFIED ---
+                selected_modules = [m.strip() for m in args.modules.split(',')]
+                if 'kpsc__amr' in selected_modules and not args.no_hamronization and pass_check:
+                    harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
+                    output_results_klebsiella_pneumo_complex_hAMRonization(
+                        full_headers, stdout_headers, harmonization_file, results, args.trim_headers
+                    )
+                if 'kosc__amr' in selected_modules and not args.no_hamronization and pass_check:
+                    ham_output = results.get('kosc__amr__hamronization_output', '')
+                    if ham_output:
+                        harmonization_file = os.path.join(args.outdir, 'klebsiella_oxytoca_complex_hAMRonization_output.txt')
+                        output_hamronization_results(harmonization_file, ham_output)
+                if 'escherichia__amr' in selected_modules and not args.no_hamronization and pass_check:
+                    ham_output = results.get('escherichia__amr__hamronization_output', '')
+                    if ham_output:
+                        harmonization_file = os.path.join(args.outdir, 'escherichia_hAMRonization_output.txt')
+                        output_hamronization_results(harmonization_file, ham_output)
+
+                # --- WRITE RAW AMRFINDER OUTPUT WHEN escherichia__amr IS SPECIFIED AND FLAG IS SET ---
+                if 'escherichia__amr' in selected_modules and getattr(args, 'save_raw_amrfinder', False) and pass_check:
+                    raw_amr = results.get('escherichia__amr__amrfinder_raw_output', '')
+                    if raw_amr:
+                        raw_amr_file = os.path.join(args.outdir, 'escherichia_amrfinder_output.txt')
+                        output_amrfinder_raw_results(raw_amr_file, raw_amr, results.get('strain', assembly))
 
             else:
                 species = results.get('general__species__species', None)
                 if species and is_kp_complex({'species': species}):
-                    # --- WRITE HAMRONIZATION FILE ---
-                    if not args.no_hamronization:
+                    if not args.no_hamronization and pass_check:
                         harmonization_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_hAMRonization_output.txt')
                         output_results_klebsiella_pneumo_complex_hAMRonization(
                             full_headers, stdout_headers, harmonization_file, results, args.trim_headers
                         )
-                    
-                    if not args.no_genotype_spec:
+
+                    if not args.no_genotype_spec and pass_check:
                         genotype_spec_file = os.path.join(args.outdir, 'klebsiella_pneumo_complex_genotype_spec.txt')
                         output_klebsiella_pneumo_complex_typingspec(genotype_spec_file, results)
 
@@ -224,21 +272,55 @@ def main():
                         (not header.startswith('kpsc__kaptive') or
                         header.split('__')[-1] not in kaptive_spec_headers)
                     ]
-                    filtered_results = {header: results.get(header, "-") for header in selective_headers}
+
+                    filtered_results = {}
+                    for header in selective_headers:
+                        val = results.get(header, "-")
+                        if header.startswith('kpsc__amr') or header.split('__')[-1] in res_headers:
+                            val = filter_fosa_oqx_alleles(val)
+                        filtered_results[header] = val
+
                     output_results(selective_headers, stdout_headers, klebsiella_pneumo_file, filtered_results, args.trim_headers)
                 else:
                     if species and is_ko_complex({'species': species}):
                         outfile_suffix = 'klebsiella_oxytoca_complex_output.txt'
+                        # --- WRITE HAMRONIZATION FILE FOR KO COMPLEX ---
+                        if not args.no_hamronization and pass_check:
+                            ham_output = results.get('kosc__amr__hamronization_output', '')
+                            if ham_output:
+                                harmonization_file = os.path.join(args.outdir, 'klebsiella_oxytoca_complex_hAMRonization_output.txt')
+                                output_hamronization_results(harmonization_file, ham_output)
+
                     elif species and is_escherichia({'species': species}):
                         outfile_suffix = 'escherichia_output.txt'
+                        # --- WRITE HAMRONIZATION FILE FOR ESCHERICHIA SPECIES ---
+                        if not args.no_hamronization and pass_check:
+                            ham_output = results.get('escherichia__amr__hamronization_output', '')
+                            if ham_output:
+                                harmonization_file = os.path.join(args.outdir, 'escherichia_hAMRonization_output.txt')
+                                output_hamronization_results(harmonization_file, ham_output)
+
+                        # --- WRITE RAW AMRFINDER OUTPUT FOR ESCHERICHIA SPECIES ---
+                        if getattr(args, 'save_raw_amrfinder', False) and pass_check:
+                            raw_amr = results.get('escherichia__amr__amrfinder_raw_output', '')
+                            if raw_amr:
+                                raw_amr_file = os.path.join(args.outdir, 'escherichia_amrfinder_output.txt')
+                                output_amrfinder_raw_results(raw_amr_file, raw_amr, results.get('strain', assembly))
                     else:
                         print(f"Assembly {assembly} does not match any specified species. Skipping to next assembly.")
                         return
 
                     output_file = os.path.join(args.outdir, outfile_suffix)
-                    output_results(full_headers, stdout_headers, output_file, results, args.trim_headers)
+                    selective_headers = [
+                        header for header in full_headers
+                        if (not header.startswith('kpsc__amr') or
+                        header.split('__')[-1] in res_headers) and
+                        (not header.startswith('kpsc__kaptive') or
+                        header.split('__')[-1] not in kaptive_spec_headers)
+                    ]
+                    filtered_results = {header: results.get(header, 'Not Tested') for header in selective_headers}
+                    output_results(selective_headers, stdout_headers, output_file, filtered_results, args.trim_headers)
 
-    
     executor = None
     try:
         executor = ThreadPoolExecutor(max_workers=args.threads)
@@ -296,7 +378,7 @@ def get_presets():
         'check': [('general__species', 'is_ko_complex')],
         'pass': [
             'general__contig_stats',
-            'kosc__mlst', 'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'kosc__kaptive'
+            'kosc__mlst', 'klebsiella__ybst', 'klebsiella__cbst', 'klebsiella__abst', 'klebsiella__smst', 'kosc__kaptive', 'kosc__amr'
         ]
     }
 
@@ -304,13 +386,14 @@ def get_presets():
         'check': [('general__species', 'is_escherichia')],
         'pass': [
             'general__contig_stats',
-            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee','escherichia__pks', 'escherichia__ezclermont','escherichia__stxtyper','escherichia__ectyper', 'escherichia__amr',
+            'escherichia__mlst_achtman', 'escherichia__mlst_pasteur', 'escherichia__pathovar', 'escherichia__mlst_lee','escherichia__pks', 'escherichia__ezclermont','escherichia__ectyper', 'escherichia__amr',
             'escherichia__kaptive', 'escherichia__cgmlst','escherichia__vfdb'
         ]
     }
 
     return {
         'kpsc': kpsc_modules,
+        'kpsc_all': kpsc_modules,
         'kosc': kosc_modules,
         'escherichia': escherichia_modules
     }
@@ -331,12 +414,10 @@ def add_module_cli_arguments(parser, args, all_module_names, modules):
                 a.help = argparse.SUPPRESS
 
 
-
 def get_used_module_names(args, all_module_names, presets): 
     if args.preset is None and args.modules is None:
         sys.exit('Error: either --preset or --modules is required')
 
-    # Initialize empty lists for module names, check modules, and pass modules
     module_names = []
     check_modules = []
     pass_modules = []
@@ -345,8 +426,9 @@ def get_used_module_names(args, all_module_names, presets):
         if args.preset not in presets:
             sys.exit(f'Error: {args.preset} is not a valid preset')
 
-        check_modules = [module[0] for module in presets[args.preset].get('check', [])]  # Extract module names from check modules
-        pass_modules = presets[args.preset].get('pass', []) 
+        check_modules = [module[0] for module in presets[args.preset].get('check', [])]
+        # Make a copy of pass_modules so modifications don't mutate the preset dictionary
+        pass_modules = list(presets[args.preset].get('pass', []))
 
         if args.preset == 'escherichia' and args.modules is None:
             pass_modules = [
@@ -354,7 +436,14 @@ def get_used_module_names(args, all_module_names, presets):
                 if module not in ('escherichia__mlst_pasteur', 'escherichia__vfdb', 'escherichia__cgmlst')
             ]
 
-        module_names += check_modules + pass_modules  # Combine check and pass modules for the overall list
+        elif args.preset == 'kpsc' and args.modules is None:
+            pass_modules = [
+                module for module in pass_modules
+                if module != 'kpsc__cgmlst'
+            ]
+        # When args.preset == 'kpsc_all', kpsc__cgmlst is retained in pass_modules
+
+        module_names += check_modules + pass_modules
 
     if args.modules:
         for m in args.modules.split(','):
@@ -364,6 +453,7 @@ def get_used_module_names(args, all_module_names, presets):
                 module_names.append(m)
 
     return module_names, check_modules, pass_modules
+
 
 
 def get_all_module_names():
@@ -514,28 +604,51 @@ def decompress_file(in_file, out_file):
         o.write(s)
 
 
-
 MAX_CPUS = 32
-def check_cpus(cpus: Any = None, max_cpus: int = MAX_CPUS, verbose: bool = False) -> int:
-    avail_cpus = os.cpu_count() or 1
+def get_available_cpus() :
+    """
+    Determine the number of usable CPUs allocated.
+    """
+    if hasattr(os, "process_cpu_count"):
+        cpus = os.process_cpu_count()
+        if cpus:
+            return cpus
 
-    if isinstance(cpus, str):
-        cpus = int(cpus.strip()) if cpus.strip().isdigit() else 0
-    elif isinstance(cpus, (int, float)):
-        cpus = int(cpus)
-    else:
-        cpus = 0
+    if hasattr(os, "sched_getaffinity"):
+        try:
+            return len(os.sched_getaffinity(0))
+        except (NotImplementedError, OSError):
+            pass
 
-    # If the user did not specify -t, default safely to 1 thread instead of all cores
-    if cpus <= 0:
-        cpus = 1
+    return os.cpu_count() or 1
 
-    cpus = max(1, min(cpus, avail_cpus, max_cpus))
+
+def check_cpus(cpus: Any = None, max_cpus: int = MAX_CPUS, verbose: bool = False) :
+    
+    try:
+        requested = int(cpus)
+    except (ValueError, TypeError):
+        raise argparse.ArgumentTypeError(f"Invalid thread count: '{cpus}'. Expected a positive integer.")
+
+    if requested <= 0:
+        raise argparse.ArgumentTypeError(f"Invalid thread count: {requested}. Must be at least 1.")
+
+    avail_cpus = get_available_cpus()
+    effective_limit = min(avail_cpus, max_cpus)
+    clamped_cpus = min(requested, effective_limit)
+
+    if requested > clamped_cpus:
+        import sys
+        print(
+            f"Note: Requested {requested} threads, but capping to {clamped_cpus} "
+            f"(usable CPUs: {avail_cpus}, MAX_CPUS limit: {max_cpus}).",
+            file=sys.stderr
+        )
 
     if verbose:
-        print(f"Using cpus={cpus}")
+        print(f"Using cpus={clamped_cpus}")
 
-    return cpus
+    return clamped_cpus
 
 
 
@@ -552,8 +665,56 @@ def output_headers(full_headers, stdout_headers, outfile):
         o.write('\t'.join(trimmed_full_headers))
 
 
-
 file_lock = threading.Lock()
+def output_hamronization_results(output_file, hamronization_raw_text):
+    """
+    Appends raw hAMRonization rows to the summary TSV file thread-safely.
+    Keeps header only if the file does not exist yet.
+    """
+    if not hamronization_raw_text or not hamronization_raw_text.strip():
+        return
+
+    lines = [line for line in hamronization_raw_text.strip().splitlines() if line.strip()]
+    if not lines:
+        return
+
+    header = lines[0]
+    data_lines = lines[1:]
+
+    with file_lock:
+        file_exists = os.path.exists(output_file) and os.path.getsize(output_file) > 0
+        with open(output_file, 'a') as f:
+            if not file_exists:
+                f.write(header + '\n')
+            for line in data_lines:
+                f.write(line + '\n')
+
+
+
+def output_amrfinder_raw_results(output_file, raw_output, strain_name):
+    """
+    Appends raw AMRFinderPlus TSV output to a combined file, prepending
+    an 'Assembly' column. Writes the header only if the file does not exist or is empty.
+    Thread-safe for parallel assembly processing.
+    """
+    lines = [line for line in raw_output.splitlines() if line.strip()]
+    if not lines:
+        return
+
+    header_cols = ['Assembly'] + lines[0].split('\t')
+    data_rows = []
+    for line in lines[1:]:
+        data_rows.append(f"{strain_name}\t{line}")
+
+    with file_lock:
+        file_exists = os.path.exists(output_file) and os.path.getsize(output_file) > 0
+        with open(output_file, 'a') as f:
+            if not file_exists:
+                f.write('\t'.join(header_cols) + '\n')
+            if data_rows:
+                f.write('\n'.join(data_rows) + '\n')
+
+
 def output_results_klebsiella_pneumo_complex_hAMRonization(full_headers, stdout_headers, outfile, results, trim_headers=False):
     input_file_name = results['strain']
     prefix = 'kpsc__amr__'
@@ -747,7 +908,6 @@ def output_results(full_headers, stdout_headers, outfile, results, trim_headers=
     for h in results.keys():
         if h not in full_headers:
             sys.exit(f'Error: results contained a value ({h}) that is not covered by the output headers')
-
 
 
 
