@@ -69,7 +69,7 @@ Check available modules, check version, print help:
 
 
 
-Output files or K. pneumoniae species complex (KpSC)
+Output files for K. pneumoniae species complex (KpSC)
 ----------------------------------------------------
 
 Output files printed to ``outdir/`` are tab-delimited (.txt) files, named in the format: 
