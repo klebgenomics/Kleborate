@@ -42,13 +42,14 @@ Create a conda environment containing Kleborate dependencies::
 
 
 
-Activate the environment and install kleborate (and Kaptive) using pip::
+Activate the environment and install Kleborate (and Kaptive) using ``pip``::
 
     conda activate klebsiella_analysis
     pip install kleborate==3.3.0b1
 
-Alternatively,install kleborate using Conda::
-   conda install -c conda-forge -c bioconda kleborate=3.3.0b1
+Alternatively, install Kleborate using Conda::
+
+    conda install -c conda-forge -c bioconda kleborate=3.3.0b1
 
 
 
@@ -221,12 +222,13 @@ Run the cgmlst module
 Test *E. coli* cgMLST
 ---------------------
 
-Download *E. coli* genome and test cgMLST module
+Download the *E. coli* test genome and run the cgMLST module:
+
 .. code-block:: bash
 
     wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/559/655/GCA_001559655.1_ASM155965v1/GCA_001559655.1_ASM155965v1_genomic.fna.gz
     kleborate -a GCA_001559655.1_ASM155965v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers
-
+    
 
 Validation Tests
 ==============================

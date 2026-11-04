@@ -139,12 +139,12 @@ Kaptive results are output in the following columns:
      - Weighted percent identity of the best matching K locus to the assembly.
    * - K_Missing_expected_genes
      - A string listing the gene names of expected K locus genes that were not found.
-   * - K_Truncated genes, details
-     - Truncated genes
-   * - K_Extra genes, details
-     - Extra genes found in the locus
-   * - Kaptive version
-     - Version of Kaptive
+   * - K_Truncated_genes_details
+     - Truncated genes.
+   * - K_Extra_genes_details
+     - Extra genes found in the locus.
+   * - Kaptive_version
+     - Version of Kaptive.
    * - O_locus
      - The O locus type which most closely matches the assembly.
    * - O_type
@@ -157,14 +157,14 @@ Kaptive results are output in the following columns:
      - Weighted percent identity of the best matching O locus to the assembly.
    * - O_Missing_expected_genes
      - A string listing the gene names of expected O locus genes that were not found.
-   * - O_Truncated genes, details
-     - Truncated genes
-   * - O_Extra genes, details
+   * - O_Truncated_genes_details
+     - Truncated genes.
+   * - O_Extra_genes_details
      - Extra genes found in the locus.
   
 
 
-  .. _kosc__amr:
+.. _kosc__amr:
 
 
 Antimicrobial resistance
