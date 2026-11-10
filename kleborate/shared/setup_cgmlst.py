@@ -98,12 +98,13 @@ def patch_mist_resource(mist_res_dir):
     if not helper_file.exists():
         print(f"\n[FIX] MiST helper missing at {helper_file}. Downloading...")
         mist_res_dir.mkdir(parents=True, exist_ok=True)
-        url = "https://raw.githubusercontent.com/B-02/MiST/master/mist/resources/pubmlst/download_bigsdb.py"
+        url = "https://raw.githubusercontent.com/BIOIT-Sciensano/MiST/main/mist/resources/pubmlst/download_bigsdb.py"
         try:
             urllib.request.urlretrieve(url, helper_file)
+            print(f"[FIX] Successfully downloaded {helper_file.name}")
         except Exception as e:
-            print(f"Failed to patch MiST: {e}")
-
+            print(f"[ERROR] Failed to patch MiST: {e}")
+            sys.exit(1)
 
 
 def setup_bigsdb_credentials(token_path, key_name, site_name):
