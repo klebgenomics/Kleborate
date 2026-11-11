@@ -42,7 +42,7 @@ def get_headers():
         'K_Truncated genes, details','K_Extra genes, details',
         'O_locus', 'O_type', 'O_locus_confidence', 'O_locus_problems', 
         'O_locus_identity', 'O_Missing_expected_genes', 'O_Database_name', 'O_Database_version',
-        'Kaptive version','O_Truncated genes, details','O_Extra genes, details'
+        'O_Truncated genes, details','O_Extra genes, details', 'Kaptive version'
     ]
     stdout_headers = []
     return full_headers, stdout_headers
