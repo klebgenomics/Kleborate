@@ -100,14 +100,14 @@ Notes
 * Imprecise ST calls are indicated with ``-nLV``\ , where n indicates the number of loci that differ from the ST reported. For example, ``131-1LV`` indicates a single-locus variant (SLV) of ST131, i.e. 6/7 loci match ST131.
 
 
-.. _escherichia__cgMLST:
+.. _escherichia__cgmlst:
 
 cgMLST and LIN codes
 ------------------
 
 .. code-block:: Python
 
-   -m escherichia__cgMLST
+   -m escherichia__cgmlst
 
 This module performs cgMLST and  LIN code typing using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_  tool. 
 

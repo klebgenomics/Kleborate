@@ -53,7 +53,7 @@ Alternatively, install Kleborate using Conda::
 
 
 
-Quick Installation Check
+Quick installation check
 ============================
 
 Download *K. pneumoniae* genome and run kpsc__mlst module
@@ -69,7 +69,7 @@ Database set up
 Before running Kleborate, set up the reference databases required
 
 
-KpSC cgMLST Database (MiST)
+KpSC cgMLST database (MiST)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 NOTE: KpSC cgMLST is only used by the module ``-m kpsc__cgmlst`` and preset ``-p kpsc_all``, so if you are not analysing *K. pneumoniae* species complex you don't need to do this step.
@@ -102,7 +102,7 @@ What the script does
 4. Downloads the ``scgMLST629_S`` scheme from the Institut Pasteur BIGSdb instance
    
   
-Download Modes
+Download modes
 --------------
 When running ``setup_cgmlst.py``, you will be prompted to select one of two download modes:
 
@@ -110,7 +110,7 @@ When running ``setup_cgmlst.py``, you will be prompted to select one of two down
 2. **Latest Pasteur database (Authenticated)**
    Pulls the most up-to-date scheme data directly from Institut Pasteur and requires OAuth authentication. Uses the ``bigsdb_auth`` downloader with credentials stored in ``.bigsdb_tokens/``.
 
-Pasteur Credential Setup (Mode 2)
+Pasteur credential setup (Mode 2)
 --------------------------------------
 If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/access_tokens``, the script initiates the OAuth setup:
 
@@ -128,7 +128,7 @@ If you select **Mode 2** and valid tokens are not found in ``.bigsdb_tokens/acce
 4. **Complete Verification:**
    Paste the verification code into the terminal. Access tokens will be saved to ``.bigsdb_tokens/``, and subsequent runs will skip re-authentication.
 
-Output Files
+Output files
 ------------
 Upon completion, the following files will be downloaded inside the target folder:
 
@@ -137,7 +137,7 @@ Upon completion, the following files will be downloaded inside the target folder
 
 
 
-Test KpSC cgMLST Install
+Test kpSC cgMLST module
 ------------------------
 
 .. code-block:: bash
@@ -146,7 +146,7 @@ Test KpSC cgMLST Install
 
 
 
-AMRFinderPlus Database
+AMRFinderPlus database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 NOTE: AMRFinderPlus is only used by the module ``-m escherichia__amr`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
@@ -157,7 +157,7 @@ Download the latest AMRFinderPlus database:
 
    amrfinder -u
 
-Verify the Installation and Database
+Verify the installation and database
 -------------------------------------
 
 .. code-block:: bash
@@ -167,7 +167,7 @@ Verify the Installation and Database
    amrfinder -l
 
 
-*E. coli* cgMLST Database (MiST)
+*E. coli* cgMLST database (MiST)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 NOTE: E. coli cgMLST is only used by the module ``-m escherichia__cgmlst`` and preset ``-p escherichia``, so if you are not analysing *E. coli/Shigella* you don't need to do this step.
@@ -184,7 +184,7 @@ Run the `setup_ecoli_cgmlst.py <https://github.com/klebgenomics/Kleborate/blob/d
 
    python setup_ecoli_cgmlst.py
 
-Output Files
+Output files
 ------------
 The following files will be created inside the ``kleborate/modules/ecoli__cgmlst/data`` folder:
 
@@ -192,7 +192,7 @@ The following files will be created inside the ``kleborate/modules/ecoli__cgmlst
 * ``ecoli_cgmlst_v1-index/`` — Indexed binary database used by ``mist`` during allele calling.
 
 
-EnteroBase API Token (required for *E. coli* LIN codes)
+EnteroBase API token (required for *E. coli* LIN codes)
 -------------------------------------------------------
 
 EnteroBase schemes do not include LIN codes in the downloaded profiles file. To retrieve the LIN code for a matched cgST, this module queries EnteroBase's API token
@@ -220,21 +220,20 @@ Run the cgmlst module
      --trim_headers \
 
 
-Test *E. coli* cgMLST
----------------------
+Test *E. coli* cgMLST module
+---------------------------
 
-Download the *E. coli* test genome and run the cgMLST module:
+Download *E. coli* genome and test cgMLST module
 
 .. code-block:: bash
 
-    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/559/655/GCA_001559655.1_ASM155965v1/GCA_001559655.1_ASM155965v1_genomic.fna.gz
-    kleborate -a GCA_001559655.1_ASM155965v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers
-    
+   wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/285/655/GCF_000285655.3_EC958.v1/GCF_000285655.3_EC958.v1_genomic.fna.gz
+   kleborate -a GCF_000285655.3_EC958.v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers --ecoli_entero_token ./enterobase_token
 
-Validation Tests
+Validation tests
 ==============================
 
-kpsc Preset Test
+kpsc preset test
 ~~~~~~~~~~~~~~~~~~~~~
 
 
