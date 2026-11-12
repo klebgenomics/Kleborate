@@ -25,10 +25,10 @@ Kleborate v3 includes a range of modules for typing bacterial genomes, most of w
 4. Modules for *Escherichia coli/Shigella* 
 
 
-Summary of availabe modules and their output columns
+Summary of available modules and their output columns
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
    :widths: 30 70
    :class: colwidths-given
@@ -68,7 +68,7 @@ Summary of availabe modules and their output columns
    * - :ref:`kpsc__wzi <kpsc__wzi>`
      - wzi allele
    * - :ref:`kpsc__kaptive <kpsc__kaptive>`
-     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, K_Truncated genes, details, K_Extra genes, details, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes, Kaptive version,O_Truncated genes, details,O_Extra genes, details
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, K_Truncated genes, details, K_Extra genes, details, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes, Kaptive version, O_Truncated genes, details, O_Extra genes, details
    * - :ref:`kpsc__cgmlst <kpsc__cgmlst>`
      - cgST, LIN code, Sublineage, Clonal group
    * - :ref:`kpsc__mrk <kpsc__mrk>`
@@ -76,7 +76,7 @@ Summary of availabe modules and their output columns
    * - :ref:`kosc__mlst <kosc__mlst>`
      - ST, gapA, infB, mdh, pgi, phoE, rpoB, tonB
    * - :ref:`kosc__kaptive <kosc__kaptive>`
-     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, K_Truncated genes, details, K_Extra genes, details, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes, Kaptive version,O_Truncated genes, details,O_Extra genes, details
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes, K_Truncated genes, details, K_Extra genes, details, O_locus, O_type, O_locus_confidence, O_locus_problems, O_locus_identity, O_Missing_expected_genes, Kaptive version, O_Truncated genes, details, O_Extra genes, details
    * - :ref:`kosc__amr <kosc__amr>`
      - Aminoglycosides, Quinolones, Fosfomycin, Sulfonamides, Tetracyclines, Colistin, Phenicols, Macrolides, Rifamycin, Tigecycline, Trimethoprim, Penicillins, Bla_acquired, Beta-lactamase inhibitor, Carbapenems, ESBL, Other Classes
    * - :ref:`escherichia__mlst_pasteur <escherichia__mlst_achtman>`
@@ -91,15 +91,13 @@ Summary of availabe modules and their output columns
      - Pathotype, Stx1, Stx2, ST, LT, eae, ipaH
    * - :ref:`escherichia__mlst_lee <escherichia__mlst_lee>`
      - LEE_ST, LEE_lineage, LEE_eae, LEE_tir, LEE_espA, LEE_espB, LEE_espD, LEE_espH, LEE_espZ
--   - :ref:`escherichia__stxtyper <escherichia__stxtyper>`
--     Stx_type, operon, identity, target_start, target_stop, target_strand, A_reference 'A_identity, A_reference_subtype, A_coverage,B_reference, B_reference_subtype, B_identity, B_coverage
--   - :ref:`escherichia__pks <escherichia__pks>`
--     clbB
--   - :ref:`escherichia__ectyper <escherichia__ectyper>`
--     O-type, H-type, Serotype, QC, Evidence, GeneScores, AllelesKeys, GeneIdentities(%), GeneCoverages(%), GeneLengths, Warnings
--   - :ref:`escherichia__kaptive <escherichia__kaptive>`
--     K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes
--   - :ref:`escherichia__amr <escherichia__amr>`
--     Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin, Methicillin, Other Classes
--   - :ref:`escherichia__cgMLST <escherichia__cgMLST>`
--     cgST, LIN code
+   * - :ref:`escherichia__stxtyper <escherichia__stxtyper>`
+     - Stx_type, operon, identity, target_start, target_stop, target_strand, A_reference, A_identity, A_reference_subtype, A_coverage, B_reference, B_reference_subtype, B_identity, B_coverage
+   * - :ref:`escherichia__pks <escherichia__pks>`
+     - clbB
+   * - :ref:`escherichia__ectyper <escherichia__ectyper>`
+     - O-type, H-type, Serotype, QC, Evidence, GeneScores, AllelesKeys, GeneIdentities(%), GeneCoverages(%), GeneLengths, Warnings
+   * - :ref:`escherichia__kaptive <escherichia__kaptive>`
+     - K_locus, K_type, K_locus_confidence, K_locus_problems, K_locus_identity, K_Missing_expected_genes
+   * - :ref:`escherichia__amr <escherichia__amr>`
+     - Aminoglycoside, Fluoroquinolone, Fosfomycin, Sulfonamide, Tetracycline, Glycopeptide, Colistin, Phenicol, Macrolide, Rifamycin, Trimethoprim, BetaLactam, Carbapenem, Cephalosporin, Methicillin, Other Classes
