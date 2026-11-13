@@ -24,6 +24,7 @@ from kaptive.db import Database
 from kaptive.db.manager import DatabaseManager
 from kaptive.core.genome import GenomeAssembly
 from kaptive.serotyping import Serotyper
+from kaptive.serotyping.io import KaptiveRow
 
 
 def description():
@@ -38,9 +39,10 @@ def get_headers():
     full_headers = [
         'K_locus', 'K_type', 'K_locus_confidence', 'K_locus_problems', 'K_locus_identity',
         'K_Missing_expected_genes', 'K_Database_name', 'K_Database_version',
+        'K_Truncated genes, details','K_Extra genes, details',
         'O_locus', 'O_type', 'O_locus_confidence', 'O_locus_problems', 
         'O_locus_identity', 'O_Missing_expected_genes', 'O_Database_name', 'O_Database_version',
-        'Kaptive version'
+        'O_Truncated genes, details','O_Extra genes, details', 'Kaptive version'
     ]
     stdout_headers = []
     return full_headers, stdout_headers
@@ -56,9 +58,8 @@ def add_cli_options(parser):
     return group
 
 
-
 def load_or_install_db(db_input):
-    """Loads/downloads a Kaptive database"""
+    """Loads/downloads/Updates kaptive DB"""
     if isinstance(db_input, Database):
         return db_input
 
@@ -67,13 +68,12 @@ def load_or_install_db(db_input):
     if os.path.exists(db_str):
         return Database.load(db_str)
 
+    DatabaseManager.update(db_str)
     db_mgr = DatabaseManager()
     return db_mgr.get(db_str)
 
 
-
 def check_cli_options(args):
-    # Reads from module-specific args namespace
     args.k_db = load_or_install_db(args.kpsc_k_db)
     args.o_db = load_or_install_db(args.kpsc_o_db)
 
@@ -91,6 +91,7 @@ def extract_fields(prefix, result, full_headers):
     if result is None:
         return fields
 
+    row = KaptiveRow.from_result(result)
     fields[f'{prefix}_locus'] = result.best_locus_name
     fields[f'{prefix}_type'] = result.phenotype
     fields[f'{prefix}_locus_confidence'] = 'Typeable' if result.typeable else 'Untypeable'
@@ -100,6 +101,9 @@ def extract_fields(prefix, result, full_headers):
     fields[f'{prefix}_Database_name'] = result.database_name
     fields[f'{prefix}_Database_version'] = result.database_version
     fields['Kaptive version'] = result.kaptive_version
+    fields[f'{prefix}_Truncated genes, details'] = row.Truncated_genes_details.decode('utf-8')
+    fields[f'{prefix}_Extra genes, details'] = row.Extra_genes_details.decode('utf-8')
+
 
     for h in fields.keys():
         if h not in full_headers:
@@ -130,4 +134,3 @@ def get_results(assembly, ref_index, args, previous_results):
 
     results_dict = {k: (v if v else '-') for k, v in results_dict.items()}
     return results_dict
-

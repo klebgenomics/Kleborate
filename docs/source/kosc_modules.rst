@@ -117,12 +117,14 @@ Kaptive database for Kosc O-locus typing
 
 
 Outputs
-+++++++++++++++++
++++++++
 
 Kaptive results are output in the following columns:
 
 .. list-table::
    :header-rows: 1
+   :widths: 35 65
+
    * - **Column name**
      - **Content**
    * - K_locus
@@ -137,6 +139,12 @@ Kaptive results are output in the following columns:
      - Weighted percent identity of the best matching K locus to the assembly.
    * - K_Missing_expected_genes
      - A string listing the gene names of expected K locus genes that were not found.
+   * - K_Truncated_genes_details
+     - Truncated genes in the K locus.
+   * - K_Extra_genes_details
+     - Extra genes found in the locus.
+   * - Kaptive_version
+     - Version of Kaptive.
    * - O_locus
      - The O locus type which most closely matches the assembly.
    * - O_type
@@ -149,3 +157,93 @@ Kaptive results are output in the following columns:
      - Weighted percent identity of the best matching O locus to the assembly.
    * - O_Missing_expected_genes
      - A string listing the gene names of expected O locus genes that were not found.
+   * - O_Truncated_genes_details
+     - Truncated genes in the O locus.
+   * - O_Extra_genes_details
+     - Extra genes found in the locus.
+  
+
+
+.. _kosc__amr:
+
+
+Antimicrobial resistance
+------------------------
+
+.. code-block:: Python
+
+   -m kosc__amr
+
+This module screens input genomes for acquired antimicrobial resistance genes and known resistance-associated point mutations using the `AMRFinderPlus tool <https://doi.org/10.1038/s41598-021-91456-0>`_. Identified determinants are grouped by drug class.
+
+
+Parameters
+++++++++++++++++++
+
+``--organism``
+
+Used to screen for point mutations in species-specific resistance markers (default Klebsiella oxytoca).
+
+``-t , --threads`` 
+
+Number of threads to use for alignment.
+
+
+Outputs
+++++++++++++++++++
+
+Results of the *Klebsiella oxytoca* AMR module are grouped by drug class:
+
+.. list-table::
+   :header-rows: 0
+
+   * - **Column name**
+     - **Markers assigned as NCBI class/subclass**
+
+   * - ``Penicillins``
+     - BETA-LACTAM, CEPHALOTHIN
+
+   * - ``Carbapenems``
+     - CARBAPENEM
+
+   * - ``ESBL``
+     - CEPHALOSPORIN (note these can be assumed to be 3rd generation cephalosporins)
+
+   * - ``Beta-lactamase inhibitor``
+     - TANIBORBACTAM, AMOXICILLIN-CLAVULANIC ACID, PIPERACILLIN-TAZOBACTAM, TICARCILLIN-CLAVULANIC ACID, SULBACTAM-DURLOBACTAM, CEFTAZIDIME-AVIBACTAM, TAZOBACTAM
+
+   * - ``Aminoglycosides``
+     - AMINOGLYCOSIDE
+
+   * - ``Quinolones``
+     - FLUOROQUINOLONE, QUINOLONE
+
+   * - ``Fosfomycin``
+     - FOSFOMYCIN
+
+   * - ``Colistin``
+     - COLISTIN
+
+   * - ``Phenicols``
+     - PHENICOL
+
+   * - ``Macrolides``
+     - MACROLIDE
+
+   * - ``Rifamycin``
+     - RIFAMYCIN
+
+   * - ``Sulfonamides``
+     - SULFONAMIDE
+
+   * - ``Tetracyclines``
+     - TETRACYCLINE
+
+   * - ``Tigecycline``
+     - TIGECYCLINE
+
+   * - ``Trimethoprim``
+     - TRIMETHOPRIM
+
+   * - ``Other Classes``
+     - other CLASS values

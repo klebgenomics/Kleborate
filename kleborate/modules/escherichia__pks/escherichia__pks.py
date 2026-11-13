@@ -74,19 +74,10 @@ def pks_minimap(assembly, ref_index, ref_file, min_identity, min_coverage):
     if not alignment_hits:
         return '-'
     
-    
     for hit in alignment_hits:
-        alignment_length = hit.query_end - hit.query_start
-        coverage = (alignment_length / hit.query_length) * 100
-        allele = hit.query_name
-        
-        if coverage < 100.0 or hit.percent_identity < 100.0:
-            return f"{allele}*"
-        else:
-            return allele
+        return hit.query_name
 
     return '-'
-
 
 
 def get_results(assembly, ref_index, args, previous_results):

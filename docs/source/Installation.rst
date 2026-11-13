@@ -13,7 +13,6 @@ Kleborate requires the following software and libraries to be installed and avai
 * `Mash <https://github.com/marbl/Mash>`_ 
 * `Minimap2 <https://github.com/lh3/minimap2>`_ 
 * `ectyper <https://github.com/phac-nml/ecoli_serotyping>`_ 
-* `stxtyper <https://github.com/ncbi/stxtyper>`_
 * `ncbi-amrfinderplus <https://github.com/ncbi/amr>`_
 * `EzClermont <https://github.com/nickp60/EzClermont>`_
 * `Kaptive <https://github.com/klebgenomics/Kaptive>`_  
@@ -38,17 +37,19 @@ Create a conda environment containing Kleborate dependencies::
         mist_typing \
         ezclermont \
         ectyper \
-        ncbi-stxtyper \
         shigapass \
         ncbi-amrfinderplus -y
 
 
 
-Activate the environment and install kleborate (and Kaptive) using pip::
+Activate the environment and install Kleborate (and Kaptive) using ``pip``::
 
     conda activate klebsiella_analysis
     pip install kleborate==3.3.0b1
 
+Alternatively, install Kleborate using Conda::
+
+    conda install -c conda-forge -c bioconda kleborate=3.3.0b1
 
 
 
@@ -71,7 +72,7 @@ Before running Kleborate, set up the reference databases required
 KpSC cgMLST database (MiST)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-NOTE: KpSC cgMLST is only used by the module ``-m kpsc__cgmlst`` and preset ``-p kpsc``, so if you are not analysing *K. pneumoniae* species complex you don't need to do this step.
+NOTE: KpSC cgMLST is only used by the module ``-m kpsc__cgmlst`` and preset ``-p kpsc_all``, so if you are not analysing *K. pneumoniae* species complex you don't need to do this step.
 
 The ``kpsc__cgmlst`` module performs core-genome MLST (cgMLST) allele calling using `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_ and uses the ``scgMLST629_S`` scheme hosted on the `Institut Pasteur BIGSdb instance <https://bigsdb.pasteur.fr/klebsiella/>`_.
 
@@ -199,12 +200,15 @@ EnteroBase schemes do not include LIN codes in the downloaded profiles file. To 
 Please request API access to the EnteroBase E. coli database at https://enterobase.warwick.ac.uk/
 Once, you have obtained the token run; 
 
+Save your EnteroBase token once in your home directory
+
 .. code-block:: bash
 
-   echo 'YOUR_TOKEN' > ./enterobase_token
-   chmod 600 ./enterobase_token
+   echo 'YOUR_TOKEN' > ~/.enterobase_token
+   chmod 600 ~/.enterobase_token
 
-When running the module pass the ``--ecoli_entero_token`` path
+
+Run the cgmlst module
 
 
 .. code-block:: bash
@@ -214,7 +218,6 @@ When running the module pass the ``--ecoli_entero_token`` path
      -o kleborate_results \
      -m escherichia__cgmlst \
      --trim_headers \
-     --ecoli_entero_token ./enterobase_token
 
 
 Test *E. coli* cgMLST module
@@ -226,7 +229,6 @@ Download *E. coli* genome and test cgMLST module
 
    wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/285/655/GCF_000285655.3_EC958.v1/GCF_000285655.3_EC958.v1_genomic.fna.gz
    kleborate -a GCF_000285655.3_EC958.v1_genomic.fna.gz -o escherichia_test -m escherichia__cgmlst --trim_headers --ecoli_entero_token ./enterobase_token
-
 
 Validation tests
 ==============================

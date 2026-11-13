@@ -20,9 +20,21 @@ Run with preset modules for *K. pneumoniae* species complex (KpSC), which reprod
 
    kleborate -a *.fasta.gz -o kleborate_results -p kpsc --trim_headers
 
+To include core genome MLST (cgMLST) profiling alongside the standard KpSC modules, use the ``kpsc_all`` preset:
+
+.. code-block:: bash
+
+   kleborate -a *.fasta.gz -o kleborate_results -p kpsc_all --trim_headers
+
 - ``-a *.fasta.gz``: Specifies the input files (assemblies) to be analyzed (.fasta or .fasta.gz).
 - ``-o``: Specifies the directory where the output files will be saved (one output file per species/complex detected).
-- ``-p``: Specifies the preset modules to run (kpsc, kosc, escherichia).
+
+- ``-p``: Specifies the preset modules to run:
+  
+  - ``kpsc``: Standard KpSC modules (matches Kleborate v2 behavior; excludes ``kpsc__cgmlst``).
+  - ``kpsc_all``: Full KpSC analysis including ``kpsc__cgmlst``.
+  - ``kosc``: Modules for *K. oxytoca* species complex.
+  - ``escherichia``: Modules for *Escherichia* species.
 - ``--trim_headers``: Trim module names from column headers in the output.
 
 
@@ -57,8 +69,8 @@ Check available modules, check version, print help:
 
 
 
-Output files
---------------------
+Output files for K. pneumoniae species complex (KpSC)
+----------------------------------------------------
 
 Output files printed to ``outdir/`` are tab-delimited (.txt) files, named in the format: 
 
@@ -69,6 +81,26 @@ Output files printed to ``outdir/`` are tab-delimited (.txt) files, named in the
     klebsiella_pneumo_complex_genotype_spec.txt – Genotype results formatted according to the PHA4GE genotype specification format
 
 Columns included in each output file will depend on the modules that are run; essentially each module creates a set of results columns that are added to the output file for the relevant species/complex. By default, each column name is preprended with the name of the module that generated it. This can be turned off using ``--trim_headers`` when running kleborate, or these column headers can be stripped off later using the ``trim_headers.py`` helper script.
+
+
+Output files for K. oxytoca species complex (KoSC)
+----------------------------------------------------
+
+Output files printed to ``outdir/`` are tab-delimited (.txt) files, named in the format:
+
+    klebsiella_oxytoca_complex_output.txt - Main Kleborate results
+
+    klebsiella_oxytoca_complex_hAMRonization_output.txt - AMRfinderPlus hamronization report 
+
+
+Output files Escherichia
+--------------------------
+
+    escherichia_output.txt - Main Kleborate results
+
+    escherichia_hAMRonization_output.txt  - AMRfinderPlus hamronization report
+
+    escherichia_amrfinder_output.txt - raw AMRfinderPlus report switched on using ``--save_raw_amrfinder`` option
 
 
 Parameters
@@ -91,6 +123,9 @@ Parameters
 ``--no_genotype_spec``                   
     Disable generation of the genotype spec output file (default: False)
 
+``--save_raw_amrfinder``
+    Enable generation of the  raw AMRfinderPlus output file (default: False)
+
 **Modules:**
 
 ``-p PRESET, --preset PRESET``         
@@ -100,6 +135,9 @@ Parameters
 
    * - kpsc
      - *Klebsiella pneumoniae* species complex
+
+   * - kpsc_all
+     - *Klebsiella pneumoniae* species complex, including cgmlst
 
    * - kosc
      - *Klebsiella oxytoca* species complex

@@ -44,32 +44,54 @@ def add_cli_options(parser):
     group = parser.add_argument_group('E. coli cgMLST/LIN code (EnteroBase)')
     group.add_argument(
         '--ecoli_entero_token', type=str, default=None,
-        help='Path to an EnteroBase API token file, required to retrieve LIN codes for '
-             'E. coli cgSTs '
+        help='Path to an EnteroBase API token file. Optional if saved at '
+             '~/.enterobase_token or set via KLEBORATE_ENTEROBASE_TOKEN.'
     )
     group.add_argument(
         '--ecoli_entero_preset', type=str, default='ecoli',
-        help="EnteroBase preset passed to 'mist lincode' "
+        help="EnteroBase preset passed to 'mist lincode' (default: %(default)s)"
     )
-
-
-def resolve_entero_token_path(cli_value):
-    if cli_value:
-        return Path(cli_value).expanduser()
-    env_value = os.environ.get(ENTEROBASE_TOKEN_ENV_VAR)
-    if env_value:
-        return Path(env_value).expanduser()
-    return DEFAULT_TOKEN_PATH
-
 
 
 def check_cli_options(args):
     token_path = resolve_entero_token_path(args.ecoli_entero_token)
 
     if not token_path.exists():
-        sys.exit(f'Error: EnteroBase API token file not found at {token_path}')
+        sys.exit(
+            f"Error: EnteroBase API token file not found at '{token_path}'.\n"
+            "To resolve this, either:\n"
+            "  1. Save your token to your home directory:\n"
+            "       echo 'YOUR_TOKEN' > ~/.enterobase_token && chmod 600 ~/.enterobase_token\n"
+            "  2. Pass the specific path via --ecoli_entero_token <path>\n"
+            f"  3. Set the environment variable: export {ENTEROBASE_TOKEN_ENV_VAR}=<path_to_token>"
+        )
 
     args.ecoli_entero_token = str(token_path)
+
+
+def resolve_entero_token_path(cli_value):
+    if cli_value:
+        return Path(cli_value).expanduser()
+    
+    env_value = os.environ.get(ENTEROBASE_TOKEN_ENV_VAR)
+    if env_value:
+        return Path(env_value).expanduser()
+    
+    # Check current directory before defaulting to home
+    local_token = Path.cwd() / '.enterobase_token'
+    if local_token.exists():
+        return local_token
+        
+    return DEFAULT_TOKEN_PATH
+    
+# def resolve_entero_token_path(cli_value):
+#     if cli_value:
+#         return Path(cli_value).expanduser()
+#     env_value = os.environ.get(ENTEROBASE_TOKEN_ENV_VAR)
+#     if env_value:
+#         return Path(env_value).expanduser()
+#     return DEFAULT_TOKEN_PATH
+
 
 
 

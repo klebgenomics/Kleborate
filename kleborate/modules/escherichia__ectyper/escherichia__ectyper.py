@@ -34,7 +34,7 @@ def prerequisite_modules():
 def get_headers():
 
     full_headers = [
-        'O-type','H-type','Serotype','QC','Evidence','GeneScores',
+        'O-type','H-type','QC','Evidence','GeneScores',
         'AlleleKeys','GeneIdentities(%)','GeneCoverages(%)','GeneLengths','Warnings'
     ]
     stdout_headers = []

@@ -134,8 +134,9 @@ def run_mist_and_extract_lincode(assembly, db_path, mist_script_path):
                 mist_run.returncode, mist_cmd,
                 output=mist_run.stdout, stderr=mist_run.stderr
             )
+
         python_cmd = [
-            "python", str(mist_script_path), json_path
+            sys.executable, str(mist_script_path), json_path
         ]
         completed = subprocess.run(
             python_cmd,
