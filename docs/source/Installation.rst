@@ -18,6 +18,7 @@ Kleborate requires the following software and libraries to be installed and avai
 * `Kaptive <https://github.com/klebgenomics/Kaptive>`_  
 * `MiST <https://github.com/BioinformaticsPlatformWIV-ISP/MiST>`_
 * `ShigaPass <https://github.com/imanyass/ShigaPass>`_
+* `hAMRonization <https://github.com/pha4ge/hAMRonization>`_
 
 
 Install Kleborate 
@@ -38,6 +39,7 @@ Create a conda environment containing Kleborate dependencies::
         ezclermont \
         ectyper \
         shigapass \
+        hamronization \
         ncbi-amrfinderplus -y
 
 
