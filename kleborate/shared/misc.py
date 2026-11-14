@@ -93,17 +93,22 @@ def reverse_complement(seq):
     return ''.join([complement_base(x) for x in seq][::-1])
 
 
-def get_tool_version(command, timeout=10):
+def get_tool_version(cmd):
     try:
-        proc = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                              stdin=subprocess.DEVNULL, text=True, timeout=timeout)
-        output = proc.stdout + proc.stderr
-        match = re.search(r'(\d+\.\d+(\.\d+)?)', output)
-        return match.group(1) if match else "Unknown"
+        output = subprocess.check_output(
+            cmd, stderr=subprocess.STDOUT, text=True, timeout=30
+        ).strip()
     except FileNotFoundError:
         return "Not Installed"
-    except subprocess.TimeoutExpired:
+    except subprocess.CalledProcessError as e:
+        output = (e.output or "").strip()
+    except (OSError, subprocess.TimeoutExpired) as e:
+        logging.warning(f"Could not run {cmd}: {e}")
         return "Unknown"
+
+    match = re.search(r'\d+\.\d+(?:\.\d+)?(?:[-.\w]+)?', output)
+    return match.group(0) if match else "Unknown"
+
 
 
 @functools.lru_cache(maxsize=1)
