@@ -415,9 +415,6 @@ Outputs of the ECTyper module is the following columns:
    * - ``H-type``
      - Predicted H antigen.
 
-   * - ``Serotype``
-     - Combined prediction of O and H antigens.
-
    * - ``QC``
      - Quality control values summarising the overall confidence of the serotype prediction.
 
