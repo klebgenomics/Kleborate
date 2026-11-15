@@ -42,7 +42,7 @@ Run with specified modules only, e.g. AMR typing for *K. pneumoniae* species com
 
 .. code-block:: Python
 
-   kleborate -a *.fasta -o kleborate_results -m kpsc__amr
+   kleborate -a *.fasta -o kleborate_results -m kpsc__amr --trim_headers
 
 (A list of modules is available via ```kleborate --list_modules``` or `here <https://kleboratemodular.readthedocs.io/en/latest/modules.html>`_)
 

@@ -1026,6 +1026,12 @@ Kaptive results are output in the following columns:
      - Weighted percent identity of the best matching K locus to the assembly.
    * - K_Missing_expected_genes
      - A string listing the gene names of expected K locus genes that were not found.
+   * - K_Truncated_genes_details
+     - Truncated genes in the K locus.
+   * - K_Extra_genes_details
+     - Extra genes found in the locus.
+   * - Kaptive_version
+     - Version of Kaptive.
    * - O_locus
      - The O locus type which most closely matches the assembly.
    * - O_type
@@ -1038,7 +1044,12 @@ Kaptive results are output in the following columns:
      - Weighted percent identity of the best matching O locus to the assembly.
    * - O_Missing_expected_genes
      - A string listing the gene names of expected O locus genes that were not found.
-
+   * - O_Truncated_genes_details
+     - Truncated genes in the O locus.
+   * - O_Extra_genes_details
+     - Extra genes found in the locus.
+   * - Kaptive_version
+     - Version of Kaptive.
 
 
 .. _kpsc__wzi:
