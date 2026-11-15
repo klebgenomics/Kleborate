@@ -22,6 +22,14 @@ def get_paths():
         sys.exit(1)
 
 
+def remove_path(path: pathlib.Path):
+    """Remove a directory or file if it exists."""
+    if path.is_dir():
+        shutil.rmtree(path)
+    elif path.exists():
+        path.unlink()
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="E. coli cgMLST Database Setup (EnteroBase)"
