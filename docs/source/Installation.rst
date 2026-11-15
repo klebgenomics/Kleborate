@@ -47,11 +47,8 @@ Create a conda environment containing Kleborate dependencies::
 Activate the environment and install Kleborate (and Kaptive) using ``pip``::
 
     conda activate klebsiella_analysis
-    pip install kleborate==3.3.0b1
+    pip install kleborate==3.3.0b2
 
-Alternatively, install Kleborate using Conda::
-
-    conda install -c conda-forge -c bioconda kleborate=3.3.0b1
 
 
 
