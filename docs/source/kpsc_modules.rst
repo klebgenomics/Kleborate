@@ -1030,8 +1030,6 @@ Kaptive results are output in the following columns:
      - Truncated genes in the K locus.
    * - K_Extra_genes_details
      - Extra genes found in the locus.
-   * - Kaptive_version
-     - Version of Kaptive.
    * - O_locus
      - The O locus type which most closely matches the assembly.
    * - O_type
