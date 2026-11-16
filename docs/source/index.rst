@@ -46,6 +46,7 @@ For *K. pneumoniae* species complex, Kleborate v3 can reproduce the outputs of K
 * Species calling (e.g. *K. oxytoca*\ , *K. michiganensis*\ , *K. grimontii*\ , etc.)
 * MLST
 * K (capsule) and O antigen (LPS) serotype prediction
+* AMR profiling (via AMRFinderPlus)
 
 
 **Typing modules for** *E. coli/Shigella* **cover:**
@@ -175,6 +176,8 @@ When Kleborate v3 is run using the ``-p kpsc`` option to run preset modules for 
    ``O_locus_missing_genes``  has been renamed ``O_Missing_expected_genes`` 
 * Updated assembly statistics module to use qualibact-v1.0 curated thresholds
 * Added new genome specification report compatible with the `PHA4GE Microbial Genotyping Data Specification <https://github.com/pha4ge/genotyping-specification>`_
+* Added a new preset for kpsc, ``kpsc_all``: Full KpSC analysis including ``kpsc__cgmlst``
+* Added kaptive fields  ``Truncated genes, details``,  ``Extra genes, details``,  ``Kaptive version``
 
 Kleborate v3 can also be run using ``-p kosc`` (to run preset modules for *K. oxytoca* complex) or ``-p escherichia`` (to run preset modules for *E. coli/Shigella*).
 
